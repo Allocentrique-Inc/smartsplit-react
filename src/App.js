@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import Admin from "./components/admin/admin"
+import Dashboard from "./components/dashboard/dashboard"
+import {useEffect, useState} from "react"
+import check from "./api/auth/check"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import "./styles/index.scss"
+import Login from "./components/logIn/logIn"
 
-function App() {
+function App() { 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router> 
+      <Switch>
+        <Route path="/admin">
+          <Admin />
+        </Route>
+        <Route path="/">
+          <LoadingManager />
+        </Route> 
+      </Switch>
+    </Router>
   );
+}
+
+const LoadingManager = (props) => {
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLogged, setIsLogged] = useState(false)
+  const resetLogginCheck = async () => {
+    const checkResult = await check() 
+    const isLogged = checkResult === true
+    setIsLoaded(true)
+    setIsLogged(isLogged)
+  }
+  useEffect(()=>{ 
+    resetLogginCheck()
+  }) 
+  return (
+    <>
+      {!isLoaded && "LOADING"}
+      {isLoaded && isLogged && <Dashboard resetLogginCheck={resetLogginCheck}/>}
+      {isLoaded && !isLogged && <Login resetLogginCheck={resetLogginCheck}/>}
+    </>
+  )
 }
 
 export default App;

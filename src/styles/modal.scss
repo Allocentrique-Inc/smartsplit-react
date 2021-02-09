@@ -1,0 +1,29 @@
+.modalBackground{
+  background-color: rgba(100,100,100, .5);
+  height: 100vh;
+  width: 100vw;
+  position: fixed; 
+  z-index: 10; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modal { 
+    position: absolute;
+    background-color: white; 
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    .topBar {
+      width: 944px;
+      height: 72px;
+      box-shadow: inset 0px -1px 0px #DCDFE1;
+      flex-shrink: 0;
+    }
+    .downBar {
+      width: 944px;
+      height: 72px;
+      box-shadow: inset 0px 1px 0px #DCDFE1;
+      flex-shrink: 0;
+    }
+  }
+}

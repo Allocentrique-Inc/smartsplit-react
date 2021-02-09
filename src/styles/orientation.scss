@@ -1,0 +1,186 @@
+ 
+.orientation{ 
+  .b1 {
+    background-color: #FAF8F9;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    .content { 
+      width: 944px;
+      .b1 { 
+        width: 944px;
+        height: 72px; 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: inset 0px -1px 0px #DCDFE1;
+        .back{ 
+          background-color: rgba(214, 196, 162,0.25);
+        }
+        .right { 
+          display:  flex;
+          .credit { 
+            margin-right: 25px;
+            background-color: rgba(214, 196, 162,0.25);
+            height: 25px;
+            width: 25px;
+          }
+          .profile { 
+            background-color: rgba(214, 196, 162,0.25);
+            height: 25px;
+            width: 25px;
+          }
+        }
+      }
+
+      .b2 { 
+        margin-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        .left {
+          display: flex;
+          justify-content: left;
+          .image{
+            display: flex;
+            justify-content: left;
+            width: 72px;
+            height: 72px;
+            background-color: rgba(214, 196, 162,0.25);
+          }
+          .description {
+            margin-left: 32px;
+            .title { 
+              font-weight: bold;
+              font-size: 32px;
+              line-height: 40px;  
+              color: #203548; 
+              display: flex;
+              .modify{ 
+                width: 40px;
+                height: 40px;
+                background-color: rgba(214, 196, 162,0.25);
+                margin-left: 16px;
+              }
+            }
+            .details {   
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 16px;   
+              color: #687A8B;
+              .artistName {
+                font-weight: bold;
+                color: #2DA84F;
+              }
+            }
+          }
+        }
+        .right { 
+          display: flex;
+          align-items: flex-end;
+          background-color: rgba(214, 196, 162,0.25);
+          width: 140px;
+          height: 40px; 
+          margin-top: 32px;
+        }
+      }
+
+      .b3{ 
+        margin-top: 16px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        width: 120px;
+        justify-content: space-between;
+        .tab{
+          font-family: IBM Plex Sans;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 24px; 
+          display: flex;
+          align-items: center; 
+          border: none;
+          background-color: inherit;
+          color: #687A8B;
+          height: 56px;
+          outline: 0;
+          cursor: pointer;
+        }
+        .selectedTab{ 
+          box-shadow: inset 0px -2px 0px #3DB25E;
+          color: #203548;
+        }
+        .space{
+          margin-left: 32px;
+        }
+      }
+    }
+  }
+  .b2{
+    width: 944px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    .tileSection { 
+      margin-top: 43px;
+      display: flex; 
+      flex-wrap: wrap;
+      .space {
+        margin-right: 13px;
+      }
+      .tile {
+        margin-top: 21px;
+        width: 304px;
+        height: 292px;
+        border: 1px solid #DCDFE1;
+        background-color: white;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .image {
+          margin: 16px;
+          width: 40px;
+          height: 40px;
+          background-color: #ccc
+        }; 
+        .title {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 24px;
+          margin: 0px 16px;
+          color: #203548;
+          height: 30px; 
+        };
+        .description{
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 16px;
+          height: 60px;
+          margin: 0px 16px;
+          color: #687A8B;
+        };
+        .action { 
+          border: 1px solid #DCDFE1;
+          padding: 6px 12px;
+          width: fit-content;
+          border-radius: 2px;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 24px;
+          color: #2DA84F; 
+          margin: 16px;
+          background-color: inherit;
+          cursor: pointer;
+        }
+        .start{
+          background-color: #2DA84F;
+          color: white; 
+        }
+      }
+    }
+  } 
+}

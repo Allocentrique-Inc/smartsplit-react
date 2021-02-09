@@ -1,0 +1,233 @@
+.workpieces{
+  display: flex;
+  width: 100vw;
+  .leftMenu {
+    height: 100vh;
+    width: 288px;
+    background-color: #322129;
+    .logo{
+      background-color: #3F2933;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      padding-left: 20px; 
+      font-family: GT Walsheim Pro;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 32px;  
+      letter-spacing: 1px;
+      text-transform: uppercase; 
+      color: #FFFFFF;
+      margin-bottom: 104px;
+      .split{
+        color : green;
+      }
+    }
+    .sectionButton{
+      background-color: inherit;
+      border: none;
+      height: 56px;
+
+      font-family: IBM Plex Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 24px; 
+      color: #FFFFFF;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      outline: 0;
+      .buttonLogo{
+        background-color: #eee;
+        width: 32px;
+        height: 32px;
+        margin: 12px
+      }
+    }
+    .selected{
+      font-weight: bold;
+    }
+  }
+  .rightContent{
+    width: 100vw;
+    .topBar{
+      height: 72px;
+      background-color: #FAF8F9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .searchBar{
+        margin-left: 32px;
+        height: 40px;
+        border: 1px solid #DCDFE1;
+        width: 464px;
+        border-radius: 25px;
+        background-color: white;
+      }
+      .profile{
+        background-color: rgba(214, 196, 162,0.15);
+        width: 50px;
+        height: 40px;
+        margin-right: 16px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+    .titleRow{ 
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 32px;
+      .title{    
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 40px; 
+        color: #203548;
+        margin-left: 32px;
+      }
+      .addButton{ 
+        display: flex; 
+        align-items: center;
+        padding: 8px 16px; 
+        margin-right: 32px;  
+        background: #2DA84F;
+        border-radius: 2px;
+        color: white;
+        outline: 0;
+        border: none;
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+    .selectPerspective{
+      margin-top: 32px;
+      margin-left: 32px;
+      margin-bottom: 32px;
+      display: flex;
+      .tab{
+        font-family: IBM Plex Sans;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px; 
+        display: flex;
+        align-items: center; 
+        border: none;
+        background-color: inherit;
+        color: #687A8B;
+        height: 56px;
+        outline: 0;
+        cursor: pointer;
+      }
+      .selectedTab{ 
+        box-shadow: inset 0px -2px 0px #3DB25E;
+        color: #203548;
+      }
+    }
+    .list{ 
+      margin-left: 32px;
+      margin-right: 32px;
+      .workpiece { 
+        display : flex; 
+        align-items : center; 
+        justify-content: space-between;
+        height: 72px;  
+        background: #FFFFFF;  
+        box-shadow: inset 0px 1px 0px #DCDFE1;
+        .left{ 
+          display : flex; 
+          align-items : center; 
+          width: 350px; 
+          text-overflow: ellipsis;
+          .img{
+            background-color: rgba(214, 196, 162,0.15);
+            height: 40px;
+            width: 40px;
+            margin: 16px;
+          }
+          .details{
+            .b1{
+              font-family: IBM Plex Sans;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 16px; 
+              color: #203548;
+              .title{ 
+                font-family: IBM Plex Sans;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 16px;
+                line-height: 24px; 
+                color: #203548;
+              }
+            }
+            .b2{
+              font-family: IBM Plex Sans;
+              font-style: normal;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 16px;
+              color: #687A8B;
+              .time{
+                background-color: rgba(214, 196, 162,0.15);
+                width: 100px;
+                height: 20px;
+              }
+              .collaborators{
+                background-color: rgba(214, 196, 162,0.15);
+                width: 100px;
+                height: 20px;
+              }
+            }
+          }
+        }
+
+        .progress{
+          background-color: rgba(214, 196, 162,0.15);
+          height: 40px;
+          width: 300px;
+        }
+        .credit{
+          background-color: rgba(214, 196, 162,0.15);
+          height: 40px;
+          width: 40px;
+        }
+
+        .right{ 
+          display: flex;
+          .action{ 
+            padding: 8px 16px;  
+            background-color: white;  
+            border: 1px solid #DCDFE1;
+            box-sizing: border-box; 
+            font-family: IBM Plex Sans;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 24px;
+            color: #2DA84F;
+            border-radius: 2px;
+            cursor: pointer;
+            margin-right: 10px;
+          }
+          .ellipsis{ 
+            background-color: rgba(214, 196, 162,0.15);
+            height: 40px;
+            width: 20px; 
+          }
+        }
+      }
+    }
+  }
+}
