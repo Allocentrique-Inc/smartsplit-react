@@ -4,16 +4,19 @@ import getWorkpiecesByOwner from '../../../api/workpieces/getWorkpiecesByOwner';
 import getWorkpiecesByRightHolder from '../../../api/workpieces/getWorkpiecesByRightHolder';
 import disconnect from '../../../api/auth/disconnect';
 
-import Workpiece from './workpiece/workpiece';
-import LeftMenu from './leftMenu/leftMenu';
-import AddWorkpiece from './addWorkpiece/addWorkPiece';
-import SelectPerspective from './selectPerspective/selectPerspective';
+import Workpiece from "./workpiece/workpiece" 
+import LeftMenu from "./leftMenu/leftMenu"
+import SelectPerspective from "./selectPerspective/selectPerspective"
+import AddWorkpieceButton from './addWorkpieceButton/addWorkpieceButton'
+import AddWorkpiece from './addWorkpiece/addWorkpiece';
 
 const Workpieces = (props) => {
-  const user_id = localStorage.getItem('user_id');
-  const [workpiecesByOwner, setWorkpiecesByOwner] = useState([]);
-  const [workpiecesByRightHolder, setWorkpiecesByRightHolder] = useState([]);
-  const [tab, setTab] = useState('owner');
+  const user_id = localStorage.getItem("user_id")
+  const [workpiecesByOwner, setWorkpiecesByOwner] = useState([])
+  const [workpiecesByRightHolder, setWorkpiecesByRightHolder] = useState([])
+  const [tab, setTab] = useState("owner") 
+  const [isAdding, setIsAdding] = useState(false)
+
 
   const resetWorkpiecesByOwner = async () => {
     const workpiecesByOwner = await getWorkpiecesByOwner({ user_id });
@@ -37,14 +40,21 @@ const Workpieces = (props) => {
 
   const commonProps = {
     resetData,
-    tab,
-    setTab,
-  };
+    tab, setTab, 
+    isAdding, setIsAdding
+  } 
 
   return (
-    <div className="workpieces">
+    <>
+    {isAdding
+        && (<div className="modalBackground"
+          onClick={() => setIsAdding(e => !e)}
+        >
+        <AddWorkpiece {...props} {...commonProps}/>
+        </div>
+      )}
+        <div className="workpieces">
       <LeftMenu />
-
       <div className="rightContent">
         <div className="topBar">
           <div className="searchBar" />
@@ -57,6 +67,11 @@ const Workpieces = (props) => {
           >
             Disconnect
           </div>
+        </div> 
+
+        <div className="titleRow">
+          <div className="title">Mes pièces musicales</div>
+          <AddWorkpieceButton {...props} {...commonProps}/>
         </div>
         <div className="content">
           <div className="titleRow">
@@ -76,7 +91,9 @@ const Workpieces = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+    </> 
+  )
+}
+
 
 export default Workpieces;
