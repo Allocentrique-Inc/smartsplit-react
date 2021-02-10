@@ -68,11 +68,11 @@ const Workpieces = (props) => {
             </div>
           </div>
 
-          <div className="titleRow">
-            <div className="title">Mes pièces musicales</div>
-            <AddWorkpieceButton {...props} {...commonProps} />
-          </div>
           <div className="content">
+            <div className="titleRow">
+              <div className="title">Mes pièces musicales</div>
+              <AddWorkpieceButton {...props} {...commonProps} />
+            </div>
             <SelectPerspective {...props} {...commonProps} />
             <div className="list">
               {(tab === 'owner'
