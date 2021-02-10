@@ -11,6 +11,7 @@ import Privacy from './privacy/privacy';
 import Kanban from './kanban/kanban';
 import Consult from './consult/consult';
 import Vote from './vote/vote';
+import translations from '../../../translations';
 
 const RightSplit = (props) => {
   const { workpiece_id } = useParams();
@@ -21,6 +22,10 @@ const RightSplit = (props) => {
   const [privacy, setPrivacy] = useState('private');
   const [collaborators, setCollaborators] = useState([]);
   const [workpiece, setWorkpiece] = useState([]);
+  const [label, setLabel] = useState({});
+  const [copyrightDividingMethod, selectCopyrightDividingMethod] = useState(
+    'equal',
+  );
 
   const resetData = async () => {
     const incomingWorkpiece = await getWorkpiece({ workpiece_id });
@@ -50,9 +55,13 @@ const RightSplit = (props) => {
       copyright,
       performance,
       recording,
+      privacy,
+      copyrightDividingMethod,
     };
     await postRightSplit(payload);
   };
+
+  const language = 'fr';
 
   const commonProps = {
     copyright,
@@ -69,6 +78,12 @@ const RightSplit = (props) => {
     setWorkpiece,
     resetData,
     saveRightSplit,
+    copyrightDividingMethod,
+    selectCopyrightDividingMethod,
+    label,
+    setLabel,
+    translations,
+    language,
   };
 
   return (

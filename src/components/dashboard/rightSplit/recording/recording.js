@@ -65,12 +65,15 @@ const Recording = (props) => {
   });
 
   return (
-    <div>
-      <TopBar {...props} />
+    <div className="rightSplitCreation">
+      <TopBar {...props} view="recording" />
       <div style={style.b1}>
         <div style={style.b1b1}>
           <div style={style.b1b1b1}>
             <Presentation view="recording" />
+
+            <div>LABELS</div>
+            <hr />
             <Collaborators {...props} {...commonProps} />
             <AddCollaborators
               {...props}

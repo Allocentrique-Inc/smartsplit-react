@@ -94,16 +94,19 @@ const Kanban = (props) => {
                 </div>
               </div>
 
-              {/* COMPLETED */}
+              {/* DECIDED */}
               <div className="bx">
-                <div className="colTitle">Archivés</div>
+                <div className="colTitle">Décidés</div>
                 <div className="content">
                   {/* ACCEPTED */}
                   {props.workpiece.rightSplit._state === 'accepted' && (
                     <AcceptedRightSplit {...commonProps} {...props} />
                   )}
 
-                  {/* DECLIDED */}
+                  {/* REJECTED */}
+                  {props.workpiece.rightSplit._state === 'rejected' && (
+                    <RejectedRightSplit {...commonProps} {...props} />
+                  )}
                   {props.workpiece.archivedSplits
                     && props.workpiece.archivedSplits.map((el, id) => (
                       <RejectedRightSplit id={id} el={el} />
@@ -196,7 +199,7 @@ const RejectedRightSplit = (props) => (
     </div>
     <div className="b1">
       <div className="collaborators" />
-      <div className="status rejectedStatus">Accepté</div>
+      <div className="status rejectedStatus">Refusé</div>
     </div>
     {/* <div className="border" />
       <button onClick={props.handleConsultBtn}>

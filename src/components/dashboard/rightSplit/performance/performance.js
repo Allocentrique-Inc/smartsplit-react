@@ -76,8 +76,8 @@ const Performance = (props) => {
     el.shares = 100 / arr.length;
   });
   return (
-    <div>
-      <TopBar {...props} />
+    <div className="rightSplitCreation">
+      <TopBar {...props} view="performance" />
       <div style={style.b1}>
         <div style={style.b1b1}>
           <div style={style.b1b1b1}>

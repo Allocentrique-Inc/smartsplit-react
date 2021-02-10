@@ -1,40 +1,44 @@
-import Title from './title/title';
-import Img from './img/img';
-import BreadCrumb from './breadCrumb/breadCrumb';
-import Credit from './credit/credit';
-import SaveAndQuit from './saveAndQuit/saveAndQuit';
-import Profile from './profile/profile';
+import { useParams, useHistory } from 'react-router-dom';
 
-const style = {
-  b1: {
-    position: 'sticky',
-    top: '0px',
-    backgroundColor: 'white',
-    height: '72px',
-    borderBottom: '2px solid #DCDFE1',
-    boxShadow: '0px -2px 4px 4px #DCDFE1',
-    alignItems: 'center',
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  b1b1: {
-    display: 'flex',
-    alignItems: 'center',
-  },
+const TopBar = (props) => {
+  const history = useHistory();
+  const { workpiece_id } = useParams();
+
+  // Displayed data
+  const title = props.workpiece.title || '';
+  const breadCrumb1 = props.translations.rightSplit.topBar.breadCrumb._rightSplits[
+    props.language
+  ];
+  const breadCrumb2 = props.translations.rightSplit.topBar.breadCrumb[`_${props.view}`][
+    props.language
+  ];
+
+  return (
+    <div className="topBar">
+      <div className="bx">
+        <div className="img" />
+        <div className="title">{title}</div>
+        <div className="breadCrumb">
+          <div className="p1">{breadCrumb1}</div>
+          <div className="arrow" />
+          <div className="p2">{breadCrumb2}</div>
+        </div>
+      </div>
+      <div className="bx">
+        <div className="credit" />
+        <div
+          className="saveAndQuit"
+          onClick={async () => {
+            await props.saveRightSplit();
+            history.push(`/workpiece/${workpiece_id}`);
+          }}
+        >
+          Save And Quit
+        </div>
+        <div className="profile" />
+      </div>
+    </div>
+  );
 };
-const TopBar = (props) => (
-  <div style={style.b1}>
-    <div style={style.b1b1}>
-      <Img />
-      <Title />
-      <BreadCrumb />
-    </div>
-    <div style={style.b1b1}>
-      <Credit />
-      <SaveAndQuit {...props} />
-      <Profile />
-    </div>
-  </div>
-);
 
 export default TopBar;

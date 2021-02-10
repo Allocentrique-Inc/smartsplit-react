@@ -15,8 +15,6 @@ const style = {
     marginRight: '16px',
   },
   splitingMethod: {
-    fontFamily: 'IBM Plex Sans',
-    fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '16px',
     lineHeight: '24px',
@@ -25,22 +23,22 @@ const style = {
 };
 
 const Option = (props) => {
-  const backgroundColor = props.dividingMethod === props.value ? 'black' : '#fff';
+  const backgroundColor = props.copyrightDividingMethod === props.value ? 'black' : '#fff';
   return (
     <div>
       <button
-        style={style.radioRow}
+        className="radioRow"
         onClick={() => {
           props.handleSelectDividingMethod(props.value);
         }}
       >
         <div
           style={{
-            ...style.radioCircle,
             backgroundColor,
           }}
+          className="radioCircle"
         />
-        <div style={style.splitingMethod}>{props.label}</div>
+        <div className="splitingMethod">{props.label}</div>
       </button>
     </div>
   );

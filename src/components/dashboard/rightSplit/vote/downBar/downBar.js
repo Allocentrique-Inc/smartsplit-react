@@ -7,8 +7,12 @@ const DownBar = (props) => {
   const handleSubmit = async () => {
     const { copyright, performance, recording } = props;
     await voteRightSplit({
-      copyright, performance, recording, workpiece_id,
+      copyright,
+      performance,
+      recording,
+      workpiece_id,
     });
+    props.resetData();
     history.push(`/workpiece/${workpiece_id}/right-split/kanban`);
   };
   return (

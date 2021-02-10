@@ -53,8 +53,9 @@ const Privacy = (props) => {
     isAdjustingEmails,
     setIsAdjustingEmails,
   };
+  console.log(props);
   return (
-    <div>
+    <div className="rightSplitCreation">
       {isSaved && (
         <div className="modalBackground">
           <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -81,6 +82,7 @@ const Privacy = (props) => {
                     await submitRightSplit({
                       workpiece_id: props.workpiece.workpiece_id,
                     });
+                    props.resetData();
                     history.push(
                       `/workpiece/${workpiece_id}/right-split/kanban`,
                     );
@@ -94,7 +96,7 @@ const Privacy = (props) => {
         </div>
       )}
 
-      <TopBar {...props} />
+      <TopBar {...props} view="privacy" />
       <div style={style.b1}>
         <div style={style.b1b1}>
           <div style={style.b1b1b1}>

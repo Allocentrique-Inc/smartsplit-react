@@ -10,10 +10,6 @@ import Collaborator from './collaborator/collaborator';
 import DownBar from '../_/downBar/downBar';
 
 const style = {
-  b1: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
   b1b1: {
     width: '944px',
     display: 'flex',
@@ -39,11 +35,10 @@ const ceil = (el) => Math.floor(el * 10000) / 10000;
 
 const Copyright = (props) => {
   const { workpiece_id } = useParams();
-  const [dividingMethod, selectDividingMethod] = useState('equal');
 
   const addCollaborators = (user_id) => {
     const calculatedCopyright = recalculateShares({
-      newDividingMethod: dividingMethod,
+      newDividingMethod: props.copyrightDividingMethod,
       copyright: [
         ...props.copyright,
         {
@@ -65,7 +60,7 @@ const Copyright = (props) => {
       1,
     );
     const calculatedCopyright = recalculateShares({
-      newDividingMethod: dividingMethod,
+      newDividingMethod: props.copyrightDividingMethod,
       copyright: arr,
     });
     props.setCopyright(calculatedCopyright);
@@ -75,7 +70,7 @@ const Copyright = (props) => {
     const arr = [...props.copyright];
     arr[id].roles = arr[id].roles.filter((el) => el !== role);
     const calculatedCopyright = recalculateShares({
-      newDividingMethod: dividingMethod,
+      newDividingMethod: props.copyrightDividingMethod,
       copyright: arr,
     });
     props.setCopyright(calculatedCopyright);
@@ -85,7 +80,7 @@ const Copyright = (props) => {
     const arr = [...props.copyright];
     arr[id].roles.push(role);
     const calculatedCopyright = recalculateShares({
-      newDividingMethod: dividingMethod,
+      newDividingMethod: props.copyrightDividingMethod,
       copyright: arr,
     });
     props.setCopyright(calculatedCopyright);
@@ -97,11 +92,11 @@ const Copyright = (props) => {
       copyright: props.copyright,
     });
     props.setCopyright(calculatedCopyright);
-    selectDividingMethod(newDividingMethod);
+    props.selectCopyrightDividingMethod(newDividingMethod);
   };
 
   const handleDrag = ({ newShares, id }) => {
-    if (dividingMethod === 'manual') {
+    if (props.copyrightDividingMethod === 'manual') {
       if (props.copyright[id].lock !== true) {
         const draggedDifferential = newShares - props.copyright[id].shares;
         const notFocussed = props.copyright.filter((el, ID) => ID !== id);
@@ -130,8 +125,6 @@ const Copyright = (props) => {
 
   const commonProps = {
     workpiece_id,
-    dividingMethod,
-    selectDividingMethod,
     addCollaborators,
     deleteCollaborator,
     deleteRole,
@@ -140,15 +133,27 @@ const Copyright = (props) => {
     handleDrag,
   };
 
-  return (
-    <div>
-      <TopBar {...props} />
-      <div style={style.b1}>
-        <div style={style.b1b1}>
-          <div style={style.b1b1b1}>
-            <Presentation view="copyright" />
+  const title = props.translations.rightSplit.title._copyright[props.language];
+  const textPresentation = props.translations.rightSplit.textPresentation._copyright[props.language];
+  const textDescription = props.translations.rightSplit.textDescription._copyright[props.language];
 
-            <DividingMethod {...commonProps} />
+  return (
+    <div className="rightSplitCreation">
+      <TopBar {...props} view="copyright" />
+      <div className="b1">
+        <div className="b1b1">
+          <div className="b1b1b1">
+            {/* <Presentation view="copyright" /> */}
+            <div className="presentation">
+              <div className="presentationB1">
+                <div className="logo" />
+                <div className="title">{title}</div>
+              </div>
+              <div className="text1">{textPresentation}</div>
+              <div className="text2">{textDescription}</div>
+            </div>
+
+            <DividingMethod {...props} {...commonProps} />
 
             {props.copyright.map((el, id) => {
               // Incomming data is different than PostingData
