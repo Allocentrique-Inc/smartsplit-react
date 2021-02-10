@@ -79,9 +79,7 @@ const Copyright = (props) => {
         let arr = [...props.copyright].map((EL, ID) => {
           if (id === ID) {
             EL.shares = ceil(sharesToSeparate < 0 ? newShares + sharesToSeparate : newShares)
-          } else {
-
-            console.log(unlockedSum)
+          } else { 
             if (EL.lock !== true) {
               EL.shares =
                 EL.shares === 0
@@ -109,8 +107,7 @@ const Copyright = (props) => {
     handleSelectDividingMethod,
     handleDrag
   }
-
-  console.log(props.copyright)
+ 
   return (
     <div>
       <TopBar {...props}/>

@@ -38,8 +38,7 @@ const getDescription = (tileId) => {
     default : return "---" 
   }
 }
-const getActionNameAndDestination = (props) => { 
-  console.log(props)
+const getActionNameAndDestination = (props) => {  
   switch (props.tileId) {
     case "share" : {
       const _state = props.workpiece  

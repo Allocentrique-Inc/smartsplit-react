@@ -28,8 +28,7 @@ const Kanban = (props) => {
     handleSubmitRightSplit,
     handleConsultBtn,
     hasToVote
-  }
-  console.log(props)
+  } 
   return (
     <>
       {/* CONSULT */}

@@ -24,8 +24,7 @@ const Orientation = (props) => {
   useEffect(() => {
     resetData()
     // eslint-disable-next-line
-  }, [props.selectedWorkpiece])
-  console.log(commonProps) 
+  }, [props.selectedWorkpiece]) 
   if(!workpiece)return null
   return (
     <div className="orientation">

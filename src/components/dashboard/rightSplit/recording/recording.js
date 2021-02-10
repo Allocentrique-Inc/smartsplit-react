@@ -19,8 +19,7 @@ const Recording = (props) => {
 
   const deleteCollaborator = (rightHolder) => { 
     const arr = [...props.recording]
-    arr.splice(props.recording.find((el1) => el1.user_id === rightHolder), 1)
-    console.log(arr)
+    arr.splice(props.recording.find((el1) => el1.user_id === rightHolder), 1) 
     props.setRecording(arr)
   }
 

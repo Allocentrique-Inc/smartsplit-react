@@ -3,8 +3,7 @@ import postCollaborator from "../../../../../api/users/postCollaborator"
 
 const AddCollaborators = (props) => {
   const [isAdding, setIsAdding] = useState(false)  
-  const [isCreating, setIsCreating] = useState(false)  
-  console.log(props.collaborators)
+  const [isCreating, setIsCreating] = useState(false)   
   const availablesCollaborators = props.collaborators.filter( (el)=>  !props.preSelectedCollaborators.some((EL)=> EL.rightHolder === el.user_id) )
   return (
     <div>

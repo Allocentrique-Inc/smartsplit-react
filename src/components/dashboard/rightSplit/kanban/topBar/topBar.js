@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";  
 
 const TopBar = (props) => {
-  let { workpiece_id } = useParams();
-  console.log(props.workpiece.title)
+  let { workpiece_id } = useParams(); 
   return (
     <div className="topBar"> 
       <div className="side">

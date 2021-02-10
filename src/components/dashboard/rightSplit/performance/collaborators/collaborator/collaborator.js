@@ -30,8 +30,7 @@ const Collaborator = (props) => {
       value={props.el.status}
       onChange={(e) => {
         const arr = [...props.performance]
-        arr[props.id].status = e.target.value
-        console.log(arr)
+        arr[props.id].status = e.target.value 
         props.setPerformance(arr)
       }}
     >

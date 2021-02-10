@@ -27,11 +27,9 @@ const Performance = (props) => {
     arr[id].roles = arr[id].roles.filter((el) => el !== role)
     props.setPerformance(arr)
   }
-  const addRole = (role, id) => {
-    console.log("ASDASDASDA", role)
+  const addRole = (role, id) => { 
     const arr = [...props.performance]
-    arr[id].roles.push(role)
-    console.log(arr)
+    arr[id].roles.push(role) 
     props.setPerformance(arr)
   }
 

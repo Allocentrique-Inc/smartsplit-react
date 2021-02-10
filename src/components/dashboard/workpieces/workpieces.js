@@ -28,7 +28,8 @@ const Workpieces = (props) => {
     setWorkpiecesByRightHolder(workpiecesByRightHolder)
   }
 
-  useEffect(() => { resetData() 
+  useEffect(() => { 
+    resetData() 
     // eslint-disable-next-line
   }, []) 
 

@@ -17,8 +17,7 @@ const Collaborator = (props) => {
       value={props.el.function}
       onChange={(e) => {
         const arr = [...props.recording]
-        arr[props.id].function = e.target.value
-        console.log(arr)
+        arr[props.id].function = e.target.value 
         props.setRecording(arr)
       }}
     >
