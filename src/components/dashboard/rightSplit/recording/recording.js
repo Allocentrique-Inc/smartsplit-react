@@ -1,20 +1,46 @@
-import AddCollaborators from "../_/addCollaborators/addCollaborators";
-import { useParams } from "react-router-dom";
-import TopBar from "../_/topBar/topBar";
-import DownBar from "../_/downBar/downBar";
-import Presentation from "../_/presentation/presentation";
-import Collaborators from "./collaborators/collaborators";
-import Circle from "../_/circle/circle";
+import { useParams } from 'react-router-dom';
+import AddCollaborators from '../_/addCollaborators/addCollaborators';
+import TopBar from '../_/topBar/topBar';
+import DownBar from '../_/downBar/downBar';
+import Presentation from '../_/presentation/presentation';
+import Collaborators from './collaborators/collaborators';
+import Circle from '../_/circle/circle';
+
+const style = {
+  b1: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  b1b1: {
+    width: '944px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '100px',
+    minHeight: 'calc(100vh - 248px)',
+  },
+  b1b1b1: {
+    width: '464px',
+  },
+  b1b1b2: {
+    width: '464px',
+  },
+  b1b1b2b1: {
+    position: 'sticky',
+    top: '144px',
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+};
 
 const Recording = (props) => {
-  let { workpiece_id } = useParams();
+  const { workpiece_id } = useParams();
   const addCollaborators = (user_id) => {
     props.setRecording([
       ...props.recording,
       {
         rightHolder: user_id,
-        comment: "",
-        function: "",
+        comment: '',
+        function: '',
         shares: 10,
       },
     ]);
@@ -24,7 +50,7 @@ const Recording = (props) => {
     const arr = [...props.recording];
     arr.splice(
       props.recording.find((el1) => el1.user_id === rightHolder),
-      1
+      1,
     );
     props.setRecording(arr);
   };
@@ -68,29 +94,3 @@ const Recording = (props) => {
 };
 
 export default Recording;
-
-const style = {
-  b1: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  b1b1: {
-    width: "944px",
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: "100px",
-    minHeight: "calc(100vh - 248px)",
-  },
-  b1b1b1: {
-    width: "464px",
-  },
-  b1b1b2: {
-    width: "464px",
-  },
-  b1b1b2b1: {
-    position: "sticky",
-    top: "144px",
-    display: "flex",
-    justifyContent: "space-around",
-  },
-};

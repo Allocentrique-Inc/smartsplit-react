@@ -1,14 +1,14 @@
-import Title from "./title/title";
-import Creation from "./creation/creation";
-import SplitOwner from "./splitOwner/splitOwner";
-import Consult from "../consult/consult";
-import DownBar from "./downBar/downBar";
-import { useState } from "react";
+import { useState } from 'react';
+import Title from './title/title';
+import Creation from './creation/creation';
+import SplitOwner from './splitOwner/splitOwner';
+import Consult from '../consult/consult';
+import DownBar from './downBar/downBar';
 
 const Vote = (props) => {
-  const [copyright, setCopyright] = useState("");
-  const [performance, setPerformance] = useState("");
-  const [recording, setRecording] = useState("");
+  const [copyright, setCopyright] = useState('');
+  const [performance, setPerformance] = useState('');
+  const [recording, setRecording] = useState('');
   const commonProps = {
     copyright,
     setCopyright,
@@ -25,7 +25,7 @@ const Vote = (props) => {
           <Title />
           <Creation />
           <SplitOwner />
-          <Consult {...props} {...commonProps} voting={true} />
+          <Consult {...props} {...commonProps} voting />
         </div>
       </div>
       <DownBar {...props} {...commonProps} />

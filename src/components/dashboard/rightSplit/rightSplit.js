@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
-import getUsersCollaborators from "../../../api/users/getUsersCollaborators";
-import postRightSplit from "../../../api/workpieces/postRightSplit";
-import getWorkpiece from "../../../api/workpieces/getWorkpiece";
-import getUsers from "../../../api/users/getUsers";
-import Copyright from "./copyright/copyright";
-import Performance from "./performance/performance";
-import Recording from "./recording/recording";
-import Privacy from "./privacy/privacy";
-import Kanban from "./kanban/kanban";
-import Consult from "./consult/consult";
-import Vote from "./vote/vote";
-import { useParams, Route } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useParams, Route } from 'react-router-dom';
+import getUsersCollaborators from '../../../api/users/getUsersCollaborators';
+import postRightSplit from '../../../api/workpieces/postRightSplit';
+import getWorkpiece from '../../../api/workpieces/getWorkpiece';
+import getUsers from '../../../api/users/getUsers';
+import Copyright from './copyright/copyright';
+import Performance from './performance/performance';
+import Recording from './recording/recording';
+import Privacy from './privacy/privacy';
+import Kanban from './kanban/kanban';
+import Consult from './consult/consult';
+import Vote from './vote/vote';
 
 const RightSplit = (props) => {
-  let { workpiece_id } = useParams();
-  const user_id = localStorage.getItem("user_id");
+  const { workpiece_id } = useParams();
+  const user_id = localStorage.getItem('user_id');
   const [copyright, setCopyright] = useState([]);
   const [performance, setPerformance] = useState([]);
   const [recording, setRecording] = useState([]);
-  const [privacy, setPrivacy] = useState("private");
+  const [privacy, setPrivacy] = useState('private');
   const [collaborators, setCollaborators] = useState([]);
   const [workpiece, setWorkpiece] = useState([]);
 
@@ -42,11 +42,15 @@ const RightSplit = (props) => {
   };
   useEffect(() => {
     resetData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const saveRightSplit = async () => {
-    const payload = { workpiece_id, copyright, performance, recording };
+    const payload = {
+      workpiece_id,
+      copyright,
+      performance,
+      recording,
+    };
     await postRightSplit(payload);
   };
 
@@ -70,7 +74,7 @@ const RightSplit = (props) => {
   return (
     <>
       <Route path="/workpiece/:workpiece_id/right-split/consult">
-        <Consult {...commonProps} voting={true} />
+        <Consult {...commonProps} voting />
       </Route>
       <Route path="/workpiece/:workpiece_id/right-split/copyright">
         <Copyright {...commonProps} />

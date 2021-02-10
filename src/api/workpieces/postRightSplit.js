@@ -2,7 +2,10 @@ const postRightSplit = async (payload) => {
   const { copyright, performance, recording } = payload;
   const arr = [...copyright, ...performance, ...recording];
   arr.forEach((el) => {
-    el.rightHolder = typeof el.rightHolder === 'string' ? el.rightHolder : el.rightHolder.user_id;
+    // eslint-disable-next-line no-param-reassign
+    el.rightHolder = typeof el.rightHolder === 'string'
+      ? el.rightHolder
+      : el.rightHolder.user_id;
   });
   const body = JSON.stringify({ copyright, performance, recording });
   try {

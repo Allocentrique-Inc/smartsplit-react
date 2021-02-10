@@ -1,5 +1,5 @@
-import { useState } from "react";
-import postWorkpiece from "../../../../api/workpieces/postWorkpiece";
+import { useState } from 'react';
+import postWorkpiece from '../../../../api/workpieces/postWorkpiece';
 
 const AddWorkpiece = (props) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -8,8 +8,9 @@ const AddWorkpiece = (props) => {
   return (
     <div>
       <button onClick={handleToggleAdding} className="addButton">
-        {" "}
-        AJOUTER{" "}
+        {' '}
+        AJOUTER
+        {' '}
       </button>
       {isAdding && <Adding {...props} />}
     </div>
@@ -17,13 +18,13 @@ const AddWorkpiece = (props) => {
 };
 
 const Adding = (props) => {
-  const [newTitle, setNewTitle] = useState("");
+  const [newTitle, setNewTitle] = useState('');
   const handleInput = (e) => setNewTitle(e.target.value);
   const handleConfirm = async () => {
     await postWorkpiece({
       title: newTitle,
     });
-    setNewTitle("");
+    setNewTitle('');
     props.resetData();
   };
   return (

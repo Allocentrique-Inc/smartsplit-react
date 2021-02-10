@@ -1,8 +1,20 @@
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from 'react-router-dom';
+
+const style = {
+  saveAndQuit: {
+    color: '#2DA84F',
+    fontFamily: 'IBM Plex Sans',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '16px',
+    lineHeight: '24px',
+    cursor: 'pointer',
+  },
+};
 
 const SaveAndQuit = (props) => {
   const history = useHistory();
-  let { workpiece_id } = useParams();
+  const { workpiece_id } = useParams();
   return (
     <div
       style={style.saveAndQuit}
@@ -17,15 +29,3 @@ const SaveAndQuit = (props) => {
 };
 
 export default SaveAndQuit;
-
-const style = {
-  saveAndQuit: {
-    color: "#2DA84F",
-    fontFamily: "IBM Plex Sans",
-    fontStyle: "normal",
-    fontWeight: "bold",
-    fontSize: "16px",
-    lineHeight: "24px",
-    cursor: "pointer",
-  },
-};

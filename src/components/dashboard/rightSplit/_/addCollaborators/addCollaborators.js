@@ -1,14 +1,13 @@
-import { useState } from "react";
-import postCollaborator from "../../../../../api/users/postCollaborator";
+import { useState } from 'react';
+import postCollaborator from '../../../../../api/users/postCollaborator';
 
 const AddCollaborators = (props) => {
   const [isAdding, setIsAdding] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const availablesCollaborators = props.collaborators.filter(
-    (el) =>
-      !props.preSelectedCollaborators.some(
-        (EL) => EL.rightHolder === el.user_id
-      )
+    (el) => !props.preSelectedCollaborators.some(
+      (EL) => EL.rightHolder === el.user_id,
+    ),
   );
   return (
     <div>
@@ -24,20 +23,18 @@ const AddCollaborators = (props) => {
 
       {isAdding && (
         <div>
-          {availablesCollaborators.map((el, id) => {
-            return (
-              <div key={el.user_id}>
-                <button
-                  onClick={() => {
-                    setIsAdding(false);
-                    props.addCollaborators(el.user_id);
-                  }}
-                >
-                  {el.firstName + " " + el.lastName}
-                </button>
-              </div>
-            );
-          })}
+          {availablesCollaborators.map((el, id) => (
+            <div key={el.user_id}>
+              <button
+                onClick={() => {
+                  setIsAdding(false);
+                  props.addCollaborators(el.user_id);
+                }}
+              >
+                {`${el.firstName} ${el.lastName}`}
+              </button>
+            </div>
+          ))}
           <div>
             <button
               onClick={() => {
@@ -66,10 +63,10 @@ const AddCollaborators = (props) => {
 };
 
 const CreateNewCollaborator = (props) => {
-  const user_id = localStorage.getItem("user_id");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const user_id = localStorage.getItem('user_id');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
   return (
     <div>
       <div>Ajouter / Modifier un collaborateur</div>

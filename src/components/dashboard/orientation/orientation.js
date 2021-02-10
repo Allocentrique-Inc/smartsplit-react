@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import getWorkpiece from "../../../api/workpieces/getWorkpiece";
-import { useParams, Link } from "react-router-dom";
-import Tile from "./tile/tile";
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import getWorkpiece from '../../../api/workpieces/getWorkpiece';
+import Tile from './tile/tile';
 
 const Orientation = (props) => {
-  let { workpiece_id } = useParams();
-  const [workpiece, setWorkpiece] = useState("");
-  const [tab, setTab] = useState("task");
+  const { workpiece_id } = useParams();
+  const [workpiece, setWorkpiece] = useState('');
+  const [tab, setTab] = useState('task');
 
   const resetData = async () => {
     const incomingWorkpiece = await getWorkpiece({
@@ -32,7 +32,7 @@ const Orientation = (props) => {
         <div className="content">
           <div className="b1">
             <div className="back">
-              <Link to={`/`}>BACK</Link>
+              <Link to="/">BACK</Link>
             </div>
             <div className="right">
               <div className="credit" />
@@ -49,11 +49,11 @@ const Orientation = (props) => {
                   <div className="modify" />
                 </div>
                 <div className="details">
-                  {"--------- créé par  "}
+                  {'--------- créé par  '}
                   <span className="artistName">
-                    {workpiece.owner.firstName + " " + workpiece.owner.lastName}
+                    {`${workpiece.owner.firstName} ${workpiece.owner.lastName}`}
                   </span>
-                  {" - Mis à jour --------"}
+                  {' - Mis à jour --------'}
                 </div>
               </div>
             </div>
@@ -61,18 +61,18 @@ const Orientation = (props) => {
           </div>
           <div className="b3">
             <button
-              className={"tab " + (tab === "task" ? "selectedTab" : "")}
+              className={`tab ${tab === 'task' ? 'selectedTab' : ''}`}
               onClick={() => {
-                setTab("task");
+                setTab('task');
               }}
             >
               Taches
             </button>
             <span className="space" />
             <button
-              className={"tab " + (tab === "file" ? "selectedTab" : "")}
+              className={`tab ${tab === 'file' ? 'selectedTab' : ''}`}
               onClick={() => {
-                setTab("file");
+                setTab('file');
               }}
             >
               Fichier

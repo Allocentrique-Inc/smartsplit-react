@@ -1,18 +1,18 @@
-import { useState } from "react";
-import TopBar from "./topBar/topBar";
-import submitRightSplit from "../../../../api/workpieces/submitRightSplit";
-import Consult from "../consult/consult";
+import { useState } from 'react';
+import TopBar from './topBar/topBar';
+import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
+import Consult from '../consult/consult';
 
 const Kanban = (props) => {
   const [isConsulting, setIsConsulting] = useState(false);
   if (
-    !props.workpiece.rightSplit ||
-    !props.workpiece.rightSplit._state ||
-    !props.workpiece.archivedSplits
+    !props.workpiece.rightSplit
+    || !props.workpiece.rightSplit._state
+    || !props.workpiece.archivedSplits
   ) {
     return null;
   }
-  const user_id = localStorage.getItem("user_id");
+  const user_id = localStorage.getItem('user_id');
 
   const handleConsultBtn = () => {
     setIsConsulting((e) => !e);
@@ -30,7 +30,7 @@ const Kanban = (props) => {
     ...props.workpiece.rightSplit.recording,
   ]
     .filter((el) => el.rightHolder.user_id === user_id)
-    .some((el) => el.vote === "undecided");
+    .some((el) => el.vote === 'undecided');
 
   const commonProps = {
     handleSubmitRightSplit,
@@ -45,11 +45,11 @@ const Kanban = (props) => {
         <div className="modalBackground" onClick={handleConsultBtn}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <div className="topBar">Top Bar</div>
-            <div style={{ overflowY: "auto" }}>
+            <div style={{ overflowY: 'auto' }}>
               <Consult
                 {...props}
                 voting={hasToVote}
-                modifiable={props.workpiece.rightSplit._state === "draft"}
+                modifiable={props.workpiece.rightSplit._state === 'draft'}
               />
             </div>
             <div className="downBar">Down Bar</div>
@@ -78,7 +78,7 @@ const Kanban = (props) => {
               <div className="bx">
                 <div className="colTitle">En attente d'envoi</div>
                 <div className="content">
-                  {props.workpiece.rightSplit._state === "draft" && (
+                  {props.workpiece.rightSplit._state === 'draft' && (
                     <DraftRightSplit {...commonProps} {...props} />
                   )}
                 </div>
@@ -88,7 +88,7 @@ const Kanban = (props) => {
               <div className="bx">
                 <div className="colTitle">En attente de décision</div>
                 <div className="content">
-                  {props.workpiece.rightSplit._state === "voting" && (
+                  {props.workpiece.rightSplit._state === 'voting' && (
                     <InVoteRightSplit {...commonProps} {...props} />
                   )}
                 </div>
@@ -99,13 +99,13 @@ const Kanban = (props) => {
                 <div className="colTitle">Archivés</div>
                 <div className="content">
                   {/* ACCEPTED */}
-                  {props.workpiece.rightSplit._state === "accepted" && (
+                  {props.workpiece.rightSplit._state === 'accepted' && (
                     <AcceptedRightSplit {...commonProps} {...props} />
                   )}
 
                   {/* DECLIDED */}
-                  {props.workpiece.archivedSplits &&
-                    props.workpiece.archivedSplits.map((el, id) => (
+                  {props.workpiece.archivedSplits
+                    && props.workpiece.archivedSplits.map((el, id) => (
                       <RejectedRightSplit id={id} el={el} />
                     ))}
                 </div>

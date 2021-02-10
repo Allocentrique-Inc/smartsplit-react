@@ -1,10 +1,10 @@
-import Admin from "./components/admin/admin";
-import Dashboard from "./components/dashboard/dashboard";
-import { useEffect, useState } from "react";
-import check from "./api/auth/check";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./styles/index.scss";
-import Login from "./components/logIn/logIn";
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Admin from './components/admin/admin';
+import Dashboard from './components/dashboard/dashboard';
+import check from './api/auth/check';
+import './styles/index.scss';
+import Login from './components/logIn/logIn';
 
 function App() {
   return (
@@ -35,7 +35,7 @@ const LoadingManager = (props) => {
   });
   return (
     <>
-      {!isLoaded && "LOADING"}
+      {!isLoaded && 'LOADING'}
       {isLoaded && isLogged && (
         <Dashboard resetLogginCheck={resetLogginCheck} />
       )}

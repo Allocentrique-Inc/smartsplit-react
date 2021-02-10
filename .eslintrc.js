@@ -27,6 +27,11 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     'react/jsx-props-no-spreading': 'off',
-    'max-len': 500,
+    'max-len': 0,
+    'jsx-a11y/label-has-associated-control': 'off',
+    'no-nested-ternary': 'off',
+    'no-param-reassign': 'off',
+    'react/no-unescaped-entities': 'off',
+    'react-hooks/exhaustive-deps': 'off',
   },
 };

@@ -1,12 +1,14 @@
-import voteRightSplit from "../../../../../api/workpieces/voteRightSplit";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from 'react-router-dom';
+import voteRightSplit from '../../../../../api/workpieces/voteRightSplit';
 
 const DownBar = (props) => {
   const history = useHistory();
-  let { workpiece_id } = useParams();
+  const { workpiece_id } = useParams();
   const handleSubmit = async () => {
     const { copyright, performance, recording } = props;
-    await voteRightSplit({ copyright, performance, recording, workpiece_id });
+    await voteRightSplit({
+      copyright, performance, recording, workpiece_id,
+    });
     history.push(`/workpiece/${workpiece_id}/right-split/kanban`);
   };
   return (

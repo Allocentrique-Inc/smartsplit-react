@@ -1,15 +1,41 @@
-import { useParams, useHistory } from "react-router-dom";
-import TopBar from "../_/topBar/topBar";
-import DownBar from "../_/downBar/downBar";
-import Presentation from "../_/presentation/presentation";
-import PrivacySelection from "./privacySelection/privacySelection";
-import Success from "./success/success";
-import Consult from "../consult/consult";
-import { useState } from "react";
-import submitRightSplit from "../../../../api/workpieces/submitRightSplit";
+import { useParams, useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import TopBar from '../_/topBar/topBar';
+import DownBar from '../_/downBar/downBar';
+import Presentation from '../_/presentation/presentation';
+import PrivacySelection from './privacySelection/privacySelection';
+import Success from './success/success';
+import Consult from '../consult/consult';
+import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
+
+const style = {
+  b1: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  b1b1: {
+    width: '944px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '100px',
+    minHeight: 'calc(100vh - 248px)',
+  },
+  b1b1b1: {
+    width: '464px',
+  },
+  b1b1b2: {
+    width: '464px',
+  },
+  b1b1b2b1: {
+    position: 'sticky',
+    top: '144px',
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+};
 
 const Privacy = (props) => {
-  let { workpiece_id } = useParams();
+  const { workpiece_id } = useParams();
   const history = useHistory();
   const [isSaved, setIsSaved] = useState(false);
   const [isConsulting, setIsConsulting] = useState(false);
@@ -56,7 +82,7 @@ const Privacy = (props) => {
                       workpiece_id: props.workpiece.workpiece_id,
                     });
                     history.push(
-                      `/workpiece/${workpiece_id}/right-split/kanban`
+                      `/workpiece/${workpiece_id}/right-split/kanban`,
                     );
                   }}
                 >
@@ -78,7 +104,7 @@ const Privacy = (props) => {
             <br />
             <PrivacySelection {...props} />
           </div>
-          <div style={style.b1b1b2}></div>
+          <div style={style.b1b1b2} />
         </div>
       </div>
       <DownBar
@@ -90,29 +116,3 @@ const Privacy = (props) => {
 };
 
 export default Privacy;
-
-const style = {
-  b1: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  b1b1: {
-    width: "944px",
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: "100px",
-    minHeight: "calc(100vh - 248px)",
-  },
-  b1b1b1: {
-    width: "464px",
-  },
-  b1b1b2: {
-    width: "464px",
-  },
-  b1b1b2b1: {
-    position: "sticky",
-    top: "144px",
-    display: "flex",
-    justifyContent: "space-around",
-  },
-};

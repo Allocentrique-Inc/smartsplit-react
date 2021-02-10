@@ -1,6 +1,6 @@
 const RoleBox = (props) => {
   const isPresent = props.performance[props.id].roles.some(
-    (EL) => props.role === EL
+    (EL) => props.role === EL,
   );
   return (
     <div key={props.role}>

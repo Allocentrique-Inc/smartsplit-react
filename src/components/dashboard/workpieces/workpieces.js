@@ -1,24 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import getWorkpiecesByOwner from "../../../api/workpieces/getWorkpiecesByOwner";
-import getWorkpiecesByRightHolder from "../../../api/workpieces/getWorkpiecesByRightHolder";
-import disconnect from "../../../api/auth/disconnect";
+import getWorkpiecesByOwner from '../../../api/workpieces/getWorkpiecesByOwner';
+import getWorkpiecesByRightHolder from '../../../api/workpieces/getWorkpiecesByRightHolder';
+import disconnect from '../../../api/auth/disconnect';
 
-import Workpiece from "./workpiece/workpiece";
-import LeftMenu from "./leftMenu/leftMenu";
-import AddWorkpiece from "./addWorkpiece/addWorkPiece";
-import SelectPerspective from "./selectPerspective/selectPerspective";
+import Workpiece from './workpiece/workpiece';
+import LeftMenu from './leftMenu/leftMenu';
+import AddWorkpiece from './addWorkpiece/addWorkPiece';
+import SelectPerspective from './selectPerspective/selectPerspective';
 
 const Workpieces = (props) => {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = localStorage.getItem('user_id');
   const [workpiecesByOwner, setWorkpiecesByOwner] = useState([]);
   const [workpiecesByRightHolder, setWorkpiecesByRightHolder] = useState([]);
-  const [tab, setTab] = useState("owner");
+  const [tab, setTab] = useState('owner');
 
-  const resetData = async () => {
-    resetWorkpiecesByOwner();
-    resetWorkpiecesByRightHolder();
-  };
   const resetWorkpiecesByOwner = async () => {
     const workpiecesByOwner = await getWorkpiecesByOwner({ user_id });
     setWorkpiecesByOwner(workpiecesByOwner);
@@ -28,6 +24,10 @@ const Workpieces = (props) => {
       user_id,
     });
     setWorkpiecesByRightHolder(workpiecesByRightHolder);
+  };
+  const resetData = async () => {
+    resetWorkpiecesByOwner();
+    resetWorkpiecesByRightHolder();
   };
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const Workpieces = (props) => {
 
       <div className="rightContent">
         <div className="topBar">
-          <div className="searchBar"></div>
+          <div className="searchBar" />
           <div
             className="profile"
             onClick={() => {
@@ -66,10 +66,10 @@ const Workpieces = (props) => {
 
         <SelectPerspective {...props} {...commonProps} />
         <div className="list">
-          {(tab === "owner" ? workpiecesByOwner : workpiecesByRightHolder).map(
+          {(tab === 'owner' ? workpiecesByOwner : workpiecesByRightHolder).map(
             (el) => (
               <Workpiece key={el.workpiece_id} {...el} {...commonProps} />
-            )
+            ),
           )}
         </div>
       </div>

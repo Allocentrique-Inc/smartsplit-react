@@ -1,12 +1,12 @@
-import { useState } from "react";
-import Workpieces from "./workpieces/workpieces";
-import Orientation from "./orientation/orientation";
-import RightSplit from "./rightSplit/rightSplit";
-import { Switch, Route } from "react-router-dom";
+import { useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import Workpieces from './workpieces/workpieces';
+import Orientation from './orientation/orientation';
+import RightSplit from './rightSplit/rightSplit';
 
 const Dashboard = (props) => {
-  const [selectedWorkpiece, selectWorkpiece] = useState("");
-  const [activity, setActivity] = useState("");
+  const [selectedWorkpiece, selectWorkpiece] = useState('');
+  const [activity, setActivity] = useState('');
   const commonProps = {
     selectedWorkpiece,
     selectWorkpiece,
