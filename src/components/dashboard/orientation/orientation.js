@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import getWorkpiece from '../../../api/workpieces/getWorkpiece';
 import Tile from './tile/tile';
+import PenIcon from '../../../icons/pen';
+import { Colors } from '../../../theme';
 
 const Orientation = (props) => {
   const { workpiece_id } = useParams();
@@ -46,7 +48,9 @@ const Orientation = (props) => {
               <div className="description">
                 <div className="title">
                   {workpiece.title}
-                  <div className="modify" />
+                  <div className="modify">
+                    <PenIcon />
+                  </div>
                 </div>
                 <div className="details">
                   {'--------- créé par  '}

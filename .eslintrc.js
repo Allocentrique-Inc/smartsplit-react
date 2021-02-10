@@ -17,6 +17,7 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     'react/button-has-type': 'off',
     'no-console': 'off',
+    'no-tabs': 'off',
     camelcase: 'off',
     'no-unused-vars': 'off',
     'no-shadow': 'off',
