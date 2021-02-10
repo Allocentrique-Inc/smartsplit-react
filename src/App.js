@@ -5,6 +5,9 @@ import Dashboard from './components/dashboard/dashboard';
 import check from './api/auth/check';
 import './styles/index.scss';
 import Login from './components/logIn/logIn';
+import ActivateEmail from './components/auth/activateEmail/activateEmail';
+import ChangePassword from './components/auth/changePassword/changePassword';
+import RequestPasswordReset from './components/auth/requestPasswordReset/requestPasswordReset';
 
 function App() {
   return (
@@ -12,6 +15,15 @@ function App() {
       <Switch>
         <Route path="/admin">
           <Admin />
+        </Route>
+        <Route path="/user/activate/:token">
+          <ActivateEmail />
+        </Route>
+        <Route path="/user/change-password/:token">
+          <ChangePassword />
+        </Route>
+        <Route path="/auth/request-password-reset">
+          <RequestPasswordReset />
         </Route>
         <Route path="/">
           <LoadingManager />
