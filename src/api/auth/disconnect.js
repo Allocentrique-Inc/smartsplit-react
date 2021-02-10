@@ -1,6 +1,6 @@
 const disconnect = () => {
-  localStorage.setItem("user_id","")
-  localStorage.setItem("accessToken","")
-}
+  localStorage.setItem('user_id', '');
+  localStorage.setItem('accessToken', '');
+};
 
-export default disconnect 
+export default disconnect;

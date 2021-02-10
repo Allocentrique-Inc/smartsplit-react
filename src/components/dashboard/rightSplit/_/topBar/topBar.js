@@ -1,9 +1,9 @@
-import Title from "./title/title"
-import Img from "./img/img"
-import BreadCrumb from "./breadCrumb/breadCrumb"
-import Credit from "./credit/credit"
-import SaveAndQuit from "./saveAndQuit/saveAndQuit"
-import Profile from "./profile/profile"
+import Title from "./title/title";
+import Img from "./img/img";
+import BreadCrumb from "./breadCrumb/breadCrumb";
+import Credit from "./credit/credit";
+import SaveAndQuit from "./saveAndQuit/saveAndQuit";
+import Profile from "./profile/profile";
 
 const TopBar = (props) => {
   return (
@@ -19,8 +19,8 @@ const TopBar = (props) => {
         <Profile />
       </div>
     </div>
-  )
-}
+  );
+};
 
 const style = {
   b1: {
@@ -36,8 +36,8 @@ const style = {
   },
   b1b1: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
-}
+};
 
-export default TopBar
+export default TopBar;

@@ -1,30 +1,39 @@
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 
-const DownBar = (props) => { 
+const DownBar = (props) => {
   return (
     <div style={style.b1}>
       <div style={style.b1b1}>
         <div style={style.b1b1b1}>
-          <Link to={props.backUrl} style={{ ...style.actionButton, ...style.goBack }}>
+          <Link
+            to={props.backUrl}
+            style={{ ...style.actionButton, ...style.goBack }}
+          >
             Retour
           </Link>
-          {!props.save&&( 
-            <Link to={props.frontUrl} style={{ ...style.actionButton, ...style.continue }}>
-            Continuer
+          {!props.save && (
+            <Link
+              to={props.frontUrl}
+              style={{ ...style.actionButton, ...style.continue }}
+            >
+              Continuer
             </Link>
           )}
-          {props.save&&( 
-            <button onClick={props.save} style={{ ...style.actionButton, ...style.continue }}>
+          {props.save && (
+            <button
+              onClick={props.save}
+              style={{ ...style.actionButton, ...style.continue }}
+            >
               Sauvegarder
             </button>
           )}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DownBar
+export default DownBar;
 
 const style = {
   b1: {
@@ -38,16 +47,16 @@ const style = {
     display: "flex",
     justifyContent: "space-around",
   },
-  b1b1 : { 
-    width: "944px", 
-    display: "flex", 
-    justifyContent: "space-between" 
+  b1b1: {
+    width: "944px",
+    display: "flex",
+    justifyContent: "space-between",
   },
-  b1b1b1 : { 
-    width: "464px", 
-    display: "flex", 
-    justifyContent: "space-between", 
-    alignItems: "center" 
+  b1b1b1: {
+    width: "464px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   actionButton: {
     border: "1px solid #DCDFE1",
@@ -67,5 +76,5 @@ const style = {
   goBack: {
     backgroundColor: "#FFFFFF",
     color: "#2DA84F",
-  }
-}
+  },
+};

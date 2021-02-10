@@ -1,94 +1,93 @@
-.kanban { 
-  .topBar{ 
+.kanban {
+  .topBar {
     position: sticky;
     top: 0px;
     background-color: white;
     height: 72px;
-    border-bottom: 2px solid #DCDFE1;
-    box-shadow: 0px -2px 4px 4px #DCDFE1;
+    border-bottom: 2px solid #dcdfe1;
+    box-shadow: 0px -2px 4px 4px #dcdfe1;
     align-items: center;
     display: flex;
-    justify-content: space-between; 
-    .side{
+    justify-content: space-between;
+    .side {
       width: 50px;
-      .back{
-        background-color: rgba(214, 196, 162,0.25); 
+      .back {
+        background-color: rgba(214, 196, 162, 0.25);
         width: 40px;
         height: 40px;
       }
     }
-    .b1{ 
-      width : 944px;
+    .b1 {
+      width: 944px;
       display: flex;
-      align-items: center; 
+      align-items: center;
       justify-content: flex-start;
-      .img{
+      .img {
         width: 40px;
         height: 40px;
-        background-color: rgba(214, 196, 162,0.25); 
+        background-color: rgba(214, 196, 162, 0.25);
         margin-right: 16px;
       }
-      .title{  
+      .title {
         font-weight: bold;
         font-size: 16px;
-        line-height: 24px;  
+        line-height: 24px;
         color: #203548;
       }
-      .pageTitle{ 
+      .pageTitle {
         font-weight: normal;
         font-size: 16px;
-        line-height: 24px; 
-        color: #203548; 
+        line-height: 24px;
+        color: #203548;
         margin-left: 6px;
       }
     }
   }
-  .tabs{
-    
+  .tabs {
   }
 
-  .b1{  
+  .b1 {
     display: flex;
     justify-content: center;
-    .b1b1{ 
-      width: 944px;    
-      .pageTitle{
+    .b1b1 {
+      width: 944px;
+      .pageTitle {
         font-weight: bold;
         font-size: 32px;
         line-height: 40px;
         margin-top: 32px;
       }
-      .splitDetails{  
+      .splitDetails {
         font-weight: normal;
         font-size: 12px;
         line-height: 16px;
-        color: #687A8B;
+        color: #687a8b;
         margin-top: 8px;
-        .artistName{ 
+        .artistName {
           font-weight: bold;
           font-size: 12px;
           line-height: 16px;
-          color: #2DA84F;
+          color: #2da84f;
           margin-left: 4px;
         }
       }
-      .b1b1b2{ 
+      .b1b1b2 {
         margin-top: 48px;
-        width: 944px; 
-        display: flex; 
-        justify-Content: space-between; 
-        margin-Bottom: 100px; 
-        min-Height: 50vh; 
-        .bx{ 
-          width: 304px;  
-          .colTitle{ 
+        width: 944px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 100px;
+        min-height: 50vh;
+        .bx {
+          width: 304px;
+          .colTitle {
             font-weight: bold;
             font-size: 18px;
-            line-height: 24px;  
+            line-height: 24px;
             color: #203548;
           }
-          .content{
-            background-color : #FAF8F9;
+          .content {
+            background-color: #faf8f9;
             height: 100%;
             margin-top: 16px;
             padding: 8px;
@@ -97,85 +96,85 @@
             cursor: pointer;
             padding: 16px;
             background-color: white;
-            // height: 184px; 
-            background: #FFFFFF; 
+            // height: 184px;
+            background: #ffffff;
             box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
             border-radius: 4px;
-            .title{ 
+            .title {
               font-weight: bold;
               font-size: 16px;
-              line-height: 24px;  
+              line-height: 24px;
               color: #203548;
             }
-            .details{ 
+            .details {
               font-weight: normal;
               font-size: 12px;
-              line-height: 16px; 
+              line-height: 16px;
               display: flex;
-              align-items: center; 
-              color: #687A8B;
-              .artistName { 
+              align-items: center;
+              color: #687a8b;
+              .artistName {
                 font-weight: bold;
-                color: #2DA84F;
+                color: #2da84f;
                 margin: 0px 4px;
               }
             }
-            .b1{ 
+            .b1 {
               display: flex;
               width: 100%;
               justify-content: space-between;
               margin-top: 16px;
-              .collaborators{
+              .collaborators {
                 height: 24px;
                 width: 100px;
-                background-color: rgba(214, 196, 162,0.15);
+                background-color: rgba(214, 196, 162, 0.15);
               }
-              .status{ 
-                display: flex; 
-                align-items: center;  
-                height: 24px; 
-                background: #DFF8E3;
+              .status {
+                display: flex;
+                align-items: center;
+                height: 24px;
+                background: #dff8e3;
                 border-radius: 2px;
                 padding: 4px 8px;
                 font-weight: bold;
                 font-size: 12px;
-                line-height: 16px; 
+                line-height: 16px;
                 align-items: center;
-                text-align: center;  
+                text-align: center;
               }
-              .acceptedStatus{ 
-                background-color: #DFF8E3; 
-                color: #176D25;
+              .acceptedStatus {
+                background-color: #dff8e3;
+                color: #176d25;
               }
-              .rejectedStatus{
-                background-color: #FBD4D4;
-                color: #AC1616;
+              .rejectedStatus {
+                background-color: #fbd4d4;
+                color: #ac1616;
               }
             }
-            .border{ 
+            .border {
               height: 16px;
-              box-shadow: inset 0px -1px 0px #DCDFE1;
+              box-shadow: inset 0px -1px 0px #dcdfe1;
               width: 100%;
             }
             button {
               background-color: red;
               width: 100%;
               margin-top: 16px;
-              height: 40px; 
+              height: 40px;
               background: rgba(255, 255, 255, 0.01);
-              border: 1px solid #DCDFE1;
+              border: 1px solid #dcdfe1;
               box-sizing: border-box;
               border-radius: 2px;
               font-weight: bold;
               font-size: 16px;
               line-height: 24px;
-              color: #2DA84F;
+              color: #2da84f;
               cursor: pointer;
               outline: 0;
             }
           }
         }
       }
-    } 
+    }
   }
 }

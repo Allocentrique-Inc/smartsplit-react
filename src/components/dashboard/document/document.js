@@ -1,11 +1,3 @@
+const Document = (props) => <div>Document</div>;
 
-
-const Document = (props) => {
-  return (
-    <div>
-      Document
-    </div>
-  )
-}
-
-export default Document
+export default Document;

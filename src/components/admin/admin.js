@@ -1,22 +1,24 @@
-import { useState } from "react"
-import login from "../../api/auth/login"
-import getWorkpiece from "../../api/workpieces/getWorkpiece"
-import getUser from "../../api/users/getUsers"
-import getWorkpiecesByOwner from "../../api/workpieces/getWorkpiecesByOwner"
-import postWorkpiece from "../../api/workpieces/postWorkpiece"
+import { useState } from 'react';
+import login from '../../api/auth/login';
+import getWorkpiece from '../../api/workpieces/getWorkpiece';
+import getUser from '../../api/users/getUsers';
+import getWorkpiecesByOwner from '../../api/workpieces/getWorkpiecesByOwner';
+import postWorkpiece from '../../api/workpieces/postWorkpiece';
 
 const Admin = (props) => {
-  const user_id = localStorage.getItem("user_id")
-  const [show, setShow] = useState(true)
+  const user_id = localStorage.getItem('user_id');
+  const [show, setShow] = useState(true);
   return (
     <>
       <button
-        onClick={() => { setShow(!show) }}
+        onClick={() => {
+          setShow(!show);
+        }}
       >
-        {show ? "HIDE ADMIN" : "SHOW ADMIN"}
+        {show ? 'HIDE ADMIN' : 'SHOW ADMIN'}
       </button>
-      {show
-        && (<div>
+      {show && (
+        <div>
           <h1>ADMIN / API / TEST</h1>
           <hr />
 
@@ -25,349 +27,189 @@ const Admin = (props) => {
             onClick={() => {
               login({
                 // email: "simon@iptoki.com",
-                email: "simonboisclair553@hotmail.com",
-                password: "ici12laba42"
-              })
+                email: 'simonboisclair553@hotmail.com',
+                password: 'ici12laba42',
+              });
             }}
           >
             login
           </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             getCheck
           </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             getRefresh
           </button>
-
 
           <hr />
           <h2>Users</h2>
           <button
             onClick={() => {
               getUser({
-                user_id
-              })
+                user_id,
+              });
             }}
           >
             getUser
           </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             patchUser
           </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             deleteUser
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             getUserAvatar
-      </button>
+          </button>
 
           <h2>Account Management</h2>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             postUser
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             activateUser
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             requestPassword
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             changePassword
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             verifyMobilePhone
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             inviteNewUser
-      </button>
-
+          </button>
 
           <h2>Collaborators</h2>
-          <button
-            style={{ backgroundColor: "yellow" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'yellow' }} onClick={() => {}}>
             getUsersCollaborators
-      </button>
-          <button
-            style={{ backgroundColor: "yellow" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'yellow' }} onClick={() => {}}>
             postCollaborators
-      </button>
+          </button>
 
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             getCollaboratorById
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             deleteCollaboratorById
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             postCollaboratorById ***
-      </button>
-
+          </button>
 
           <h2>Contributors</h2>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             getUsersContributors
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             postContributors
-      </button>
+          </button>
 
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             getContributorById
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             deleteContributorById
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             postContributorById ***
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             patchContributorById ***
-      </button>
-
+          </button>
 
           <hr />
           <h2>WorkPiece</h2>
           <button
             onClick={() => {
               getWorkpiece({
-                workpiece_id: "e5de5afc-b362-450b-aa3a-0792f2a9075d"
-              })
+                workpiece_id: 'e5de5afc-b362-450b-aa3a-0792f2a9075d',
+              });
             }}
           >
             getWorkpiece
-      </button>
+          </button>
           <button
             onClick={() => {
               getWorkpiecesByOwner({
-                user_id
-              })
+                user_id,
+              });
             }}
           >
             getWorkpiecesByOwner
-      </button>
+          </button>
           <button
             onClick={() => {
               postWorkpiece({
-                title: "The Time Is Mine"
-              })
+                title: 'The Time Is Mine',
+              });
             }}
           >
             postWorkpiece
-      </button>
-          <button
-            style={{ backgroundColor: "yellow" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'yellow' }} onClick={() => {}}>
             patchWorkpieces
-      </button>
-          <button
-            style={{ backgroundColor: "yellow" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'yellow' }} onClick={() => {}}>
             deleteWorkpieces
-      </button>
-
+          </button>
 
           <h2>RightSplit</h2>
-          <button
-            style={{ backgroundColor: "yellow" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'yellow' }} onClick={() => {}}>
             postRightSplit
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             putRightSplit
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             deleteRightSplit
-      </button>
+          </button>
 
-
-          <button
-            style={{ backgroundColor: "grey" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'grey' }} onClick={() => {}}>
             submitRightSplit
-      </button>
-          <button
-            style={{ backgroundColor: "grey" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'grey' }} onClick={() => {}}>
             voteRightSplit
-      </button>
-          <button
-            style={{ backgroundColor: "grey" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'grey' }} onClick={() => {}}>
             swapUserRightSplit
-      </button>
-
+          </button>
 
           <h2>Documentation</h2>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             getDocumentation
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             patchDocumentation
-      </button>
+          </button>
 
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             getField
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             patchField
-      </button>
-
+          </button>
 
           <h2>File</h2>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             postFile
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             getFileById
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             deleteFileById
-      </button>
-          <button
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-            }}
-          >
+          </button>
+          <button style={{ backgroundColor: 'red' }} onClick={() => {}}>
             patchFileById
-      </button>
-        </div>)
-      }
+          </button>
+        </div>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default Admin
+export default Admin;

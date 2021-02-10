@@ -1,6 +1,6 @@
-const Img = (props) => (<div style={style.img} />)
+const Img = (props) => <div style={style.img} />;
 
-export default Img
+export default Img;
 
 const style = {
   img: {
@@ -8,6 +8,6 @@ const style = {
     width: "40px",
     backgroundColor: "green",
     marginRight: "16px",
-    marginLeft: "16px"
+    marginLeft: "16px",
   },
-}
+};

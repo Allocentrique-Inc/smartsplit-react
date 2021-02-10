@@ -1,19 +1,23 @@
-import { useHistory, useParams } from "react-router-dom";  
+import { useHistory, useParams } from "react-router-dom";
 
 const Modify = (props) => {
-  const history = useHistory(); 
+  const history = useHistory();
   let { workpiece_id } = useParams();
   return (
     <div>
-      {props.modifiable
-        && <button 
-          onClick={()=>{ history.push(`/workpiece/${workpiece_id}/right-split/${props.destination}`); }}
+      {props.modifiable && (
+        <button
+          onClick={() => {
+            history.push(
+              `/workpiece/${workpiece_id}/right-split/${props.destination}`
+            );
+          }}
         >
           Modifier
         </button>
-      }
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Modify
+export default Modify;

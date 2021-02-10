@@ -1,86 +1,118 @@
-import {useState} from "react"
-import postCollaborator from "../../../../../api/users/postCollaborator"
+import { useState } from "react";
+import postCollaborator from "../../../../../api/users/postCollaborator";
 
 const AddCollaborators = (props) => {
-  const [isAdding, setIsAdding] = useState(false)  
-  const [isCreating, setIsCreating] = useState(false)   
-  const availablesCollaborators = props.collaborators.filter( (el)=>  !props.preSelectedCollaborators.some((EL)=> EL.rightHolder === el.user_id) )
+  const [isAdding, setIsAdding] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
+  const availablesCollaborators = props.collaborators.filter(
+    (el) =>
+      !props.preSelectedCollaborators.some(
+        (EL) => EL.rightHolder === el.user_id
+      )
+  );
   return (
     <div>
-      {!isAdding&&<button onClick={()=>{setIsAdding(true)}}>
-        AddCollaborators
-      </button>}
+      {!isAdding && (
+        <button
+          onClick={() => {
+            setIsAdding(true);
+          }}
+        >
+          AddCollaborators
+        </button>
+      )}
 
-      {isAdding&&<div>
-        {availablesCollaborators.map((el,id)=>{
-          return (
-            <div key={el.user_id}>
-              <button onClick={()=>{
-                setIsAdding(false)
-                props.addCollaborators(el.user_id)
-              }}>
-                {el.firstName + " " + el.lastName}
-              </button>
-            </div>
-          )
-        })}
-        <div> 
-          <button onClick={()=>{setIsCreating(true)}}>
-            Créer un nouveau collaborateur
-          </button>
-        </div>
+      {isAdding && (
         <div>
-          <button onClick={()=>{setIsAdding(false)}}>
-            Cancel (should be on click out)
-          </button>
+          {availablesCollaborators.map((el, id) => {
+            return (
+              <div key={el.user_id}>
+                <button
+                  onClick={() => {
+                    setIsAdding(false);
+                    props.addCollaborators(el.user_id);
+                  }}
+                >
+                  {el.firstName + " " + el.lastName}
+                </button>
+              </div>
+            );
+          })}
+          <div>
+            <button
+              onClick={() => {
+                setIsCreating(true);
+              }}
+            >
+              Créer un nouveau collaborateur
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                setIsAdding(false);
+              }}
+            >
+              Cancel (should be on click out)
+            </button>
+          </div>
         </div>
-      </div>}
-      {isCreating&&<CreateNewCollaborator {...props} setIsCreating={setIsCreating}/>}
+      )}
+      {isCreating && (
+        <CreateNewCollaborator {...props} setIsCreating={setIsCreating} />
+      )}
     </div>
-  )
-}
+  );
+};
 
 const CreateNewCollaborator = (props) => {
-  const user_id = localStorage.getItem("user_id")
-  const [firstName,setFirstName] = useState("")
-  const [lastName,setLastName] = useState("")
-  const [email,setEmail] = useState("")
+  const user_id = localStorage.getItem("user_id");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
   return (
     <div>
       <div>Ajouter / Modifier un collaborateur</div>
       <div>
         First Name
-        <input value={firstName} onChange={(e)=>setFirstName(e.target.value)}/>
+        <input
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
       </div>
       <div>
         Last Name
-        <input value={lastName} onChange={(e)=>setLastName(e.target.value)}/>
+        <input value={lastName} onChange={(e) => setLastName(e.target.value)} />
       </div>
       <div>
         Email
-        <input value={email} onChange={(e)=>setEmail(e.target.value)}/>
+        <input value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
       <div>
-        <button onClick={()=>{props.setIsCreating(false)}}>
+        <button
+          onClick={() => {
+            props.setIsCreating(false);
+          }}
+        >
           Annuler
         </button>
         <button
-          onClick={ async ()=>{
+          onClick={async () => {
             await postCollaborator({
               firstName,
               lastName,
               email,
-              user_id 
-            }) 
-            await props.resetData()
-            props.setIsCreating(false)
+              user_id,
+            });
+            await props.resetData();
+            props.setIsCreating(false);
           }}
         >
           Sauvegarder
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddCollaborators
+export default AddCollaborators;

@@ -1,10 +1,8 @@
 const BreadCrumb = (props) => (
-  <div style={style.breadCrumb}>
-    {"BreadCrumb > BreadCrumb"}
-  </div>
-)
+  <div style={style.breadCrumb}>{"BreadCrumb > BreadCrumb"}</div>
+);
 
-export default BreadCrumb
+export default BreadCrumb;
 
 const style = {
   breadCrumb: {
@@ -12,6 +10,6 @@ const style = {
     fontStyle: "normal",
     fontWeight: "normal",
     fontSize: "16px",
-    lineHeight: "24px",  
+    lineHeight: "24px",
   },
-}
+};

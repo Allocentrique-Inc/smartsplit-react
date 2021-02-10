@@ -7,32 +7,32 @@
       min-height: calc(100vh - 72px);
     }
   }
-  .downBar{
+  .downBar {
     position: sticky;
     bottom: 0px;
     background-color: white;
     height: 72px;
-    border-bottom: 2px solid #DCDFE1;
-    box-shadow: 0px -2px 4px 4px #DCDFE1;
+    border-bottom: 2px solid #dcdfe1;
+    box-shadow: 0px -2px 4px 4px #dcdfe1;
     align-items: center;
     display: flex;
     justify-content: space-around;
-    .b1{ 
+    .b1 {
       width: 944px;
-      display: flex; 
+      display: flex;
       justify-content: space-between;
     }
-    .submit{
-      border: 1px solid #DCDFE1;
+    .submit {
+      border: 1px solid #dcdfe1;
       padding: 6px 12px;
       width: fit-content;
       border-radius: 2px;
       font-style: normal;
       font-weight: bold;
       font-size: 16px;
-      line-height: 24px; 
-      background-color: #2DA84F;
-      color: #FFFFFF;
+      line-height: 24px;
+      background-color: #2da84f;
+      color: #ffffff;
     }
   }
 }

@@ -1,11 +1,5 @@
-
-
 const SplitOwner = (props) => {
-  return (
-    <div className="splitOwner">
-      SplitOwner
-    </div>
-  )
-}
+  return <div className="splitOwner">SplitOwner</div>;
+};
 
-export default SplitOwner
+export default SplitOwner;

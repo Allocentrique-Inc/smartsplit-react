@@ -1,21 +1,24 @@
 const SelectPerspective = (props) => {
-  return ( 
+  return (
     <div className="selectPerspective">
-      <button 
-        className={"tab "+(props.tab==="owner"?"selectedTab":"")} 
-        onClick={()=>{props.setTab("owner")}} 
-        
+      <button
+        className={"tab " + (props.tab === "owner" ? "selectedTab" : "")}
+        onClick={() => {
+          props.setTab("owner");
+        }}
       >
         Mes ajouts
       </button>
-      <button 
-        className={"tab "+(props.tab==="rightHolder"?"selectedTab":"")} 
-        onClick={()=>{props.setTab("rightHolder")}}  
+      <button
+        className={"tab " + (props.tab === "rightHolder" ? "selectedTab" : "")}
+        onClick={() => {
+          props.setTab("rightHolder");
+        }}
       >
         Partagées avec moi
-      </button> 
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default SelectPerspective
+export default SelectPerspective;
