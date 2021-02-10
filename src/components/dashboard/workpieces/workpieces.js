@@ -4,19 +4,18 @@ import getWorkpiecesByOwner from '../../../api/workpieces/getWorkpiecesByOwner';
 import getWorkpiecesByRightHolder from '../../../api/workpieces/getWorkpiecesByRightHolder';
 import disconnect from '../../../api/auth/disconnect';
 
-import Workpiece from "./workpiece/workpiece" 
-import LeftMenu from "./leftMenu/leftMenu"
-import SelectPerspective from "./selectPerspective/selectPerspective"
-import AddWorkpieceButton from './addWorkpieceButton/addWorkpieceButton'
+import Workpiece from './workpiece/workpiece';
+import LeftMenu from './leftMenu/leftMenu';
+import SelectPerspective from './selectPerspective/selectPerspective';
+import AddWorkpieceButton from './addWorkpieceButton/addWorkpieceButton';
 import AddWorkpiece from './addWorkpiece/addWorkpiece';
 
 const Workpieces = (props) => {
-  const user_id = localStorage.getItem("user_id")
-  const [workpiecesByOwner, setWorkpiecesByOwner] = useState([])
-  const [workpiecesByRightHolder, setWorkpiecesByRightHolder] = useState([])
-  const [tab, setTab] = useState("owner") 
-  const [isAdding, setIsAdding] = useState(false)
-
+  const user_id = localStorage.getItem('user_id');
+  const [workpiecesByOwner, setWorkpiecesByOwner] = useState([]);
+  const [workpiecesByRightHolder, setWorkpiecesByRightHolder] = useState([]);
+  const [tab, setTab] = useState('owner');
+  const [isAdding, setIsAdding] = useState(false);
 
   const resetWorkpiecesByOwner = async () => {
     const workpiecesByOwner = await getWorkpiecesByOwner({ user_id });
@@ -40,60 +39,59 @@ const Workpieces = (props) => {
 
   const commonProps = {
     resetData,
-    tab, setTab, 
-    isAdding, setIsAdding
-  } 
+    tab,
+    setTab,
+    isAdding,
+    setIsAdding,
+  };
 
   return (
     <>
-    {isAdding
-        && (<div className="modalBackground"
-          onClick={() => setIsAdding(e => !e)}
-        >
-        <AddWorkpiece {...props} {...commonProps}/>
+      {isAdding && (
+        <div className="modalBackground" onClick={() => setIsAdding((e) => !e)}>
+          <AddWorkpiece {...props} {...commonProps} />
         </div>
       )}
-        <div className="workpieces">
-      <LeftMenu />
-      <div className="rightContent">
-        <div className="topBar">
-          <div className="searchBar" />
-          <div
-            className="profile"
-            onClick={() => {
-              disconnect();
-              props.resetLogginCheck();
-            }}
-          >
-            Disconnect
+      <div className="workpieces">
+        <LeftMenu />
+        <div className="rightContent">
+          <div className="topBar">
+            <div className="searchBar" />
+            <div
+              className="profile"
+              onClick={() => {
+                disconnect();
+                props.resetLogginCheck();
+              }}
+            >
+              Disconnect
+            </div>
           </div>
-        </div> 
 
-        <div className="titleRow">
-          <div className="title">Mes pièces musicales</div>
-          <AddWorkpieceButton {...props} {...commonProps}/>
-        </div>
-        <div className="content">
           <div className="titleRow">
             <div className="title">Mes pièces musicales</div>
-            <AddWorkpiece {...props} {...commonProps} />
+            <AddWorkpieceButton {...props} {...commonProps} />
           </div>
+          <div className="content">
+            <div className="titleRow">
+              <div className="title">Mes pièces musicales</div>
+              <AddWorkpiece {...props} {...commonProps} />
+            </div>
 
-          <SelectPerspective {...props} {...commonProps} />
-          <div className="list">
-            {(tab === 'owner'
-              ? workpiecesByOwner
-              : workpiecesByRightHolder
-            ).map((el) => (
-              <Workpiece key={el.workpiece_id} {...el} {...commonProps} />
-            ))}
+            <SelectPerspective {...props} {...commonProps} />
+            <div className="list">
+              {(tab === 'owner'
+                ? workpiecesByOwner
+                : workpiecesByRightHolder
+              ).map((el) => (
+                <Workpiece key={el.workpiece_id} {...el} {...commonProps} />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    </> 
-  )
-}
-
+    </>
+  );
+};
 
 export default Workpieces;

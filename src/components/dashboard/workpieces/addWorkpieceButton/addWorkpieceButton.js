@@ -1,27 +1,34 @@
-import {useState} from "react"
+import { useState } from 'react';
+import PenIcon from '../../../../icons/pen';
 
 const AddWorkpieceButton = (props) => {
-  // const [isAdding, setIsAdding] = useState(false)
+  const [isAdding, setIsAdding] = useState(false);
   // const handleToggleAdding = () => setIsAdding(e => !e)
 
   return (
     <div>
-      <button onClick={() => props.setIsAdding(e => !e)} className="addButton"> AJOUTER </button> 
-      {/*{isAdding && <Adding {...props} /> }*/}
+      <button
+        onClick={() => props.setIsAdding((e) => !e)}
+        className="addButton"
+      >
+        {' '}
+        AJOUTER
+        <PenIcon />
+      </button>
     </div>
-  )
-}
+  );
+};
 
 // const Adding = (props) => {
 //   const [newTitle, setNewTitle] = useState("")
 //   const handleInput = (e) => setNewTitle(e.target.value)
-  // const handleConfirm = async () => {
-  //   await postWorkpiece({
-  //     title: newTitle
-  //   })
-  //   setNewTitle("")
-  //   props.resetData()
-  // }
+// const handleConfirm = async () => {
+//   await postWorkpiece({
+//     title: newTitle
+//   })
+//   setNewTitle("")
+//   props.resetData()
+// }
 //   return (
 //     <div>
 //       <input value={newTitle} onChange={handleInput} />
@@ -30,4 +37,4 @@ const AddWorkpieceButton = (props) => {
 //   )
 // }
 
-export default AddWorkpieceButton
+export default AddWorkpieceButton;
