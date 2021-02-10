@@ -40,6 +40,7 @@
       align-items: center;
       width: 100%;
       outline: 0;
+      cursor: pointer;
       .buttonLogo {
         background-color: #eee;
         width: 32px;
@@ -136,7 +137,7 @@
     }
     .content {
       height: calc(100vh - 72px);
-      overflow-y: scroll;
+      overflow-y: auto;
     }
     .list {
       margin-left: 32px;
