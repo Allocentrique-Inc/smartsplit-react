@@ -58,19 +58,21 @@ const Workpieces = (props) => {
             Disconnect
           </div>
         </div>
+        <div className="content">
+          <div className="titleRow">
+            <div className="title">Mes pièces musicales</div>
+            <AddWorkpiece {...props} {...commonProps} />
+          </div>
 
-        <div className="titleRow">
-          <div className="title">Mes pièces musicales</div>
-          <AddWorkpiece {...props} {...commonProps} />
-        </div>
-
-        <SelectPerspective {...props} {...commonProps} />
-        <div className="list">
-          {(tab === 'owner' ? workpiecesByOwner : workpiecesByRightHolder).map(
-            (el) => (
+          <SelectPerspective {...props} {...commonProps} />
+          <div className="list">
+            {(tab === 'owner'
+              ? workpiecesByOwner
+              : workpiecesByRightHolder
+            ).map((el) => (
               <Workpiece key={el.workpiece_id} {...el} {...commonProps} />
-            ),
-          )}
+            ))}
+          </div>
         </div>
       </div>
     </div>

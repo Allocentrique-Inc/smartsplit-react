@@ -134,6 +134,10 @@
         color: #203548;
       }
     }
+    .content {
+      height: calc(100vh - 72px);
+      overflow-y: scroll;
+    }
     .list {
       margin-left: 32px;
       margin-right: 32px;
