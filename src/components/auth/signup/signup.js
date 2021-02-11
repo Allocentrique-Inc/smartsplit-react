@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import SmartSplit from '../../../icons/smartsplit';
 import postUser from '../../../api/users/postUser';
+import CheckEmailModal from './checkEmailModal/checkEmailModal';
 
 export default (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const history = useHistory();
   const handleEmail = (e) => setEmail(e.target.value);
@@ -15,10 +17,18 @@ export default (props) => {
     const result = await postUser({ email, password });
     history.push('/');
   };
+  const resetForm = () => {
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+  };
 
   const isPasswordValid = () => password === confirmPassword && password !== '';
   return (
     <div className="form">
+      <div className="modalBackground" onClick={() => setShowModal((e) => !e)}>
+        <CheckEmailModal resetForm={resetForm} toggleModal={setShowModal} />
+      </div>
       <div className="header">
         <h1>En route vers la professionnalisation</h1>
         <p>

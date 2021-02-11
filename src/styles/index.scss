@@ -15,13 +15,6 @@ body {
   font-family: IBM Plex Sans;
 }
 
-h1 {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 40px;
-  line-height: 48px;
-}
-
 .to-do {
   background-color: map-get($colors, 'wip');
 }

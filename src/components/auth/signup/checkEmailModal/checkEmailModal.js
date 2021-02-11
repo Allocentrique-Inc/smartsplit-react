@@ -26,4 +26,4 @@ const CheckEmailModal = (props) => {
   );
 };
 
-export default AddWorkpieceModal;
+export default CheckEmailModal;
