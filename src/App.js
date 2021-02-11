@@ -26,7 +26,7 @@ function App() {
         <Route path="/user">
           <User />
         </Route>
-        <Route path="/" exact>
+        <Route path="/">
           <LoadingManager />
         </Route>
       </Switch>
@@ -40,8 +40,8 @@ const LoadingManager = (props) => {
   const resetLogginCheck = async () => {
     const checkResult = await check();
     const isLogged = checkResult.statusCode !== 401;
-    setIsLoaded(true);
     setIsLogged(isLogged);
+    setIsLoaded(true);
   };
   useEffect(() => {
     resetLogginCheck();
@@ -52,7 +52,7 @@ const LoadingManager = (props) => {
       {isLoaded && isLogged && (
         <Dashboard resetLogginCheck={resetLogginCheck} />
       )}
-      {isLoaded && !isLogged && <Auth resetLogginCheck={resetLogginCheck} />}
+      {isLoaded && !isLogged && <Redirect to="/auth/login" />}
     </>
   );
 };

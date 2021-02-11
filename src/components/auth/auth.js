@@ -27,8 +27,8 @@ const Auth = (props) => {
         )}
       </div>
       <Switch>
-        <Route path={['/', '/auth/login']} exact>
-          <Login resetLogginCheck={props.resetLogginCheck} />
+        <Route path="/auth/login">
+          <Login />
         </Route>
         <Route path="/auth/signup">
           <Signup />

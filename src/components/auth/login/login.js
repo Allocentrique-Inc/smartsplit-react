@@ -11,7 +11,7 @@ const Login = (props) => {
   const handlePassword = (e) => setPassword(e.target.value);
   const handleConfirm = async () => {
     await login({ email, password });
-    props.resetLogginCheck();
+    history.push('/');
   };
   return (
     <div className="form">
