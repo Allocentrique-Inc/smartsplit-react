@@ -15,7 +15,7 @@ import RequestPasswordReset from './requestPasswordReset/requestPasswordReset';
 const User = (props) => {
   const match = useRouteMatch();
   return (
-    <div className="auth">
+    <div className="authLayout">
       <div className="topBar">
         <SmartSplit />
         <div className="right">

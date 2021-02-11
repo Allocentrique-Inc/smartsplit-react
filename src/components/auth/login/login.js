@@ -15,19 +15,21 @@ const Login = (props) => {
   };
   return (
     <div className="form">
-      <h1>Connecte-toi à ton compte SmartSplit.</h1>
-      <p>Entre tes informations ci-dessous.</p>
-      <div>
-        <b>Mon courriel</b>
-        <input value={email} onChange={handleEmail} />
+      <div className="header">
+        <h1>Connecte-toi à ton compte SmartSplit.</h1>
+        <p>Entre tes informations ci-dessous.</p>
       </div>
-      <div>
-        <b>Mon mot de passe</b>
-        <input value={password} onChange={handlePassword} />
+
+      <div className="form-input">
+        <label htmlFor="email">Mon courriel</label>
+        <input id="email" value={email} onChange={handleEmail} />
       </div>
-      <button onClick={() => history.push('/user/request-password-reset')}>
-        Reset password
-      </button>
+      <div className="form-input">
+        <label htmlFor="password">Mon mot de passe</label>
+        <input id="password" value={password} onChange={handlePassword} />
+        <Link to="/user/request-password-reset">Reset password</Link>
+      </div>
+
       <div className="buttons">
         <div className="checkbox">
           <input

@@ -8,7 +8,7 @@ import Signup from './signup/signup';
 const Auth = (props) => {
   const { type } = useParams();
   return (
-    <div className="auth">
+    <div className="authLayout">
       <div className="topBar">
         <SmartSplit />
         {type !== 'signup' && (

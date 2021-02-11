@@ -6,24 +6,41 @@ import postUser from '../../../api/users/postUser';
 export default (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const history = useHistory();
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
-  const handleConfirm = async () => {
+  const handleSubmit = async () => {
     const result = await postUser({ email, password });
     history.push('/');
   };
+
+  const isPasswordValid = () => password === confirmPassword && password !== '';
   return (
     <div className="form">
-      <h1>En route vers la professionnalisation</h1>
-      <p>Entre tes informations ci-dessous.</p>
-      <div>
-        <b>Mon courriel</b>
-        <input value={email} onChange={handleEmail} />
+      <div className="header">
+        <h1>En route vers la professionnalisation</h1>
+        <p>
+          Tu es à un clic de pouvoir documenter ta musique et de partager tes
+          droits avec tes contributeurs.
+        </p>
       </div>
-      <div>
-        <b>Mon mot de passe</b>
-        <input value={password} onChange={handlePassword} />
+      <div className="form-input">
+        <label htmlFor="email">Mon courriel</label>
+        <input id="email" value={email} onChange={handleEmail} />
+      </div>
+      <div className="form-input">
+        <label htmlFor="password">Mon mot de passe</label>
+        <input id="password" value={password} onChange={handlePassword} />
+      </div>
+      <div className="form-input">
+        <label htmlFor="confirmPassword">Confirme ton mot de passe</label>
+        <input
+          id="confirmPassword"
+          value={password}
+          onChange={handlePassword}
+        />
       </div>
 
       <div className="buttons">
@@ -36,7 +53,7 @@ export default (props) => {
           />
           <label htmlFor="stayLoggedIn">Rester connecté</label>
         </div>
-        <button onClick={handleConfirm}>Créer mon compte</button>
+        <button onClick={handleSubmit}>Créer mon compte</button>
       </div>
     </div>
   );

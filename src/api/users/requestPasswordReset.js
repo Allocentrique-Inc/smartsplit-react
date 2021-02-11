@@ -14,6 +14,7 @@ const requestPasswordReset = async (payload) => {
       },
     });
     const textResponse = await response.text();
+    console.log(response);
     const parsedResponse = JSON.parse(textResponse);
     console.log(parsedResponse);
     return parsedResponse;
