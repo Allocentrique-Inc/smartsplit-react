@@ -34,5 +34,6 @@ module.exports = {
     'no-param-reassign': 'off',
     'react/no-unescaped-entities': 'off',
     'react-hooks/exhaustive-deps': 'off',
+    'object-curly-newline': 'off',
   },
 };

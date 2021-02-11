@@ -1,58 +1,43 @@
 import { useState } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useParams, Switch, Route } from 'react-router-dom';
 import login from '../../api/auth/login';
 import SmartSplit from '../../icons/smartsplit';
+import Login from './login/login';
+import Signup from './signup/signup';
 
 const Auth = (props) => {
-  const isLoggingPage = useRouteMatch({
-    path: '/auth/login',
-    strict,
-  });
+  const { type } = useParams();
+  console.log('Loggin form', type);
 
   return (
     <div className="auth">
       <div className="topBar">
         <SmartSplit />
-        {loginForm ? (
+        {type !== 'signup' && (
           <div className="right">
             <span>Pas encore membre ?</span>
-            <Link to="/signup">Créer mon compte</Link>
+            <Link to="/auth/signup">Créer mon compte</Link>
             <button>English</button>
           </div>
-        ) : (
+        )}
+        {type === 'signup' && (
           <div className="right">
             <span>Déjà membre ?</span>
-            <Link to="/">Ouvrir une session</Link>
+            <Link to="/auth/login">Ouvrir une session</Link>
             <button>English</button>
           </div>
         )}
       </div>
-      <div className="form">
-        <h1>En route vers la professionnalisation</h1>
-        <p>Entre tes informations ci-dessous.</p>
-        <div>
-          <b>Mon courriel</b>
-          <input value={email} onChange={handleEmail} />
-        </div>
-        <div>
-          <b>Mon mot de passe</b>
-          <input value={password} onChange={handlePassword} />
-        </div>
-        <div className="buttons">
-          <div className="checkbox">
-            <input
-              type="checkbox"
-              id="stayLoggedIn"
-              name="stayLoggedIn"
-              value="true"
-            />
-            <label htmlFor="stayLoggedIn">Rester connecté</label>
-          </div>
-          <button onClick={handleConfirm}>Me connecter</button>
-        </div>
-      </div>
+      <Switch>
+        <Route path={['/', '/auth/login']} exact>
+          <Login resetLogginCheck={props.resetLogginCheck} />
+        </Route>
+        <Route path="/auth/signup">
+          <Signup />
+        </Route>
+      </Switch>
     </div>
   );
 };
 
-export default Signup;
+export default Auth;

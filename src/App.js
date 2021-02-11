@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import Admin from './components/admin/admin';
 import Dashboard from './components/dashboard/dashboard';
 import check from './api/auth/check';
 import './styles/index.scss';
-import Login from './components/logIn/logIn';
-import ActivateEmail from './components/auth/activateEmail/activateEmail';
-import ChangePassword from './components/auth/changePassword/changePassword';
-import RequestPasswordReset from './components/auth/requestPasswordReset/requestPasswordReset';
+
+import Auth from './components/auth/auth';
+import ActivateEmail from './components/user/activateEmail/activateEmail';
+import ChangePassword from './components/user/changePassword/changePassword';
+import RequestPasswordReset from './components/user/requestPasswordReset/requestPasswordReset';
+import Login from './components/auth/login/login';
 
 function App() {
   return (
@@ -15,6 +22,9 @@ function App() {
       <Switch>
         <Route path="/admin">
           <Admin />
+        </Route>
+        <Route path="/auth/:type">
+          <Auth />
         </Route>
         <Route path="/user/activate/:token">
           <ActivateEmail />
@@ -25,7 +35,7 @@ function App() {
         <Route path="/auth/request-password-reset">
           <RequestPasswordReset />
         </Route>
-        <Route path="/">
+        <Route path="/" exact>
           <LoadingManager />
         </Route>
       </Switch>
@@ -38,7 +48,7 @@ const LoadingManager = (props) => {
   const [isLogged, setIsLogged] = useState(false);
   const resetLogginCheck = async () => {
     const checkResult = await check();
-    const isLogged = checkResult === true;
+    const isLogged = checkResult.statusCode !== 401;
     setIsLoaded(true);
     setIsLogged(isLogged);
   };
@@ -51,7 +61,7 @@ const LoadingManager = (props) => {
       {isLoaded && isLogged && (
         <Dashboard resetLogginCheck={resetLogginCheck} />
       )}
-      {isLoaded && !isLogged && <Login resetLogginCheck={resetLogginCheck} />}
+      {isLoaded && !isLogged && <Auth resetLogginCheck={resetLogginCheck} />}
     </>
   );
 };
