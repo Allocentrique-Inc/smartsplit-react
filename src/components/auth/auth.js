@@ -7,8 +7,6 @@ import Signup from './signup/signup';
 
 const Auth = (props) => {
   const { type } = useParams();
-  console.log('Loggin form', type);
-
   return (
     <div className="auth">
       <div className="topBar">

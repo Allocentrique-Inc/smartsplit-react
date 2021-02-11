@@ -25,7 +25,7 @@ const Login = (props) => {
         <b>Mon mot de passe</b>
         <input value={password} onChange={handlePassword} />
       </div>
-      <button onClick={() => history.push('/auth/reset-password')}>
+      <button onClick={() => history.push('/user/request-password-reset')}>
         Reset password
       </button>
       <div className="buttons">

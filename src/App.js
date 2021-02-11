@@ -11,10 +11,7 @@ import check from './api/auth/check';
 import './styles/index.scss';
 
 import Auth from './components/auth/auth';
-import ActivateEmail from './components/user/activateEmail/activateEmail';
-import ChangePassword from './components/user/changePassword/changePassword';
-import RequestPasswordReset from './components/user/requestPasswordReset/requestPasswordReset';
-import Login from './components/auth/login/login';
+import User from './components/user/user';
 
 function App() {
   return (
@@ -26,14 +23,8 @@ function App() {
         <Route path="/auth/:type">
           <Auth />
         </Route>
-        <Route path="/user/activate/:token">
-          <ActivateEmail />
-        </Route>
-        <Route path="/user/change-password/:token">
-          <ChangePassword />
-        </Route>
-        <Route path="/auth/request-password-reset">
-          <RequestPasswordReset />
+        <Route path="/user">
+          <User />
         </Route>
         <Route path="/" exact>
           <LoadingManager />
