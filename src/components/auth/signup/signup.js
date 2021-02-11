@@ -26,23 +26,23 @@ export default (props) => {
           droits avec tes contributeurs.
         </p>
       </div>
+      <div className="to-do">Creation de compte avec réseau sociaux</div>
       <div className="form-input">
-        <label htmlFor="email">Mon courriel</label>
+        <label htmlFor="email">Entre ton courriel</label>
         <input id="email" value={email} onChange={handleEmail} />
       </div>
       <div className="form-input">
-        <label htmlFor="password">Mon mot de passe</label>
-        <input id="password" value={password} onChange={handlePassword} />
+        <label htmlFor="password">Choisis ton mot de passe</label>
+        <div className="double-input">
+          <input id="password" value={password} onChange={handlePassword} />
+          <div className="to-do">Validation de mot de passe</div>
+          <input
+            id="confirmPassword"
+            value={password}
+            onChange={handlePassword}
+          />
+        </div>
       </div>
-      <div className="form-input">
-        <label htmlFor="confirmPassword">Confirme ton mot de passe</label>
-        <input
-          id="confirmPassword"
-          value={password}
-          onChange={handlePassword}
-        />
-      </div>
-
       <div className="buttons">
         <div className="checkbox">
           <input
@@ -53,7 +53,9 @@ export default (props) => {
           />
           <label htmlFor="stayLoggedIn">Rester connecté</label>
         </div>
-        <button onClick={handleSubmit}>Créer mon compte</button>
+        <button onClick={handleSubmit} className="btn-primary">
+          Créer mon compte
+        </button>
       </div>
     </div>
   );

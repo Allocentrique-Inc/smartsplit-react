@@ -15,14 +15,14 @@ const Auth = (props) => {
           <div className="right">
             <span>Pas encore membre ?</span>
             <Link to="/auth/signup">Créer mon compte</Link>
-            <button>English</button>
+            <button className="btn-secondary">English</button>
           </div>
         )}
         {type === 'signup' && (
           <div className="right">
             <span>Déjà membre ?</span>
             <Link to="/auth/login">Ouvrir une session</Link>
-            <button>English</button>
+            <button className="btn-secondary">English</button>
           </div>
         )}
       </div>

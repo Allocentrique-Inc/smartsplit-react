@@ -30,7 +30,9 @@ export default () => {
 
       <div className="buttons">
         <Link to="/auth/signup">Je n'ai pas de compte</Link>
-        <button onClick={handleSubmit}>Envoyer</button>
+        <button onClick={handleSubmit} className="btn-primary">
+          Envoyer
+        </button>
       </div>
     </div>
   );

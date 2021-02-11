@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import postWorkpiece from '../../../../api/workpieces/postWorkpiece';
 
-const AddWorkpiece = (props) => {
+const CheckEmailModal = (props) => {
   const [title, setTitle] = useState('');
 
   const handleConfirm = async () => {
@@ -26,4 +26,4 @@ const AddWorkpiece = (props) => {
   );
 };
 
-export default AddWorkpiece;
+export default AddWorkpieceModal;

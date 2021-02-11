@@ -8,7 +8,7 @@ import Workpiece from './workpiece/workpiece';
 import LeftMenu from './leftMenu/leftMenu';
 import SelectPerspective from './selectPerspective/selectPerspective';
 import AddWorkpieceButton from './addWorkpieceButton/addWorkpieceButton';
-import AddWorkpiece from './addWorkpiece/addWorkpiece';
+import AddWorkpieceModal from './addWorkpieceModal/addWorkpieceModal';
 
 const Workpieces = (props) => {
   const user_id = localStorage.getItem('user_id');
@@ -49,7 +49,7 @@ const Workpieces = (props) => {
     <>
       {isAdding && (
         <div className="modalBackground" onClick={() => setIsAdding((e) => !e)}>
-          <AddWorkpiece {...props} {...commonProps} />
+          <AddWorkpieceModal {...props} {...commonProps} />
         </div>
       )}
       <div className="workpieces">

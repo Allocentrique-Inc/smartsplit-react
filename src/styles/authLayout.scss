@@ -1,10 +1,25 @@
 .authLayout {
+  p,
+  input {
+    @extend .medium-400;
+    color: map-get($colors, 'secondary');
+  }
+  a {
+    @extend .medium-400;
+    color: map-get($colors, 'action');
+    font-weight: bold;
+    text-decoration: none;
+  }
   .topBar {
     padding: 16px 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     .right {
+      span {
+        @extend .medium-400;
+        color: map-get($colors, 'secondary');
+      }
       :first-child {
         margin-right: 16px;
       }
@@ -14,20 +29,40 @@
     }
   }
   .form {
-    margin-top: 64px;
+    margin: map-get($spacings, 'xlarge') auto;
     max-width: 465px;
-    margin-left: auto;
-    margin-right: auto;
     .header {
-      margin-bottom: 64px;
+      margin-bottom: map-get($spacings, 'large');
+      p {
+        margin-top: map-get($spacings, 'medium');
+      }
     }
     .form-input {
-      margin-bottom: 32px;
+      margin-bottom: map-get($spacings, 'large');
+
       label {
-        font-weight: bold;
+        @extend .medium-700;
       }
       input {
+        height: map-get($sizes, 'medium');
         width: 100%;
+        background: map-get($colors-background, 'ground');
+        border: 1px solid map-get($colors, 'stroke');
+        border-radius: $border-radius-form;
+        padding: map-get($spacings, 'small');
+      }
+      > input {
+        margin-top: map-get($spacings, 'small');
+      }
+      a {
+        @extend .small-700;
+      }
+      .double-input {
+        display: flex;
+        flex-direction: column;
+        :last-child {
+          margin-top: map-get($spacings, 'large');
+        }
       }
     }
 
@@ -37,6 +72,10 @@
       .checkbox {
         display: flex;
         align-items: center;
+        label {
+          @extend .medium-400;
+          margin-left: map-get($spacings, 'medium');
+        }
       }
     }
   }

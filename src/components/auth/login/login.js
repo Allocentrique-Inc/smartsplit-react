@@ -27,7 +27,7 @@ const Login = (props) => {
       <div className="form-input">
         <label htmlFor="password">Mon mot de passe</label>
         <input id="password" value={password} onChange={handlePassword} />
-        <Link to="/user/request-password-reset">Reset password</Link>
+        <Link to="/user/request-password-reset">Mot de passe oublié?</Link>
       </div>
 
       <div className="buttons">
@@ -40,7 +40,9 @@ const Login = (props) => {
           />
           <label htmlFor="stayLoggedIn">Rester connecté</label>
         </div>
-        <button onClick={handleConfirm}>Me connecter</button>
+        <button onClick={handleConfirm} className="btn-primary">
+          Me connecter
+        </button>
       </div>
     </div>
   );
