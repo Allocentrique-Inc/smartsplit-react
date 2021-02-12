@@ -9,6 +9,7 @@ export default function WorkpieceModal({ setShowModal, resetData, create }) {
     secondary: '',
   });
   const [file, setFile] = useState('');
+  const [composer, setComposer] = useState('');
   const handleConfirm = async () => {
     await postWorkpiece({
       title,
@@ -30,7 +31,12 @@ export default function WorkpieceModal({ setShowModal, resetData, create }) {
           <div className="content">
             <div className="formInput">
               <label htmlFor="workpieceTitle">Titre de la pièce musicale</label>
-              <input type="text" id="workpieceTitle" />
+              <input
+                type="text"
+                id="workpieceTitle"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
               <div className="hint">
                 Ne pas inclure de «featuring« dans le titre.
               </div>
@@ -73,10 +79,32 @@ export default function WorkpieceModal({ setShowModal, resetData, create }) {
                 </label>
               </div>
             </div>
-            <div className="formInput toDo">
-              <label>Artiste ou groupe originel</label>
-              <input type="text" />
-            </div>
+            {type.secondary === 'original' && (
+              <div className="formInput toDo">
+                <label>{`${title}, par`}</label>
+                <input type="text" />
+              </div>
+            )}
+            {(type.secondary === 'remix' || type.secondary === 'cover') && (
+              <>
+                <div className="formInput toDo">
+                  <label>Artiste ou groupe originel</label>
+                  <input
+                    type="text"
+                    value={composer}
+                    onChange={(e) => setComposer(e.target.value)}
+                  />
+                </div>
+                <div className="formInput toDo">
+                  <label>
+                    {`${title} (${composer}), 
+                  ${type.secondary === 'cover' ? 'repris' : 'remixé'} par`}
+                  </label>
+                  <input type="text" />
+                </div>
+              </>
+            )}
+
             <div className="row">
               <div className="formInput">
                 <label>
