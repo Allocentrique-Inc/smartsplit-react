@@ -125,7 +125,12 @@ export default function WorkpieceModal({ setShowModal, resetData, create }) {
             </div>
           </div>
           <div className="downBar">
-            <button className="btn-secondary">Annuler</button>
+            <button
+              className="btn-secondary"
+              onClick={() => setShowModal(false)}
+            >
+              Annuler
+            </button>
             <button className="btn-primary">
               {create ? "C'est parti !" : 'Sauvegarder'}
             </button>
