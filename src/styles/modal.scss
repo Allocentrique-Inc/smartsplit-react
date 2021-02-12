@@ -4,24 +4,34 @@
   width: 100vw;
   position: fixed;
   z-index: 10;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   .modal {
-    position: absolute;
     background-color: white;
     max-height: 80vh;
+    max-width: 80vw;
     display: flex;
     flex-direction: column;
+
     .topBar {
-      width: 944px;
-      height: 72px;
+      padding: 16px;
+      max-width: 80vw;
       box-shadow: inset 0px -1px 0px #dcdfe1;
       flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .content {
+      padding: 32px;
+      overflow-y: auto;
     }
     .downBar {
-      width: 944px;
-      height: 72px;
+      padding: 16px;
+      max-width: 80vw;
       box-shadow: inset 0px 1px 0px #dcdfe1;
       flex-shrink: 0;
     }

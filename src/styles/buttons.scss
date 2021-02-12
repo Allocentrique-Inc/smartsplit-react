@@ -26,3 +26,11 @@
   border: 1px solid map-get($colors, 'stroke');
   box-sizing: border-box;
 }
+
+.btn-icon {
+  padding-top: map-get($spacings, 'small');
+  background-color: map-get($colors-background, 'transparent');
+  border: none;
+  cursor: pointer;
+  align-items: center;
+}
