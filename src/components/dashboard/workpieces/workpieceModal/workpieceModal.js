@@ -130,7 +130,13 @@ export default function WorkpieceModal({ setShowModal, resetData, create }) {
               </div>
             </div>
             <div className="formInput toDo">
-              <label>Artiste ou groupe originel</label>
+              <label>
+                Qui a collaboré sur cette pièce musicale?
+                <span style={{ color: '#687A8B', fontWeight: 'normal' }}>
+                  {' '}
+                  Optionnel
+                </span>
+              </label>
               <input
                 type="text"
                 placeholder="Ajouter un ou plusieurs collaborateurs..."
@@ -146,10 +152,6 @@ export default function WorkpieceModal({ setShowModal, resetData, create }) {
                 type="text"
                 placeholder="Rechercher ou ajouter un label..."
               />
-              <div className="hint">
-                Ces collaborateurs seront automatiquement ajoutés au partage de
-                droit. Vous pourrez toujours les retirer du partage
-              </div>
             </div>
           </div>
           <div className="downBar">
