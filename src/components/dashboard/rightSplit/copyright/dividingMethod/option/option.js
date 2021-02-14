@@ -23,7 +23,7 @@ const style = {
 };
 
 const Option = (props) => {
-  const backgroundColor = props.copyrightDividingMethod === props.value ? 'black' : '#fff';
+  const isSelected = props.copyrightDividingMethod === props.value;
   return (
     <div>
       <button
@@ -32,12 +32,9 @@ const Option = (props) => {
           props.handleSelectDividingMethod(props.value);
         }}
       >
-        <div
-          style={{
-            backgroundColor,
-          }}
-          className="radioCircle"
-        />
+        <div className="radioCircle">
+          {isSelected && <div className="innerSelected" />}
+        </div>
         <div className="splitingMethod">{props.label}</div>
       </button>
     </div>

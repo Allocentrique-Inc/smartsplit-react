@@ -1,50 +1,44 @@
 import colors from '../../../../_/colors';
 
 const Dragger = ({
-  shares, setShares, setLock, lock, dividingMethod, id,
-}) => (
-  <div style={{ display: 'flex', alignItems: 'center' }}>
-    {dividingMethod === 'manual' && (
-    <button onClick={() => setLock(!lock)}>
-      {lock ? 'locked' : 'lock'}
-    </button>
-    )}
-    <div
-      style={{
-        display: 'flex',
-        height: '40px',
-        alignItems: 'center',
-        cursor: 'pointer',
-        marginRight: '20px',
-      }}
-      onClick={(e) => {
-        setShares(
-          Math.round((e.clientX - e.target.getBoundingClientRect().x) / 2),
-        );
-      }}
-    >
-      <div
-        style={{
-          width: '200px',
-          borderRadius: '4px',
-          height: '8px',
-          border: '1.5px solid black',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          style={{
-            height: '8px',
-            width: shares ? `${shares * 2}px` : '0px',
-            backgroundColor: colors[id],
-            borderRadius: '4px 0px 0px 4px',
-          }}
-        />
+  shares, setShares, setLock, lock, id,
+}) => {
+  const handleClick = (e) => {
+    const newValue = Math.round(
+      (e.clientX - e.target.getBoundingClientRect().x) / 3,
+    );
+    setShares(newValue);
+  };
+  const handleLockBtn = () => setLock(!lock);
+  const isManual = true;
+  return (
+    <div className="dragger">
+      <div className="lock">
+        {isManual && (
+          <button
+            className={lock ? 'locked' : 'unlocked'}
+            onClick={handleLockBtn}
+          >
+            {lock ? 'L' : 'U'}
+          </button>
+        )}
+      </div>
+      <div className="buttonBar" onClick={handleClick}>
+        <div className="bar">
+          <div
+            className="color"
+            style={{
+              width: shares ? `${(shares / 100) * 300}px` : '0px',
+              backgroundColor: colors[id],
+            }}
+          />
+        </div>
+      </div>
+      <div className="shares">
+        {!Number.isNaN(shares) && `${shares.toFixed(1)} %`}
       </div>
     </div>
-    <div>{shares && shares.toFixed(4)}</div>
-  </div>
-);
+  );
+};
 
 export default Dragger;

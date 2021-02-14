@@ -2,6 +2,7 @@ const login = async (payload) => {
   const { email, password } = payload;
   const body = JSON.stringify({ email, password });
   try {
+    console.log('TRYING TO LOG');
     const url = 'http://localhost:3001/v1/auth/login';
     const method = 'POST';
     const response = await fetch(url, {

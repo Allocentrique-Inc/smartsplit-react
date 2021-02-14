@@ -11,3 +11,23 @@
 body {
   font-family: IBM Plex Sans;
 }
+
+.row {
+  display: flex;
+}
+
+.rowSB {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rowSBAC {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rowAC {
+  display: flex;
+  align-items: center;
+}

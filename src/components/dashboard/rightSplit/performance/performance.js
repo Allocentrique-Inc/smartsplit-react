@@ -1,39 +1,18 @@
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import AddCollaborators from '../_/addCollaborators/addCollaborators';
 import TopBar from '../_/topBar/topBar';
 import DownBar from '../_/downBar/downBar';
-import Presentation from '../_/presentation/presentation';
 import Collaborators from './collaborators/collaborators';
 import Circle from '../_/circle/circle';
-
-const style = {
-  b1: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  b1b1: {
-    width: '944px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '100px',
-    minHeight: 'calc(100vh - 248px)',
-  },
-  b1b1b1: {
-    width: '464px',
-  },
-  b1b1b2: {
-    width: '464px',
-  },
-  b1b1b2b1: {
-    position: 'sticky',
-    top: '144px',
-    display: 'flex',
-    justifyContent: 'space-around',
-  },
-};
+import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollaborator';
+import Presentation from '../_/presentation/presentation';
 
 const Performance = (props) => {
   const { workpiece_id } = useParams();
+  const [isCreatingNewCollaborator, setIsCreatingNewCollaborator] = useState(
+    false,
+  );
   const addCollaborators = (user_id) => {
     props.setPerformance([
       ...props.performance,
@@ -65,43 +44,65 @@ const Performance = (props) => {
     props.setPerformance(arr);
   };
 
+  // SHARES CALCULATION
+  const mainActorsTotal = props.performance.reduce(
+    (acc, el) => (el.status === 'principal' || el.status === 'featured' ? acc + 1 : acc),
+    0,
+  );
+  const restTotal = props.performance.length - mainActorsTotal;
+  props.performance.forEach((el, id, arr) => {
+    if (el.status === 'principal' || el.status === 'featured') {
+      el.shares = 80 / mainActorsTotal;
+    } else {
+      el.shares = 20 / restTotal;
+    }
+  });
+
+  const title = props.translations.rightSplit.title._performance[props.language];
+  const textPresentation = props.translations.rightSplit.textPresentation._performance[props.language];
+  const textDescription = props.translations.rightSplit.textDescription._performance[props.language];
+
   const commonProps = {
+    ...props,
     deleteCollaborator,
     deleteRole,
     addRole,
     addCollaborators,
+    isCreatingNewCollaborator,
+    setIsCreatingNewCollaborator,
+    title,
+    textPresentation,
+    textDescription,
   };
-
-  props.performance.forEach((el, id, arr) => {
-    el.shares = 100 / arr.length;
-  });
   return (
-    <div className="rightSplitCreation">
-      <TopBar {...props} view="performance" />
-      <div style={style.b1}>
-        <div style={style.b1b1}>
-          <div style={style.b1b1b1}>
-            <Presentation view="performance" />
-            <Collaborators {...props} {...commonProps} />
-            <AddCollaborators
-              {...props}
-              addCollaborators={addCollaborators}
-              preSelectedCollaborators={props.performance}
-            />
-          </div>
-          <div style={style.b1b1b2}>
-            <div style={style.b1b1b2b1}>
-              <Circle {...props} collaborators={props.performance} />
+    <>
+      {isCreatingNewCollaborator && <CreateNewCollaborator {...commonProps} />}
+      <div className="rightSplitCreation">
+        <TopBar {...commonProps} view="performance" />
+        <div className="b1">
+          <div className="b1b1">
+            <div className="b1b1b1">
+              <Presentation {...commonProps} />
+              <Collaborators {...commonProps} />
+              <AddCollaborators
+                {...commonProps}
+                preSelectedCollaborators={props.performance}
+              />
+            </div>
+            <div className="b1b1b2">
+              <div className="b1b1b1b2">
+                <Circle collaborators={props.performance} />
+              </div>
             </div>
           </div>
         </div>
+        <div />
+        <DownBar
+          backUrl={`/workpiece/${workpiece_id}/right-split/copyright`}
+          frontUrl={`/workpiece/${workpiece_id}/right-split/recording`}
+        />
       </div>
-      <div />
-      <DownBar
-        backUrl={`/workpiece/${workpiece_id}/right-split/copyright`}
-        frontUrl={`/workpiece/${workpiece_id}/right-split/recording`}
-      />
-    </div>
+    </>
   );
 };
 

@@ -1,45 +1,45 @@
 import RoleBox from './roleBox/roleBox';
 import Dragger from './dragger/dragger';
 
-const style = {
-  collaboratorStyle: {
-    backgroundColor: '#FAF8F9',
-    padding: '16px',
-    marginBottom: '16px',
-    borderRadius: '2px',
-  },
-};
-
 const Collaborator = (props) => (
-  <div key={props.id} style={style.collaboratorStyle}>
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: '16px',
-      }}
-    >
-      <div>
-        {`${props.collaborator.firstName} ${props.collaborator.lastName}`}
+  <div className="collaborator">
+    <div className="b1">
+      <div className="rowAC">
+        <div className="avatar" />
+        <div className="name">
+          {`${props.collaborator.firstName} ${props.collaborator.lastName}`}
+        </div>
       </div>
-      <div>
-        <button
-          onClick={() => {
-            props.deleteCollaborator(props.el.rightHolder);
-          }}
-        >
-          ...
-        </button>
+      <div
+        className="ellipsis"
+        onClick={() => {
+          props.deleteCollaborator(props.el.rightHolder);
+        }}
+      >
+        ...
       </div>
     </div>
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        marginBottom: '10px',
+    <div className="space" />
+
+    <select
+      className="selectStatus"
+      value={props.el.status}
+      onChange={(e) => {
+        const arr = [...props.performance];
+        arr[props.id].status = e.target.value;
+        props.setPerformance(arr);
       }}
     >
+      <option disabled value="">
+        Select Status
+      </option>
+      <option value="principal">principal</option>
+      <option value="featured">featured</option>
+      <option value="bandMember">bandMember</option>
+      <option value="session">session</option>
+    </select>
+
+    <div className="roleRow">
       {['singer', 'musician'].map((role) => (
         <RoleBox
           key={role}
@@ -51,21 +51,6 @@ const Collaborator = (props) => (
         />
       ))}
     </div>
-
-    <select
-      value={props.el.status}
-      onChange={(e) => {
-        const arr = [...props.performance];
-        arr[props.id].status = e.target.value;
-        props.setPerformance(arr);
-      }}
-    >
-      <option value="">Select Status</option>
-      <option value="principalArtist">principalArtist</option>
-      <option value="invitedArtist">invitedArtist</option>
-      <option value="bandMember">bandMember</option>
-      <option value="artistAttendant">artistAttendant</option>
-    </select>
 
     <Dragger
       id={props.id}

@@ -27,8 +27,11 @@ const recalculateShares = ({ newDividingMethod, copyright }) => {
       (acc, el) => (el.roles.some((el) => el === 'mixer') ? acc + 1 : acc + 0),
       0,
     );
-    const autorShares = 50 / autor;
-    const musicShares = 50 / (adaptator + composer + mixer);
+
+    const autorShares = autor > 0 ? (adaptator + composer + mixer > 0 ? 50 : 100) / autor : 0;
+    const musicShares = adaptator + composer + mixer > 0
+      ? (autor > 0 ? 50 : 100) / (adaptator + composer + mixer)
+      : 0;
     const arr = [
       ...copyright.map((el) => {
         const obj = { ...el };

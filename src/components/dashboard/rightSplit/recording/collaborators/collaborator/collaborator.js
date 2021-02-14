@@ -10,30 +10,27 @@ const style = {
 };
 
 const Collaborator = (props) => (
-  <div key={props.id} style={style.collaboratorStyle}>
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: '16px',
-      }}
-    >
-      <div>
-        {`${props.collaborator.firstName} ${props.collaborator.lastName}`}
+  <div className="collaborator">
+    <div className="b1">
+      <div className="rowAC">
+        <div className="avatar" />
+        <div className="name">
+          {`${props.collaborator.firstName} ${props.collaborator.lastName}`}
+        </div>
       </div>
-      <div>
-        <button
-          onClick={() => {
-            props.deleteCollaborator(props.el.rightHolder);
-          }}
-        >
-          ...
-        </button>
+      <div
+        className="ellipsis"
+        onClick={() => {
+          props.deleteCollaborator(props.el.rightHolder);
+        }}
+      >
+        ...
       </div>
     </div>
+    <div className="space" />
 
     <select
+      className="selectStatus"
       value={props.el.function}
       onChange={(e) => {
         const arr = [...props.recording];
@@ -41,23 +38,24 @@ const Collaborator = (props) => (
         props.setRecording(arr);
       }}
     >
-      <option value="">Select Function</option>
-      <option value="techProducer">techProducer</option>
+      <option disabled value="">
+        Select Function
+      </option>
+      <option value="principal">principal</option>
+      <option value="featured">featured</option>
+      <option value="bandMember">bandMember</option>
+      <option value="session">session</option>
     </select>
 
     <Dragger
       id={props.id}
-      dividingMethod={props.dividingMethod}
       shares={props.el.shares}
       setShares={(newShares) => {
-        // const arr = [...props.recording]
-        // arr[id].shares = newShares
-        // props.setRecording(arr)
-        // props.handleDrag({ newShares, id: props.id })
+        props.handleDrag({ newShares, id: props.id });
       }}
       lock={props.el.lock}
       setLock={(newState) => {
-        const arr = [...props.recording];
+        const arr = [...props.copyright];
         arr[props.id].lock = newState;
         props.setRecording(arr);
       }}

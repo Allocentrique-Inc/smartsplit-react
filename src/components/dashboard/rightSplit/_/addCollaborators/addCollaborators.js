@@ -3,111 +3,66 @@ import postCollaborator from '../../../../../api/users/postCollaborator';
 
 const AddCollaborators = (props) => {
   const [isAdding, setIsAdding] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
+  const user_id = localStorage.getItem('user_id');
   const availablesCollaborators = props.collaborators.filter(
     (el) => !props.preSelectedCollaborators.some(
       (EL) => EL.rightHolder === el.user_id,
     ),
   );
   return (
-    <div>
-      {!isAdding && (
-        <button
-          onClick={() => {
-            setIsAdding(true);
-          }}
-        >
-          AddCollaborators
-        </button>
-      )}
+    <div
+      className="addCollaborators"
+      onClick={() => {
+        setIsAdding((e) => !e);
+      }}
+    >
+      <div className="addButton">
+        <div className="plusIcon" />
+        <div className="input">Ajouter un collaborateur...</div>
+        <div className="arrowDown" />
+      </div>
 
       {isAdding && (
-        <div>
-          {availablesCollaborators.map((el, id) => (
-            <div key={el.user_id}>
-              <button
-                onClick={() => {
-                  setIsAdding(false);
-                  props.addCollaborators(el.user_id);
-                }}
-              >
-                {`${el.firstName} ${el.lastName}`}
-              </button>
-            </div>
-          ))}
-          <div>
-            <button
-              onClick={() => {
-                setIsCreating(true);
-              }}
-            >
-              Créer un nouveau collaborateur
-            </button>
+        <div id="dropDown">
+          <div className="optionList">
+            {availablesCollaborators.map((el, id) => {
+              const isYou = el.user_id === user_id;
+              const artistName = el.artistName || '';
+              const firstName = el.firstName || '';
+              const lastName = el.lastName || '';
+              const firstInstance = artistName || `${firstName} ${lastName}`;
+              const secondInstance = isYou
+                ? '(toi)'
+                : artistName
+                  ? `(${firstName} ${lastName})`
+                  : '';
+              return (
+                <div
+                  className="option"
+                  key={el.user_id}
+                  onClick={async () => {
+                    await props.addCollaborators(el.user_id);
+                    await setIsAdding(false);
+                  }}
+                >
+                  <div className="avatar" />
+                  <span className="firstInstance">{firstInstance}</span>
+                  <span className="secondInstance">{secondInstance}</span>
+                </div>
+              );
+            })}
           </div>
-          <div>
-            <button
-              onClick={() => {
-                setIsAdding(false);
-              }}
-            >
-              Cancel (should be on click out)
-            </button>
+          <div
+            className="addANew "
+            onClick={() => {
+              props.setIsCreatingNewCollaborator(true);
+            }}
+          >
+            <div className="avatar" />
+            Créer un nouveau collaborateur
           </div>
         </div>
       )}
-      {isCreating && (
-        <CreateNewCollaborator {...props} setIsCreating={setIsCreating} />
-      )}
-    </div>
-  );
-};
-
-const CreateNewCollaborator = (props) => {
-  const user_id = localStorage.getItem('user_id');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  return (
-    <div>
-      <div>Ajouter / Modifier un collaborateur</div>
-      <div>
-        First Name
-        <input
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-      </div>
-      <div>
-        Last Name
-        <input value={lastName} onChange={(e) => setLastName(e.target.value)} />
-      </div>
-      <div>
-        Email
-        <input value={email} onChange={(e) => setEmail(e.target.value)} />
-      </div>
-      <div>
-        <button
-          onClick={() => {
-            props.setIsCreating(false);
-          }}
-        >
-          Annuler
-        </button>
-        <button
-          onClick={async () => {
-            await postCollaborator({
-              firstName,
-              lastName,
-              email,
-              user_id,
-            });
-            await props.resetData();
-            props.setIsCreating(false);
-          }}
-        >
-          Sauvegarder
-        </button>
-      </div>
     </div>
   );
 };

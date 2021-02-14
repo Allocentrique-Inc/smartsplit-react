@@ -1,5 +1,11 @@
 const postRightSplit = async (payload) => {
-  const { copyright, performance, recording } = payload;
+  const {
+    copyright,
+    performance,
+    recording,
+    copyrightDividingMethod,
+    privacy,
+  } = payload;
   const arr = [...copyright, ...performance, ...recording];
   arr.forEach((el) => {
     // eslint-disable-next-line no-param-reassign
@@ -7,7 +13,13 @@ const postRightSplit = async (payload) => {
       ? el.rightHolder
       : el.rightHolder.user_id;
   });
-  const body = JSON.stringify({ copyright, performance, recording });
+  const body = JSON.stringify({
+    copyright,
+    performance,
+    recording,
+    privacy,
+    copyrightDividingMethod,
+  });
   try {
     const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit`;
     const method = 'POST';

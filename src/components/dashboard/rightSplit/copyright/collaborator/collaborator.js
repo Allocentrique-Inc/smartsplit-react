@@ -1,45 +1,26 @@
 import RoleBox from './roleBox/roleBox';
 import Dragger from './dragger/dragger';
 
-const style = {
-  collaboratorStyle: {
-    backgroundColor: '#FAF8F9',
-    padding: '16px',
-    marginBottom: '16px',
-    borderRadius: '2px',
-  },
-};
-
 const Collaborator = (props) => (
-  <div key={props.id} style={style.collaboratorStyle}>
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: '16px',
-      }}
-    >
-      <div>
-        {`${props.collaborator.firstName} ${props.collaborator.lastName}`}
+  <div className="collaborator">
+    <div className="b1">
+      <div className="rowAC">
+        <div className="avatar" />
+        <div className="name">
+          {`${props.collaborator.firstName} ${props.collaborator.lastName}`}
+        </div>
       </div>
-      <div>
-        <button
-          onClick={() => {
-            props.deleteCollaborator(props.el.rightHolder);
-          }}
-        >
-          ...
-        </button>
+      <div
+        className="ellipsis"
+        onClick={() => {
+          props.deleteCollaborator(props.el.rightHolder);
+        }}
+      >
+        ...
       </div>
     </div>
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        marginBottom: '10px',
-      }}
-    >
+    <div className="space" />
+    <div className="roleRow">
       {['autor', 'adaptator'].map((role) => (
         <RoleBox
           key={role}
@@ -51,7 +32,7 @@ const Collaborator = (props) => (
         />
       ))}
     </div>
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div className="roleRow">
       {['composer', 'mixer'].map((role) => (
         <RoleBox
           key={role}
@@ -66,12 +47,9 @@ const Collaborator = (props) => (
 
     <Dragger
       id={props.id}
-      dividingMethod={props.dividingMethod}
+      copyrightDividingMethod={props.copyrightDividingMethod}
       shares={props.el.shares}
       setShares={(newShares) => {
-        // const arr = [...props.copyright]
-        // arr[id].shares = newShares
-        // props.setCopyright(arr)
         props.handleDrag({ newShares, id: props.id });
       }}
       lock={props.el.lock}

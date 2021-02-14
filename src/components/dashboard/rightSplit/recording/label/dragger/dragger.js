@@ -1,12 +1,7 @@
 import colors from '../../../_/colors';
 
 const Dragger = ({
-  shares,
-  setShares,
-  setLock,
-  lock,
-  copyrightDividingMethod,
-  id,
+  shares, setShares, setLock, lock, id,
 }) => {
   const handleClick = (e) => {
     const newValue = Math.round(
@@ -15,7 +10,7 @@ const Dragger = ({
     setShares(newValue);
   };
   const handleLockBtn = () => setLock(!lock);
-  const isManual = copyrightDividingMethod === 'manual';
+  const isManual = true;
   return (
     <div className="dragger">
       <div className="lock">

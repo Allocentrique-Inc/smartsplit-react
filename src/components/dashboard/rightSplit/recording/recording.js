@@ -3,34 +3,9 @@ import AddCollaborators from '../_/addCollaborators/addCollaborators';
 import TopBar from '../_/topBar/topBar';
 import DownBar from '../_/downBar/downBar';
 import Presentation from '../_/presentation/presentation';
+import Label from './label/label';
 import Collaborators from './collaborators/collaborators';
 import Circle from '../_/circle/circle';
-
-const style = {
-  b1: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  b1b1: {
-    width: '944px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '100px',
-    minHeight: 'calc(100vh - 248px)',
-  },
-  b1b1b1: {
-    width: '464px',
-  },
-  b1b1b2: {
-    width: '464px',
-  },
-  b1b1b2b1: {
-    position: 'sticky',
-    top: '144px',
-    display: 'flex',
-    justifyContent: 'space-around',
-  },
-};
 
 const Recording = (props) => {
   const { workpiece_id } = useParams();
@@ -41,9 +16,23 @@ const Recording = (props) => {
         rightHolder: user_id,
         comment: '',
         function: '',
-        shares: 10,
+        shares: 0,
       },
     ]);
+  };
+
+  const addLabelCollaborators = (user_id) => {
+    props.setLabel({
+      rightHolder: user_id,
+      shares: 0,
+      agreementDuration: '',
+      notifViaEmail: false,
+      notifViaText: false,
+    });
+  };
+
+  const deleteLabel = () => {
+    props.setLabel({});
   };
 
   const deleteCollaborator = (rightHolder) => {
@@ -55,25 +44,50 @@ const Recording = (props) => {
     props.setRecording(arr);
   };
 
+  const handleDrag = () => {};
+
+  const title = props.translations.rightSplit.title._recording[props.language];
+  const textPresentation = props.translations.rightSplit.textPresentation._recording[props.language];
+  const textDescription = props.translations.rightSplit.textDescription._recording[props.language];
+
   const commonProps = {
+    ...props,
     addCollaborators,
     deleteCollaborator,
+    title,
+    textPresentation,
+    textDescription,
+    handleDrag,
   };
 
-  props.recording.forEach((el, id, arr) => {
-    el.shares = 100 / arr.length;
-  });
-
+  // props.recording.forEach((el, id, arr) => {
+  //   el.shares = 100 / arr.length;
+  // });
+  console.log(props.label);
   return (
     <div className="rightSplitCreation">
       <TopBar {...props} view="recording" />
-      <div style={style.b1}>
-        <div style={style.b1b1}>
-          <div style={style.b1b1b1}>
-            <Presentation view="recording" />
+      <div className="b1">
+        <div className="b1b1">
+          <div className="b1b1b1">
+            <Presentation {...commonProps} />
+            {!props.label.rightHolder && (
+              <AddCollaborators
+                {...props}
+                {...commonProps}
+                addCollaborators={addLabelCollaborators}
+                preSelectedCollaborators={[...props.recording, props.label]}
+              />
+            )}
 
-            <div>LABELS</div>
-            <hr />
+            {props.label.rightHolder && (
+              <Label
+                {...commonProps}
+                el={props.label}
+                deleteCollaborator={deleteLabel}
+              />
+            )}
+            <div className="separator" />
             <Collaborators {...props} {...commonProps} />
             <AddCollaborators
               {...props}
@@ -81,8 +95,8 @@ const Recording = (props) => {
               preSelectedCollaborators={props.recording}
             />
           </div>
-          <div style={style.b1b1b2}>
-            <div style={style.b1b1b2b1}>
+          <div className="b1b1b2">
+            <div className="b1b1b1b2">
               <Circle {...props} collaborators={props.recording} />
             </div>
           </div>

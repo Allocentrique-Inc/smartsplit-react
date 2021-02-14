@@ -3,9 +3,10 @@ import Collaborator from './collaborator/collaborator';
 const Collaborators = (props) => (
   <>
     {props.recording.map((el, id) => {
-      const collaborator = props.collaborators.find(
-        (EL) => EL.user_id === el.rightHolder,
-      );
+      // Incomming data is different than PostingData
+      const collaborator = typeof el.rightHolder === 'string'
+        ? props.collaborators.find((EL) => EL.user_id === el.rightHolder)
+        : el.rightHolder;
       if (!collaborator) return null;
       return (
         <Collaborator

@@ -8,6 +8,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
+    background-color: white;
     .bx {
       display: flex;
       align-items: center;
@@ -113,6 +114,21 @@
             margin-bottom: 72px;
           }
         }
+        .separator {
+          margin-bottom: 32px;
+          margin-top: 32px;
+          border-bottom: 1px solid #dcdfe1;
+          width: 100%;
+        }
+      }
+      .b1b1b2 {
+        width: 464px;
+        .b1b1b1b2 {
+          position: sticky;
+          top: 144px;
+          display: flex;
+          justify-content: space-around;
+        }
       }
     }
   }
@@ -125,19 +141,298 @@
       display: flex;
       height: 24px;
       align-items: center;
+      cursor: pointer;
+      margin-bottom: 16px;
     }
     .radioCircle {
       height: 16px;
       width: 16px;
       border-radius: 10px;
-      border: 1px solid black;
+      border: 1px solid #dcdfe1;
       margin-right: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .innerSelected {
+        height: 8px;
+        width: 8px;
+        border-radius: 10px;
+        background-color: #2da84f;
+      }
     }
     .splitingMethod {
-      font-weight: 'normal';
-      font-size: '16px';
-      line-height: '24px';
-      color: '#203548';
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 24px;
+      color: #203548;
     }
+  }
+  .addCollaborators {
+    .addButton {
+      height: 40px;
+      width: 100%;
+      background-color: white;
+      border: 1px solid #dcdfe1;
+      box-sizing: border-box;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      line-height: 24px;
+      color: #8da0b3;
+      cursor: pointer;
+      .plusIcon {
+        margin: 9px;
+        height: 22px;
+        width: 22px;
+        background-color: rgba(214, 196, 162, 0.15);
+        cursor: pointer;
+      }
+      .input {
+        border: none;
+        outline: 0;
+        width: 100%;
+        cursor: pointer;
+      }
+      .arrowDown {
+        margin: 9px;
+        height: 22px;
+        width: 22px;
+        background-color: rgba(214, 196, 162, 0.15);
+      }
+    }
+    .optionList {
+      width: 100%;
+      border: 1px solid #dcdfe1;
+      border-top: none;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      box-shadow: inset 0px -1px 0px #dcdfe1;
+      .option {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        .avatar {
+          margin: 8px;
+          height: 24px;
+          width: 24px;
+          background-color: rgba(214, 196, 162, 0.15);
+        }
+        &:hover {
+          background-color: rgba(214, 196, 162, 0.15);
+        }
+        .firstInstance {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+        }
+        .secondInstance {
+          margin-left: 4px;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 16px;
+        }
+      }
+    }
+    .addANew {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      .avatar {
+        margin: 8px;
+        height: 24px;
+        width: 24px;
+        background-color: rgba(214, 196, 162, 0.15);
+      }
+      border: 1px solid #dcdfe1;
+      border-top: none;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      color: #2da84f;
+      &:hover {
+        background-color: rgba(214, 196, 162, 0.15);
+      }
+    }
+  }
+  .collaborator {
+    background-color: #faf8f9;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 2px;
+    .b1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .avatar {
+      width: 24px;
+      height: 24px;
+      background-color: rgba(214, 196, 162, 0.15);
+    }
+    .name {
+      margin-left: 16px;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      color: #203548;
+    }
+    .ellipsis {
+      background-color: rgba(214, 196, 162, 0.15);
+      margin-top: -18px;
+      font-weight: 1000;
+      color: #c4c4c4;
+    }
+    .space {
+      margin-left: 40px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #dcdfe1;
+    }
+    .selectStatus {
+      height: 32px;
+      width: calc(100% - 40px);
+      margin-left: 40px;
+      margin-bottom: 12px;
+      border: 1px solid #dcdfe1;
+      background-color: white;
+      padding-right: 8px;
+      padding-left: 8px;
+      outline: 0;
+    }
+    .roleRow {
+      margin-left: 40px;
+      display: flex;
+      margin-bottom: 10px;
+      .checkBoxRow {
+        width: 188px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        label {
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 16px;
+          color: #203548;
+          margin-left: 11px;
+        }
+        input {
+          height: 18px;
+          width: 18px;
+          border: 1px solid #dcdfe1;
+        }
+      }
+    }
+    .dragger {
+      display: flex;
+      align-items: center;
+      .lock {
+        width: 40px;
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        .locked {
+          width: 18px;
+          font-size: 10px;
+          padding: 0px;
+          border: 1px solid red;
+          background-color: rgba(214, 196, 162, 0.15);
+          cursor: pointer;
+        }
+        .unlocked {
+          width: 18px;
+          font-size: 10px;
+          padding: 0px;
+          border: 1px solid black;
+          background-color: rgba(214, 196, 162, 0.15);
+          cursor: pointer;
+        }
+      }
+      .buttonBar {
+        flex-shrink: 0;
+        display: flex;
+        height: 40px;
+        align-items: center;
+        cursor: pointer;
+        margin-right: 20px;
+        .bar {
+          width: 300px;
+          border-radius: 4px;
+          height: 8px;
+          border: 1px solid #dcdfe1;
+          display: flex;
+          align-items: center;
+          .color {
+            height: 6px;
+            border-radius: 4px 0px 0px 4px;
+          }
+        }
+      }
+      .shares {
+        flex-grow: 1;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: right;
+        color: #000000;
+      }
+    }
+  }
+}
+.createNewCollaborator {
+  width: 624px;
+  padding: 32px;
+  .row1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    input {
+      width: 272px;
+    }
+  }
+  .label {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #203548;
+    margin-bottom: 8px;
+  }
+  input {
+    border: 1px solid #dcdfe1;
+    box-sizing: border-box;
+    border-radius: 2px;
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+  }
+}
+
+.createNewCollaboratorNavigation {
+  .cancel {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2da84f;
+    background-color: inherit;
+    border: none;
+    margin-right: 16px;
+    cursor: pointer;
+    padding: 8px 16px;
+  }
+  .save {
+    color: white;
+    background: #2da84f;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 8px 16px;
+    border-radius: 2px;
+    outline: 0;
   }
 }

@@ -34,10 +34,14 @@ const RightSplit = (props) => {
         copyright,
         performance,
         recording,
+        copyrightDividingMethod,
+        privacy,
       } = incomingWorkpiece.rightSplit;
       setCopyright(copyright);
       setPerformance(performance);
       setRecording(recording);
+      selectCopyrightDividingMethod(copyrightDividingMethod);
+      setPrivacy(privacy);
     }
 
     setWorkpiece(incomingWorkpiece);

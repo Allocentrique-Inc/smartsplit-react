@@ -45,6 +45,10 @@ const Privacy = (props) => {
     setIsSaved(true);
   };
 
+  const title = props.translations.rightSplit.title._privacy[props.language];
+  const textPresentation = props.translations.rightSplit.textPresentation._privacy[props.language];
+  const textDescription = props.translations.rightSplit.textDescription._privacy[props.language];
+
   const commonProps = {
     isSaved,
     setIsSaved,
@@ -52,8 +56,10 @@ const Privacy = (props) => {
     setIsConsulting,
     isAdjustingEmails,
     setIsAdjustingEmails,
+    title,
+    textPresentation,
+    textDescription,
   };
-  console.log(props);
   return (
     <div className="rightSplitCreation">
       {isSaved && (
@@ -97,16 +103,13 @@ const Privacy = (props) => {
       )}
 
       <TopBar {...props} view="privacy" />
-      <div style={style.b1}>
-        <div style={style.b1b1}>
-          <div style={style.b1b1b1}>
-            <Presentation view="privacy" />
-            Confidentialite du partage
-            <br />
-            <br />
+      <div className="b1">
+        <div className="b1b1">
+          <div className="b1b1b1">
+            <Presentation {...commonProps} />
             <PrivacySelection {...props} />
           </div>
-          <div style={style.b1b1b2} />
+          <div className="b1b1b2" />
         </div>
       </div>
       <DownBar

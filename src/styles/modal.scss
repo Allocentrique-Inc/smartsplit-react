@@ -14,16 +14,36 @@
     display: flex;
     flex-direction: column;
     .topBar {
-      width: 944px;
+      // width: 944px;
       height: 72px;
       box-shadow: inset 0px -1px 0px #dcdfe1;
       flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 16px;
+      padding-right: 16px;
+      .title {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        color: #203548;
+      }
+      .exit {
+      }
     }
     .downBar {
-      width: 944px;
+      // width: 944px;
       height: 72px;
       box-shadow: inset 0px 1px 0px #dcdfe1;
       flex-shrink: 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-left: 16px;
+      padding-right: 16px;
     }
   }
 }
