@@ -1,0 +1,43 @@
+.small {
+  font-style: normal;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.small-400 {
+  @extend .small;
+  font-weight: normal;
+}
+
+.small-700 {
+  @extend .small;
+  font-weight: bold;
+}
+
+.medium {
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+.medium-400 {
+  @extend .medium;
+  font-weight: normal;
+}
+.medium-700 {
+  @extend .medium;
+  font-weight: bold;
+}
+
+h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+h4 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+}

@@ -16,6 +16,9 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': 'off',
     'react/button-has-type': 'off',
+    'react/jsx-curly-newline': 'off',
+    'react/implicit-arrow-linebreak': 'off',
+    'implicit-arrow-linebreak': 'off',
     'no-console': 'off',
     'no-tabs': 'off',
     camelcase: 'off',
@@ -34,5 +37,6 @@ module.exports = {
     'no-param-reassign': 'off',
     'react/no-unescaped-entities': 'off',
     'react-hooks/exhaustive-deps': 'off',
+    'object-curly-newline': 'off',
   },
 };
