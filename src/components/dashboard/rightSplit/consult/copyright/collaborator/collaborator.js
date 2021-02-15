@@ -1,7 +1,9 @@
-// import Vote from '../vote/vote';
-
 const Collaborator = (props) => {
   const { firstName, lastName, shares, vote, roles } = props.collaborator;
+  const handleAccept = () => props.setCopyright('accepted');
+  const handleReject = () => props.setCopyright('rejected');
+  const user_id = localStorage.getItem('user_id');
+  const isUserVoting = user_id === props.collaborator.user_id && vote === 'undecided';
   return (
     <>
       <div className="consultCollaborator">
@@ -29,10 +31,24 @@ const Collaborator = (props) => {
           )}
         </div>
       </div>
-      {props.voting && (
+      {props.voting && isUserVoting && (
         <div className="voting">
-          <button className="reject">No</button>
-          <button className="accept">Yes</button>
+          <button
+            onClick={handleReject}
+            className={`reject ${
+              props.copyright === 'rejected' ? 'rejectSelected' : ''
+            }`}
+          >
+            No
+          </button>
+          <button
+            onClick={handleAccept}
+            className={`accept ${
+              props.copyright === 'accepted' ? 'acceptSelected' : ''
+            }`}
+          >
+            Yes
+          </button>
         </div>
       )}
     </>
