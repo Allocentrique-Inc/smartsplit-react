@@ -6,7 +6,7 @@ import X from '../../../../icons/x';
 export default function WorkpieceModal({
   setShowModal,
   resetData,
-  workpiece_id,
+  workpiece_id = null,
 }) {
   const [title, setTitle] = useState('');
   const [type, setType] = useState({

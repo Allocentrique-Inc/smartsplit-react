@@ -44,7 +44,7 @@ const Workpieces = (props) => {
   };
   return (
     <div className="workpieces">
-      {showModal && <AddOrEditWorkpieceModal {...commonProps} create />}
+      {showModal && <AddOrEditWorkpieceModal {...commonProps} />}
       <LeftMenu />
       <div className="rightContent">
         <div className="topBar">
