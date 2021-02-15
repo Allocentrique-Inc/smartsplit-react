@@ -11,6 +11,7 @@ import SmartSplit from '../../icons/smartsplit';
 import ActivateEmail from './activateEmail/activateEmail';
 import ChangePassword from './changePassword/changePassword';
 import RequestPasswordReset from './requestPasswordReset/requestPasswordReset';
+import PasswordResetConfirmation from './passwordResetConfirmation/passwordResetConfirmation';
 
 const User = (props) => {
   const match = useRouteMatch();
@@ -33,6 +34,9 @@ const User = (props) => {
         </Route>
         <Route path={`${match.path}/request-password-reset`}>
           <RequestPasswordReset />
+        </Route>
+        <Route path={`${match.path}/password-reset-confirmation`}>
+          <PasswordResetConfirmation />
         </Route>
       </Switch>
     </div>
