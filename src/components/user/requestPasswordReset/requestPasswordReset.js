@@ -7,7 +7,7 @@ export default () => {
   const history = useHistory();
   const handleSubmit = async () => {
     await requestPasswordReset({ email });
-    history.push('/');
+    history.push('/user/password-reset-confirmation');
   };
   return (
     <div className="form">

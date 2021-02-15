@@ -1,7 +1,7 @@
 .btn {
-  border-radius: $border-radius-form;
-  height: map-get($sizes, 'medium');
-  padding: map-get($spacings, 'small') map-get($spacings, 'medium');
+  border-radius: 2px;
+  height: 40px;
+  padding: 8px 16px;
   cursor: pointer;
   align-items: center;
   font-style: normal;
@@ -16,6 +16,11 @@
   background-color: map-get($colors, 'action');
   outline: 0;
   border: none;
+}
+
+.btn-disabled {
+  color: map-get($colors, 'tertiary');
+  background-color: map-get($colors-background, 'hell');
 }
 
 .btn-secondary {

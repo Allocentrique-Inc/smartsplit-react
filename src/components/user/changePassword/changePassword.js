@@ -8,7 +8,8 @@ export default () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const handleSubmit = async () => {
-    await changePassword({ token, password });
+    const result = await changePassword({ token, password });
+    console.log('CHANGE PASSWORD', result);
     history.push('/');
   };
   const isPasswordValid = () => password === confirmPassword && password !== '';
@@ -24,6 +25,7 @@ export default () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <div className="toDo">Validation de mot de passe</div>
       </div>
       <div className="form-input">
         <label htmlFor="confirmPassword">
@@ -39,7 +41,10 @@ export default () => {
 
       <div className="buttons">
         <div />
-        <button onClick={handleSubmit} disabled={!isPasswordValid()}>
+        <button
+          className={`btn-primary ${!isPasswordValid() && 'btn-disabled'}`}
+          onClick={handleSubmit}
+        >
           Réinitialiser
         </button>
       </div>
