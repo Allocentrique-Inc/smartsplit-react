@@ -8,7 +8,7 @@ const Document = (props) => {
     <div className="documentation">
       <TopBar {...props} />
       <div className="documentationContent">
-        {/* <Route path="/workpiece/:workpiece_id/documentation/creation">
+        <Route path="/workpiece/:workpiece_id/documentation/creation">
           <div>Creation</div>
         </Route>
         <Route path="/workpiece/:workpiece_id/documentation/performance">
@@ -16,7 +16,7 @@ const Document = (props) => {
         </Route>
         <Route path="/workpiece/:workpiece_id/documentation/recording">
           <div>recording</div>
-        </Route> */}
+        </Route>
         <Route path="/workpiece/:workpiece_id/documentation/release">
           <div>release</div>
         </Route>
