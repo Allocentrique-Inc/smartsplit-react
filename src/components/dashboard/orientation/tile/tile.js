@@ -54,7 +54,7 @@ const getActionNameAndDestination = (props) => {
     case 'document': {
       return {
         name: 'Commencer',
-        destination: '',
+        destination: `/workpiece/${props.workpiece_id}/documentation`,
         className: 'action start',
       };
     }

@@ -3,6 +3,7 @@ import { useParams, Route } from 'react-router-dom';
 import getWorkpiece from '../../../api/workpieces/getWorkpiece';
 import RightSplit from '../rightSplit/rightSplit';
 import Orientation from '../orientation/orientation';
+import Documentation from '../documentation/documentation';
 
 const Workpiece = (props) => {
   const { workpiece_id } = useParams();
@@ -34,11 +35,11 @@ const Workpiece = (props) => {
       <Route path="/workpiece/:workpiece_id/right-split/">
         <RightSplit {...commonProps} />
       </Route>
+      <Route path="/workpiece/:workpiece_id/documentation/">
+        <Documentation {...commonProps} />
+      </Route>
       <Route path="/workpiece/:workpiece_id/" exact>
         <Orientation {...commonProps} />
-      </Route>
-      <Route path="/workpiece/:workpiece_id/documentation/">
-        <div>DOCUMENTATION</div>
       </Route>
       <Route path="/workpiece/:workpiece_id/protect/">
         <div>PROTEXT</div>
