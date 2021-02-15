@@ -61,7 +61,6 @@ const Copyright = (props) => {
   };
 
   const addRole = (role, id) => {
-    console.log(role);
     const arr = [...props.copyright];
     arr[id].roles.push(role);
     const calculatedCopyright = recalculateShares({

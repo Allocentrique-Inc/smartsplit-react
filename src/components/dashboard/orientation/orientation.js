@@ -1,33 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import getWorkpiece from '../../../api/workpieces/getWorkpiece';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Tile from './tile/tile';
 import PenIcon from '../../../icons/pen';
-import { Colors } from '../../../theme';
 
 const Orientation = (props) => {
-  const { workpiece_id } = useParams();
-  const [workpiece, setWorkpiece] = useState('');
   const [tab, setTab] = useState('task');
-
-  const resetData = async () => {
-    const incomingWorkpiece = await getWorkpiece({
-      workpiece_id,
-    });
-    setWorkpiece(incomingWorkpiece);
-  };
-
-  const commonProps = {
-    workpiece,
-    resetData,
-    workpiece_id,
-  };
-
-  useEffect(() => {
-    resetData();
-    // eslint-disable-next-line
-  }, [props.selectedWorkpiece]);
-  if (!workpiece) return null;
+  const commonProps = { ...props };
+  if (!props.workpiece) return null;
   return (
     <div className="orientation">
       <div className="b1">
@@ -47,15 +26,18 @@ const Orientation = (props) => {
               <div className="image">Image</div>
               <div className="description">
                 <div className="title">
-                  {workpiece.title}
-                  <div className="modify">
+                  {props.workpiece.title}
+                  <div
+                    className="modify"
+                    style={{ backgroundColor: 'rgba(214, 196, 162, 0.25)' }}
+                  >
                     <PenIcon />
                   </div>
                 </div>
                 <div className="details">
                   {'--------- créé par  '}
                   <span className="artistName">
-                    {`${workpiece.owner.firstName} ${workpiece.owner.lastName}`}
+                    {`${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName}`}
                   </span>
                   {' - Mis à jour --------'}
                 </div>
@@ -78,6 +60,7 @@ const Orientation = (props) => {
               onClick={() => {
                 setTab('file');
               }}
+              style={{ backgroundColor: 'rgba(214, 196, 162, 0.25)' }}
             >
               Fichier
             </button>
@@ -87,14 +70,14 @@ const Orientation = (props) => {
 
       <div className="b2">
         <div className="tileSection">
-          <Tile tileId="share" {...props} {...commonProps} />
+          <Tile tileId="share" {...commonProps} />
           <div className="space" />
-          <Tile tileId="document" {...props} {...commonProps} />
+          <Tile tileId="document" {...commonProps} />
           <div className="space" />
-          <Tile tileId="protect" {...props} {...commonProps} />
-          <Tile tileId="" {...props} {...commonProps} />
+          <Tile tileId="protect" {...commonProps} />
+          <Tile tileId="" {...commonProps} />
           <div className="space" />
-          <Tile tileId="" {...props} {...commonProps} />
+          <Tile tileId="" {...commonProps} />
         </div>
       </div>
     </div>

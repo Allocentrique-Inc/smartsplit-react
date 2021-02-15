@@ -134,38 +134,6 @@
   }
   .dividingMethod {
     margin-bottom: 32px;
-    .radioRow {
-      background-color: #fff;
-      border: none;
-      outline: 0;
-      display: flex;
-      height: 24px;
-      align-items: center;
-      cursor: pointer;
-      margin-bottom: 16px;
-    }
-    .radioCircle {
-      height: 16px;
-      width: 16px;
-      border-radius: 10px;
-      border: 1px solid #dcdfe1;
-      margin-right: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      .innerSelected {
-        height: 8px;
-        width: 8px;
-        border-radius: 10px;
-        background-color: #2da84f;
-      }
-    }
-    .splitingMethod {
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 24px;
-      color: #203548;
-    }
   }
   .addCollaborators {
     .addButton {
@@ -381,6 +349,50 @@
         color: #000000;
       }
     }
+  }
+  .success {
+    text-align: center;
+    max-width: 624px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .topIcon {
+      margin-top: 54px;
+      background-color: rgba(214, 196, 162, 0.15);
+      height: 96px;
+      width: 96px;
+    }
+    .text1 {
+      margin-top: 58px;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 24px;
+      color: #203548;
+    }
+    .text2 {
+      margin-top: 16px;
+      font-size: 16px;
+      line-height: 24px;
+      color: #687a8b;
+    }
+    .text3 {
+      margin-top: 32px;
+      width: 304px;
+      height: 56px;
+      background-color: rgba(214, 196, 162, 0.15);
+    }
+  }
+  .privacySelection {
+    .title {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      color: #203548;
+      margin-bottom: 16px;
+    }
+  }
+  .postSaveConsult {
+    min-width: 564px;
   }
 }
 .createNewCollaborator {

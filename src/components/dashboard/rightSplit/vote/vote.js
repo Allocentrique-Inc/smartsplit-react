@@ -17,15 +17,31 @@ const Vote = (props) => {
     recording,
     setRecording,
   };
-
+  const { title, owner } = props.workpiece;
+  const ownerName = `${owner.firstName} ${owner.lastName}`;
+  const splitOwner = props.workpiece.rightSplit.owner;
+  const splitOwnerName = `${splitOwner.firstName} ${splitOwner.lastName}`;
+  const { version } = props.workpiece.rightSplit;
   return (
     <div className="vote">
       <div className="b1">
         <div className="inner">
-          <Title />
-          <Creation />
-          <SplitOwner />
-          <Consult {...props} {...commonProps} voting />
+          <div className="voteTitle">{`Valider le split de ${title}`}</div>
+          <div className="workpieceDetails">
+            Créé par
+            <span className="ownerName">{ownerName}</span>
+            - Mis à jour il y a
+            -----
+          </div>
+          <div className="version">{`Version ${version}`}</div>
+          <div className="workpieceDetails">
+            Créé par
+            <span className="ownerName">{splitOwnerName}</span>
+            - il y a -----
+          </div>
+          <div className="consult">
+            <Consult {...props} {...commonProps} voting />
+          </div>
         </div>
       </div>
       <DownBar {...props} {...commonProps} />

@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Workpieces from './workpieces/workpieces';
 import Orientation from './orientation/orientation';
 import RightSplit from './rightSplit/rightSplit';
+import Workpiece from './workpiece/workpiece';
 
 const Dashboard = (props) => {
   const [selectedWorkpiece, selectWorkpiece] = useState('');
@@ -15,11 +16,11 @@ const Dashboard = (props) => {
   };
   return (
     <Switch>
-      <Route path="/workpiece/:workpiece_id/right-split">
+      {/* <Route path="/workpiece/:workpiece_id/right-split">
         <RightSplit {...props} {...commonProps} />
-      </Route>
+      </Route> */}
       <Route path="/workpiece/:workpiece_id">
-        <Orientation {...props} {...commonProps} />
+        <Workpiece {...props} {...commonProps} />
       </Route>
       <Route path="/">
         <Workpieces {...props} {...commonProps} />

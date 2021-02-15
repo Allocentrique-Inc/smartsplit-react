@@ -41,10 +41,12 @@ const Collaborator = (props) => (
       <option disabled value="">
         Select Function
       </option>
-      <option value="principal">principal</option>
-      <option value="featured">featured</option>
-      <option value="bandMember">bandMember</option>
-      <option value="session">session</option>
+      <option value="producer">producer</option>
+      <option value="autoProducer">autoProducer</option>
+      <option value="directorProducer">directorProducer</option>
+      <option value="techProducer">techProducer</option>
+      <option value="studio">studio</option>
+      <option value="illustratorDesigner">illustratorDesigner</option>
     </select>
 
     <Dragger

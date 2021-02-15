@@ -1,5 +1,5 @@
 const submitRightSplit = async (payload) => {
-  const body = JSON.stringify({});
+  const body = JSON.stringify([]);
   try {
     const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit/submit`;
     const method = 'POST';

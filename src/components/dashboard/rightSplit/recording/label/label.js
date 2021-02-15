@@ -68,7 +68,7 @@ const Collaborator = (props) => {
           }}
         />
       </div>
-      <Dragger
+      {/* <Dragger
         id={props.id}
         shares={props.el.shares}
         setShares={(newShares) => {
@@ -78,7 +78,7 @@ const Collaborator = (props) => {
         setLock={(newState) => {
           props.setLabel({ ...props.label, lock: newState });
         }}
-      />
+      /> */}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import Vote from '../vote/vote';
+// import Vote from '../vote/vote';
 
 const Collaborator = (props) => {
   const { firstName, lastName, shares, vote, roles } = props.collaborator;

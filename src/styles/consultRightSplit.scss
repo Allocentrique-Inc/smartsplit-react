@@ -1,0 +1,125 @@
+.consultRightSplit {
+  width: 880px;
+  display: flex;
+  justify-content: space-between;
+  .left {
+    width: 432px;
+  }
+  .right {
+    width: 432px;
+  }
+  .consultRightSplitSection {
+    margin-bottom: 56px;
+  }
+  .titleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    .title {
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      color: #203548;
+    }
+  }
+  .toDo {
+    background-color: rgba(214, 196, 162, 0.15);
+  }
+  .consultCollaborator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #dcdfe1;
+    height: 72px;
+
+    .left {
+      display: flex;
+      align-items: center;
+      .avatar {
+        background-color: rgba(214, 196, 162, 0.15);
+        height: 24px;
+        width: 24px;
+        margin: 16px;
+      }
+      .roles {
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        color: #687a8b;
+      }
+      .name {
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        color: #203548;
+      }
+    }
+
+    .right {
+      .shares {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: right;
+        color: #203548;
+      }
+      .voteUndecided {
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: right;
+        color: #687a8b;
+      }
+      .voteAccepted {
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: right;
+        color: #2da84f;
+      }
+      .voteRejected {
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: right;
+        color: #ac1616;
+      }
+    }
+  }
+
+  .voting {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 56px;
+    margin-bottom: 16px;
+    button {
+      width: 180px;
+      height: 40px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      border: 1px solid #dcdfe1;
+      cursor: pointer;
+    }
+    .reject {
+      color: #ac1616;
+      background-color: white;
+    }
+    .accept {
+      color: #2da84f;
+      background-color: white;
+    }
+    .acceptSelected {
+      background: #2da84f;
+      color: white;
+      border: none;
+    }
+    .rejectSelected {
+      background: #ac1616;
+      color: white;
+      border: none;
+    }
+  }
+}

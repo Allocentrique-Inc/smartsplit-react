@@ -3,7 +3,7 @@ import TopBar from './topBar/topBar';
 import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
 import Consult from '../consult/consult';
 
-const Kanban = (props) => {
+const Summary = (props) => {
   const [isConsulting, setIsConsulting] = useState(false);
   if (
     !props.workpiece.rightSplit
@@ -57,7 +57,7 @@ const Kanban = (props) => {
         </div>
       )}
 
-      <div className="kanban">
+      <div className="summary">
         <TopBar {...props} />
 
         <div className="b1">
@@ -121,7 +121,7 @@ const Kanban = (props) => {
   );
 };
 
-export default Kanban;
+export default Summary;
 
 const DraftRightSplit = (props) => (
   <div className="rightSplit" onClick={props.handleConsultBtn}>

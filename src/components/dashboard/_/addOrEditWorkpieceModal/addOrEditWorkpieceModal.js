@@ -13,6 +13,7 @@ export default function WorkpieceModal({ setShowModal, resetData, create }) {
   const handleConfirm = async () => {
     await postWorkpiece({
       title,
+      type,
     });
     setShowModal(false);
     resetData();
@@ -161,7 +162,7 @@ export default function WorkpieceModal({ setShowModal, resetData, create }) {
             >
               Annuler
             </button>
-            <button className="btn-primary">
+            <button onClick={handleConfirm} className="btn-primary">
               {create ? "C'est parti !" : 'Sauvegarder'}
             </button>
           </div>

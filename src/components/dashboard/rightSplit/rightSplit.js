@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import { useParams, Route } from 'react-router-dom';
 import getUsersCollaborators from '../../../api/users/getUsersCollaborators';
 import postRightSplit from '../../../api/workpieces/postRightSplit';
-import getWorkpiece from '../../../api/workpieces/getWorkpiece';
 import getUsers from '../../../api/users/getUsers';
 import Copyright from './copyright/copyright';
 import Performance from './performance/performance';
 import Recording from './recording/recording';
 import Privacy from './privacy/privacy';
-import Kanban from './kanban/kanban';
+import Summary from './summary/summary';
 import Consult from './consult/consult';
 import Vote from './vote/vote';
 import translations from '../../../translations';
@@ -21,37 +20,35 @@ const RightSplit = (props) => {
   const [recording, setRecording] = useState([]);
   const [privacy, setPrivacy] = useState('private');
   const [collaborators, setCollaborators] = useState([]);
-  const [workpiece, setWorkpiece] = useState([]);
   const [label, setLabel] = useState({});
   const [copyrightDividingMethod, selectCopyrightDividingMethod] = useState(
     'equal',
   );
 
-  const resetData = async () => {
-    const incomingWorkpiece = await getWorkpiece({ workpiece_id });
-    if (incomingWorkpiece.rightSplit) {
+  const mapData = async () => {
+    if (props.workpiece.rightSplit) {
       const {
         copyright,
         performance,
         recording,
         copyrightDividingMethod,
         privacy,
-      } = incomingWorkpiece.rightSplit;
+        label,
+      } = props.workpiece.rightSplit;
       setCopyright(copyright);
       setPerformance(performance);
       setRecording(recording);
       selectCopyrightDividingMethod(copyrightDividingMethod);
       setPrivacy(privacy);
+      setLabel(label || {});
     }
-
-    setWorkpiece(incomingWorkpiece);
     const collaborators = await getUsersCollaborators({ user_id });
     const user = await getUsers({ user_id });
     setCollaborators([user, ...collaborators]);
   };
   useEffect(() => {
-    resetData();
-  }, []);
+    mapData();
+  }, [props.workpiece]);
 
   const saveRightSplit = async () => {
     const payload = {
@@ -61,13 +58,16 @@ const RightSplit = (props) => {
       recording,
       privacy,
       copyrightDividingMethod,
+      label,
     };
     await postRightSplit(payload);
+    props.resetData();
   };
 
   const language = 'fr';
 
   const commonProps = {
+    ...props,
     copyright,
     setCopyright,
     performance,
@@ -78,9 +78,7 @@ const RightSplit = (props) => {
     setPrivacy,
     collaborators,
     setCollaborators,
-    workpiece,
-    setWorkpiece,
-    resetData,
+    mapData,
     saveRightSplit,
     copyrightDividingMethod,
     selectCopyrightDividingMethod,
@@ -89,7 +87,6 @@ const RightSplit = (props) => {
     translations,
     language,
   };
-
   return (
     <>
       <Route path="/workpiece/:workpiece_id/right-split/consult">
@@ -107,8 +104,8 @@ const RightSplit = (props) => {
       <Route path="/workpiece/:workpiece_id/right-split/privacy">
         <Privacy {...commonProps} />
       </Route>
-      <Route path="/workpiece/:workpiece_id/right-split/kanban">
-        <Kanban {...commonProps} />
+      <Route path="/workpiece/:workpiece_id/right-split/summary">
+        <Summary {...commonProps} />
       </Route>
       <Route path="/workpiece/:workpiece_id/right-split/vote">
         <Vote {...commonProps} />

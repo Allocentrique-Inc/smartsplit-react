@@ -7,7 +7,6 @@ const voteRightSplit = async (payload) => {
     recording: { vote: recording || undefined },
   });
 
-  console.log(body);
   try {
     const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit/vote`;
     const method = 'POST';

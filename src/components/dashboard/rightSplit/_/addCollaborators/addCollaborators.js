@@ -5,9 +5,10 @@ const AddCollaborators = (props) => {
   const [isAdding, setIsAdding] = useState(false);
   const user_id = localStorage.getItem('user_id');
   const availablesCollaborators = props.collaborators.filter(
-    (el) => !props.preSelectedCollaborators.some(
-      (EL) => EL.rightHolder === el.user_id,
-    ),
+    (el) =>
+      !props.preSelectedCollaborators.some(
+        (EL) => EL.rightHolder === el.user_id,
+      ),
   );
   return (
     <div

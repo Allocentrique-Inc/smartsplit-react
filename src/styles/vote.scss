@@ -5,6 +5,49 @@
     .inner {
       width: 944px;
       min-height: calc(100vh - 72px);
+      .voteTitle {
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 40px;
+        display: flex;
+        align-items: center;
+        color: #203548;
+        margin-top: 64px;
+      }
+      .workpieceDetails {
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        color: #687a8b;
+        margin-top: 8px;
+        .ownerName {
+          font-weight: bold;
+          font-size: 12px;
+          line-height: 16px;
+          display: flex;
+          align-items: center;
+          color: #2da84f;
+          margin-left: 4px;
+        }
+      }
+
+      .version {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        color: #203548;
+        margin-top: 64px;
+      }
+      .consult {
+        border: 1px solid #dcdfe1;
+        padding: 32px;
+        border-radius: 4px;
+        margin-top: 32px;
+      }
     }
   }
   .downBar {

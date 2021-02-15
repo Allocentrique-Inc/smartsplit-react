@@ -1,7 +1,13 @@
-import Vote from '../vote/vote';
+// import Vote from '../vote/vote';
 
 const Collaborator = (props) => {
-  const { firstName, lastName, shares, vote, roles } = props.collaborator;
+  const {
+    firstName,
+    lastName,
+    shares,
+    vote,
+    function: _function,
+  } = props.collaborator;
   return (
     <div className="consultCollaborator">
       <div className="left">
@@ -9,9 +15,8 @@ const Collaborator = (props) => {
         <div>
           <div className="name">{`${firstName} ${lastName}`}</div>
           <div className="roles">
-            {roles.map((el) => (
-              <div>{`${el} `}</div>
-            ))}
+            {' '}
+            {_function}
           </div>
         </div>
       </div>

@@ -10,17 +10,19 @@ const recalculateShares = ({ newDividingMethod, copyright }) => {
     return arr;
   }
 
-  if (newDividingMethod === 'roles') {
+  if (newDividingMethod === 'role') {
     const autor = copyright.reduce(
       (acc, el) => (el.roles.some((el) => el === 'autor') ? acc + 1 : acc + 0),
       0,
     );
     const adaptator = copyright.reduce(
-      (acc, el) => (el.roles.some((el) => el === 'adaptator') ? acc + 1 : acc + 0),
+      (acc, el) =>
+        (el.roles.some((el) => el === 'adaptator') ? acc + 1 : acc + 0),
       0,
     );
     const composer = copyright.reduce(
-      (acc, el) => (el.roles.some((el) => el === 'composer') ? acc + 1 : acc + 0),
+      (acc, el) =>
+        (el.roles.some((el) => el === 'composer') ? acc + 1 : acc + 0),
       0,
     );
     const mixer = copyright.reduce(

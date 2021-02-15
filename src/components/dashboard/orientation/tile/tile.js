@@ -40,13 +40,13 @@ const getActionNameAndDestination = (props) => {
         case 'draft':
           return {
             name: 'Continuer',
-            destination: `/workpiece/${props.workpiece_id}/right-split/kanban`,
+            destination: `/workpiece/${props.workpiece_id}/right-split/summary`,
             className: 'action',
           };
         default:
           return {
             name: 'Consulter',
-            destination: `/workpiece/${props.workpiece_id}/right-split/kanban`,
+            destination: `/workpiece/${props.workpiece_id}/right-split/summary`,
             className: 'action',
           };
       }

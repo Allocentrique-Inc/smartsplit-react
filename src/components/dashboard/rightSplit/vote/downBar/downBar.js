@@ -13,7 +13,7 @@ const DownBar = (props) => {
       workpiece_id,
     });
     props.resetData();
-    history.push(`/workpiece/${workpiece_id}/right-split/kanban`);
+    history.push(`/workpiece/${workpiece_id}/right-split/summary`);
   };
   return (
     <div className="downBar">

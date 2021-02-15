@@ -63,7 +63,6 @@ const Recording = (props) => {
   // props.recording.forEach((el, id, arr) => {
   //   el.shares = 100 / arr.length;
   // });
-  console.log(props.label);
   return (
     <div className="rightSplitCreation">
       <TopBar {...props} view="recording" />

@@ -7,8 +7,7 @@ import disconnect from '../../../api/auth/disconnect';
 import Workpiece from './workpiece/workpiece';
 import LeftMenu from './leftMenu/leftMenu';
 import SelectPerspective from './selectPerspective/selectPerspective';
-import AddWorkpieceButton from './addWorkpieceButton/addWorkpieceButton';
-import WorkpieceModal from './workpieceModal/workpieceModal';
+import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkpieceModal';
 
 const Workpieces = (props) => {
   const user_id = localStorage.getItem('user_id');
@@ -34,19 +33,18 @@ const Workpieces = (props) => {
 
   useEffect(() => {
     resetData();
-    // eslint-disable-next-line
   }, []);
 
   const commonProps = {
+    ...props,
     resetData,
     tab,
     setTab,
     setShowModal,
   };
-
   return (
     <div className="workpieces">
-      {showModal && <WorkpieceModal {...commonProps} create />}
+      {showModal && <AddOrEditWorkpieceModal {...commonProps} create />}
       <LeftMenu />
       <div className="rightContent">
         <div className="topBar">
