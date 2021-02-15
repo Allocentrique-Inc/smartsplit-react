@@ -1,20 +1,26 @@
 import { useState } from 'react';
 import postWorkpiece from '../../../../api/workpieces/postWorkpiece';
+import patchWorkpiece from '../../../../api/workpieces/patchWorkpiece';
 import X from '../../../../icons/x';
 
-export default function WorkpieceModal({ setShowModal, resetData, create }) {
+export default function WorkpieceModal({
+  setShowModal,
+  resetData,
+  workpiece_id,
+}) {
   const [title, setTitle] = useState('');
   const [type, setType] = useState({
     primary: '',
     secondary: '',
   });
+  const isAdding = workpiece_id === null;
   const [file, setFile] = useState('');
   const [composer, setComposer] = useState('');
   const handleConfirm = async () => {
-    await postWorkpiece({
-      title,
-      type,
-    });
+    const result = isAdding
+      ? await postWorkpiece({ title })
+      : await patchWorkpiece({ workpiece_id, title });
+    console.log(result);
     setShowModal(false);
     resetData();
   };
@@ -24,7 +30,7 @@ export default function WorkpieceModal({ setShowModal, resetData, create }) {
       <div className="modalBackground" onClick={() => setShowModal(false)}>
         <div className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="topBar">
-            <h4>{`${create ? 'Créer' : 'Modifier'} une pièce musicale`}</h4>
+            <h4>{`${isAdding ? 'Créer' : 'Modifier'} une pièce musicale`}</h4>
             <button className="btn-icon" onClick={() => setShowModal(false)}>
               <X />
             </button>
@@ -163,7 +169,7 @@ export default function WorkpieceModal({ setShowModal, resetData, create }) {
               Annuler
             </button>
             <button onClick={handleConfirm} className="btn-primary">
-              {create ? "C'est parti !" : 'Sauvegarder'}
+              {isAdding ? "C'est parti !" : 'Sauvegarder'}
             </button>
           </div>
         </div>

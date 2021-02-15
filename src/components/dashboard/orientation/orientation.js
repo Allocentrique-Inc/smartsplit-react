@@ -1,14 +1,24 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Tile from './tile/tile';
 import PenIcon from '../../../icons/pen';
+import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkpieceModal';
 
 const Orientation = (props) => {
   const [tab, setTab] = useState('task');
+  const { workpiece_id } = useParams();
+  const [showModal, setShowModal] = useState(false);
   const commonProps = { ...props };
   if (!props.workpiece) return null;
   return (
     <div className="orientation">
+      {showModal && (
+        <AddOrEditWorkpieceModal
+          {...commonProps}
+          workpieceId={workpiece_id}
+          setShowModal={setShowModal}
+        />
+      )}
       <div className="b1">
         <div className="content">
           <div className="b1">
@@ -27,12 +37,12 @@ const Orientation = (props) => {
               <div className="description">
                 <div className="title">
                   {props.workpiece.title}
-                  <div
-                    className="modify"
-                    style={{ backgroundColor: 'rgba(214, 196, 162, 0.25)' }}
+                  <button
+                    className="btn-icon"
+                    onClick={() => setShowModal(true)}
                   >
                     <PenIcon />
-                  </div>
+                  </button>
                 </div>
                 <div className="details">
                   {'--------- créé par  '}
