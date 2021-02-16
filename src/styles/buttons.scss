@@ -33,9 +33,8 @@
 }
 
 .btn-icon {
-  padding-top: map-get($spacings, 'small');
-  background-color: map-get($colors-background, 'transparent');
+  background-color: inherit;
   border: none;
   cursor: pointer;
-  align-items: center;
+  padding: 0;
 }

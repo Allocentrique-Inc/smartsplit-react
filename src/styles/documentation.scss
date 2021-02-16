@@ -1,4 +1,29 @@
 .documentation {
   .topBar {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    .left {
+      align-items: center;
+      display: flex;
+      .workpieceTitle {
+        @extend .medium-700;
+        margin-left: 16px;
+      }
+      .breadCrumbs {
+        align-items: center;
+        display: flex;
+        .crumb {
+        }
+      }
+    }
+    .right {
+    }
+  }
+  .content {
+    display: flex;
+    > * {
+      flex: 1;
+    }
   }
 }
