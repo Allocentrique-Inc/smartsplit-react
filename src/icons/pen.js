@@ -1,4 +1,3 @@
-import React from 'react';
 import { Colors, Metrics } from '../theme';
 
 export default function Pen({

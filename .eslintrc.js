@@ -19,6 +19,7 @@ module.exports = {
     'react/jsx-curly-newline': 'off',
     'react/implicit-arrow-linebreak': 'off',
     'implicit-arrow-linebreak': 'off',
+    'operator-linebreak': 'off',
     'no-console': 'off',
     'no-tabs': 'off',
     camelcase: 'off',
