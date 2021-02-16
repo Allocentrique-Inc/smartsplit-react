@@ -1,15 +1,21 @@
 import { useState, useEffect } from 'react';
-import { useParams, Route } from 'react-router-dom';
-import TopBar from './topBar/topBar';
+import { useParams, useHistory, Route, Switch } from 'react-router-dom';
 import translations from '../../../translations';
 import Creation from './creation/creation';
 import Performance from './performance/performance';
+import Recording from './recording/recording';
+import Release from './release/release';
+import Files from './files/files';
+import Info from './info/info';
+import Lyrics from './lyrics/lyrics';
+import Streaming from './streaming/streaming';
 import patchDocumentation from '../../../api/workpieces/patchDocumentation';
+import TopBar from '../_/topBar/topBar';
 
 const Documentation = (props) => {
   console.log(props);
   const { workpiece_id } = useParams();
-
+  const history = useHistory();
   const language = 'fr';
   const [creation, setCreation] = useState({
     date: '',
@@ -76,7 +82,6 @@ const Documentation = (props) => {
 
   const mapData = () => {
     if (props.workpiece.documentation) {
-      console.log('DATA TO MAP', props.workpiece.documentation);
       Object.entries(setters).forEach(([field, setter]) => {
         setter(props.workpiece.documentation[field]);
       });
@@ -86,9 +91,6 @@ const Documentation = (props) => {
   useEffect(() => {
     mapData();
   }, [props.workpiece]);
-
-  console.log('FIELDS', { creation });
-
   const saveDocumentation = async () => {
     const payload = {
       creation,
@@ -103,7 +105,12 @@ const Documentation = (props) => {
     };
     console.log('TO PATCH', payload);
     const result = await patchDocumentation(payload);
-    console.log('PATCH DOCUMENTATION', result);
+    console.log('PATCH DOCUMENTATION RESULT', result);
+  };
+
+  const onQuitAction = async () => {
+    await saveDocumentation();
+    history.push(`/workpiece/${workpiece_id}`);
   };
 
   const commonProps = {
@@ -120,12 +127,19 @@ const Documentation = (props) => {
     translations,
     saveDocumentation,
     language,
+    workpiece_id,
+    onQuitAction,
   };
 
   return (
-    <div className="documentation">
-      <TopBar {...commonProps} />
-      <div className="documentationContent">
+    <div className="corridorLayout">
+      <TopBar
+        {...commonProps}
+        crumb1="Documenter mon oeuvre"
+        crumb2="DEV"
+        onQuitAction={onQuitAction}
+      />
+      <Switch>
         <Route path="/workpiece/:workpiece_id/documentation/creation">
           <Creation {...commonProps} />
         </Route>
@@ -133,26 +147,26 @@ const Documentation = (props) => {
           <Performance {...commonProps} />
         </Route>
         <Route path="/workpiece/:workpiece_id/documentation/recording">
-          <div>recording</div>
+          <Recording {...commonProps} />
         </Route>
         <Route path="/workpiece/:workpiece_id/documentation/release">
-          <div>release</div>
+          <Release {...commonProps} />
         </Route>
         <Route path="/workpiece/:workpiece_id/documentation/files">
-          <div>files</div>
+          <Files {...commonProps} />
         </Route>
         <Route path="/workpiece/:workpiece_id/documentation/info">
-          <div>info</div>
+          <Info {...commonProps} />
         </Route>
         <Route path="/workpiece/:workpiece_id/documentation/lyrics">
-          <div>lyrics</div>
+          <Lyrics {...commonProps} />
         </Route>
         <Route path="/workpiece/:workpiece_id/documentation/streaming">
-          <div>streaming</div>
+          <Streaming {...commonProps} />
         </Route>
-      </div>
+      </Switch>
       <Route path="/workpiece/:workpiece_id/documentation/" exact>
-        <div>summary</div>
+        <Creation {...commonProps} />
       </Route>
     </div>
   );

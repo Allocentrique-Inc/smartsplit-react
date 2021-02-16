@@ -1,6 +1,6 @@
 import { useParams, useHistory } from 'react-router-dom';
-import SongPlaceholder from '../../../../icons/songPlaceholder';
-import ChevronRight from '../../../../icons/chevron-right';
+import SongPlaceholder from '../../../../../icons/songPlaceholder';
+import ChevronRight from '../../../../../icons/chevron-right';
 
 export default function TopBar(props) {
   const history = useHistory();
@@ -27,7 +27,13 @@ export default function TopBar(props) {
         </div>
       </div>
       <div className="right">
-        <button className="btn-secondary" onClick={props.saveDocumentation}>
+        <button
+          className="btn-secondary"
+          onClick={async () => {
+            await props.saveDocumentation();
+            history.push(`/workpiece/${workpiece_id}`);
+          }}
+        >
           Sauvegarder et fermer
         </button>
       </div>
