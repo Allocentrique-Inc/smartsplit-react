@@ -1,27 +1,18 @@
 import Dragger from './dragger/dragger';
 
-const style = {
-  collaboratorStyle: {
-    backgroundColor: '#FAF8F9',
-    padding: '16px',
-    marginBottom: '16px',
-    borderRadius: '2px',
-  },
-};
-
 const Collaborator = (props) => (
   <div className="collaborator">
     <div className="b1">
       <div className="rowAC">
         <div className="avatar" />
         <div className="name">
-          {`${props.collaborator.firstName} ${props.collaborator.lastName}`}
+          {`${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`}
         </div>
       </div>
       <div
         className="ellipsis"
         onClick={() => {
-          props.deleteCollaborator(props.el.rightHolder);
+          props.deleteCollaborator(props.collaborator.rightHolder_id);
         }}
       >
         ...
@@ -31,7 +22,7 @@ const Collaborator = (props) => (
 
     <select
       className="selectStatus"
-      value={props.el.function}
+      value={props.collaborator.function}
       onChange={(e) => {
         const arr = [...props.recording];
         arr[props.id].function = e.target.value;
@@ -50,14 +41,18 @@ const Collaborator = (props) => (
     </select>
 
     <Dragger
-      id={props.id}
-      shares={props.el.shares}
+      activeCollaboratorsIds={props.activeCollaboratorsIds}
+      rightHolder_id={props.collaborator.rightHolder_id}
+      shares={props.collaborator.shares}
       setShares={(newShares) => {
-        props.handleDrag({ newShares, id: props.id });
+        props.handleDrag({
+          newShares,
+          draggedRightHolder_id: props.collaborator.rightHolder_id,
+        });
       }}
-      lock={props.el.lock}
+      lock={props.collaborator.lock}
       setLock={(newState) => {
-        const arr = [...props.copyright];
+        const arr = [...props.recording];
         arr[props.id].lock = newState;
         props.setRecording(arr);
       }}

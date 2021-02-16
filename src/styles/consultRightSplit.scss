@@ -47,6 +47,10 @@
         font-size: 12px;
         line-height: 16px;
         color: #687a8b;
+        display: flex;
+        .role {
+          margin-right: 5px;
+        }
       }
       .name {
         font-weight: normal;

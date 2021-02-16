@@ -6,7 +6,8 @@ const Dragger = ({
   setLock,
   lock,
   copyrightDividingMethod,
-  id,
+  activeCollaboratorsIds,
+  rightHolder_id,
 }) => {
   const handleClick = (e) => {
     const newValue = Math.round(
@@ -34,7 +35,8 @@ const Dragger = ({
             className="color"
             style={{
               width: shares ? `${(shares / 100) * 300}px` : '0px',
-              backgroundColor: colors[id],
+              backgroundColor:
+                colors[activeCollaboratorsIds.indexOf(rightHolder_id)],
             }}
           />
         </div>

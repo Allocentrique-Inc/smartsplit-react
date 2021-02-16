@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import postCollaborator from '../../../../../api/users/postCollaborator';
 
 const AddCollaborators = (props) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -42,7 +41,7 @@ const AddCollaborators = (props) => {
                   className="option"
                   key={el.user_id}
                   onClick={async () => {
-                    await props.addCollaborators(el.user_id);
+                    await props.addCollaborators(el);
                     await setIsAdding(false);
                   }}
                 >

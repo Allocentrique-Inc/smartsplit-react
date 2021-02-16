@@ -13,10 +13,7 @@ const postRightSplit = async (payload) => {
   }
 
   arr.forEach((el) => {
-    // eslint-disable-next-line no-param-reassign
-    el.rightHolder = typeof el.rightHolder === 'string'
-      ? el.rightHolder
-      : el.rightHolder.user_id;
+    el.rightHolder = typeof el.rightHolder === 'string' ? el.rightHolder : el.rightHolder_id;
   });
 
   const body = JSON.stringify({
@@ -25,7 +22,7 @@ const postRightSplit = async (payload) => {
     recording,
     privacy,
     copyrightDividingMethod,
-    label: label.rightHolder ? label : undefined,
+    label: label.rightHolder_id ? label : undefined,
   });
   try {
     const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit`;

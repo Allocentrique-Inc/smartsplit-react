@@ -66,6 +66,20 @@ const RightSplit = (props) => {
 
   const language = 'fr';
 
+  let activeCollaborators = [...copyright, ...performance, ...recording];
+  if (label.rightHolder_id) {
+    activeCollaborators.push(label);
+  }
+  activeCollaborators = activeCollaborators.reduce((acc, el) => {
+    if (acc.find((EL) => EL.rightHolder_id === el.rightHolder_id)) {
+      return acc;
+    }
+    return [...acc, el];
+  }, []);
+  const activeCollaboratorsIds = activeCollaborators.map(
+    (el) => el.rightHolder_id,
+  );
+
   const commonProps = {
     ...props,
     copyright,
@@ -86,6 +100,7 @@ const RightSplit = (props) => {
     setLabel,
     translations,
     language,
+    activeCollaboratorsIds,
   };
   return (
     <>

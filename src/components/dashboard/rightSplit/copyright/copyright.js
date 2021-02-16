@@ -17,13 +17,14 @@ const Copyright = (props) => {
   const [isCreatingNewCollaborator, setIsCreatingNewCollaborator] = useState(
     false,
   );
-  const addCollaborators = (user_id) => {
+  const addCollaborators = (newCollaborator) => {
     const calculatedCopyright = recalculateShares({
       newDividingMethod: props.copyrightDividingMethod,
       copyright: [
         ...props.copyright,
         {
-          rightHolder: user_id,
+          rightHolder: newCollaborator,
+          rightHolder_id: newCollaborator.user_id,
           roles: [],
           comment: '',
           shares: 0,
@@ -34,38 +35,45 @@ const Copyright = (props) => {
     props.setCopyright(calculatedCopyright);
   };
 
-  const deleteCollaborator = (rightHolder) => {
-    const arr = [...props.copyright];
-    arr.splice(
-      props.copyright.reduce(
-        (acc, el1, id) => (el1.rightHolder === rightHolder ? id : acc),
-        0,
-      ),
-      1,
+  const deleteCollaborator = (rightHolder_id) => {
+    const newCopyright = props.copyright.filter(
+      (el) => el.rightHolder_id !== rightHolder_id,
     );
     const calculatedCopyright = recalculateShares({
       newDividingMethod: props.copyrightDividingMethod,
-      copyright: arr,
+      copyright: newCopyright,
     });
     props.setCopyright(calculatedCopyright);
   };
 
-  const deleteRole = (role, id) => {
-    const arr = [...props.copyright];
-    arr[id].roles = arr[id].roles.filter((el) => el !== role);
+  const deleteRole = (role, rightHolder_id) => {
+    const modifiedCollaborator = props.copyright.find(
+      (el) => el.rightHolder_id === rightHolder_id,
+    );
+    modifiedCollaborator.roles = modifiedCollaborator.roles.filter(
+      (el) => el !== role,
+    );
+    const newCopyright = props.copyright.map((el) =>
+      (el.rightHolder_id === rightHolder_id ? modifiedCollaborator : el));
+
     const calculatedCopyright = recalculateShares({
       newDividingMethod: props.copyrightDividingMethod,
-      copyright: arr,
+      copyright: newCopyright,
     });
     props.setCopyright(calculatedCopyright);
   };
 
-  const addRole = (role, id) => {
-    const arr = [...props.copyright];
-    arr[id].roles.push(role);
+  const addRole = (role, rightHolder_id) => {
+    const modifiedCollaborator = props.copyright.find(
+      (el) => el.rightHolder_id === rightHolder_id,
+    );
+    modifiedCollaborator.roles.push(role);
+    const newCopyright = props.copyright.map((el) =>
+      (el.rightHolder_id === rightHolder_id ? modifiedCollaborator : el));
+
     const calculatedCopyright = recalculateShares({
       newDividingMethod: props.copyrightDividingMethod,
-      copyright: arr,
+      copyright: newCopyright,
     });
     props.setCopyright(calculatedCopyright);
   };
@@ -144,7 +152,6 @@ const Copyright = (props) => {
   const shouldDisplayCircle = isTotal100;
   return (
     <>
-      {/* CREATE NEW COLLABORATOR */}
       {isCreatingNewCollaborator && <CreateNewCollaborator {...commonProps} />}
       <div className="rightSplitCreation">
         <TopBar {...commonProps} view="copyright" />
@@ -153,24 +160,14 @@ const Copyright = (props) => {
             <div className="b1b1b1">
               <Presentation {...commonProps} />
               <DividingMethod {...commonProps} />
-              {props.copyright.map((el, id) => {
-                // Incomming data is different than PostingData
-                const collaborator = typeof el.rightHolder === 'string'
-                  ? props.collaborators.find(
-                    (EL) => EL.user_id === el.rightHolder,
-                  )
-                  : el.rightHolder;
-                return (
-                  <Collaborator
-                    key={collaborator.user_id}
-                    {...commonProps}
-                    el={el}
-                    id={id}
-                    collaborator={collaborator}
-                  />
-                );
-              })}
-
+              {props.copyright.map((collaborator, id) => (
+                <Collaborator
+                  key={collaborator.rightHolder_id}
+                  {...commonProps}
+                  id={id}
+                  collaborator={collaborator}
+                />
+              ))}
               <AddCollaborators
                 {...commonProps}
                 preSelectedCollaborators={props.copyright}

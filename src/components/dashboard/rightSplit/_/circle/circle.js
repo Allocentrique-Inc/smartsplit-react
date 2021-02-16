@@ -43,7 +43,8 @@ const Canvas = (props) => {
         .filter((el, ID) => ID < id)
         .reduce((acc, el) => el.shares + acc, 0);
       const end = start + el.shares;
-      drawPie(context, start, end, colors[id], props.consult);
+      const color = colors[props.activeCollaboratorsIds.indexOf(el.rightHolder_id)];
+      drawPie(context, start, end, color, props.consult);
     });
     if (props.collaborators.length !== 0) {
       drawHollow(context, props.consult ? 72 : 92, '#FFFFFF', props.consult);

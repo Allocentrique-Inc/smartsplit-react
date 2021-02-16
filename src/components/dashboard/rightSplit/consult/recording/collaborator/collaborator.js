@@ -1,13 +1,8 @@
 // import Vote from '../vote/vote';
 
 const Collaborator = (props) => {
-  const {
-    firstName,
-    lastName,
-    shares,
-    vote,
-    function: _function,
-  } = props.collaborator;
+  const { shares, vote, function: _function, rightHolder } = props.collaborator;
+  const { firstName, lastName } = rightHolder;
   const handleAccept = () => props.setRecording('accepted');
   const handleReject = () => props.setRecording('rejected');
   const user_id = localStorage.getItem('user_id');

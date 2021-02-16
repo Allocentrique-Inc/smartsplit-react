@@ -13,11 +13,12 @@ const Performance = (props) => {
   const [isCreatingNewCollaborator, setIsCreatingNewCollaborator] = useState(
     false,
   );
-  const addCollaborators = (user_id) => {
+  const addCollaborators = (newCollaborator) => {
     props.setPerformance([
       ...props.performance,
       {
-        rightHolder: user_id,
+        rightHolder: newCollaborator,
+        rightHolder_id: newCollaborator.user_id,
         roles: [],
         comment: '',
         status: '',
@@ -46,15 +47,16 @@ const Performance = (props) => {
 
   // SHARES CALCULATION
   const mainActorsTotal = props.performance.reduce(
-    (acc, el) => (el.status === 'principal' || el.status === 'featured' ? acc + 1 : acc),
+    (acc, el) =>
+      (el.status === 'principal' || el.status === 'featured' ? acc + 1 : acc),
     0,
   );
-  const restTotal = props.performance.length - mainActorsTotal;
+  const remainingActorsTotal = props.performance.length - mainActorsTotal;
   props.performance.forEach((el, id, arr) => {
     if (el.status === 'principal' || el.status === 'featured') {
-      el.shares = 80 / mainActorsTotal;
+      el.shares = (remainingActorsTotal > 0 ? 80 : 100) / mainActorsTotal;
     } else {
-      el.shares = 20 / restTotal;
+      el.shares = (mainActorsTotal > 0 ? 20 : 100) / remainingActorsTotal;
     }
   });
 
@@ -91,7 +93,7 @@ const Performance = (props) => {
             </div>
             <div className="b1b1b2">
               <div className="b1b1b1b2">
-                <Circle collaborators={props.performance} />
+                <Circle {...commonProps} collaborators={props.performance} />
               </div>
             </div>
           </div>

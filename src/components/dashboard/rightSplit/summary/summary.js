@@ -4,7 +4,7 @@ import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
 import Consult from '../consult/consult';
 
 const Summary = (props) => {
-  const [isConsulting, setIsConsulting] = useState(false);
+  const [consulting, setConsulting] = useState(null);
   if (
     !props.workpiece.rightSplit
     || !props.workpiece.rightSplit._state
@@ -13,10 +13,6 @@ const Summary = (props) => {
     return null;
   }
   const user_id = localStorage.getItem('user_id');
-
-  const handleConsultBtn = () => {
-    setIsConsulting((e) => !e);
-  };
 
   const handleSubmitRightSplit = async (e) => {
     e.stopPropagation();
@@ -34,25 +30,34 @@ const Summary = (props) => {
 
   const commonProps = {
     handleSubmitRightSplit,
-    handleConsultBtn,
+    setConsulting,
     hasToVote,
   };
   return (
     <>
       {/* CONSULT */}
-      {isConsulting && (
+      {consulting && (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-        <div className="modalBackground" onClick={handleConsultBtn}>
+        <div className="modalBackground" onClick={() => setConsulting(null)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <div className="topBar">Top Bar</div>
-            <div style={{ overflowY: 'auto' }}>
+            <div className="topBar">
+              <div className="title">Version 1</div>
+              <button className="exit" onClick={() => setConsulting(null)}>
+                x
+              </button>
+            </div>
+            <div className="content postSaveConsult">
               <Consult
                 {...props}
-                voting={hasToVote}
-                modifiable={props.workpiece.rightSplit._state === 'draft'}
+                voting={false}
+                modifiable={consulting._state === 'draft'}
               />
             </div>
-            <div className="downBar">Down Bar</div>
+            <div className="downBar">
+              {/* <button className="btn-primary" onClick={() => {}}>
+                Envoyer aux collaborateurs
+              </button> */}
+            </div>
           </div>
         </div>
       )}
@@ -124,7 +129,10 @@ const Summary = (props) => {
 export default Summary;
 
 const DraftRightSplit = (props) => (
-  <div className="rightSplit" onClick={props.handleConsultBtn}>
+  <div
+    className="rightSplit"
+    onClick={() => props.setConsulting(props.workpiece.rightSplit)}
+  >
     <div className="title">Version X</div>
     <div className="details">
       Créé par
@@ -135,7 +143,6 @@ const DraftRightSplit = (props) => (
     </div>
     <div className="b1">
       <div className="collaborators" />
-      <div className="status">Accepté</div>
     </div>
     <div className="border" />
     <button onClick={props.handleSubmitRightSplit}>Send to collab</button>
@@ -143,7 +150,10 @@ const DraftRightSplit = (props) => (
 );
 
 const AcceptedRightSplit = (props) => (
-  <div className="rightSplit" onClick={props.handleConsultBtn}>
+  <div
+    className="rightSplit"
+    onClick={() => props.setConsulting(props.workpiece.rightSplit)}
+  >
     <div className="title">Version X</div>
     <div className="details">
       Créé par
@@ -167,7 +177,10 @@ const AcceptedRightSplit = (props) => (
 );
 
 const InVoteRightSplit = (props) => (
-  <div className="rightSplit" onClick={props.handleConsultBtn}>
+  <div
+    className="rightSplit"
+    onClick={() => props.setConsulting(props.workpiece.rightSplit)}
+  >
     <div className="title">Version X</div>
     <div className="details">
       Créé par
@@ -178,17 +191,15 @@ const InVoteRightSplit = (props) => (
     </div>
     <div className="b1">
       <div className="collaborators" />
-      {/* <div className="status">Accepté</div>  */}
     </div>
-    {/* <div className="border"/>  */}
-    {/* <button onClick={props.handleConsultBtn}>
-        Téléchargé l'entente
-      </button>  */}
   </div>
 );
 
 const RejectedRightSplit = (props) => (
-  <div className="rightSplit" onClick={props.handleConsultBtn}>
+  <div
+    className="rightSplit"
+    onClick={() => props.setConsulting(props.workpiece.rightSplit)}
+  >
     <div className="title">Version X</div>
     <div className="details">
       Créé par
@@ -201,9 +212,5 @@ const RejectedRightSplit = (props) => (
       <div className="collaborators" />
       <div className="status rejectedStatus">Refusé</div>
     </div>
-    {/* <div className="border" />
-      <button onClick={props.handleConsultBtn}>
-        Téléchargé l'entente
-      </button> */}
   </div>
 );

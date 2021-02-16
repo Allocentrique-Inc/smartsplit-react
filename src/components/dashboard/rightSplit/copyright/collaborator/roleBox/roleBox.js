@@ -1,15 +1,13 @@
 const RoleBox = (props) => {
-  const isPresent = props.copyright[props.id].roles.some(
-    (EL) => props.role === EL,
-  );
+  const isPresent = props.collaborator.roles.some((EL) => props.role === EL);
   return (
     <div
       className="checkBoxRow"
       onClick={() => {
         if (isPresent) {
-          props.deleteRole(props.role, props.id);
+          props.deleteRole(props.role, props.collaborator.rightHolder_id);
         } else {
-          props.addRole(props.role, props.id);
+          props.addRole(props.role, props.collaborator.rightHolder_id);
         }
       }}
     >

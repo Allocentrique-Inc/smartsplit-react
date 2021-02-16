@@ -12,6 +12,29 @@ const getWorkpiece = async (payload) => {
     });
     const textResponse = await response.text();
     const parsedResponse = JSON.parse(textResponse);
+
+    // DATA MAPPING
+    if (parsedResponse.rightSplit) {
+      if (parsedResponse.rightSplit.copyright) {
+        parsedResponse.rightSplit.copyright.forEach((el) => {
+          el.rightHolder_id = el.rightHolder.user_id;
+        });
+      }
+      if (parsedResponse.rightSplit.performance) {
+        parsedResponse.rightSplit.performance.forEach((el) => {
+          el.rightHolder_id = el.rightHolder.user_id;
+        });
+      }
+      if (parsedResponse.rightSplit.recording) {
+        parsedResponse.rightSplit.recording.forEach((el) => {
+          el.rightHolder_id = el.rightHolder.user_id;
+        });
+      }
+      if (parsedResponse.rightSplit.label) {
+        parsedResponse.rightSplit.label.rightHolder_id = parsedResponse.rightSplit.label.rightHolder.user_id;
+      }
+    }
+
     console.log(parsedResponse);
     return parsedResponse;
   } catch (err) {

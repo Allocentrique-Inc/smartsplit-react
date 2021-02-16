@@ -15,7 +15,7 @@ const Collaborator = (props) => {
             <div className="name">{`${firstName} ${lastName}`}</div>
             <div className="roles">
               {roles.map((el) => (
-                <div>{`${el} `}</div>
+                <div className="role">{`${el} `}</div>
               ))}
             </div>
           </div>

@@ -2,9 +2,13 @@ import Dragger from './dragger/dragger';
 import NotificationBox from './notificationBox/notificationBox';
 
 const Collaborator = (props) => {
-  const collaborator = typeof props.el.rightHolder === 'string'
+  let collaborator = typeof props.el.rightHolder === 'string'
     ? props.collaborators.find((EL) => EL.user_id === props.el.rightHolder)
     : props.el.rightHolder;
+  collaborator = {
+    ...collaborator,
+    ...props.el,
+  };
   return (
     <div className="collaborator">
       <div className="b1">
@@ -68,17 +72,21 @@ const Collaborator = (props) => {
           }}
         />
       </div>
-      {/* <Dragger
-        id={props.id}
-        shares={props.el.shares}
+      <Dragger
+        activeCollaboratorsIds={props.activeCollaboratorsIds}
+        rightHolder_id={props.label.rightHolder_id}
+        shares={collaborator.shares}
         setShares={(newShares) => {
-          props.handleDrag({ newShares, id: props.id });
+          props.handleDrag({
+            newShares,
+            draggedRightHolder_id: collaborator.user_id,
+          });
         }}
-        lock={props.el.lock}
+        lock={collaborator.lock}
         setLock={(newState) => {
           props.setLabel({ ...props.label, lock: newState });
         }}
-      /> */}
+      />
     </div>
   );
 };

@@ -10,7 +10,7 @@ const Copyright = (props) => {
     <div className="consultRightSplitSection">
       <div className="titleRow">
         <div className="title">Copyright</div>
-        {!props.voting && (
+        {!props.voting && props.modifiable && (
           <button className="btn-secondary" onClick={handleButton}>
             modifier
           </button>

@@ -7,7 +7,7 @@ const Collaborator = (props) => (
       <div className="rowAC">
         <div className="avatar" />
         <div className="name">
-          {`${props.collaborator.firstName} ${props.collaborator.lastName}`}
+          {`${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`}
         </div>
       </div>
       <div
@@ -23,7 +23,7 @@ const Collaborator = (props) => (
 
     <select
       className="selectStatus"
-      value={props.el.status}
+      value={props.collaborator.status}
       onChange={(e) => {
         const arr = [...props.performance];
         arr[props.id].status = e.target.value;
@@ -53,16 +53,12 @@ const Collaborator = (props) => (
     </div>
 
     <Dragger
-      id={props.id}
+      activeCollaboratorsIds={props.activeCollaboratorsIds}
+      rightHolder_id={props.collaborator.rightHolder_id}
       dividingMethod={props.dividingMethod}
-      shares={props.el.shares}
-      setShares={(newShares) => {
-        // const arr = [...props.performance]
-        // arr[id].shares = newShares
-        // props.setperformance(arr)
-        // props.handleDrag({ newShares, id: props.id })
-      }}
-      lock={props.el.lock}
+      shares={props.collaborator.shares}
+      setShares={() => {}}
+      lock={props.collaborator.lock}
       setLock={(newState) => {
         const arr = [...props.performance];
         arr[props.id].lock = newState;
