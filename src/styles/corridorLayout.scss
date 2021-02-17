@@ -1,0 +1,85 @@
+.corridorLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .topBar {
+    padding: 16px;
+    border-bottom: 2px solid #dcdfe1;
+    box-shadow: 0px -2px 4px 4px #dcdfe1;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    .bx {
+      display: flex;
+      align-items: center;
+      .title {
+        margin-left: 16px;
+        margin-right: 32px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #203548;
+      }
+      .breadCrumb {
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        .p1 {
+          margin-right: 10px;
+          margin-left: 10px;
+        }
+        .p2 {
+          margin-right: 10px;
+          margin-left: 10px;
+        }
+      }
+      .credit {
+        background-color: rgba(214, 196, 162, 0.15);
+        height: 40px;
+        width: 40px;
+      }
+      .saveAndQuit {
+        margin-right: 16px;
+        margin-left: 16px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        color: #2da84f;
+        cursor: pointer;
+      }
+      .profile {
+        background-color: rgba(214, 196, 162, 0.15);
+        height: 40px;
+        width: 40px;
+        margin-left: 32px;
+      }
+    }
+  }
+  main {
+    flex: 1;
+  }
+  .downBar {
+    background-color: white;
+    padding: 16px;
+    border-bottom: 2px solid map-get($colors, 'stroke');
+    box-shadow: 0px -2px 4px 4px map-get($colors, 'stroke');
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    .b1b1 {
+      width: 944px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .b1b1b1 {
+      width: 464px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

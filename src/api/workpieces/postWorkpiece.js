@@ -1,6 +1,10 @@
 const postWorkpiece = async (payload) => {
-  const { title } = payload;
-  const body = JSON.stringify({ title });
+  console.log('PAYTIME MOTHERFUCKER', payload);
+  const body = new FormData();
+  body.append('title', payload.title);
+  body.append('type', payload.type);
+  body.append('file', payload.file);
+  console.log('POSTINNN WITH SAM WORKPIECE DATTA YO', body);
   try {
     const url = 'http://localhost:3001/v1/workpieces/';
     const method = 'POST';
@@ -9,7 +13,6 @@ const postWorkpiece = async (payload) => {
       method,
       body,
       headers: {
-        'content-type': 'application/json',
         Authorization: bearer,
       },
     });
