@@ -6,27 +6,17 @@ export default function Recording(props) {
       <main>
         <div className="left">
           <form>
-            <div className="formInput toDo">
-              <label htmlFor="peformers">Performers ?</label>
-              <input
-                type="string"
-                id="performers"
-                value={props.performance.performers}
-                onChange={(e) =>
-                  props.setField('performance', { performers: e.target.value })
-                }
-              />
+            <div className="formSection toDo">
+              <h3>Enregistrement</h3>
             </div>
-            <div className="formInput toDo">
-              <label htmlFor="conductor">Conductor ?</label>
-              <input
-                type="string"
-                id="conductor"
-                value={props.performance.conductor}
-                onChange={(e) =>
-                  props.setField('performance', { conductor: e.target.value })
-                }
-              />
+            <div className="formSection toDo">
+              <h3>Mixage</h3>
+            </div>
+            <div className="formSection toDo">
+              <h3>Mastering</h3>
+            </div>
+            <div className="formSection toDo">
+              <h3>Production</h3>
             </div>
           </form>
         </div>

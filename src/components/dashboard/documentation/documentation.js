@@ -13,7 +13,7 @@ import patchDocumentation from '../../../api/workpieces/patchDocumentation';
 import TopBar from '../_/topBar/topBar';
 
 const Documentation = (props) => {
-  console.log(props);
+  // console.log(props);
   const { workpiece_id } = useParams();
   const history = useHistory();
   const language = 'fr';
@@ -77,7 +77,11 @@ const Documentation = (props) => {
     streaming: setStreaming,
   };
   const setField = (type, field) => {
-    setters[type]((prevState) => ({ ...prevState, ...field }));
+    // console.log('SETTING FIELD', type, field);
+    setters[type]((prevState) => {
+      console.log('prevstate', prevState);
+      return { ...prevState, ...field };
+    });
   };
 
   const mapData = () => {

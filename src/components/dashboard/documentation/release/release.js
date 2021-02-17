@@ -7,24 +7,68 @@ export default function Release(props) {
         <div className="left">
           <form>
             <div className="formInput toDo">
-              <label htmlFor="peformers">Performers ?</label>
+              <label htmlFor="date">Date de sortie</label>
               <input
-                type="string"
-                id="performers"
-                value={props.performance.performers}
+                type="date"
+                id="date"
+                value={props.release.date}
                 onChange={(e) =>
-                  props.setField('performance', { performers: e.target.value })
+                  props.setField('release', { date: e.target.value })
                 }
               />
             </div>
             <div className="formInput toDo">
-              <label htmlFor="conductor">Conductor ?</label>
+              <label htmlFor="label">Label</label>
               <input
                 type="string"
-                id="conductor"
-                value={props.performance.conductor}
+                id="label"
+                value={props.release.label}
                 onChange={(e) =>
-                  props.setField('performance', { conductor: e.target.value })
+                  props.setField('release', { label: e.target.value })
+                }
+              />
+            </div>
+            <div className="formInput toDo">
+              <label htmlFor="format">Format du produit</label>
+              <input
+                type="string"
+                id="format"
+                value={props.release.format}
+                onChange={(e) =>
+                  props.setField('release', { format: e.target.value })
+                }
+              />
+            </div>
+            <div className="formInput toDo">
+              <label htmlFor="support">Support</label>
+              <input
+                type="string"
+                id="support"
+                value={props.release.support}
+                onChange={(e) =>
+                  props.setField('release', { support: e.target.value })
+                }
+              />
+            </div>
+            <div className="formInput toDo">
+              <label htmlFor="distributor">Distribution</label>
+              <input
+                type="string"
+                id="distributor"
+                value={props.release.distributor}
+                onChange={(e) =>
+                  props.setField('release', { distributor: e.target.value })
+                }
+              />
+            </div>
+            <div className="formInput toDo">
+              <label htmlFor="upc">Code UPC/EAN</label>
+              <input
+                type="string"
+                id="upc"
+                value={props.release.upc}
+                onChange={(e) =>
+                  props.setField('release', { upc: e.target.value })
                 }
               />
             </div>

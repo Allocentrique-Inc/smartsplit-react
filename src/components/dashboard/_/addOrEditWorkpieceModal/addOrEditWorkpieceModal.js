@@ -13,13 +13,16 @@ export default function WorkpieceModal({
     primary: '',
     secondary: '',
   });
+  const [file, setFile] = useState({
+    data: '',
+    version: '',
+  });
   const isAdding = workpiece_id === null;
-  const [file, setFile] = useState('');
   const [composer, setComposer] = useState('');
   const handleConfirm = async () => {
     const result = isAdding
-      ? await postWorkpiece({ title })
-      : await patchWorkpiece({ workpiece_id, title });
+      ? await postWorkpiece({ title, type, file })
+      : await patchWorkpiece({ workpiece_id, title, type, file });
     console.log(result);
     setShowModal(false);
     resetData();
@@ -124,16 +127,29 @@ export default function WorkpieceModal({
                 <input
                   type="file"
                   className="btn-primary filePicker"
-                  value={file}
-                  onChange={(e) => setFile(e.target.value)}
+                  onChange={(e) =>
+                    setFile((prevState) => ({
+                      ...prevState,
+                      data: e.target.files[0],
+                    }))
+                  }
                 />
                 <div className="hint">
                   Format WAV ou MP3 seulement. 100 Mo maximum.
                 </div>
               </div>
-              <div className="formInput toDo">
+              <div className="formInput">
                 <label>Version de travail</label>
-                <input type="number" />
+                <input
+                  type="text"
+                  value={file.version}
+                  onChange={(e) =>
+                    setFile((prevState) => ({
+                      ...prevState,
+                      version: e.target.value,
+                    }))
+                  }
+                />
               </div>
             </div>
             <div className="formInput toDo">
