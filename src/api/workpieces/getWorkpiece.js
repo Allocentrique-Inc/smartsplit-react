@@ -1,6 +1,6 @@
 const getWorkpiece = async (payload) => {
   try {
-    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}`;
+    const url = `http://159.203.15.16:3001/v1/workpieces/${payload.workpiece_id}`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
@@ -31,7 +31,8 @@ const getWorkpiece = async (payload) => {
         });
       }
       if (parsedResponse.rightSplit.label) {
-        parsedResponse.rightSplit.label.rightHolder_id = parsedResponse.rightSplit.label.rightHolder.user_id;
+        parsedResponse.rightSplit.label.rightHolder_id =
+          parsedResponse.rightSplit.label.rightHolder.user_id;
       }
     }
 

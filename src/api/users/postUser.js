@@ -5,7 +5,7 @@ const postUser = async (payload) => {
     password,
   });
   try {
-    const url = 'http://localhost:3001/v1/users/';
+    const url = 'http://159.203.15.16:3001/v1/users/';
     const method = 'POST';
     const response = await fetch(url, {
       method,

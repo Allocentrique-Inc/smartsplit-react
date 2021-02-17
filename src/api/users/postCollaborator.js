@@ -1,12 +1,13 @@
 const postCollaborator = async (payload) => {
-  const {
-    email, firstName, lastName, artistName, user_id,
-  } = payload;
+  const { email, firstName, lastName, artistName, user_id } = payload;
   const body = JSON.stringify({
-    email, firstName, lastName, artistName,
+    email,
+    firstName,
+    lastName,
+    artistName,
   });
   try {
-    const url = `http://localhost:3001/v1/users/${user_id}/collaborators/`;
+    const url = `http://159.203.15.16:3001/v1/users/${user_id}/collaborators/`;
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

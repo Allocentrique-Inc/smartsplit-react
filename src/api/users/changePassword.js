@@ -6,7 +6,7 @@ const changePassword = async (payload) => {
     currentPassword,
   });
   try {
-    const url = 'http://localhost:3001/v1/users/change-password';
+    const url = 'http://159.203.15.16:3001/v1/users/change-password';
     const method = 'POST';
     const response = await fetch(url, {
       method,

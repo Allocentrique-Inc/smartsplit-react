@@ -6,7 +6,7 @@ const postWorkpiece = async (payload) => {
   body.append('file', payload.file);
   console.log('POSTINNN WITH SAM WORKPIECE DATTA YO', body);
   try {
-    const url = 'http://localhost:3001/v1/workpieces/';
+    const url = 'http://159.203.15.16:3001/v1/workpieces/';
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
