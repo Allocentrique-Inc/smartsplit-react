@@ -105,18 +105,20 @@ const Copyright = (props) => {
           (acc, el) => el.shares + acc,
           0,
         );
-        const sharesToSeparate = unlockedSharesSum + draggedDifferential + 100 - totalSum;
+        const sharesToSeparate =
+          unlockedSharesSum + draggedDifferential + 100 - totalSum;
         const arr = [...props.copyright].map((EL, ID) => {
           if (id === ID) {
             EL.shares = ceil(
               sharesToSeparate < 0 ? newShares + sharesToSeparate : newShares,
             );
           } else if (EL.lock !== true) {
-            EL.shares = EL.shares === 0
-              ? 0
-              : sharesToSeparate < 0
+            EL.shares =
+              EL.shares === 0
                 ? 0
-                : ceil((EL.shares / unlockedSharesSum) * sharesToSeparate);
+                : sharesToSeparate < 0
+                  ? 0
+                  : ceil((EL.shares / unlockedSharesSum) * sharesToSeparate);
           }
           return EL;
         });
@@ -126,8 +128,10 @@ const Copyright = (props) => {
   };
 
   const title = props.translations.rightSplit.title._copyright[props.language];
-  const textPresentation = props.translations.rightSplit.textPresentation._copyright[props.language];
-  const textDescription = props.translations.rightSplit.textDescription._copyright[props.language];
+  const textPresentation =
+    props.translations.rightSplit.textPresentation._copyright[props.language];
+  const textDescription =
+    props.translations.rightSplit.textDescription._copyright[props.language];
 
   const commonProps = {
     ...props,
@@ -158,7 +162,7 @@ const Copyright = (props) => {
         <div className="b1">
           <div className="b1b1">
             <div className="b1b1b1">
-              <Presentation {...commonProps} />
+              <Presentation {...commonProps} view="copyright" />
               <DividingMethod {...commonProps} />
               {props.copyright.map((collaborator, id) => (
                 <Collaborator

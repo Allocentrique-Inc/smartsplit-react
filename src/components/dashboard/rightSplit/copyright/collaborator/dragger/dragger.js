@@ -1,4 +1,7 @@
 import colors from '../../../_/colors';
+import Lock from '../../../../../../icons/lock';
+import Unlock from '../../../../../../icons/unlock';
+import HelpCircleFull from '../../../../../../icons/helpCircleFull';
 
 const Dragger = ({
   shares,
@@ -11,7 +14,7 @@ const Dragger = ({
 }) => {
   const handleClick = (e) => {
     const newValue = Math.round(
-      (e.clientX - e.target.getBoundingClientRect().x) / 3,
+      (e.clientX - e.target.getBoundingClientRect().x) / 3.28,
     );
     setShares(newValue);
   };
@@ -25,7 +28,7 @@ const Dragger = ({
             className={lock ? 'locked' : 'unlocked'}
             onClick={handleLockBtn}
           >
-            {lock ? 'L' : 'U'}
+            {lock ? <Lock /> : <Unlock />}
           </button>
         )}
       </div>
@@ -34,11 +37,12 @@ const Dragger = ({
           <div
             className="color"
             style={{
-              width: shares ? `${(shares / 100) * 300}px` : '0px',
+              width: shares ? `${(shares / 100) * 328}px` : '0px',
               backgroundColor:
                 colors[activeCollaboratorsIds.indexOf(rightHolder_id)],
             }}
           />
+          {isManual && <div className="whiteBall" />}
         </div>
       </div>
       <div className="shares">

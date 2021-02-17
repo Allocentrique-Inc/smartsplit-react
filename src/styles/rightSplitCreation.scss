@@ -60,12 +60,26 @@
         color: #2da84f;
         cursor: pointer;
       }
-      .profile {
-        background-color: rgba(214, 196, 162, 0.15);
-        height: 40px;
-        width: 40px;
-        margin-right: 16px;
+      .avatar {
+        background-color: rgba(131, 127, 119, 0.25);
+        height: 24px;
+        width: 24px;
+        border-radius: 24px;
+        margin-right: 4px;
         margin-left: 16px;
+        color: black;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        letter-spacing: 0.75px;
+      }
+      .chevronDown {
+        margin-right: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
@@ -87,7 +101,6 @@
             margin-bottom: 32px;
             margin-top: 72px;
             .logo {
-              background-color: #2da84f;
               width: 22px;
               height: 22px;
               margin-right: 17px;
@@ -153,7 +166,6 @@
         margin: 9px;
         height: 22px;
         width: 22px;
-        background-color: rgba(214, 196, 162, 0.15);
         cursor: pointer;
       }
       .input {
@@ -166,7 +178,6 @@
         margin: 9px;
         height: 22px;
         width: 22px;
-        background-color: rgba(214, 196, 162, 0.15);
       }
     }
     .optionList {
@@ -186,7 +197,15 @@
           margin: 8px;
           height: 24px;
           width: 24px;
-          background-color: rgba(214, 196, 162, 0.15);
+          background-color: rgba(131, 127, 119, 0.25);
+          border-radius: 24px;
+          color: black;
+          font-size: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          letter-spacing: 0.75px;
         }
         &:hover {
           background-color: rgba(214, 196, 162, 0.15);
@@ -241,6 +260,14 @@
       width: 24px;
       height: 24px;
       background-color: rgba(214, 196, 162, 0.15);
+      border-radius: 24px;
+      color: black;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      letter-spacing: 0.75px;
     }
     .name {
       margin-left: 16px;
@@ -250,10 +277,19 @@
       color: #203548;
     }
     .ellipsis {
-      background-color: rgba(214, 196, 162, 0.15);
-      margin-top: -18px;
-      font-weight: 1000;
-      color: #c4c4c4;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      button {
+        background-color: white;
+        position: absolute;
+        margin-top: 80px;
+        margin-left: -130px;
+        border: none;
+        width: 160px;
+        height: 60px;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+      }
     }
     .space {
       margin-left: 40px;
@@ -280,7 +316,27 @@
         width: 188px;
         display: flex;
         align-items: center;
-        cursor: pointer;
+        .checkBox {
+          background-color: white;
+          width: 18px;
+          height: 18px;
+          border: 1px solid #dcdfe1;
+          box-sizing: border-box;
+          border-radius: 2px;
+          outline: 0;
+          cursor: pointer;
+          .isChecked {
+            background-color: #2da84f;
+            height: 18px;
+            width: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: 0;
+            margin: -1px;
+            border-radius: 2px;
+          }
+        }
         label {
           font-weight: normal;
           font-size: 12px;
@@ -307,17 +363,17 @@
           width: 18px;
           font-size: 10px;
           padding: 0px;
-          border: 1px solid red;
-          background-color: rgba(214, 196, 162, 0.15);
           cursor: pointer;
+          border: none;
+          background-color: inherit;
         }
         .unlocked {
           width: 18px;
           font-size: 10px;
           padding: 0px;
-          border: 1px solid black;
-          background-color: rgba(214, 196, 162, 0.15);
           cursor: pointer;
+          border: none;
+          background-color: inherit;
         }
       }
       .buttonBar {
@@ -326,9 +382,8 @@
         height: 40px;
         align-items: center;
         cursor: pointer;
-        margin-right: 20px;
         .bar {
-          width: 300px;
+          width: 328px;
           border-radius: 4px;
           height: 8px;
           border: 1px solid #dcdfe1;
@@ -337,6 +392,17 @@
           .color {
             height: 6px;
             border-radius: 4px 0px 0px 4px;
+          }
+          .whiteBall {
+            background: #ffffff;
+            border: 1px solid #dcdfe1;
+            box-sizing: border-box;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+            height: 16px;
+            width: 16px;
+            border-radius: 16px;
+            margin-left: -8px;
+            pointer-events: none;
           }
         }
       }

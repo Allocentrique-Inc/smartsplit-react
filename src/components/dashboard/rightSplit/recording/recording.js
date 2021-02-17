@@ -69,20 +69,22 @@ const Recording = (props) => {
         0,
       );
       const totalSum = allActors.reduce((acc, el) => el.shares + acc, 0);
-      const sharesToSeparate = unlockedNotDraggedActorsSum + draggedDifferential + 100 - totalSum;
+      const sharesToSeparate =
+        unlockedNotDraggedActorsSum + draggedDifferential + 100 - totalSum;
       const redefinedActors = allActors.map((el) => {
         if (el.rightHolder_id === draggedRightHolder_id) {
           el.shares = ceil(
             sharesToSeparate < 0 ? newShares + sharesToSeparate : newShares,
           );
         } else if (el.lock !== true) {
-          el.shares = el.shares === 0
-            ? 0
-            : sharesToSeparate < 0
+          el.shares =
+            el.shares === 0
               ? 0
-              : ceil(
-                (el.shares / unlockedNotDraggedActorsSum) * sharesToSeparate,
-              );
+              : sharesToSeparate < 0
+                ? 0
+                : ceil(
+                  (el.shares / unlockedNotDraggedActorsSum) * sharesToSeparate,
+                );
         }
         return el;
       });
@@ -100,8 +102,10 @@ const Recording = (props) => {
   };
 
   const title = props.translations.rightSplit.title._recording[props.language];
-  const textPresentation = props.translations.rightSplit.textPresentation._recording[props.language];
-  const textDescription = props.translations.rightSplit.textDescription._recording[props.language];
+  const textPresentation =
+    props.translations.rightSplit.textPresentation._recording[props.language];
+  const textDescription =
+    props.translations.rightSplit.textDescription._recording[props.language];
 
   const commonProps = {
     ...props,
@@ -141,7 +145,7 @@ const Recording = (props) => {
             <AddCollaborators
               {...props}
               {...commonProps}
-              preSelectedCollaborators={props.recording}
+              preSelectedCollaborators={allActors}
             />
           </div>
           <div className="b1b1b2">

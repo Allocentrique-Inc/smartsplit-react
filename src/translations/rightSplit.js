@@ -7,7 +7,7 @@ export default {
       _recording: { fr: 'Enregistrement sonore', en: 'Recording' },
       _privacy: { fr: 'Confidentialité', en: 'Privacy' },
     },
-    saveAndQuit: { fr: 'Sauvegarder et quitter', en: 'Save And Quit' },
+    _saveAndQuit: { fr: 'Sauvegarder et fermer', en: 'Save And Quit' },
   },
 
   title: {
@@ -30,7 +30,7 @@ export default {
   textDescription: {
     _copyright: {
       fr:
-        'Sépare ici les droits d’auteur entre les créateurs, c’est à dire les auteurs des paroles, les compositeurs et les arrangeurs de la musique. Il est d’usage de partager le droit d’auteur équitablement. Mais tu peux faire autrement.',
+        'Sépare ici les droits d’auteur entre les créateurs, c’est à dire les auteurs des <b>paroles</b>, les compositeurs et les arrangeurs de la <b>musique</b>. Il est d’usage de partager le droit d’auteur équitablement. Mais tu peux faire autrement.',
       en: 'COPYRIGHT',
     },
     _performance: {
@@ -63,6 +63,30 @@ export default {
       fr: 'Gérer manuellement',
       en: 'COPYRIGHT',
     },
+  },
+
+  copyrightRoles: {
+    _autor: {
+      fr: 'Auteur',
+      en: 'COPYRIGHT',
+    },
+    _composer: {
+      fr: 'Compositeur',
+      en: 'COPYRIGHT',
+    },
+    _adaptator: {
+      fr: 'Adaptateur',
+      en: 'COPYRIGHT',
+    },
+    _mixer: {
+      fr: 'Arrangeur',
+      en: 'COPYRIGHT',
+    },
+  },
+
+  _removeCollaborator: {
+    fr: 'Retirer ce partage',
+    en: 'COPYRIGHT',
   },
 
   // copyright: {

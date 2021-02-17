@@ -1,12 +1,16 @@
 import { useState } from 'react';
+import ChevronDown from '../../../../../icons/chevronDown';
+import PlusCircleFull from '../../../../../icons/plusCircleFull';
+import PlusCircle from '../../../../../icons/plusCircle';
 
 const AddCollaborators = (props) => {
   const [isAdding, setIsAdding] = useState(false);
   const user_id = localStorage.getItem('user_id');
+  console.log(props.collaborators);
   const availablesCollaborators = props.collaborators.filter(
     (el) =>
       !props.preSelectedCollaborators.some(
-        (EL) => EL.rightHolder === el.user_id,
+        (EL) => EL.rightHolder_id === el.user_id,
       ),
   );
   return (
@@ -17,9 +21,13 @@ const AddCollaborators = (props) => {
       }}
     >
       <div className="addButton">
-        <div className="plusIcon" />
+        <div className="plusIcon">
+          <PlusCircleFull />
+        </div>
         <div className="input">Ajouter un collaborateur...</div>
-        <div className="arrowDown" />
+        <div className="arrowDown">
+          <ChevronDown />
+        </div>
       </div>
 
       {isAdding && (
@@ -45,7 +53,10 @@ const AddCollaborators = (props) => {
                     await setIsAdding(false);
                   }}
                 >
-                  <div className="avatar" />
+                  <div className="avatar">
+                    {firstName[0]}
+                    {lastName[0]}
+                  </div>
                   <span className="firstInstance">{firstInstance}</span>
                   <span className="secondInstance">{secondInstance}</span>
                 </div>
@@ -58,7 +69,9 @@ const AddCollaborators = (props) => {
               props.setIsCreatingNewCollaborator(true);
             }}
           >
-            <div className="avatar" />
+            <div className="avatar">
+              <PlusCircle />
+            </div>
             Créer un nouveau collaborateur
           </div>
         </div>
