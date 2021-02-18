@@ -1,10 +1,9 @@
 const postWorkpiece = async (payload) => {
-  console.log('PAYTIME MOTHERFUCKER', payload);
   const body = new FormData();
   body.append('title', payload.title);
   body.append('type', payload.type);
   body.append('file', payload.file);
-  console.log('POSTINNN WITH SAM WORKPIECE DATTA YO', body);
+
   try {
     const url = 'http://159.203.15.16:3001/v1/workpieces/';
     const method = 'POST';

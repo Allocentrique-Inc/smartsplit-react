@@ -4,6 +4,7 @@ import Workpieces from './workpieces/workpieces';
 import Orientation from './orientation/orientation';
 import RightSplit from './rightSplit/rightSplit';
 import Workpiece from './workpiece/workpiece';
+import Settings from './settings/settings';
 
 const Dashboard = (props) => {
   const [selectedWorkpiece, selectWorkpiece] = useState('');
@@ -21,6 +22,9 @@ const Dashboard = (props) => {
       </Route> */}
       <Route path="/workpiece/:workpiece_id">
         <Workpiece {...props} {...commonProps} />
+      </Route>
+      <Route path="/settings">
+        <Settings />
       </Route>
       <Route path="/">
         <Workpieces {...props} {...commonProps} />

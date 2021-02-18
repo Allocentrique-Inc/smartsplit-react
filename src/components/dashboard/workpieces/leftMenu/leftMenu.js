@@ -17,7 +17,7 @@ const LeftMenu = (props) => {
       </button>
       <button
         className={`sectionButton ${selected === 'alfa' ? 'alfa' : 'alfa'}`}
-        onClick={() => history.push('/profile')}
+        onClick={() => history.push('/settings')}
       >
         <span className="buttonLogo" />
         Mon profil public
