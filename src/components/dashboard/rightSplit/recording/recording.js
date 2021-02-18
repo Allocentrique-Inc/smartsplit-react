@@ -4,7 +4,7 @@ import TopBar from '../_/topBar/topBar';
 import DownBar from '../_/downBar/downBar';
 import Presentation from '../_/presentation/presentation';
 import Label from './label/label';
-import Collaborators from './collaborators/collaborators';
+import Collaborator from './collaborator/collaborator';
 import Circle from '../_/circle/circle';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
@@ -101,6 +101,9 @@ const Recording = (props) => {
     }
   };
 
+  const allActorsSum = allActors.reduce((acc, el) => el.shares + acc, 0);
+  const isDisplayingCircle = allActorsSum === 100;
+
   const title = props.translations.rightSplit.title._recording[props.language];
   const textPresentation =
     props.translations.rightSplit.textPresentation._recording[props.language];
@@ -123,10 +126,9 @@ const Recording = (props) => {
       <div className="b1">
         <div className="b1b1">
           <div className="b1b1b1">
-            <Presentation {...commonProps} />
+            <Presentation {...commonProps} view="recording" />
             {!props.label.rightHolder && (
               <AddCollaborators
-                {...props}
                 {...commonProps}
                 addCollaborators={addLabelCollaborators}
                 preSelectedCollaborators={[...props.recording, props.label]}
@@ -141,16 +143,24 @@ const Recording = (props) => {
               />
             )}
             <div className="separator" />
-            <Collaborators {...props} {...commonProps} />
+            {props.recording.map((collaborator, id) => (
+              <Collaborator
+                key={collaborator.rightHolder_id}
+                {...commonProps}
+                collaborator={collaborator}
+                id={id}
+              />
+            ))}
             <AddCollaborators
-              {...props}
               {...commonProps}
               preSelectedCollaborators={allActors}
             />
           </div>
           <div className="b1b1b2">
             <div className="b1b1b1b2">
-              <Circle {...commonProps} collaborators={allActors} />
+              {isDisplayingCircle && (
+                <Circle {...commonProps} collaborators={allActors} />
+              )}
             </div>
           </div>
         </div>

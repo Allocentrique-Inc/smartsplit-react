@@ -60,6 +60,8 @@ const Copyright = (props) => {
       newDividingMethod: props.copyrightDividingMethod,
       copyright: newCopyright,
     });
+
+    console.log(role, rightHolder_id);
     props.setCopyright(calculatedCopyright);
   };
 

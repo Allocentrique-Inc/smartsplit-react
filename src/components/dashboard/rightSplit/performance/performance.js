@@ -3,7 +3,7 @@ import { useState } from 'react';
 import AddCollaborators from '../_/addCollaborators/addCollaborators';
 import TopBar from '../_/topBar/topBar';
 import DownBar from '../_/downBar/downBar';
-import Collaborators from './collaborators/collaborators';
+import Collaborator from './collaborator/collaborator';
 import Circle from '../_/circle/circle';
 import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollaborator';
 import Presentation from '../_/presentation/presentation';
@@ -34,15 +34,27 @@ const Performance = (props) => {
     );
     props.setPerformance(arr);
   };
-  const deleteRole = (role, id) => {
-    const arr = [...props.performance];
-    arr[id].roles = arr[id].roles.filter((el) => el !== role);
-    props.setPerformance(arr);
+
+  const deleteRole = (role, rightHolder_id) => {
+    const modifiedPerformance = props.performance.find(
+      (el) => el.rightHolder_id === rightHolder_id,
+    );
+    modifiedPerformance.roles = modifiedPerformance.roles.filter(
+      (el) => el !== role,
+    );
+    const newPerformance = props.performance.map((el) =>
+      (el.rightHolder_id === rightHolder_id ? modifiedPerformance : el));
+    props.setPerformance(newPerformance);
   };
-  const addRole = (role, id) => {
-    const arr = [...props.performance];
-    arr[id].roles.push(role);
-    props.setPerformance(arr);
+
+  const addRole = (role, rightHolder_id) => {
+    const modifiedPerformance = props.performance.find(
+      (el) => el.rightHolder_id === rightHolder_id,
+    );
+    modifiedPerformance.roles.push(role);
+    const newPerformance = props.performance.map((el) =>
+      (el.rightHolder_id === rightHolder_id ? modifiedPerformance : el));
+    props.setPerformance(newPerformance);
   };
 
   // SHARES CALCULATION
@@ -60,9 +72,12 @@ const Performance = (props) => {
     }
   });
 
-  const title = props.translations.rightSplit.title._performance[props.language];
-  const textPresentation = props.translations.rightSplit.textPresentation._performance[props.language];
-  const textDescription = props.translations.rightSplit.textDescription._performance[props.language];
+  const title =
+    props.translations.rightSplit.title._performance[props.language];
+  const textPresentation =
+    props.translations.rightSplit.textPresentation._performance[props.language];
+  const textDescription =
+    props.translations.rightSplit.textDescription._performance[props.language];
 
   const commonProps = {
     ...props,
@@ -84,8 +99,15 @@ const Performance = (props) => {
         <div className="b1">
           <div className="b1b1">
             <div className="b1b1b1">
-              <Presentation {...commonProps} />
-              <Collaborators {...commonProps} />
+              <Presentation {...commonProps} view="performance" />
+              {props.performance.map((collaborator, id) => (
+                <Collaborator
+                  key={collaborator.user_id}
+                  {...commonProps}
+                  id={id}
+                  collaborator={collaborator}
+                />
+              ))}
               <AddCollaborators
                 {...commonProps}
                 preSelectedCollaborators={props.performance}

@@ -1,6 +1,14 @@
+import CheckMark from '../../../../../../icons/check-mark';
+
 const NotificationBox = (props) => (
-  <div className="checkBoxRow" onClick={props.toggle}>
-    <input type="checkbox" checked={props.value} onChange={() => {}} />
+  <div className="checkBoxRow">
+    <div className="checkBox" onClick={props.toggle}>
+      {props.value && (
+        <div className="isChecked">
+          <CheckMark />
+        </div>
+      )}
+    </div>
     <label>{props.tag}</label>
   </div>
 );
