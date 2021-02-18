@@ -28,7 +28,7 @@ export default function DeleteAccountModal(props) {
           <div className="content">
             <h3>Attention cette opération est irréversible.</h3>
             <div className="formInput">
-              <label forHtml="input">
+              <label htmlFor="input">
                 Écris le mot « détruire » ci-dessous, afin de confirmer ton
                 intention :
               </label>

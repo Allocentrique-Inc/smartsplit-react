@@ -53,10 +53,7 @@ export default function Settings(props) {
     notifications: setNotifications,
   };
   const setField = (type, field) => {
-    setters[type]((prevState) => {
-      console.log('prevstate', prevState);
-      return { ...prevState, ...field };
-    });
+    setters[type]((prevState) => ({ ...prevState, ...field }));
   };
 
   const commonProps = {
