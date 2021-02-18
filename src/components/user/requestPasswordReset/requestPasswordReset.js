@@ -18,7 +18,7 @@ export default () => {
           réinitialisation.
         </p>
       </div>
-      <div className="form-input">
+      <div className="formInput">
         <label htmlFor="email">Courriel</label>
         <input
           type="text"

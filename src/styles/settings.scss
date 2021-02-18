@@ -1,0 +1,46 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .topBar {
+    width: 100%;
+    padding: 16px 24px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+  }
+  a {
+    max-height: 24px;
+  }
+  main {
+    max-width: 944px;
+    .colLeft {
+      width: 244px;
+      margin-right: 96px;
+    }
+    .colRight {
+      .formInput {
+        margin-bottom: 32px;
+      }
+
+      > * {
+        padding: 64px 0;
+        box-shadow: inset 0px -1px 0px map-get($colors, 'stroke');
+        :last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .profile {
+      > .row {
+        > * {
+          flex: 1;
+        }
+        :first-child {
+          margin-right: 16px;
+        }
+      }
+    }
+  }
+}

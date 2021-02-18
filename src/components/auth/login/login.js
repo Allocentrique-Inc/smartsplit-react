@@ -20,13 +20,18 @@ const Login = (props) => {
         <p>Entre tes informations ci-dessous.</p>
       </div>
 
-      <div className="form-input">
+      <div className="formInput">
         <label htmlFor="email">Mon courriel</label>
         <input id="email" value={email} onChange={handleEmail} />
       </div>
-      <div className="form-input">
+      <div className="formInput">
         <label htmlFor="password">Mon mot de passe</label>
-        <input id="password" value={password} onChange={handlePassword} />
+        <input
+          id="password"
+          value={password}
+          type="password"
+          onChange={handlePassword}
+        />
         <Link to="/user/request-password-reset">Mot de passe oublié?</Link>
       </div>
 

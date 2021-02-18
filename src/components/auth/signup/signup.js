@@ -12,7 +12,6 @@ export default (props) => {
 
   const history = useHistory();
   const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
   const handleSubmit = async () => {
     const result = await postUser({ email, password });
     setShowModal(true);
@@ -33,19 +32,25 @@ export default (props) => {
         </p>
       </div>
       <div className="toDo">Creation de compte avec réseau sociaux</div>
-      <div className="form-input">
+      <div className="formInput">
         <label htmlFor="email">Entre ton courriel</label>
         <input id="email" value={email} onChange={handleEmail} />
       </div>
-      <div className="form-input">
+      <div className="formInput">
         <label htmlFor="password">Choisis ton mot de passe</label>
         <div className="double-input">
-          <input id="password" value={password} onChange={handlePassword} />
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <div className="toDo">Validation de mot de passe</div>
           <input
             id="confirmPassword"
-            value={password}
-            onChange={handlePassword}
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
       </div>

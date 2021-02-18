@@ -7,6 +7,7 @@ export default function Profile(props) {
       <h2>Profil</h2>
       <input
         value={profile.avatar}
+        className="toDo"
         onChange={(e) => setField('profile', { avatar: e.target.value })}
       />
       <div className="row">

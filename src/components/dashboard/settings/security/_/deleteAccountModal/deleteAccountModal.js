@@ -6,7 +6,6 @@ import X from '../../../../../../icons/x';
 export default function DeleteAccountModal(props) {
   const { setShowModal } = props;
   const history = useHistory();
-  console.log('PROPS', props);
   const [security, setSecurity] = useState('');
   const isSecurityValid = () => security === 'détruire';
   const handleOnDelete = async () => {

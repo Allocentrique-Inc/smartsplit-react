@@ -30,7 +30,7 @@ export default function Account(props) {
           id="mobilePhone"
           type="text"
           value={account.mobilePhone}
-          onChange={(e) => setField('account', { mobilePhone: e.target.value })}
+          onChange={(value) => setField('account', { mobilePhone: value })}
         />
       </div>
       <div className="formInput">

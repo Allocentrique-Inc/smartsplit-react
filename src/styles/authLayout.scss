@@ -10,6 +10,7 @@
     font-weight: bold;
     text-decoration: none;
   }
+
   .checkEmailModal {
     width: 80vw;
     max-width: 944px;
@@ -49,41 +50,15 @@
   .form {
     margin: 64px auto;
     max-width: 464px;
+    .formInput {
+      margin-bottom: 32px;
+    }
     .header {
       margin-bottom: 32px;
       p {
         margin-top: 16px;
       }
     }
-    .form-input {
-      margin-bottom: 32px;
-
-      label {
-        @extend .medium-700;
-      }
-      input {
-        height: 40px;
-        width: 100%;
-        background: map-get($colors-background, 'ground');
-        border: 1px solid map-get($colors, 'stroke');
-        border-radius: 2px;
-        padding: 8px;
-      }
-      > input {
-        margin-top: 8px;
-      }
-      a {
-        @extend .small-700;
-      }
-      .double-input {
-        display: flex;
-        flex-direction: column;
-        :last-child {
-          margin-top: 32px;
-        }
-      }
-    }
-
     .buttons {
       display: flex;
       justify-content: space-between;

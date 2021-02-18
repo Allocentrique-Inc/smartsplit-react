@@ -1,7 +1,12 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Profile from './profile/profile';
 import Account from './account/account';
 import ProfessionalIdentity from './professionalIdentity/professionalIdentity';
+import Notifications from './notifications/notifications';
+import Security from './security/security';
+import ArrowLeft from '../../../icons/arrowLeft';
+import ProfilePlaceholder from '../../../icons/profilePlaceholder';
 
 export default function Settings(props) {
   const [profile, setProfile] = useState({
@@ -27,14 +32,14 @@ export default function Settings(props) {
         },
       ],
       public: false,
-      birthDate: '',
-      isni: '',
-      uri: '',
     },
+    birthDate: '',
+    isni: '',
+    uri: '',
   });
   const [notifications, setNotifications] = useState({
-    generalInteractions: [],
-    administrativeMessages: [],
+    generalInteractions: ['email', 'push'],
+    administrativeMessages: ['email', 'push'],
     accountLogin: [],
     smartsplitBlog: [],
     smartsplitPromotions: [],
@@ -63,9 +68,22 @@ export default function Settings(props) {
   };
   return (
     <div className="settings">
-      <Profile {...commonProps} />
-      <Account {...commonProps} />
-      <ProfessionalIdentity {...commonProps} />
+      <div className="topBar">
+        <Link to="/">
+          <ArrowLeft />
+        </Link>
+        <ProfilePlaceholder />
+      </div>
+      <main className="row">
+        <div className="colLeft toDo">NAVIGATION</div>
+        <div className="colRight">
+          <Profile {...commonProps} />
+          <Account {...commonProps} />
+          <ProfessionalIdentity {...commonProps} />
+          <Notifications {...commonProps} />
+          <Security {...commonProps} />
+        </div>
+      </main>
     </div>
   );
 }

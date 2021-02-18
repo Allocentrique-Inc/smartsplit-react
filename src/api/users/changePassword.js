@@ -8,15 +8,21 @@ const changePassword = async (payload) => {
   try {
     const url = 'http://localhost:3001/v1/users/change-password';
     const method = 'POST';
+    const headers = {
+      'content-type': 'application/json',
+    };
+    if (currentPassword) {
+      headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
+    }
+
     const response = await fetch(url, {
       method,
       body,
-      headers: {
-        'content-type': 'application/json',
-      },
+      headers,
     });
     const textResponse = await response.text();
     const parsedResponse = JSON.parse(textResponse);
+    localStorage.setItem('accessToken', parsedResponse.accessToken);
     console.log(parsedResponse);
     return parsedResponse;
   } catch (err) {

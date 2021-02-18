@@ -27,7 +27,7 @@ export default function PhoneNumber(props) {
   const [currentValue, setCurrentValue] = useState(value || '');
   const [fieldValue, setFieldValue] = useState(toDisplayNumber(value) || '');
 
-  const handleChange = useCallback(
+  const handleOnChange = useCallback(
     (number) => {
       setFieldValue(number);
 
@@ -57,7 +57,12 @@ export default function PhoneNumber(props) {
 
   return (
     <div className="row" {...nextProps}>
-      <input value={fieldValue} onChange={handleChange} onBlur={handleOnBlur} />
+      <input
+        type="text"
+        value={fieldValue}
+        onChange={(e) => handleOnChange(e.target.value)}
+        onBlur={handleOnBlur}
+      />
       {StatusIcon[status]}
     </div>
   );
