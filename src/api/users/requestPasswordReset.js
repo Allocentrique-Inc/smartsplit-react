@@ -4,7 +4,7 @@ const requestPasswordReset = async (payload) => {
     email,
   });
   try {
-    const url = 'http://159.203.15.16:3001/v1/users/request-password-reset';
+    const url = 'http://localhost:3001/v1/users/request-password-reset';
     const method = 'POST';
     const response = await fetch(url, {
       method,
