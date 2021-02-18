@@ -1,6 +1,6 @@
 const getUsersCollaborators = async (payload) => {
   try {
-    const url = `http://159.203.15.16:3001/v1/users/${payload.user_id}/collaborators/`;
+    const url = `http://localhost:3001/v1/users/${payload.user_id}/collaborators/`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

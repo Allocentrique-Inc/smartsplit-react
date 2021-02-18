@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import RoleBox from '../../_/roleBox/roleBox';
+import Dragger from '../../_/dragger/dragger';
 import colors from '../../_/colors';
 import Ellipsis from '../../../../../icons/ellipsis';
-import Dragger from '../../_/dragger/dragger';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -23,10 +23,26 @@ const Collaborator = (props) => {
     props.deleteCollaborator(props.collaborator.rightHolder_id);
   };
 
+  // STATUS
+  const selectStatus = (e) => {
+    const arr = [...props.performance];
+    arr[props.id].status = e.target.value;
+    props.setPerformance(arr);
+  };
+
+  // DRAGGER
+  const setShares = () => {
+    /* Shares automatically setted on performance according to status */
+  };
+  const setLock = (newState) => {
+    const arr = [...props.performance];
+    arr[props.id].lock = newState;
+    props.setPerformance(arr);
+  };
+
   // ROLE BOX
   const handleToggleRole = (role) => {
     const isPresent = props.collaborator.roles.some((el) => role === el);
-    console.log(role, isPresent);
     if (isPresent) {
       props.deleteRole(role, props.collaborator.rightHolder_id);
     } else {
@@ -34,49 +50,42 @@ const Collaborator = (props) => {
     }
   };
 
-  // DRAGGER
-  const setShares = (newShares) =>
-    props.handleDrag({ newShares, id: props.id });
-  const setLock = (newState) => {
-    const arr = [...props.copyright];
-    arr[props.id].lock = newState;
-    props.setCopyright(arr);
-  };
-  const isDraggable = props.copyrightDividingMethod === 'manual';
-
   // TEXTS
   const t_initials = `${props.collaborator.rightHolder.firstName[0]}${props.collaborator.rightHolder.lastName[0]}`;
   const t_userName = `${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`;
   const t_removeCollaborator =
     props.translations.rightSplit._removeCollaborator[props.language];
-  const t_autor =
-    props.translations.rightSplit.copyrightRoles._autor[props.language];
-  const t_composer =
-    props.translations.rightSplit.copyrightRoles._composer[props.language];
-  const t_adaptator =
-    props.translations.rightSplit.copyrightRoles._adaptator[props.language];
-  const t_mixer =
-    props.translations.rightSplit.copyrightRoles._mixer[props.language];
+  const t_singer =
+    props.translations.rightSplit.performanceRoles._singer[props.language];
+  const t_musician =
+    props.translations.rightSplit.performanceRoles._musician[props.language];
+  const t_principal =
+    props.translations.rightSplit.performanceStatus._principal[props.language];
+  const t_featured =
+    props.translations.rightSplit.performanceStatus._featured[props.language];
+  const t_bandMember =
+    props.translations.rightSplit.performanceStatus._bandMember[props.language];
+  const t_session =
+    props.translations.rightSplit.performanceStatus._session[props.language];
 
   // COMMON PROPS
   const commonProps = {
     ...props,
-    isDraggable,
     setLock,
     setShares,
     handleToggleRole,
   };
+
   return (
     <div className="collaborator">
       <div className="b1">
-        {/* AVATAR */}
         <div className="rowAC">
+          {/* AVATAR */}
           <div className="avatar" style={avatarStyle}>
             {t_initials}
           </div>
           <div className="name">{t_userName}</div>
         </div>
-
         {/* ELLIPSIS OPTIONS */}
         <div className="ellipsis" onClick={handleEllipsisClick}>
           <Ellipsis />
@@ -87,36 +96,36 @@ const Collaborator = (props) => {
           )}
         </div>
       </div>
-
       <div className="space" />
+
+      {/* STATUS */}
+      <select
+        className="selectStatus"
+        value={props.collaborator.status}
+        onChange={selectStatus}
+      >
+        <option disabled value="">
+          Select Status
+        </option>
+        <option value="principal">{t_principal}</option>
+        <option value="featured">{t_featured}</option>
+        <option value="bandMember">{t_bandMember}</option>
+        <option value="session">{t_session}</option>
+      </select>
 
       {/* ROLES */}
       <div className="roleRow">
         <RoleBox
           {...commonProps}
           arr={props.collaborator.roles}
-          label={t_autor}
-          _role="autor"
+          label={t_singer}
+          _role="singer"
         />
         <RoleBox
           {...commonProps}
           arr={props.collaborator.roles}
-          label={t_composer}
-          _role="composer"
-        />
-      </div>
-      <div className="roleRow">
-        <RoleBox
-          {...commonProps}
-          arr={props.collaborator.roles}
-          label={t_adaptator}
-          _role="adaptator"
-        />
-        <RoleBox
-          {...commonProps}
-          arr={props.collaborator.roles}
-          label={t_mixer}
-          _role="mixer"
+          label={t_musician}
+          _role="musician"
         />
       </div>
 

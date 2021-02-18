@@ -1,7 +1,7 @@
 const submitRightSplit = async (payload) => {
   const body = JSON.stringify([]);
   try {
-    const url = `http://159.203.15.16:3001/v1/workpieces/${payload.workpiece_id}/rightSplit/submit`;
+    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit/submit`;
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

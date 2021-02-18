@@ -35,12 +35,12 @@ export default {
     },
     _performance: {
       fr:
-        'On sépare ici le droit voisin entre les interprètes, autant les musiciens que les chanteurs. Les membres d’un groupe se partagent ce droit à parts égales; Les artistes principaux et artistes invités se partagent 80%, tandis que le 20% restant est partagé parmi les artistes accompagnateurs, le cas échéant.',
+        'On sépare ici le <b>droit voisin</b> entre les <b>interprètes</b>, autant les musiciens que les chanteurs. Les membres d’un groupe se partagent ce droit à parts égales; Les artistes principaux et artistes invités se partagent 80%, tandis que le 20% restant est partagé parmi les artistes accompagnateurs, le cas échéant.',
       en: 'PERFORMANCE',
     },
     _recording: {
       fr:
-        'On sépare ici le droit voisin des producteurs, c’est à dire ceux qui ont investi leur temps et/ou leur argent pour enregistrer et finaliser le produit afin d’être commercialisé. Il est d’usage de partager ce droit en parts égales ou au prorata de l’investissement.  En savoir plus...',
+        'On sépare ici le <b>droit voisin</b> des <b>producteurs</b>, c’est à dire ceux qui ont investi leur temps et/ou leur argent pour enregistrer et finaliser le produit afin d’être commercialisé. Il est d’usage de partager ce droit en parts égales ou au prorata de l’investissement.',
       en: 'RECORDING',
     },
     _privacy: {
@@ -84,9 +84,144 @@ export default {
     },
   },
 
+  performanceRoles: {
+    _singer: {
+      fr: 'Chanteur',
+      en: 'COPYRIGHT',
+    },
+    _musician: {
+      fr: 'Musicien',
+      en: 'COPYRIGHT',
+    },
+  },
+
+  performanceStatus: {
+    _principal: {
+      fr: 'Artiste principal',
+      en: 'COPYRIGHT',
+    },
+    _featured: {
+      fr: 'Artiste invité (featuring)',
+      en: 'COPYRIGHT',
+    },
+    _bandMember: {
+      fr: 'Membre du groupe',
+      en: 'COPYRIGHT',
+    },
+    _session: {
+      fr: 'Artiste accompagnateur',
+      en: 'COPYRIGHT',
+    },
+  },
+
+  recordingLabelNotification: {
+    _notifyPresentation: {
+      fr: "Me notifier 1 mois avant l'échéance...",
+      en: 'COPYRIGHT',
+    },
+    _notifViaText: {
+      fr: 'Par texto',
+      en: 'COPYRIGHT',
+    },
+    _notifViaEmail: {
+      fr: 'Par courriel',
+      en: 'COPYRIGHT',
+    },
+  },
+
+  recordingLabelDealTimeLapse: {
+    _oneYear: {
+      fr: "1 an, puis renouvelable d'année en année",
+      en: 'COPYRIGHT',
+    },
+    _twoYears: {
+      fr: "2 ans, puis renouvelable d'année en année",
+      en: 'COPYRIGHT',
+    },
+    _threeYears: {
+      fr: "3 ans, puis renouvelable d'année en année",
+      en: 'COPYRIGHT',
+    },
+    _fourYears: {
+      fr: "4 ans, puis renouvelable d'année en année",
+      en: 'COPYRIGHT',
+    },
+    _fiveYears: {
+      fr: "5 ans, puis renouvelable d'année en année",
+      en: 'COPYRIGHT',
+    },
+    _renew: {
+      fr: 'Se renouvelle automatiquement, sauf avis signifié 60 jours avant.',
+      en: 'COPYRIGHT',
+    },
+  },
+
+  recordingFunctionOptions: {
+    _placeholder: {
+      fr: 'Sélectionner une fonction...',
+      en: 'COPYRIGHT',
+    },
+    _producer: {
+      fr: 'Producteur',
+      en: 'COPYRIGHT',
+    },
+    _autoProducer: {
+      fr: 'Auto-producteur',
+      en: 'COPYRIGHT',
+    },
+    _directorProducer: {
+      fr: 'Réalisateur-producteur',
+      en: 'COPYRIGHT',
+    },
+    _techProducer: {
+      fr: 'Technicien-producteur',
+      en: 'COPYRIGHT',
+    },
+    _studio: {
+      fr: "Studio d'enregistrement",
+      en: 'COPYRIGHT',
+    },
+    _illustratorDesigner: {
+      fr:
+        "Personne s'investissant dans la création de matériel visuel lié à la pièce (pochette, vidéo).",
+      en: 'COPYRIGHT',
+    },
+  },
+
+  privacySettings: {
+    _title: {
+      fr: 'Confidentialité du partage',
+      en: 'ASD',
+    },
+    _private: {
+      fr: 'Privée',
+      en: '',
+    },
+    _public: {
+      fr: 'Public',
+      en: '',
+    },
+  },
+
   _removeCollaborator: {
     fr: 'Retirer ce partage',
     en: 'COPYRIGHT',
+  },
+
+  success: {
+    _title: {
+      fr: 'Ta proposition de partage est maintenant complétée !',
+      en: '',
+    },
+    _description: {
+      fr:
+        'Tu peux maintenant la proposer à tes collaborateurs. Tu pourras ensuite partager ta part avec ton éditeur, si tu en as un.',
+      en: '',
+    },
+    _goto: {
+      fr: 'Voir le résumé',
+      en: '',
+    },
   },
 
   // copyright: {

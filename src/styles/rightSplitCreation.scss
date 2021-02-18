@@ -289,6 +289,7 @@
         width: 160px;
         height: 60px;
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
       }
     }
     .space {
@@ -307,6 +308,14 @@
       padding-right: 8px;
       padding-left: 8px;
       outline: 0;
+    }
+    .notifyPresentation {
+      margin-left: 40px;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 16px;
+      color: #203548;
+      margin-bottom: 8px;
     }
     .roleRow {
       margin-left: 40px;
@@ -422,12 +431,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    .topIcon {
-      margin-top: 54px;
-      background-color: rgba(214, 196, 162, 0.15);
-      height: 96px;
-      width: 96px;
-    }
     .text1 {
       margin-top: 58px;
       font-weight: bold;

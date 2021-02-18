@@ -18,8 +18,10 @@ const Privacy = (props) => {
     setIsSaved(true);
   };
   const title = props.translations.rightSplit.title._privacy[props.language];
-  const textPresentation = props.translations.rightSplit.textPresentation._privacy[props.language];
-  const textDescription = props.translations.rightSplit.textDescription._privacy[props.language];
+  const textPresentation =
+    props.translations.rightSplit.textPresentation._privacy[props.language];
+  const textDescription =
+    props.translations.rightSplit.textDescription._privacy[props.language];
   const commonProps = {
     ...props,
     isSaved,
@@ -53,8 +55,8 @@ const Privacy = (props) => {
       <div className="b1">
         <div className="b1b1">
           <div className="b1b1b1">
-            <Presentation {...commonProps} />
-            <PrivacySelection {...props} />
+            <Presentation {...commonProps} view="privacy" />
+            <PrivacySelection {...commonProps} />
           </div>
           <div className="b1b1b2" />
         </div>
