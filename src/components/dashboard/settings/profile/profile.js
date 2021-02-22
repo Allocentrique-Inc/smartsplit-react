@@ -1,7 +1,7 @@
 import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 
 export default function Profile(props) {
-  const { profile, setField } = props;
+  const { profile, setField, updateUser } = props;
   return (
     <div className="profile">
       <h2>Profil</h2>
@@ -9,6 +9,7 @@ export default function Profile(props) {
         value={profile.avatar}
         className="toDo"
         onChange={(e) => setField('profile', { avatar: e.target.value })}
+        onBlur={updateUser}
       />
       <div className="row">
         <div className="formInput">
@@ -18,6 +19,7 @@ export default function Profile(props) {
             id="firstName"
             value={profile.firstName}
             onChange={(e) => setField('profile', { firstName: e.target.value })}
+            onBlur={updateUser}
           />
         </div>
         <div className="formInput">
@@ -27,6 +29,7 @@ export default function Profile(props) {
             id="lastName"
             value={profile.lastName}
             onChange={(e) => setField('profile', { lastName: e.target.value })}
+            onBlur={updateUser}
           />
         </div>
       </div>
@@ -37,6 +40,7 @@ export default function Profile(props) {
           id="artistName"
           value={profile.artistName}
           onChange={(e) => setField('profile', { artistName: e.target.value })}
+          onBlur={updateUser}
         />
       </div>
       <div className="formInput">
@@ -45,6 +49,7 @@ export default function Profile(props) {
           id="projects"
           value={profile.projects}
           onChange={(value) => setField('profile', { projects: value })}
+          onBlur={updateUser}
         />
       </div>
     </div>

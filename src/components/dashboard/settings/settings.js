@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Profile from './profile/profile';
 import Account from './account/account';
@@ -7,8 +7,12 @@ import Notifications from './notifications/notifications';
 import Security from './security/security';
 import ArrowLeft from '../../../icons/arrowLeft';
 import ProfilePlaceholder from '../../../icons/profilePlaceholder';
+import patchUser from '../../../api/users/patchUser';
+import getUsers from '../../../api/users/getUsers';
+import { loadObjToAnother } from '../../../utils';
 
 export default function Settings(props) {
+  const [user_id] = useState(localStorage.getItem('user_id'));
   const [profile, setProfile] = useState({
     avatar: '',
     firstName: '',
@@ -19,18 +23,13 @@ export default function Settings(props) {
   const [account, setAccount] = useState({
     address: '',
     locale: '',
-    mobilePhone: '',
+    phoneNumber: '',
     emails: [],
   });
   const [professionalIdentity, setProfessionalIdentity] = useState({
     organisations: [],
     professionalIdentity: {
-      ids: [
-        {
-          name: 'cillum eu',
-          value: 'adipisici',
-        },
-      ],
+      ids: [],
       public: false,
     },
     birthDate: '',
@@ -46,6 +45,8 @@ export default function Settings(props) {
     partnerPromotions: [],
   });
 
+  const [dirtyFields, setDirtyFields] = useState([]);
+
   const setters = {
     profile: setProfile,
     account: setAccount,
@@ -54,7 +55,52 @@ export default function Settings(props) {
   };
   const setField = (type, field) => {
     setters[type]((prevState) => ({ ...prevState, ...field }));
+    if (type === 'notifications' && !dirtyFields.includes('notifications')) {
+      dirtyFields.push('notifications');
+    } else if (type !== 'notifications') {
+      dirtyFields.push(Object.keys(field)[0]);
+    }
+    setDirtyFields([...dirtyFields]);
   };
+
+  const updateUser = async () => {
+    const fields = {
+      ...profile,
+      ...account,
+      ...professionalIdentity,
+      notifications,
+    };
+    Object.keys(fields).forEach(
+      (key) => !dirtyFields.includes(key) && delete fields[key],
+    );
+    if (Object.entries(fields).length > 0) {
+      await patchUser({ user_id, ...fields });
+      setDirtyFields([]);
+    }
+  };
+
+  const mapData = async () => {
+    const user = await getUsers({ user_id });
+    console.log('DATA TO LOAD', user);
+    loadObjToAnother(user, profile);
+    setProfile({ ...profile });
+    loadObjToAnother(user, account);
+    if (user.mobilePhone) {
+      account.phoneNumber = user.mobilePhone.number;
+    }
+    setAccount({ ...account });
+    loadObjToAnother(user, professionalIdentity);
+    setProfessionalIdentity({ ...professionalIdentity });
+    setNotifications(user.notifications);
+    Object.keys(account).forEach((key) => {
+      if (user[key]) {
+        account[key] = user[key];
+      }
+    });
+  };
+  useEffect(() => {
+    mapData();
+  }, []);
 
   const commonProps = {
     profile,
@@ -62,6 +108,7 @@ export default function Settings(props) {
     professionalIdentity,
     notifications,
     setField,
+    updateUser,
   };
   return (
     <div className="settings">
