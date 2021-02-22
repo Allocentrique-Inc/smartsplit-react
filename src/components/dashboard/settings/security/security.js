@@ -7,7 +7,7 @@ export default function Security(props) {
   const [showDelAccountModal, setShowDelAccountModal] = useState(false);
 
   return (
-    <div className="security">
+    <div className="security" id="security">
       {showPasswordModal && (
         <ChangePasswordModal setShowModal={setShowPasswordModal} {...props} />
       )}

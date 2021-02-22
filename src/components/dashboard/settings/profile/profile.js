@@ -3,7 +3,7 @@ import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 export default function Profile(props) {
   const { profile, setField, updateUser } = props;
   return (
-    <div className="profile">
+    <div className="profile" id="profile">
       <h2>Profil</h2>
       <input
         value={profile.avatar}

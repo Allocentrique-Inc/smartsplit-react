@@ -4,7 +4,7 @@ import ProIdSelect from './_/proIdSelect/proIdSelect';
 export default function ProfessionalIdentity(props) {
   const { professionalIdentity, setField, updateUser } = props;
   return (
-    <div className="professionalIdentity">
+    <div className="professionalIdentity" id="professional-identity">
       <h2>Identité professionnelle</h2>
       <div className="formInput">
         <label htmlFor="organisations">Mes entreprises liées</label>

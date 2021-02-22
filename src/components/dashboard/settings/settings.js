@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { NavHashLink } from 'react-router-hash-link';
 import Profile from './profile/profile';
 import Account from './account/account';
 import ProfessionalIdentity from './professionalIdentity/professionalIdentity';
@@ -119,7 +120,45 @@ export default function Settings(props) {
         <ProfilePlaceholder />
       </div>
       <main className="row">
-        <div className="colLeft toDo">NAVIGATION</div>
+        <div className="colLeft">
+          <div className="navigation">
+            <NavHashLink
+              smooth
+              activeClassName="selected"
+              to="/settings#profile"
+            >
+              Profil
+            </NavHashLink>
+            <NavHashLink
+              smooth
+              activeClassName="selected"
+              to="/settings#account"
+            >
+              Compte
+            </NavHashLink>
+            <NavHashLink
+              smooth
+              activeClassName="selected"
+              to="/settings#professional-identity"
+            >
+              Identité professionnelle
+            </NavHashLink>
+            <NavHashLink
+              smooth
+              activeClassName="selected"
+              to="/settings#notifications"
+            >
+              Notifications
+            </NavHashLink>
+            <NavHashLink
+              smooth
+              activeClassName="selected"
+              to="/settings#security"
+            >
+              Sécurité
+            </NavHashLink>
+          </div>
+        </div>
         <div className="colRight">
           <Profile {...commonProps} />
           <Account {...commonProps} />

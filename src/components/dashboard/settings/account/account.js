@@ -4,7 +4,7 @@ import PhoneNumber from '../../../_/form/phoneNumber/phoneNumber';
 export default function Account(props) {
   const { account, setField, updateUser } = props;
   return (
-    <div className="account">
+    <div className="account" id="account">
       <h2>Compte</h2>
       <div className="formInput">
         <label htmlFor="address">Mon adresse civique</label>
