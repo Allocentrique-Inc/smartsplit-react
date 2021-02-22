@@ -1,9 +1,9 @@
-import React from "react"
-import { Svg, Path } from "react-native-svg"
-import { Colors } from "../theme"
+import React from 'react';
+import { Svg, Path } from 'react-native-svg';
+import { Colors } from '../theme';
 
 export default function CheckMark(props) {
-	const color = props.color || Colors.tertiary
+	const color = props.color || Colors.tertiary;
 	return (
 		<Svg
 			width="24"
@@ -20,5 +20,5 @@ export default function CheckMark(props) {
 				strokeLinejoin="round"
 			/>
 		</Svg>
-	)
+	);
 }

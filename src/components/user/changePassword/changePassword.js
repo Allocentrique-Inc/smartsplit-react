@@ -17,22 +17,22 @@ export default () => {
   return (
     <div className="form">
       <h1 className="header">Réinitialise ton mot de passe.</h1>
-      <div className="form-input">
+      <div className="formInput">
         <label htmlFor="password">Choisis ton nouveau mot de passe</label>
         <input
-          type="text"
+          type="password"
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="toDo">Validation de mot de passe</div>
       </div>
-      <div className="form-input">
+      <div className="formInput">
         <label htmlFor="confirmPassword">
           Confirme ton nouveau mot de passe
         </label>
         <input
-          type="text"
+          type="password"
           id="confirmPassword"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -44,6 +44,7 @@ export default () => {
         <button
           className={`btn-primary ${!isPasswordValid() && 'btn-disabled'}`}
           onClick={handleSubmit}
+          disabled={!isPasswordValid()}
         >
           Réinitialiser
         </button>

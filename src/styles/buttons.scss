@@ -19,6 +19,11 @@
   border: none;
 }
 
+.btn-primary-alert {
+  @extend .btn-primary;
+  background-color: map-get($colors, 'error');
+}
+
 .btn-disabled {
   color: map-get($colors, 'tertiary');
   background-color: map-get($colors-background, 'hell');
@@ -31,6 +36,11 @@
   background-color: map-get($colors-background, 'transparent');
   border: 1px solid map-get($colors, 'stroke');
   box-sizing: border-box;
+}
+
+.btn-secondary-alert {
+  @extend .btn-secondary;
+  color: map-get($colors, 'error');
 }
 
 .btn-icon {

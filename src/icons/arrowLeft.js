@@ -1,24 +1,30 @@
-import * as React from 'react';
+import { Colors, Metrics } from '../theme';
 
-function SvgComponent(props) {
+const ArrowLeft = ({ color = Colors.tertiary, size = Metrics.size.small }) => {
   return (
     <svg
-      width={24}
-      height={24}
-      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
     >
       <path
-        d="M20 12H4M10 18l-6-6 6-6"
+        d="M20 12H4"
         stroke="#8DA0B3"
-        strokeWidth={2}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 18L4 12L10 6"
+        stroke="#8DA0B3"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
     </svg>
   );
-}
+};
 
-export default SvgComponent;
+export default ArrowLeft;

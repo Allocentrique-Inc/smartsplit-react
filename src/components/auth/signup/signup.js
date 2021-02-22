@@ -61,16 +61,29 @@ export default (props) => {
         <label htmlFor="email">Entre ton courriel</label>
         <input id="email" value={email} onChange={handleEmail} />
       </div>
-      <div className="form-input">
+      <div className="formInput">
         <label htmlFor="password">Choisis ton mot de passe</label>
         <div className="double-input">
-          <input id="password" value={password} onChange={handlePassword} />
+          {/* <input id="password" value={password} onChange={handlePassword} /> */}
           {/* <div className="toDo">Validation de mot de passe</div>
           <input
             id="confirmPassword"
             value={password}
             onChange={handlePassword}
           /> */}
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <div className="toDo">Validation de mot de passe</div>
+          <input
+            id="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
         </div>
       </div>
       <div className="buttons">

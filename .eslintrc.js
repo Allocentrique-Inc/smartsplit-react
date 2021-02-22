@@ -20,6 +20,7 @@ module.exports = {
     'react/implicit-arrow-linebreak': 'off',
     'implicit-arrow-linebreak': 'off',
     'operator-linebreak': 'off',
+    'no-irregular-whitespace': 'off',
     'no-console': 'off',
     'no-tabs': 'off',
     camelcase: 'off',
