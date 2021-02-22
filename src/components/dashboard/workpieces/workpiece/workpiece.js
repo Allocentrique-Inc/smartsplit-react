@@ -1,45 +1,53 @@
-// import {useState} from "react"
-// import deleteWorkpiece from "../../../../api/workpieces/deleteWorkpiece"
-// import patchWorkpiece from "../../../../api/workpieces/patchWorkpiece"
+import { useState } from 'react';
 import Action from './action/action';
+import SongPlaceholder from '../../../../icons/songPlaceholder';
+import VertEllipsis from '../../../../icons/vertEllipsis';
 
-const Workpiece = (props) => (
-  // const [newTitle,setNewTitle] = useState("")
-  // const handleInput = (e)=>setNewTitle(e.target.value)
-  // const handlePatch = async ()=>{
-  //   await patchWorkpiece({workpiece_id : props.workpiece_id, title : newTitle})
-  //   setNewTitle("")
-  //   props.resetData()
-  // }
-  // const handleDelete = async ()=>{
-  //   await deleteWorkpiece({workpiece_id : props.workpiece_id})
-  //   props.resetData()
-  // }
-  <div className="workpiece">
-    <div className="left">
-      <div className="img" />
+const Workpiece = (props) => {
+  const t_songCreator =
+    props.owner &&
+    props.owner.firstName &&
+    props.owner.lastName &&
+    `par ${props.owner.firstName} ${props.owner.lastName}`;
+  const t_songTitle = props.title;
 
-      <div className="details">
-        <div className="b1">
-          <span className="title">{`${props.title} `}</span>
-          <span>par</span>
-          <span>{` ${props.owner.firstName} ${props.owner.lastName}`}</span>
-        </div>
-        <div className="b2">
-          <span>Modifié il y a </span>
-          <span className="time">-----</span>
-          {' - Partagé avec '}
-          <span className="collaborators">-----</span>
+  const commonProps = {
+    ...props,
+  };
+  return (
+    <div className="workpiece">
+      <div className="left">
+        <SongPlaceholder />
+        <div className="details">
+          <div className="b1">
+            {t_songTitle && <span className="title">{t_songTitle}</span>}
+            {t_songCreator && t_songCreator}
+          </div>
         </div>
       </div>
-    </div>
 
-    <div className="progress" />
-    <div className="credit" />
-    <div className="right">
-      <Action {...props} />
-      <div className="ellipsis" />
+      <div className="right">
+        <Action {...props} />
+        <Ellipsis />
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
+const Ellipsis = () => {
+  const [showWorkpieceOptions, setShowWorkpieceOptions] = useState(false);
+  const toggleMenu = () => setShowWorkpieceOptions((e) => !e);
+  const handleDelete = () => {};
+  const t_deleteButton = 'DELETE WORKPIECE';
+  return (
+    <span className="ellipsis" onClick={toggleMenu}>
+      <VertEllipsis />
+      {showWorkpieceOptions && (
+        <button className="workpieceMenuOption" onClick={handleDelete}>
+          {t_deleteButton}
+        </button>
+      )}
+    </span>
+  );
+};
 export default Workpiece;

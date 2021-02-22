@@ -16,18 +16,14 @@ const Copyright = (props) => {
           </button>
         )}
       </div>
-      {props.workpiece.rightSplit.copyright.map((el, id) => {
-        let collaborator = typeof el.rightHolder === 'string'
-          ? props.collaborators.find((EL) => EL.user_id === el.rightHolder)
-          : el.rightHolder;
-        collaborator = { ...collaborator, ...el };
-        const rightSplit = props.workpiece.rightSplit.copyright;
+      {props.rightSplitInConsultation.copyright.map((collaborator) => {
+        const rightSplit = props.rightSplitInConsultation.copyright;
         return (
           <Collaborator
             {...props}
             collaborator={collaborator}
             rightSplit={rightSplit}
-            key={collaborator.user_id}
+            key={collaborator.rightHolder_id}
           />
         );
       })}

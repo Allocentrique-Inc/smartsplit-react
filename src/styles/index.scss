@@ -41,3 +41,42 @@ body {
 .toDo {
   background-color: map-get($colors, 'wip');
 }
+
+.profileOptions {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  .avatar {
+    background-color: rgba(131, 127, 119, 0.25);
+    height: 24px;
+    width: 24px;
+    border-radius: 24px;
+    margin-right: 4px;
+    margin-left: 16px;
+    color: black;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    letter-spacing: 0.75px;
+    cursor: pointer;
+  }
+  .chevronDown {
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .profileMenuOption {
+    background-color: white;
+    width: 160px;
+    height: 60px;
+    position: absolute;
+    margin-right: 140px;
+    top: 52px;
+    border: none;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+}

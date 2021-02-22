@@ -5,11 +5,13 @@ const DownBar = (props) => {
   const history = useHistory();
   const { workpiece_id } = useParams();
   const handleSubmit = async () => {
-    const { copyright, performance, recording } = props;
+    const { copyright, performance, recording, privacy, label } = props;
     await voteRightSplit({
       copyright,
       performance,
       recording,
+      privacy,
+      label,
       workpiece_id,
     });
     props.resetData();

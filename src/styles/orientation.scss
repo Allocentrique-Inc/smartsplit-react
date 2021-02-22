@@ -14,17 +14,14 @@
         align-items: center;
         box-shadow: inset 0px -1px 0px #dcdfe1;
         .back {
-          background-color: rgba(214, 196, 162, 0.25);
+          display: flex;
+          align-items: center;
+          cursor: pointer;
         }
         .right {
           display: flex;
           .credit {
             margin-right: 25px;
-            background-color: rgba(214, 196, 162, 0.25);
-            height: 25px;
-            width: 25px;
-          }
-          .profile {
             background-color: rgba(214, 196, 162, 0.25);
             height: 25px;
             width: 25px;
@@ -39,12 +36,12 @@
         .left {
           display: flex;
           justify-content: left;
+          align-items: center;
           .image {
             display: flex;
             justify-content: left;
             width: 72px;
             height: 72px;
-            background-color: rgba(214, 196, 162, 0.25);
           }
           .description {
             margin-left: 32px;
@@ -66,6 +63,7 @@
               .artistName {
                 font-weight: bold;
                 color: #2da84f;
+                margin-left: 4px;
               }
             }
           }

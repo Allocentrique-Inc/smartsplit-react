@@ -8,6 +8,7 @@ import Workpiece from './workpiece/workpiece';
 import LeftMenu from './leftMenu/leftMenu';
 import SelectPerspective from './selectPerspective/selectPerspective';
 import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkpieceModal';
+import ProfileOptions from '../_/profileOptions/profileOptions';
 
 const Workpieces = (props) => {
   const user_id = localStorage.getItem('user_id');
@@ -48,16 +49,9 @@ const Workpieces = (props) => {
       <LeftMenu />
       <div className="rightContent">
         <div className="topBar">
-          <div className="searchBar" />
-          <div
-            className="profile"
-            onClick={() => {
-              disconnect();
-              props.resetLogginCheck();
-            }}
-          >
-            Disconnect
-          </div>
+          {/* <div className="searchBar" /> */}
+          <div />
+          <ProfileOptions {...commonProps} />
         </div>
 
         <div className="content">

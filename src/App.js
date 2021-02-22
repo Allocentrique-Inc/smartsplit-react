@@ -9,7 +9,6 @@ import Admin from './components/admin/admin';
 import Dashboard from './components/dashboard/dashboard';
 import check from './api/auth/check';
 import './styles/index.scss';
-
 import Auth from './components/auth/auth';
 import User from './components/user/user';
 

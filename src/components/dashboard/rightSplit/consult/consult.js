@@ -9,31 +9,64 @@ const Consult = (props) => {
     return null;
   }
   const recording = [
-    props.label.rightHolder_id ? props.label : '',
-    ...props.recording,
+    props.rightSplitInConsultation.label.rightHolder_id
+      ? props.rightSplitInConsultation.label
+      : '',
+    ...props.rightSplitInConsultation.recording,
   ].filter((e) => e !== '');
+
+  let activeCollaborators = [
+    ...props.rightSplitInConsultation.copyright,
+    ...props.rightSplitInConsultation.performance,
+    ...props.rightSplitInConsultation.recording,
+  ];
+  if (props.rightSplitInConsultation.label.rightHolder_id) {
+    activeCollaborators.push(props.rightSplitInConsultation.label);
+  }
+  activeCollaborators = activeCollaborators.reduce((acc, el) => {
+    if (acc.find((EL) => EL.rightHolder_id === el.rightHolder_id)) {
+      return acc;
+    }
+    return [...acc, el];
+  }, []);
+  const activeCollaboratorsIds = activeCollaborators.map(
+    (el) => el.rightHolder_id,
+  );
+
+  const commonProps = {
+    ...props,
+    activeCollaboratorsIds,
+  };
   return (
     <>
-      {props.copyright.length > 0 && (
+      {props.rightSplitInConsultation.copyright.length > 0 && (
         <div className="consultRightSplit">
           <div className="left">
-            <Copyright {...props} />
+            <Copyright {...commonProps} />
           </div>
-          <div className="right">
-            {props.copyright.length > 0 && (
-              <Circle {...props} collaborators={props.copyright} consult />
+          <div className="consultRightSplitRight">
+            {props.rightSplitInConsultation.copyright.length > 0 && (
+              <Circle
+                {...commonProps}
+                collaborators={props.rightSplitInConsultation.copyright}
+                consult
+              />
             )}
           </div>
         </div>
       )}
 
-      {props.performance.length > 0 && (
+      {props.rightSplitInConsultation.performance.length > 0 && (
         <div className="consultRightSplit">
           <div className="left">
-            <Performance {...props} />
+            <Performance {...commonProps} />
           </div>
-          <div className="right">
-            <Circle {...props} collaborators={props.performance} consult />
+          <div className="consultRightSplitRight">
+            <Circle
+              {...commonProps}
+              collaborators={props.rightSplitInConsultation.performance}
+              consult
+            />
           </div>
         </div>
       )}
@@ -41,19 +74,19 @@ const Consult = (props) => {
       {recording.length > 0 && (
         <div className="consultRightSplit">
           <div className="left">
-            <Recording {...props} />
+            <Recording {...commonProps} />
           </div>
-          <div className="right">
-            <Circle {...props} collaborators={recording} consult />
+          <div className="consultRightSplitRight">
+            <Circle {...commonProps} collaborators={recording} consult />
           </div>
         </div>
       )}
 
-      <div className="consultRightSplit toDo">
+      <div className="consultRightSplit">
         <div className="left">
-          <Privacy {...props} />
+          <Privacy {...commonProps} />
         </div>
-        <div className="right" />
+        <div className="consultRightSplitRight" />
       </div>
     </>
   );

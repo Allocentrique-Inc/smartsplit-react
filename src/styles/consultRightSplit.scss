@@ -5,8 +5,10 @@
   .left {
     width: 432px;
   }
-  .right {
+  .consultRightSplitRight {
     width: 432px;
+    display: flex;
+    justify-content: space-around;
   }
   .consultRightSplitSection {
     margin-bottom: 56px;
@@ -37,10 +39,18 @@
       display: flex;
       align-items: center;
       .avatar {
-        background-color: rgba(214, 196, 162, 0.15);
+        background-color: rgba(131, 127, 119, 0.25);
         height: 24px;
         width: 24px;
         margin: 16px;
+        border-radius: 24px;
+        color: black;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        letter-spacing: 0px;
       }
       .roles {
         font-weight: normal;
@@ -67,6 +77,8 @@
         line-height: 24px;
         text-align: right;
         color: #203548;
+        width: 65px;
+        flex-shrink: 0;
       }
       .voteUndecided {
         font-weight: normal;
@@ -90,6 +102,11 @@
         color: #ac1616;
       }
     }
+  }
+
+  .privacyCollaborator {
+    height: inherit;
+    border: none;
   }
 
   .voting {

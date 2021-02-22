@@ -16,21 +16,13 @@ const Performance = (props) => {
           </button>
         )}
       </div>
-      {props.workpiece.rightSplit.performance.map((el, id) => {
-        let collaborator = typeof el.rightHolder === 'string'
-          ? props.collaborators.find((EL) => EL.user_id === el.rightHolder)
-          : el.rightHolder;
-        collaborator = { ...collaborator, ...el };
-        const rightSplit = props.workpiece.rightSplit.performance;
-        return (
-          <Collaborator
-            {...props}
-            collaborator={collaborator}
-            rightSplit={rightSplit}
-            key={collaborator.user_id}
-          />
-        );
-      })}
+      {props.rightSplitInConsultation.performance.map((collaborator, id) => (
+        <Collaborator
+          {...props}
+          collaborator={collaborator}
+          key={collaborator.rightHolder_id}
+        />
+      ))}
     </div>
   );
 };

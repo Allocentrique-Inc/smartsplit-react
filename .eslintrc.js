@@ -25,6 +25,7 @@ module.exports = {
     camelcase: 'off',
     'no-unused-vars': 'off',
     'no-shadow': 'off',
+    'arrow-body-style': 'off',
     'consistent-return': 'off',
     'react/destructuring-assignment': 'off',
     'react/prop-types': 'off',
@@ -39,5 +40,6 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'object-curly-newline': 'off',
+    'prefer-destructuring': 'off',
   },
 };

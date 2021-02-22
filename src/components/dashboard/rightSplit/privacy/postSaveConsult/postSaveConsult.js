@@ -17,7 +17,7 @@ const PostSaveConsult = (props) => {
         </button>
       </div>
       <div className="content postSaveConsult">
-        <Consult {...props} voting={false} />
+        <Consult {...props} voting={false} modifiable />
       </div>
       <div className="downBar">
         <button className="btn-primary" onClick={handleProceed}>

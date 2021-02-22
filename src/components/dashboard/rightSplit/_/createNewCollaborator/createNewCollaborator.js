@@ -48,12 +48,13 @@ const CreateNewCollaborator = (props) => {
               <button
                 className="save"
                 onClick={async () => {
-                  await postCollaborator({
+                  const newCollaborator = await postCollaborator({
                     firstName,
                     lastName,
                     email,
                     user_id,
                   });
+                  await props.addCollaborators(newCollaborator);
                   await props.resetData();
                   cancel();
                 }}

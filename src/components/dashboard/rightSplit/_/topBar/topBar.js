@@ -1,9 +1,12 @@
 import { useParams, useHistory } from 'react-router-dom';
+import { useState } from 'react';
 import ChevronRight from '../../../../../icons/chevron-right';
 import ChevronDown from '../../../../../icons/chevronDown';
 import SongPlaceholder from '../../../../../icons/songPlaceholder';
+import ProfileOptions from '../../../_/profileOptions/profileOptions';
 
 const TopBar = (props) => {
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const history = useHistory();
   const { workpiece_id } = useParams();
   const handleSaveAndQuit = async () => {
@@ -23,9 +26,6 @@ const TopBar = (props) => {
     ];
   const t_saveAndQuit =
     props.translations.rightSplit.topBar._saveAndQuit[props.language];
-  console.log(props);
-  const { firstName, lastName } = props.workpiece.owner;
-  const t_initials = firstName[0] + lastName[0];
   return (
     <div className="topBar">
       <div className="bx">
@@ -40,14 +40,10 @@ const TopBar = (props) => {
         </div>
       </div>
       <div className="bx">
-        <div className="credit" />
         <div className="saveAndQuit" onClick={handleSaveAndQuit}>
           {t_saveAndQuit}
         </div>
-        <div className="avatar">{t_initials}</div>
-        <div className="chevronDown">
-          <ChevronDown />
-        </div>
+        <ProfileOptions {...props} />
       </div>
     </div>
   );

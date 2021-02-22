@@ -224,6 +224,28 @@ export default {
     },
   },
 
+  summary: {
+    adjustEmail: {
+      _title: {
+        fr: 'Envoyer le partage des droits',
+        en: '',
+      },
+      _presentation: {
+        fr:
+          'Pour finaliser ce partage, tu dois inviter tes collaborateurs à valider le tout. Indique les adresses courriels auxquelles envoyer ta proposition de partage.',
+        en: '',
+      },
+      _send: {
+        fr: 'Envoyer',
+        en: '',
+      },
+      _cancel: {
+        fr: 'Annuler',
+        en: '',
+      },
+    },
+  },
+
   // copyright: {
   //   title: "Droits d'auteur",
   //   header: 'Qui a inventé cette pièce musicale ?',

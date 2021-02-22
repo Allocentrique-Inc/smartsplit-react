@@ -10,22 +10,19 @@
     display: flex;
     justify-content: space-between;
     .side {
-      width: 50px;
+      width: 0px;
       .back {
-        background-color: rgba(214, 196, 162, 0.25);
-        width: 40px;
-        height: 40px;
+        cursor: pointer;
+        margin-left: 16px;
       }
     }
     .b1 {
+      align-self: center;
       width: 944px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       .img {
-        width: 40px;
-        height: 40px;
-        background-color: rgba(214, 196, 162, 0.25);
         margin-right: 16px;
       }
       .title {
@@ -177,4 +174,7 @@
       }
     }
   }
+}
+
+.adjustEmails {
 }

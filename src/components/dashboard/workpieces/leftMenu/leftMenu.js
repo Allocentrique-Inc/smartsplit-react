@@ -1,21 +1,26 @@
 import { useHistory } from 'react-router-dom';
-import Logo from './logo/logo';
+import Music from '../../../../icons/music';
+import SmartsplitSecondary from '../../../../icons/smartsplitSecondary';
 
 const LeftMenu = (props) => {
   const history = useHistory();
   const selected = 'alfa';
   return (
     <div className="leftMenu">
-      <Logo />
-
+      <div className="logo">
+        <SmartsplitSecondary />
+      </div>
       <button
-        className={`sectionButton ${selected === 'alfa' ? 'alfa' : 'alfa'}`}
+        className="sectionButton  selected"
         onClick={() => history.push('/')}
       >
-        <span className="buttonLogo" />
+        <span className="buttonLogo">
+          <Music />
+        </span>
         Mes pièces musicales
       </button>
-      <button
+
+      {/* <button
         className={`sectionButton ${selected === 'alfa' ? 'alfa' : 'alfa'}`}
         onClick={() => history.push('/profile')}
       >
@@ -35,7 +40,7 @@ const LeftMenu = (props) => {
       >
         <span className="buttonLogo" />
         Mes revenues
-      </button>
+      </button> */}
     </div>
   );
 };

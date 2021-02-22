@@ -30,6 +30,11 @@ const getWorkpiece = async (payload) => {
           el.rightHolder_id = el.rightHolder.user_id;
         });
       }
+      if (parsedResponse.rightSplit.privacy) {
+        parsedResponse.rightSplit.privacy.forEach((el) => {
+          el.rightHolder_id = el.rightHolder.user_id;
+        });
+      }
       if (parsedResponse.rightSplit.label) {
         parsedResponse.rightSplit.label.rightHolder_id =
           parsedResponse.rightSplit.label.rightHolder.user_id;

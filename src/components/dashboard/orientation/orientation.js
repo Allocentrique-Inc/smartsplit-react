@@ -1,93 +1,111 @@
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import Tile from './tile/tile';
 import PenIcon from '../../../icons/pen';
+import ArrowLeft from '../../../icons/arrowLeft';
 import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkpieceModal';
+import Collaborators from './collaborators/collaborators';
+import SongPlaceholder from '../../../icons/songPlaceholder';
+import ProfileOptions from '../_/profileOptions/profileOptions';
 
 const Orientation = (props) => {
   const [tab, setTab] = useState('task');
+  const history = useHistory();
   const { workpiece_id } = useParams();
-  const [showModal, setShowModal] = useState(false);
-  const commonProps = { ...props };
+  const [isEditingWorkpiece, setIsEditingWorkpiece] = useState(false);
+  const [isEditingCollaborators, setIsEditingCollaborators] = useState(false);
+  const handleBackButton = async () => {
+    history.push('/');
+  };
+
+  const t_createdBy =
+    props.workpiece &&
+    props.workpiece.owner &&
+    props.workpiece.owner.firstName &&
+    props.workpiece.owner.lastName &&
+    `${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName}`;
+
+  const handleEditWorkpiece = () => setIsEditingWorkpiece(true);
+  const handleSelectTask = () => setTab('task');
+  const taskTabClassName = `tab ${tab === 'task' ? 'selectedTab' : ''}`;
   if (!props.workpiece) return null;
+
+  const commonProps = {
+    ...props,
+    workpiece_id,
+  };
   return (
     <div className="orientation">
-      {showModal && (
+      {/** EDIT WORKPIECE MODAL */}
+      {isEditingWorkpiece && (
         <AddOrEditWorkpieceModal
           {...commonProps}
-          workpieceId={workpiece_id}
-          setShowModal={setShowModal}
+          setShowModal={setIsEditingWorkpiece}
         />
       )}
+
+      {/** EDIT COLLABORATORS MODAL */}
+      {isEditingCollaborators && (
+        <Collaborators
+          {...commonProps}
+          setShowModal={setIsEditingCollaborators}
+        />
+      )}
+
       <div className="b1">
         <div className="content">
+          {/** TOP BAR SECTION ONE */}
           <div className="b1">
-            <div className="back">
-              <Link to="/">BACK</Link>
+            <div className="back" onClick={handleBackButton}>
+              <ArrowLeft />
             </div>
             <div className="right">
-              <div className="credit" />
-              <div className="profile" />
+              <ProfileOptions {...commonProps} />
             </div>
           </div>
 
+          {/** TOP BAR SECTION TWO */}
           <div className="b2">
             <div className="left">
-              <div className="image">Image</div>
+              <div className="image">
+                <SongPlaceholder size={72} />
+              </div>
               <div className="description">
                 <div className="title">
                   {props.workpiece.title}
-                  <button
-                    className="btn-icon"
-                    onClick={() => setShowModal(true)}
-                  >
+                  <button className="btn-icon" onClick={handleEditWorkpiece}>
                     <PenIcon />
                   </button>
                 </div>
                 <div className="details">
-                  {'--------- créé par  '}
-                  <span className="artistName">
-                    {`${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName}`}
-                  </span>
-                  {' - Mis à jour --------'}
+                  {t_createdBy && 'créé par'}
+                  <span className="artistName">{t_createdBy}</span>
                 </div>
               </div>
             </div>
-            <div className="right">Collaborators</div>
           </div>
+
+          {/** TOP BAR SECTION THREE */}
           <div className="b3">
-            <button
-              className={`tab ${tab === 'task' ? 'selectedTab' : ''}`}
-              onClick={() => {
-                setTab('task');
-              }}
-            >
+            <button className={taskTabClassName} onClick={handleSelectTask}>
               Taches
             </button>
             <span className="space" />
-            <button
-              className={`tab ${tab === 'file' ? 'selectedTab' : ''}`}
-              onClick={() => {
-                setTab('file');
-              }}
-              style={{ backgroundColor: 'rgba(214, 196, 162, 0.25)' }}
-            >
-              Fichier
-            </button>
           </div>
         </div>
       </div>
 
+      {/** TILES SECTION */}
       <div className="b2">
         <div className="tileSection">
           <Tile tileId="share" {...commonProps} />
-          <div className="space" />
+          {/* <div className="space" />
           <Tile tileId="document" {...commonProps} />
           <div className="space" />
           <Tile tileId="protect" {...commonProps} />
           <Tile tileId="" {...commonProps} />
           <div className="space" />
-          <Tile tileId="" {...commonProps} />
+          <Tile tileId="" {...commonProps} /> */}
         </div>
       </div>
     </div>

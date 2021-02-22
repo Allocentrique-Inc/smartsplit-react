@@ -48,10 +48,12 @@ const Collaborator = (props) => {
   const t_userName = `${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`;
   const t_removeCollaborator =
     props.translations.rightSplit._removeCollaborator[props.language];
-  const get_t_recordingFunctionOptions = (value) =>
-    props.translations.rightSplit.recordingFunctionOptions[`_${value}`][
+  const get_t_recordingFunctionOptions = (value) => {
+    if (value === '') value = 'placeholder';
+    return props.translations.rightSplit.recordingFunctionOptions[`_${value}`][
       props.language
     ];
+  };
 
   const commonProps = {
     ...props,
@@ -90,7 +92,7 @@ const Collaborator = (props) => {
         onChange={setStatus}
       >
         {[
-          'placeholder',
+          '',
           'producer',
           'autoProducer',
           'directorProducer',

@@ -34,6 +34,7 @@ const Privacy = (props) => {
     textPresentation,
     textDescription,
   };
+
   return (
     <div className="rightSplitCreation">
       {isSaved && (
@@ -42,7 +43,10 @@ const Privacy = (props) => {
             {!isConsulting && <Success {...commonProps} />}
 
             {isConsulting && !isAdjustingEmails && (
-              <PostSaveConsult {...commonProps} />
+              <PostSaveConsult
+                {...commonProps}
+                rightSplitInConsultation={props.workpiece.rightSplit}
+              />
             )}
             {isConsulting && isAdjustingEmails && (
               <AdjustEmails {...commonProps} />
@@ -50,7 +54,6 @@ const Privacy = (props) => {
           </div>
         </div>
       )}
-
       <TopBar {...props} view="privacy" />
       <div className="b1">
         <div className="b1b1">

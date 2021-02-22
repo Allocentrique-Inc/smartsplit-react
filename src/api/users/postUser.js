@@ -1,8 +1,11 @@
 const postUser = async (payload) => {
-  const { email, password } = payload;
+  const { email, password, firstName, lastName, artistName } = payload;
   const body = JSON.stringify({
     email,
     password,
+    firstName,
+    lastName,
+    artistName,
   });
   try {
     const url = 'http://localhost:3001/v1/users/';

@@ -1,3 +1,4 @@
+import { Link, useHistory, useParams } from 'react-router-dom';
 import HighFive from '../../../../../icons/high-five';
 
 const Success = (props) => {
@@ -5,6 +6,8 @@ const Success = (props) => {
   const t_description =
     props.translations.rightSplit.success._description[props.language];
   const t_goto = props.translations.rightSplit.success._goto[props.language];
+  const history = useHistory();
+  const { workpiece_id } = useParams();
   return (
     <>
       <div className="topBar">
@@ -23,7 +26,7 @@ const Success = (props) => {
         <button
           className="btn-primary"
           onClick={() => {
-            props.setIsConsulting((e) => !e);
+            history.push(`/workpiece/${workpiece_id}/right-split/summary`);
           }}
         >
           {t_goto}

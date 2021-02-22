@@ -6,7 +6,6 @@ import PlusCircle from '../../../../../icons/plusCircle';
 const AddCollaborators = (props) => {
   const [isAdding, setIsAdding] = useState(false);
   const user_id = localStorage.getItem('user_id');
-  console.log(props.collaborators);
   const availablesCollaborators = props.collaborators.filter(
     (el) =>
       !props.preSelectedCollaborators.some(

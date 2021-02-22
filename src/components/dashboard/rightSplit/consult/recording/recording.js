@@ -16,19 +16,20 @@ const Recording = (props) => {
           </button>
         )}
       </div>
-      {[props.label.rightHolder_id ? props.label : '', ...props.recording]
+      {[
+        props.rightSplitInConsultation.label
+          ? props.rightSplitInConsultation.label
+          : '',
+        ...props.rightSplitInConsultation.recording,
+      ]
         .filter((e) => e !== '')
-        .map((collaborator, id) => {
-          const rightSplit = props.workpiece.rightSplit.recording;
-          return (
-            <Collaborator
-              {...props}
-              collaborator={collaborator}
-              rightSplit={rightSplit}
-              key={collaborator.user_id}
-            />
-          );
-        })}
+        .map((collaborator, id) => (
+          <Collaborator
+            {...props}
+            collaborator={collaborator}
+            key={collaborator.rightHolder_id}
+          />
+        ))}
     </div>
   );
 };

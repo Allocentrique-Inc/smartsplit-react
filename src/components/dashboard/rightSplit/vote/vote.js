@@ -9,6 +9,8 @@ const Vote = (props) => {
   const [copyright, setCopyright] = useState('');
   const [performance, setPerformance] = useState('');
   const [recording, setRecording] = useState('');
+  const [label, setLabel] = useState('');
+  const [privacy, setPrivacy] = useState('');
   const commonProps = {
     copyright,
     setCopyright,
@@ -16,12 +18,17 @@ const Vote = (props) => {
     setPerformance,
     recording,
     setRecording,
+    label,
+    setLabel,
+    privacy,
+    setPrivacy,
   };
   const { title, owner } = props.workpiece;
   const ownerName = `${owner.firstName} ${owner.lastName}`;
   const splitOwner = props.workpiece.rightSplit.owner;
   const splitOwnerName = `${splitOwner.firstName} ${splitOwner.lastName}`;
   const { version } = props.workpiece.rightSplit;
+  console.log(props);
   return (
     <div className="vote">
       <div className="b1">
@@ -40,7 +47,12 @@ const Vote = (props) => {
             - il y a -----
           </div>
           <div className="consult">
-            <Consult {...props} {...commonProps} voting />
+            <Consult
+              {...props}
+              {...commonProps}
+              voting
+              rightSplitInConsultation={props.workpiece.rightSplit}
+            />
           </div>
         </div>
       </div>
