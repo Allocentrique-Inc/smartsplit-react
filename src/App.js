@@ -49,7 +49,7 @@ const LoadingManager = (props) => {
     <>
       {!isLoaded && 'LOADING'}
       {isLoaded && isLogged && (
-        <Dashboard resetLogginCheck={resetLogginCheck} />
+        <Dashboard {...props} resetLogginCheck={resetLogginCheck} />
       )}
       {isLoaded && !isLogged && <Redirect to="/auth/login" />}
     </>

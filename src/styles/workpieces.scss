@@ -133,6 +133,11 @@
           align-items: center;
           width: 350px;
           text-overflow: ellipsis;
+          .img {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+          }
           .details {
             margin-left: 16px;
             .b1 {

@@ -17,7 +17,9 @@ const Workpiece = (props) => {
   return (
     <div className="workpiece">
       <div className="left">
-        <SongPlaceholder />
+        <div className="img">
+          <SongPlaceholder />
+        </div>
         <div className="details">
           <div className="b1">
             {t_songTitle && <span className="title">{t_songTitle}</span>}

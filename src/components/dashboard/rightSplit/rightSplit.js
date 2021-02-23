@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams, Route } from 'react-router-dom';
 import getUsersCollaborators from '../../../api/users/getUsersCollaborators';
 import postRightSplit from '../../../api/workpieces/postRightSplit';
-import getUsers from '../../../api/users/getUsers';
 import Copyright from './copyright/copyright';
 import Performance from './performance/performance';
 import Recording from './recording/recording';
@@ -24,7 +23,6 @@ const RightSplit = (props) => {
   const [copyrightDividingMethod, selectCopyrightDividingMethod] = useState(
     'equal',
   );
-
   const mapData = async () => {
     if (props.workpiece.rightSplit) {
       const {
@@ -43,8 +41,7 @@ const RightSplit = (props) => {
       setLabel(label || {});
     }
     const collaborators = await getUsersCollaborators({ user_id });
-    const user = await getUsers({ user_id });
-    setCollaborators([user, ...collaborators]);
+    setCollaborators([props.user, ...collaborators]);
   };
   useEffect(() => {
     mapData();

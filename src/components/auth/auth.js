@@ -28,7 +28,7 @@ const Auth = (props) => {
       </div>
       <Switch>
         <Route path="/auth/login">
-          <Login />
+          <Login {...props} />
         </Route>
         <Route path="/auth/signup">
           <Signup />

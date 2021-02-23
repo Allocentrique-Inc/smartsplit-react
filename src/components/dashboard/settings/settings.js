@@ -67,7 +67,9 @@ export default function Settings(props) {
     <div className="settings">
       <div className="topBar">
         <Link to="/">
+          {' '}
           <ArrowLeft />
+          {' '}
         </Link>
         <ProfilePlaceholder />
       </div>

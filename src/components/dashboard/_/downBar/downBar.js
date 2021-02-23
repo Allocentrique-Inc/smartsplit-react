@@ -1,25 +1,34 @@
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-const DownBar = (props) => (
-  <div className="downBar">
-    <div className="b1b1">
-      <div className="b1b1b1">
-        <Link to={props.backUrl} className="btn-secondary">
-          Retour
-        </Link>
-        {!props.save && (
-          <Link to={props.frontUrl} className="btn-primary">
-            Continuer
-          </Link>
-        )}
-        {props.save && (
-          <button onClick={props.save} className="btn-primary">
-            Sauvegarder
+const DownBar = (props) => {
+  const history = useHistory();
+  const handleNext = () => {
+    history.push(props.frontUrl);
+  };
+  const handleBack = () => {
+    history.push(props.backUrl);
+  };
+  return (
+    <div className="downBar">
+      <div className="b1b1">
+        <div className="b1b1b1">
+          <button onClick={handleBack} className="btn-secondary">
+            Retour
           </button>
-        )}
+          {!props.save && (
+            <button onClick={handleNext} className="btn-primary">
+              Continuer
+            </button>
+          )}
+          {props.save && (
+            <button onClick={props.save} className="btn-primary">
+              Sauvegarder
+            </button>
+          )}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default DownBar;

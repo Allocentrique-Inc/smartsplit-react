@@ -8,7 +8,10 @@ const Consult = (props) => {
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
   }
+
   const recording = [
+    props.rightSplitInConsultation &&
+    props.rightSplitInConsultation.label &&
     props.rightSplitInConsultation.label.rightHolder_id
       ? props.rightSplitInConsultation.label
       : '',
@@ -20,7 +23,11 @@ const Consult = (props) => {
     ...props.rightSplitInConsultation.performance,
     ...props.rightSplitInConsultation.recording,
   ];
-  if (props.rightSplitInConsultation.label.rightHolder_id) {
+  if (
+    props.rightSplitInConsultation &&
+    props.rightSplitInConsultation.label &&
+    props.rightSplitInConsultation.label.rightHolder_id
+  ) {
     activeCollaborators.push(props.rightSplitInConsultation.label);
   }
   activeCollaborators = activeCollaborators.reduce((acc, el) => {
