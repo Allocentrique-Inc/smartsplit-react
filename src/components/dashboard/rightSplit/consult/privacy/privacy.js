@@ -38,7 +38,7 @@ const Privacy = (props) => {
 
 const Collab = (props) => {
   console.log(props.collaborator);
-  const { vote, rightHolder } = props.collaborator;
+  const { vote, rightHolder, comment } = props.collaborator;
   const { firstName, lastName } = rightHolder;
   const t_name = `${firstName} ${lastName}`;
   const t_initials = `${firstName[0]}${lastName[0]}`;
@@ -78,7 +78,12 @@ const Collab = (props) => {
           )}
         </div>
       </div>
-
+      {!props.voting && !isUserVoting && comment && (
+        <div className="comment">
+          <div>Commentaire</div>
+          {comment}
+        </div>
+      )}
       {props.voting && isUserVoting && (
         <div className="voting">
           <div className="buttons">

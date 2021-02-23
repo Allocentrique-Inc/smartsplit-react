@@ -108,7 +108,16 @@
     height: inherit;
     border: none;
   }
-
+  .comment {
+    @extend .medium-400;
+    padding: 8px 16px;
+    margin: 0 8px 16px 8px;
+    color: map-get($colors, 'secondary');
+    background-color: map-get($colors-background, 'underground');
+    div {
+      margin-bottom: 8px;
+    }
+  }
   .voting {
     display: flex;
     flex-direction: column;
@@ -125,6 +134,7 @@
       border: 1px solid #dcdfe1;
       box-sizing: border-box;
       border-radius: 2px;
+      margin-bottom: 16px;
     }
     button {
       width: 180px;

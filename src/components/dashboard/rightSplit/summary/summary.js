@@ -3,6 +3,7 @@ import TopBar from './topBar/topBar';
 import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
 import Consult from '../consult/consult';
 import X from '../../../../icons/x';
+import ProfilePlaceholder from '../../../../icons/profilePlaceholder';
 
 const Summary = (props) => {
   const [consulting, setConsulting] = useState(null);
@@ -83,61 +84,67 @@ const Summary = (props) => {
       {consulting &&
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         (isAdjustingEmails ? (
-          <div
-            className="modalBackground"
-            onClick={() => {
-              setConsulting(null);
-              setIsAdjustingEmails(false);
-            }}
-          >
-            <div className="modal" onClick={(e) => e.stopPropagation()}>
-              <div className="topBar">
-                <div className="title">{t_title}</div>
-                <div
-                  className="exit"
-                  onClick={() => {
-                    setConsulting(null);
-                    setIsAdjustingEmails(false);
-                  }}
-                >
-                  <X />
+          <div className="sendSplitModal">
+            <div
+              className="modalBackground"
+              onClick={() => {
+                setConsulting(null);
+                setIsAdjustingEmails(false);
+              }}
+            >
+              <div className="modal" onClick={(e) => e.stopPropagation()}>
+                <div className="topBar">
+                  <div className="title">{t_title}</div>
+                  <div
+                    className="exit"
+                    onClick={() => {
+                      setConsulting(null);
+                      setIsAdjustingEmails(false);
+                    }}
+                  >
+                    <X />
+                  </div>
                 </div>
-              </div>
-              <div className="content adjustEmails">
-                <div>{t_presentation}</div>
-                <div>
+                <div className="content">
+                  <p>{t_presentation}</p>
                   {allActors.map((el) => (
-                    <div>
-                      <div>{`${el.rightHolder.firstName} ${el.rightHolder.lastName}`}</div>
-                      <input
-                        value={emails[el.rightHolder_id]}
-                        onChange={(e) => {
-                          const alfa = { ...emails };
-                          alfa[el.rightHolder_id] = e.target.value;
-                          setEmails(alfa);
-                        }}
-                      />
+                    <div className="collaborator">
+                      <ProfilePlaceholder small />
+
+                      <div className="formInput">
+                        <label>
+                          {`${el.rightHolder.firstName} ${el.rightHolder.lastName}`}
+                        </label>
+                        <input
+                          value={emails[el.rightHolder_id]}
+                          onChange={(e) => {
+                            const alfa = { ...emails };
+                            alfa[el.rightHolder_id] = e.target.value;
+                            setEmails(alfa);
+                          }}
+                        />
+                      </div>
                     </div>
                   ))}
                 </div>
-              </div>
-              <div className="downBar">
-                <button
-                  className="btn-secondary"
-                  style={{ marginRight: '10px' }}
-                  onClick={() => {
-                    setConsulting(null);
-                    setIsAdjustingEmails(false);
-                  }}
-                >
-                  {t_annuler}
-                </button>
-                <button
-                  className="btn-primary"
-                  onClick={handleSubmitRightSplit}
-                >
-                  {t_envoyer}
-                </button>
+                <div className="downBar">
+                  <button
+                    className="btn-secondary"
+                    style={{ marginRight: '10px' }}
+                    onClick={() => {
+                      setConsulting(null);
+                      setIsAdjustingEmails(false);
+                    }}
+                  >
+                    {t_annuler}
+                  </button>
+                  <button
+                    className="btn-primary"
+                    onClick={handleSubmitRightSplit}
+                  >
+                    {t_envoyer}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

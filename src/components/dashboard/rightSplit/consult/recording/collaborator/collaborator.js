@@ -1,7 +1,13 @@
 // import Vote from '../vote/vote';
 
 const Collaborator = (props) => {
-  const { shares, vote, function: _function, rightHolder } = props.collaborator;
+  const {
+    shares,
+    vote,
+    function: _function,
+    rightHolder,
+    comment,
+  } = props.collaborator;
   const { firstName, lastName } = rightHolder;
   const t_initials = `${firstName[0]} ${lastName[0]}`;
   const user_id = localStorage.getItem('user_id');
@@ -71,6 +77,12 @@ const Collaborator = (props) => {
           )}
         </div>
       </div>
+      {!props.voting && !isUserVoting && comment && (
+        <div className="comment">
+          <div>Commentaire</div>
+          {comment}
+        </div>
+      )}
       {props.voting && isUserVoting && (
         <div className="voting">
           <div className="buttons">

@@ -1,7 +1,7 @@
 // import Vote from '../vote/vote';
 
 const Collaborator = (props) => {
-  const { shares, vote, roles, rightHolder } = props.collaborator;
+  const { shares, vote, roles, rightHolder, comment } = props.collaborator;
   const { firstName, lastName } = rightHolder;
   const t_initials = `${firstName[0]} ${lastName[0]}`;
   const handleAccept = () =>
@@ -46,6 +46,12 @@ const Collaborator = (props) => {
           )}
         </div>
       </div>
+      {!props.voting && !isUserVoting && comment && (
+        <div className="comment">
+          <div>Commentaire</div>
+          {comment}
+        </div>
+      )}
       {props.voting && isUserVoting && (
         <div className="voting">
           <div className="buttons">

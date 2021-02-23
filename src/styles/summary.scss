@@ -176,5 +176,26 @@
   }
 }
 
-.adjustEmails {
+.sendSplitModal {
+  .modal {
+    max-width: 644px !important;
+  }
+  .content {
+    p {
+      @extend .medium-400;
+      color: map-get($colors, 'secondary');
+      margin-bottom: 32px;
+    }
+    .collaborator {
+      margin-top: 16px;
+      display: flex;
+      svg {
+        margin-right: 16px;
+        margin-top: 4px;
+      }
+      .formInput {
+        flex: 1;
+      }
+    }
+  }
 }

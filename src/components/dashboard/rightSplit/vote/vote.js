@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Title from './title/title';
 import Creation from './creation/creation';
 import SplitOwner from './splitOwner/splitOwner';
@@ -38,6 +38,9 @@ const Vote = (props) => {
     privacy,
     setPrivacy,
   };
+  useEffect(() => {
+    console.log('SPLITS', copyright, performance, recording, label);
+  }, []);
   const { title, owner } = props.workpiece;
   const ownerName = `${owner.firstName} ${owner.lastName}`;
   const splitOwner = props.workpiece.rightSplit.owner;
