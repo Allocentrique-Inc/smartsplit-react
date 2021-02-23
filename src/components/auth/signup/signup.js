@@ -7,7 +7,7 @@ import CheckEmailModal from './checkEmailModal/checkEmailModal';
 export default (props) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [artistName, setArtisteName] = useState('');
+  const [artistName, setArtistName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -18,7 +18,7 @@ export default (props) => {
   const handlePassword = (e) => setPassword(e.target.value);
   const handleFirstName = (e) => setFirstName(e.target.value);
   const handleLastName = (e) => setLastName(e.target.value);
-  const handleArtistName = (e) => setArtisteName(e.target.value);
+  const handleArtistName = (e) => setArtistName(e.target.value);
   const handleSubmit = async () => {
     const result = await postUser({
       email,
@@ -29,6 +29,9 @@ export default (props) => {
     });
     setShowModal(true);
     setEmail('');
+    setFirstName('');
+    setLastName('');
+    setArtistName('');
     setPassword('');
     setConfirmPassword('');
   };
@@ -44,26 +47,41 @@ export default (props) => {
           droits avec tes contributeurs.
         </p>
       </div>
-      {/* <div className="toDo">Creation de compte avec réseau sociaux</div> */}
-      <div className="form-input">
-        <label htmlFor="text">Entre ton prénom</label>
-        <input id="firstName" value={firstName} onChange={handleFirstName} />
+      <div className="toDo">Creation de compte avec réseau sociaux</div>
+      <div className="formInput">
+        <label htmlFor="firstName">Entre ton prénom</label>
+        <input
+          type="text"
+          id="firstName"
+          value={firstName}
+          onChange={handleFirstName}
+        />
       </div>
-      <div className="form-input">
-        <label htmlFor="text">Entre ton nom de famille</label>
-        <input id="lastName" value={lastName} onChange={handleLastName} />
+      <div className="formInput">
+        <label htmlFor="lastName">Entre ton nom de famille</label>
+        <input
+          type="text"
+          id="lastName"
+          value={lastName}
+          onChange={handleLastName}
+        />
       </div>
-      <div className="form-input">
-        <label htmlFor="text">Entre ton nom d'artiste (optionel)</label>
-        <input id="artistName" value={artistName} onChange={handleArtistName} />
+      <div className="formInput">
+        <label htmlFor="artistName">Entre ton nom d'artiste (optionel)</label>
+        <input
+          type="text"
+          id="artistName"
+          value={artistName}
+          onChange={handleArtistName}
+        />
       </div>
-      <div className="form-input">
+      <div className="formInput">
         <label htmlFor="email">Entre ton courriel</label>
-        <input id="email" value={email} onChange={handleEmail} />
+        <input type="text" id="email" value={email} onChange={handleEmail} />
       </div>
       <div className="formInput">
         <label htmlFor="password">Choisis ton mot de passe</label>
-        <div className="double-input">
+        <div className="doubleInput">
           {/* <input id="password" value={password} onChange={handlePassword} /> */}
           {/* <div className="toDo">Validation de mot de passe</div>
           <input

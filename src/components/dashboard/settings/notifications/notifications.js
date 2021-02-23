@@ -1,7 +1,8 @@
+import { useEffect } from 'react';
 import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 
 export default function Notifications(props) {
-  const { notifications, setField } = props;
+  const { notifications, setField, updateUser, ...nextProps } = props;
   const isNotificationSelected = (type, value) =>
     notifications[type].includes(value);
   const toggleNotification = (type, value) => {
@@ -11,10 +12,15 @@ export default function Notifications(props) {
     } else {
       notifications[type].splice(index, 1);
     }
-    setField('notifications', notifications);
+    setField('notifications', {
+      ...notifications,
+      [type]: notifications[type],
+    });
+    updateUser();
   };
+  useEffect(() => updateUser());
   return (
-    <div className="notifications">
+    <div className="notifications" id="notifications">
       <h2>Notifications</h2>
       <table>
         <thead>

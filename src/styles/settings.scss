@@ -17,6 +17,27 @@
     .colLeft {
       width: 244px;
       margin-right: 96px;
+      .navigation {
+        top: 0;
+        position: sticky;
+        display: flex;
+        flex-direction: column;
+        box-shadow: inset 1px 0px 0px #dcdfe1;
+
+        > * {
+          margin-top: 8px;
+          margin-bottom: 8px;
+        }
+        a {
+          @extend .medium-700;
+          color: map-get($colors, 'secondary');
+          // display: block;
+          height: 24px;
+          text-decoration: none;
+
+          padding: 8px 0 8px 16px;
+        }
+      }
     }
     .colRight {
       .formInput {

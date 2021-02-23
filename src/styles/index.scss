@@ -42,6 +42,7 @@ body {
 
 .toDo {
   background-color: map-get($colors, 'wip');
+  display: none;
 }
 
 .profileOptions {

@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import Music from '../../../../icons/music';
 import SmartsplitSecondary from '../../../../icons/smartsplitSecondary';
+import Tool from '../../../../icons/tool';
 
 const LeftMenu = (props) => {
   const history = useHistory();
@@ -20,13 +21,25 @@ const LeftMenu = (props) => {
         Mes pièces musicales
       </button>
 
-      {/* <button
+      {/*  <button
         className={`sectionButton ${selected === 'alfa' ? 'alfa' : 'alfa'}`}
         onClick={() => history.push('/settings')}
       >
-        <span className="buttonLogo" />
+        <span className="buttonLogo">
+          <UserCard />
+        </span>
         Mon profil public
+      </button> */}
+      <button
+        className={`sectionButton ${selected === 'alfa' ? 'alfa' : 'alfa'}`}
+        onClick={() => history.push('/settings')}
+      >
+        <span className="buttonLogo">
+          <Tool />
+        </span>
+        Paramètres
       </button>
+      {/*
       <button
         className={`sectionButton ${selected === 'alfa' ? 'alfa' : 'alfa'}`}
         onClick={() => history.push('/collaborators')}

@@ -17,11 +17,21 @@
     @extend .small-700;
   }
 
-  .double-input {
+  .doubleInput {
     display: flex;
     flex-direction: column;
     :last-child {
       margin-top: 32px;
+    }
+    > input {
+      @extend .medium-400;
+      margin-top: 8px;
+      height: 40px;
+      width: 100%;
+      background: map-get($colors-background, 'ground');
+      border: 1px solid map-get($colors, 'stroke');
+      border-radius: 2px;
+      padding: 8px;
     }
   }
 

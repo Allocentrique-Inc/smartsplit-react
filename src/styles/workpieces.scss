@@ -27,7 +27,6 @@
     .sectionButton {
       background-color: inherit;
       border: none;
-      height: 56px;
       font-family: IBM Plex Sans;
       font-style: normal;
       font-weight: normal;
@@ -36,12 +35,12 @@
       color: #ffffff;
       display: flex;
       justify-content: flex-start;
-      align-items: center;
       width: 100%;
       outline: 0;
       cursor: pointer;
+      padding: 16px;
       .buttonLogo {
-        margin: 12px;
+        margin-right: 16px;
       }
     }
     .selected {

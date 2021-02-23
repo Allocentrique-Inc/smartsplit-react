@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import AddProIdModal from './addProIdModal/addProIdModal';
 
-export default function ProIdSelect({ value, onChange }) {
+export default function ProIdSelect({ value, onChange, onBlur }) {
   const [ids, setIds] = useState(value.ids);
   const [showModal, setShowModal] = useState(false);
   const handleIdChange = (name, newValue) => {
@@ -16,6 +16,12 @@ export default function ProIdSelect({ value, onChange }) {
   const togglePublicProperty = () => {
     onChange({ ids, public: !value.public });
   };
+  useEffect(() => {
+    value && setIds(value.ids);
+  }, [value]);
+  useEffect(() => {
+    onBlur && onBlur();
+  }, [value.ids, value.public]);
   return (
     <div className="proIdSelect">
       <div className="inputs">
@@ -26,7 +32,7 @@ export default function ProIdSelect({ value, onChange }) {
               type="text"
               value={id.value}
               onChange={(e) => handleIdChange(id.name, e.target.value)}
-              onBlur={() => onChange(ids)}
+              onBlur={() => onChange({ ids, public: value.public })}
             />
           </div>
         ))}
@@ -41,6 +47,7 @@ export default function ProIdSelect({ value, onChange }) {
         <input
           type="checkbox"
           value={value.public}
+          checked={value.public}
           onChange={togglePublicProperty}
         />
         Rendre publics mes identifiants professionnels énumérés ci-dessus

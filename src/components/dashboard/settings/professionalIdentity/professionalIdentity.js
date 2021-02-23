@@ -2,9 +2,9 @@ import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 import ProIdSelect from './_/proIdSelect/proIdSelect';
 
 export default function ProfessionalIdentity(props) {
-  const { professionalIdentity, setField } = props;
+  const { professionalIdentity, setField, updateUser } = props;
   return (
-    <div className="professionalIdentity">
+    <div className="professionalIdentity" id="professional-identity">
       <h2>Identité professionnelle</h2>
       <div className="formInput">
         <label htmlFor="organisations">Mes entreprises liées</label>
@@ -14,6 +14,7 @@ export default function ProfessionalIdentity(props) {
           onChange={(value) =>
             setField('professionalIdentity', { organisations: value })
           }
+          onBlur={updateUser}
         />
       </div>
       <div className="formInput">
@@ -26,6 +27,7 @@ export default function ProfessionalIdentity(props) {
           onChange={(value) =>
             setField('professionalIdentity', { professionalIdentity: value })
           }
+          onBlur={updateUser}
         />
       </div>
       <div className="formInput">
@@ -37,6 +39,7 @@ export default function ProfessionalIdentity(props) {
           onChange={(e) =>
             setField('professionalIdentity', { birthDate: e.target.value })
           }
+          onBlur={updateUser}
         />
       </div>
       <div className="formInput">
@@ -48,6 +51,7 @@ export default function ProfessionalIdentity(props) {
           onChange={(e) =>
             setField('professionalIdentity', { isni: e.target.value })
           }
+          onBlur={updateUser}
         />
       </div>
       <div className="formInput">
@@ -59,6 +63,7 @@ export default function ProfessionalIdentity(props) {
           onChange={(e) =>
             setField('professionalIdentity', { uri: e.target.value })
           }
+          onBlur={updateUser}
         />
       </div>
     </div>

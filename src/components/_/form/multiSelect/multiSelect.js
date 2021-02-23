@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export default function MultiSelect(props) {
-  const { value, onChange } = props;
+  const { value, onChange, onBlur } = props;
   const [search, setSearch] = useState('');
 
   const addElement = () => {
@@ -10,12 +10,14 @@ export default function MultiSelect(props) {
       onChange(value);
     }
     setSearch('');
+    onBlur && onBlur();
   };
 
   const removeElement = (index) => {
     const newValue = value;
     newValue.splice(index, 1);
     onChange(newValue);
+    onBlur && onBlur();
   };
 
   return (

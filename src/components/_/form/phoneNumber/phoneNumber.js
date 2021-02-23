@@ -5,7 +5,7 @@ import MoreHorizontal from '../../../../icons/moreHorizontal';
 import CheckMark from '../../../../icons/checkMark';
 
 export default function PhoneNumber(props) {
-  const { value, onChange, status = 'unverified', ...nextProps } = props;
+  const { value, onChange, status = 'unverified', onBlur } = props;
   const StatusIcon = {
     unverified: <MoreHorizontal />,
     pending: <MoreHorizontal />,
@@ -27,26 +27,23 @@ export default function PhoneNumber(props) {
   const [currentValue, setCurrentValue] = useState(value || '');
   const [fieldValue, setFieldValue] = useState(toDisplayNumber(value) || '');
 
-  const handleOnChange = useCallback(
-    (number) => {
-      setFieldValue(number);
+  const handleOnChange = (number) => {
+    setFieldValue(number);
 
-      const parsed = toInternational(number);
+    const parsed = toInternational(number);
 
-      if (parsed && parsed !== currentValue) {
-        if (onChange) {
-          onChange(parsed);
-        }
-        setCurrentValue(parsed);
+    if (parsed && parsed !== currentValue) {
+      if (onChange) {
+        onChange(parsed);
       }
-    },
-    [currentValue],
-  );
-
-  const handleOnBlur = useCallback(() => {
+      setCurrentValue(parsed);
+    }
+  };
+  const handleOnBlur = () => {
     const formattedNumber = toDisplayNumber(fieldValue);
     setFieldValue(formattedNumber || fieldValue);
-  }, [fieldValue]);
+    onBlur && onBlur();
+  };
 
   useEffect(() => {
     if (value !== currentValue) {
@@ -54,16 +51,15 @@ export default function PhoneNumber(props) {
       handleOnBlur();
     }
   }, [value, currentValue]);
-
+  useEffect(() => {
+    setFieldValue(toDisplayNumber(value) || '');
+  }, [value]);
   return (
-    <div className="row" {...nextProps}>
-      <input
-        type="text"
-        value={fieldValue}
-        onChange={(e) => handleOnChange(e.target.value)}
-        onBlur={handleOnBlur}
-      />
-      {StatusIcon[status]}
-    </div>
+    <input
+      type="text"
+      value={fieldValue}
+      onChange={(e) => handleOnChange(e.target.value)}
+      onBlur={handleOnBlur}
+    />
   );
 }
