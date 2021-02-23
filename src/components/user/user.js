@@ -12,6 +12,7 @@ import ActivateEmail from './activateEmail/activateEmail';
 import ChangePassword from './changePassword/changePassword';
 import RequestPasswordReset from './requestPasswordReset/requestPasswordReset';
 import PasswordResetConfirmation from './passwordResetConfirmation/passwordResetConfirmation';
+import ActivateInvitedUser from './activateInvitedUser/activateInvitedUser';
 
 const User = (props) => {
   const match = useRouteMatch();
@@ -28,6 +29,11 @@ const User = (props) => {
       <Switch>
         <Route path={`${match.path}/activate/:token`}>
           <ActivateEmail />
+        </Route>
+        <Route
+          path={`${match.path}/activate-invited-user/:token/:firstName/:lastName`}
+        >
+          <ActivateInvitedUser />
         </Route>
         <Route path={`${match.path}/change-password/:token`}>
           <ChangePassword />

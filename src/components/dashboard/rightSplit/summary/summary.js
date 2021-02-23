@@ -6,8 +6,8 @@ import X from '../../../../icons/x';
 
 const Summary = (props) => {
   const [consulting, setConsulting] = useState(null);
-  const [emails, setEmails] = useState(false);
-  const [isAdjustingEmails, setIsAdjustingEmails] = useState(null);
+  const [emails, setEmails] = useState(null);
+  const [isAdjustingEmails, setIsAdjustingEmails] = useState(false);
   if (
     !props.workpiece.rightSplit ||
     !props.workpiece.rightSplit._state ||
@@ -24,7 +24,8 @@ const Summary = (props) => {
       emails,
     });
     setConsulting(null);
-    setEmails(false);
+    setEmails(null);
+    setIsAdjustingEmails(false);
     props.resetData();
   };
 
@@ -48,10 +49,12 @@ const Summary = (props) => {
     props.translations.rightSplit.summary.adjustEmail._cancel[props.language];
 
   const allArrays = [
-    ...props.copyright,
-    ...props.performance,
-    ...props.recording,
-    props.label.rightHolder_id ? props.label : '',
+    ...props.workpiece.rightSplit.copyright,
+    ...props.workpiece.rightSplit.performance,
+    ...props.workpiece.rightSplit.recording,
+    props.workpiece.rightSplit.label.rightHolder_id
+      ? props.workpiece.rightSplit.label
+      : '',
   ].filter((el) => el !== '');
   const allActors = [];
   allArrays.forEach((el) => {
@@ -60,12 +63,9 @@ const Summary = (props) => {
     }
   });
 
-  console.log(emails);
-
   useEffect(() => {
     const alfa = {};
     allActors.forEach((el) => {
-      console.log(el);
       const { emails } = el.rightHolder;
       alfa[el.rightHolder_id] = emails[0];
     });
