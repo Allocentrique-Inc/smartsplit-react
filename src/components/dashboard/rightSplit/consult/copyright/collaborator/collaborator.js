@@ -2,8 +2,18 @@ const Collaborator = (props) => {
   const { shares, vote, roles, rightHolder } = props.collaborator;
   const { firstName, lastName } = rightHolder;
   const t_initials = `${firstName[0]} ${lastName[0]}`;
-  const handleAccept = () => props.setCopyright('accepted');
-  const handleReject = () => props.setCopyright('rejected');
+  const handleAccept = () =>
+    props.setCopyright({
+      vote: 'accepted',
+      comment: '',
+    });
+  const handleReject = () =>
+    props.setCopyright((prevState) => ({ ...prevState, vote: 'rejected' }));
+  const handleCommentChange = (e) =>
+    props.setCopyright((prevState) => ({
+      ...prevState,
+      comment: e.target.value,
+    }));
   const user_id = localStorage.getItem('user_id');
   const isUserVoting =
     user_id === props.collaborator.rightHolder_id && vote === 'undecided';
@@ -38,22 +48,30 @@ const Collaborator = (props) => {
       </div>
       {props.voting && isUserVoting && (
         <div className="voting">
-          <button
-            onClick={handleReject}
-            className={`reject ${
-              props.copyright === 'rejected' ? 'rejectSelected' : ''
-            }`}
-          >
-            No
-          </button>
-          <button
-            onClick={handleAccept}
-            className={`accept ${
-              props.copyright === 'accepted' ? 'acceptSelected' : ''
-            }`}
-          >
-            Yes
-          </button>
+          <div className="buttons">
+            <button
+              onClick={handleReject}
+              className={`reject ${
+                props.copyright.vote === 'rejected' ? 'rejectSelected' : ''
+              }`}
+            >
+              No
+            </button>
+            <button
+              onClick={handleAccept}
+              className={`accept ${
+                props.copyright.vote === 'accepted' ? 'acceptSelected' : ''
+              }`}
+            >
+              Yes
+            </button>
+          </div>
+          {props.copyright.vote === 'rejected' && (
+            <textarea
+              value={props.copyright.comment}
+              onChange={handleCommentChange}
+            />
+          )}
         </div>
       )}
     </>

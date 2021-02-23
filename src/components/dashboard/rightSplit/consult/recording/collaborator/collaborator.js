@@ -15,16 +15,37 @@ const Collaborator = (props) => {
   let isRejected;
   let handleAccept;
   let handleReject;
+  let handleCommentChange;
+  let commentValue;
   if (isLabel) {
-    isAccepted = props.label === 'accepted';
-    isRejected = props.label === 'rejected';
-    handleAccept = () => props.setLabel('accepted');
-    handleReject = () => props.setLabel('rejected');
+    isAccepted = props.label.vote === 'accepted';
+    isRejected = props.label.vote === 'rejected';
+    handleAccept = () =>
+      props.setLabel((prevState) => ({ ...prevState, vote: 'accepted' }));
+    handleReject = () =>
+      props.setLabel((prevState) => ({ ...prevState, vote: 'rejected' }));
+    handleCommentChange = (e) =>
+      props.setLabel((prevState) => ({
+        ...prevState,
+        comment: e.target.value,
+      }));
+    commentValue = props.label.comment;
   } else {
-    isAccepted = props.recording === 'accepted';
-    isRejected = props.recording === 'rejected';
-    handleAccept = () => props.setRecording('accepted');
-    handleReject = () => props.setRecording('rejected');
+    isAccepted = props.recording.vote === 'accepted';
+    isRejected = props.recording.vote === 'rejected';
+    handleAccept = () =>
+      props.setRecording({
+        vote: 'accepted',
+        comment: '',
+      });
+    handleReject = () =>
+      props.setRecording((prevState) => ({ ...prevState, vote: 'rejected' }));
+    handleCommentChange = (e) =>
+      props.setRecording((prevState) => ({
+        ...prevState,
+        comment: e.target.value,
+      }));
+    commentValue = props.recording.comment;
   }
   console.log(isLabel, props.label, isRejected);
   return (
@@ -34,10 +55,7 @@ const Collaborator = (props) => {
           <div className="avatar">{t_initials}</div>
           <div>
             <div className="name">{`${firstName} ${lastName}`}</div>
-            <div className="roles">
-              {' '}
-              {_function}
-            </div>
+            <div className="roles"> {_function}</div>
           </div>
         </div>
         <div className="right">
@@ -55,18 +73,26 @@ const Collaborator = (props) => {
       </div>
       {props.voting && isUserVoting && (
         <div className="voting">
-          <button
-            onClick={handleReject}
-            className={`reject ${isRejected ? 'rejectSelected' : ''}`}
-          >
-            No
-          </button>
-          <button
-            onClick={handleAccept}
-            className={`accept ${isAccepted ? 'acceptSelected' : ''}`}
-          >
-            Yes
-          </button>
+          <div className="buttons">
+            <button
+              onClick={handleReject}
+              className={`reject ${isRejected ? 'rejectSelected' : ''}`}
+            >
+              No
+            </button>
+            <button
+              onClick={handleAccept}
+              className={`accept ${isAccepted ? 'acceptSelected' : ''}`}
+            >
+              Yes
+            </button>
+          </div>
+          {isRejected && (
+            <textarea
+              value={props.recording.comment}
+              onChange={handleCommentChange}
+            />
+          )}
         </div>
       )}
     </>

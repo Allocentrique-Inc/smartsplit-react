@@ -43,8 +43,18 @@ const Collab = (props) => {
   const t_name = `${firstName} ${lastName}`;
   const t_initials = `${firstName[0]}${lastName[0]}`;
   const t_vote = props.collaborator.vote;
-  const handleAccept = () => props.setPrivacy('accepted');
-  const handleReject = () => props.setPrivacy('rejected');
+  const handleAccept = () =>
+    props.setPrivacy({
+      vote: 'accepted',
+      comment: '',
+    });
+  const handleReject = () =>
+    props.setPrivacy((prevState) => ({ ...prevState, vote: 'rejected' }));
+  const handleCommentChange = (e) =>
+    props.setPrivacy((prevState) => ({
+      ...prevState,
+      comment: e.target.value,
+    }));
   const user_id = localStorage.getItem('user_id');
   const isUserVoting =
     user_id === props.collaborator.rightHolder_id && vote === 'undecided';
@@ -71,22 +81,30 @@ const Collab = (props) => {
 
       {props.voting && isUserVoting && (
         <div className="voting">
-          <button
-            onClick={handleReject}
-            className={`reject ${
-              props.privacy === 'rejected' ? 'rejectSelected' : ''
-            }`}
-          >
-            No
-          </button>
-          <button
-            onClick={handleAccept}
-            className={`accept ${
-              props.privacy === 'accepted' ? 'acceptSelected' : ''
-            }`}
-          >
-            Yes
-          </button>
+          <div className="buttons">
+            <button
+              onClick={handleReject}
+              className={`reject ${
+                props.privacy.vote === 'rejected' ? 'rejectSelected' : ''
+              }`}
+            >
+              No
+            </button>
+            <button
+              onClick={handleAccept}
+              className={`accept ${
+                props.privacy.vote === 'accepted' ? 'acceptSelected' : ''
+              }`}
+            >
+              Yes
+            </button>
+          </div>
+          {props.privacy.vote === 'rejected' && (
+            <textarea
+              value={props.privacy.comment}
+              onChange={handleCommentChange}
+            />
+          )}
         </div>
       )}
     </div>

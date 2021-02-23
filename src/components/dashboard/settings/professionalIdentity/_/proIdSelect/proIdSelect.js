@@ -23,7 +23,7 @@ export default function ProIdSelect({ value, onChange, onBlur }) {
     onBlur && onBlur();
   }, [value.ids, value.public]);
   return (
-    <div className="proIdSelect">
+    <div className="proIdSelect toDo">
       <div className="inputs">
         {ids.map((id) => (
           <div className="formInput" key={id.name}>

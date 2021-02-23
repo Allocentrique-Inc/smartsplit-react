@@ -18,6 +18,7 @@ module.exports = {
     'react/button-has-type': 'off',
     'react/jsx-curly-newline': 'off',
     'react/implicit-arrow-linebreak': 'off',
+    'react/jsx-one-expression-per-line': 'off',
     'implicit-arrow-linebreak': 'off',
     'operator-linebreak': 'off',
     'no-irregular-whitespace': 'off',
