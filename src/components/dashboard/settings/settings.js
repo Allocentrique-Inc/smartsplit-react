@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { NavHashLink } from 'react-router-hash-link';
+// import { NavHashLink } from 'react-router-hash-link';
 import Profile from './profile/profile';
 import Account from './account/account';
 import ProfessionalIdentity from './professionalIdentity/professionalIdentity';
@@ -123,7 +123,7 @@ export default function Settings(props) {
       </div>
       <main className="row">
         <div className="colLeft">
-          <div className="navigation">
+          {/* <div className="navigation">
             <NavHashLink
               smooth
               activeClassName="selected"
@@ -159,7 +159,7 @@ export default function Settings(props) {
             >
               Sécurité
             </NavHashLink>
-          </div>
+          </div> */}
         </div>
         <div className="colRight">
           <Profile {...commonProps} />
