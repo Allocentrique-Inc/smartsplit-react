@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import MultiSelect from '../../../_/form/multiSelect/multiSelect';
+import Checkbox from '../../../_/form/checkbox/checkbox';
 
 export default function Notifications(props) {
   const { notifications, setField, updateUser, ...nextProps } = props;
@@ -33,19 +34,23 @@ export default function Notifications(props) {
         </thead>
         <tbody>
           <tr>
-            <td>Interactions Générales</td>
             <td>
-              <input
-                type="checkbox"
+              <div className="title">Interactions Générales</div>
+              <div className="description">
+                Propositions et suivi d'ayants droit
+              </div>
+            </td>
+            <td>
+              <Checkbox
                 checked={isNotificationSelected('generalInteractions', 'email')}
                 onChange={() =>
                   toggleNotification('generalInteractions', 'email')
                 }
+                disabled
               />
             </td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected('generalInteractions', 'push')}
                 onChange={() =>
                   toggleNotification('generalInteractions', 'push')
@@ -53,8 +58,7 @@ export default function Notifications(props) {
               />
             </td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected('generalInteractions', 'sms')}
                 onChange={() =>
                   toggleNotification('generalInteractions', 'sms')
@@ -65,8 +69,7 @@ export default function Notifications(props) {
           <tr>
             <td>Messages administratifs</td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected(
                   'administrativeMessages',
                   'email',
@@ -74,11 +77,11 @@ export default function Notifications(props) {
                 onChange={() =>
                   toggleNotification('administrativeMessages', 'email')
                 }
+                disabled
               />
             </td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected(
                   'administrativeMessages',
                   'push',
@@ -89,8 +92,7 @@ export default function Notifications(props) {
               />
             </td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected(
                   'administrativeMessages',
                   'sms',
@@ -104,15 +106,13 @@ export default function Notifications(props) {
           <tr>
             <td>Connexion au compte</td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected('accountLogin', 'email')}
                 onChange={() => toggleNotification('accountLogin', 'email')}
               />
             </td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected('accountLogin', 'push')}
                 onChange={() => toggleNotification('accountLogin', 'push')}
               />
@@ -121,15 +121,13 @@ export default function Notifications(props) {
           <tr>
             <td>Blogue de Smartsplit</td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected('smartsplitBlog', 'email')}
                 onChange={() => toggleNotification('smartsplitBlog', 'email')}
               />
             </td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected('smartsplitBlog', 'push')}
                 onChange={() => toggleNotification('smartsplitBlog', 'push')}
               />
@@ -138,8 +136,7 @@ export default function Notifications(props) {
           <tr>
             <td>Promotions Smartsplit</td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected(
                   'smartsplitPromotions',
                   'email',
@@ -150,8 +147,7 @@ export default function Notifications(props) {
               />
             </td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected('smartsplitPromotions', 'push')}
                 onChange={() =>
                   toggleNotification('smartsplitPromotions', 'push')
@@ -162,8 +158,7 @@ export default function Notifications(props) {
           <tr>
             <td>Promotions partenaires</td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected('partnerPromotions', 'email')}
                 onChange={() =>
                   toggleNotification('partnerPromotions', 'email')
@@ -171,8 +166,7 @@ export default function Notifications(props) {
               />
             </td>
             <td>
-              <input
-                type="checkbox"
+              <Checkbox
                 checked={isNotificationSelected('partnerPromotions', 'push')}
                 onChange={() => toggleNotification('partnerPromotions', 'push')}
               />

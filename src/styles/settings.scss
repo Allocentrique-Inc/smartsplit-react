@@ -63,5 +63,44 @@
         }
       }
     }
+    .notifications {
+      table {
+        margin-top: 32px;
+        width: 100%;
+        th {
+          color: map-get($colors, 'primary');
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 24px;
+          text-align: left;
+          padding-bottom: 8px;
+        }
+
+        tbody {
+          tr {
+            box-shadow: inset 0px 1px 0px map-get($colors, 'stroke');
+
+            > :first-child {
+              padding: 8px;
+            }
+          }
+          td {
+            .checkbox {
+              padding: 8px 0;
+            }
+
+            .title {
+              @extend .medium-400;
+              color: map-get($colors, 'primary');
+            }
+            .description {
+              @extend .small-400;
+              color: map-get($colors, 'secondary');
+            }
+          }
+        }
+      }
+    }
   }
 }
