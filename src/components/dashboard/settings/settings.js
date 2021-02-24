@@ -11,6 +11,7 @@ import ProfilePlaceholder from '../../../icons/profilePlaceholder';
 import patchUser from '../../../api/users/patchUser';
 import getUsers from '../../../api/users/getUsers';
 import { loadObjToAnother } from '../../../utils';
+import translations from '../../../translations';
 
 export default function Settings(props) {
   const [user_id] = useState(localStorage.getItem('user_id'));
@@ -47,7 +48,7 @@ export default function Settings(props) {
   });
 
   const [dirtyFields, setDirtyFields] = useState([]);
-
+  const language = account.locale;
   const setters = {
     profile: setProfile,
     account: setAccount,
@@ -110,20 +111,21 @@ export default function Settings(props) {
     notifications,
     setField,
     updateUser,
+    translations: translations.settings,
+    language,
   };
   return (
     <div className="settings">
       <div className="topBar">
         <Link to="/">
           {' '}
-          <ArrowLeft />
-          {' '}
+          <ArrowLeft />{' '}
         </Link>
         <ProfilePlaceholder />
       </div>
       <main className="row">
-        <div className="colLeft">
-          {/* <div className="navigation">
+        {/*<div className="colLeft">
+          <div className="navigation">
             <NavHashLink
               smooth
               activeClassName="selected"
@@ -159,8 +161,8 @@ export default function Settings(props) {
             >
               Sécurité
             </NavHashLink>
-          </div> */}
-        </div>
+          </div>
+        </div>*/}
         <div className="colRight">
           <Profile {...commonProps} />
           <Account {...commonProps} />
