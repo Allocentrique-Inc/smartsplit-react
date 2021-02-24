@@ -1,6 +1,6 @@
 const deleteUser = async (payload) => {
   try {
-    const url = `http://159.203.15.16:3001/v1/users/${payload.user_id}`;
+    const url = `http://localhost:3001/v1/users/${payload.user_id}`;
     const method = 'DELETE';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
 

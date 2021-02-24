@@ -2,7 +2,7 @@ const patchDocumentation = async (payload) => {
   const { creation, workpiece_id } = payload;
   const body = JSON.stringify({ creation });
   try {
-    const url = `http://159.203.15.16:3001/v1/workpieces/${payload.workpiece_id}/documentation`;
+    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/documentation`;
     const method = 'PATCH';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
