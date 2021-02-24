@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import postUser from '../../../api/users/postUser';
+import activateInvited from '../../../api/users/activateInvited';
 
 export default (props) => {
   const { token, firstName: _firstName, lastName: _lastName } = useParams();
@@ -17,7 +17,8 @@ export default (props) => {
   const handleLastName = (e) => setLastName(e.target.value);
   const handleArtistName = (e) => setArtistName(e.target.value);
   const handleSubmit = async () => {
-    const result = await postUser({
+    const result = await activateInvited({
+      token,
       password,
       firstName,
       lastName,
@@ -83,7 +84,7 @@ export default (props) => {
             id="password"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePassword}
           />
           <div className="toDo">Validation de mot de passe</div>
           <input

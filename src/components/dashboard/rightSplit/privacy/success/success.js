@@ -1,5 +1,6 @@
 import { Link, useHistory, useParams } from 'react-router-dom';
 import HighFive from '../../../../../icons/high-five';
+import X from '../../../../../icons/x';
 
 const Success = (props) => {
   const t_title = props.translations.rightSplit.success._title[props.language];
@@ -12,15 +13,15 @@ const Success = (props) => {
     <>
       <div className="topBar">
         <div className="title">Partage créé!</div>
-        <button className="exit" onClick={() => props.setIsSaved(false)}>
-          x
-        </button>
+        <div className="exit" onClick={() => props.setIsSaved(false)}>
+          <X />
+        </div>
       </div>
       <div className="content success">
         <HighFive />
         <div className="text1">{t_title}</div>
         <div className="text2">{t_description}</div>
-        <div className="text3" />
+        {/* <div className="text3" /> */}
       </div>
       <div className="downBar">
         <button

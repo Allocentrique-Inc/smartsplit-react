@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 import AddCollaborators from '../_/addCollaborators/addCollaborators';
 import TopBar from '../_/topBar/topBar';
 import DownBar from '../_/downBar/downBar';
@@ -6,22 +7,36 @@ import Presentation from '../_/presentation/presentation';
 import Label from './label/label';
 import Collaborator from './collaborator/collaborator';
 import Circle from '../_/circle/circle';
+import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollaborator';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
 const Recording = (props) => {
+  const [isCreatingNewCollaborator, setIsCreatingNewCollaborator] = useState(
+    false,
+  );
+  const [
+    isCreatingNewLabelCollaborator,
+    setIsCreatingNewLabelCollaborator,
+  ] = useState(false);
   const { workpiece_id } = useParams();
   const addCollaborators = (newCollaborator) => {
-    props.setRecording([
-      ...props.recording,
-      {
-        rightHolder: newCollaborator,
-        rightHolder_id: newCollaborator.user_id,
-        comment: '',
-        function: '',
-        shares: 0,
-      },
-    ]);
+    if (
+      !props.recording.find(
+        (el) => newCollaborator.user_id === el.rightHolder_id,
+      )
+    ) {
+      props.setRecording([
+        ...props.recording,
+        {
+          rightHolder: newCollaborator,
+          rightHolder_id: newCollaborator.user_id,
+          comment: '',
+          function: '',
+          shares: 0,
+        },
+      ]);
+    }
   };
 
   const addLabelCollaborators = (newCollaborator) => {
@@ -118,58 +133,74 @@ const Recording = (props) => {
     textPresentation,
     textDescription,
     handleDrag,
+    isCreatingNewCollaborator,
+    setIsCreatingNewCollaborator,
+    isCreatingNewLabelCollaborator,
+    setIsCreatingNewLabelCollaborator,
   };
-
   return (
-    <div className="rightSplitCreation">
-      <TopBar {...props} view="recording" />
-      <div className="b1">
-        <div className="b1b1">
-          <div className="b1b1b1">
-            <Presentation {...commonProps} view="recording" />
-            {!props.label.rightHolder && (
+    <>
+      {isCreatingNewCollaborator && <CreateNewCollaborator {...commonProps} />}
+      {isCreatingNewLabelCollaborator && (
+        <CreateNewCollaborator
+          {...commonProps}
+          addCollaborators={addLabelCollaborators}
+          setIsCreatingNewCollaborator={setIsCreatingNewLabelCollaborator}
+        />
+      )}
+      <div className="rightSplitCreation">
+        <TopBar {...props} view="recording" />
+        <div className="b1">
+          <div className="b1b1">
+            <div className="b1b1b1">
+              <Presentation {...commonProps} view="recording" />
+              {!props.label.rightHolder && (
+                <AddCollaborators
+                  {...commonProps}
+                  addCollaborators={addLabelCollaborators}
+                  preSelectedCollaborators={[...props.recording, props.label]}
+                  setIsCreatingNewCollaborator={
+                    setIsCreatingNewLabelCollaborator
+                  }
+                />
+              )}
+
+              {props.label.rightHolder && (
+                <Label
+                  {...commonProps}
+                  el={props.label}
+                  deleteCollaborator={deleteLabel}
+                />
+              )}
+              <div className="separator" />
+              {props.recording.map((collaborator, id) => (
+                <Collaborator
+                  key={collaborator.rightHolder_id}
+                  {...commonProps}
+                  collaborator={collaborator}
+                  id={id}
+                />
+              ))}
               <AddCollaborators
                 {...commonProps}
-                addCollaborators={addLabelCollaborators}
-                preSelectedCollaborators={[...props.recording, props.label]}
+                preSelectedCollaborators={allActors}
               />
-            )}
-
-            {props.label.rightHolder && (
-              <Label
-                {...commonProps}
-                el={props.label}
-                deleteCollaborator={deleteLabel}
-              />
-            )}
-            <div className="separator" />
-            {props.recording.map((collaborator, id) => (
-              <Collaborator
-                key={collaborator.rightHolder_id}
-                {...commonProps}
-                collaborator={collaborator}
-                id={id}
-              />
-            ))}
-            <AddCollaborators
-              {...commonProps}
-              preSelectedCollaborators={allActors}
-            />
-          </div>
-          <div className="b1b1b2">
-            <div className="b1b1b1b2">
-              {isDisplayingCircle && (
-                <Circle {...commonProps} collaborators={allActors} />
-              )}
+            </div>
+            <div className="b1b1b2">
+              <div className="b1b1b1b2">
+                {isDisplayingCircle && (
+                  <Circle {...commonProps} collaborators={allActors} />
+                )}
+              </div>
             </div>
           </div>
         </div>
+        <DownBar
+          backUrl={`/workpiece/${workpiece_id}/right-split/performance`}
+          frontUrl={`/workpiece/${workpiece_id}/right-split/privacy`}
+        />
       </div>
-      <DownBar
-        backUrl={`/workpiece/${workpiece_id}/right-split/performance`}
-        frontUrl={`/workpiece/${workpiece_id}/right-split/privacy`}
-      />
-    </div>
+    </>
   );
 };
 

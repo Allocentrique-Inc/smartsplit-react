@@ -18,21 +18,27 @@ const Copyright = (props) => {
     false,
   );
   const addCollaborators = (newCollaborator) => {
-    const calculatedCopyright = recalculateShares({
-      newDividingMethod: props.copyrightDividingMethod,
-      copyright: [
-        ...props.copyright,
-        {
-          rightHolder: newCollaborator,
-          rightHolder_id: newCollaborator.user_id,
-          roles: [],
-          comment: '',
-          shares: 0,
-          lock: false,
-        },
-      ],
-    });
-    props.setCopyright(calculatedCopyright);
+    if (
+      !props.copyright.find(
+        (el) => newCollaborator.user_id === el.rightHolder_id,
+      )
+    ) {
+      const calculatedCopyright = recalculateShares({
+        newDividingMethod: props.copyrightDividingMethod,
+        copyright: [
+          ...props.copyright,
+          {
+            rightHolder: newCollaborator,
+            rightHolder_id: newCollaborator.user_id,
+            roles: [],
+            comment: '',
+            shares: 0,
+            lock: false,
+          },
+        ],
+      });
+      props.setCopyright(calculatedCopyright);
+    }
   };
 
   const deleteCollaborator = (rightHolder_id) => {

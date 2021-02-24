@@ -14,17 +14,23 @@ const Performance = (props) => {
     false,
   );
   const addCollaborators = (newCollaborator) => {
-    props.setPerformance([
-      ...props.performance,
-      {
-        rightHolder: newCollaborator,
-        rightHolder_id: newCollaborator.user_id,
-        roles: [],
-        comment: '',
-        status: '',
-        shares: 10,
-      },
-    ]);
+    if (
+      !props.performance.find(
+        (el) => newCollaborator.user_id === el.rightHolder_id,
+      )
+    ) {
+      props.setPerformance([
+        ...props.performance,
+        {
+          rightHolder: newCollaborator,
+          rightHolder_id: newCollaborator.user_id,
+          roles: [],
+          comment: '',
+          status: '',
+          shares: 10,
+        },
+      ]);
+    }
   };
   const deleteCollaborator = (rightHolder) => {
     const arr = [...props.performance];
