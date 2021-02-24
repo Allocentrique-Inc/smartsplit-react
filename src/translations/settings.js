@@ -27,6 +27,43 @@ export default {
     },
   },
 
+  security: {
+    _title: {
+      fr: 'Sécurité',
+      en: 'Security',
+    },
+    changePasswordModal: {
+      _title: {
+        fr: 'Changer le mot de passe',
+        en: 'Change the password',
+      },
+      _currentPassword: {
+        fr: 'Mot de passe actuel',
+        en: 'Current password',
+      },
+      _password: {
+        fr: 'Nouveau mot de passe',
+        en: 'New password',
+      },
+      _confirmPassword: {
+        fr: 'Répère ton nouveau mot de passe',
+        en: 'Confirm your new password',
+      },
+      _resetPassword: {
+        fr: 'Mot de passe oublié?',
+        en: 'Forgot password?',
+      },
+      _cancel: {
+        fr: 'Annuler',
+        en: 'Cancel',
+      },
+      _save: {
+        fr: 'Sauvegarder',
+        en: 'Save',
+      },
+    },
+  },
+
   fields: {
     firstName: {
       _label: {
@@ -92,6 +129,16 @@ export default {
       _label: {
         fr: 'Ma langue',
         en: 'Language',
+      },
+      options: {
+        _french: {
+          fr: 'Français Canadien',
+          en: 'Canadian French',
+        },
+        _english: {
+          fr: 'Anglais',
+          en: 'English',
+        },
       },
     },
     phoneNumber: {

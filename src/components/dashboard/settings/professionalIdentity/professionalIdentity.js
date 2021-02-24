@@ -40,7 +40,7 @@ export default function ProfessionalIdentity(props) {
           onBlur={updateUser}
         />
       </div>
-      <div className="formInput">
+      <div className="formInput birthDate">
         <label htmlFor="birthDate">{t_fields.birthDate._label[language]}</label>
         <input
           id="birthDate"
@@ -53,7 +53,7 @@ export default function ProfessionalIdentity(props) {
           placeholder={t_fields.birthDate._placeholder[language]}
         />
       </div>
-      <div className="formInput">
+      <div className="formInput isni">
         <label htmlFor="isni">{t_fields.isni._label[language]}</label>{' '}
         <input
           id="isni"

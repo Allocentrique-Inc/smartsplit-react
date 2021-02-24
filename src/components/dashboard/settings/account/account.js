@@ -3,7 +3,7 @@ import PhoneNumber from '../../../_/form/phoneNumber/phoneNumber';
 
 export default function Account(props) {
   const { account, setField, updateUser, translations, language } = props;
-  const t_title = translations.titles._profile[language];
+  const t_title = translations.titles._account[language];
   const t_fields = translations.fields;
   return (
     <div className="account" id="account">
@@ -18,17 +18,23 @@ export default function Account(props) {
           onBlur={updateUser}
         />
       </div>
-      <div className="formInput">
+      <div className="formInput locale">
         <label htmlFor="locale">{t_fields.locale._label[language]}</label>
-        <input
+        <select
           id="locale"
-          type="text"
           value={account.locale}
           onChange={(e) => setField('account', { locale: e.target.value })}
           onBlur={updateUser}
-        />
+        >
+          <option value="fr">
+            {t_fields.locale.options._french[language]}
+          </option>
+          <option value="en">
+            {t_fields.locale.options._english[language]}
+          </option>
+        </select>
       </div>
-      <div className="formInput">
+      <div className="formInput phoneNumber">
         <label htmlFor="phoneNumber">
           {t_fields.phoneNumber._label[language]}
         </label>

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .topBar {
     width: 100%;
     padding: 16px 24px;
@@ -63,6 +64,22 @@
         }
       }
     }
+    .account {
+      .locale {
+        max-width: 304px;
+      }
+      .phoneNumber {
+        max-width: 472px;
+      }
+    }
+    .professionalIdentity {
+      .birthDate {
+        max-width: 162px;
+      }
+      .isni {
+        max-width: 288px;
+      }
+    }
     .notifications {
       table {
         margin-top: 32px;
@@ -97,6 +114,60 @@
             .description {
               @extend .small-400;
               color: map-get($colors, 'secondary');
+            }
+          }
+        }
+      }
+    }
+    .security {
+      .formInput {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        button {
+          margin-top: 8px;
+          width: fit-content;
+        }
+      }
+      .modal {
+        .downBar {
+          > :first-child {
+            margin-right: 16px;
+          }
+        }
+      }
+      .changePasswordModal {
+        .modal {
+          max-width: 624px;
+          width: 80vh;
+          .content {
+            > :first-child {
+              input {
+                margin-bottom: 8px;
+              }
+              margin-top: 0px;
+            }
+            a {
+              @extend .small-700;
+              text-decoration: none;
+              color: map-get($colors, 'action');
+            }
+          }
+        }
+      }
+      .deleteAccountModal {
+        .modal {
+          max-width: 624px;
+          width: 80vh;
+          .content {
+            h3 {
+              color: map-get($colors, 'danger');
+            }
+            .formInput {
+              margin: 32px 0;
+            }
+            p {
+              @extend .medium-400;
             }
           }
         }

@@ -24,9 +24,9 @@ export default function DeleteAccountModal(props) {
               <X />
             </button>
           </div>
-          <p>Afin de détruire ce compte, tu dois confirmer ton intention.</p>
           <div className="content">
             <h3>Attention cette opération est irréversible.</h3>
+            <p>Afin de détruire ce compte, tu dois confirmer ton intention.</p>
             <div className="formInput">
               <label htmlFor="input">
                 Écris le mot « détruire » ci-dessous, afin de confirmer ton
@@ -39,6 +39,10 @@ export default function DeleteAccountModal(props) {
                 onChange={(e) => setSecurity(e.target.value)}
               />
             </div>
+            <p>
+              En cliquant sur «Détruire le compte» plus bas, ton compte sera
+              supprimé et tu seras éjecté du système.
+            </p>
           </div>
           <div className="downBar">
             <button

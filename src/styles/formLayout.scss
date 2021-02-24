@@ -2,7 +2,9 @@
   > label {
     @extend .medium-700;
   }
-  > input {
+
+  > input,
+  select {
     @extend .medium-400;
     margin-top: 8px;
     height: 40px;
