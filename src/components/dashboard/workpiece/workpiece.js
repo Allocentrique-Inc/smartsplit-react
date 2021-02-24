@@ -13,10 +13,8 @@ const Workpiece = (props) => {
     const incomingWorkpiece = await getWorkpiece({
       workpiece_id,
     });
-    console.log(incomingWorkpiece);
     setWorkpiece(incomingWorkpiece);
   };
-  console.log(workpiece);
 
   const commonProps = {
     ...props,

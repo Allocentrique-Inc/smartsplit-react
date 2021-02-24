@@ -37,7 +37,6 @@ const Privacy = (props) => {
 };
 
 const Collab = (props) => {
-  console.log(props.collaborator);
   const { vote, rightHolder, comment } = props.collaborator;
   const { firstName, lastName } = rightHolder;
   const t_name = `${firstName} ${lastName}`;

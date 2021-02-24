@@ -7,7 +7,6 @@ const voteRightSplit = async (payload) => {
     privacy,
     label,
   });
-  console.log('VOTE RIGHT SPLIT BOWDY', body);
   try {
     const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit/vote`;
     const method = 'POST';

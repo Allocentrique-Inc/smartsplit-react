@@ -30,7 +30,7 @@ const LeftMenu = (props) => {
         </span>
         Mon profil public
       </button> */}
-      <button
+      {/* <button
         className={`sectionButton ${selected === 'alfa' ? 'alfa' : 'alfa'}`}
         onClick={() => history.push('/settings')}
       >
@@ -38,7 +38,7 @@ const LeftMenu = (props) => {
           <Tool />
         </span>
         Paramètres
-      </button>
+      </button> */}
       {/*
       <button
         className={`sectionButton ${selected === 'alfa' ? 'alfa' : 'alfa'}`}

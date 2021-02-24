@@ -23,6 +23,8 @@ const RightSplit = (props) => {
   const [copyrightDividingMethod, selectCopyrightDividingMethod] = useState(
     'equal',
   );
+  const [warnings, setWarnings] = useState([]);
+
   const mapData = async () => {
     if (props.workpiece.rightSplit) {
       const {
@@ -98,6 +100,8 @@ const RightSplit = (props) => {
     translations,
     language,
     activeCollaboratorsIds,
+    warnings,
+    setWarnings,
   };
   return (
     <>

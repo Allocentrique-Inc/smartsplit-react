@@ -37,7 +37,6 @@ const Collaborator = (props) => {
     });
   };
   const setLock = (newState) => {
-    console.log(newState);
     const arr = [...props.recording];
     arr[props.id].lock = newState;
     props.setRecording(arr);

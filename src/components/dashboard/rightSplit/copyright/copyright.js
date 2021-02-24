@@ -4,7 +4,8 @@ import AddCollaborators from '../_/addCollaborators/addCollaborators';
 import Circle from '../_/circle/circle';
 import TopBar from '../_/topBar/topBar';
 import DividingMethod from './dividingMethod/dividingMethod';
-import recalculateShares from '../_/recalculateShares';
+import recalculateShares from './_/recalculateShares';
+import setCollaboratorsErrors from './_/setCollaboratorsErrors';
 import Collaborator from './collaborator/collaborator';
 import DownBar from '../_/downBar/downBar';
 import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollaborator';
@@ -23,7 +24,7 @@ const Copyright = (props) => {
         (el) => newCollaborator.user_id === el.rightHolder_id,
       )
     ) {
-      const calculatedCopyright = recalculateShares({
+      let calculatedCopyright = recalculateShares({
         newDividingMethod: props.copyrightDividingMethod,
         copyright: [
           ...props.copyright,
@@ -34,9 +35,11 @@ const Copyright = (props) => {
             comment: '',
             shares: 0,
             lock: false,
+            errors: [],
           },
         ],
       });
+      calculatedCopyright = setCollaboratorsErrors(calculatedCopyright);
       props.setCopyright(calculatedCopyright);
     }
   };
@@ -45,10 +48,11 @@ const Copyright = (props) => {
     const newCopyright = props.copyright.filter(
       (el) => el.rightHolder_id !== rightHolder_id,
     );
-    const calculatedCopyright = recalculateShares({
+    let calculatedCopyright = recalculateShares({
       newDividingMethod: props.copyrightDividingMethod,
       copyright: newCopyright,
     });
+    calculatedCopyright = setCollaboratorsErrors(calculatedCopyright);
     props.setCopyright(calculatedCopyright);
   };
 
@@ -62,12 +66,12 @@ const Copyright = (props) => {
     const newCopyright = props.copyright.map((el) =>
       (el.rightHolder_id === rightHolder_id ? modifiedCollaborator : el));
 
-    const calculatedCopyright = recalculateShares({
+    let calculatedCopyright = recalculateShares({
       newDividingMethod: props.copyrightDividingMethod,
       copyright: newCopyright,
     });
+    calculatedCopyright = setCollaboratorsErrors(calculatedCopyright);
 
-    console.log(role, rightHolder_id);
     props.setCopyright(calculatedCopyright);
   };
 
@@ -79,27 +83,31 @@ const Copyright = (props) => {
     const newCopyright = props.copyright.map((el) =>
       (el.rightHolder_id === rightHolder_id ? modifiedCollaborator : el));
 
-    const calculatedCopyright = recalculateShares({
+    let calculatedCopyright = recalculateShares({
       newDividingMethod: props.copyrightDividingMethod,
       copyright: newCopyright,
     });
+    calculatedCopyright = setCollaboratorsErrors(calculatedCopyright);
     props.setCopyright(calculatedCopyright);
   };
 
   const handleSelectDividingMethod = (newDividingMethod) => {
-    const calculatedCopyright = recalculateShares({
+    let calculatedCopyright = recalculateShares({
       newDividingMethod,
       copyright: props.copyright,
     });
+    calculatedCopyright = setCollaboratorsErrors(calculatedCopyright);
     props.setCopyright(calculatedCopyright);
     props.selectCopyrightDividingMethod(newDividingMethod);
   };
 
   const handleDrag = ({ newShares, id }) => {
+    let copyright = props.copyright;
+
     if (props.copyrightDividingMethod === 'manual') {
-      if (props.copyright[id].lock !== true) {
-        const draggedDifferential = props.copyright[id].shares - newShares;
-        const notFocussedCollaborators = props.copyright.filter(
+      if (copyright[id].lock !== true) {
+        const draggedDifferential = copyright[id].shares - newShares;
+        const notFocussedCollaborators = copyright.filter(
           (el, ID) => ID !== id,
         );
         const unLocksCollaborators = notFocussedCollaborators.filter(
@@ -109,13 +117,10 @@ const Copyright = (props) => {
           (acc, el) => el.shares + acc,
           0,
         );
-        const totalSum = props.copyright.reduce(
-          (acc, el) => el.shares + acc,
-          0,
-        );
+        const totalSum = copyright.reduce((acc, el) => el.shares + acc, 0);
         const sharesToSeparate =
           unlockedSharesSum + draggedDifferential + 100 - totalSum;
-        const arr = [...props.copyright].map((EL, ID) => {
+        copyright = [...copyright].map((EL, ID) => {
           if (id === ID) {
             EL.shares = ceil(
               sharesToSeparate < 0 ? newShares + sharesToSeparate : newShares,
@@ -130,7 +135,8 @@ const Copyright = (props) => {
           }
           return EL;
         });
-        props.setCopyright(arr);
+        copyright = setCollaboratorsErrors(copyright);
+        props.setCopyright(copyright);
       }
     }
   };

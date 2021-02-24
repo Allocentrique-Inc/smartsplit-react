@@ -11,7 +11,6 @@ const Dragger = (props) => {
     props.setShares(newValue);
   };
   const handleLockBtn = () => props.setLock(!props.collaborator.lock);
-  console.log(props);
   return (
     <div className="dragger">
       <div className="lock">

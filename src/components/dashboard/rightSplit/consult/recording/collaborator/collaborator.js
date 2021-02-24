@@ -53,7 +53,6 @@ const Collaborator = (props) => {
       }));
     commentValue = props.recording.comment;
   }
-  console.log(isLabel, props.label, isRejected);
   return (
     <>
       <div className="consultCollaborator">

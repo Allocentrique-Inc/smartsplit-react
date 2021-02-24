@@ -3,7 +3,6 @@ import ChevronDown from '../../../../icons/chevronDown';
 import disconnect from '../../../../api/auth/disconnect';
 
 const ProfileOptions = (props) => {
-  console.log(props.user);
   const [showProfileOptions, setShowProfileOptions] = useState(false);
   let t_initials;
   if (props.user && props.user.firstName && props.user.lastName) {

@@ -23,7 +23,6 @@ export default function WorkpieceModal({
     const result = isAdding
       ? await postWorkpiece({ title, type, file })
       : await patchWorkpiece({ workpiece_id, title, type, file });
-    console.log(result);
     setShowModal(false);
     resetData();
   };

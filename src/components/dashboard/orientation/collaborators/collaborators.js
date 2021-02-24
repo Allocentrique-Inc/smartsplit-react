@@ -1,7 +1,6 @@
 import X from '../../../../icons/x';
 
 const Collaborators = (props) => {
-  console.log(props.workpiece.rightHolders);
   return (
     <div className="modalBackground" onClick={() => props.setShowModal(false)}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -31,7 +30,6 @@ const Collaborators = (props) => {
 };
 
 const RightHolder = (props) => {
-  console.log(props.rightHolder);
   const { firstName, lastName } = props.rightHolder;
   const permission = 'read';
   const t_name = `${firstName} ${lastName}`;

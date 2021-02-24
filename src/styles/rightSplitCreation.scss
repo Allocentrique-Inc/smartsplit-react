@@ -426,6 +426,21 @@
       }
     }
   }
+
+  .collaboratorErrors {
+    box-shadow: 0px 0px 1px 1px red;
+  }
+
+  .collaboratorTextErrors {
+    margin-top: -8px;
+    margin-bottom: 16px;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    color: #ac1616;
+  }
   .success {
     text-align: center;
     max-width: 624px;

@@ -26,7 +26,6 @@ const Collaborator = (props) => {
   // ROLE BOX
   const handleToggleRole = (role) => {
     const isPresent = props.collaborator.roles.some((el) => role === el);
-    console.log(role, isPresent);
     if (isPresent) {
       props.deleteRole(role, props.collaborator.rightHolder_id);
     } else {
@@ -58,6 +57,11 @@ const Collaborator = (props) => {
   const t_mixer =
     props.translations.rightSplit.copyrightRoles._mixer[props.language];
 
+  const collaboratorClassName =
+    props.collaborator.errors.length > 0
+      ? 'collaborator collaboratorErrors'
+      : 'collaborator';
+
   // COMMON PROPS
   const commonProps = {
     ...props,
@@ -67,63 +71,76 @@ const Collaborator = (props) => {
     handleToggleRole,
   };
   return (
-    <div className="collaborator">
-      <div className="b1">
-        {/* AVATAR */}
-        <div className="rowAC">
-          <div className="avatar" style={avatarStyle}>
-            {t_initials}
+    <>
+      <div className={collaboratorClassName}>
+        <div className="b1">
+          {/* AVATAR */}
+          <div className="rowAC">
+            <div className="avatar" style={avatarStyle}>
+              {t_initials}
+            </div>
+            <div className="name">{t_userName}</div>
           </div>
-          <div className="name">{t_userName}</div>
+
+          {/* ELLIPSIS OPTIONS */}
+          <div className="ellipsis" onClick={handleEllipsisClick}>
+            <Ellipsis />
+            {isShowingOptions && (
+              <button onClick={handleDeleteCollaboratorButton}>
+                {t_removeCollaborator}
+              </button>
+            )}
+          </div>
         </div>
 
-        {/* ELLIPSIS OPTIONS */}
-        <div className="ellipsis" onClick={handleEllipsisClick}>
-          <Ellipsis />
-          {isShowingOptions && (
-            <button onClick={handleDeleteCollaboratorButton}>
-              {t_removeCollaborator}
-            </button>
-          )}
+        <div className="space" />
+
+        {/* ROLES */}
+        <div className="roleRow">
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_autor}
+            _role="autor"
+          />
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_composer}
+            _role="composer"
+          />
         </div>
-      </div>
+        <div className="roleRow">
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_adaptator}
+            _role="adaptator"
+          />
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_mixer}
+            _role="mixer"
+          />
+        </div>
 
-      <div className="space" />
-
-      {/* ROLES */}
-      <div className="roleRow">
-        <RoleBox
-          {...commonProps}
-          arr={props.collaborator.roles}
-          label={t_autor}
-          _role="autor"
-        />
-        <RoleBox
-          {...commonProps}
-          arr={props.collaborator.roles}
-          label={t_composer}
-          _role="composer"
-        />
+        {/* SHARES */}
+        <Dragger {...commonProps} />
       </div>
-      <div className="roleRow">
-        <RoleBox
-          {...commonProps}
-          arr={props.collaborator.roles}
-          label={t_adaptator}
-          _role="adaptator"
-        />
-        <RoleBox
-          {...commonProps}
-          arr={props.collaborator.roles}
-          label={t_mixer}
-          _role="mixer"
-        />
-      </div>
-
-      {/* SHARES */}
-      <Dragger {...commonProps} />
-    </div>
+      <CollaboratorErrors {...commonProps} />
+    </>
   );
 };
+
+const CollaboratorErrors = (props) => (
+  <div className="collaboratorTextErrors">
+    {props.collaborator.errors.map((el, id) => (
+      <div style={{ marginRight: '8px' }} key={el}>
+        {el}
+      </div>
+    ))}
+  </div>
+);
 
 export default Collaborator;
