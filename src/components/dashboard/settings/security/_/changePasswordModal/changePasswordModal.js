@@ -24,7 +24,7 @@ export default function ChangePasswordModal({
         <div className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="topBar">
             <h4>
-              {translations.security.changePasswordModal._title[language]}
+              {translations.security.changePasswordModal._action[language]}
             </h4>
             <button className="btn-icon" onClick={() => setShowModal(false)}>
               <X />

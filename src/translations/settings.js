@@ -28,12 +28,12 @@ export default {
   },
 
   security: {
-    _title: {
-      fr: 'Sécurité',
-      en: 'Security',
-    },
     changePasswordModal: {
-      _title: {
+      _label: {
+        fr: 'Mot de passe',
+        en: 'Password',
+      },
+      _action: {
         fr: 'Changer le mot de passe',
         en: 'Change the password',
       },
@@ -60,6 +60,49 @@ export default {
       _save: {
         fr: 'Sauvegarder',
         en: 'Save',
+      },
+    },
+    deleteAccountModal: {
+      _label: {
+        fr: 'Résiliation',
+        en: 'Cancellation',
+      },
+      _action: {
+        fr: 'Détruire ce compte',
+        en: 'Delete this account',
+      },
+      _h3: {
+        fr: 'Attention cette opération est irréversible.',
+        en: 'Please note, this operation is irreversible.',
+      },
+      _p1: {
+        fr: 'Afin de détruire ce compte, tu dois confirmer ton intention.',
+        en:
+          'In order to delete this account, you need to confirm your intention.',
+      },
+      _p2: {
+        fr:
+          'En cliquant sur «Détruire le compte» plus bas, ton compte sera supprimé et tu seras éjecté du système.',
+        en:
+          'By clicking on "confirm" below, your account will be deleted and you will be ejected from the system.',
+      },
+      _inputLabel: {
+        fr:
+          'Écris le mot « détruire » ci-dessous, afin de confirmer ton intention :',
+        en:
+          'Write the word "delete" below, in order to confirm your intention:',
+      },
+      _securityWord: {
+        fr: 'détruire',
+        en: 'delete',
+      },
+      _cancel: {
+        fr: 'Annuler',
+        en: 'Cancel',
+      },
+      _deleteAccount: {
+        fr: 'Détruire le compte',
+        en: 'Delete the account',
       },
     },
   },
