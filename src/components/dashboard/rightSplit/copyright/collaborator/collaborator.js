@@ -3,6 +3,7 @@ import RoleBox from '../../_/roleBox/roleBox';
 import colors from '../../_/colors';
 import Ellipsis from '../../../../../icons/ellipsis';
 import Dragger from '../../_/dragger/dragger';
+import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -43,6 +44,11 @@ const Collaborator = (props) => {
   };
   const isDraggable = props.copyrightDividingMethod === 'manual';
 
+  const collaboratorClassName =
+    props.collaborator.errors.length > 0 && props.triedSubmit
+      ? 'collaborator collaboratorErrors'
+      : 'collaborator';
+
   // TEXTS
   const t_initials = `${props.collaborator.rightHolder.firstName[0]}${props.collaborator.rightHolder.lastName[0]}`;
   const t_userName = `${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`;
@@ -56,11 +62,6 @@ const Collaborator = (props) => {
     props.translations.rightSplit.copyrightRoles._adaptator[props.language];
   const t_mixer =
     props.translations.rightSplit.copyrightRoles._mixer[props.language];
-
-  const collaboratorClassName =
-    props.collaborator.errors.length > 0
-      ? 'collaborator collaboratorErrors'
-      : 'collaborator';
 
   // COMMON PROPS
   const commonProps = {
@@ -132,15 +133,5 @@ const Collaborator = (props) => {
     </>
   );
 };
-
-const CollaboratorErrors = (props) => (
-  <div className="collaboratorTextErrors">
-    {props.collaborator.errors.map((el, id) => (
-      <div style={{ marginRight: '8px' }} key={el}>
-        {el}
-      </div>
-    ))}
-  </div>
-);
 
 export default Collaborator;

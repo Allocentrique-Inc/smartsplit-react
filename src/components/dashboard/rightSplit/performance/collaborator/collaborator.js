@@ -3,6 +3,8 @@ import RoleBox from '../../_/roleBox/roleBox';
 import Dragger from '../../_/dragger/dragger';
 import colors from '../../_/colors';
 import Ellipsis from '../../../../../icons/ellipsis';
+import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
+import setCollaboratorsErrors from '../_/setCollaboratorsErrors';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -25,8 +27,9 @@ const Collaborator = (props) => {
 
   // STATUS
   const selectStatus = (e) => {
-    const arr = [...props.performance];
+    let arr = [...props.performance];
     arr[props.id].status = e.target.value;
+    arr = setCollaboratorsErrors(arr);
     props.setPerformance(arr);
   };
 
@@ -49,6 +52,13 @@ const Collaborator = (props) => {
       props.addRole(role, props.collaborator.rightHolder_id);
     }
   };
+
+  const collaboratorClassName =
+    props.collaborator.errors &&
+    props.collaborator.errors.length > 0 &&
+    props.triedSubmit
+      ? 'collaborator collaboratorErrors'
+      : 'collaborator';
 
   // TEXTS
   const t_initials = `${props.collaborator.rightHolder.firstName[0]}${props.collaborator.rightHolder.lastName[0]}`;
@@ -77,61 +87,64 @@ const Collaborator = (props) => {
   };
 
   return (
-    <div className="collaborator">
-      <div className="b1">
-        <div className="rowAC">
-          {/* AVATAR */}
-          <div className="avatar" style={avatarStyle}>
-            {t_initials}
+    <>
+      <div className={collaboratorClassName}>
+        <div className="b1">
+          <div className="rowAC">
+            {/* AVATAR */}
+            <div className="avatar" style={avatarStyle}>
+              {t_initials}
+            </div>
+            <div className="name">{t_userName}</div>
           </div>
-          <div className="name">{t_userName}</div>
+          {/* ELLIPSIS OPTIONS */}
+          <div className="ellipsis" onClick={handleEllipsisClick}>
+            <Ellipsis />
+            {isShowingOptions && (
+              <button onClick={handleDeleteCollaboratorButton}>
+                {t_removeCollaborator}
+              </button>
+            )}
+          </div>
         </div>
-        {/* ELLIPSIS OPTIONS */}
-        <div className="ellipsis" onClick={handleEllipsisClick}>
-          <Ellipsis />
-          {isShowingOptions && (
-            <button onClick={handleDeleteCollaboratorButton}>
-              {t_removeCollaborator}
-            </button>
-          )}
+        <div className="space" />
+
+        {/* STATUS */}
+        <select
+          className="selectStatus"
+          value={props.collaborator.status}
+          onChange={selectStatus}
+        >
+          <option disabled value="">
+            Select Status
+          </option>
+          <option value="principal">{t_principal}</option>
+          <option value="featured">{t_featured}</option>
+          <option value="bandMember">{t_bandMember}</option>
+          <option value="session">{t_session}</option>
+        </select>
+
+        {/* ROLES */}
+        <div className="roleRow">
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_singer}
+            _role="singer"
+          />
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_musician}
+            _role="musician"
+          />
         </div>
+
+        {/* SHARES */}
+        <Dragger {...commonProps} />
       </div>
-      <div className="space" />
-
-      {/* STATUS */}
-      <select
-        className="selectStatus"
-        value={props.collaborator.status}
-        onChange={selectStatus}
-      >
-        <option disabled value="">
-          Select Status
-        </option>
-        <option value="principal">{t_principal}</option>
-        <option value="featured">{t_featured}</option>
-        <option value="bandMember">{t_bandMember}</option>
-        <option value="session">{t_session}</option>
-      </select>
-
-      {/* ROLES */}
-      <div className="roleRow">
-        <RoleBox
-          {...commonProps}
-          arr={props.collaborator.roles}
-          label={t_singer}
-          _role="singer"
-        />
-        <RoleBox
-          {...commonProps}
-          arr={props.collaborator.roles}
-          label={t_musician}
-          _role="musician"
-        />
-      </div>
-
-      {/* SHARES */}
-      <Dragger {...commonProps} />
-    </div>
+      <CollaboratorErrors {...commonProps} />
+    </>
   );
 };
 

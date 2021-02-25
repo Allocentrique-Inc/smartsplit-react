@@ -7,19 +7,22 @@ import Collaborator from './collaborator/collaborator';
 import Circle from '../_/circle/circle';
 import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollaborator';
 import Presentation from '../_/presentation/presentation';
+import PageErrors from '../../_/pageErrors/pageErrors';
+import setCollaboratorsErrors from './_/setCollaboratorsErrors';
 
 const Performance = (props) => {
   const { workpiece_id } = useParams();
   const [isCreatingNewCollaborator, setIsCreatingNewCollaborator] = useState(
     false,
   );
+  const [triedSubmit, setTriedSubmit] = useState(false);
   const addCollaborators = (newCollaborator) => {
     if (
       !props.performance.find(
         (el) => newCollaborator.user_id === el.rightHolder_id,
       )
     ) {
-      props.setPerformance([
+      let newPerformance = [
         ...props.performance,
         {
           rightHolder: newCollaborator,
@@ -29,16 +32,19 @@ const Performance = (props) => {
           status: '',
           shares: 10,
         },
-      ]);
+      ];
+      newPerformance = setCollaboratorsErrors(newPerformance);
+      props.setPerformance(newPerformance);
     }
   };
   const deleteCollaborator = (rightHolder) => {
-    const arr = [...props.performance];
-    arr.splice(
+    let newPerformance = [...props.performance];
+    newPerformance.splice(
       props.performance.find((el1) => el1.user_id === rightHolder),
       1,
     );
-    props.setPerformance(arr);
+    newPerformance = setCollaboratorsErrors(newPerformance);
+    props.setPerformance(newPerformance);
   };
 
   const deleteRole = (role, rightHolder_id) => {
@@ -96,6 +102,8 @@ const Performance = (props) => {
     title,
     textPresentation,
     textDescription,
+    triedSubmit,
+    setTriedSubmit,
   };
   return (
     <>
@@ -118,6 +126,12 @@ const Performance = (props) => {
                 {...commonProps}
                 preSelectedCollaborators={props.performance}
               />
+              {triedSubmit && (
+                <PageErrors
+                  {...commonProps}
+                  errors={props.calculatePerformanceErrors(props.performance)}
+                />
+              )}
             </div>
             <div className="b1b1b2">
               <div className="b1b1b1b2">
@@ -128,6 +142,8 @@ const Performance = (props) => {
         </div>
         <div />
         <DownBar
+          {...commonProps}
+          errors={props.calculatePerformanceErrors(props.performance)}
           backUrl={`/workpiece/${workpiece_id}/right-split/copyright`}
           frontUrl={`/workpiece/${workpiece_id}/right-split/recording`}
         />

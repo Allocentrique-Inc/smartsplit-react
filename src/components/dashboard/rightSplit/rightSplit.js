@@ -79,6 +79,63 @@ const RightSplit = (props) => {
     (el) => el.rightHolder_id,
   );
 
+  const calculateCopyrightErrors = (copyright) => {
+    const pageErrors = [];
+
+    // TOTAL OF SHARES SHALL BE EQUAL OR CLOSE TO 100
+    if (copyright.length > 0) {
+      const sharesTotal = copyright.reduce((acc, el) => el.shares + acc, 0);
+      const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
+      if (!isTotal100) {
+        pageErrors.push('SharesTotalShallBe100');
+      }
+    }
+
+    // ALL COLLABORATORS SHALL BE ERROR LESS
+    const hasCollaboratorErrors = copyright.some(
+      (el) => el.errors && el.errors.length > 0,
+    );
+    if (hasCollaboratorErrors) {
+      pageErrors.push('AllShallHaveBeErrorLess');
+    }
+
+    return pageErrors;
+  };
+
+  const calculatePerformanceErrors = (performance) => {
+    const pageErrors = [];
+
+    // TOTAL OF SHARES SHALL BE EQUAL OR CLOSE TO 100
+    const sharesTotal = performance.reduce((acc, el) => el.shares + acc, 0);
+    const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
+    if (!isTotal100) {
+      pageErrors.push('SharesTotalShallBe100');
+    }
+
+    // ALL COLLABORATORS SHALL BE ERROR LESS
+    const hasCollaboratorErrors = performance.some(
+      (el) => el.errors && el.errors.length > 0,
+    );
+    if (hasCollaboratorErrors) {
+      pageErrors.push('AllShallHaveBeErrorLess');
+    }
+
+    return pageErrors;
+  };
+
+  const calculateRecordingErrors = (recording, label) => {
+    const pageErrors = [];
+
+    // TOTAL OF SHARES SHALL BE EQUAL OR CLOSE TO 100
+    // const sharesTotal = copyright.reduce((acc, el) => el.shares + acc, 0);
+    // const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
+    // if (!isTotal100) {
+    //   pageErrors.push('SharesTotalShallBe100');
+    // }
+
+    return pageErrors;
+  };
+
   const commonProps = {
     ...props,
     copyright,
@@ -102,6 +159,9 @@ const RightSplit = (props) => {
     activeCollaboratorsIds,
     warnings,
     setWarnings,
+    calculateCopyrightErrors,
+    calculatePerformanceErrors,
+    calculateRecordingErrors,
   };
   return (
     <>
