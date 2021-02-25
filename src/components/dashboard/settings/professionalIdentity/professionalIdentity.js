@@ -9,14 +9,12 @@ export default function ProfessionalIdentity(props) {
     translations,
     language,
   } = props;
-  const t_title = translations.titles._professionalIdentity[language];
-  const t_fields = translations.fields;
   return (
     <div className="professionalIdentity" id="professional-identity">
-      <h2>{t_title}</h2>
+      <h2>{translations.titles._professionalIdentity[language]}</h2>
       <div className="formInput toDo">
         <label htmlFor="organisations">
-          {t_fields.organisations._label[language]}
+          {translations.fields.organisations._label[language]}
         </label>
         <MultiSelect
           id="organisations"
@@ -41,7 +39,9 @@ export default function ProfessionalIdentity(props) {
         />
       </div>
       <div className="formInput birthDate">
-        <label htmlFor="birthDate">{t_fields.birthDate._label[language]}</label>
+        <label htmlFor="birthDate">
+          {translations.fields.birthDate._label[language]}
+        </label>
         <input
           id="birthDate"
           type="date"
@@ -50,11 +50,13 @@ export default function ProfessionalIdentity(props) {
             setField('professionalIdentity', { birthDate: e.target.value })
           }
           onBlur={updateUser}
-          placeholder={t_fields.birthDate._placeholder[language]}
+          placeholder={translations.fields.birthDate._placeholder[language]}
         />
       </div>
       <div className="formInput isni">
-        <label htmlFor="isni">{t_fields.isni._label[language]}</label>{' '}
+        <label htmlFor="isni">
+          {translations.fields.isni._label[language]}
+        </label>{' '}
         <input
           id="isni"
           type="text"
@@ -63,11 +65,11 @@ export default function ProfessionalIdentity(props) {
             setField('professionalIdentity', { isni: e.target.value })
           }
           onBlur={updateUser}
-          placeholder={t_fields.isni._placeholder[language]}
+          placeholder={translations.fields.isni._placeholder[language]}
         />
       </div>
       <div className="formInput">
-        <label htmlFor="uri">{t_fields.uri._label[language]}</label>{' '}
+        <label htmlFor="uri">{translations.fields.uri._label[language]}</label>{' '}
         <input
           id="uri"
           type="text"
@@ -76,7 +78,7 @@ export default function ProfessionalIdentity(props) {
             setField('professionalIdentity', { uri: e.target.value })
           }
           onBlur={updateUser}
-          placeholder={t_fields.uri._placeholder[language]}
+          placeholder={translations.fields.uri._placeholder[language]}
         />
       </div>
     </div>

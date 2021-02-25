@@ -3,13 +3,13 @@ import PhoneNumber from '../../../_/form/phoneNumber/phoneNumber';
 
 export default function Account(props) {
   const { account, setField, updateUser, translations, language } = props;
-  const t_title = translations.titles._account[language];
-  const t_fields = translations.fields;
   return (
     <div className="account" id="account">
-      <h2>{t_title}</h2>
+      <h2>{translations.titles._account[language]}</h2>
       <div className="formInput">
-        <label htmlFor="address">{t_fields.address._label[language]}</label>
+        <label htmlFor="address">
+          {translations.fields.address._label[language]}
+        </label>
         <input
           id="address"
           type="text"
@@ -19,7 +19,9 @@ export default function Account(props) {
         />
       </div>
       <div className="formInput locale">
-        <label htmlFor="locale">{t_fields.locale._label[language]}</label>
+        <label htmlFor="locale">
+          {translations.fields.locale._label[language]}
+        </label>
         <select
           id="locale"
           value={account.locale}
@@ -27,16 +29,16 @@ export default function Account(props) {
           onBlur={updateUser}
         >
           <option value="fr">
-            {t_fields.locale.options._french[language]}
+            {translations.fields.locale.options._french[language]}
           </option>
           <option value="en">
-            {t_fields.locale.options._english[language]}
+            {translations.fields.locale.options._english[language]}
           </option>
         </select>
       </div>
       <div className="formInput phoneNumber">
         <label htmlFor="phoneNumber">
-          {t_fields.phoneNumber._label[language]}
+          {translations.fields.phoneNumber._label[language]}
         </label>
         <PhoneNumber
           id="phoneNumber"
@@ -51,7 +53,9 @@ export default function Account(props) {
         />
       </div>
       <div className="formInput toDo">
-        <label htmlFor="emails">{t_fields.emails._label[language]}</label>
+        <label htmlFor="emails">
+          {translations.fields.emails._label[language]}
+        </label>
         <MultiSelect
           id="emails"
           value={account.emails}

@@ -1,5 +1,5 @@
 export default function Checkbox(props) {
-  const { onChange, checked, disabled } = props;
+  const { onChange, checked, disabled, label } = props;
   return (
     <div
       className={`checkbox ${disabled ? 'disabled' : ''}`}
@@ -28,6 +28,7 @@ export default function Checkbox(props) {
           </svg>
         )}
       </div>
+      {label && <span>{label}</span>}
     </div>
   );
 }

@@ -3,97 +3,65 @@ import { Link, useHistory } from 'react-router-dom';
 import SmartSplit from '../../../icons/smartsplit';
 import postUser from '../../../api/users/postUser';
 import CheckEmailModal from './checkEmailModal/checkEmailModal';
+import Checkbox from '../../_/form/checkbox/checkbox';
 
 export default (props) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [artistName, setArtistName] = useState('');
+  const { translations, language } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [termsChecked, setTermsChecked] = useState(false);
+  const [stayConnected, setStayConnected] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
 
   const history = useHistory();
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
-  const handleFirstName = (e) => setFirstName(e.target.value);
-  const handleLastName = (e) => setLastName(e.target.value);
-  const handleArtistName = (e) => setArtistName(e.target.value);
   const handleSubmit = async () => {
     const result = await postUser({
       email,
       password,
-      firstName,
-      lastName,
-      artistName,
     });
     setShowModal(true);
     setEmail('');
-    setFirstName('');
-    setLastName('');
-    setArtistName('');
     setPassword('');
     setConfirmPassword('');
   };
 
   const isPasswordValid = () => password === confirmPassword && password !== '';
+  const t_fields = translations.fields;
   return (
     <div className="form">
-      {showModal && <CheckEmailModal setShowModal={setShowModal} />}
+      {showModal && <CheckEmailModal setShowModal={setShowModal} {...props} />}
       <div className="header">
-        <h1>En route vers la professionnalisation</h1>
-        <p>
-          Tu es à un clic de pouvoir documenter ta musique et de partager tes
-          droits avec tes contributeurs.
-        </p>
+        <h1>{translations.h1._signup[language]}</h1>
+        <p>{translations.p._signup[language]}</p>
       </div>
       <div className="toDo">Creation de compte avec réseau sociaux</div>
+
       <div className="formInput">
-        <label htmlFor="firstName">Entre ton prénom</label>
+        <label htmlFor="email">{t_fields.signup.email._label[language]}</label>
         <input
           type="text"
-          id="firstName"
-          value={firstName}
-          onChange={handleFirstName}
+          id="email"
+          value={email}
+          onChange={handleEmail}
+          placeholder={t_fields.signup.email._placeholder[language]}
         />
       </div>
       <div className="formInput">
-        <label htmlFor="lastName">Entre ton nom de famille</label>
-        <input
-          type="text"
-          id="lastName"
-          value={lastName}
-          onChange={handleLastName}
-        />
-      </div>
-      <div className="formInput">
-        <label htmlFor="artistName">Entre ton nom d'artiste (optionel)</label>
-        <input
-          type="text"
-          id="artistName"
-          value={artistName}
-          onChange={handleArtistName}
-        />
-      </div>
-      <div className="formInput">
-        <label htmlFor="email">Entre ton courriel</label>
-        <input type="text" id="email" value={email} onChange={handleEmail} />
-      </div>
-      <div className="formInput">
-        <label htmlFor="password">Choisis ton mot de passe</label>
+        <label htmlFor="password">
+          {t_fields.signup.password._label[language]}
+        </label>
         <div className="doubleInput">
-          {/* <input id="password" value={password} onChange={handlePassword} /> */}
-          {/* <div className="toDo">Validation de mot de passe</div>
-          <input
-            id="confirmPassword"
-            value={password}
-            onChange={handlePassword}
-          /> */}
           <input
             id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder={
+              t_fields.signup.password.placeholders._password[language]
+            }
           />
           <div className="toDo">Validation de mot de passe</div>
           <input
@@ -101,19 +69,24 @@ export default (props) => {
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder={
+              t_fields.signup.password.placeholders._confirmPassword[language]
+            }
           />
         </div>
       </div>
+      <Checkbox
+        checked={termsChecked}
+        onChange={() => setTermsChecked(!termsChecked)}
+        label={translations.checkboxes._termsAndConditions[language]}
+      />
+
       <div className="buttons">
-        {/* <div className="checkbox">
-          <input
-            type="checkbox"
-            id="stayLoggedIn"
-            name="stayLoggedIn"
-            value="true"
-          />
-          <label htmlFor="stayLoggedIn">Rester connecté</label>
-        </div> */}
+        <Checkbox
+          checked={stayConnected}
+          onChange={() => setStayConnected(!stayConnected)}
+          label={translations.checkboxes._stayConnected[language]}
+        />
         <button onClick={handleSubmit} className="btn-primary">
           Créer mon compte
         </button>

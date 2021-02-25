@@ -32,7 +32,7 @@ const Dashboard = (props) => {
         <Workpiece {...props} {...commonProps} />
       </Route>
       <Route path="/settings">
-        <Settings />
+        <Settings {...props} {...commonProps} />
       </Route>
       <Route path="/">
         <Workpieces {...props} {...commonProps} />

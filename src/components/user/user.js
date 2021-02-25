@@ -13,9 +13,10 @@ import ChangePassword from './changePassword/changePassword';
 import RequestPasswordReset from './requestPasswordReset/requestPasswordReset';
 import PasswordResetConfirmation from './passwordResetConfirmation/passwordResetConfirmation';
 import ActivateInvitedUser from './activateInvitedUser/activateInvitedUser';
+import Onboarding from './onboarding/onboarding';
 
 const User = (props) => {
-  const match = useRouteMatch();
+  const commonProps = { ...props };
   return (
     <div className="authLayout">
       <div className="topBar">
@@ -27,22 +28,23 @@ const User = (props) => {
         </div>
       </div>
       <Switch>
-        <Route path={`${match.path}/activate/:token`}>
-          <ActivateEmail />
+        <Route path="/user/activate/:token">
+          <ActivateEmail {...commonProps} />
         </Route>
-        <Route
-          path={`${match.path}/activate-invited-user/:token/:firstName/:lastName`}
-        >
-          <ActivateInvitedUser />
+        <Route path="/user/activate-invited-user/:token/:firstName/:lastName">
+          <ActivateInvitedUser {...commonProps} />
         </Route>
-        <Route path={`${match.path}/change-password/:token`}>
-          <ChangePassword />
+        <Route path="/user/change-password/:token">
+          <ChangePassword {...commonProps} />
         </Route>
-        <Route path={`${match.path}/request-password-reset`}>
-          <RequestPasswordReset />
+        <Route path="/user/request-password-reset">
+          <RequestPasswordReset {...commonProps} />
         </Route>
-        <Route path={`${match.path}/password-reset-confirmation`}>
-          <PasswordResetConfirmation />
+        <Route path="/user/password-reset-confirmation">
+          <PasswordResetConfirmation {...commonProps} />
+        </Route>
+        <Route path="/user/onboarding">
+          <Onboarding {...commonProps} />
         </Route>
       </Switch>
     </div>

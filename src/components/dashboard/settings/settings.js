@@ -14,7 +14,7 @@ import { loadObjToAnother } from '../../../utils';
 import translations from '../../../translations';
 
 export default function Settings(props) {
-  const [user_id] = useState(localStorage.getItem('user_id'));
+  const { user } = props;
   const [profile, setProfile] = useState({
     avatar: '',
     firstName: '',
@@ -66,6 +66,7 @@ export default function Settings(props) {
   };
 
   const updateUser = async () => {
+    const user_id = user.user_id;
     const fields = {
       ...profile,
       ...account,
@@ -82,7 +83,6 @@ export default function Settings(props) {
   };
 
   const mapData = async () => {
-    const user = await getUsers({ user_id });
     console.log('DATA TO LOAD', user);
     loadObjToAnother(user, profile);
     setProfile({ ...profile });

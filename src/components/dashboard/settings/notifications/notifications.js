@@ -4,8 +4,6 @@ import Checkbox from '../../../_/form/checkbox/checkbox';
 
 export default function Notifications(props) {
   const { notifications, setField, updateUser, translations, language } = props;
-  const t_title = translations.titles._notifications[language];
-  const t_fields = translations.fields;
   const isNotificationSelected = (type, value) =>
     notifications[type].includes(value);
   const toggleNotification = (type, value) => {
@@ -21,30 +19,32 @@ export default function Notifications(props) {
     });
     updateUser();
   };
-  useEffect(() => updateUser());
   return (
     <div className="notifications" id="notifications">
-      <h2>{t_title}</h2>
+      <h2>{translations.titles._notifications[language]}</h2>
       <table>
         <thead>
           <tr>
-            <th>{t_fields.notifications.types._name[language]}</th>
-            <th>{t_fields.notifications.types._email[language]}</th>
-            <th>{t_fields.notifications.types._mobile[language]}</th>
-            <th>{t_fields.notifications.types._text[language]}</th>
+            <th>{translations.fields.notifications.types._name[language]}</th>
+            <th>{translations.fields.notifications.types._email[language]}</th>
+            <th>{translations.fields.notifications.types._mobile[language]}</th>
+            <th>{translations.fields.notifications.types._text[language]}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>
               <div className="title">
-                {t_fields.notifications.generalInteractions._name[language]}
+                {
+                  translations.fields.notifications.generalInteractions._name[
+                    language
+                  ]
+                }
               </div>
               <div className="description">
                 {
-                  t_fields.notifications.generalInteractions._description[
-                    language
-                  ]
+                  translations.fields.notifications.generalInteractions
+                    ._description[language]
                 }
               </div>
             </td>
@@ -78,13 +78,15 @@ export default function Notifications(props) {
             <td>
               {' '}
               <div className="title">
-                {t_fields.notifications.administrativeMessages._name[language]}
+                {
+                  translations.fields.notifications.administrativeMessages
+                    ._name[language]
+                }
               </div>
               <div className="description">
                 {
-                  t_fields.notifications.administrativeMessages._description[
-                    language
-                  ]
+                  translations.fields.notifications.administrativeMessages
+                    ._description[language]
                 }
               </div>
             </td>
@@ -127,10 +129,14 @@ export default function Notifications(props) {
             <td>
               {' '}
               <div className="title">
-                {t_fields.notifications.accountLogin._name[language]}
+                {translations.fields.notifications.accountLogin._name[language]}
               </div>
               <div className="description">
-                {t_fields.notifications.accountLogin._description[language]}
+                {
+                  translations.fields.notifications.accountLogin._description[
+                    language
+                  ]
+                }
               </div>
             </td>
             <td>
@@ -150,10 +156,18 @@ export default function Notifications(props) {
             <td>
               {' '}
               <div className="title">
-                {t_fields.notifications.smartsplitBlog._name[language]}
+                {
+                  translations.fields.notifications.smartsplitBlog._name[
+                    language
+                  ]
+                }
               </div>
               <div className="description">
-                {t_fields.notifications.smartsplitBlog._description[language]}
+                {
+                  translations.fields.notifications.smartsplitBlog._description[
+                    language
+                  ]
+                }
               </div>
             </td>
             <td>
@@ -173,13 +187,16 @@ export default function Notifications(props) {
             <td>
               {' '}
               <div className="title">
-                {t_fields.notifications.smartsplitPromotions._name[language]}
+                {
+                  translations.fields.notifications.smartsplitPromotions._name[
+                    language
+                  ]
+                }
               </div>
               <div className="description">
                 {
-                  t_fields.notifications.smartsplitPromotions._description[
-                    language
-                  ]
+                  translations.fields.notifications.smartsplitPromotions
+                    ._description[language]
                 }
               </div>
             </td>
@@ -207,13 +224,16 @@ export default function Notifications(props) {
             <td>
               {' '}
               <div className="title">
-                {t_fields.notifications.partnerPromotions._name[language]}
+                {
+                  translations.fields.notifications.partnerPromotions._name[
+                    language
+                  ]
+                }
               </div>
               <div className="description">
                 {
-                  t_fields.notifications.partnerPromotions._description[
-                    language
-                  ]
+                  translations.fields.notifications.partnerPromotions
+                    ._description[language]
                 }
               </div>
             </td>
