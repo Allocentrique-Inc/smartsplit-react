@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ChevronDown from '../../../../icons/chevronDown';
 import disconnect from '../../../../api/auth/disconnect';
 
 const ProfileOptions = (props) => {
+  const { translations, language } = props;
   const [showProfileOptions, setShowProfileOptions] = useState(false);
+  const history = useHistory();
   let t_initials;
   if (props.user && props.user.firstName && props.user.lastName) {
     const { firstName, lastName } = props.user;
@@ -14,22 +17,37 @@ const ProfileOptions = (props) => {
     props.resetLogginCheck();
   };
   return (
-    <div
-      onClick={() => {
-        setShowProfileOptions((e) => !e);
-      }}
-      className="profileOptions"
-    >
-      <div className="avatar">{t_initials}</div>
-      <div className="chevronDown">
-        <ChevronDown />
-        {showProfileOptions && (
-          <button className="profileMenuOption" onClick={handleDisconnect}>
-            Déconnexion
-          </button>
-        )}
+    <>
+      {showProfileOptions && (
+        <div
+          className="profileMenuBackground"
+          onClick={() => setShowProfileOptions(false)}
+        >
+          <div className="profileMenu">
+            <button
+              className="menuItem"
+              onClick={() => history.push('/settings')}
+            >
+              {translations.topBar._settings[language]}
+            </button>
+            <button className="menuItem" onClick={handleDisconnect}>
+              {translations.topBar._logout[language]}
+            </button>
+          </div>
+        </div>
+      )}
+      <div
+        onClick={() => {
+          setShowProfileOptions((e) => !e);
+        }}
+        className="profileOptions"
+      >
+        <div className="avatar">{t_initials}</div>
+        <div className="chevronDown">
+          <ChevronDown />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

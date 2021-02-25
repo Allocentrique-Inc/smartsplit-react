@@ -48,7 +48,7 @@ export default function Settings(props) {
   });
 
   const [dirtyFields, setDirtyFields] = useState([]);
-  const language = account.locale;
+
   const setters = {
     profile: setProfile,
     account: setAccount,
@@ -105,6 +105,7 @@ export default function Settings(props) {
   }, []);
 
   const commonProps = {
+    ...props,
     profile,
     account,
     professionalIdentity,
@@ -112,7 +113,6 @@ export default function Settings(props) {
     setField,
     updateUser,
     translations: translations.settings,
-    language,
   };
   return (
     <div className="settings">

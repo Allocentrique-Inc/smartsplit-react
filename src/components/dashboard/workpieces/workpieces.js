@@ -9,6 +9,7 @@ import LeftMenu from './leftMenu/leftMenu';
 import SelectPerspective from './selectPerspective/selectPerspective';
 import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkpieceModal';
 import ProfileOptions from '../_/profileOptions/profileOptions';
+import translations from '../../../translations';
 
 const Workpieces = (props) => {
   const user_id = localStorage.getItem('user_id');
@@ -42,6 +43,7 @@ const Workpieces = (props) => {
     tab,
     setTab,
     setShowModal,
+    translations: translations.workpieces,
   };
   return (
     <div className="workpieces">
@@ -51,7 +53,15 @@ const Workpieces = (props) => {
         <div className="topBar">
           {/* <div className="searchBar" /> */}
           <div />
-          <ProfileOptions {...commonProps} />
+          <div className="row">
+            <button
+              className="btn-primary-small"
+              onClick={props.toggleLanguage}
+            >
+              {translations.workpieces.topBar._languageBtn[props.language]}
+            </button>
+            <ProfileOptions {...commonProps} />
+          </div>
         </div>
 
         <div className="content">

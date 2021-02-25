@@ -30,6 +30,10 @@ export default {
       fr: 'En route vers la professionnalisation.',
       en: 'On the way to professionalization',
     },
+    _login: {
+      fr: 'Connecte-toi à ton compte Smartsplit.',
+      en: 'Login to your Smartsplit account.',
+    },
   },
   p: {
     _signup: {
@@ -37,6 +41,10 @@ export default {
         'Tu es à un clic de pouvoir documenter ta musique et de partager tes droits avec tes contributeurs.',
       en:
         'You  are one click away from documenting your music and share your rights with your contributors.',
+    },
+    _login: {
+      fr: 'Entre tes informations ci-dessous.',
+      en: 'Enter your information below.',
     },
   },
   checkboxes: {
@@ -55,6 +63,10 @@ export default {
     _signup: {
       fr: 'Créer mon compte',
       en: 'Create my account',
+    },
+    _login: {
+      fr: 'Me connecter',
+      en: 'Connect',
     },
   },
   fields: {
@@ -127,6 +139,28 @@ export default {
             'Par exemple, <i>Madonna</i> est le nom d’artiste de <i>Madonna Louise Ciccone</i>.',
           en:
             'For example, <i>Madonna</i> is the artist label of <i>Madonna Louise Ciccone</i>.',
+        },
+      },
+    },
+    login: {
+      email: {
+        _label: {
+          fr: 'Mon courriel',
+          en: 'My email',
+        },
+        _placeholder: {
+          fr: 'tonnom@exemple.com',
+          en: 'name@example.com',
+        },
+      },
+      password: {
+        _label: {
+          fr: 'Mon mot de passe',
+          en: 'My password',
+        },
+        _hint: {
+          fr: 'Mot de passe oublié?',
+          en: 'Forgot password?',
         },
       },
     },

@@ -10,6 +10,10 @@ const Dashboard = (props) => {
   const [activity, setActivity] = useState('');
   const [user, setUser] = useState(null);
   const user_id = localStorage.getItem('user_id');
+  const [language, setLanguage] = useState('');
+  useEffect(() => {
+    user && setLanguage(user.locale);
+  }, [user]);
   useEffect(() => {
     const getUser = async () => {
       const user = await getUsers({ user_id });
@@ -17,6 +21,9 @@ const Dashboard = (props) => {
     };
     getUser();
   }, []);
+  const toggleLanguage = () => {
+    setLanguage(language === 'fr' ? 'en' : 'fr');
+  };
   if (!user) return null;
   const commonProps = {
     selectedWorkpiece,
@@ -25,6 +32,8 @@ const Dashboard = (props) => {
     setActivity,
     user,
     setUser,
+    language,
+    toggleLanguage,
   };
   return (
     <Switch>

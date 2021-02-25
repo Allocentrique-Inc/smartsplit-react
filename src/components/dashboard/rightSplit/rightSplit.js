@@ -12,6 +12,7 @@ import Vote from './vote/vote';
 import translations from '../../../translations';
 
 const RightSplit = (props) => {
+  const { language } = props;
   const { workpiece_id } = useParams();
   const user_id = localStorage.getItem('user_id');
   const [copyright, setCopyright] = useState([]);
@@ -62,8 +63,6 @@ const RightSplit = (props) => {
     await postRightSplit(payload);
     props.resetData();
   };
-
-  const language = 'fr';
 
   let activeCollaborators = [...copyright, ...performance, ...recording];
   if (label.rightHolder_id) {

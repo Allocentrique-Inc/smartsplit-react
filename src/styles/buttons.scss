@@ -19,6 +19,13 @@
   border: none;
 }
 
+.btn-primary-small {
+  @extend .btn-primary, .small-700;
+  color: map-get($colors, 'primary_reversed') !important;
+  padding: 4px 8px;
+  height: 24px;
+}
+
 .btn-primary-alert {
   @extend .btn-primary;
   background-color: map-get($colors, 'error');

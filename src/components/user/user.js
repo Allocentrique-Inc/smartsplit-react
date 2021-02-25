@@ -27,26 +27,28 @@ const User = (props) => {
           <button className="btn-secondary">English</button>
         </div>
       </div>
-      <Switch>
-        <Route path="/user/activate/:token">
-          <ActivateEmail {...commonProps} />
-        </Route>
-        <Route path="/user/activate-invited-user/:token/:firstName/:lastName">
-          <ActivateInvitedUser {...commonProps} />
-        </Route>
-        <Route path="/user/change-password/:token">
-          <ChangePassword {...commonProps} />
-        </Route>
-        <Route path="/user/request-password-reset">
-          <RequestPasswordReset {...commonProps} />
-        </Route>
-        <Route path="/user/password-reset-confirmation">
-          <PasswordResetConfirmation {...commonProps} />
-        </Route>
-        <Route path="/user/onboarding">
-          <Onboarding {...commonProps} />
-        </Route>
-      </Switch>
+      <main>
+        <Switch>
+          <Route path="/user/activate/:token">
+            <ActivateEmail {...commonProps} />
+          </Route>
+          <Route path="/user/activate-invited-user/:token/:firstName/:lastName">
+            <ActivateInvitedUser {...commonProps} />
+          </Route>
+          <Route path="/user/change-password/:token">
+            <ChangePassword {...commonProps} />
+          </Route>
+          <Route path="/user/request-password-reset">
+            <RequestPasswordReset {...commonProps} />
+          </Route>
+          <Route path="/user/password-reset-confirmation">
+            <PasswordResetConfirmation {...commonProps} />
+          </Route>
+          <Route path="/user/onboarding">
+            <Onboarding {...commonProps} />
+          </Route>
+        </Switch>
+      </main>
     </div>
   );
 };

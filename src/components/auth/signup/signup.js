@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
 import SmartSplit from '../../../icons/smartsplit';
 import postUser from '../../../api/users/postUser';
 import CheckEmailModal from './checkEmailModal/checkEmailModal';
@@ -74,7 +75,9 @@ export default (props) => {
             }
           />
           <div className="hint">
-            {translations.fields.signup.firstName._hint[language]}
+            {ReactHtmlParser(
+              translations.fields.signup.firstName._hint[language],
+            )}
           </div>
         </div>
         <div className="formInput">
@@ -91,7 +94,9 @@ export default (props) => {
             }
           />
           <div className="hint">
-            {translations.fields.signup.lastName._hint[language]}
+            {ReactHtmlParser(
+              translations.fields.signup.lastName._hint[language],
+            )}
           </div>
         </div>
       </div>
@@ -109,7 +114,9 @@ export default (props) => {
           }
         />
         <div className="hint">
-          {translations.fields.signup.artistName._hint[language]}
+          {ReactHtmlParser(
+            translations.fields.signup.artistName._hint[language],
+          )}
         </div>
       </div>
       <div className="formInput">
