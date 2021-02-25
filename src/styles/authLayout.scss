@@ -51,6 +51,11 @@
     .form {
       margin: 0 auto;
       max-width: 464px;
+      .row {
+        :first-child {
+          margin-right: 30px;
+        }
+      }
       .formInput {
         margin-bottom: 32px;
       }

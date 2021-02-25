@@ -9,6 +9,9 @@ import translations from '../../translations';
 const Auth = (props) => {
   const { type } = useParams();
   const [language, setLanguage] = useState('fr');
+  const toggleLanguage = () => {
+    setLanguage(language === 'fr' ? 'en' : 'fr');
+  };
   const commonProps = {
     ...props,
     translations: translations.auth,
@@ -22,7 +25,7 @@ const Auth = (props) => {
         <div className="right">
           <span>{translations.auth.topBar[type]._span[language]}</span>
           <Link to={url}>{translations.auth.topBar[type]._link[language]}</Link>
-          <button className="btn-secondary">
+          <button className="btn-secondary" onClick={toggleLanguage}>
             {translations.auth.topBar._languageBtn[language]}
           </button>
         </div>

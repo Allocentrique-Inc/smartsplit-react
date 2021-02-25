@@ -85,6 +85,50 @@ export default {
           },
         },
       },
+      firstName: {
+        _label: {
+          fr: 'Entre ton prénom',
+          en: 'Enter your first name',
+        },
+        _placeholder: {
+          fr: 'Prénom(s) usuel(s)',
+          en: 'Usual First Name(s)',
+        },
+        _hint: {
+          fr: 'Exemple: <i>Madonna Louise</i>',
+          en: 'Example: <i>Madonna Louise</i>',
+        },
+      },
+      lastName: {
+        _label: {
+          fr: 'Entre ton nom',
+          en: 'Enter your last name',
+        },
+        _placeholder: {
+          fr: 'Nom de famille usuel',
+          en: 'Usual first _label(s)',
+        },
+        _hint: {
+          fr: 'Exemple: <i>Ciccone</i>',
+          en: 'Example: <i>Ciccone</i>',
+        },
+      },
+      artistName: {
+        _label: {
+          fr: "Ton nom d'artiste",
+          en: 'Artist Name',
+        },
+        _placeholder: {
+          fr: "Entre ton nom d'artiste",
+          en: 'Artist label',
+        },
+        _hint: {
+          fr:
+            'Par exemple, <i>Madonna</i> est le nom d’artiste de <i>Madonna Louise Ciccone</i>.',
+          en:
+            'For example, <i>Madonna</i> is the artist label of <i>Madonna Louise Ciccone</i>.',
+        },
+      },
     },
   },
 };

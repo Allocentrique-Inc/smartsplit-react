@@ -8,6 +8,9 @@ import Checkbox from '../../_/form/checkbox/checkbox';
 export default (props) => {
   const { translations, language } = props;
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [artistName, setArtistName] = useState('');
   const [password, setPassword] = useState('');
   const [termsChecked, setTermsChecked] = useState(false);
   const [stayConnected, setStayConnected] = useState(false);
@@ -20,16 +23,21 @@ export default (props) => {
   const handleSubmit = async () => {
     const result = await postUser({
       email,
+      firstName,
+      lastName,
+      artistName,
       password,
     });
     setShowModal(true);
     setEmail('');
+    setFirstName('');
+    setLastName('');
+    setArtistName('');
     setPassword('');
     setConfirmPassword('');
   };
 
   const isPasswordValid = () => password === confirmPassword && password !== '';
-  const t_fields = translations.fields;
   return (
     <div className="form">
       {showModal && <CheckEmailModal setShowModal={setShowModal} {...props} />}
@@ -40,18 +48,73 @@ export default (props) => {
       <div className="toDo">Creation de compte avec réseau sociaux</div>
 
       <div className="formInput">
-        <label htmlFor="email">{t_fields.signup.email._label[language]}</label>
+        <label htmlFor="email">
+          {translations.fields.signup.email._label[language]}
+        </label>
         <input
           type="text"
           id="email"
           value={email}
           onChange={handleEmail}
-          placeholder={t_fields.signup.email._placeholder[language]}
+          placeholder={translations.fields.signup.email._placeholder[language]}
         />
+      </div>
+      <div className="row">
+        <div className="formInput">
+          <label htmlFor="firstName">
+            {translations.fields.signup.firstName._label[language]}
+          </label>
+          <input
+            type="text"
+            id="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            placeholder={
+              translations.fields.signup.firstName._placeholder[language]
+            }
+          />
+          <div className="hint">
+            {translations.fields.signup.firstName._hint[language]}
+          </div>
+        </div>
+        <div className="formInput">
+          <label htmlFor="lastName">
+            {translations.fields.signup.lastName._label[language]}
+          </label>
+          <input
+            type="text"
+            id="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            placeholder={
+              translations.fields.signup.lastName._placeholder[language]
+            }
+          />
+          <div className="hint">
+            {translations.fields.signup.lastName._hint[language]}
+          </div>
+        </div>
+      </div>
+      <div className="formInput">
+        <label htmlFor="artistName">
+          {translations.fields.signup.artistName._label[language]}
+        </label>
+        <input
+          type="text"
+          id="artistName"
+          value={artistName}
+          onChange={(e) => setArtistName(e.target.value)}
+          placeholder={
+            translations.fields.signup.artistName._placeholder[language]
+          }
+        />
+        <div className="hint">
+          {translations.fields.signup.artistName._hint[language]}
+        </div>
       </div>
       <div className="formInput">
         <label htmlFor="password">
-          {t_fields.signup.password._label[language]}
+          {translations.fields.signup.password._label[language]}
         </label>
         <div className="doubleInput">
           <input
@@ -60,7 +123,9 @@ export default (props) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder={
-              t_fields.signup.password.placeholders._password[language]
+              translations.fields.signup.password.placeholders._password[
+                language
+              ]
             }
           />
           <div className="toDo">Validation de mot de passe</div>
@@ -70,7 +135,9 @@ export default (props) => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder={
-              t_fields.signup.password.placeholders._confirmPassword[language]
+              translations.fields.signup.password.placeholders._confirmPassword[
+                language
+              ]
             }
           />
         </div>
