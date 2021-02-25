@@ -2,12 +2,14 @@ import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 import PhoneNumber from '../../../_/form/phoneNumber/phoneNumber';
 
 export default function Account(props) {
-  const { account, setField, updateUser } = props;
+  const { account, setField, updateUser, translations, language } = props;
+  const t_title = translations.titles._account[language];
+  const t_fields = translations.fields;
   return (
     <div className="account" id="account">
-      <h2>Compte</h2>
+      <h2>{t_title}</h2>
       <div className="formInput">
-        <label htmlFor="address">Mon adresse civique</label>
+        <label htmlFor="address">{t_fields.address._label[language]}</label>
         <input
           id="address"
           type="text"
@@ -16,18 +18,26 @@ export default function Account(props) {
           onBlur={updateUser}
         />
       </div>
-      <div className="formInput">
-        <label htmlFor="locale">Ma langue</label>
-        <input
+      <div className="formInput locale">
+        <label htmlFor="locale">{t_fields.locale._label[language]}</label>
+        <select
           id="locale"
-          type="text"
           value={account.locale}
           onChange={(e) => setField('account', { locale: e.target.value })}
           onBlur={updateUser}
-        />
+        >
+          <option value="fr">
+            {t_fields.locale.options._french[language]}
+          </option>
+          <option value="en">
+            {t_fields.locale.options._english[language]}
+          </option>
+        </select>
       </div>
-      <div className="formInput">
-        <label htmlFor="phoneNumber">Mon téléphone mobile</label>
+      <div className="formInput phoneNumber">
+        <label htmlFor="phoneNumber">
+          {t_fields.phoneNumber._label[language]}
+        </label>
         <PhoneNumber
           id="phoneNumber"
           type="text"
@@ -41,7 +51,7 @@ export default function Account(props) {
         />
       </div>
       <div className="formInput toDo">
-        <label htmlFor="emails">Mes courriels liés à ce compte</label>
+        <label htmlFor="emails">{t_fields.emails._label[language]}</label>
         <MultiSelect
           id="emails"
           value={account.emails}

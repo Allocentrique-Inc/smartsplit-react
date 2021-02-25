@@ -3,11 +3,16 @@ import { useHistory } from 'react-router-dom';
 import deleteUser from '../../../../../../api/users/deleteUser';
 import X from '../../../../../../icons/x';
 
-export default function DeleteAccountModal(props) {
-  const { setShowModal } = props;
+export default function DeleteAccountModal({
+  setShowModal,
+  translations,
+  language,
+}) {
   const history = useHistory();
   const [security, setSecurity] = useState('');
-  const isSecurityValid = () => security === 'détruire';
+  const isSecurityValid = () =>
+    security ===
+    translations.security.deleteAccountModal._securityWord[language];
   const handleOnDelete = async () => {
     const user_id = localStorage.getItem('user_id');
     const result = await deleteUser({ user_id });
@@ -19,18 +24,19 @@ export default function DeleteAccountModal(props) {
       <div className="modalBackground" onClick={() => setShowModal(false)}>
         <div className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="topBar">
-            <h4>Détruire ce compte</h4>
+            <h4>
+              {translations.security.deleteAccountModal._action[language]}
+            </h4>
             <button className="btn-icon" onClick={() => setShowModal(false)}>
               <X />
             </button>
           </div>
-          <p>Afin de détruire ce compte, tu dois confirmer ton intention.</p>
           <div className="content">
-            <h3>Attention cette opération est irréversible.</h3>
+            <h3>{translations.security.deleteAccountModal._h3[language]}</h3>
+            <p>{translations.security.deleteAccountModal._p1[language]}</p>
             <div className="formInput">
               <label htmlFor="input">
-                Écris le mot « détruire » ci-dessous, afin de confirmer ton
-                intention :
+                {translations.security.deleteAccountModal._inputLabel[language]}
               </label>
               <input
                 type="text"
@@ -39,13 +45,14 @@ export default function DeleteAccountModal(props) {
                 onChange={(e) => setSecurity(e.target.value)}
               />
             </div>
+            <p>{translations.security.deleteAccountModal._p2[language]}</p>
           </div>
           <div className="downBar">
             <button
               className="btn-secondary"
               onClick={() => setShowModal(false)}
             >
-              Annuler
+              {translations.security.deleteAccountModal._cancel[language]}
             </button>
             <button
               className={`btn-primary-alert ${
@@ -54,7 +61,11 @@ export default function DeleteAccountModal(props) {
               onClick={handleOnDelete}
               disabled={!isSecurityValid()}
             >
-              Détruire le compte
+              {
+                translations.security.deleteAccountModal._deleteAccount[
+                  language
+                ]
+              }
             </button>
           </div>
         </div>

@@ -3,6 +3,7 @@ import ChangePasswordModal from './_/changePasswordModal/changePasswordModal';
 import DeleteAccountModal from './_/deleteAccountModal/deleteAccountModal';
 
 export default function Security(props) {
+  const { translations, language } = props;
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [showDelAccountModal, setShowDelAccountModal] = useState(false);
 
@@ -15,23 +16,32 @@ export default function Security(props) {
         <DeleteAccountModal setShowModal={setShowDelAccountModal} {...props} />
       )}
 
-      <h2>Sécurité</h2>
-      <label htmlFor="changePasswordBtn">Mot de passe</label>
-      <button
-        id="changePasswordBtn"
-        className="btn-secondary"
-        onClick={() => setShowPasswordModal(true)}
-      >
-        Changer le mot de passe
-      </button>
-      <label htmlFor="deleteAccountBtn">Résiliation</label>
-      <button
-        id="deleteAccountBtn"
-        className="btn-secondary-alert"
-        onClick={() => setShowDelAccountModal(true)}
-      >
-        Détruire ce compte
-      </button>
+      <h2>{translations.titles._security[language]}</h2>
+      <div className="formInput">
+        {' '}
+        <label htmlFor="changePasswordBtn">
+          {translations.security.changePasswordModal._label[language]}
+        </label>
+        <button
+          id="changePasswordBtn"
+          className="btn-secondary"
+          onClick={() => setShowPasswordModal(true)}
+        >
+          {translations.security.changePasswordModal._action[language]}
+        </button>
+      </div>
+      <div className="formInput">
+        <label htmlFor="deleteAccountBtn">
+          {translations.security.deleteAccountModal._label[language]}
+        </label>
+        <button
+          id="deleteAccountBtn"
+          className="btn-secondary-alert"
+          onClick={() => setShowDelAccountModal(true)}
+        >
+          {translations.security.deleteAccountModal._action[language]}
+        </button>
+      </div>
     </div>
   );
 }

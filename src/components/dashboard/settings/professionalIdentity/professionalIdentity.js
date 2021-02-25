@@ -2,12 +2,22 @@ import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 import ProIdSelect from './_/proIdSelect/proIdSelect';
 
 export default function ProfessionalIdentity(props) {
-  const { professionalIdentity, setField, updateUser } = props;
+  const {
+    professionalIdentity,
+    setField,
+    updateUser,
+    translations,
+    language,
+  } = props;
+  const t_title = translations.titles._professionalIdentity[language];
+  const t_fields = translations.fields;
   return (
     <div className="professionalIdentity" id="professional-identity">
-      <h2>Identité professionnelle</h2>
-      <div className="formInput">
-        <label htmlFor="organisations">Mes entreprises liées</label>
+      <h2>{t_title}</h2>
+      <div className="formInput toDo">
+        <label htmlFor="organisations">
+          {t_fields.organisations._label[language]}
+        </label>
         <MultiSelect
           id="organisations"
           value={professionalIdentity.organisations}
@@ -17,7 +27,7 @@ export default function ProfessionalIdentity(props) {
           onBlur={updateUser}
         />
       </div>
-      <div className="formInput">
+      <div className="formInput toDo">
         <label htmlFor="professionalIdentity">
           Mes identifiants professionnels
         </label>
@@ -30,8 +40,8 @@ export default function ProfessionalIdentity(props) {
           onBlur={updateUser}
         />
       </div>
-      <div className="formInput">
-        <label htmlFor="birthDate">Ma date de naissance</label>
+      <div className="formInput birthDate">
+        <label htmlFor="birthDate">{t_fields.birthDate._label[language]}</label>
         <input
           id="birthDate"
           type="date"
@@ -40,10 +50,11 @@ export default function ProfessionalIdentity(props) {
             setField('professionalIdentity', { birthDate: e.target.value })
           }
           onBlur={updateUser}
+          placeholder={t_fields.birthDate._placeholder[language]}
         />
       </div>
-      <div className="formInput">
-        <label htmlFor="isni">Mon ISNI</label>
+      <div className="formInput isni">
+        <label htmlFor="isni">{t_fields.isni._label[language]}</label>{' '}
         <input
           id="isni"
           type="text"
@@ -52,10 +63,11 @@ export default function ProfessionalIdentity(props) {
             setField('professionalIdentity', { isni: e.target.value })
           }
           onBlur={updateUser}
+          placeholder={t_fields.isni._placeholder[language]}
         />
       </div>
       <div className="formInput">
-        <label htmlFor="uri">Mon URI</label>
+        <label htmlFor="uri">{t_fields.uri._label[language]}</label>{' '}
         <input
           id="uri"
           type="text"
@@ -64,6 +76,7 @@ export default function ProfessionalIdentity(props) {
             setField('professionalIdentity', { uri: e.target.value })
           }
           onBlur={updateUser}
+          placeholder={t_fields.uri._placeholder[language]}
         />
       </div>
     </div>
