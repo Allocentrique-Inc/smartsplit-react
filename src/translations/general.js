@@ -9,4 +9,8 @@ export default {
       en: 'Logout',
     },
   },
+  _languageBtn: {
+    fr: 'English',
+    en: 'Français',
+  },
 };

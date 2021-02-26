@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import getWorkpiecesByOwner from '../../../api/workpieces/getWorkpiecesByOwner';
 import getWorkpiecesByRightHolder from '../../../api/workpieces/getWorkpiecesByRightHolder';
-import disconnect from '../../../api/auth/disconnect';
 
 import Workpiece from './workpiece/workpiece';
 import LeftMenu from './leftMenu/leftMenu';
@@ -36,6 +35,8 @@ const Workpieces = (props) => {
     resetData();
   }, []);
 
+  const t_language = props.translations.general._languageBtn[props.language];
+
   const commonProps = {
     ...props,
     resetData,
@@ -56,11 +57,7 @@ const Workpieces = (props) => {
               className="btn-primary-small"
               onClick={props.toggleLanguage}
             >
-              {
-                props.translations.workpieces.topBar._languageBtn[
-                  props.language
-                ]
-              }
+              {t_language}
             </button>
             <ProfileOptions {...commonProps} />
           </div>

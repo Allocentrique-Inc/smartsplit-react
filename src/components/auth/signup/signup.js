@@ -28,6 +28,8 @@ export default (props) => {
       lastName,
       artistName,
       password,
+      locale: props.language,
+      // SHOULD INCLUDE LANGUAGE
     });
     setShowModal(true);
     setEmail('');

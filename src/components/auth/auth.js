@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useParams, Switch, Route } from 'react-router-dom';
-import login from '../../api/auth/login';
 import SmartSplit from '../../icons/smartsplit';
 import Login from './login/login';
 import Signup from './signup/signup';
@@ -26,7 +25,7 @@ const Auth = (props) => {
           <span>{translations.auth.topBar[type]._span[language]}</span>
           <Link to={url}>{translations.auth.topBar[type]._link[language]}</Link>
           <button className="btn-secondary" onClick={toggleLanguage}>
-            {translations.auth.topBar._languageBtn[language]}
+            {translations.general._languageBtn[language]}
           </button>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Workpiece from './workpiece/workpiece';
 import Settings from './settings/settings';
 import getUsers from '../../api/users/getUsers';
 import translations from '../../translations';
+import patchUser from '../../api/users/patchUser';
 
 const Dashboard = (props) => {
   const [selectedWorkpiece, selectWorkpiece] = useState('');
@@ -24,7 +25,9 @@ const Dashboard = (props) => {
     getUser();
   }, []);
   const toggleLanguage = () => {
-    setLanguage(language === 'fr' ? 'en' : 'fr');
+    const newLanguage = language === 'fr' ? 'en' : 'fr';
+    setLanguage(newLanguage);
+    patchUser({ locale: newLanguage, user_id });
   };
   if (!user) return null;
   const commonProps = {

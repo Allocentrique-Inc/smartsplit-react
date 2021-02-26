@@ -20,10 +20,6 @@ export default {
         en: 'Create my account',
       },
     },
-    _languageBtn: {
-      fr: 'English',
-      en: 'Français',
-    },
   },
   h1: {
     _signup: {
