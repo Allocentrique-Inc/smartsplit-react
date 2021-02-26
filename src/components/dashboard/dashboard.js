@@ -4,11 +4,13 @@ import Workpieces from './workpieces/workpieces';
 import Workpiece from './workpiece/workpiece';
 import Settings from './settings/settings';
 import getUsers from '../../api/users/getUsers';
+import translations from '../../translations';
 
 const Dashboard = (props) => {
   const [selectedWorkpiece, selectWorkpiece] = useState('');
   const [activity, setActivity] = useState('');
   const [user, setUser] = useState(null);
+  const [apiErrors, setApiErrors] = useState([]);
   const user_id = localStorage.getItem('user_id');
   const [language, setLanguage] = useState('');
   useEffect(() => {
@@ -34,6 +36,7 @@ const Dashboard = (props) => {
     setUser,
     language,
     toggleLanguage,
+    translations,
   };
   return (
     <Switch>

@@ -23,7 +23,11 @@ const AddCollaborators = (props) => {
         <div className="plusIcon">
           <PlusCircleFull />
         </div>
-        <div className="input">Ajouter un collaborateur...</div>
+        <div className="input">
+          {props.isAddingLabel
+            ? 'Ajouter un label'
+            : 'Ajouter un collaborateur...'}
+        </div>
         <div className="arrowDown">
           <ChevronDown />
         </div>

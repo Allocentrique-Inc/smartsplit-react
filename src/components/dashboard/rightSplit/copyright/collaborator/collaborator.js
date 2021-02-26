@@ -45,7 +45,10 @@ const Collaborator = (props) => {
   const isDraggable = props.copyrightDividingMethod === 'manual';
 
   const collaboratorClassName =
-    props.collaborator.errors.length > 0 && props.triedSubmit
+    props.collaborator &&
+    props.collaborator.errors &&
+    props.collaborator.errors.length > 0 &&
+    props.triedSubmit
       ? 'collaborator collaboratorErrors'
       : 'collaborator';
 

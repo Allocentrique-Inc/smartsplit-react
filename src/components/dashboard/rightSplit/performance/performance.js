@@ -16,6 +16,8 @@ const Performance = (props) => {
     false,
   );
   const [triedSubmit, setTriedSubmit] = useState(false);
+  const pageErrors = props.calculatePerformanceErrors(props.performance);
+
   const addCollaborators = (newCollaborator) => {
     if (
       !props.performance.find(
@@ -37,11 +39,10 @@ const Performance = (props) => {
       props.setPerformance(newPerformance);
     }
   };
-  const deleteCollaborator = (rightHolder) => {
-    let newPerformance = [...props.performance];
-    newPerformance.splice(
-      props.performance.find((el1) => el1.user_id === rightHolder),
-      1,
+
+  const deleteCollaborator = (rightHolder_id) => {
+    let newPerformance = [...props.performance].filter(
+      (el) => el.rightHolder_id !== rightHolder_id,
     );
     newPerformance = setCollaboratorsErrors(newPerformance);
     props.setPerformance(newPerformance);
@@ -84,12 +85,12 @@ const Performance = (props) => {
     }
   });
 
-  const title =
+  const t_title =
     props.translations.rightSplit.title._performance[props.language];
-  const textPresentation =
-    props.translations.rightSplit.textPresentation._performance[props.language];
-  const textDescription =
-    props.translations.rightSplit.textDescription._performance[props.language];
+  const t_presentation =
+    props.translations.rightSplit.presentation._performance[props.language];
+  const t_description =
+    props.translations.rightSplit.description._performance[props.language];
 
   const commonProps = {
     ...props,
@@ -99,24 +100,25 @@ const Performance = (props) => {
     addCollaborators,
     isCreatingNewCollaborator,
     setIsCreatingNewCollaborator,
-    title,
-    textPresentation,
-    textDescription,
+    t_title,
+    t_presentation,
+    t_description,
     triedSubmit,
     setTriedSubmit,
   };
+
   return (
     <>
       {isCreatingNewCollaborator && <CreateNewCollaborator {...commonProps} />}
       <div className="rightSplitCreation">
-        <TopBar {...commonProps} view="performance" />
+        <TopBar {...commonProps} view="performance" errors={pageErrors} />
         <div className="b1">
           <div className="b1b1">
             <div className="b1b1b1">
               <Presentation {...commonProps} view="performance" />
               {props.performance.map((collaborator, id) => (
                 <Collaborator
-                  key={collaborator.user_id}
+                  key={collaborator.rightHolder_id}
                   {...commonProps}
                   id={id}
                   collaborator={collaborator}
@@ -127,10 +129,7 @@ const Performance = (props) => {
                 preSelectedCollaborators={props.performance}
               />
               {triedSubmit && (
-                <PageErrors
-                  {...commonProps}
-                  errors={props.calculatePerformanceErrors(props.performance)}
-                />
+                <PageErrors {...commonProps} errors={pageErrors} />
               )}
             </div>
             <div className="b1b1b2">
@@ -143,7 +142,7 @@ const Performance = (props) => {
         <div />
         <DownBar
           {...commonProps}
-          errors={props.calculatePerformanceErrors(props.performance)}
+          errors={pageErrors}
           backUrl={`/workpiece/${workpiece_id}/right-split/copyright`}
           frontUrl={`/workpiece/${workpiece_id}/right-split/recording`}
         />

@@ -23,10 +23,10 @@ const Presentation = (props) => (
           }
         })()}
       </div>
-      <div className="title">{props.title}</div>
+      <div className="title">{props.t_title}</div>
     </div>
-    <div className="text1">{props.textPresentation}</div>
-    <div className="text2">{ReactHtmlParser(props.textDescription)}</div>
+    <div className="text1">{props.t_presentation}</div>
+    <div className="text2">{ReactHtmlParser(props.t_description)}</div>
   </div>
 );
 

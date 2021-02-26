@@ -28,10 +28,10 @@ const ProfileOptions = (props) => {
               className="menuItem"
               onClick={() => history.push('/settings')}
             >
-              {translations.topBar._settings[language]}
+              {translations.general.profileOptions._settings[language]}
             </button>
             <button className="menuItem" onClick={handleDisconnect}>
-              {translations.topBar._logout[language]}
+              {translations.general.profileOptions._logout[language]}
             </button>
           </div>
         </div>

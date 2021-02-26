@@ -21,6 +21,8 @@ const Copyright = (props) => {
   );
   const [triedSubmit, setTriedSubmit] = useState(false);
 
+  const pageErrors = props.calculateCopyrightErrors(props.copyright);
+
   const addCollaborators = (newCollaborator) => {
     const isCollaboratorAlreadyIn = props.copyright.find(
       (el) => newCollaborator.user_id === el.rightHolder_id,
@@ -141,15 +143,16 @@ const Copyright = (props) => {
     }
   };
 
-  const title = props.translations.rightSplit.title._copyright[props.language];
-  const textPresentation =
-    props.translations.rightSplit.textPresentation._copyright[props.language];
-  const textDescription =
-    props.translations.rightSplit.textDescription._copyright[props.language];
-
   const sharesTotal = props.copyright.reduce((acc, el) => el.shares + acc, 0);
   const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
   const shouldDisplayCircle = isTotal100;
+
+  const t_title =
+    props.translations.rightSplit.title._copyright[props.language];
+  const t_presentation =
+    props.translations.rightSplit.presentation._copyright[props.language];
+  const t_description =
+    props.translations.rightSplit.description._copyright[props.language];
 
   const commonProps = {
     ...props,
@@ -162,9 +165,9 @@ const Copyright = (props) => {
     handleDrag,
     isCreatingNewCollaborator,
     setIsCreatingNewCollaborator,
-    title,
-    textPresentation,
-    textDescription,
+    t_title,
+    t_presentation,
+    t_description,
     triedSubmit,
     setTriedSubmit,
   };
@@ -173,7 +176,7 @@ const Copyright = (props) => {
     <>
       {isCreatingNewCollaborator && <CreateNewCollaborator {...commonProps} />}
       <div className="rightSplitCreation">
-        <TopBar {...commonProps} view="copyright" />
+        <TopBar {...commonProps} view="copyright" errors={pageErrors} />
         <div className="b1">
           <div className="b1b1">
             <div className="b1b1b1">
@@ -192,10 +195,7 @@ const Copyright = (props) => {
                 preSelectedCollaborators={props.copyright}
               />
               {triedSubmit && (
-                <PageErrors
-                  {...commonProps}
-                  errors={props.calculateCopyrightErrors(props.copyright)}
-                />
+                <PageErrors {...commonProps} errors={pageErrors} />
               )}
             </div>
             <div className="b1b1b2">
@@ -210,7 +210,7 @@ const Copyright = (props) => {
 
         <DownBar
           {...commonProps}
-          errors={props.calculateCopyrightErrors(props.copyright)}
+          errors={pageErrors}
           backUrl={`/workpiece/${workpiece_id}`}
           frontUrl={`/workpiece/${workpiece_id}/right-split/performance`}
         />

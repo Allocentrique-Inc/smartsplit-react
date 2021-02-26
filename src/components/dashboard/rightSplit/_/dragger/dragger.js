@@ -1,7 +1,6 @@
 import colors from '../colors';
 import Lock from '../../../../../icons/lock';
 import Unlock from '../../../../../icons/unlock';
-// import HelpCircleFull from '../../../../../../icons/helpCircleFull';
 
 const Dragger = (props) => {
   const handleClick = (e) => {

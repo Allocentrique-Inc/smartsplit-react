@@ -9,9 +9,20 @@ const TopBar = (props) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const history = useHistory();
   const { workpiece_id } = useParams();
+
+  const flowErrors = props.calculateFlowErrors(
+    props.copyright,
+    props.performance,
+    props.recording,
+    props.label,
+  );
+
   const handleSaveAndQuit = async () => {
-    await props.saveRightSplit();
-    history.push(`/workpiece/${workpiece_id}`);
+    props.setTriedSubmit(true);
+    if (flowErrors.length === 0) {
+      await props.saveRightSplit();
+      history.push(`/workpiece/${workpiece_id}`);
+    }
   };
 
   // _text

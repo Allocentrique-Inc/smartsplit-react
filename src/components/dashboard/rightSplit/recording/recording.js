@@ -8,6 +8,9 @@ import Label from './label/label';
 import Collaborator from './collaborator/collaborator';
 import Circle from '../_/circle/circle';
 import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollaborator';
+import PageErrors from '../../_/pageErrors/pageErrors';
+import setCollaboratorsErrors from './_/setCollaboratorsErrors';
+import setLabelErrors from './_/setLabelErrors';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
@@ -15,18 +18,24 @@ const Recording = (props) => {
   const [isCreatingNewCollaborator, setIsCreatingNewCollaborator] = useState(
     false,
   );
+  const [triedSubmit, setTriedSubmit] = useState(false);
   const [
     isCreatingNewLabelCollaborator,
     setIsCreatingNewLabelCollaborator,
   ] = useState(false);
   const { workpiece_id } = useParams();
+
+  const pageErrors = props.calculateRecordingErrors(
+    props.recording,
+    props.label,
+  );
+
   const addCollaborators = (newCollaborator) => {
-    if (
-      !props.recording.find(
-        (el) => newCollaborator.user_id === el.rightHolder_id,
-      )
-    ) {
-      props.setRecording([
+    const isCollaboratorAlreadyIn = props.recording.find(
+      (el) => newCollaborator.user_id === el.rightHolder_id,
+    );
+    if (!isCollaboratorAlreadyIn) {
+      let newRecording = [
         ...props.recording,
         {
           rightHolder: newCollaborator,
@@ -35,19 +44,23 @@ const Recording = (props) => {
           function: '',
           shares: 0,
         },
-      ]);
+      ];
+      newRecording = setCollaboratorsErrors(newRecording);
+      props.setRecording(newRecording);
     }
   };
 
   const addLabelCollaborators = (newCollaborator) => {
-    props.setLabel({
+    let newLabelCollaborator = {
       rightHolder: newCollaborator,
       rightHolder_id: newCollaborator.user_id,
       shares: 0,
       agreementDuration: '',
       notifViaEmail: false,
       notifViaText: false,
-    });
+    };
+    newLabelCollaborator = setLabelErrors(newLabelCollaborator);
+    props.setLabel(newLabelCollaborator);
   };
 
   const deleteLabel = () => {
@@ -55,18 +68,20 @@ const Recording = (props) => {
   };
 
   const deleteCollaborator = (rightHolder) => {
-    const arr = [...props.recording];
-    arr.splice(
+    let newRecording = [...props.recording];
+    newRecording.splice(
       props.recording.find((el1) => el1.user_id === rightHolder),
       1,
     );
-    props.setRecording(arr);
+    newRecording = setCollaboratorsErrors(newRecording);
+    props.setRecording(newRecording);
   };
 
   const allActors = [...props.recording];
   if (props.label.rightHolder) {
     allActors.push(props.label);
   }
+
   const handleDrag = ({ newShares, draggedRightHolder_id }) => {
     const draggedActor = allActors.find(
       (el) => el.rightHolder_id === draggedRightHolder_id,
@@ -103,12 +118,14 @@ const Recording = (props) => {
         }
         return el;
       });
-      const newRecording = redefinedActors.filter(
+      let newRecording = redefinedActors.filter(
         (el) => el.rightHolder_id !== props.label.rightHolder_id,
       );
-      const newLabel = redefinedActors.filter(
+      let newLabel = redefinedActors.filter(
         (el) => el.rightHolder_id === props.label.rightHolder_id,
       );
+      newRecording = setCollaboratorsErrors(newRecording);
+      newLabel = setLabelErrors(newLabel);
       props.setRecording(newRecording);
       if (newLabel.length > 0) {
         props.setLabel(newLabel[0]);
@@ -119,24 +136,27 @@ const Recording = (props) => {
   const allActorsSum = allActors.reduce((acc, el) => el.shares + acc, 0);
   const isDisplayingCircle = allActorsSum === 100;
 
-  const title = props.translations.rightSplit.title._recording[props.language];
-  const textPresentation =
-    props.translations.rightSplit.textPresentation._recording[props.language];
-  const textDescription =
-    props.translations.rightSplit.textDescription._recording[props.language];
+  const t_title =
+    props.translations.rightSplit.title._recording[props.language];
+  const t_presentation =
+    props.translations.rightSplit.presentation._recording[props.language];
+  const t_description =
+    props.translations.rightSplit.description._recording[props.language];
 
   const commonProps = {
     ...props,
     addCollaborators,
     deleteCollaborator,
-    title,
-    textPresentation,
-    textDescription,
+    t_title,
+    t_presentation,
+    t_description,
     handleDrag,
     isCreatingNewCollaborator,
     setIsCreatingNewCollaborator,
     isCreatingNewLabelCollaborator,
     setIsCreatingNewLabelCollaborator,
+    triedSubmit,
+    setTriedSubmit,
   };
   return (
     <>
@@ -149,7 +169,7 @@ const Recording = (props) => {
         />
       )}
       <div className="rightSplitCreation">
-        <TopBar {...props} view="recording" />
+        <TopBar {...commonProps} view="recording" errors={pageErrors} />
         <div className="b1">
           <div className="b1b1">
             <div className="b1b1b1">
@@ -162,17 +182,19 @@ const Recording = (props) => {
                   setIsCreatingNewCollaborator={
                     setIsCreatingNewLabelCollaborator
                   }
+                  isAddingLabel
                 />
               )}
-
               {props.label.rightHolder && (
                 <Label
                   {...commonProps}
-                  el={props.label}
+                  collaborator={props.label}
                   deleteCollaborator={deleteLabel}
                 />
               )}
+
               <div className="separator" />
+
               {props.recording.map((collaborator, id) => (
                 <Collaborator
                   key={collaborator.rightHolder_id}
@@ -181,10 +203,15 @@ const Recording = (props) => {
                   id={id}
                 />
               ))}
+
               <AddCollaborators
                 {...commonProps}
                 preSelectedCollaborators={allActors}
               />
+
+              {triedSubmit && (
+                <PageErrors {...commonProps} errors={pageErrors} />
+              )}
             </div>
             <div className="b1b1b2">
               <div className="b1b1b1b2">
@@ -196,6 +223,8 @@ const Recording = (props) => {
           </div>
         </div>
         <DownBar
+          {...commonProps}
+          errors={pageErrors}
           backUrl={`/workpiece/${workpiece_id}/right-split/performance`}
           frontUrl={`/workpiece/${workpiece_id}/right-split/privacy`}
         />

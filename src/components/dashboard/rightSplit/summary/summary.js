@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import TopBar from './topBar/topBar';
 import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
 import Consult from '../consult/consult';
@@ -6,6 +7,8 @@ import X from '../../../../icons/x';
 import ProfilePlaceholder from '../../../../icons/profilePlaceholder';
 
 const Summary = (props) => {
+  const history = useHistory();
+  const { workpiece_id } = useParams();
   const [consulting, setConsulting] = useState(null);
   const [emails, setEmails] = useState(null);
   const [isAdjustingEmails, setIsAdjustingEmails] = useState(false);
@@ -14,6 +17,7 @@ const Summary = (props) => {
     !props.workpiece.rightSplit._state ||
     !props.workpiece.archivedSplits
   ) {
+    history.push(`/workpiece/${workpiece_id}/`);
     return null;
   }
   const user_id = localStorage.getItem('user_id');
@@ -53,6 +57,8 @@ const Summary = (props) => {
     ...props.workpiece.rightSplit.copyright,
     ...props.workpiece.rightSplit.performance,
     ...props.workpiece.rightSplit.recording,
+    props.workpiece.rightSplit &&
+    props.workpiece.rightSplit.label &&
     props.workpiece.rightSplit.label.rightHolder_id
       ? props.workpiece.rightSplit.label
       : '',

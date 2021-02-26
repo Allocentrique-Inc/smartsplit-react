@@ -19,7 +19,7 @@ const Vote = (props) => {
     comment: '',
   });
   const [label, setLabel] = useState({
-    vote: 'accepted',
+    vote: '',
     comment: '',
   });
   const [privacy, setPrivacy] = useState({

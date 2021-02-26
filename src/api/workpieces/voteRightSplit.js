@@ -1,12 +1,13 @@
 const voteRightSplit = async (payload) => {
   const { copyright, performance, recording, privacy, label } = payload;
   const body = JSON.stringify({
-    copyright,
-    performance,
-    recording,
-    privacy,
-    label,
+    copyright: copyright.vote ? copyright : undefined,
+    performance: performance.vote ? performance : undefined,
+    recording: recording.vote ? recording : undefined,
+    privacy: privacy.vote ? privacy : undefined,
+    label: label.vote ? label : undefined,
   });
+
   try {
     const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit/vote`;
     const method = 'POST';

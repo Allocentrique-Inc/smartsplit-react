@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 const DownBar = (props) => {
   const history = useHistory();
   const handleNext = () => {
+    console.log(props.errors);
     props.setTriedSubmit(true);
     if (props.errors.length === 0) {
       history.push(props.frontUrl);

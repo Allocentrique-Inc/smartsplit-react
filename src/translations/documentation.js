@@ -21,7 +21,7 @@ export default {
   //   _privacy: { fr: 'CONFIDENTIALITÉ', en: 'PRIVACY' },
   // },
 
-  // textPresentation: {
+  // presentation: {
   //   _copyright: { fr: 'Qui a inventé cette pièce musicale ?', en: 'COPYRIGHT' },
   //   _performance: {
   //     fr: 'Qui a joué sur l’enregistrement sonore?',
@@ -31,7 +31,7 @@ export default {
   //   _privacy: { fr: 'Veux-tu rendre ce partage public?', en: 'PRIVACY' },
   // },
 
-  // textDescription: {
+  // description: {
   //   _copyright: {
   //     fr:
   //       'Sépare ici les droits d’auteur entre les créateurs, c’est à dire les auteurs des paroles, les compositeurs et les arrangeurs de la musique. Il est d’usage de partager le droit d’auteur équitablement. Mais tu peux faire autrement.',

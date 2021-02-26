@@ -1,16 +1,12 @@
-import refresh from './refresh';
-
-const login = async (payload) => {
-  const { email, password } = payload;
-  const body = JSON.stringify({ email, password });
+const refresh = async (payload) => {
   try {
-    console.log('TRYING TO LOG');
-    const url = 'http://localhost:3001/v1/auth/login';
-    const method = 'POST';
+    console.log('TRYING TO REFRESH TOKEN');
+    const url = 'http://localhost:3001/v1/auth/refresh';
+    const method = 'GET';
+    const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
       method,
-      body,
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', Authorization: bearer },
     });
     const textResponse = await response.text();
     const parsedResponse = JSON.parse(textResponse);
@@ -28,4 +24,4 @@ const login = async (payload) => {
   }
 };
 
-export default login;
+export default refresh;
