@@ -6,12 +6,10 @@ import Presentation from '../_/presentation/presentation';
 import PrivacySelection from './privacySelection/privacySelection';
 import Success from './success/success';
 import PostSaveConsult from './postSaveConsult/postSaveConsult';
-import AdjustEmails from './adjustEmails/adjustEmails';
 import PageErrors from '../../_/pageErrors/pageErrors';
 
 const Privacy = (props) => {
   const { workpiece_id } = useParams();
-
   const [isSaved, setIsSaved] = useState(false);
   const [isConsulting, setIsConsulting] = useState(false);
   const [isAdjustingEmails, setIsAdjustingEmails] = useState(false);
@@ -65,9 +63,6 @@ const Privacy = (props) => {
                 {...commonProps}
                 rightSplitInConsultation={props.workpiece.rightSplit}
               />
-            )}
-            {isConsulting && isAdjustingEmails && (
-              <AdjustEmails {...commonProps} />
             )}
           </div>
         </div>

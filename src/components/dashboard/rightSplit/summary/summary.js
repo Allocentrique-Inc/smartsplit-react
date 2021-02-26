@@ -4,13 +4,12 @@ import TopBar from './topBar/topBar';
 import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
 import Consult from '../consult/consult';
 import X from '../../../../icons/x';
-import ProfilePlaceholder from '../../../../icons/profilePlaceholder';
+import AdjustEmails from './adjustEmails/adjustEmails';
 
 const Summary = (props) => {
   const history = useHistory();
   const { workpiece_id } = useParams();
   const [consulting, setConsulting] = useState(null);
-  const [emails, setEmails] = useState(null);
   const [isAdjustingEmails, setIsAdjustingEmails] = useState(false);
   if (
     !props.workpiece.rightSplit ||
@@ -22,65 +21,17 @@ const Summary = (props) => {
   }
   const user_id = localStorage.getItem('user_id');
 
-  const handleSubmitRightSplit = async (e) => {
-    e.stopPropagation();
-    await submitRightSplit({
-      workpiece_id: props.workpiece.workpiece_id,
-      emails,
-    });
-    setConsulting(null);
-    setEmails(null);
-    setIsAdjustingEmails(false);
-    props.resetData();
-  };
-
   const hasToVote = [
     ...props.workpiece.rightSplit.copyright,
     ...props.workpiece.rightSplit.performance,
     ...props.workpiece.rightSplit.recording,
   ]
-    .filter((el) => el.rightHolder.user_id === user_id)
+    .filter((el) => el.rightHolder_id === user_id)
     .some((el) => el.vote === 'undecided');
 
-  const t_title =
-    props.translations.rightSplit.summary.adjustEmail._title[props.language];
-  const t_presentation =
-    props.translations.rightSplit.summary.adjustEmail._presentation[
-      props.language
-    ];
-  const t_envoyer =
-    props.translations.rightSplit.summary.adjustEmail._send[props.language];
-  const t_annuler =
-    props.translations.rightSplit.summary.adjustEmail._cancel[props.language];
-
-  const allArrays = [
-    ...props.workpiece.rightSplit.copyright,
-    ...props.workpiece.rightSplit.performance,
-    ...props.workpiece.rightSplit.recording,
-    props.workpiece.rightSplit &&
-    props.workpiece.rightSplit.label &&
-    props.workpiece.rightSplit.label.rightHolder_id
-      ? props.workpiece.rightSplit.label
-      : '',
-  ].filter((el) => el !== '');
-  const allActors = [];
-  allArrays.forEach((el) => {
-    if (!allActors.find((EL) => EL.rightHolder_id === el.rightHolder_id)) {
-      allActors.push(el);
-    }
-  });
-
-  useEffect(() => {
-    const alfa = {};
-    allActors.forEach((el) => {
-      const { emails } = el.rightHolder;
-      alfa[el.rightHolder_id] = emails[0];
-    });
-    setEmails(alfa);
-  }, []);
-
   const commonProps = {
-    handleSubmitRightSplit,
+    ...props,
+    setIsAdjustingEmails,
     setConsulting,
     hasToVote,
   };
@@ -90,70 +41,7 @@ const Summary = (props) => {
       {consulting &&
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         (isAdjustingEmails ? (
-          <div className="sendSplitModal">
-            <div
-              className="modalBackground"
-              onClick={() => {
-                setConsulting(null);
-                setIsAdjustingEmails(false);
-              }}
-            >
-              <div className="modal" onClick={(e) => e.stopPropagation()}>
-                <div className="topBar">
-                  <div className="title">{t_title}</div>
-                  <div
-                    className="exit"
-                    onClick={() => {
-                      setConsulting(null);
-                      setIsAdjustingEmails(false);
-                    }}
-                  >
-                    <X />
-                  </div>
-                </div>
-                <div className="content">
-                  <p>{t_presentation}</p>
-                  {allActors.map((el) => (
-                    <div className="collaborator">
-                      <ProfilePlaceholder small />
-
-                      <div className="formInput">
-                        <label>
-                          {`${el.rightHolder.firstName} ${el.rightHolder.lastName}`}
-                        </label>
-                        <input
-                          value={emails[el.rightHolder_id]}
-                          onChange={(e) => {
-                            const alfa = { ...emails };
-                            alfa[el.rightHolder_id] = e.target.value;
-                            setEmails(alfa);
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="downBar">
-                  <button
-                    className="btn-secondary"
-                    style={{ marginRight: '10px' }}
-                    onClick={() => {
-                      setConsulting(null);
-                      setIsAdjustingEmails(false);
-                    }}
-                  >
-                    {t_annuler}
-                  </button>
-                  <button
-                    className="btn-primary"
-                    onClick={handleSubmitRightSplit}
-                  >
-                    {t_envoyer}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <AdjustEmails {...commonProps} />
         ) : (
           <div className="modalBackground" onClick={() => setConsulting(null)}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
