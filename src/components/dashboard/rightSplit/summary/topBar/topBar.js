@@ -1,6 +1,7 @@
 import { Link, useParams, useHistory } from 'react-router-dom';
 import ArrowLeft from '../../../../../icons/arrowLeft';
 import SongPlaceholder from '../../../../../icons/songPlaceholder';
+import ProfileOptions from '../../../_/profileOptions/profileOptions';
 
 const TopBar = (props) => {
   const { workpiece_id } = useParams();
@@ -22,7 +23,7 @@ const TopBar = (props) => {
         <div className="title">{props.workpiece.title}</div>
         <div className="pageTitle">- Partage des droits</div>
       </div>
-      <div className="side" />
+      <ProfileOptions {...props} />
     </div>
   );
 };

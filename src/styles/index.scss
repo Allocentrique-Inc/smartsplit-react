@@ -44,28 +44,25 @@ body {
   background-color: map-get($colors, 'wip');
   display: none;
 }
-.profileMenuBackground {
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  .profileMenu {
+.profileMenu {
+  outline: 0;
+  background-color: white;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
+  margin-left: -130px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  .menuItem {
     background-color: white;
-
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    top: 52px;
-    right: 24px;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    .menuItem {
-      background-color: white;
-      padding: 8px 16px;
-      border: none;
-      cursor: pointer;
-    }
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+  }
+  :hover {
+    background-color: #eee;
   }
 }
 .profileOptions {

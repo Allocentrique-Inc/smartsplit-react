@@ -12,42 +12,55 @@ const ProfileOptions = (props) => {
     const { firstName, lastName } = props.user;
     t_initials = firstName[0] + lastName[0];
   }
-  const handleDisconnect = () => {
+  const handleDisconnectBtn = () => {
     disconnect();
     props.resetLogginCheck();
   };
+  const handleSettingsBtn = () => {
+    history.push('/settings');
+  };
+  const handleSetShowProfileOptions = () => {
+    setShowProfileOptions((e) => !e);
+    setTimeout(() => {
+      try {
+        document.getElementById('profileMenu1').focus();
+      } catch (e) {
+        console.log('');
+      }
+    }, 0);
+  };
+  const handleCloseProfileOptions = () => {
+    setTimeout(() => {
+      setShowProfileOptions(false);
+    }, 200);
+  };
+
+  const t_settings = translations.general.profileOptions._settings[language];
+  const t_disconnect = translations.general.profileOptions._logout[language];
   return (
-    <>
+    <div>
       {showProfileOptions && (
         <div
-          className="profileMenuBackground"
-          onClick={() => setShowProfileOptions(false)}
+          className="profileMenu"
+          tabIndex="0"
+          onBlur={handleCloseProfileOptions}
+          id="profileMenu1"
         >
-          <div className="profileMenu">
-            <button
-              className="menuItem"
-              onClick={() => history.push('/settings')}
-            >
-              {translations.general.profileOptions._settings[language]}
-            </button>
-            <button className="menuItem" onClick={handleDisconnect}>
-              {translations.general.profileOptions._logout[language]}
-            </button>
+          <div className="menuItem" onClick={handleSettingsBtn}>
+            {t_settings}
+          </div>
+          <div className="menuItem" onClick={handleDisconnectBtn}>
+            {t_disconnect}
           </div>
         </div>
       )}
-      <div
-        onClick={() => {
-          setShowProfileOptions((e) => !e);
-        }}
-        className="profileOptions"
-      >
+      <div onClick={handleSetShowProfileOptions} className="profileOptions">
         <div className="avatar">{t_initials}</div>
         <div className="chevronDown">
           <ChevronDown />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

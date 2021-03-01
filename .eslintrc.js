@@ -46,5 +46,6 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'off',
     'object-curly-newline': 'off',
     'prefer-destructuring': 'off',
+    'jsx-a11y/no-noninteractive-tabindex': 'off',
   },
 };
