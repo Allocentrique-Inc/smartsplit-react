@@ -131,8 +131,12 @@ const Summary = (props) => {
                     <RejectedRightSplit {...commonProps} {...props} />
                   )}
                   {props.workpiece.archivedSplits &&
-                    props.workpiece.archivedSplits.map((el, id) => (
-                      <RejectedRightSplit id={id} el={el} />
+                    props.workpiece.archivedSplits.map((workpiece, id) => (
+                      <RejectedRightSplit
+                        id={id}
+                        {...commonProps}
+                        // workpiece={workpiece}
+                      />
                     ))}
                 </div>
               </div>
@@ -217,7 +221,10 @@ const InVoteRightSplit = (props) => (
 const RejectedRightSplit = (props) => (
   <div
     className="rightSplit"
-    onClick={() => props.setConsulting(props.workpiece.rightSplit)}
+    onClick={() => {
+      console.log('HERE', props);
+      props.setConsulting(props.workpiece.rightSplit);
+    }}
   >
     <div className="title">Version X</div>
     <div className="details">
