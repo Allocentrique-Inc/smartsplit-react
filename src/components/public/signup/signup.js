@@ -89,7 +89,7 @@ export default (props) => {
     translations.publicPages.checkboxes._stayConnected[language];
   const t_button = translations.publicPages.button._signup[language];
   return (
-    <div className="form">
+    <div className="content">
       {showModal && <CheckEmailModal setShowModal={setShowModal} {...props} />}
       <div className="header">
         <h1>{t_h1}</h1>

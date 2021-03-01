@@ -16,7 +16,7 @@ export default function Onboarding({ translations, language }) {
   };
 
   return (
-    <div className="form">
+    <div className="content">
       <div className="header">
         <h1>Courriel envoyé.</h1>
         <p>

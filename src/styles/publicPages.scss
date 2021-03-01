@@ -2,25 +2,6 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  a {
-    @extend .medium-400;
-    color: map-get($colors, 'action');
-    font-weight: bold;
-    text-decoration: none;
-  }
-
-  .checkEmailModal {
-    width: 80vw;
-    max-width: 944px;
-    .content {
-      .iconContainer {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 16px;
-      }
-    }
-  }
-
   .topBar {
     padding: 16px 32px;
     display: flex;
@@ -43,7 +24,7 @@
   main {
     overflow-y: auto;
     padding: 64px 0;
-    .form {
+    .content {
       margin: 0 auto;
       max-width: 464px;
       .header p,
@@ -79,6 +60,24 @@
             margin-left: 16px;
           }
         }
+      }
+    }
+  }
+  a {
+    @extend .medium-400;
+    color: map-get($colors, 'action');
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .checkEmailModal {
+    width: 80vw;
+    max-width: 944px;
+    .content {
+      .iconContainer {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 16px;
       }
     }
   }

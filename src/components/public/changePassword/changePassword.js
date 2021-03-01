@@ -29,7 +29,7 @@ export default ({ translations, language }) => {
     ];
 
   return (
-    <div className="form">
+    <div className="content">
       <h1 className="header">{t_h1}</h1>
       <div className="formInput">
         <label htmlFor="password">{t_password_label}</label>

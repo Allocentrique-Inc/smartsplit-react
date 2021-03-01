@@ -17,7 +17,7 @@ export default ({ translations, language }) => {
   const t_email_label =
     translations.publicPages.form.requestPasswordReset.email._label[language];
   return (
-    <div className="form">
+    <div className="content">
       <div className="header">
         <h1>{t_h1}</h1>
         <p>{t_p}</p>

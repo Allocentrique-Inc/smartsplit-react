@@ -30,12 +30,12 @@ export default (props) => {
     setArtistName('');
     setPassword('');
     setConfirmPassword('');
-    history.push('/auth/login');
+    history.push('/login');
   };
 
   const isPasswordValid = () => password === confirmPassword && password !== '';
   return (
-    <div className="form">
+    <div className="content">
       <div className="header">
         <h1>En route vers la professionnalisation</h1>
         <p>

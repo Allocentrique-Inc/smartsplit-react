@@ -13,6 +13,8 @@ import Onboarding from './onboarding/onboarding';
 
 export default function Public() {
   const match = useRouteMatch();
+  const isInvited = useRouteMatch('/user/activate-invited-user');
+  console.log('GLOUGOUGLOUG', isInvited);
   const [language, setLanguage] = useState('fr');
   const toggleLanguage = () => setLanguage(language === 'fr' ? 'en' : 'fr');
   const commonProps = {
@@ -27,16 +29,18 @@ export default function Public() {
   const t_language = translations.general._languageBtn[language];
   return (
     <div className="publicPages">
-      <div className="topBar">
-        <SmartSplit />
-        <div className="right">
-          <span>{t_span}</span>
-          <Link to={t_url}>{t_link}</Link>
-          <button className="btn-secondary" onClick={toggleLanguage}>
-            {t_language}
-          </button>
+      {!isInvited && (
+        <div className="topBar">
+          <SmartSplit />
+          <div className="right">
+            <span>{t_span}</span>
+            <Link to={t_url}>{t_link}</Link>
+            <button className="btn-secondary" onClick={toggleLanguage}>
+              {t_language}
+            </button>
+          </div>
         </div>
-      </div>
+      )}
       <main>
         <Switch>
           <Route path="/login">

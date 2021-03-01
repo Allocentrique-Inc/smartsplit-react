@@ -7,7 +7,7 @@ export default function PasswordResetConfirmation({ translations, language }) {
   const t_button =
     translations.publicPages.button._passwordResetConfirmation[language];
   return (
-    <div className="form">
+    <div className="content">
       <div className="header">
         <h1>{t_h1}</h1>
         <p>{t_p}</p>
