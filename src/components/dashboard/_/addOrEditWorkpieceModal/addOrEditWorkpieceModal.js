@@ -50,7 +50,7 @@ export default function WorkpieceModal({
                 Ne pas inclure de «featuring« dans le titre.
               </div>
             </div>
-            <div className="formInput">
+            <div className="formInput toDo">
               <label htmlFor="type">Cette oeuvre est...</label>
               <div className="radioGroup" id="type">
                 <label>
@@ -115,7 +115,7 @@ export default function WorkpieceModal({
             )}
 
             <div className="row">
-              <div className="formInput">
+              <div className="formInput toDo">
                 <label>
                   Fichier
                   <span style={{ color: '#687A8B', fontWeight: 'normal' }}>
@@ -137,7 +137,7 @@ export default function WorkpieceModal({
                   Format WAV ou MP3 seulement. 100 Mo maximum.
                 </div>
               </div>
-              <div className="formInput">
+              <div className="formInput toDo">
                 <label>Version de travail</label>
                 <input
                   type="text"
