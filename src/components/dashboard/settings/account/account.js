@@ -25,7 +25,9 @@ export default function Account(props) {
         <select
           id="locale"
           value={account.locale}
-          onChange={(e) => setField('account', { locale: e.target.value })}
+          onChange={(e) => {
+            setField('account', { locale: e.target.value });
+          }}
           onBlur={updateUser}
         >
           <option value="fr">

@@ -7,10 +7,9 @@ import {
 } from 'react-router-dom';
 import Admin from './components/admin/admin';
 import Dashboard from './components/dashboard/dashboard';
+import Public from './components/public/public';
 import check from './api/auth/check';
 import './styles/index.scss';
-import Auth from './components/auth/auth';
-import User from './components/user/user';
 
 function App() {
   return (
@@ -19,11 +18,8 @@ function App() {
         <Route path="/admin">
           <Admin />
         </Route>
-        <Route path="/auth/:type">
-          <Auth />
-        </Route>
-        <Route path="/user">
-          <User />
+        <Route path={['/user', '/login', '/signup']}>
+          <Public />
         </Route>
         <Route path="/">
           <LoadingManager />
@@ -51,7 +47,7 @@ const LoadingManager = (props) => {
       {isLoaded && isLogged && (
         <Dashboard {...props} resetLogginCheck={resetLogginCheck} />
       )}
-      {isLoaded && !isLogged && <Redirect to="/auth/login" />}
+      {isLoaded && !isLogged && <Redirect to="/login" />}
     </>
   );
 };

@@ -35,8 +35,6 @@ const Workpieces = (props) => {
     resetData();
   }, []);
 
-  const t_language = props.translations.general._languageBtn[props.language];
-
   const commonProps = {
     ...props,
     resetData,
@@ -52,15 +50,7 @@ const Workpieces = (props) => {
         <div className="topBar">
           {/* <div className="searchBar" /> */}
           <div />
-          <div className="row">
-            <button
-              className="btn-primary-small"
-              onClick={props.toggleLanguage}
-            >
-              {t_language}
-            </button>
-            <ProfileOptions {...commonProps} />
-          </div>
+          <ProfileOptions {...commonProps} />
         </div>
 
         <div className="content">

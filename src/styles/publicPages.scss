@@ -1,12 +1,7 @@
-.authLayout {
+.publicPages {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  p,
-  input {
-    @extend .medium-400;
-    color: map-get($colors, 'secondary');
-  }
   a {
     @extend .medium-400;
     color: map-get($colors, 'action');
@@ -51,6 +46,11 @@
     .form {
       margin: 0 auto;
       max-width: 464px;
+      .header p,
+      input {
+        @extend .medium-400;
+        color: map-get($colors, 'secondary');
+      }
       .row {
         :first-child {
           margin-right: 30px;

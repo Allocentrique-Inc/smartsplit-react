@@ -14,16 +14,16 @@ const Dashboard = (props) => {
   const [apiErrors, setApiErrors] = useState([]);
   const user_id = localStorage.getItem('user_id');
   const [language, setLanguage] = useState('');
+  const refreshUser = async () => {
+    const user = await getUsers({ user_id });
+    setUser(user);
+  };
+  useEffect(() => {
+    refreshUser();
+  }, []);
   useEffect(() => {
     user && setLanguage(user.locale);
   }, [user]);
-  useEffect(() => {
-    const getUser = async () => {
-      const user = await getUsers({ user_id });
-      setUser(user);
-    };
-    getUser();
-  }, []);
   const toggleLanguage = () => {
     const newLanguage = language === 'fr' ? 'en' : 'fr';
     setLanguage(newLanguage);
@@ -40,6 +40,7 @@ const Dashboard = (props) => {
     language,
     toggleLanguage,
     translations,
+    refreshUser,
   };
   return (
     <Switch>

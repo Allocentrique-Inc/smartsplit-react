@@ -19,6 +19,8 @@ const ProfileOptions = (props) => {
   const handleSettingsBtn = () => {
     history.push('/settings');
   };
+  const t_language = props.translations.general._languageBtn[props.language];
+
   const handleSetShowProfileOptions = () => {
     setShowProfileOptions((e) => !e);
     setTimeout(() => {
@@ -46,6 +48,9 @@ const ProfileOptions = (props) => {
           onBlur={handleCloseProfileOptions}
           id="profileMenu1"
         >
+          <div className="menuItem" onClick={props.toggleLanguage}>
+            {t_language}
+          </div>
           <div className="menuItem" onClick={handleSettingsBtn}>
             {t_settings}
           </div>

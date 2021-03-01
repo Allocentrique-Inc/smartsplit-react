@@ -39,8 +39,8 @@ export default function Settings(props) {
     uri: '',
   });
   const [notifications, setNotifications] = useState({
-    generalInteractions: ['email', 'push'],
-    administrativeMessages: ['email', 'push'],
+    generalInteractions: ['email'],
+    administrativeMessages: ['email'],
     accountLogin: [],
     smartsplitBlog: [],
     smartsplitPromotions: [],
@@ -79,11 +79,11 @@ export default function Settings(props) {
     if (Object.entries(fields).length > 0) {
       await patchUser({ user_id, ...fields });
       setDirtyFields([]);
+      props.refreshUser();
     }
   };
 
   const mapData = async () => {
-    console.log('DATA TO LOAD', user);
     loadObjToAnother(user, profile);
     setProfile({ ...profile });
     loadObjToAnother(user, account);
@@ -94,11 +94,6 @@ export default function Settings(props) {
     loadObjToAnother(user, professionalIdentity);
     setProfessionalIdentity({ ...professionalIdentity });
     setNotifications(user.notifications);
-    Object.keys(account).forEach((key) => {
-      if (user[key]) {
-        account[key] = user[key];
-      }
-    });
   };
   useEffect(() => {
     mapData();

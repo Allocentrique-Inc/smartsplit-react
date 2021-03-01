@@ -1,13 +1,9 @@
 import { useState } from 'react';
-import {
-  Link,
-  useParams,
-  useRouteMatch,
-  Switch,
-  Route,
-} from 'react-router-dom';
-import login from '../../api/auth/login';
+import { Switch, Route, Link, useRouteMatch } from 'react-router-dom';
+import translations from '../../translations';
 import SmartSplit from '../../icons/smartsplit';
+import Login from './login/login';
+import Signup from './signup/signup';
 import ActivateEmail from './activateEmail/activateEmail';
 import ChangePassword from './changePassword/changePassword';
 import RequestPasswordReset from './requestPasswordReset/requestPasswordReset';
@@ -15,20 +11,40 @@ import PasswordResetConfirmation from './passwordResetConfirmation/passwordReset
 import ActivateInvitedUser from './activateInvitedUser/activateInvitedUser';
 import Onboarding from './onboarding/onboarding';
 
-const User = (props) => {
-  const commonProps = { ...props };
+export default function Public() {
+  const match = useRouteMatch();
+  const [language, setLanguage] = useState('fr');
+  const toggleLanguage = () => setLanguage(language === 'fr' ? 'en' : 'fr');
+  const commonProps = {
+    language,
+    toggleLanguage,
+    translations,
+  };
+  const topBarMode = match.path === '/login' ? 'login' : 'signup';
+  const t_url = topBarMode === 'login' ? '/signup' : '/login';
+  const t_span = translations.publicPages.topBar[topBarMode]._span[language];
+  const t_link = translations.publicPages.topBar[topBarMode]._link[language];
+  const t_language = translations.general._languageBtn[language];
   return (
-    <div className="authLayout">
+    <div className="publicPages">
       <div className="topBar">
         <SmartSplit />
         <div className="right">
-          <span>Pas encore membre ?</span>
-          <Link to="/auth/signup">Créer mon compte</Link>
-          <button className="btn-secondary">English</button>
+          <span>{t_span}</span>
+          <Link to={t_url}>{t_link}</Link>
+          <button className="btn-secondary" onClick={toggleLanguage}>
+            {t_language}
+          </button>
         </div>
       </div>
       <main>
         <Switch>
+          <Route path="/login">
+            <Login {...commonProps} />
+          </Route>
+          <Route path="/signup">
+            <Signup {...commonProps} />
+          </Route>
           <Route path="/user/activate/:token">
             <ActivateEmail {...commonProps} />
           </Route>
@@ -51,6 +67,4 @@ const User = (props) => {
       </main>
     </div>
   );
-};
-
-export default User;
+}
