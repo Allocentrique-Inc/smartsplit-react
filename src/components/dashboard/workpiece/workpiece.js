@@ -4,6 +4,7 @@ import getWorkpiece from '../../../api/workpieces/getWorkpiece';
 import RightSplit from '../rightSplit/rightSplit';
 import Orientation from '../orientation/orientation';
 import Documentation from '../documentation/documentation';
+import BuyTest from '../purchase/BuyTest';
 
 const Workpiece = (props) => {
   const { workpiece_id } = useParams();
@@ -43,6 +44,10 @@ const Workpiece = (props) => {
       </Route>
       <Route path="/workpiece/:workpiece_id/protect/">
         <div>PROTEXT</div>
+      </Route>
+      {/* this is just a test path*/}
+      <Route path="/workpiece/:workpiece_id/buy/">
+        <BuyTest {...commonProps} />
       </Route>
     </>
   );
