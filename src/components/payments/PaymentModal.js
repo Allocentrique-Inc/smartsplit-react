@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import X from '../../icons/x';
 import getUsers from '../../api/users/getUsers';
 import getProducts from '../../api/payments/getProducts';
+import PaymentSteps from './PaymentSteps';
 
 const PaymentModal = (props) => {
   const { setShowModal, productId, workpiece, language } = props;
@@ -9,11 +10,19 @@ const PaymentModal = (props) => {
   const [user, setUser] = useState();
   const [product, setProduct] = useState();
   const [loading, setLoading] = useState(true);
+  const [currentStep, setCurrentStep] = useState(0);
+  const steps = [
+    { label: 'Promo Code' },
+    { label: 'Billing Address' },
+    { label: 'Confirm' },
+    { label: 'Payment' },
+  ];
   const load = async () => {
     const user = await getUsers({ user_id });
-
     setUser(user);
     const product = await getProducts({ product_id: productId });
+    setProduct(product);
+    setLoading(false);
     console.log(user);
   };
   useEffect(() => {
@@ -24,8 +33,8 @@ const PaymentModal = (props) => {
       <div className="modalBackground" onClick={() => setShowModal(false)}>
         <div className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="topBar">
-            <div><h4>Acheter un feature</h4>
-              <div />
+            <div className="topBarContent"><h4>{loading ? 'loading...' : `${language === 'en' ? 'Buy a' : 'Achetez une'} ${product.name[language]}`}</h4>
+              <PaymentSteps steps={steps} current={currentStep} />
             </div>
             <button
               className="btn-icon"
@@ -35,7 +44,7 @@ const PaymentModal = (props) => {
             </button>
           </div>
           <div className="content">
-            modal content
+            {loading ? 'LOADING' : product.description[language]}
           </div>
           <div className="downBar">
             <button

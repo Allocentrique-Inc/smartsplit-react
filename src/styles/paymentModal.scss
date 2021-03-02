@@ -1,5 +1,58 @@
 .paymentModal{
   .modal{
     width:944px;
+    .topBar{
+      height:110px
+    }
+    .topBarContent{
+      width:90%
+    }
+    .content{
+      height:60vh
+    }
+  }
+  .paymentSteps{
+    margin-top:5px;
+    display:flex;
+    .step{
+      flex-grow: 0;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width:80px;
+      .stepCircle{
+        background:#ccc;
+        color:#999;
+        width:40px;
+        height:40px;
+        border-radius:20px;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+      }
+      .stepCircle.active{
+        background:map-get($colors, 'action');
+        color:map-get($colors,'primary_reversed')
+      }
+      .stepLabel{
+        font-size:11px;
+        text-align:center;
+        color:#ccc
+      }
+      .stepLabel.active{
+        color:#000
+      }
+
+    }
+    .interStep{
+      position:relative;
+      flex-grow:1;
+      transform: translateY(-60%);
+      border-bottom:1px solid #ccc;
+    }
+    .interStep.active{
+      border-color:map-get($colors, 'action');
+    }
   }
 }

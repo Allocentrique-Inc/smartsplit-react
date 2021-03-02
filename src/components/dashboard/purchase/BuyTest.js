@@ -11,7 +11,9 @@ const BuyTest = (props) => {
   const [showModal, setShowModal] = useState(false);
   const modalProps = {
     setShowModal,
-    productId: '',
+    productId: 'b42f9e18-b370-4b7a-900c-d148c6873657',
+    workpiece,
+    language,
   };
   return (
     <div className="rightSplitCreation">
