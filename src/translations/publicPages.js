@@ -136,6 +136,10 @@ export default {
         </>
       ),
     },
+    _invalidCredentials: {
+      fr: 'Email ou mot de passe incorrect',
+      en: 'Incorrect email or password',
+    },
     _shouldNotBeEmpty: {
       fr: 'Ce champ est obligatoire',
       en: 'This field is required',

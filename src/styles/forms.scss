@@ -17,6 +17,9 @@
 
   > a {
     @extend .small-700;
+    color: map-get($colors, 'action');
+    font-weight: bold;
+    text-decoration: none;
   }
 
   .doubleInput {
@@ -110,5 +113,9 @@
     @extend .small-400;
     color: #ac1616;
     padding-top: 8px;
+    a {
+      @extend .small-700;
+      color: #ac1616;
+    }
   }
 }

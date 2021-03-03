@@ -14,8 +14,10 @@ const login = async (payload) => {
     });
     const textResponse = await response.text();
     const parsedResponse = JSON.parse(textResponse);
-    localStorage.setItem('accessToken', parsedResponse.accessToken);
-    localStorage.setItem('user_id', parsedResponse.user.user_id);
+    if (parsedResponse.accessToken) {
+      localStorage.setItem('accessToken', parsedResponse.accessToken);
+      localStorage.setItem('user_id', parsedResponse.user.user_id);
+    }
     setTimeout(() => {
       refresh();
     }, 100000);

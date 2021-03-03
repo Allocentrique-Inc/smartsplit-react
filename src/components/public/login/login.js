@@ -25,9 +25,17 @@ const Login = ({ translations, language }) => {
   const [stayConnected, setStayConnected] = useState(false);
   const handleConfirm = async () => {
     if (form.isValid()) {
-      await login(form.toJS());
-      history.push('/');
-      form.reset();
+      const result = await login(form.toJS());
+      if (result.statusCode === 401) {
+        !form.fields.email.errors.includes('invalidCredentials') &&
+          form.fields.email.errors.push('invalidCredentials');
+        !form.fields.password.errors.includes('invalidCredentials') &&
+          form.fields.password.errors.push('invalidCredentials');
+        form.setFields({ ...form.fields });
+      } else {
+        history.push('/');
+        form.reset();
+      }
     }
     setTriedSubmit(true);
   };
