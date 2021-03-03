@@ -3,23 +3,24 @@ const emailFormatValidator = (value) =>
     value,
   );
 const minLengthValidator = (value, charLimit) => value.length >= charLimit;
+
 const errorTags = {
   shouldBeTrue: 'shouldBeTrue',
   emailFormat: 'shouldMatchEmailFormat',
-  minLength: (charLimit) => `shouldBeAtLeast${charLimit}CharLong`,
+  minLength: (charLimit) => {
+    return charLimit > 1
+      ? `shouldBeAtLeast${charLimit}CharLong`
+      : 'shouldNotBeEmpty';
+  },
+  shouldMatch: (toMatch) => `shouldMatch${toMatch}`,
 };
 
 export default function validate(fields) {
   let isValid = true;
   Object.values(fields).forEach((field) => {
     field.validators.forEach((validator) => {
-      let charLimit;
-      if (validator.includes('minLength')) {
-        charLimit = validator.split('_')[1];
-        validator = 'minLength';
-      }
-      switch (validator) {
-        case 'emailFormat':
+      switch (true) {
+        case /emailFormat/.test(validator):
           if (!emailFormatValidator(field.value)) {
             isValid = false;
             !field.errors.includes(errorTags.emailFormat) &&
@@ -27,21 +28,33 @@ export default function validate(fields) {
           }
 
           break;
-        case 'minLength':
+        case /minLength*/.test(validator): {
+          const charLimit = validator.split('_')[1];
           if (!minLengthValidator(field.value, charLimit)) {
             isValid = false;
             !field.errors.includes(errorTags.minLength(charLimit)) &&
               field.errors.push(errorTags.minLength(charLimit));
           }
-
           break;
-        case 'shouldBeTrue':
+        }
+        case /shouldBeTrue/.test(validator):
           if (!field.value) {
             isValid = false;
             !field.errors.includes(errorTags.shouldBeTrue) &&
               field.errors.push(errorTags.shouldBeTrue);
           }
           break;
+        case /shouldMatch*/.test(validator): {
+          const toMatch = validator.split('_')[1];
+          if (fields[toMatch] && field.value !== fields[toMatch].value) {
+            isValid = false;
+
+            !field.errors.includes(errorTags.shouldMatch(toMatch)) &&
+              field.errors.push(errorTags.shouldMatch(toMatch));
+          }
+          break;
+        }
+
         default:
       }
     });

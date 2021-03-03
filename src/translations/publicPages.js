@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default {
   topBar: {
     signup: {
@@ -141,6 +143,26 @@ export default {
         _placeholder: {
           fr: 'tonnom@exemple.com',
           en: 'name@example.com',
+        },
+        errors: {
+          _emailConflict: {
+            fr: () => (
+              <>
+                Ce courriel est déjà utilisé. As-tu{' '}
+                <Link to="/user/request-password-reset">
+                  oublié ton mot de passe ?
+                </Link>
+              </>
+            ),
+            en: () => (
+              <>
+                Ce courriel est déjà utilisé. As-tu{' '}
+                <Link to="/user/request-password-reset">
+                  oublié ton mot de passe ?
+                </Link>
+              </>
+            ),
+          },
         },
       },
       password: {

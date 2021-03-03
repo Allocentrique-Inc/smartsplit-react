@@ -25,7 +25,7 @@ const Login = ({ translations, language }) => {
   const [stayConnected, setStayConnected] = useState(false);
   const handleConfirm = async () => {
     if (form.isValid()) {
-      await login(form.values());
+      await login(form.toJS());
       history.push('/');
       form.reset();
     }

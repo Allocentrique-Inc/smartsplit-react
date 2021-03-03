@@ -11,7 +11,6 @@ import useForm from '../../_/form/useForm';
 export default (props) => {
   const { translations, language } = props;
   const [stayConnected, setStayConnected] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
   const form = useForm({
     email: {
@@ -37,12 +36,19 @@ export default (props) => {
     password: {
       value: '',
       errors: [],
-      validators: ['minLength_1'],
+      validators: ['minLength_8'],
+    },
+    confirmPassword: {
+      value: '',
+      errors: [],
+      validators: ['shouldMatch_password'],
+      excluded: true,
     },
     termsChecked: {
       value: false,
       errors: [],
       validators: ['shouldBeTrue'],
+      excluded: true,
     },
   });
   const [triedSubmit, setTriedSubmit] = useState(false);
@@ -50,13 +56,18 @@ export default (props) => {
   const history = useHistory();
   const handleSubmit = async () => {
     if (form.isValid()) {
-      await postUser({
-        ...form.values(),
+      const result = await postUser({
+        ...form.toJS(),
         locale: props.language,
       });
-      setShowModal(true);
+      if (result.statusCode === 409) {
+        form.fields.email.errors.push('emailConflict');
+        form.setField('email', { errors: form.fields.email.errors });
+      } else {
+        setShowModal(true);
+        form.reset();
+      }
     }
-    form.reset();
     setTriedSubmit(true);
     setStayConnected(false);
   };
@@ -170,23 +181,26 @@ export default (props) => {
       </FormInput>
       <FormInput errors={form.fields.password.errors} triedSubmit={triedSubmit}>
         <label htmlFor="password">{t_password_label}</label>
-        <div className="doubleInput">
-          <input
-            id="password"
-            type="password"
-            value={form.fields.password.value}
-            onChange={form.handlers.password}
-            placeholder={t_password_placeholder}
-          />
-          <div className="toDo">Validation de mot de passe</div>
-          <input
-            id="confirmPassword"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder={t_confirm_password_placeholder}
-          />
-        </div>
+        <input
+          type="password"
+          id="password"
+          value={form.fields.password.value}
+          onChange={form.handlers.password}
+          placeholder={t_password_placeholder}
+        />
+        <div className="toDo">Validation de mot de passe</div>
+      </FormInput>
+      <FormInput
+        errors={form.fields.confirmPassword.errors}
+        triedSubmit={triedSubmit}
+      >
+        <input
+          id="confirmPassword"
+          type="password"
+          value={form.fields.confirmPassword.value}
+          onChange={form.handlers.confirmPassword}
+          placeholder={t_confirm_password_placeholder}
+        />
       </FormInput>
       <FormInput
         errors={form.fields.termsChecked.errors}

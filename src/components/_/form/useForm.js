@@ -12,11 +12,12 @@ export default function useForm(iniFields = {}) {
       },
     }));
   };
-
-  const values = () => {
+  const toJS = () => {
     const values = {};
     Object.entries(fields).forEach(([fieldName, field]) => {
-      values[fieldName] = field.value;
+      if (!field.excluded) {
+        values[fieldName] = field.value;
+      }
     });
     return values;
   };
@@ -38,6 +39,7 @@ export default function useForm(iniFields = {}) {
   });
   const isValid = () => {
     const result = validate(fields);
+    console.log('VALIDATED FIELDS', fields);
     setFields({ ...fields });
     return result;
   };
@@ -46,7 +48,7 @@ export default function useForm(iniFields = {}) {
     fields,
     setFields,
     setField,
-    values,
+    toJS,
     handlers,
     isValid,
     reset,
