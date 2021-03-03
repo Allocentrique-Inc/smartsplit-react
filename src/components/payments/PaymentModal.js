@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import X from '../../icons/x';
 import getUsers from '../../api/users/getUsers';
 import getProducts from '../../api/payments/getProducts';
@@ -24,6 +24,7 @@ const PaymentModal = (props) => {
   const [address, setAddress] = useState();
   const [purchase, setPurchase] = useState();
   const [clientSecret, setClientSecret] = useState();
+  const [stepValid, setStepValid] = useState(true);
   const steps = [
     { label: 'Promo Code', component: PromoCodeStep },
     { label: 'Billing Address', component: BillingAddressStep },
@@ -34,6 +35,16 @@ const PaymentModal = (props) => {
   const load = async () => {
     const user = await getUsers({ user_id });
     setUser(user);
+    setAddress({
+      address_id: '',
+      street1: '',
+      street2: '',
+      city: '',
+      province: '',
+      postalCode: '',
+      country: 'CA',
+      ...user.paymentInfo.billingAddress,
+    });
     const product = await getProducts({ product_id: productId });
     setProduct(product);
     setLoading(false);
@@ -42,7 +53,6 @@ const PaymentModal = (props) => {
 
   const nextStep = () => {
     if (currentStep < steps.length) {
-      setStepComponent(steps[currentStep + 1].component);
       setCurrentStep(currentStep + 1);
     }
   };
@@ -53,6 +63,7 @@ const PaymentModal = (props) => {
   const stepProps = {
     language,
     user,
+    setUser,
     product,
     workpiece,
     promo,
@@ -68,7 +79,10 @@ const PaymentModal = (props) => {
     fPrice,
     setShowModal,
     nextStep,
+    stepValid,
+    setStepValid,
   };
+
   return (
     <div className="paymentModal">
       <div className="modalBackground" onClick={() => setShowModal(false)}>
@@ -88,16 +102,21 @@ const PaymentModal = (props) => {
                 </button>
               </div>
               <div className="content">
-                {loading ? 'LOADING' : <StepComponent {...stepProps} />}
+                {React.createElement(steps[currentStep - 1].component, stepProps)}
               </div>
               <div className="downBar">
                 <button
-                  className="btn-secondary"
+                  className={stepValid ? 'btn-secondary' : 'btn-disabled'}
                   onClick={() => setShowModal(false)}
                 >
                   Annuler
                 </button>
-                <button onClick={() => {}} className="btn-primary">
+                <button
+                  onClick={nextStep}
+                  className={stepValid ? 'btn-primary' : 'btn-disabled'}
+                  disabled={!stepValid}
+                  style={{ marginLeft: '10px' }}
+                >
                   Continuer
                 </button>
               </div>

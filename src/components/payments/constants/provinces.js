@@ -8,7 +8,7 @@ export default {
     NS: 'Nova Scotia',
     ON: 'Ontario',
     PE: 'Prince Edward Island',
-    QC: 'Quebec',
+    PQ: 'Quebec',
     SK: 'Saskatchewan',
     NT: 'Northwest Territories',
     NU: 'Nunavut',
