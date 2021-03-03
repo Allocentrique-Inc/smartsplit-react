@@ -39,7 +39,6 @@ export default function useForm(iniFields = {}) {
   });
   const isValid = () => {
     const result = validate(fields);
-    console.log('VALIDATED FIELDS', fields);
     setFields({ ...fields });
     return result;
   };

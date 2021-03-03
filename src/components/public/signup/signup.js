@@ -16,27 +16,27 @@ export default (props) => {
     email: {
       value: '',
       errors: [],
-      validators: ['emailFormat', 'minLength_1'],
+      validators: ['emailFormat', 'required'],
     },
     firstName: {
       value: '',
       errors: [],
-      validators: ['minLength_1'],
+      validators: ['required'],
     },
     lastName: {
       value: '',
       errors: [],
-      validators: ['minLength_1'],
+      validators: ['required'],
     },
     artistName: {
       value: '',
       errors: [],
-      validators: ['minLength_1'],
+      validators: ['required'],
     },
     password: {
       value: '',
       errors: [],
-      validators: ['minLength_8'],
+      validators: ['minLength_8', 'required'],
     },
     confirmPassword: {
       value: '',

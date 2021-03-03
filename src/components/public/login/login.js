@@ -12,12 +12,12 @@ const Login = ({ translations, language }) => {
     email: {
       value: '',
       errors: [],
-      validators: ['emailFormat', 'minLength_1'],
+      validators: ['emailFormat', 'required'],
     },
     password: {
       value: '',
       errors: [],
-      validators: ['minLength_1'],
+      validators: ['required'],
     },
   });
   const [triedSubmit, setTriedSubmit] = useState(false);

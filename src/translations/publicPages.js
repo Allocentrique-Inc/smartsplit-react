@@ -108,7 +108,7 @@ export default {
     },
   },
   formErrors: {
-    _shouldMatchEmailFormat: {
+    _emailFormat: {
       fr: "Le format de l'adresse courriel est invalide",
       en: 'Email address is in an invalid format',
     },
@@ -140,7 +140,7 @@ export default {
       fr: 'Email ou mot de passe incorrect',
       en: 'Incorrect email or password',
     },
-    _shouldNotBeEmpty: {
+    _required: {
       fr: 'Ce champ est obligatoire',
       en: 'This field is required',
     },

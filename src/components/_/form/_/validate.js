@@ -3,18 +3,8 @@ const emailFormatValidator = (value) =>
     value,
   );
 const minLengthValidator = (value, charLimit) => value.length >= charLimit;
-
-const errorTags = {
-  shouldBeTrue: 'shouldBeTrue',
-  emailFormat: 'shouldMatchEmailFormat',
-  minLength: (charLimit) => {
-    return charLimit > 1
-      ? `shouldBeAtLeast${charLimit}CharLong`
-      : 'shouldNotBeEmpty';
-  },
-  shouldMatch: (toMatch) =>
-    `shouldMatch${toMatch[0].toUpperCase() + toMatch.slice(1)}`,
-};
+const requiredValidator = (value) =>
+  value !== '' && value !== [] && value !== {};
 
 export default function validate(fields) {
   let isValid = true;
@@ -24,8 +14,8 @@ export default function validate(fields) {
         case /emailFormat/.test(validator):
           if (!emailFormatValidator(field.value)) {
             isValid = false;
-            !field.errors.includes(errorTags.emailFormat) &&
-              field.errors.push(errorTags.emailFormat);
+            !field.errors.includes('emailFormat') &&
+              field.errors.push('emailFormat');
           }
 
           break;
@@ -33,16 +23,16 @@ export default function validate(fields) {
           const charLimit = validator.split('_')[1];
           if (!minLengthValidator(field.value, charLimit)) {
             isValid = false;
-            !field.errors.includes(errorTags.minLength(charLimit)) &&
-              field.errors.push(errorTags.minLength(charLimit));
+            !field.errors.includes(`shouldBeAtLeast${charLimit}CharLong`) &&
+              field.errors.push(`shouldBeAtLeast${charLimit}CharLong`);
           }
           break;
         }
         case /shouldBeTrue/.test(validator):
           if (!field.value) {
             isValid = false;
-            !field.errors.includes(errorTags.shouldBeTrue) &&
-              field.errors.push(errorTags.shouldBeTrue);
+            !field.errors.includes('shouldBeTrue') &&
+              field.errors.push('shouldBeTrue');
           }
           break;
         case /shouldMatch*/.test(validator): {
@@ -50,12 +40,22 @@ export default function validate(fields) {
           if (fields[toMatch] && field.value !== fields[toMatch].value) {
             isValid = false;
 
-            !field.errors.includes(errorTags.shouldMatch(toMatch)) &&
-              field.errors.push(errorTags.shouldMatch(toMatch));
+            !field.errors.includes(
+              `shouldMatch${toMatch[0].toUpperCase() + toMatch.slice(1)}`,
+            ) &&
+              field.errors.push(
+                `shouldMatch${toMatch[0].toUpperCase() + toMatch.slice(1)}`,
+              );
           }
           break;
         }
-
+        case /required/.test(validator): {
+          if (!requiredValidator(field.value)) {
+            isValid = false;
+            !field.errors.includes('required') && field.errors.push('required');
+          }
+          break;
+        }
         default:
       }
     });
