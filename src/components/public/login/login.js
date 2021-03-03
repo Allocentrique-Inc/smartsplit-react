@@ -1,20 +1,37 @@
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
 import login from '../../../api/auth/login';
 import SmartSplit from '../../../icons/smartsplit';
 import Checkbox from '../../_/form/checkbox/checkbox';
+import FormInput from '../../_/form/formInput/formInput';
+import useForm from '../../_/form/useForm';
 
 const Login = ({ translations, language }) => {
-  const [email, setEmail] = useState('simonboisclair553@hotmail.com');
-  const [password, setPassword] = useState('ici12laba42');
+  const form = useForm({
+    email: {
+      value: '',
+      errors: [],
+      validators: ['emailFormat', 'minLength_1'],
+    },
+    password: {
+      value: '',
+      errors: [],
+      validators: ['minLength_1'],
+    },
+  });
+  const [triedSubmit, setTriedSubmit] = useState(false);
   const history = useHistory();
-  const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
   const [stayConnected, setStayConnected] = useState(false);
   const handleConfirm = async () => {
-    await login({ email, password });
-    history.push('/');
+    if (form.isValid()) {
+      await login(form.values());
+      history.push('/');
+      form.reset();
+    }
+    setTriedSubmit(true);
   };
+
   const t_h1 = translations.publicPages.h1._login[language];
   const t_p = translations.publicPages.p._login[language];
   const t_email_label =
@@ -35,27 +52,25 @@ const Login = ({ translations, language }) => {
         <h1>{t_h1}</h1>
         <p>{t_p}</p>
       </div>
-
-      <div className="formInput">
+      <FormInput errors={form.fields.email.errors} triedSubmit={triedSubmit}>
         <label htmlFor="email">{t_email_label}</label>
         <input
           id="email"
-          value={email}
-          onChange={handleEmail}
+          value={form.fields.email.value}
+          onChange={form.handlers.email}
           placeholder={t_email_placeholder}
         />
-      </div>
-      <div className="formInput">
+      </FormInput>
+      <FormInput errors={form.fields.password.errors} triedSubmit={triedSubmit}>
         <label htmlFor="password">{t_password_label}</label>
         <input
           id="password"
-          value={password}
+          value={form.fields.password.value}
           type="password"
-          onChange={handlePassword}
+          onChange={form.handlers.password}
         />
         <Link to="/user/request-password-reset">{t_forgot_password_link}</Link>
-      </div>
-
+      </FormInput>
       <div className="buttons">
         <div className="checkbox">
           <input

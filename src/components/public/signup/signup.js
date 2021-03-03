@@ -5,44 +5,61 @@ import SmartSplit from '../../../icons/smartsplit';
 import postUser from '../../../api/users/postUser';
 import CheckEmailModal from './checkEmailModal/checkEmailModal';
 import Checkbox from '../../_/form/checkbox/checkbox';
+import FormInput from '../../_/form/formInput/formInput';
+import useForm from '../../_/form/useForm';
 
 export default (props) => {
   const { translations, language } = props;
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [artistName, setArtistName] = useState('');
-  const [password, setPassword] = useState('');
-  const [termsChecked, setTermsChecked] = useState(false);
   const [stayConnected, setStayConnected] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const form = useForm({
+    email: {
+      value: '',
+      errors: [],
+      validators: ['emailFormat', 'minLength_1'],
+    },
+    firstName: {
+      value: '',
+      errors: [],
+      validators: ['minLength_1'],
+    },
+    lastName: {
+      value: '',
+      errors: [],
+      validators: ['minLength_1'],
+    },
+    artistName: {
+      value: '',
+      errors: [],
+      validators: ['minLength_1'],
+    },
+    password: {
+      value: '',
+      errors: [],
+      validators: ['minLength_1'],
+    },
+    termsChecked: {
+      value: false,
+      errors: [],
+      validators: ['shouldBeTrue'],
+    },
+  });
+  const [triedSubmit, setTriedSubmit] = useState(false);
 
   const history = useHistory();
-  const handleEmail = (e) => setEmail(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
   const handleSubmit = async () => {
-    const result = await postUser({
-      email,
-      firstName,
-      lastName,
-      artistName,
-      password,
-      locale: props.language,
-      // SHOULD INCLUDE LANGUAGE
-    });
-    setShowModal(true);
-    setEmail('');
-    setFirstName('');
-    setLastName('');
-    setArtistName('');
-    setPassword('');
-    setConfirmPassword('');
-    setTermsChecked(false);
+    if (form.isValid()) {
+      await postUser({
+        ...form.values(),
+        locale: props.language,
+      });
+      setShowModal(true);
+    }
+    form.reset();
+    setTriedSubmit(true);
     setStayConnected(false);
   };
-
-  const isPasswordValid = () => password === confirmPassword && password !== '';
 
   const t_h1 = translations.publicPages.h1._signup[language];
   const t_p = translations.publicPages.p._signup[language];
@@ -97,59 +114,68 @@ export default (props) => {
       </div>
       <div className="toDo">Creation de compte avec réseau sociaux</div>
 
-      <div className="formInput">
+      <FormInput errors={form.fields.email.errors} triedSubmit={triedSubmit}>
         <label htmlFor="email">{t_email_label}</label>
         <input
           type="text"
           id="email"
-          value={email}
-          onChange={handleEmail}
+          value={form.fields.email.value}
+          onChange={form.handlers.email}
           placeholder={t_email_placeholder}
         />
-      </div>
+      </FormInput>
       <div className="row">
-        <div className="formInput">
+        <FormInput
+          errors={form.fields.firstName.errors}
+          triedSubmit={triedSubmit}
+        >
           <label htmlFor="firstName">{t_firstName_label}</label>
           <input
             type="text"
             id="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={form.fields.firstName.value}
+            onChange={form.handlers.firstName}
             placeholder={t_firstName_placeholder}
           />
           <div className="hint">{t_firstName_hint}</div>
-        </div>
-        <div className="formInput">
+        </FormInput>
+        <FormInput
+          errors={form.fields.lastName.errors}
+          triedSubmit={triedSubmit}
+        >
           <label htmlFor="lastName">{t_lastName_label}</label>
           <input
             type="text"
             id="lastName"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={form.fields.lastName.value}
+            onChange={form.handlers.lastName}
             placeholder={t_lastName_placeholder}
           />
           <div className="hint">{t_lastName_hint}</div>
-        </div>
+        </FormInput>
       </div>
-      <div className="formInput">
+      <FormInput
+        errors={form.fields.artistName.errors}
+        triedSubmit={triedSubmit}
+      >
         <label htmlFor="artistName">{t_artistName_label}</label>
         <input
           type="text"
           id="artistName"
-          value={artistName}
-          onChange={(e) => setArtistName(e.target.value)}
+          value={form.fields.artistName.value}
+          onChange={form.handlers.artistName}
           placeholder={t_artistName_placeholder}
         />
         <div className="hint">{t_artistName_hint}</div>
-      </div>
-      <div className="formInput">
+      </FormInput>
+      <FormInput errors={form.fields.password.errors} triedSubmit={triedSubmit}>
         <label htmlFor="password">{t_password_label}</label>
         <div className="doubleInput">
           <input
             id="password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={form.fields.password.value}
+            onChange={form.handlers.password}
             placeholder={t_password_placeholder}
           />
           <div className="toDo">Validation de mot de passe</div>
@@ -161,12 +187,17 @@ export default (props) => {
             placeholder={t_confirm_password_placeholder}
           />
         </div>
-      </div>
-      <Checkbox
-        checked={termsChecked}
-        onChange={() => setTermsChecked(!termsChecked)}
-        label={t_terms_checkbox}
-      />
+      </FormInput>
+      <FormInput
+        errors={form.fields.termsChecked.errors}
+        triedSubmit={triedSubmit}
+      >
+        <Checkbox
+          checked={form.fields.termsChecked.value}
+          onChange={form.handlers.termsChecked}
+          label={t_terms_checkbox}
+        />
+      </FormInput>
 
       <div className="buttons">
         <Checkbox
