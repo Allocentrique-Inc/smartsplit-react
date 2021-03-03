@@ -11,8 +11,7 @@ import ProductImage from '../../../assets/entente.png';
 
 const stripe = loadStripe('pk_test_51IK8XlIayL0oggkdXNvYQhloDaPLfjKIrBSJotk7M4Esh2PLx4CqTR17bNBc0IuMoqvUVHlc85qXHQPA8sRYgpPC00y3coZqHM');
 const PaymentStep = (props) => {
-  const { setStepValid, purchase, fPrice } = props;
-  useEffect(() => { setStepValid(false); });
+  const { setStepValid, purchase, fPrice, setHandlePayment } = props;
   return (
     <Elements stripe={stripe}>
       <h3>Enter your payment information</h3>
@@ -30,7 +29,7 @@ const PaymentStep = (props) => {
 export default PaymentStep;
 
 export const CheckoutForm = (props) => {
-  const { clientSecret, stepValid, setStepValid } = props;
+  const { clientSecret, stepValid, setStepValid, setHandlePayment } = props;
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState('');
@@ -66,8 +65,8 @@ export const CheckoutForm = (props) => {
     setError(event.error ? event.error.message : '');
   };
 
-  const handleSubmit = async (ev) => {
-    ev.preventDefault();
+  const handleSubmit = async () => {
+    // ev.preventDefault();
     setProcessing(true);
 
     const payload = await stripe.confirmCardPayment(clientSecret, {
@@ -85,22 +84,15 @@ export const CheckoutForm = (props) => {
       setSucceeded(true);
     }
   };
+  useEffect(() => {
+    //setStepValid(false);
+    //setHandlePayment(handleSubmit);
+  }, []);
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+    <>
+      <h3>Enter your payment information:</h3>
       <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
-      <button
-        disabled={processing || disabled || succeeded}
-        id="submit"
-      >
-        <span id="button-text">
-          {processing ? (
-            <div className="spinner" id="spinner" />
-          ) : (
-            'Pay now'
-          )}
-        </span>
-      </button>
       {/* Show any error that happens when processing the payment */}
       {error && (
         <div className="card-error" role="alert">
@@ -119,6 +111,9 @@ export const CheckoutForm = (props) => {
           </a> Refresh the page to pay again.
         </p>
       )}
-    </form>
+      <div className="text-right" style={{ marginTop: '20px' }}>
+        <button className={disabled ? 'btn-disabled' : 'btn-primary'} onClick={handleSubmit}>PAY NOW!</button>
+      </div>
+    </>
   );
 };

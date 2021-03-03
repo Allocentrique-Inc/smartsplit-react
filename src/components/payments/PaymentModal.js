@@ -52,8 +52,9 @@ const PaymentModal = (props) => {
   ];
 
   const nextStep = () => {
-    if (currentStep === 3) {
+    if (currentStep === 4) {
       handlePayment();
+      return;
     }
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
@@ -92,6 +93,7 @@ const PaymentModal = (props) => {
     useCredits,
     setUseCredits,
     total,
+    setHandlePayment,
   };
 
   return (
@@ -128,6 +130,7 @@ const PaymentModal = (props) => {
                 >
                   Cancel
                 </button>
+                {currentStep < 4 && (
                 <button
                   onClick={nextStep}
                   className={stepValid ? 'btn-primary' : 'btn-disabled'}
@@ -136,6 +139,8 @@ const PaymentModal = (props) => {
                 >
                   {steps[currentStep - 1].next}
                 </button>
+                )
+                }
               </div>
             </>
           ) : (
