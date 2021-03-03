@@ -4,8 +4,8 @@ import { Link, useHistory } from 'react-router-dom';
 import login from '../../../api/auth/login';
 import SmartSplit from '../../../icons/smartsplit';
 import Checkbox from '../../_/form/checkbox/checkbox';
-import FormInput from '../../_/form/formInput/formInput';
 import useForm from '../../_/form/useForm';
+import FormInput from '../../_/form/formInput/formInput';
 
 const Login = ({ translations, language }) => {
   const form = useForm({
@@ -32,6 +32,12 @@ const Login = ({ translations, language }) => {
     setTriedSubmit(true);
   };
 
+  const commonProps = {
+    language,
+    errorTranslations: translations.publicPages.formErrors,
+    triedSubmit,
+  };
+
   const t_h1 = translations.publicPages.h1._login[language];
   const t_p = translations.publicPages.p._login[language];
   const t_email_label =
@@ -52,7 +58,7 @@ const Login = ({ translations, language }) => {
         <h1>{t_h1}</h1>
         <p>{t_p}</p>
       </div>
-      <FormInput errors={form.fields.email.errors} triedSubmit={triedSubmit}>
+      <FormInput errors={form.fields.email.errors} {...commonProps}>
         <label htmlFor="email">{t_email_label}</label>
         <input
           id="email"
@@ -61,7 +67,7 @@ const Login = ({ translations, language }) => {
           placeholder={t_email_placeholder}
         />
       </FormInput>
-      <FormInput errors={form.fields.password.errors} triedSubmit={triedSubmit}>
+      <FormInput errors={form.fields.password.errors} {...commonProps}>
         <label htmlFor="password">{t_password_label}</label>
         <input
           id="password"

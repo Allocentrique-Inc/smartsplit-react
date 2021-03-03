@@ -107,6 +107,48 @@ export default {
       en: 'Stay connected',
     },
   },
+  formErrors: {
+    _shouldMatchEmailFormat: {
+      fr: "Le format de l'adresse courriel est invalide",
+      en: 'Email address is in an invalid format',
+    },
+    _shouldBeTrue: {
+      fr:
+        "Tu dois accepter les les Termes et conditions d'utilisation et la Politique sur la vie privée de Smartsplit",
+      en:
+        'You must agree to the Terms and Conditions of Use and the Privacy Policy of Smartsplit',
+    },
+    _emailConflict: {
+      fr: () => (
+        <>
+          Ce courriel est déjà utilisé. As-tu{' '}
+          <Link to="/user/request-password-reset">
+            oublié ton mot de passe?
+          </Link>
+        </>
+      ),
+      en: () => (
+        <>
+          This email is already in use. Have you{' '}
+          <Link to="/user/request-password-reset">
+            forgotten your password?
+          </Link>
+        </>
+      ),
+    },
+    _shouldNotBeEmpty: {
+      fr: 'Ce champ est obligatoire',
+      en: 'This field is required',
+    },
+    _shouldBeAtLeast8CharLong: {
+      fr: 'Le mot de passe doit faire au moins 8 caractères',
+      en: 'Password must be at least 8 characters long',
+    },
+    _shouldMatchPassword: {
+      fr: 'Les mots de passe doivent être identiques',
+      en: 'Passwords must match',
+    },
+  },
   form: {
     requestPasswordReset: {
       email: {
@@ -143,26 +185,6 @@ export default {
         _placeholder: {
           fr: 'tonnom@exemple.com',
           en: 'name@example.com',
-        },
-        errors: {
-          _emailConflict: {
-            fr: () => (
-              <>
-                Ce courriel est déjà utilisé. As-tu{' '}
-                <Link to="/user/request-password-reset">
-                  oublié ton mot de passe ?
-                </Link>
-              </>
-            ),
-            en: () => (
-              <>
-                Ce courriel est déjà utilisé. As-tu{' '}
-                <Link to="/user/request-password-reset">
-                  oublié ton mot de passe ?
-                </Link>
-              </>
-            ),
-          },
         },
       },
       password: {

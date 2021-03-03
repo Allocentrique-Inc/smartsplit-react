@@ -30,6 +30,12 @@ export default ({ translations, language }) => {
     setTriedSubmit(true);
   };
 
+  const commonProps = {
+    language,
+    errorTranslations: translations.publicPages.formErrors,
+    triedSubmit,
+  };
+
   const t_h1 = translations.publicPages.h1._changePassword[language];
   const t_button = translations.publicPages.button._changePassword[language];
 
@@ -47,7 +53,7 @@ export default ({ translations, language }) => {
   return (
     <div className="content">
       <h1 className="header">{t_h1}</h1>
-      <FormInput errors={form.fields.password.errors} triedSubmit={triedSubmit}>
+      <FormInput errors={form.fields.password.errors} {...commonProps}>
         <label htmlFor="password">{t_password_label}</label>
         <input
           type="password"
@@ -58,10 +64,7 @@ export default ({ translations, language }) => {
         />
         <div className="toDo">Validation de mot de passe</div>
       </FormInput>
-      <FormInput
-        errors={form.fields.confirmPassword.errors}
-        triedSubmit={triedSubmit}
-      >
+      <FormInput errors={form.fields.confirmPassword.errors} {...commonProps}>
         <label htmlFor="confirmPassword">{t_confirm_password_label}</label>
         <input
           id="confirmPassword"

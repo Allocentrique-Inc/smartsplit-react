@@ -1,5 +1,13 @@
 export default function FormInput(props) {
-  const { children, errors, triedSubmit, ...nextProps } = props;
+  const {
+    children,
+    errors,
+    triedSubmit,
+    errorTranslations,
+    language,
+    ...nextProps
+  } = props;
+  console.log('PROPS', errorTranslations._shouldNotBeEmpty.fr);
   const showErrors = errors.length > 0 && triedSubmit;
   const classNames = `formInput ${showErrors ? 'error' : ''}`;
   return (
@@ -10,7 +18,7 @@ export default function FormInput(props) {
         errors &&
         errors.map((error) => (
           <p className="error" key={error}>
-            {error}
+            {errorTranslations[`_${error}`][language]}
           </p>
         ))}
       {Array.isArray(children) && children.length > 1 && children.slice(2)}

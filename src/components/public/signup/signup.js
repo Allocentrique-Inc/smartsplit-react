@@ -5,8 +5,8 @@ import SmartSplit from '../../../icons/smartsplit';
 import postUser from '../../../api/users/postUser';
 import CheckEmailModal from './checkEmailModal/checkEmailModal';
 import Checkbox from '../../_/form/checkbox/checkbox';
-import FormInput from '../../_/form/formInput/formInput';
 import useForm from '../../_/form/useForm';
+import FormInput from '../../_/form/formInput/formInput';
 
 export default (props) => {
   const { translations, language } = props;
@@ -72,6 +72,12 @@ export default (props) => {
     setStayConnected(false);
   };
 
+  const commonProps = {
+    language,
+    errorTranslations: translations.publicPages.formErrors,
+    triedSubmit,
+  };
+
   const t_h1 = translations.publicPages.h1._signup[language];
   const t_p = translations.publicPages.p._signup[language];
   const t_email_label =
@@ -125,7 +131,7 @@ export default (props) => {
       </div>
       <div className="toDo">Creation de compte avec réseau sociaux</div>
 
-      <FormInput errors={form.fields.email.errors} triedSubmit={triedSubmit}>
+      <FormInput errors={form.fields.email.errors} {...commonProps}>
         <label htmlFor="email">{t_email_label}</label>
         <input
           type="text"
@@ -136,10 +142,7 @@ export default (props) => {
         />
       </FormInput>
       <div className="row">
-        <FormInput
-          errors={form.fields.firstName.errors}
-          triedSubmit={triedSubmit}
-        >
+        <FormInput errors={form.fields.firstName.errors} {...commonProps}>
           <label htmlFor="firstName">{t_firstName_label}</label>
           <input
             type="text"
@@ -150,10 +153,7 @@ export default (props) => {
           />
           <div className="hint">{t_firstName_hint}</div>
         </FormInput>
-        <FormInput
-          errors={form.fields.lastName.errors}
-          triedSubmit={triedSubmit}
-        >
+        <FormInput errors={form.fields.lastName.errors} {...commonProps}>
           <label htmlFor="lastName">{t_lastName_label}</label>
           <input
             type="text"
@@ -165,10 +165,7 @@ export default (props) => {
           <div className="hint">{t_lastName_hint}</div>
         </FormInput>
       </div>
-      <FormInput
-        errors={form.fields.artistName.errors}
-        triedSubmit={triedSubmit}
-      >
+      <FormInput errors={form.fields.artistName.errors} {...commonProps}>
         <label htmlFor="artistName">{t_artistName_label}</label>
         <input
           type="text"
@@ -179,7 +176,7 @@ export default (props) => {
         />
         <div className="hint">{t_artistName_hint}</div>
       </FormInput>
-      <FormInput errors={form.fields.password.errors} triedSubmit={triedSubmit}>
+      <FormInput errors={form.fields.password.errors} {...commonProps}>
         <label htmlFor="password">{t_password_label}</label>
         <input
           type="password"
@@ -190,10 +187,7 @@ export default (props) => {
         />
         <div className="toDo">Validation de mot de passe</div>
       </FormInput>
-      <FormInput
-        errors={form.fields.confirmPassword.errors}
-        triedSubmit={triedSubmit}
-      >
+      <FormInput errors={form.fields.confirmPassword.errors} {...commonProps}>
         <input
           id="confirmPassword"
           type="password"
@@ -202,10 +196,7 @@ export default (props) => {
           placeholder={t_confirm_password_placeholder}
         />
       </FormInput>
-      <FormInput
-        errors={form.fields.termsChecked.errors}
-        triedSubmit={triedSubmit}
-      >
+      <FormInput errors={form.fields.termsChecked.errors} {...commonProps}>
         <Checkbox
           checked={form.fields.termsChecked.value}
           onChange={form.handlers.termsChecked}

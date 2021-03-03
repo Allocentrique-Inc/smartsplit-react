@@ -26,6 +26,13 @@ export default ({ translations, language }) => {
     }
     setTriedSubmit(true);
   };
+
+  const commonProps = {
+    language,
+    errorTranslations: translations.publicPages.formErrors,
+    triedSubmit,
+  };
+
   const t_h1 = translations.publicPages.h1._requestPasswordReset[language];
   const t_p = translations.publicPages.p._requestPasswordReset[language];
   const t_link = translations.publicPages._signupLink[language];
@@ -39,7 +46,7 @@ export default ({ translations, language }) => {
         <h1>{t_h1}</h1>
         <p>{t_p}</p>
       </div>
-      <FormInput errors={form.fields.email.errors} triedSubmit={triedSubmit}>
+      <FormInput errors={form.fields.email.errors} {...commonProps}>
         <label htmlFor="email">{t_email_label}</label>
         <input
           id="email"

@@ -12,7 +12,8 @@ const errorTags = {
       ? `shouldBeAtLeast${charLimit}CharLong`
       : 'shouldNotBeEmpty';
   },
-  shouldMatch: (toMatch) => `shouldMatch${toMatch}`,
+  shouldMatch: (toMatch) =>
+    `shouldMatch${toMatch[0].toUpperCase() + toMatch.slice(1)}`,
 };
 
 export default function validate(fields) {
