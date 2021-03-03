@@ -1,6 +1,6 @@
 import ProductImage from '../../../assets/entente.png';
 import getPromoCode from '../../../api/payments/getPromoCode';
-import creditsConversionRate from '../constants/creditsConversionRate';
+import { credits2Munee } from '../constants/creditsConversionRate';
 
 const PromoCodeStep = (props) => {
   const {
@@ -24,7 +24,7 @@ const PromoCodeStep = (props) => {
     fPrice(
       product.price
       - (promo ? promo.value : 0)
-      - (useCredits ? credits * creditsConversionRate : 0),
+      - (useCredits ? credits2Munee(credits) : 0),
     );
 
   return (
@@ -75,7 +75,7 @@ const PromoCodeStep = (props) => {
             Use Credits on this purchase
           </label>
         </div>
-        <div className="item-price">{useCredits ? `-${fPrice(credits * creditsConversionRate)}` : '——'}</div>
+        <div className="item-price">{useCredits ? `-${fPrice(credits2Munee(credits))}` : '——'}</div>
       </div>
       <div className="item-row">
         <div className="item-image" />
