@@ -1,12 +1,32 @@
 import ProductImage from '../../../assets/entente.png';
 import getPromoCode from '../../../api/payments/getPromoCode';
+import creditsConversionRate from '../constants/creditsConversionRate';
 
 const PromoCodeStep = (props) => {
-  const { language, product, promo, setPromo, promoCode, setPromoCode, fPrice } = props;
+  const {
+    language,
+    product,
+    promo,
+    setPromo,
+    promoCode,
+    setPromoCode,
+    fPrice,
+    credits,
+    useCredits,
+    setUseCredits,
+  } = props;
+
   const fetchPromo = async (code) => {
     const promo = await getPromoCode(code);
     if (promo) setPromo(promo);
   };
+  const total = () =>
+    fPrice(
+      product.price
+      - (promo ? promo.value : 0)
+      - (useCredits ? credits * creditsConversionRate : 0),
+    );
+
   return (
     <div className="order">
       <div className="item-row">
@@ -15,7 +35,7 @@ const PromoCodeStep = (props) => {
         <div className="item-price">{fPrice(product.price)}</div>
       </div>
       <div className="item-row">
-        <div className="item-image">
+        <div className="item-image text-right">
           <label>{promo ? 'Promo Code:' : 'Enter a Promo Code:'}</label>
         </div>
         <div className="item-description">{
@@ -40,6 +60,27 @@ const PromoCodeStep = (props) => {
                     </button>
                   ) }
         </div>
+      </div>
+      <div className="item-row">
+        <div className="item-image text-right"><label>{credits || '0'} Credits Available</label></div>
+        <div className="item-description">
+          <label><input
+            type="checkbox"
+            checked={useCredits}
+            onChange={
+          (e) => {
+            setUseCredits(e.target.checked);
+          }
+        } />
+            Use Credits on this purchase
+          </label>
+        </div>
+        <div className="item-price">{useCredits ? `-${fPrice(credits * creditsConversionRate)}` : '——'}</div>
+      </div>
+      <div className="item-row">
+        <div className="item-image" />
+        <div className="item-description text-right medium-700">Total:</div>
+        <div className="item-price">{total()}</div>
       </div>
     </div>
   );

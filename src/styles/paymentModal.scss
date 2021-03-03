@@ -1,17 +1,26 @@
 .paymentModal{
   .modal{
     width:650px;
-    .topBar{
-      height:110px;
-      .btn-icon{
-      align-self:flex-start
+    .topBar {
+      height: 110px;
+      position: relative;
+
+      .btn-icon {
+        align-self: flex-start
+      }
     }
+    .downBar{
+      position:relative;
     }
+
     .topBarContent{
       width:90%
     }
     .content{
-      height:60vh
+      height:60vh;
+      h3{
+        margin-bottom:1em
+      }
     }
 
   }
@@ -150,9 +159,7 @@
     }
   }
   .addressForm {
-    h3{
-      margin-bottom:1em
-    }
+
     p{display:flex; margin-bottom:0.3em}
     label {
        display:block;

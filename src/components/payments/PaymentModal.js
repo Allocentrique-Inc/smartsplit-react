@@ -13,10 +13,8 @@ const fPrice = (n) => (`$${(n / 100).toFixed(2)}`);
 
 const PaymentModal = (props) => {
   const { setShowModal, productId, workpiece, language } = props;
-  const user_id = localStorage.getItem('user_id');
-  const [user, setUser] = useState();
-  const [product, setProduct] = useState();
-  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(props.user);
+  const [product, setProduct] = useState(props.product);
   const [currentStep, setCurrentStep] = useState(0);
   const [promoCode, setPromoCode] = useState(false);
   const [promo, setPromo] = useState();
@@ -25,16 +23,9 @@ const PaymentModal = (props) => {
   const [purchase, setPurchase] = useState();
   const [clientSecret, setClientSecret] = useState();
   const [stepValid, setStepValid] = useState(true);
-  const steps = [
-    { label: 'Promo Code', component: PromoCodeStep },
-    { label: 'Billing Address', component: BillingAddressStep },
-    { label: 'Confirm' },
-    { label: 'Payment' },
-  ];
-
-  const load = async () => {
-    const user = await getUsers({ user_id });
-    setUser(user);
+  const [credits, setCredits] = useState(0);
+  const [useCredits, setUseCredits] = useState(false);
+  useEffect(() => {
     setAddress({
       address_id: '',
       street1: '',
@@ -45,20 +36,22 @@ const PaymentModal = (props) => {
       country: 'CA',
       ...user.paymentInfo.billingAddress,
     });
-    const product = await getProducts({ product_id: productId });
-    setProduct(product);
-    setLoading(false);
-    console.log(user);
-  };
+    if (workpiece.credits?.remaining) {
+      setCredits(workpiece.credits?.remaining);
+    }
+  }, [user]);
+  const steps = [
+    { label: 'Promo Code', component: PromoCodeStep },
+    { label: 'Billing Address', component: BillingAddressStep },
+    { label: 'Confirm' },
+    { label: 'Payment' },
+  ];
 
   const nextStep = () => {
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
     }
   };
-  useEffect(() => {
-    load();
-  }, [user_id]);
 
   const stepProps = {
     language,
@@ -68,19 +61,22 @@ const PaymentModal = (props) => {
     workpiece,
     promo,
     setPromo,
+    promoCode,
+    setPromoCode,
     address,
     setAddress,
     purchase,
     setPurchase,
     clientSecret,
     setClientSecret,
-    loading,
-    setLoading,
     fPrice,
     setShowModal,
     nextStep,
     stepValid,
     setStepValid,
+    credits,
+    useCredits,
+    setUseCredits,
   };
 
   return (
@@ -91,7 +87,7 @@ const PaymentModal = (props) => {
             <>
               <div className="topBar">
                 <div className="topBarContent">
-                  <h4>{loading ? 'loading...' : `${language === 'en' ? 'Buy a' : 'Achetez une'} ${product.name[language]}`}</h4>
+                  <h4>{`${language === 'en' ? 'Buy a' : 'Achetez une'} ${product.name[language]}`}</h4>
                   <PaymentSteps steps={steps} current={currentStep} />
                 </div>
                 <button
