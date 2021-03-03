@@ -29,7 +29,7 @@ const BillingAddressStep = (props) => {
         setShowForm(false);
         setStepValid(true);
       } else {
-        const newAddress = await createAddress(address);
+        const newAddress = await createAddress(user, address);
         const userUpdated = await getUsers({ user_id: user.user_id });
         setUser(userUpdated);
         setShowForm(false);

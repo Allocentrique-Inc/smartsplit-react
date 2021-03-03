@@ -24,7 +24,7 @@ const PaymentModal = (props) => {
   const [clientSecret, setClientSecret] = useState();
   const [stepValid, setStepValid] = useState(true);
   const [credits, setCredits] = useState(10);
-  const [useCredits, setUseCredits] = useState(false);
+  const [useCredits, setUseCredits] = useState(true);
   useEffect(() => {
     setAddress({
       address_id: '',

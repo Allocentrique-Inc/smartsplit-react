@@ -1,6 +1,6 @@
 const createAddress = async (user, address) => {
   try {
-    const url = `http://localhost:3001/v1/user/${user.user_id}/addresses/`;
+    const url = `http://localhost:3001/v1/users/${user.user_id}/addresses/`;
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
