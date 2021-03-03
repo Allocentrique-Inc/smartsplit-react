@@ -8,8 +8,9 @@ import getPromoCode from '../../api/payments/getPromoCode';
 import PromoCodeStep from './steps/PromoCodeStep';
 import SplashStep from './steps/SplashStep';
 import BillingAddressStep from './steps/BillingAddressStep';
-import PurchaseStep from './steps/PurchaseStep';
+import ReviewStep from './steps/ReviewStep';
 import { credits2Munee } from './constants/creditsConversionRate';
+import PaymentStep from './steps/PaymentStep';
 
 const fPrice = (n) => (`$${(n / 100).toFixed(2)}`);
 
@@ -27,6 +28,7 @@ const PaymentModal = (props) => {
   const [stepValid, setStepValid] = useState(true);
   const [credits, setCredits] = useState(10);
   const [useCredits, setUseCredits] = useState(true);
+  const [handlePayment, setHandlePayment] = useState(null);
   useEffect(() => {
     setAddress({
       address_id: '',
@@ -43,12 +45,16 @@ const PaymentModal = (props) => {
     }
   }, [user]);
   const steps = [
-    { label: 'Promo Code', component: PromoCodeStep },
-    { label: 'Billing Address', component: BillingAddressStep },
-    { label: 'Payment', component: PurchaseStep },
+    { label: 'Promo Code', component: PromoCodeStep, next: 'Continue' },
+    { label: 'Billing Address', component: BillingAddressStep, next: 'Confirm Billing Address' },
+    { label: 'Confirm', component: ReviewStep, next: 'Confirm Amount' },
+    { label: 'Payment', component: PaymentStep, next: 'Pay Now' },
   ];
 
   const nextStep = () => {
+    if (currentStep === 3) {
+      handlePayment();
+    }
     if (currentStep < steps.length) {
       setCurrentStep(currentStep + 1);
     }
@@ -96,7 +102,10 @@ const PaymentModal = (props) => {
             <>
               <div className="topBar">
                 <div className="topBarContent">
-                  <h4>{`${language === 'en' ? 'Buy a' : 'Achetez une'} ${product.name[language]}`}</h4>
+                  <h4>{`${language === 'en' ? 'Buy a' : 'Achetez une'} ${
+                    product.name[language]
+                  }`}
+                  </h4>
                   <PaymentSteps steps={steps} current={currentStep} />
                 </div>
                 <button
@@ -107,14 +116,17 @@ const PaymentModal = (props) => {
                 </button>
               </div>
               <div className="content">
-                {React.createElement(steps[currentStep - 1].component, stepProps)}
+                {React.createElement(
+                  steps[currentStep - 1].component,
+                  stepProps,
+                )}
               </div>
               <div className="downBar">
                 <button
                   className={stepValid ? 'btn-secondary' : 'btn-disabled'}
                   onClick={() => setShowModal(false)}
                 >
-                  Annuler
+                  Cancel
                 </button>
                 <button
                   onClick={nextStep}
@@ -122,13 +134,13 @@ const PaymentModal = (props) => {
                   disabled={!stepValid}
                   style={{ marginLeft: '10px' }}
                 >
-                  Continuer
+                  {steps[currentStep - 1].next}
                 </button>
               </div>
             </>
-          ) : (<SplashStep {...stepProps} />)
-          }
-
+          ) : (
+            <SplashStep {...stepProps} />
+          )}
         </div>
       </div>
     </div>
