@@ -7,7 +7,9 @@ const SplashStep = (props) => {
     <>
       <div className="splashModal">
         <div className="splashContent">
-          <img alt="" src={ProductImage} />
+          <div className="splashImage">
+            <img alt="" src={ProductImage} />
+          </div>
           <div className="splashProductInfo">
             <h5>Télécharger l'entente</h5>
             <h3>Concrétisez votre entente légalement</h3>

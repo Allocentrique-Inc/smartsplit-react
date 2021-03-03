@@ -14,18 +14,13 @@ const PromoCodeStep = (props) => {
     credits,
     useCredits,
     setUseCredits,
+    total,
   } = props;
 
   const fetchPromo = async (code) => {
     const promo = await getPromoCode(code);
     if (promo) setPromo(promo);
   };
-  const total = () =>
-    fPrice(
-      product.price
-      - (promo ? promo.value : 0)
-      - (useCredits ? credits2Munee(credits) : 0),
-    );
 
   return (
     <div className="order">

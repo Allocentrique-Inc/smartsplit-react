@@ -8,6 +8,8 @@ import getPromoCode from '../../api/payments/getPromoCode';
 import PromoCodeStep from './steps/PromoCodeStep';
 import SplashStep from './steps/SplashStep';
 import BillingAddressStep from './steps/BillingAddressStep';
+import PurchaseStep from './steps/PurchaseStep';
+import { credits2Munee } from './constants/creditsConversionRate';
 
 const fPrice = (n) => (`$${(n / 100).toFixed(2)}`);
 
@@ -43,8 +45,7 @@ const PaymentModal = (props) => {
   const steps = [
     { label: 'Promo Code', component: PromoCodeStep },
     { label: 'Billing Address', component: BillingAddressStep },
-    { label: 'Confirm' },
-    { label: 'Payment' },
+    { label: 'Payment', component: PurchaseStep },
   ];
 
   const nextStep = () => {
@@ -52,6 +53,13 @@ const PaymentModal = (props) => {
       setCurrentStep(currentStep + 1);
     }
   };
+
+  const total = () =>
+    fPrice(
+      product.price
+          - (promo ? promo.value : 0)
+          - (useCredits ? credits2Munee(credits) : 0),
+    );
 
   const stepProps = {
     language,
@@ -77,6 +85,7 @@ const PaymentModal = (props) => {
     credits,
     useCredits,
     setUseCredits,
+    total,
   };
 
   return (
