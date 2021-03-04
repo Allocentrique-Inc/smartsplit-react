@@ -30,7 +30,7 @@ const postUser = async (payload) => {
     }
     setTimeout(() => {
       refresh();
-    }, 100000);
+    }, 3500000);
     return parsedResponse;
   } catch (err) {
     console.log(err);
