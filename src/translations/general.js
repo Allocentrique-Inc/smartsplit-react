@@ -13,4 +13,10 @@ export default {
     fr: 'English',
     en: 'Français',
   },
+  formErrors: {
+    _required: {
+      fr: 'Ce champ est obligatoire',
+      en: 'This field is required',
+    },
+  },
 };

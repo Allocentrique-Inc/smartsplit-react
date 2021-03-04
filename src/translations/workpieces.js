@@ -21,4 +21,46 @@ export default {
       en: 'New password',
     },
   },
+  workpieceModal: {
+    topBar: {
+      title: {
+        _create: {
+          fr: 'Créer une pièce musicale',
+          en: 'Create a workpiece',
+        },
+        _edit: {
+          fr: 'Modifier une pièce musicale',
+          en: 'Edit a workpiece',
+        },
+      },
+    },
+    downBar: {
+      _cancel: {
+        fr: 'Annuler',
+        en: 'Cancel',
+      },
+      submit: {
+        _create: {
+          fr: "C'est parti!",
+          en: "Let's go!",
+        },
+        _edit: {
+          fr: 'Sauvegarder',
+          en: 'Save',
+        },
+      },
+    },
+    fields: {
+      title: {
+        _label: {
+          fr: 'Titre de la pièce musicale',
+          en: 'Title of the musical piece',
+        },
+        _hint: {
+          fr: 'Ne pas inclure de «featuring» dans le titre.',
+          en: 'Do not include any featuring in the title.',
+        },
+      },
+    },
+  },
 };

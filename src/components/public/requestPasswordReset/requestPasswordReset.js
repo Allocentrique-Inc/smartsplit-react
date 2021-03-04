@@ -9,7 +9,7 @@ export default ({ translations, language }) => {
     email: {
       value: '',
       errors: [],
-      validators: ['emailFormat', 'minLength_1'],
+      validators: ['emailFormat', 'required'],
     },
   });
   const [triedSubmit, setTriedSubmit] = useState(false);
