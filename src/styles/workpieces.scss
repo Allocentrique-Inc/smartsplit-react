@@ -224,6 +224,31 @@
           }
         }
       }
+      .empty {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        .text1 {
+          font-family: IBM Plex Sans;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 24px;
+          text-align: center;
+          color: #203548;
+          margin-top: 54px;
+        }
+        .text2 {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 16px;
+          line-height: 24px;
+          text-align: center;
+          color: #687a8b;
+          margin-top: 8px;
+        }
+      }
     }
   }
 }
