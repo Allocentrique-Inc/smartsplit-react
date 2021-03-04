@@ -140,10 +140,6 @@ export default {
       fr: 'Email ou mot de passe incorrect',
       en: 'Incorrect email or password',
     },
-    _required: {
-      fr: 'Ce champ est obligatoire',
-      en: 'This field is required',
-    },
     _shouldBeAtLeast8CharLong: {
       fr: 'Le mot de passe doit faire au moins 8 caractères',
       en: 'Password must be at least 8 characters long',

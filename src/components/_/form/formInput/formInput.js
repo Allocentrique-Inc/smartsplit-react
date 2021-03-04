@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import generalTranslations from '../../../../translations/general';
+
 export default function FormInput(props) {
   const {
     children,
@@ -7,20 +10,24 @@ export default function FormInput(props) {
     language,
     ...nextProps
   } = props;
+  const [translations] = useState({
+    ...generalTranslations.formErrors,
+    ...errorTranslations,
+  });
   const showErrors = errors.length > 0 && triedSubmit;
   const classNames = `formInput ${showErrors ? 'error' : ''}`;
   const displayTranslation = (error) => {
-    const translations = errorTranslations[`_${error}`];
-    if (!translations) {
+    try {
+      const translation = translations[`_${error}`][language];
+      return (
+        <p className="error" key={error}>
+          {typeof translation === 'string' && translation}
+          {typeof translation === 'function' && translation()}
+        </p>
+      );
+    } catch {
       return null;
     }
-    const translation = translations[language];
-    return (
-      <p className="error" key={error}>
-        {typeof translation === 'string' && translation}
-        {typeof translation === 'function' && translation()}
-      </p>
-    );
   };
   return (
     <div className={classNames} {...nextProps}>
