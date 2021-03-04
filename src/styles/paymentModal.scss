@@ -14,7 +14,7 @@
     }
 
     .topBarContent{
-      width:90%
+      width:100%
     }
     .content{
       height:60vh;
@@ -171,6 +171,11 @@
       text-align:right;
       padding-right:10px;
     }
+  }
+  .hline {
+    height:1px;
+    width:100%;
+    border-bottom:1px solid #ccc
   }
 
 

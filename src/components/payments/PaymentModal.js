@@ -8,9 +8,8 @@ import getPromoCode from '../../api/payments/getPromoCode';
 import PromoCodeStep from './steps/PromoCodeStep';
 import SplashStep from './steps/SplashStep';
 import BillingAddressStep from './steps/BillingAddressStep';
-import ReviewStep from './steps/ReviewStep';
+import TransactionStep from './steps/TransactionStep';
 import { credits2Munee } from './constants/creditsConversionRate';
-import PaymentStep from './steps/PaymentStep';
 
 const fPrice = (n) => (`$${(n / 100).toFixed(2)}`);
 
@@ -47,8 +46,7 @@ const PaymentModal = (props) => {
   const steps = [
     { label: 'Promo Code', component: PromoCodeStep, next: 'Continue' },
     { label: 'Billing Address', component: BillingAddressStep, next: 'Confirm Billing Address' },
-    { label: 'Confirm', component: ReviewStep, next: 'Confirm Amount' },
-    { label: 'Payment', component: PaymentStep, next: 'Pay Now' },
+    { label: 'Payment', component: TransactionStep, next: 'Confirm Amount' },
   ];
 
   const nextStep = () => {
@@ -98,7 +96,7 @@ const PaymentModal = (props) => {
 
   return (
     <div className="paymentModal">
-      <div className="modalBackground" onClick={() => setShowModal(false)}>
+      <div className="modalBackground">
         <div className="modal" onClick={(e) => e.stopPropagation()}>
           {currentStep > 0 ? (
             <>
@@ -130,7 +128,7 @@ const PaymentModal = (props) => {
                 >
                   Cancel
                 </button>
-                {currentStep < 4 && (
+                {currentStep < 3 && (
                 <button
                   onClick={nextStep}
                   className={stepValid ? 'btn-primary' : 'btn-disabled'}

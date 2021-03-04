@@ -9,10 +9,9 @@ import {
 import ProductImage from '../../../assets/entente.png';
 import { credits2Munee } from '../constants/creditsConversionRate';
 import createPurchase from '../../../api/payments/createPurchase';
-import {CheckoutForm} from "./PaymentStep";
 
 const stripe = loadStripe('pk_test_51IK8XlIayL0oggkdXNvYQhloDaPLfjKIrBSJotk7M4Esh2PLx4CqTR17bNBc0IuMoqvUVHlc85qXHQPA8sRYgpPC00y3coZqHM');
-const ReviewStep = (props) => {
+const TransactionStep = (props) => {
   const {
     user,
     workpiece,
@@ -117,6 +116,7 @@ const ReviewStep = (props) => {
         <div className="item-description text-right medium-700">Total:</div>
         <div className="item-price">{fPrice(purchase.total)}</div>
       </div>
+      <div className="hline" />
       <Elements stripe={stripe}>
         <h3>Enter your payment information</h3>
         <CheckoutForm {...props} />
@@ -125,8 +125,8 @@ const ReviewStep = (props) => {
 
   );
 };
-export default ReviewStep;
-export const CheckoutForm = (props) => {
+export default TransactionStep;
+const CheckoutForm = (props) => {
   const { clientSecret, stepValid, setStepValid, setHandlePayment } = props;
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
@@ -189,7 +189,6 @@ export const CheckoutForm = (props) => {
 
   return (
     <>
-      <h3>Enter your payment information:</h3>
       <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
       {/* Show any error that happens when processing the payment */}
       {error && (
