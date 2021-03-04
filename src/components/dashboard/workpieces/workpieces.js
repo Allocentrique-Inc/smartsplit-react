@@ -8,6 +8,8 @@ import LeftMenu from './leftMenu/leftMenu';
 import SelectPerspective from './selectPerspective/selectPerspective';
 import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkpieceModal';
 import ProfileOptions from '../_/profileOptions/profileOptions';
+import EmptyOwnerSongs from './emptyOwnerSongs/emptyOwnerSongs';
+import EmptyRightholderSongs from './emptyRightholderSongs/emptyRightholderSongs';
 
 const Workpieces = (props) => {
   const user_id = localStorage.getItem('user_id');
@@ -16,9 +18,12 @@ const Workpieces = (props) => {
   const [tab, setTab] = useState('owner');
   const [showModal, setShowModal] = useState(false);
 
-  const resetWorkpiecesByOwner = async () => {
+  const resetWorkpiecesByOwner = async (firstLoad) => {
     const workpiecesByOwner = await getWorkpiecesByOwner({ user_id });
     setWorkpiecesByOwner(workpiecesByOwner);
+    if (firstLoad && workpiecesByOwner.length === 0) {
+      setTab('rightHolder');
+    }
   };
   const resetWorkpiecesByRightHolder = async () => {
     const workpiecesByRightHolder = await getWorkpiecesByRightHolder({
@@ -26,13 +31,13 @@ const Workpieces = (props) => {
     });
     setWorkpiecesByRightHolder(workpiecesByRightHolder);
   };
-  const resetData = async () => {
-    resetWorkpiecesByOwner();
+  const resetData = async ({ firstLoad }) => {
+    resetWorkpiecesByOwner(firstLoad);
     resetWorkpiecesByRightHolder();
   };
 
   useEffect(() => {
-    resetData();
+    resetData({ firstLoad: true });
   }, []);
 
   const commonProps = {
@@ -68,6 +73,13 @@ const Workpieces = (props) => {
             ).map((el) => (
               <Workpiece key={el.workpiece_id} {...el} {...commonProps} />
             ))}
+            {tab === 'owner'
+              ? workpiecesByOwner.length === 0 && (
+              <EmptyOwnerSongs {...commonProps} />
+              )
+              : workpiecesByRightHolder.length === 0 && (
+              <EmptyRightholderSongs {...commonProps} />
+              )}
           </div>
         </div>
       </div>

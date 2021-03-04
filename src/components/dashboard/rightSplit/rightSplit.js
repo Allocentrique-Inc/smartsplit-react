@@ -31,7 +31,7 @@ const RightSplit = (props) => {
   const [copyright, setCopyright] = useState([]);
   const [performance, setPerformance] = useState([]);
   const [recording, setRecording] = useState([]);
-  const [privacy, setPrivacy] = useState('private');
+  const [isPublic, setIsPublic] = useState(false);
   const [collaborators, setCollaborators] = useState([]);
   const [label, setLabel] = useState({});
   const [copyrightDividingMethod, selectCopyrightDividingMethod] = useState(
@@ -47,13 +47,14 @@ const RightSplit = (props) => {
         copyrightDividingMethod,
         privacy,
         label,
+        isPublic,
       } = props.workpiece.rightSplit;
       setCopyright(copyright);
       setPerformance(performance);
       setRecording(recording);
       selectCopyrightDividingMethod(copyrightDividingMethod);
-      setPrivacy(privacy);
       setLabel(label || {});
+      setIsPublic(isPublic);
     }
     const collaborators = await getUsersCollaborators({ user_id });
     setCollaborators([props.user, ...collaborators]);
@@ -68,9 +69,9 @@ const RightSplit = (props) => {
       copyright,
       performance,
       recording,
-      privacy,
       copyrightDividingMethod,
       label,
+      isPublic,
     };
     await postRightSplit(payload);
     props.resetData();
@@ -206,8 +207,6 @@ const RightSplit = (props) => {
     setPerformance,
     recording,
     setRecording,
-    privacy,
-    setPrivacy,
     collaborators,
     setCollaborators,
     mapData,
@@ -225,6 +224,8 @@ const RightSplit = (props) => {
     calculatePerformanceErrors,
     calculateRecordingErrors,
     calculateFlowErrors,
+    isPublic,
+    setIsPublic,
   };
   return (
     <>

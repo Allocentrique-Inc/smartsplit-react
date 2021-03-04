@@ -5,7 +5,6 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import Admin from './components/admin/admin';
 import Dashboard from './components/dashboard/dashboard';
 import Public from './components/public/public';
 import check from './api/auth/check';
@@ -15,9 +14,6 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/admin">
-          <Admin />
-        </Route>
         <Route path={['/user', '/login', '/signup']}>
           <Public />
         </Route>

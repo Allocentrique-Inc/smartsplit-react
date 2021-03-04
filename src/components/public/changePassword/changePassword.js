@@ -1,18 +1,40 @@
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import changePassword from '../../../api/users/changePassword';
+import useForm from '../../_/form/useForm';
+import FormInput from '../../_/form/formInput/formInput';
 
 export default ({ translations, language }) => {
   const { token } = useParams();
   const history = useHistory();
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const form = useForm({
+    password: {
+      value: '',
+      errors: [],
+      validators: ['minLength_8'],
+    },
+    confirmPassword: {
+      value: '',
+      errors: [],
+      validators: ['shouldMatch_password'],
+      excluded: true,
+    },
+  });
+  const [triedSubmit, setTriedSubmit] = useState(false);
   const handleSubmit = async () => {
-    const result = await changePassword({ token, password });
-    console.log('CHANGE PASSWORD', result);
-    history.push('/');
+    if (form.isValid()) {
+      const result = await changePassword({ ...form.toJS(), token });
+      console.log('CHANGE PASSWORD', result);
+      history.push('/');
+    }
+    setTriedSubmit(true);
   };
-  const isPasswordValid = () => password === confirmPassword && password !== '';
+
+  const commonProps = {
+    language,
+    errorTranslations: translations.publicPages.formErrors,
+    triedSubmit,
+  };
 
   const t_h1 = translations.publicPages.h1._changePassword[language];
   const t_button = translations.publicPages.button._changePassword[language];
@@ -31,33 +53,29 @@ export default ({ translations, language }) => {
   return (
     <div className="content">
       <h1 className="header">{t_h1}</h1>
-      <div className="formInput">
+      <FormInput errors={form.fields.password.errors} {...commonProps}>
         <label htmlFor="password">{t_password_label}</label>
         <input
           type="password"
           id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={form.fields.password.value}
+          onChange={form.handlers.password}
+          placeholder={t_password_placeholder}
         />
         <div className="toDo">Validation de mot de passe</div>
-      </div>
-      <div className="formInput">
+      </FormInput>
+      <FormInput errors={form.fields.confirmPassword.errors} {...commonProps}>
         <label htmlFor="confirmPassword">{t_confirm_password_label}</label>
         <input
-          type="password"
           id="confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          type="password"
+          value={form.fields.confirmPassword.value}
+          onChange={form.handlers.confirmPassword}
         />
-      </div>
-
+      </FormInput>
       <div className="buttons">
         <div />
-        <button
-          className={`btn-primary ${!isPasswordValid() && 'btn-disabled'}`}
-          onClick={handleSubmit}
-          disabled={!isPasswordValid()}
-        >
+        <button className="btn-primary" onClick={handleSubmit}>
           {t_button}
         </button>
       </div>

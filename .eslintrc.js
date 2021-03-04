@@ -22,6 +22,7 @@ module.exports = {
     'implicit-arrow-linebreak': 'off',
     'operator-linebreak': 'off',
     'no-irregular-whitespace': 'off',
+    'no-control-regex': 'off',
     'no-console': 'off',
     'no-tabs': 'off',
     'spaced-comment': 'off',

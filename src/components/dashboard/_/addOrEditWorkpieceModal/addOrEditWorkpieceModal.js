@@ -1,14 +1,28 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import postWorkpiece from '../../../../api/workpieces/postWorkpiece';
 import patchWorkpiece from '../../../../api/workpieces/patchWorkpiece';
 import X from '../../../../icons/x';
+import useForm from '../../../_/form/useForm';
+import FormInput from '../../../_/form/formInput/formInput';
 
-export default function WorkpieceModal({
-  setShowModal,
-  resetData,
-  workpiece_id = null,
-}) {
-  const [title, setTitle] = useState('');
+export default function WorkpieceModal(props) {
+  const {
+    setShowModal,
+    resetData,
+    workpiece_id = null,
+    language,
+    translations,
+  } = props;
+  const history = useHistory();
+  const form = useForm({
+    title: {
+      value: '',
+      errors: [],
+      validators: ['required'],
+    },
+  });
+  const [triedSubmit, setTriedSubmit] = useState(false);
   const [type, setType] = useState({
     primary: '',
     secondary: '',
@@ -17,39 +31,65 @@ export default function WorkpieceModal({
     data: '',
     version: '',
   });
-  const isAdding = workpiece_id === null;
   const [composer, setComposer] = useState('');
+  const isAdding = workpiece_id === null;
   const handleConfirm = async () => {
-    const result = isAdding
-      ? await postWorkpiece({ title, type, file })
-      : await patchWorkpiece({ workpiece_id, title, type, file });
-    setShowModal(false);
-    resetData();
+    if (form.isValid()) {
+      const result = isAdding
+        ? await postWorkpiece(form.toJS())
+        : await patchWorkpiece({ workpiece_id, ...form.toJS() });
+      setShowModal(false);
+      resetData();
+      if (isAdding) {
+        if (result && result.workpiece_id) {
+          history.push(`/workpiece/${result.workpiece_id}`);
+        }
+      }
+    }
+    setTriedSubmit(true);
   };
 
+  const commonProps = {
+    language,
+    errorTranslations: translations.publicPages.formErrors,
+    triedSubmit,
+  };
+
+  const t_topBar =
+    translations.workpieces.workpieceModal.topBar.title[
+      isAdding ? '_create' : '_edit'
+    ][language];
+  const t_title_label =
+    translations.workpieces.workpieceModal.fields.title._label[language];
+  const t_title_hint =
+    translations.workpieces.workpieceModal.fields.title._hint[language];
+  const t_cancel =
+    translations.workpieces.workpieceModal.downBar._cancel[language];
+  const t_submit =
+    translations.workpieces.workpieceModal.downBar.submit[
+      isAdding ? '_create' : '_edit'
+    ][language];
   return (
     <div className="workpieceModal">
       <div className="modalBackground" onClick={() => setShowModal(false)}>
         <div className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="topBar">
-            <h4>{`${isAdding ? 'Créer' : 'Modifier'} une pièce musicale`}</h4>
+            <h4>{t_topBar}</h4>
             <button className="btn-icon" onClick={() => setShowModal(false)}>
               <X />
             </button>
           </div>
           <div className="content">
-            <div className="formInput">
-              <label htmlFor="workpieceTitle">Titre de la pièce musicale</label>
+            <FormInput errors={form.fields.title.errors} {...commonProps}>
+              <label htmlFor="workpieceTitle">{t_title_label}</label>
               <input
                 type="text"
                 id="workpieceTitle"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={form.fields.title.value}
+                onChange={form.handlers.title}
               />
-              <div className="hint">
-                Ne pas inclure de «featuring« dans le titre.
-              </div>
-            </div>
+              <div className="hint">{t_title_hint}</div>
+            </FormInput>
             <div className="formInput toDo">
               <label htmlFor="type">Cette oeuvre est...</label>
               <div className="radioGroup" id="type">
@@ -90,7 +130,7 @@ export default function WorkpieceModal({
             </div>
             {type.secondary === 'original' && (
               <div className="formInput toDo">
-                <label>{`${title}, par`}</label>
+                <label>{`${form.fields.title.value}, par`}</label>
                 <input type="text" />
               </div>
             )}
@@ -106,7 +146,7 @@ export default function WorkpieceModal({
                 </div>
                 <div className="formInput toDo">
                   <label>
-                    {`${title} (${composer}), 
+                    {`${form.fields.title.value} (${composer}), 
                   ${type.secondary === 'cover' ? 'repris' : 'remixé'} par`}
                   </label>
                   <input type="text" />
@@ -181,10 +221,10 @@ export default function WorkpieceModal({
               className="btn-secondary"
               onClick={() => setShowModal(false)}
             >
-              Annuler
+              {t_cancel}
             </button>
             <button onClick={handleConfirm} className="btn-primary">
-              {isAdding ? "C'est parti !" : 'Sauvegarder'}
+              {t_submit}
             </button>
           </div>
         </div>

@@ -4,9 +4,10 @@ const postRightSplit = async (payload) => {
     performance,
     recording,
     copyrightDividingMethod,
-    privacy,
     label,
+    isPublic,
   } = payload;
+
   let arr = [...copyright, ...performance, ...recording];
   if (label.rightHolder) {
     arr = [...arr, label];
@@ -21,7 +22,7 @@ const postRightSplit = async (payload) => {
     copyright,
     performance,
     recording,
-    privacy,
+    isPublic,
     copyrightDividingMethod,
     label: label.rightHolder_id ? label : undefined,
   });

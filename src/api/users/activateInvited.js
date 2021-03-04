@@ -1,3 +1,5 @@
+import refresh from '../auth/refresh';
+
 const postUser = async (payload) => {
   const { token, password, firstName, lastName, artistName } = payload;
   console.log(payload);
@@ -21,6 +23,14 @@ const postUser = async (payload) => {
     const textResponse = await response.text();
     const parsedResponse = JSON.parse(textResponse);
     console.log(parsedResponse);
+    if (parsedResponse.accessToken) {
+      console.log('HERE');
+      localStorage.setItem('accessToken', parsedResponse.accessToken);
+      localStorage.setItem('user_id', parsedResponse.user.user_id);
+    }
+    setTimeout(() => {
+      refresh();
+    }, 100000);
     return parsedResponse;
   } catch (err) {
     console.log(err);

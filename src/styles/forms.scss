@@ -17,6 +17,9 @@
 
   > a {
     @extend .small-700;
+    color: map-get($colors, 'action');
+    font-weight: bold;
+    text-decoration: none;
   }
 
   .doubleInput {
@@ -99,4 +102,20 @@
 }
 .checkbox.disabled {
   cursor: auto;
+}
+
+.formInput.error {
+  input,
+  .checkbox .square {
+    border: 1px solid #ac1616;
+  }
+  p.error {
+    @extend .small-400;
+    color: #ac1616;
+    padding-top: 8px;
+    a {
+      @extend .small-700;
+      color: #ac1616;
+    }
+  }
 }

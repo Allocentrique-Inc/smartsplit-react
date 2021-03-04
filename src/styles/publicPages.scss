@@ -9,6 +9,12 @@
     align-items: center;
     flex-shrink: 0;
     .right {
+      a {
+        @extend .medium-400;
+        color: map-get($colors, 'action');
+        font-weight: bold;
+        text-decoration: none;
+      }
       span {
         @extend .medium-400;
         color: map-get($colors, 'secondary');
@@ -52,6 +58,13 @@
       .buttons {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        > a {
+          @extend .medium-400;
+          color: map-get($colors, 'action');
+          font-weight: bold;
+          text-decoration: none;
+        }
         .checkbox {
           display: flex;
           align-items: center;
@@ -62,12 +75,6 @@
         }
       }
     }
-  }
-  a {
-    @extend .medium-400;
-    color: map-get($colors, 'action');
-    font-weight: bold;
-    text-decoration: none;
   }
 
   .checkEmailModal {
