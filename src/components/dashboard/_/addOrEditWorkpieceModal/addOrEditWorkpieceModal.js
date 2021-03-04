@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import postWorkpiece from '../../../../api/workpieces/postWorkpiece';
 import patchWorkpiece from '../../../../api/workpieces/patchWorkpiece';
 import X from '../../../../icons/x';
@@ -8,6 +9,7 @@ export default function WorkpieceModal({
   resetData,
   workpiece_id = null,
 }) {
+  const history = useHistory();
   const [title, setTitle] = useState('');
   const [type, setType] = useState({
     primary: '',
@@ -23,8 +25,14 @@ export default function WorkpieceModal({
     const result = isAdding
       ? await postWorkpiece({ title, type, file })
       : await patchWorkpiece({ workpiece_id, title, type, file });
+
     setShowModal(false);
     resetData();
+    if (isAdding) {
+      if (result && result.workpiece_id) {
+        history.push(`/workpiece/${result.workpiece_id}`);
+      }
+    }
   };
 
   return (
