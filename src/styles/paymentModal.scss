@@ -177,6 +177,9 @@
     width:100%;
     border-bottom:1px solid #ccc
   }
+  .successStep{
+    h3,h2{color:map-get($colors, 'action');}
+  }
 
 
 }

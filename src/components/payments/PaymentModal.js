@@ -52,7 +52,7 @@ const PaymentModal = (props) => {
     { label: 'Promo Code', component: PromoCodeStep, next: 'Continue' },
     { label: 'Billing Address', component: BillingAddressStep, next: 'Confirm Billing Address' },
     { label: 'Payment', component: TransactionStep, next: 'Confirm Amount' },
-    { label: 'Success<', component: SuccessStep },
+    { label: 'Download', component: SuccessStep },
   ];
   const closeModal = async () => {
     if (processing) return;
@@ -129,7 +129,7 @@ const PaymentModal = (props) => {
                 <button
                   className="btn-icon"
                   disabled={processing}
-                  onClick={() => setShowModal(false)}
+                  onClick={() => closeModal()}
                 >
                   <X />
                 </button>
@@ -144,9 +144,9 @@ const PaymentModal = (props) => {
                 <button
                   className={stepValid ? 'btn-secondary' : 'btn-disabled'}
                   disabled={processing || !stepValid}
-                  onClick={() => setShowModal(false)}
+                  onClick={() => closeModal()}
                 >
-                  Cancel
+                  {currentStep === 4 ? 'Close' : 'Cancel'}
                 </button>
                 {currentStep < 3 && (
                 <button

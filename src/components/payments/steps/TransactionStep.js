@@ -34,6 +34,7 @@ const TransactionStep = (props) => {
     setClientSecret,
     nextStep,
     setProcessing,
+    setDoCleanupOnClose,
   } = props;
   const [loading, setLoading] = useState(true);
   const initPurchase = async () => {
@@ -64,6 +65,7 @@ const TransactionStep = (props) => {
     setLoading(false);
     setStepValid(true);
     setProcessing(false);
+    setDoCleanupOnClose(true);
   };
   useEffect(() => {
     setStepValid(false);
@@ -176,7 +178,7 @@ const CheckoutForm = (props) => {
   const handleSubmit = async () => {
     // ev.preventDefault();
     setProcessing(true);
-
+    setDoCleanupOnClose(false);
     const payload = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: elements.getElement(CardElement),
@@ -189,17 +191,18 @@ const CheckoutForm = (props) => {
       setProcessing(false);
       setDoCleanupOnClose(true);
     } else {
-      setError(null);
-      setStepValid(true);
-      setSucceeded(true);
-      setProcessing(false);
       const updatedPurchase = await completePurchase({
         user_id: purchase.user_id,
         purchase_id: purchase.purchase_id,
         status: 'succeeded',
       });
+
       console.log(updatedPurchase);
       setPurchase(updatedPurchase);
+      setError(null);
+      setStepValid(true);
+      setSucceeded(true);
+      setProcessing(false);
       nextStep();
     }
   };

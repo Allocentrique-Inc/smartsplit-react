@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import ProductImage from '../../../assets/entente.png';
 import getPromoCode from '../../../api/payments/getPromoCode';
 import { credits2Munee } from '../constants/creditsConversionRate';
@@ -16,10 +17,21 @@ const PromoCodeStep = (props) => {
     setUseCredits,
     total,
   } = props;
-
+  const [promoInvalid, setPromoInvalid] = useState(false);
   const fetchPromo = async (code) => {
     const promo = await getPromoCode(code);
-    if (promo) setPromo(promo);
+    if (promo) {
+      if (promo.purchase_id) {
+        setPromoInvalid(true);
+      } else {
+        setPromo(promo);
+      }
+    }
+  };
+
+  const handlePromoCodeChange = (e) => {
+    setPromoInvalid(false);
+    setPromoCode(e.target.value);
   };
 
   return (
@@ -36,22 +48,23 @@ const PromoCodeStep = (props) => {
         <div className="item-description">{
                 promo ?
                   `${promo.organisation[language]}: ${promo.description[language]} `
-                  : <input type="text" onChange={(e) => { setPromoCode(e.target.value); }} />}
+                  : <input type="text" onChange={handlePromoCodeChange} />}
+          {promoInvalid && <span style={{ color: '#c00' }}> invalid code</span>}
         </div>
         <div className="item-price">{
                 promo ?
                   `-${fPrice(promo.value)}`
                   : (
                     <button
-                      className={promoCode ? 'btn-primary-small' : 'btn-disabled'}
-                      disabled={!promoCode}
+                      className={promoCode && !promoInvalid ? 'btn-primary-small' : 'btn-disabled-small'}
+                      disabled={!promoCode || promoInvalid}
                       onClick={(e) => {
                         e.preventDefault();
                         fetchPromo(promoCode).catch((e) => {
                           console.log(e);
                         });
                       }}
-                    >fetch
+                    >validate
                     </button>
                   ) }
         </div>

@@ -7,6 +7,7 @@ const deletePurchase = async (purchase) => {
       method,
       headers: {
         Authorization: bearer,
+        'Content-Type': 'application/json',
       },
     });
     const textResponse = await response.text();
