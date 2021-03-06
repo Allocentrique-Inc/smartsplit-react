@@ -20,7 +20,7 @@ const login = async (payload) => {
     }
     setTimeout(() => {
       refresh();
-    }, 100000);
+    }, 3500000);
     console.log(parsedResponse);
     return parsedResponse;
   } catch (err) {

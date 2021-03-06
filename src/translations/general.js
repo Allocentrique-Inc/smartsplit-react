@@ -18,5 +18,9 @@ export default {
       fr: 'Ce champ est obligatoire',
       en: 'This field is required',
     },
+    _emailFormat: {
+      fr: "Le format de l'adresse courriel est invalide",
+      en: 'Email address is in an invalid format',
+    },
   },
 };

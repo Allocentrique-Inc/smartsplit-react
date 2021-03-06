@@ -14,7 +14,7 @@ const refresh = async (payload) => {
     localStorage.setItem('user_id', parsedResponse.user.user_id);
     setTimeout(() => {
       refresh();
-    }, 100000);
+    }, 3500000);
     console.log(parsedResponse);
     return parsedResponse;
   } catch (err) {

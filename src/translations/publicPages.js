@@ -108,10 +108,6 @@ export default {
     },
   },
   formErrors: {
-    _emailFormat: {
-      fr: "Le format de l'adresse courriel est invalide",
-      en: 'Email address is in an invalid format',
-    },
     _shouldBeTrue: {
       fr:
         "Tu dois accepter les les Termes et conditions d'utilisation et la Politique sur la vie privée de Smartsplit",
