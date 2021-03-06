@@ -31,6 +31,8 @@ const PaymentModal = (props) => {
   const [useCredits, setUseCredits] = useState(true);
   const [handlePayment, setHandlePayment] = useState(null);
   const [succeeded, setSucceeded] = useState(false);
+  const [processing, setProcessing] = useState(false);
+  const [doCleanupOnClose, setDoCleanupOnClose] = useState(false);
   useEffect(() => {
     setAddress({
       address_id: '',
@@ -53,7 +55,8 @@ const PaymentModal = (props) => {
     { label: 'Success<', component: SuccessStep },
   ];
   const closeModal = async () => {
-    if (purchase?.purchase_id) {
+    if (processing) return;
+    if (doCleanupOnClose) {
       await deletePurchase(purchase);
     }
     setShowModal(false);
@@ -103,6 +106,10 @@ const PaymentModal = (props) => {
     setHandlePayment,
     succeeded,
     setSucceeded,
+    processing,
+    setProcessing,
+    doCleanupOnClose,
+    setDoCleanupOnClose,
   };
 
   return (
@@ -121,6 +128,7 @@ const PaymentModal = (props) => {
                 </div>
                 <button
                   className="btn-icon"
+                  disabled={processing}
                   onClick={() => setShowModal(false)}
                 >
                   <X />
@@ -135,6 +143,7 @@ const PaymentModal = (props) => {
               <div className="downBar">
                 <button
                   className={stepValid ? 'btn-secondary' : 'btn-disabled'}
+                  disabled={processing || !stepValid}
                   onClick={() => setShowModal(false)}
                 >
                   Cancel

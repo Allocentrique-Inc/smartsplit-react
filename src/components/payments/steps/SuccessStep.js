@@ -11,8 +11,8 @@ const SuccessStep = (props) => {
         </div>
 
         <h5> Your purchase of {product.title} was successful.</h5>
-        <h2>Success!</h2>
-        <h3> an email has been sent to your primary email address with the invoice and transaction </h3>
+        <h3>Success!</h3>
+        <p> an email has been sent to your primary email address with the invoice and transaction </p>
         <button className="btn-primary">Download your product</button>
         <button
           className="btn-icon"

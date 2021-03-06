@@ -11,7 +11,9 @@ import { credits2Munee } from '../constants/creditsConversionRate';
 import createPurchase from '../../../api/payments/createPurchase';
 import completePurchase from '../../../api/payments/completePurchase';
 
-const stripe = loadStripe('pk_test_51IK8XlIayL0oggkdXNvYQhloDaPLfjKIrBSJotk7M4Esh2PLx4CqTR17bNBc0IuMoqvUVHlc85qXHQPA8sRYgpPC00y3coZqHM');
+const stripe = loadStripe(
+  'pk_test_51IK8XlIayL0oggkdXNvYQhloDaPLfjKIrBSJotk7M4Esh2PLx4CqTR17bNBc0IuMoqvUVHlc85qXHQPA8sRYgpPC00y3coZqHM',
+);
 const TransactionStep = (props) => {
   const {
     user,
@@ -31,15 +33,16 @@ const TransactionStep = (props) => {
     clientSecret,
     setClientSecret,
     nextStep,
+    setProcessing,
   } = props;
   const [loading, setLoading] = useState(true);
   const initPurchase = async () => {
+    setProcessing(true);
     let purchase = {
       user_id: user.user_id,
       workpiece_id: workpiece.workpiece_id,
       product: product.product_id,
       billingAddress: address.address_id,
-
     };
     if (promo) {
       purchase = {
@@ -60,6 +63,7 @@ const TransactionStep = (props) => {
     console.log(paymentIntent.clientSecret);
     setLoading(false);
     setStepValid(true);
+    setProcessing(false);
   };
   useEffect(() => {
     setStepValid(false);
@@ -74,7 +78,9 @@ const TransactionStep = (props) => {
         <div className="item-image">
           <img alt="" src={ProductImage} />
         </div>
-        <div className="item-description">{purchase.product.description[language]}</div>
+        <div className="item-description">
+          {purchase.product.description[language]}
+        </div>
         <div className="item-price">{fPrice(purchase.product.price)}</div>
       </div>
       {promo && (
@@ -83,7 +89,8 @@ const TransactionStep = (props) => {
             <label>Promo Code:</label>
           </div>
           <div className="item-description">
-            {purchase.promoCode.organisation[language]}: {purchase.promoCode.description[language]} `
+            {purchase.promoCode.organisation[language]}:{' '}
+            {purchase.promoCode.description[language]} `
           </div>
           <div className="item-price">-{fPrice(purchase.promoCode.value)}</div>
         </div>
@@ -96,15 +103,17 @@ const TransactionStep = (props) => {
           <div className="item-description">
             Use {credits} Credits on this purchase
           </div>
-          <div className="item-price">-{fPrice(credits2Munee(purchase.creditsValue))}</div>
+          <div className="item-price">
+            -{fPrice(credits2Munee(purchase.creditsValue))}
+          </div>
         </div>
       )}
       {purchase.gst && (
-      <div className="item-row">
-        <div className="item-image" />
-        <div className="item-description text-right medium-700">GST/TPS:</div>
-        <div className="item-price">{fPrice(purchase.gst)}</div>
-      </div>
+        <div className="item-row">
+          <div className="item-image" />
+          <div className="item-description text-right medium-700">GST/TPS:</div>
+          <div className="item-price">{fPrice(purchase.gst)}</div>
+        </div>
       )}
       {purchase.pst && (
         <div className="item-row">
@@ -124,14 +133,12 @@ const TransactionStep = (props) => {
         <CheckoutForm {...props} />
       </Elements>
     </div>
-
   );
 };
 export default TransactionStep;
 const CheckoutForm = (props) => {
-  const { nextStep, purchase } = props;
+  const { nextStep, purchase, setPurchase, succeeded, setSucceeded, setDoCleanupOnClose } = props;
   const { clientSecret, stepValid, setStepValid, setHandlePayment } = props;
-  const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState('');
   const [disabled, setDisabled] = useState(true);
@@ -176,22 +183,27 @@ const CheckoutForm = (props) => {
       },
     });
     console.log(payload);
+
     if (payload.error) {
       setError(`Payment failed ${payload.error.message}`);
       setProcessing(false);
+      setDoCleanupOnClose(true);
     } else {
       setError(null);
       setStepValid(true);
-      setProcessing(false);
       setSucceeded(true);
+      setProcessing(false);
       const updatedPurchase = await completePurchase({
         user_id: purchase.user_id,
         purchase_id: purchase.purchase_id,
         status: 'succeeded',
       });
+      console.log(updatedPurchase);
+      setPurchase(updatedPurchase);
       nextStep();
     }
   };
+
   useEffect(() => {
     //setStepValid(false);
     //setHandlePayment(handleSubmit);
@@ -199,7 +211,11 @@ const CheckoutForm = (props) => {
 
   return (
     <>
-      <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
+      <CardElement
+        id="card-element"
+        options={cardStyle}
+        onChange={handleChange}
+      />
       {/* Show any error that happens when processing the payment */}
       {error && (
         <div className="card-error" role="alert">
@@ -210,18 +226,22 @@ const CheckoutForm = (props) => {
       {succeeded && (
         <p className="result-message">
           Payment succeeded, see the result in your
-          <a
-            href="https://dashboard.stripe.com/test/payments"
-          >
+          <a href="https://dashboard.stripe.com/test/payments">
             {' '}
             Stripe dashboard.
-          </a> Refresh the page to pay again.
+          </a>{' '}
+          Refresh the page to pay again.
         </p>
       )}
       {!succeeded && (
-      <div className="text-right" style={{ marginTop: '20px' }}>
-        <button className={disabled || processing ? 'btn-disabled' : 'btn-primary'} onClick={handleSubmit}>PAY NOW!</button>
-      </div>
+        <div className="text-right" style={{ marginTop: '20px' }}>
+          <button
+            className={disabled || processing ? 'btn-disabled' : 'btn-primary'}
+            onClick={handleSubmit}
+          >
+            PAY NOW!
+          </button>
+        </div>
       )}
     </>
   );
