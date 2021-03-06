@@ -9,6 +9,7 @@ import {
 import ProductImage from '../../../assets/entente.png';
 import { credits2Munee } from '../constants/creditsConversionRate';
 import createPurchase from '../../../api/payments/createPurchase';
+import completePurchase from '../../../api/payments/completePurchase';
 
 const stripe = loadStripe('pk_test_51IK8XlIayL0oggkdXNvYQhloDaPLfjKIrBSJotk7M4Esh2PLx4CqTR17bNBc0IuMoqvUVHlc85qXHQPA8sRYgpPC00y3coZqHM');
 const TransactionStep = (props) => {
@@ -29,6 +30,7 @@ const TransactionStep = (props) => {
     setStepValid,
     clientSecret,
     setClientSecret,
+    nextStep,
   } = props;
   const [loading, setLoading] = useState(true);
   const initPurchase = async () => {
@@ -127,6 +129,7 @@ const TransactionStep = (props) => {
 };
 export default TransactionStep;
 const CheckoutForm = (props) => {
+  const { nextStep, purchase } = props;
   const { clientSecret, stepValid, setStepValid, setHandlePayment } = props;
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
@@ -178,8 +181,15 @@ const CheckoutForm = (props) => {
       setProcessing(false);
     } else {
       setError(null);
+      setStepValid(true);
       setProcessing(false);
       setSucceeded(true);
+      const updatedPurchase = await completePurchase({
+        user_id: purchase.user_id,
+        purchase_id: purchase.purchase_id,
+        status: 'succeeded',
+      });
+      nextStep();
     }
   };
   useEffect(() => {
@@ -208,9 +218,11 @@ const CheckoutForm = (props) => {
           </a> Refresh the page to pay again.
         </p>
       )}
+      {!succeeded && (
       <div className="text-right" style={{ marginTop: '20px' }}>
-        <button className={disabled ? 'btn-disabled' : 'btn-primary'} onClick={handleSubmit}>PAY NOW!</button>
+        <button className={disabled || processing ? 'btn-disabled' : 'btn-primary'} onClick={handleSubmit}>PAY NOW!</button>
       </div>
+      )}
     </>
   );
 };

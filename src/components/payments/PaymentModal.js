@@ -10,6 +10,8 @@ import SplashStep from './steps/SplashStep';
 import BillingAddressStep from './steps/BillingAddressStep';
 import TransactionStep from './steps/TransactionStep';
 import { credits2Munee } from './constants/creditsConversionRate';
+import SuccessStep from './steps/SuccessStep';
+import deletePurchase from '../../api/payments/deletePurchase';
 
 const fPrice = (n) => (`$${(n / 100).toFixed(2)}`);
 
@@ -28,6 +30,7 @@ const PaymentModal = (props) => {
   const [credits, setCredits] = useState(10);
   const [useCredits, setUseCredits] = useState(true);
   const [handlePayment, setHandlePayment] = useState(null);
+  const [succeeded, setSucceeded] = useState(false);
   useEffect(() => {
     setAddress({
       address_id: '',
@@ -47,8 +50,14 @@ const PaymentModal = (props) => {
     { label: 'Promo Code', component: PromoCodeStep, next: 'Continue' },
     { label: 'Billing Address', component: BillingAddressStep, next: 'Confirm Billing Address' },
     { label: 'Payment', component: TransactionStep, next: 'Confirm Amount' },
+    { label: 'Success<', component: SuccessStep },
   ];
-
+  const closeModal = async () => {
+    if (purchase?.purchase_id) {
+      await deletePurchase(purchase);
+    }
+    setShowModal(false);
+  };
   const nextStep = () => {
     if (currentStep === 4) {
       handlePayment();
@@ -92,6 +101,8 @@ const PaymentModal = (props) => {
     setUseCredits,
     total,
     setHandlePayment,
+    succeeded,
+    setSucceeded,
   };
 
   return (
