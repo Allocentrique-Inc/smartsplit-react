@@ -21,9 +21,19 @@ const DownBar = (props) => {
     <div className="downBar">
       <div className="b1">
         <div />
-        <button onClick={handleSubmit} className="submit">
-          Soumettre mon vote
-        </button>
+
+        <div className="right">
+          <div className="voteCount">
+            {`${props.voteTotal} / ${props.voteNbrNeeded} ${props.t_voteCount}`}
+          </div>
+          <button
+            onClick={handleSubmit}
+            className="submit"
+            disabled={props.voteTotal / props.voteNbrNeeded !== 1}
+          >
+            Soumettre mon vote
+          </button>
+        </div>
       </div>
     </div>
   );

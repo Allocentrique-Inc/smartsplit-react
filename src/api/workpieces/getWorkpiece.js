@@ -41,6 +41,35 @@ const getWorkpiece = async (payload) => {
       }
     }
 
+    if (parsedResponse.archivedSplits) {
+      parsedResponse.archivedSplits.forEach((rightSplit, id) => {
+        if (rightSplit.copyright) {
+          rightSplit.copyright.forEach((el) => {
+            el.rightHolder_id = el.rightHolder.user_id;
+          });
+        }
+        if (rightSplit.performance) {
+          rightSplit.performance.forEach((el) => {
+            el.rightHolder_id = el.rightHolder.user_id;
+          });
+        }
+        if (rightSplit.recording) {
+          rightSplit.recording.forEach((el) => {
+            el.rightHolder_id = el.rightHolder.user_id;
+          });
+        }
+        if (rightSplit.privacy) {
+          rightSplit.privacy.forEach((el) => {
+            el.rightHolder_id = el.rightHolder.user_id;
+          });
+        }
+        if (rightSplit.label) {
+          rightSplit.label.rightHolder_id =
+            rightSplit.label.rightHolder.user_id;
+        }
+      });
+    }
+
     console.log(parsedResponse);
     return parsedResponse;
   } catch (err) {

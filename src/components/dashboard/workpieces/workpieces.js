@@ -31,7 +31,8 @@ const Workpieces = (props) => {
     });
     setWorkpiecesByRightHolder(workpiecesByRightHolder);
   };
-  const resetData = async ({ firstLoad }) => {
+  const resetData = async (params) => {
+    const firstLoad = params && params.firstLoad;
     resetWorkpiecesByOwner(firstLoad);
     resetWorkpiecesByRightHolder();
   };

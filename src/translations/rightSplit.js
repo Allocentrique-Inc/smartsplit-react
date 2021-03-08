@@ -246,6 +246,61 @@ export default {
     },
   },
 
+  vote: {
+    _title: {
+      fr: 'Valider le split de',
+      en: '',
+    },
+    _createdBy: {
+      fr: 'Créé par',
+      en: '',
+    },
+    _voteCount: {
+      fr: 'sélections effectuées',
+      en: '',
+    },
+  },
+
+  consultRightSplit: {
+    _copyright: {
+      fr: "Droits d'auteur",
+      en: '',
+    },
+    _performance: {
+      fr: 'Interprétation',
+      en: '',
+    },
+    _recording: {
+      fr: 'Enregistrement sonore',
+      en: '',
+    },
+    _privacy: {
+      fr: 'Confidentialité',
+      en: '',
+    },
+    _privacySubtitle: {
+      fr: 'veut rendre ce partage des droits',
+      en: '',
+    },
+    _privacyDescription: {
+      fr:
+        'encourage la transparence de l’information sur ces partages de droit, afin que toute la communauté puisse bénéficier de bons exemples.',
+      en: '',
+    },
+    _modify: {
+      fr: 'modifier',
+      en: 'modify',
+    },
+    _public: {
+      fr: 'publique',
+      en: 'modify',
+    },
+    _private: {
+      fr: 'privé',
+      en: 'modify',
+    },
+  },
+
   // copyright: {
   //   title: "Droits d'auteur",
   //   header: 'Qui a inventé cette pièce musicale ?',

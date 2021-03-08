@@ -12,6 +12,33 @@
   }
   .consultRightSplitSection {
     margin-bottom: 56px;
+    .privacySubtitle {
+      font-size: 16px;
+      line-height: 24px;
+      color: #203548;
+      flex: none;
+      order: 0;
+      flex-grow: 0;
+      margin: 0px 4px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      svg {
+        margin-right: 6px;
+      }
+    }
+    .privacyDescription {
+      margin-left: 36px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      color: #687a8b;
+      flex: none;
+      order: 0;
+      flex-grow: 1;
+    }
   }
   .titleRow {
     display: flex;

@@ -26,6 +26,44 @@ const Vote = (props) => {
     vote: '',
     comment: '',
   });
+
+  const rightSplit = props.workpiece.rightSplit;
+  const voteNbrNeeded = [
+    rightSplit.copyright &&
+      rightSplit.copyright.some(
+        (el) => el.rightHolder_id === props.user.user_id,
+      ),
+    rightSplit.performance &&
+      rightSplit.performance.some(
+        (el) => el.rightHolder_id === props.user.user_id,
+      ),
+    rightSplit.recording &&
+      rightSplit.recording.some(
+        (el) => el.rightHolder_id === props.user.user_id,
+      ),
+    rightSplit.label && rightSplit.label.rightHolder_id === props.user.user_id,
+    rightSplit.privacy &&
+      rightSplit.privacy.some((el) => el.rightHolder_id === props.user.user_id),
+  ].filter((el) => el === true).length;
+  const voteTotal = [copyright, performance, recording, label, privacy].filter(
+    (el) => el.vote !== '',
+  ).length;
+
+  useEffect(() => {
+    console.log('SPLITS', copyright, performance, recording, label);
+  }, []);
+  const { title, owner } = props.workpiece;
+  const ownerName = `${owner.firstName} ${owner.lastName}`;
+  const splitOwner = props.workpiece.rightSplit.owner;
+  const splitOwnerName = `${splitOwner.firstName} ${splitOwner.lastName}`;
+  const { version } = props.workpiece.rightSplit;
+
+  const translation = props.translations.rightSplit.vote;
+  const locale = props.user.locale;
+  const t_title = translation._title[locale];
+  const t_createdBy = translation._createdBy[locale];
+  const t_voteCount = translation._voteCount[locale];
+
   const commonProps = {
     copyright,
     setCopyright,
@@ -37,30 +75,26 @@ const Vote = (props) => {
     setLabel,
     privacy,
     setPrivacy,
+    voteNbrNeeded,
+    voteTotal,
+    t_voteCount,
   };
-  useEffect(() => {
-    console.log('SPLITS', copyright, performance, recording, label);
-  }, []);
-  const { title, owner } = props.workpiece;
-  const ownerName = `${owner.firstName} ${owner.lastName}`;
-  const splitOwner = props.workpiece.rightSplit.owner;
-  const splitOwnerName = `${splitOwner.firstName} ${splitOwner.lastName}`;
-  const { version } = props.workpiece.rightSplit;
-  console.log('VOTE PAGE PROPS', props);
   return (
     <div className="vote">
       <div className="b1">
         <div className="inner">
-          <div className="voteTitle">{`Valider le split de ${title}`}</div>
+          <div className="voteTitle">{`${t_title} ${title}`}</div>
           <div className="workpieceDetails">
-            Créé par
-            <span className="ownerName">{ownerName}</span>- Mis à jour il y a
-            -----
+            {t_createdBy}
+            <span className="ownerName">{ownerName}</span>
+            {/* - Mis à jour il y a
+            ----- */}
           </div>
           <div className="version">{`Version ${version}`}</div>
           <div className="workpieceDetails">
-            Créé par
-            <span className="ownerName">{splitOwnerName}</span>- il y a -----
+            {t_createdBy}
+            <span className="ownerName">{splitOwnerName}</span>
+            {/* - il y a ----- */}
           </div>
           <div className="consult">
             <Consult

@@ -64,18 +64,34 @@
       width: 944px;
       display: flex;
       justify-content: space-between;
-    }
-    .submit {
-      border: 1px solid #dcdfe1;
-      padding: 6px 12px;
-      width: fit-content;
-      border-radius: 2px;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 24px;
-      background-color: #2da84f;
-      color: #ffffff;
+      .right {
+        display: flex;
+        .voteCount {
+          font-size: 16px;
+          line-height: 24px;
+          display: flex;
+          align-items: center;
+          text-align: right;
+          color: #687a8b;
+          margin-right: 32px;
+        }
+        .submit {
+          border: 1px solid #dcdfe1;
+          padding: 6px 12px;
+          width: fit-content;
+          border-radius: 2px;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 24px;
+          background-color: #2da84f;
+          color: #ffffff;
+          &:disabled {
+            background-color: #f5f2f3;
+            color: #8da0b2;
+          }
+        }
+      }
     }
   }
 }
