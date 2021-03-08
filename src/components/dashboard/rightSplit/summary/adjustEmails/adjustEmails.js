@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import emailValidator from 'email-validator';
+// import emailValidator from 'email-validator';
 import submitRightSplit from '../../../../../api/workpieces/submitRightSplit';
 import PageErrors from '../../_/pageErrors/pageErrors';
 import X from '../../../../../icons/x';
@@ -29,7 +29,7 @@ const AdjustEmails = (props) => {
   allActors.forEach((el) => {
     el.errors = [];
     const email = emails[el.rightHolder_id];
-    const legitEmail = emailValidator.validate(email);
+    const legitEmail = true; // emailValidator.validate(email);
     if (!legitEmail) {
       el.errors.push('collaboratorShallHaveLegitEmail');
     }
