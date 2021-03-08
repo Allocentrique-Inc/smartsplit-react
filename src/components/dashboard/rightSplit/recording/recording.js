@@ -8,7 +8,7 @@ import Label from './label/label';
 import Collaborator from './collaborator/collaborator';
 import Circle from '../_/circle/circle';
 import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollaborator';
-import PageErrors from '../../_/pageErrors/pageErrors';
+import PageErrors from '../_/pageErrors/pageErrors';
 import setCollaboratorsErrors from './_/setCollaboratorsErrors';
 import setLabelErrors from './_/setLabelErrors';
 

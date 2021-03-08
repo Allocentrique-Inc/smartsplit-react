@@ -6,7 +6,7 @@ import Presentation from '../_/presentation/presentation';
 import PrivacySelection from './privacySelection/privacySelection';
 import Success from './success/success';
 import PostSaveConsult from './postSaveConsult/postSaveConsult';
-import PageErrors from '../../_/pageErrors/pageErrors';
+import PageErrors from '../_/pageErrors/pageErrors';
 
 const Privacy = (props) => {
   const { workpiece_id } = useParams();

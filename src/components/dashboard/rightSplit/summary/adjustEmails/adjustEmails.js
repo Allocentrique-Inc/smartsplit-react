@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import emailValidator from 'email-validator';
 import submitRightSplit from '../../../../../api/workpieces/submitRightSplit';
-import PageErrors from '../../../_/pageErrors/pageErrors';
+import PageErrors from '../../_/pageErrors/pageErrors';
 import X from '../../../../../icons/x';
 import ProfilePlaceholder from '../../../../../icons/profilePlaceholder';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 
 const AdjustEmails = (props) => {
   const [emails, setEmails] = useState({});
-  const [triedSubmit, setTriedSubmit] = useState(false);
+  const [triedSubmit, setTriedSubmit] = useState(true);
   const allArrays = [
     ...props.workpiece.rightSplit.copyright,
     ...props.workpiece.rightSplit.performance,
@@ -50,7 +50,7 @@ const AdjustEmails = (props) => {
       (el) => el.errors.length > 0,
     );
     if (collaboratorsContainsError) {
-      pageErrors.push('allCollaboratorsShallBeErrorless');
+      pageErrors.push('allShallContainEmail');
     }
     return pageErrors;
   };
@@ -158,7 +158,11 @@ const AdjustEmails = (props) => {
             >
               {t_annuler}
             </button>
-            <button className="btn-primary" onClick={handleSubmitRightSplit}>
+            <button
+              className="btn-primary"
+              onClick={handleSubmitRightSplit}
+              disabled={pageErrors.length !== 0}
+            >
               {t_envoyer}
             </button>
           </div>
