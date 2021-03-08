@@ -1,5 +1,6 @@
 // import Collaborator from './collaborator/collaborator';
 import { useHistory, useParams } from 'react-router-dom';
+import Eye from './eye';
 
 const Privacy = (props) => {
   const history = useHistory();
@@ -7,23 +8,39 @@ const Privacy = (props) => {
   const handleButton = () =>
     history.push(`/workpiece/${workpiece_id}/right-split/privacy`);
   const t_title = '';
+  console.log(props.rightSplitInConsultation.isPublic);
+  const t_privacyState = props.rightSplitInConsultation.isPublic
+    ? props.t_public
+    : props.t_private;
+  const fakeName = 'Alfa';
   return (
     <div className="consultRightSplitSection">
       <div
         className="titleRow"
         style={{
-          borderBottom: '1px solid #dcdfe1',
+          // borderBottom: '1px solid #dcdfe1',
           paddingBottom: '16px',
           marginBottom: '0px',
         }}
       >
-        <div className="title">Privacy</div>
+        <div className="title">{props.t_privacy}</div>
         {!props.voting && props.modifiable && (
           <button className="btn-secondary" onClick={handleButton}>
-            modifier
+            {props.t_modify}
           </button>
         )}
       </div>
+      <div className="privacySubtitle">
+        <Eye />
+        {`${fakeName} ${props.t_privacySubtitle}`}
+        {'\u00A0'}
+        <b> {t_privacyState}</b>
+      </div>
+      {props.rightSplitInConsultation.isPublic && (
+        <div className="privacyDescription">
+          {`${fakeName} ${props.t_privacyDescription}`}
+        </div>
+      )}
       <div />
       {props.rightSplitInConsultation.privacy.map((collaborator, id) => (
         <Collab

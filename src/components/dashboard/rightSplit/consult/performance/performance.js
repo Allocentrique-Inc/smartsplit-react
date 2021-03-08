@@ -9,10 +9,10 @@ const Performance = (props) => {
   return (
     <div className="consultRightSplitSection">
       <div className="titleRow">
-        <div className="title">Performance</div>
+        <div className="title">{props.t_performance}</div>
         {!props.voting && props.modifiable && (
           <button className="btn-secondary" onClick={handleButton}>
-            modifier
+            {props.t_modify}
           </button>
         )}
       </div>

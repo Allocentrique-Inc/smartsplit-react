@@ -40,9 +40,30 @@ const Consult = (props) => {
     (el) => el.rightHolder_id,
   );
 
+  const translation = props.translations.rightSplit.consultRightSplit;
+  const locale = props.user.locale;
+  const t_copyright = translation._copyright[locale];
+  const t_performance = translation._performance[locale];
+  const t_recording = translation._recording[locale];
+  const t_privacy = translation._privacy[locale];
+  const t_privacySubtitle = translation._privacySubtitle[locale];
+  const t_privacyDescription = translation._privacyDescription[locale];
+  const t_modify = translation._modify[locale];
+  const t_public = translation._public[locale];
+  const t_private = translation._private[locale];
+
   const commonProps = {
     ...props,
     activeCollaboratorsIds,
+    t_copyright,
+    t_performance,
+    t_recording,
+    t_privacy,
+    t_privacySubtitle,
+    t_privacyDescription,
+    t_modify,
+    t_public,
+    t_private,
   };
   return (
     <>
