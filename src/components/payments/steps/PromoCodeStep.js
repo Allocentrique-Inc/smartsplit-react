@@ -20,12 +20,14 @@ const PromoCodeStep = (props) => {
   const [promoInvalid, setPromoInvalid] = useState(false);
   const fetchPromo = async (code) => {
     const promo = await getPromoCode(code);
-    if (promo) {
+    if (promo && promo.promo_id) {
       if (promo.purchase_id) {
         setPromoInvalid(true);
       } else {
         setPromo(promo);
       }
+    } else {
+      setPromoInvalid(true);
     }
   };
 
