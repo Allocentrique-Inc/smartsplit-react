@@ -1,7 +1,7 @@
 const refresh = async (payload) => {
   try {
     console.log('TRYING TO REFRESH TOKEN');
-    const url = 'http://localhost:3001/v1/auth/refresh';
+    const url = 'http://159.203.15.16:3001/v1/auth/refresh';
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

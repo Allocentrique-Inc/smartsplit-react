@@ -9,7 +9,7 @@ const voteRightSplit = async (payload) => {
   });
 
   try {
-    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit/vote`;
+    const url = `http://159.203.15.16:3001/v1/workpieces/${payload.workpiece_id}/rightSplit/vote`;
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
