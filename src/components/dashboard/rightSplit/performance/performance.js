@@ -7,7 +7,7 @@ import Collaborator from './collaborator/collaborator';
 import Circle from '../_/circle/circle';
 import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollaborator';
 import Presentation from '../_/presentation/presentation';
-import PageErrors from '../../_/pageErrors/pageErrors';
+import PageErrors from '../_/pageErrors/pageErrors';
 import setCollaboratorsErrors from './_/setCollaboratorsErrors';
 
 const Performance = (props) => {

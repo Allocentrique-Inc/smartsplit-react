@@ -301,6 +301,41 @@ export default {
     },
   },
 
+  errors: {
+    shouldIncludeAtLeastOneRole: {
+      fr: 'Vous devez sélectionner au moins un rôle.',
+      en: 'modify',
+    },
+    sharesTotalShallBe100: {
+      fr: 'Le total des part doit équivaloire à 100%.',
+      en: 'modify',
+    },
+    allShallBeErrorless: {
+      fr: 'Aucun collaborateur ne doit être en erreur.',
+      en: 'modify',
+    },
+    noPageShallBeInError: {
+      fr: 'Aucune page ne doit être en erreur.',
+      en: 'modify',
+    },
+    shouldHaveStatus: {
+      fr: 'Vous devez sélectionner un statut.',
+      en: 'modify',
+    },
+    shouldSpecifyAgreementDuration: {
+      fr: 'Vous devez sélectionner un durée de contrat.',
+      en: 'modify',
+    },
+    shouldHaveFunction: {
+      fr: 'Vous devez sélectionner une fonction.',
+      en: 'modify',
+    },
+    allShallContainEmail: {
+      fr: 'Tous les collaborateurs doivent avoir un courriel valide.',
+      en: 'modify',
+    },
+  },
+
   // copyright: {
   //   title: "Droits d'auteur",
   //   header: 'Qui a inventé cette pièce musicale ?',
