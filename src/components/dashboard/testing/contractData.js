@@ -7,9 +7,9 @@ export default {
     rightHolders: {
       title: '<h2>Entente intervenue entre les contributeurs suivants :</h2>',
       list: [
-        "<span class='rank'>1</span><p><b>Claude Poirier</b> portant le nom de ... <span class='ipi'>- IPI #518507355</span></p><p>Domicilié au 54 Place Calais, Candiac, Québec, Canada, J5R 4K6 <br>Et joignable par téléphone au (514) 594-2424 et par courriel au claudep38@icloud.com.<a href='mailto:claudep38@icloud.com'>claudep38@icloud.com</a></p>",
-        '...',
-        '<i>Tous ci-dessus collectivement nommés les «contributeurs» ou les «parties»</i>',
+        "<column><rank>1</rank></column><column><p><b>Claude Poirier</b> portant le nom portant le nom d’artiste <i>«Claude Poirier»</i><strong>- IPI #518507355</strong></p><p>Domicilié au 54 Place Calais, Candiac, Québec, Canada, J5R 4K6 \nEt joignable par téléphone au (514) 594-2424 et par courriel au <a href='mailto:claudep38@icloud.com'>claudep38@icloud.com</a>.</p></column>",
+        "<column><rank>2</rank></column><column><p><b>Claudetee Poirierer</b> portant le nom portant le nom d’artiste <strong>- IPI #518507355</strong></p><p>Domicilié au 54 Place Calais, Candiac, Québec, Canada, J5R 4K6 \nEt joignable par téléphone au (514) 594-2424 et par courriel au <a href='mailto:claudep38@icloud.com'>claudep38@icloud.com</a>.</p></column>",
+        '<p><i>Tous ci-dessus collectivement nommés les «contributeurs» ou les «parties»</i></p>',
       ],
     },
     rightSplits: {
