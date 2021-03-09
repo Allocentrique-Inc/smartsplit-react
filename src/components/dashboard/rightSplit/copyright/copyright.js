@@ -10,7 +10,7 @@ import Collaborator from './collaborator/collaborator';
 import DownBar from '../_/downBar/downBar';
 import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollaborator';
 import Presentation from '../_/presentation/presentation';
-import PageErrors from '../../_/pageErrors/pageErrors';
+import PageErrors from '../_/pageErrors/pageErrors';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 

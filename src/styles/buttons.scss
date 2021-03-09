@@ -17,6 +17,10 @@
   background-color: map-get($colors, 'action');
   outline: 0;
   border: none;
+  &:disabled {
+    color: map-get($colors, 'tertiary');
+    background-color: map-get($colors-background, 'hell');
+  }
 }
 
 .btn-primary-small {

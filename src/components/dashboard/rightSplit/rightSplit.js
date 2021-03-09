@@ -98,7 +98,7 @@ const RightSplit = (props) => {
       const sharesTotal = copyright.reduce((acc, el) => el.shares + acc, 0);
       const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
       if (!isTotal100) {
-        pageErrors.push('SharesTotalShallBe100');
+        pageErrors.push('sharesTotalShallBe100');
       }
     }
 
@@ -107,7 +107,7 @@ const RightSplit = (props) => {
       (el) => el.errors && el.errors.length > 0,
     );
     if (hasCollaboratorErrors) {
-      pageErrors.push('AllShallBeErrorless');
+      pageErrors.push('allShallBeErrorless');
     }
 
     return pageErrors;
@@ -121,7 +121,7 @@ const RightSplit = (props) => {
       const sharesTotal = performance.reduce((acc, el) => el.shares + acc, 0);
       const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
       if (!isTotal100) {
-        pageErrors.push('SharesTotalShallBe100');
+        pageErrors.push('sharesTotalShallBe100');
       }
     }
 
@@ -130,7 +130,7 @@ const RightSplit = (props) => {
       (el) => el.errors && el.errors.length > 0,
     );
     if (hasCollaboratorErrors) {
-      pageErrors.push('AllShallBeErrorless');
+      pageErrors.push('allShallBeErrorless');
     }
 
     return pageErrors;
@@ -145,7 +145,7 @@ const RightSplit = (props) => {
       (label.errors && label.errors.length > 0);
 
     if (hasCollaboratorErrors) {
-      pageErrors.push('AllShallBeErrorless');
+      pageErrors.push('allShallBeErrorless');
     }
 
     // TOTAL OF SHARES SHALL BE EQUAL OR CLOSE TO 100
@@ -157,7 +157,7 @@ const RightSplit = (props) => {
       const allActorsSum = allActors.reduce((acc, el) => el.shares + acc, 0);
       const isTotal100 = allActorsSum > 99.999 && allActorsSum < 100.001;
       if (!isTotal100) {
-        pageErrors.push('SharesTotalShallBe100');
+        pageErrors.push('sharesTotalShallBe100');
       }
     }
 
@@ -168,19 +168,19 @@ const RightSplit = (props) => {
     const flowErrors = [];
     // NO PAGE SHALL HAVE ERRORS OR SHALL BE REDIRECTED TO THE PAGE
     if (calculateCopyrightErrors(copyright).length > 0) {
-      flowErrors.push('NoPageShallBeInError');
+      flowErrors.push('noPageShallBeInError');
       if (matchPerformance || matchRecording || matchPrivacy) {
         history.push(`/workpiece/${workpiece_id}/right-split/copyright`);
       }
     }
     if (calculatePerformanceErrors(performance).length > 0) {
-      flowErrors.push('NoPageShallBeInError');
+      flowErrors.push('noPageShallBeInError');
       if (matchRecording || matchPrivacy) {
         history.push(`/workpiece/${workpiece_id}/right-split/performance`);
       }
     }
     if (calculateRecordingErrors(recording, label).length > 0) {
-      flowErrors.push('NoPageShallBeInError');
+      flowErrors.push('noPageShallBeInError');
       if (matchPrivacy) {
         history.push(`/workpiece/${workpiece_id}/right-split/recording`);
       }

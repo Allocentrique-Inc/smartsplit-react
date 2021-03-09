@@ -29,6 +29,12 @@ const Summary = (props) => {
     .filter((el) => el.rightHolder_id === user_id)
     .some((el) => el.vote === 'undecided');
 
+  const canSendToCollab =
+    props.workpiece.rightSplit.owner.user_id === props.user.user_id;
+  const t_sendToCollab = {
+    fr: 'Envoyer aux collaborateurs',
+    en: '',
+  }[props.user.locale];
   const commonProps = {
     ...props,
     setIsAdjustingEmails,
@@ -65,14 +71,14 @@ const Summary = (props) => {
                 />
               </div>
               <div className="downBar">
-                {consulting._state === 'draft' && (
+                {consulting._state === 'draft' && canSendToCollab && (
                   <button
                     className="btn-primary"
                     onClick={() => {
                       setIsAdjustingEmails(true);
                     }}
                   >
-                    Envoyer aux collaborateurs
+                    {t_sendToCollab}
                   </button>
                 )}
               </div>
@@ -156,8 +162,14 @@ const Summary = (props) => {
 export default Summary;
 
 const DraftRightSplit = (props) => {
-  console.log(props);
   const versionIndex = props.workpiece.rightSplit.version;
+  const t_sendToCollab = {
+    fr: 'Envoyer aux collaborateurs',
+    en: '',
+  }[props.user.locale];
+  const canSendToCollab =
+    props.workpiece.rightSplit.owner.user_id === props.user.user_id;
+
   return (
     <div
       className="rightSplit"
@@ -167,7 +179,7 @@ const DraftRightSplit = (props) => {
       <div className="details">
         Créé par
         <span className="artistName">
-          {` ${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName} `}
+          {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
         </span>
         {/* il y a ------- */}
       </div>
@@ -175,8 +187,15 @@ const DraftRightSplit = (props) => {
         {/* <div className="collaborators" /> */}
         <div />
       </div>
-      <div className="border" />
-      <button>Send to collab</button>
+
+      {canSendToCollab ? (
+        <>
+          <div className="border" />
+          <button>{t_sendToCollab}</button>
+        </>
+      ) : (
+        <button>Consulter</button>
+      )}
     </div>
   );
 };
@@ -193,7 +212,7 @@ const AcceptedRightSplit = (props) => {
       <div className="details">
         Créé par
         <span className="artistName">
-          {` ${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName} `}
+          {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
         </span>
         {/* il y a ------- */}
       </div>
@@ -225,7 +244,7 @@ const InVoteRightSplit = (props) => {
       <div className="details">
         Créé par
         <span className="artistName">
-          {` ${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName} `}
+          {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
         </span>
         {/* il y a ------- */}
       </div>
@@ -255,7 +274,7 @@ const RejectedRightSplit = (props) => {
       <div className="details">
         Créé par
         <span className="artistName">
-          {` ${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName} `}
+          {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
         </span>
         {/* il y a ------- */}
       </div>
@@ -267,6 +286,7 @@ const RejectedRightSplit = (props) => {
       <button onClick={handleCreateANewModelBtn}>
         Créer un nouveau modèle
       </button>
+      <button>Consulter</button>
     </div>
   );
 };
@@ -294,6 +314,7 @@ const RejectedRightSplitArchived = (props) => {
         <div />
         <div className="status rejectedStatus">Refusé</div>
       </div>
+      <button>Consulter</button>
     </div>
   );
 };

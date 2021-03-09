@@ -36,7 +36,7 @@ const patchUser = async (payload) => {
   });
   console.log('PATCH BODY', body);
   try {
-    const url = `http://localhost:3001/v1/users/${user_id}`;
+    const url = `http://159.203.15.16:3001/v1/users/${user_id}`;
     const method = 'PATCH';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
