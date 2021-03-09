@@ -21,7 +21,7 @@ const LeftMenu = (props) => {
         Mes pièces musicales
       </button>
 
-      <button
+      {/*<button
         className="sectionButton"
         onClick={() => history.push('/testing')}
       >
@@ -29,7 +29,7 @@ const LeftMenu = (props) => {
           <Tool />
         </span>
         Tests
-      </button>
+      </button>*/}
 
       {/*  <button
         className={`sectionButton ${selected === 'alfa' ? 'alfa' : 'alfa'}`}
