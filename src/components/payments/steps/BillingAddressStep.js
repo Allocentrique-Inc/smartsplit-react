@@ -22,7 +22,7 @@ const BillingAddressStep = (props) => {
       Object.keys(address).forEach((k) => {
         if (k === 'active' || k === 'address_id' || k === 'user_id') return;
         if (!address[k] && !user.paymentInfo.billingAddress[k]) return;
-        if (address[k].trim() !== user.paymentInfo.billingAddress[k].trim()) { changed = true; }
+        if (address[k] !== user.paymentInfo.billingAddress[k]) { changed = true; }
       });
       if (!changed) {
         console.log('no change');
@@ -71,20 +71,42 @@ const BillingAddressStep = (props) => {
               />
             </p>
             <p>
-              <label>Province :</label>
-              <select
+              <label>Province/State :</label>
+              {address.country === 'CA' || address.country === 'US' ? (
+                <select
+                  type="text"
+                  onChange={(e) => {
+                    setAddress({ ...address, province: e.target.selectedOptions[0].value });
+                  }}
+                >
+                  {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                  <option value="">select {address.country === 'US' ? 'state' : 'province'}</option>
+                  {Object.keys(provinces[address.country]).map(
+                    (p) => <option value={p} selected={p === address.province}>{provinces[address.country][p]}</option>,
+                  )}
+
+                </select>
+              ) : (
+                <input
+                  type="text"
+                  onChange={
+                    (e) => { setAddress({ ...address, province: e.target.value }); }
+                  }
+                  value={address.province}
+                />
+              )}
+              {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+
+            </p>
+            <p>
+              <label>Postal/Zip Code :</label>
+              <input
                 type="text"
                 onChange={(e) => {
-                  setAddress({ ...address, province: e.target.selectedOptions[0].value });
+                  setAddress({ ...address, postalCode: e.target.value });
                 }}
-              >
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <option value="">select province</option>
-                {Object.keys(provinces[address.country]).map(
-                  (p) => <option value={p} selected={p === address.province}>{provinces[address.country][p]}</option>,
-                )}
-
-              </select>
+                value={address.postalCode}
+              />
               {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
 
             </p>

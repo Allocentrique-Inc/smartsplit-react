@@ -4,10 +4,10 @@ import ProductCodes from '../../payments/ProductCodes';
 
 import getUsers from '../../../api/users/getUsers';
 import PaymentModal from '../../payments/PaymentModal';
-import getProducts from '../../../api/payments/getProducts';
+import getProductByCode from '../../../api/payments/getProductByCode';
 
 const BuyTest = (props) => {
-  const productId = 'b42f9e18-b370-4b7a-900c-d148c6873657';
+  const productCode = 'RIGHT_SPLIT_DOWNLOAD';
   const { language, workpiece, workpiece_id } = props;
   const user_id = localStorage.getItem('user_id');
   const [user, setUser] = useState();
@@ -16,7 +16,7 @@ const BuyTest = (props) => {
   const load = async () => {
     const user = await getUsers({ user_id });
     setUser(user);
-    const product = await getProducts({ product_id: productId });
+    const product = await getProductByCode(productCode);
     setProduct(product);
     setLoading(false);
     console.log(user);

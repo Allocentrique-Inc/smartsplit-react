@@ -110,20 +110,20 @@ const TransactionStep = (props) => {
           </div>
         </div>
       )}
-      {purchase.gst && (
+      {purchase.gst > 0 ? (
         <div className="item-row">
           <div className="item-image" />
           <div className="item-description text-right medium-700">GST/TPS:</div>
           <div className="item-price">{fPrice(purchase.gst)}</div>
         </div>
-      )}
-      {purchase.pst && (
+      ) : null}
+      {purchase.pst > 0 ? (
         <div className="item-row">
           <div className="item-image" />
           <div className="item-description text-right medium-700">QST/TVQ:</div>
           <div className="item-price">{fPrice(purchase.pst)}</div>
         </div>
-      )}
+      ) : null}
       <div className="item-row">
         <div className="item-image" />
         <div className="item-description text-right medium-700">Total:</div>
