@@ -1,6 +1,8 @@
+import config from '../../config';
+
 const getUsersCollaborators = async (payload) => {
   try {
-    const url = `http://localhost:3001/v1/users/${payload.user_id}/collaborators/`;
+    const url = `${config.apiUrl}/users/${payload.user_id}/collaborators/`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

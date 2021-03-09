@@ -1,3 +1,5 @@
+import config from '../../config';
+
 const patchUser = async (payload) => {
   const {
     user_id,
@@ -36,7 +38,7 @@ const patchUser = async (payload) => {
   });
   console.log('PATCH BODY', body);
   try {
-    const url = `http://localhost:3001/v1/users/${user_id}`;
+    const url = `${config.apiUrl}/users/${user_id}`;
     const method = 'PATCH';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

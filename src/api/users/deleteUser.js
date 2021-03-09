@@ -1,6 +1,8 @@
+import config from '../../config';
+
 const deleteUser = async (payload) => {
   try {
-    const url = `http://localhost:3001/v1/users/${payload.user_id}`;
+    const url = `${config.apiUrl}/users/${payload.user_id}`;
     const method = 'DELETE';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
 

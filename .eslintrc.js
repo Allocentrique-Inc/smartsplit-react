@@ -27,6 +27,8 @@ module.exports = {
     'no-tabs': 'off',
     'spaced-comment': 'off',
     'import/prefer-default-export': 'off',
+    'import/no-named-as-default': 'off',
+    'import/no-named-as-default-member': 'off',
     camelcase: 'off',
     'no-unused-vars': 'off',
     'no-unused-expressions': 'off',

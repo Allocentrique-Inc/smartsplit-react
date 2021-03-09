@@ -1,3 +1,5 @@
+import config from '../../config';
+
 const voteRightSplit = async (payload) => {
   const { copyright, performance, recording, privacy, label } = payload;
   const body = JSON.stringify({
@@ -9,7 +11,7 @@ const voteRightSplit = async (payload) => {
   });
 
   try {
-    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit/vote`;
+    const url = `${config.apiUrl}/workpieces/${payload.workpiece_id}/rightSplit/vote`;
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

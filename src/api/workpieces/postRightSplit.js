@@ -1,3 +1,5 @@
+import config from '../../config';
+
 const postRightSplit = async (payload) => {
   const {
     copyright,
@@ -27,7 +29,7 @@ const postRightSplit = async (payload) => {
     label: label.rightHolder_id ? label : undefined,
   });
   try {
-    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit`;
+    const url = `${config.apiUrl}/workpieces/${payload.workpiece_id}/rightSplit`;
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

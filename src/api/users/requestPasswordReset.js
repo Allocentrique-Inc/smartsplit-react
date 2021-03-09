@@ -1,10 +1,12 @@
+import config from '../../config';
+
 const requestPasswordReset = async (payload) => {
   const { email } = payload;
   const body = JSON.stringify({
     email,
   });
   try {
-    const url = 'http://localhost:3001/v1/users/request-password-reset';
+    const url = `${config.apiUrl}/users/request-password-reset`;
     const method = 'POST';
     const response = await fetch(url, {
       method,

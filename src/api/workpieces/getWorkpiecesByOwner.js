@@ -1,6 +1,8 @@
+import config from '../../config';
+
 const getWorkpiecesByOwner = async (payload) => {
   try {
-    const url = `http://localhost:3001/v1/workpieces/by-owner/${payload.user_id}`;
+    const url = `${config.apiUrl}/workpieces/by-owner/${payload.user_id}`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

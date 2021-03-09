@@ -1,8 +1,10 @@
+import config from '../../config';
+
 const patchDocumentation = async (payload) => {
   const { creation, workpiece_id } = payload;
   const body = JSON.stringify({ creation });
   try {
-    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/documentation`;
+    const url = `${config.apiUrl}/workpieces/${payload.workpiece_id}/documentation`;
     const method = 'PATCH';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

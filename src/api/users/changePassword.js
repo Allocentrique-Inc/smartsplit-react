@@ -1,3 +1,5 @@
+import config from '../../config';
+
 const changePassword = async (payload) => {
   const { password, token, currentPassword } = payload;
   const body = JSON.stringify({
@@ -6,7 +8,7 @@ const changePassword = async (payload) => {
     currentPassword,
   });
   try {
-    const url = 'http://localhost:3001/v1/users/change-password';
+    const url = `${config.apiUrl}/users/change-password`;
     const method = 'POST';
     const headers = {
       'content-type': 'application/json',

@@ -5,6 +5,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import { Font } from '@react-pdf/renderer';
 import Dashboard from './components/dashboard/dashboard';
 import Public from './components/public/public';
 import check from './api/auth/check';

@@ -1,3 +1,5 @@
+import config from '../../config';
+
 const postUser = async (payload) => {
   const { email, password, firstName, lastName, artistName } = payload;
   const body = JSON.stringify({
@@ -8,7 +10,7 @@ const postUser = async (payload) => {
     artistName,
   });
   try {
-    const url = 'http://localhost:3001/v1/users/';
+    const url = `${config.apiUrl}/users/`;
     const method = 'POST';
     const response = await fetch(url, {
       method,

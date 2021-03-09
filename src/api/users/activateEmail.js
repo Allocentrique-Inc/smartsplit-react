@@ -1,4 +1,5 @@
 import refresh from '../auth/refresh';
+import config from '../../config';
 
 const activateEmail = async (payload) => {
   const { token } = payload;
@@ -6,7 +7,7 @@ const activateEmail = async (payload) => {
     token,
   });
   try {
-    const url = 'http://localhost:3001/v1/users/activate';
+    const url = `${config.apiUrl}/users/activate`;
     const method = 'POST';
     const response = await fetch(url, {
       method,
