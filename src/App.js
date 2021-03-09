@@ -10,10 +10,6 @@ import Dashboard from './components/dashboard/dashboard';
 import Public from './components/public/public';
 import check from './api/auth/check';
 import './styles/index.scss';
-import regularFont from './components/dashboard/testing/Roboto/Roboto-Regular.ttf';
-import italicFont from './components/dashboard/testing/Roboto/Roboto-Italic.ttf';
-import boldFont from './components/dashboard/testing/Roboto/Roboto-Bold.ttf';
-import boldItalicFont from './components/dashboard/testing/Roboto/Roboto-BoldItalic.ttf';
 
 function App() {
   return (

@@ -12,16 +12,12 @@ import {
 import ReactHtmlParser from 'react-html-parser';
 import ArrowLeft from '../../../icons/arrowLeft';
 import contractData from './contract-pdf-draft';
-import regularFont from './Open_Sans/OpenSans-Regular.ttf';
-import italicFont from './Open_Sans/OpenSans-Italic.ttf';
-import boldFont from './Open_Sans/OpenSans-Bold.ttf';
-import boldItalicFont from './Open_Sans/OpenSans-BoldItalic.ttf';
 
 // Create styles
 const styles = StyleSheet.create({
   page: {
     padding: '24 32',
-    fontFamily: 'OpenSans',
+    fontFamily: 'Helvetica',
   },
   h1: {
     display: 'block',
@@ -30,14 +26,16 @@ const styles = StyleSheet.create({
     marginRight: 0,
     fontSize: 32,
     color: '#2da84f',
-    fontWeight: 'bold',
-    fontStyle: 'normal',
+    fontFamily: 'Helvetica-Bold',
+    // fontWeight: 'bold',
     textDecoration: 'none',
     verticalAlign: 'baseline',
   },
   h2: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Helvetica-Bold',
+
+    // fontWeight: 'bold',
   },
   p: {
     display: 'block',
@@ -46,16 +44,17 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     marginRight: 0,
   },
-  // fontStyles doesn't work, see https://github.com/diegomura/react-pdf/issues/164
   italic: {
-    fontStyle: 'italic',
+    fontFamily: 'Helvetica-Oblique',
+    // fontStyle: 'italic',
   },
   bold: {
-    fontWeight: 'bold',
+    fontFamily: 'Helvetica-Bold',
+    // fontWeight: 'bold',
   },
   boldItalic: {
-    fontStyle: 'italic',
-    fontWeight: 'bold',
+    // fontStyle: 'italic',
+    // fontWeight: 'bold',
   },
   section: {
     flexGrow: 1,
@@ -64,12 +63,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 });
+
 const inheritedStyles = [];
 const generatePdfContent = (reactElements) => {
   return (
     <>
       {reactElements.map((el) => {
-        console.log(el);
         switch (el.type) {
           case 'h1':
             inheritedStyles.push('h1');
@@ -131,30 +130,6 @@ const MyDocument = () => (
 );
 
 export default function Testing(props) {
-  console.log('DATA', ReactHtmlParser(contractData.header));
-  useEffect(() => {
-    Font.register({
-      family: 'OpenSans',
-      fonts: [
-        {
-          src: regularFont,
-        },
-        {
-          src: italicFont,
-          fontStyle: 'italic',
-        },
-        {
-          src: boldFont,
-          fontWeight: 'bold',
-        },
-        {
-          src: boldItalicFont,
-          fontWeight: 'bold',
-          fontStyle: 'italic',
-        },
-      ],
-    });
-  }, []);
   return (
     <div>
       <div className="topBar">
