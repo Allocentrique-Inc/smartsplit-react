@@ -1,11 +1,9 @@
 export default {
-  documentTitle: 'ENTENTE DE PARTAGE DE DROITS',
-  documentSubtitle:
-    'Droit d’auteur sur l’oeuvre & Droits voisins des artistes-interprètes et producteurs',
+  header:
+    '<h1>ENTENTE DE PARTAGE DE DROITS</h1><p><i>Droit d’auteur sur l’oeuvre & Droits voisins des artistes-interprètes et producteurs</i></p>',
   sections: {
     generalInformations:
       '<h2>Entente concernant la pièce musicale originale :</h2><p><strong>Monsieur Poirier (feat. Claude Poirier)</strong> interprétée par <i>Luminol</i>, ci-après la <b>«pièce»</b> musicale.</p>',
-      }
     rightHolders: {
       title: '<h2>Entente intervenue entre les contributeurs suivants :</h2>',
       list: [
@@ -59,4 +57,5 @@ export default {
       signatories: ['Claude Poirier', 'Frédéric Desjardins', '...'],
     },
   },
+  footer: 'Entente de partage de droits - Page',
 };

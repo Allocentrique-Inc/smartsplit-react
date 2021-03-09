@@ -25,4 +25,4 @@ yarn-error.log*
 .eslintcache
 smartsplit.sublime*
 
-src/config.js
+/config.js

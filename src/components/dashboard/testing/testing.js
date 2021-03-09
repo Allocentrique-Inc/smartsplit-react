@@ -11,7 +11,7 @@ import {
 } from '@react-pdf/renderer';
 import ReactHtmlParser from 'react-html-parser';
 import ArrowLeft from '../../../icons/arrowLeft';
-import contractData from './contract-pdf-draft';
+import contractData from './contractData';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -21,28 +21,22 @@ const styles = StyleSheet.create({
   },
   h1: {
     display: 'block',
-    marginBottom: '0.67em',
-    marginLeft: 0,
-    marginRight: 0,
-    fontSize: 32,
+    margin: '0',
+    fontSize: '32',
     color: '#2da84f',
     fontFamily: 'Helvetica-Bold',
     // fontWeight: 'bold',
-    textDecoration: 'none',
-    verticalAlign: 'baseline',
   },
   h2: {
-    fontSize: 16,
+    fontSize: '20',
     fontFamily: 'Helvetica-Bold',
-
+    margin: '0',
     // fontWeight: 'bold',
   },
   p: {
     display: 'block',
-    marginTop: '1em',
-    marginBottom: '1em',
-    marginLeft: 0,
-    marginRight: 0,
+    margin: '12 0',
+    fontSize: '16',
   },
   italic: {
     fontFamily: 'Helvetica-Oblique',
@@ -56,11 +50,18 @@ const styles = StyleSheet.create({
     // fontStyle: 'italic',
     // fontWeight: 'bold',
   },
+  strong: {
+    fontFamily: 'Helvetica-Bold',
+    color: '#2da84f',
+  },
   section: {
-    flexGrow: 1,
+    paddingBottom: 24,
   },
   header: {
-    flexGrow: 1,
+    // flexGrow: 1,
+    paddingBottom: 24,
+    marginBottom: 16,
+    borderBottom: '1 solid black',
   },
 });
 
@@ -77,6 +78,14 @@ const generatePdfContent = (reactElements) => {
                 {generatePdfContent(el.props.children)}
               </Text>
             );
+          case 'h2':
+            inheritedStyles.push('h2');
+            return (
+              <Text style={styles.h2}>
+                {generatePdfContent(el.props.children)}
+              </Text>
+            );
+
           case 'p':
             inheritedStyles.push('p');
             return (
@@ -108,6 +117,13 @@ const generatePdfContent = (reactElements) => {
                 {generatePdfContent(el.props.children)}
               </Text>
             );
+          case 'strong':
+            inheritedStyles.push('strong');
+            return (
+              <Text style={styles.strong}>
+                {generatePdfContent(el.props.children)}
+              </Text>
+            );
           default:
             return el;
         }
@@ -123,7 +139,14 @@ const MyDocument = () => (
         {generatePdfContent(ReactHtmlParser(contractData.header))}
       </View>
       <View style={styles.section}>
-        <Text>Section #3</Text>
+        {generatePdfContent(
+          ReactHtmlParser(contractData.sections.generalInformations),
+        )}
+      </View>
+      <View style={styles.section}>
+        {generatePdfContent(
+          ReactHtmlParser(contractData.sections.rightHolders.title),
+        )}
       </View>
     </Page>
   </Document>
