@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import login from '../../../api/auth/login';
@@ -59,6 +59,10 @@ const Login = ({ translations, language }) => {
   const t_checkbox =
     translations.publicPages.checkboxes._stayConnected[language];
   const t_button = translations.publicPages.button._login[language];
+
+  useEffect(() => {
+    localStorage.removeItem('accessToken');
+  }, []);
 
   return (
     <div className="content">

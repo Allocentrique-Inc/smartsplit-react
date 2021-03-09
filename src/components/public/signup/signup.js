@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 import SmartSplit from '../../../icons/smartsplit';
@@ -122,6 +122,9 @@ export default (props) => {
   const t_stay_logged_checkbox =
     translations.publicPages.checkboxes._stayConnected[language];
   const t_button = translations.publicPages.button._signup[language];
+  useEffect(() => {
+    localStorage.removeItem('accessToken');
+  }, []);
   return (
     <div className="content">
       {showModal && <CheckEmailModal setShowModal={setShowModal} {...props} />}

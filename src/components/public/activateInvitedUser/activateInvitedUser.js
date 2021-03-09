@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import activateInvited from '../../../api/users/activateInvited';
 
@@ -32,6 +32,10 @@ export default (props) => {
     setConfirmPassword('');
     history.push('/');
   };
+
+  useEffect(() => {
+    localStorage.removeItem('accessToken');
+  }, []);
 
   const isPasswordValid = () => password === confirmPassword && password !== '';
   return (
