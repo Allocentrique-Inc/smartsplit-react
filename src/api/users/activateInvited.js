@@ -11,7 +11,7 @@ const postUser = async (payload) => {
     artistName,
   });
   try {
-    const url = 'http://159.203.15.16:3001/v1/users/activate-invited';
+    const url = 'http://localhost:3001/v1/users/activate-invited';
     const method = 'POST';
     const response = await fetch(url, {
       method,

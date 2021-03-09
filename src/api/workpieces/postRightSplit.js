@@ -27,7 +27,7 @@ const postRightSplit = async (payload) => {
     label: label.rightHolder_id ? label : undefined,
   });
   try {
-    const url = `http://159.203.15.16:3001/v1/workpieces/${payload.workpiece_id}/rightSplit`;
+    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit`;
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

@@ -1,12 +1,10 @@
-const submitRightSplit = async (payload) => {
-  const body = JSON.stringify({});
+const getProductByCode = async (productCode) => {
   try {
-    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}/rightSplit`;
-    const method = 'DELETE';
+    const url = `http://localhost:3001/v1/products/${productCode}`;
+    const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
       method,
-      body,
       headers: {
         'content-type': 'application/json',
         Authorization: bearer,
@@ -23,4 +21,4 @@ const submitRightSplit = async (payload) => {
   }
 };
 
-export default submitRightSplit;
+export default getProductByCode;
