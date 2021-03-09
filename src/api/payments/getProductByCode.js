@@ -1,6 +1,8 @@
+import config from '../../config';
+
 const getProductByCode = async (productCode) => {
   try {
-    const url = `http://localhost:3001/v1/products/${productCode}`;
+    const url = `${config.apiUrl}/products/${productCode}`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

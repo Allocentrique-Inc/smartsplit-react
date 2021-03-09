@@ -1,6 +1,8 @@
+import config from '../../config';
+
 const getPromoCode = async (code) => {
   try {
-    const url = `http://localhost:3001/v1/promoCodes/byCode/${code}`;
+    const url = `${config.apiUrl}/promoCodes/byCode/${code}`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

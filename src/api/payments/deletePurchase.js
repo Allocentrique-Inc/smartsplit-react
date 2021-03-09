@@ -1,6 +1,8 @@
+import config from '../../config';
+
 const deletePurchase = async (purchase) => {
   try {
-    const url = `http://localhost:3001/v1/users/${purchase.user_id}/purchases/${purchase.purchase_id}`;
+    const url = `${config.apiUrl}/users/${purchase.user_id}/purchases/${purchase.purchase_id}`;
     const method = 'DELETE';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

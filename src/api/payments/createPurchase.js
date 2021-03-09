@@ -1,6 +1,8 @@
+import config from '../../config';
+
 const createPurchase = async (purchase) => {
   try {
-    const url = `http://localhost:3001/v1/users/${purchase.user_id}/purchases/`;
+    const url = `${config.apiUrl}/users/${purchase.user_id}/purchases/`;
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
