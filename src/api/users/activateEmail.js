@@ -6,7 +6,7 @@ const activateEmail = async (payload) => {
     token,
   });
   try {
-    const url = 'http://159.203.15.16:3001/v1/users/activate';
+    const url = 'http://localhost:3001/v1/users/activate';
     const method = 'POST';
     const response = await fetch(url, {
       method,

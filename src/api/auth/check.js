@@ -1,6 +1,6 @@
 const login = async (payload) => {
   try {
-    const url = 'http://159.203.15.16:3001/v1/auth/check';
+    const url = 'http://localhost:3001/v1/auth/check';
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
