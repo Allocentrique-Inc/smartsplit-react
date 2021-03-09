@@ -1,4 +1,5 @@
 import refresh from '../auth/refresh';
+import config from '../../../config';
 
 const postUser = async (payload) => {
   const { token, password, firstName, lastName, artistName } = payload;
@@ -11,7 +12,7 @@ const postUser = async (payload) => {
     artistName,
   });
   try {
-    const url = 'http://localhost:3001/v1/users/activate-invited';
+    const url = `${config.apiUrl}/users/activate-invited`;
     const method = 'POST';
     const response = await fetch(url, {
       method,

@@ -1,8 +1,10 @@
+import config from '../../../config';
+
 const patchWorkpiece = async (payload) => {
   const { title } = payload;
   const body = JSON.stringify({ title });
   try {
-    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}`;
+    const url = `${config.apiUrl}/workpieces/${payload.workpiece_id}`;
     const method = 'PATCH';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

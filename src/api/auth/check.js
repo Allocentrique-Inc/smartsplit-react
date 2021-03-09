@@ -1,6 +1,8 @@
+import config from '../../../config';
+
 const login = async (payload) => {
   try {
-    const url = 'http://localhost:3001/v1/auth/check';
+    const url = `${config.apiUrl}/auth/check`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

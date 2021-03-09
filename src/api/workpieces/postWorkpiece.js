@@ -1,8 +1,10 @@
+import config from '../../../config';
+
 const postWorkpiece = async (payload) => {
   const { title, type, file } = payload;
   const body = JSON.stringify({ title });
   try {
-    const url = 'http://localhost:3001/v1/workpieces/';
+    const url = `${config.apiUrl}/workpieces/`;
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

@@ -1,3 +1,5 @@
+import config from '../../../config';
+
 const postCollaborator = async (payload) => {
   const { email, firstName, lastName, artistName, user_id } = payload;
   const body = JSON.stringify({
@@ -7,7 +9,7 @@ const postCollaborator = async (payload) => {
     artistName,
   });
   try {
-    const url = `http://localhost:3001/v1/users/${user_id}/collaborators/`;
+    const url = `${config.apiUrl}/users/${user_id}/collaborators/`;
     const method = 'POST';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

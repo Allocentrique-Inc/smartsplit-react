@@ -1,6 +1,8 @@
+import config from '../../../config';
+
 const getUsers = async (payload) => {
   try {
-    const url = `http://localhost:3001/v1/users/${payload.user_id}`;
+    const url = `${config.apiUrl}/users/${payload.user_id}`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

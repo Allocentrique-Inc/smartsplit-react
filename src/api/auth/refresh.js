@@ -1,7 +1,9 @@
+import config from '../../../config';
+
 const refresh = async (payload) => {
   try {
     console.log('TRYING TO REFRESH TOKEN');
-    const url = 'http://localhost:3001/v1/auth/refresh';
+    const url = `${config.apiUrl}/auth/refresh`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {

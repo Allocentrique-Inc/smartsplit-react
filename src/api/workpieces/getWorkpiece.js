@@ -1,6 +1,8 @@
+import config from '../../../config';
+
 const getWorkpiece = async (payload) => {
   try {
-    const url = `http://localhost:3001/v1/workpieces/${payload.workpiece_id}`;
+    const url = `${config.apiUrl}/workpieces/${payload.workpiece_id}`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
