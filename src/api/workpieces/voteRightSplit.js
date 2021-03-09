@@ -1,4 +1,4 @@
-import config from '../../../config';
+import config from '../../config';
 
 const voteRightSplit = async (payload) => {
   const { copyright, performance, recording, privacy, label } = payload;

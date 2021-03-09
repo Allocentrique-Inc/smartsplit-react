@@ -1,4 +1,4 @@
-import config from '../../../config';
+import config from '../../config';
 
 const patchUser = async (payload) => {
   const {

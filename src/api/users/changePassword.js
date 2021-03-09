@@ -1,4 +1,4 @@
-import config from '../../../config';
+import config from '../../config';
 
 const changePassword = async (payload) => {
   const { password, token, currentPassword } = payload;

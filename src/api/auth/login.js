@@ -1,5 +1,5 @@
 import refresh from './refresh';
-import config from '../../../config';
+import config from '../../config';
 
 const login = async (payload) => {
   const { email, password } = payload;

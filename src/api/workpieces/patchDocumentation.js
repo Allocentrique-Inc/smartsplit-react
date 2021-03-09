@@ -1,4 +1,4 @@
-import config from '../../../config';
+import config from '../../config';
 
 const patchDocumentation = async (payload) => {
   const { creation, workpiece_id } = payload;

@@ -1,4 +1,4 @@
-import config from '../../../config';
+import config from '../../config';
 
 const postUser = async (payload) => {
   const { email, password, firstName, lastName, artistName } = payload;

@@ -1,5 +1,5 @@
 import refresh from '../auth/refresh';
-import config from '../../../config';
+import config from '../../config';
 
 const postUser = async (payload) => {
   const { token, password, firstName, lastName, artistName } = payload;

@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall": "FILE=\"config.js\"; test -f $FILE && echo \"config.js exists\" || cp config.example.js config.js"
+    "postinstall": "FILE=\\\"src/config.js\\\"; test -f $FILE && echo \\\"src/config.js exists\\\" || cp src/config.example.js src/config.js"
   },
   "eslintConfig": {
     "extends": [

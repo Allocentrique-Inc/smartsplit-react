@@ -1,4 +1,4 @@
-import config from '../../../config';
+import config from '../../config';
 
 const requestPasswordReset = async (payload) => {
   const { email } = payload;

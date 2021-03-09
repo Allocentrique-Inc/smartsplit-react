@@ -1,4 +1,4 @@
-import config from '../../../config';
+import config from '../../config';
 
 const postCollaborator = async (payload) => {
   const { email, firstName, lastName, artistName, user_id } = payload;
