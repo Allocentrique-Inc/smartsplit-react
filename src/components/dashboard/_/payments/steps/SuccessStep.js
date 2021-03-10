@@ -1,5 +1,5 @@
-import ProductImage from '../../../assets/entente.png';
-import X from '../../../icons/x';
+import ProductImage from '../../../../../assets/entente.png';
+import X from '../../../../../icons/x';
 
 const SuccessStep = (props) => {
   const { product, setShowModal, purchase, setDoCleanup } = props;

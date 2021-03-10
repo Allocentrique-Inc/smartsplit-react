@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import ProductImage from '../../../assets/entente.png';
-import getPromoCode from '../../../api/payments/getPromoCode';
+import ProductImage from '../../../../../assets/entente.png';
+import getPromoCode from '../../../../../api/payments/getPromoCode';
 import { credits2Munee } from '../constants/creditsConversionRate';
 
 const PromoCodeStep = (props) => {

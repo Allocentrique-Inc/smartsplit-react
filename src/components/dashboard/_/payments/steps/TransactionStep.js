@@ -6,10 +6,10 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js';
-import ProductImage from '../../../assets/entente.png';
+import ProductImage from '../../../../../assets/entente.png';
 import { credits2Munee } from '../constants/creditsConversionRate';
-import createPurchase from '../../../api/payments/createPurchase';
-import completePurchase from '../../../api/payments/completePurchase';
+import createPurchase from '../../../../../api/payments/createPurchase';
+import completePurchase from '../../../../../api/payments/completePurchase';
 
 const stripe = loadStripe(
   'pk_test_51IK8XlIayL0oggkdXNvYQhloDaPLfjKIrBSJotk7M4Esh2PLx4CqTR17bNBc0IuMoqvUVHlc85qXHQPA8sRYgpPC00y3coZqHM',

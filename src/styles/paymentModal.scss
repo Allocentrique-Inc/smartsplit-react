@@ -180,6 +180,12 @@
   .successStep{
     h3,h2{color:map-get($colors, 'action');}
   }
+  .loadingStep{
+    height:50vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
 
 
 }

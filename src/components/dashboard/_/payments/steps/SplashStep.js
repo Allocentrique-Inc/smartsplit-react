@@ -1,5 +1,5 @@
-import ProductImage from '../../../assets/entente.png';
-import X from '../../../icons/x';
+import ProductImage from '../../../../../assets/entente.png';
+import X from '../../../../../icons/x';
 
 const SplashStep = (props) => {
   const { setShowModal, nextStep, loading, product, fPrice } = props;

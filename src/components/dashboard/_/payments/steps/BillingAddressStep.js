@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import countries from '../constants/countries';
 import provinces from '../constants/provinces';
-import Pen from '../../../icons/pen';
-import createAddress from '../../../api/payments/createAddress';
-import getUsers from '../../../api/users/getUsers';
+import Pen from '../../../../../icons/pen';
+import createAddress from '../../../../../api/payments/createAddress';
+import getUsers from '../../../../../api/users/getUsers';
 
 const BillingAddressStep = (props) => {
   const { user, setUser, address, setAddress, stepValid, setStepValid } = props;
