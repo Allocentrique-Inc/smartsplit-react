@@ -79,26 +79,59 @@ export default function PdfContentParser(reactElements) {
   );
 }
 
-const List = ({ type = 'alphabetical', children }) => {
+const List = ({ type = 'alphabetical', nestedIndex = '', children }) => {
   const letterIndexes = ['a', 'b', 'c', 'd'];
   let counter = 0;
-  const Bullet = () => (
-    <Text style={styles.listIndex}>
-      {type === 'alphabetical' && `${letterIndexes[counter++]})`}
-      {type === 'numeral' && `${++counter}.`}
-    </Text>
-  );
 
+  const filterNestedLists = (element) =>
+    element.props.children.findIndex(
+      (child) => child.type === 'nol' || child.type === 'aol',
+    );
+  const filterOtherChildren = (element) => {
+    element.props.children.findIndex(
+      (child) => child.type !== 'nol' && child.type !== 'aol',
+    );
+  };
+
+  const Bullet = ({ counter }) => {
+    return (
+      <Text style={styles.listIndex}>
+        {type === 'alphabetical' && `${nestedIndex}${letterIndexes[counter]})`}
+        {type === 'numeral' && `${nestedIndex}${counter}.`}
+      </Text>
+    );
+  };
   return (
     <View>
       {children &&
         children.map((child) => {
-          console.log('CHILD', child);
+          counter++;
+
           return (
-            <View style={styles.li}>
-              <Bullet />
+            <View style={styles.li} key={Math.random()}>
+              <Bullet counter={counter} />
               <View style={styles.liContent}>
-                {PdfContentParser(child.props.children)}
+                {child.props.children.map((grandChildren) => {
+                  if (
+                    grandChildren.type === 'aol' ||
+                    grandChildren.type === 'nol'
+                  ) {
+                    return (
+                      <List
+                        type={
+                          grandChildren.type === 'aol'
+                            ? 'alphabetical'
+                            : 'numeral'
+                        }
+                        nestedIndex={`${counter}.`}
+                      >
+                        {grandChildren.props.children}
+                      </List>
+                    );
+                  }
+
+                  return PdfContentParser([grandChildren]);
+                })}
               </View>
             </View>
           );
