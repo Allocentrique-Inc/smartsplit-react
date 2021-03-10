@@ -62,7 +62,7 @@ export default StyleSheet.create({
   section: {
     paddingBottom: 16,
   },
-  row: {
+  rightHolderRow: {
     padding: '8 16',
     flexDirection: 'row',
     borderTop: '1 solid #e2e2e3',
@@ -92,7 +92,27 @@ export default StyleSheet.create({
   bullet: {
     paddingRight: 12,
   },
-  textRow: {
+  row: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+
+  signatoryContainer: {
+    width: '50%',
+    fontSize: 11,
+    fontFamily: 'Times-Bold',
+  },
+  signatureBox: {
+    height: 50,
+    borderBottom: '2 dashed #203548',
+    marginRight: 32,
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 10,
+    left: 32,
+    right: 32,
+    textAlign: 'right',
+    fontSize: 8,
   },
 });

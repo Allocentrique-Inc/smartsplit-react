@@ -68,9 +68,7 @@ export default function PdfContentParser(reactElements) {
         return <List type="numeral">{el.props.children}</List>;
       case 'row':
         return (
-          <Text style={styles.textRow}>
-            {PdfContentParser(el.props.children)}
-          </Text>
+          <Text style={styles.row}>{PdfContentParser(el.props.children)}</Text>
         );
       default:
         return <Text>{el}</Text>;

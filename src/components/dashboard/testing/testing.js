@@ -26,7 +26,7 @@ const MyDocument = () => (
         {contractData.sections.rightHolders.list.map((rightHolder, index) => (
           <View
             style={[
-              styles.row,
+              styles.rightHolderRow,
               index === contractData.sections.rightHolders.list.length - 1
                 ? styles.lastRow
                 : null,
@@ -37,6 +37,13 @@ const MyDocument = () => (
           </View>
         ))}
       </View>
+      <Text
+        fixed
+        style={styles.footer}
+        render={({ pageNumber, totalPages }) =>
+          `${contractData.footer} ${pageNumber} / ${totalPages}`
+        }
+      />
     </Page>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
@@ -82,6 +89,13 @@ const MyDocument = () => (
           )}
         </List>
       </View>
+      <Text
+        fixed
+        style={styles.footer}
+        render={({ pageNumber, totalPages }) =>
+          `${contractData.footer} ${pageNumber} / ${totalPages}`
+        }
+      />
     </Page>
     <Page size="A4" style={styles.page}>
       <View style={styles.section} key="recommendations">
@@ -97,6 +111,28 @@ const MyDocument = () => (
           ReactHtmlParser(contractData.sections.otherConditions),
         )}
       </View>
+      <View style={styles.section} key="signatures">
+        {PdfContentParser(
+          ReactHtmlParser(contractData.sections.signatures.text),
+        )}
+        <View style={styles.row}>
+          {contractData.sections.signatures.signatories.map((signatory) => {
+            return (
+              <View style={styles.signatoryContainer}>
+                <View style={styles.signatureBox} />
+                {PdfContentParser([signatory])}
+              </View>
+            );
+          })}
+        </View>
+      </View>
+      <Text
+        fixed
+        style={styles.footer}
+        render={({ pageNumber, totalPages }) =>
+          `${contractData.footer} ${pageNumber} / ${totalPages}`
+        }
+      />
     </Page>
   </Document>
 );
