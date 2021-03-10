@@ -50,6 +50,10 @@ export default ({ translations, language }) => {
       language
     ];
 
+  useEffect(() => {
+    localStorage.removeItem('accessToken');
+  }, []);
+
   return (
     <div className="content">
       <h1 className="header">{t_h1}</h1>

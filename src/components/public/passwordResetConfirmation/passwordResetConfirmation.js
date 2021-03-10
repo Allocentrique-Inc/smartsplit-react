@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 export default function PasswordResetConfirmation({ translations, language }) {
@@ -6,6 +7,10 @@ export default function PasswordResetConfirmation({ translations, language }) {
   const t_p = translations.publicPages.p._passwordResetConfirmation[language];
   const t_button =
     translations.publicPages.button._passwordResetConfirmation[language];
+
+  useEffect(() => {
+    localStorage.removeItem('accessToken');
+  }, []);
   return (
     <div className="content">
       <div className="header">

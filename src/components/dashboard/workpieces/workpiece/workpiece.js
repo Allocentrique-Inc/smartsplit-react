@@ -14,6 +14,7 @@ const Workpiece = (props) => {
   const commonProps = {
     ...props,
   };
+
   return (
     <div className="workpiece">
       <div className="left">
@@ -29,23 +30,44 @@ const Workpiece = (props) => {
       </div>
 
       <div className="right">
-        <Action {...props} />
-        <Ellipsis />
+        <Action {...commonProps} />
+        <Ellipsis {...commonProps} />
       </div>
     </div>
   );
 };
 
-const Ellipsis = () => {
+const Ellipsis = (props) => {
   const [showWorkpieceOptions, setShowWorkpieceOptions] = useState(false);
-  const toggleMenu = () => setShowWorkpieceOptions((e) => !e);
+  const openMenu = () => {
+    setTimeout(() => {
+      document.getElementById('workpieceMenu').focus();
+    }, 0);
+    setShowWorkpieceOptions(true);
+  };
+  const closeMenu = () => {
+    setShowWorkpieceOptions(false);
+  };
   const handleDelete = () => {};
-  const t_deleteButton = 'DELETE WORKPIECE';
+  const t_deleteButton = {
+    fr: 'Supprimer cette pièce',
+    en: 'Delete this workpiece',
+  }[props.user.locale];
+
   return (
-    <span className="ellipsis" onClick={toggleMenu}>
+    <span
+      className="ellipsis"
+      onClick={showWorkpieceOptions ? closeMenu : openMenu}
+    >
       <VertEllipsis />
       {showWorkpieceOptions && (
-        <button className="workpieceMenuOption" onClick={handleDelete}>
+        <button
+          className="workpieceMenuOption"
+          onClick={handleDelete}
+          tabIndex="0"
+          id="workpieceMenu"
+          onBlur={closeMenu}
+        >
           {t_deleteButton}
         </button>
       )}

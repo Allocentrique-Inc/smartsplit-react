@@ -7,6 +7,7 @@ export default () => {
   const history = useHistory();
 
   useEffect(() => {
+    localStorage.removeItem('accessToken');
     const activate = async () => {
       await activateEmail({ token });
       history.push('/');

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import requestPasswordReset from '../../../api/users/requestPasswordReset';
 import useForm from '../../_/form/useForm';
@@ -26,6 +26,9 @@ export default ({ translations, language }) => {
     }
     setTriedSubmit(true);
   };
+  useEffect(() => {
+    localStorage.removeItem('accessToken');
+  }, []);
 
   const commonProps = {
     language,
