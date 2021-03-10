@@ -25,6 +25,7 @@ module.exports = {
     'no-control-regex': 'off',
     'no-console': 'off',
     'no-tabs': 'off',
+    'no-plusplus': 'off',
     'spaced-comment': 'off',
     'import/prefer-default-export': 'off',
     'import/no-named-as-default': 'off',
