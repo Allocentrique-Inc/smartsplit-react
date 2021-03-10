@@ -20,6 +20,14 @@ export default StyleSheet.create({
     marginBottom: 8,
     // fontWeight: 'bold',
   },
+  h3: {
+    fontSize: '11',
+    fontFamily: 'Helvetica-Bold',
+    color: '#2da84f',
+
+    // fontWeight: 'bold',
+  },
+
   p: {
     display: 'block',
     margin: '6 0',
@@ -81,7 +89,10 @@ export default StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
   },
-  listIndex: {
+  bullet: {
     paddingRight: 12,
+  },
+  textRow: {
+    flexDirection: 'row',
   },
 });

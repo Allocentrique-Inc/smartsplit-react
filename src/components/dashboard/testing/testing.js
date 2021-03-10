@@ -4,12 +4,13 @@ import styles from './_/styles';
 import PdfContentParser from './_/pdfContentParser';
 import ArrowLeft from '../../../icons/arrowLeft';
 import contractData from './contractData';
+import List from './_/list/list';
 // Create styles
 
 // Create Document Component
 const MyDocument = () => (
   <Document>
-    {/*<Page size="A4" style={styles.page}>
+    <Page size="A4" style={styles.page}>
       <View style={styles.header}>
         {PdfContentParser(ReactHtmlParser(contractData.header))}
       </View>
@@ -36,17 +37,62 @@ const MyDocument = () => (
           </View>
         ))}
       </View>
-    </Page>*/}
+    </Page>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
+        {PdfContentParser(
+          ReactHtmlParser(
+            contractData.sections.agreementConditions.description,
+          ),
+        )}
+        <View>
+          {PdfContentParser(
+            ReactHtmlParser(
+              contractData.sections.agreementConditions.copyright.title,
+            ),
+          )}
+        </View>
+        <List type="numeral">
+          {ReactHtmlParser(
+            contractData.sections.agreementConditions.copyright.content,
+          )}
+        </List>
+        <View>
+          {PdfContentParser(
+            ReactHtmlParser(
+              contractData.sections.agreementConditions.performance.title,
+            ),
+          )}
+        </View>
+        <List type="numeral">
+          {ReactHtmlParser(
+            contractData.sections.agreementConditions.performance.content,
+          )}
+        </List>
+        <View>
+          {PdfContentParser(
+            ReactHtmlParser(
+              contractData.sections.agreementConditions.recording.title,
+            ),
+          )}
+        </View>
+        <List type="numeral">
+          {ReactHtmlParser(
+            contractData.sections.agreementConditions.recording.content,
+          )}
+        </List>
+      </View>
+    </Page>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.section} key="recommendations">
         {PdfContentParser(
           ReactHtmlParser(contractData.sections.recommendations),
         )}
       </View>
-      <View style={styles.section}>
+      <View style={styles.section} key="moralRights">
         {PdfContentParser(ReactHtmlParser(contractData.sections.moralRights))}
       </View>
-      <View style={styles.section}>
+      <View style={styles.section} key="otherConditions">
         {PdfContentParser(
           ReactHtmlParser(contractData.sections.otherConditions),
         )}
