@@ -1,39 +1,94 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ChevronDown from '../../../../../icons/chevronDown';
 import PlusCircleFull from '../../../../../icons/plusCircleFull';
 import PlusCircle from '../../../../../icons/plusCircle';
+import getUsersCollaborators from '../../../../../api/users/getUsersCollaborators';
 
 const AddCollaborators = (props) => {
   const [isAdding, setIsAdding] = useState(false);
-  const user_id = localStorage.getItem('user_id');
-  const availablesCollaborators = props.collaborators.filter(
-    (el) =>
-      !props.preSelectedCollaborators.some(
-        (EL) => EL.rightHolder_id === el.user_id,
-      ),
-  );
+  const user_id = props.user.user_id;
+  const [query, setQuery] = useState('');
+  const [lastUpdate, setLastUpdate] = useState('0');
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [availablesCollaborators, setAvailablesCollaborators] = useState([]);
+  console.log(props);
+  const filterCollaborators = (collaborators) => {
+    return [props.user, ...collaborators].filter(
+      (el) =>
+        !props.preSelectedCollaborators.some(
+          (EL) => EL.rightHolder_id === el.user_id,
+        ),
+    );
+  };
+
+  const refreshCollaborator = async (query) => {
+    const time = new Date().getTime();
+    const collaborators = await getUsersCollaborators({
+      user_id,
+      search_terms: query,
+    });
+    if (time > lastUpdate) {
+      setLastUpdate(time);
+      const availablesCollaborators = filterCollaborators(collaborators);
+      setAvailablesCollaborators(availablesCollaborators);
+    }
+    setIsLoaded(true);
+  };
+
+  const handleQueryInput = (e) => {
+    setQuery(e.target.value);
+    refreshCollaborator(e.target.value);
+  };
+
+  const handleOpenMenu = () => {
+    setIsAdding((e) => !e);
+    refreshCollaborator();
+    document.getElementById('addCollaboratorInput').focus();
+  };
+
+  const handleCloseMenu = () => {
+    setIsAdding(false);
+    setQuery('');
+    setIsLoaded(false);
+  };
+
+  const handleDelayCloseMenu = async () => {
+    setTimeout(() => {
+      handleCloseMenu();
+    }, 500);
+  };
+
+  useEffect(() => {
+    refreshCollaborator();
+  }, []);
+
   return (
     <div
       className="addCollaborators"
-      onClick={() => {
-        setIsAdding((e) => !e);
-      }}
+      onClick={isAdding ? handleCloseMenu : handleOpenMenu}
     >
       <div className="addButton">
         <div className="plusIcon">
           <PlusCircleFull />
         </div>
-        <div className="input">
-          {props.isAddingLabel
-            ? 'Ajouter un label'
-            : 'Ajouter un collaborateur...'}
-        </div>
+        <input
+          className="input"
+          placeholder={
+            props.isAddingLabel
+              ? 'Ajouter un label'
+              : 'Ajouter un collaborateur...'
+          }
+          value={query}
+          onChange={handleQueryInput}
+          id="addCollaboratorInput"
+          onBlur={handleDelayCloseMenu}
+        />
         <div className="arrowDown">
           <ChevronDown />
         </div>
       </div>
 
-      {isAdding && (
+      {isLoaded && isAdding && (
         <div id="dropDown">
           <div className="optionList">
             {availablesCollaborators.map((el, id) => {
@@ -53,6 +108,8 @@ const AddCollaborators = (props) => {
                   key={el.user_id}
                   onClick={async () => {
                     await props.addCollaborators(el);
+                    setAvailablesCollaborators([]);
+                    setQuery('');
                     await setIsAdding(false);
                   }}
                 >
