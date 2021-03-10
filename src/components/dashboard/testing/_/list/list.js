@@ -6,11 +6,12 @@ import styles from '../styles';
 export default function List({
   type = 'alphabetical',
   nestedIndex = '',
+  start = 0,
   children,
   debug,
 }) {
   const letterIndexes = ['a', 'b', 'c', 'd'];
-  let counter = 0;
+  let currentIndex = start;
 
   const filterNestedLists = (element) =>
     element.props.children.findIndex(
@@ -22,26 +23,24 @@ export default function List({
     );
   };
 
-  const Bullet = ({ counter }) => {
+  const Bullet = ({ currentIndex }) => {
     return (
       <Text style={styles.bullet}>
         {type === 'alphabetical' &&
-          `${nestedIndex}${letterIndexes[counter - 1]})`}
-        {type === 'numeral' && `${nestedIndex}${counter}.`}
+          `${nestedIndex}${letterIndexes[currentIndex - 1]})`}
+        {type === 'numeral' && `${nestedIndex}${currentIndex}.`}
       </Text>
     );
   };
-  console.log('CHILDREN', children);
-
   return (
-    <View debug={debug}>
+    <View debug={debug} key={Math.random()}>
       {children &&
         children.map((child) => {
-          counter++;
+          currentIndex++;
 
           return (
             <View style={styles.li} key={Math.random()}>
-              <Bullet counter={counter} />
+              <Bullet currentIndex={currentIndex} />
               <View style={styles.liContent}>
                 {child.props &&
                   child.props.children.map((grandChild) => {
@@ -51,12 +50,13 @@ export default function List({
                     ) {
                       return (
                         <List
+                          key={Math.random()}
                           type={
                             grandChild.type === 'aol'
                               ? 'alphabetical'
                               : 'numeral'
                           }
-                          nestedIndex={`${counter}.`}
+                          nestedIndex={`${currentIndex}.`}
                         >
                           {grandChild.props.children}
                         </List>
