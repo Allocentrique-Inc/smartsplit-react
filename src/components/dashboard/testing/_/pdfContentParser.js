@@ -67,31 +67,39 @@ export default function PdfContentParser(reactElements) {
                 {el.props.children}
               </Link>
             );
-          case 'ol':
+          case 'aol':
             return <List>{el.props.children}</List>;
+          case 'nol':
+            return <List type="numeral">{el.props.children}</List>;
           default:
-            return <Text style={styles.wrap}>{el}</Text>;
+            return <Text>{el}</Text>;
         }
       })}
     </>
   );
 }
 
-const List = ({ type = 'letter', children }) => {
+const List = ({ type = 'alphabetical', children }) => {
   const letterIndexes = ['a', 'b', 'c', 'd'];
   let counter = 0;
+  const Bullet = () => (
+    <Text style={styles.listIndex}>
+      {type === 'alphabetical' && `${letterIndexes[counter++]})`}
+      {type === 'numeral' && `${++counter}.`}
+    </Text>
+  );
+
   return (
     <View>
       {children &&
         children.map((child) => {
+          console.log('CHILD', child);
           return (
             <View style={styles.li}>
-              <View>
-                <Text style={styles.listIndex}>
-                  {letterIndexes[counter++]})
-                </Text>
+              <Bullet />
+              <View style={styles.liContent}>
+                {PdfContentParser(child.props.children)}
               </View>
-              <View>{PdfContentParser(child.props.children)}</View>
             </View>
           );
         })}

@@ -4,6 +4,7 @@ export default StyleSheet.create({
   page: {
     padding: '16 32',
     fontFamily: 'Helvetica',
+    flex: 1,
   },
   h1: {
     display: 'block',
@@ -72,14 +73,15 @@ export default StyleSheet.create({
     borderBottom: '1 solid #9a9a9a',
   },
   li: {
-    marginLeft: 16,
     fontSize: 11,
     flexDirection: 'row',
+    padding: 5,
+  },
+  liContent: {
+    flexDirection: 'column',
+    flex: 1,
   },
   listIndex: {
-    paddingRight: 16,
-  },
-  wrap: {
-    width: 500,
+    paddingRight: 12,
   },
 });

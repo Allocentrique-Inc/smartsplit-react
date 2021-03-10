@@ -9,7 +9,7 @@ import contractData from './contractData';
 // Create Document Component
 const MyDocument = () => (
   <Document>
-    <Page size="A4" style={styles.page}>
+    {/*<Page size="A4" style={styles.page}>
       <View style={styles.header}>
         {PdfContentParser(ReactHtmlParser(contractData.header))}
       </View>
@@ -36,7 +36,7 @@ const MyDocument = () => (
           </View>
         ))}
       </View>
-    </Page>
+    </Page>*/}
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
         {PdfContentParser(
