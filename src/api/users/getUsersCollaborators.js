@@ -17,7 +17,6 @@ const getUsersCollaborators = async (payload) => {
     });
     const textResponse = await response.text();
     const parsedResponse = JSON.parse(textResponse);
-    console.log(url, parsedResponse);
     if (parsedResponse.statusCode === 404) {
       return [];
     }

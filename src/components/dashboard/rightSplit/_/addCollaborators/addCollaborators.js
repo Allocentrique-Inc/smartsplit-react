@@ -11,7 +11,6 @@ const AddCollaborators = (props) => {
   const [lastUpdate, setLastUpdate] = useState('0');
   const [isLoaded, setIsLoaded] = useState(false);
   const [availablesCollaborators, setAvailablesCollaborators] = useState([]);
-  console.log(props);
   const filterCollaborators = (collaborators) => {
     return [props.user, ...collaborators].filter(
       (el) =>
