@@ -72,7 +72,12 @@ const Workpieces = (props) => {
               ? workpiecesByOwner
               : workpiecesByRightHolder
             ).map((el) => (
-              <Workpiece key={el.workpiece_id} {...el} {...commonProps} />
+              <Workpiece
+                key={el.workpiece_id}
+                {...el}
+                {...commonProps}
+                tab={tab}
+              />
             ))}
             {tab === 'owner'
               ? workpiecesByOwner.length === 0 && (
