@@ -1,26 +1,55 @@
-import { Document, Page, Text, View, PDFViewer } from '@react-pdf/renderer';
+import {
+  Document,
+  Page,
+  Text,
+  View,
+  PDFDownloadLink,
+} from '@react-pdf/renderer';
 import ReactHtmlParser from 'react-html-parser';
 import styles from './_/styles';
-import PdfContentParser from './_/pdfContentParser';
-import ArrowLeft from '../../../icons/arrowLeft';
-import contractData from './contractData';
 import List from './_/list/list';
-// Create styles
+import PDFContentParser from './_/PDFContentParser';
+import contractData from './contractData';
 
-// Create Document Component
-const MyDocument = () => (
+export default function DownloadContractButton({ language }) {
+  const t_filename = {
+    fr: '(TEST)Entente de partage de droit.pdf',
+    en: '(TEST)Right split agreee.pdf',
+  }[language];
+  const t_loading = {
+    fr: 'Chargement...',
+    en: 'Loading...',
+  }[language];
+  const t_download = {
+    fr: "Télécharger l'entente",
+    en: 'Download the contract',
+  }[language];
+  return (
+    <div className="pdfBtnContainer">
+      <PDFDownloadLink
+        className="btn-secondary"
+        document={<Contract />}
+        fileName={t_filename}
+      >
+        {({ blob, url, loading, error }) => (loading ? t_loading : t_download)}
+      </PDFDownloadLink>
+    </div>
+  );
+}
+
+const Contract = () => (
   <Document>
     <Page size="A4" style={styles.page} key={Math.random()}>
       <View style={styles.header} key={Math.random()}>
-        {PdfContentParser(ReactHtmlParser(contractData.header))}
+        {PDFContentParser(ReactHtmlParser(contractData.header))}
       </View>
       <View style={styles.section} key={Math.random()}>
-        {PdfContentParser(
+        {PDFContentParser(
           ReactHtmlParser(contractData.sections.generalInformations),
         )}
       </View>
       <View style={styles.section} key={Math.random()}>
-        {PdfContentParser(
+        {PDFContentParser(
           ReactHtmlParser(contractData.sections.rightHolders.title),
         )}
         {contractData.sections.rightHolders.list.map((rightHolder, index) => (
@@ -33,7 +62,7 @@ const MyDocument = () => (
             ]}
             key={Math.random()}
           >
-            {PdfContentParser(ReactHtmlParser(rightHolder))}
+            {PDFContentParser(ReactHtmlParser(rightHolder))}
           </View>
         ))}
       </View>
@@ -48,13 +77,13 @@ const MyDocument = () => (
     </Page>
     <Page size="A4" style={styles.page} key={Math.random()}>
       <View style={styles.section} key={Math.random()}>
-        {PdfContentParser(
+        {PDFContentParser(
           ReactHtmlParser(
             contractData.sections.agreementConditions.description,
           ),
         )}
         <View key={Math.random()}>
-          {PdfContentParser(
+          {PDFContentParser(
             ReactHtmlParser(
               contractData.sections.agreementConditions.copyright.title,
             ),
@@ -66,7 +95,7 @@ const MyDocument = () => (
           )}
         </List>
         <View key={Math.random()}>
-          {PdfContentParser(
+          {PDFContentParser(
             ReactHtmlParser(
               contractData.sections.agreementConditions.performance.title,
             ),
@@ -78,7 +107,7 @@ const MyDocument = () => (
           )}
         </List>
         <View key={Math.random()}>
-          {PdfContentParser(
+          {PDFContentParser(
             ReactHtmlParser(
               contractData.sections.agreementConditions.recording.title,
             ),
@@ -101,20 +130,20 @@ const MyDocument = () => (
     </Page>
     <Page size="A4" style={styles.page} key={Math.random()}>
       <View style={styles.section} key="recommendations">
-        {PdfContentParser(
+        {PDFContentParser(
           ReactHtmlParser(contractData.sections.recommendations),
         )}
       </View>
       <View style={styles.section} key="moralRights">
-        {PdfContentParser(ReactHtmlParser(contractData.sections.moralRights))}
+        {PDFContentParser(ReactHtmlParser(contractData.sections.moralRights))}
       </View>
       <View style={styles.section} key="otherConditions">
-        {PdfContentParser(
+        {PDFContentParser(
           ReactHtmlParser(contractData.sections.otherConditions),
         )}
       </View>
       <View style={styles.section} key="signatures">
-        {PdfContentParser(
+        {PDFContentParser(
           ReactHtmlParser(contractData.sections.signatures.text),
         )}
         <View style={styles.row} key={Math.random()}>
@@ -122,7 +151,7 @@ const MyDocument = () => (
             return (
               <View style={styles.signatoryContainer} key={Math.random()}>
                 <View style={styles.signatureBox} />
-                {PdfContentParser([signatory])}
+                {PDFContentParser([signatory])}
               </View>
             );
           })}
@@ -139,13 +168,3 @@ const MyDocument = () => (
     </Page>
   </Document>
 );
-
-export default function Testing(props) {
-  return (
-    <div>
-      <PDFViewer width={585} height={842}>
-        <MyDocument />
-      </PDFViewer>
-    </div>
-  );
-}

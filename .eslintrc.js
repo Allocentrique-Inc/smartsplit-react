@@ -34,6 +34,7 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-unused-expressions': 'off',
     'no-shadow': 'off',
+    'no-confusing-arrow': 'off',
     'arrow-body-style': 'off',
     'consistent-return': 'off',
     'react/destructuring-assignment': 'off',

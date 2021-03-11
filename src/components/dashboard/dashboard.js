@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 import Workpieces from './workpieces/workpieces';
 import Workpiece from './workpiece/workpiece';
 import Settings from './settings/settings';
-import Testing from './testing/testing';
 import getUsers from '../../api/users/getUsers';
 import translations from '../../translations';
 import patchUser from '../../api/users/patchUser';
@@ -48,9 +47,6 @@ const Dashboard = (props) => {
       </Route>
       <Route path="/settings">
         <Settings {...props} {...commonProps} />
-      </Route>
-      <Route path="/testing">
-        <Testing {...props} {...commonProps} />
       </Route>
       <Route path="/">
         <Workpieces {...props} {...commonProps} />

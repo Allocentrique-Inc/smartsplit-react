@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, PDFViewer, Font } from '@react-pdf/renderer';
 // eslint-disable-next-line import/no-cycle
-import PdfContentParser from '../pdfContentParser';
+import PDFContentParser from '../PDFContentParser';
 import styles from '../styles';
 
 export default function List({
@@ -63,7 +63,7 @@ export default function List({
                       );
                     }
 
-                    return PdfContentParser(
+                    return PDFContentParser(
                       Array.isArray(grandChild) ? grandChild : [grandChild],
                     );
                   })}
