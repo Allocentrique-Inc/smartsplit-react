@@ -3,7 +3,14 @@ import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 import Checkbox from '../../../_/form/checkbox/checkbox';
 
 export default function Notifications(props) {
-  const { notifications, setField, updateUser, translations, language } = props;
+  const {
+    notifications,
+    setField,
+    updateUser,
+    translations,
+    language,
+    className = '',
+  } = props;
   const isNotificationSelected = (type, value) =>
     notifications[type].includes(value);
   const toggleNotification = (type, value) => {
@@ -20,7 +27,7 @@ export default function Notifications(props) {
     updateUser();
   };
   return (
-    <div className="notifications" id="notifications">
+    <div className={`notifications ${className}`} id="notifications">
       <h2>{translations.titles._notifications[language]}</h2>
       <table>
         <thead>

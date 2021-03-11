@@ -26,16 +26,6 @@ const LeftMenu = (props) => {
         {t_workpieces}
       </button>
 
-      {/*<button
-        className="sectionButton"
-        onClick={() => history.push('/testing')}
-      >
-        <span className="buttonLogo">
-          <Tool />
-        </span>
-        Tests
-      </button>*/}
-
       {/*  <button
         className={`sectionButton ${selected === 'alfa' ? 'alfa' : 'alfa'}`}
         onClick={() => history.push('/settings')}

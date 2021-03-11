@@ -90,22 +90,15 @@ const Login = ({ translations, language }) => {
         <Link to="/user/request-password-reset">{t_forgot_password_link}</Link>
       </FormInput>
       <div className="buttons">
-        <div className="checkbox">
-          <input
-            type="checkbox"
-            id="stayConnected"
-            name="stayConnected"
-            value="true"
-          />
-          <Checkbox
-            checked={stayConnected}
-            onChange={() => setStayConnected(!stayConnected)}
-            label={t_checkbox}
-          />
-        </div>
         <button onClick={handleConfirm} className="btn-primary">
           {t_button}
         </button>
+        <Checkbox
+          className="toDo"
+          checked={stayConnected}
+          onChange={() => setStayConnected(!stayConnected)}
+          label={t_checkbox}
+        />
       </div>
     </div>
   );

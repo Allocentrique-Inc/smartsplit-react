@@ -9,56 +9,58 @@ const requiredValidator = (value) =>
 export default function validate(fields) {
   let isValid = true;
   Object.values(fields).forEach((field) => {
-    field.validators.forEach((validator) => {
-      switch (true) {
-        case /emailFormat/.test(validator):
-          if (!emailFormatValidator(field.value)) {
-            isValid = false;
-            !field.errors.includes('emailFormat') &&
-              field.errors.push('emailFormat');
-          }
+    field.validators &&
+      field.validators.forEach((validator) => {
+        switch (true) {
+          case /emailFormat/.test(validator):
+            if (!emailFormatValidator(field.value)) {
+              isValid = false;
+              !field.errors.includes('emailFormat') &&
+                field.errors.push('emailFormat');
+            }
 
-          break;
-        case /minLength*/.test(validator): {
-          const charLimit = validator.split('_')[1];
-          if (!minLengthValidator(field.value, charLimit)) {
-            isValid = false;
-            !field.errors.includes(`shouldBeAtLeast${charLimit}CharLong`) &&
-              field.errors.push(`shouldBeAtLeast${charLimit}CharLong`);
+            break;
+          case /minLength*/.test(validator): {
+            const charLimit = validator.split('_')[1];
+            if (!minLengthValidator(field.value, charLimit)) {
+              isValid = false;
+              !field.errors.includes(`shouldBeAtLeast${charLimit}CharLong`) &&
+                field.errors.push(`shouldBeAtLeast${charLimit}CharLong`);
+            }
+            break;
           }
-          break;
-        }
-        case /shouldBeTrue/.test(validator):
-          if (!field.value) {
-            isValid = false;
-            !field.errors.includes('shouldBeTrue') &&
-              field.errors.push('shouldBeTrue');
-          }
-          break;
-        case /shouldMatch*/.test(validator): {
-          const toMatch = validator.split('_')[1];
-          if (fields[toMatch] && field.value !== fields[toMatch].value) {
-            isValid = false;
+          case /shouldBeTrue/.test(validator):
+            if (!field.value) {
+              isValid = false;
+              !field.errors.includes('shouldBeTrue') &&
+                field.errors.push('shouldBeTrue');
+            }
+            break;
+          case /shouldMatch*/.test(validator): {
+            const toMatch = validator.split('_')[1];
+            if (fields[toMatch] && field.value !== fields[toMatch].value) {
+              isValid = false;
 
-            !field.errors.includes(
-              `shouldMatch${toMatch[0].toUpperCase() + toMatch.slice(1)}`,
-            ) &&
-              field.errors.push(
+              !field.errors.includes(
                 `shouldMatch${toMatch[0].toUpperCase() + toMatch.slice(1)}`,
-              );
+              ) &&
+                field.errors.push(
+                  `shouldMatch${toMatch[0].toUpperCase() + toMatch.slice(1)}`,
+                );
+            }
+            break;
           }
-          break;
-        }
-        case /required/.test(validator): {
-          if (!requiredValidator(field.value)) {
-            isValid = false;
-            !field.errors.includes('required') && field.errors.push('required');
+          case /required/.test(validator): {
+            if (!requiredValidator(field.value)) {
+              isValid = false;
+              !field.errors.includes('required') &&
+                field.errors.push('required');
+            }
+            break;
           }
-          break;
+          default:
         }
-        default:
-      }
-    });
+      });
   });
   return isValid;
 }

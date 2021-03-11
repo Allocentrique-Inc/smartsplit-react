@@ -12,6 +12,15 @@ export default function useForm(iniFields = {}) {
       },
     }));
   };
+  const setFieldValue = (field, value) => {
+    setFields((prevState) => ({
+      ...prevState,
+      [field]: {
+        ...prevState[field],
+        value,
+      },
+    }));
+  };
   const toJS = () => {
     const values = {};
     Object.entries(fields).forEach(([fieldName, field]) => {
@@ -43,13 +52,22 @@ export default function useForm(iniFields = {}) {
     return result;
   };
   const reset = () => setFields(iniFields);
+  const loadFields = (values) => {
+    Object.entries(values).forEach(([key, value]) => {
+      if (fields[key]) {
+        setFieldValue(key, value);
+      }
+    });
+  };
   return {
     fields,
     setFields,
     setField,
+    setFieldValue,
     toJS,
     handlers,
     isValid,
     reset,
+    loadFields,
   };
 }
