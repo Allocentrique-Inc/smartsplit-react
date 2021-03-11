@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import login from '../../../api/auth/login';
@@ -60,6 +60,10 @@ const Login = ({ translations, language }) => {
     translations.publicPages.checkboxes._stayConnected[language];
   const t_button = translations.publicPages.button._login[language];
 
+  useEffect(() => {
+    localStorage.removeItem('accessToken');
+  }, []);
+
   return (
     <div className="content">
       <div className="header">
@@ -86,22 +90,15 @@ const Login = ({ translations, language }) => {
         <Link to="/user/request-password-reset">{t_forgot_password_link}</Link>
       </FormInput>
       <div className="buttons">
-        <div className="checkbox">
-          <input
-            type="checkbox"
-            id="stayConnected"
-            name="stayConnected"
-            value="true"
-          />
-          <Checkbox
-            checked={stayConnected}
-            onChange={() => setStayConnected(!stayConnected)}
-            label={t_checkbox}
-          />
-        </div>
         <button onClick={handleConfirm} className="btn-primary">
           {t_button}
         </button>
+        <Checkbox
+          className="toDo"
+          checked={stayConnected}
+          onChange={() => setStayConnected(!stayConnected)}
+          label={t_checkbox}
+        />
       </div>
     </div>
   );

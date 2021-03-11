@@ -14,7 +14,6 @@ const Dashboard = (props) => {
   const [user, setUser] = useState(null);
   const [apiErrors, setApiErrors] = useState([]);
   const user_id = localStorage.getItem('user_id');
-  const [language, setLanguage] = useState('');
   const refreshUser = async () => {
     const user = await getUsers({ user_id });
     setUser(user);
@@ -22,13 +21,12 @@ const Dashboard = (props) => {
   useEffect(() => {
     refreshUser();
   }, []);
-  useEffect(() => {
-    user && setLanguage(user.locale);
-  }, [user]);
-  const toggleLanguage = () => {
+  const language = (user && user.locale) || 'fr';
+  const toggleLanguage = async () => {
+    console.log('ARE WE HERE');
     const newLanguage = language === 'fr' ? 'en' : 'fr';
-    setLanguage(newLanguage);
-    patchUser({ locale: newLanguage, user_id });
+    await patchUser({ locale: newLanguage, user_id });
+    await refreshUser();
   };
   if (!user) return null;
   const commonProps = {

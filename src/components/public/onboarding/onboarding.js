@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default function Onboarding({ translations, language }) {
@@ -14,6 +14,10 @@ export default function Onboarding({ translations, language }) {
     setLastName('');
     setArtistName('');
   };
+
+  useEffect(() => {
+    localStorage.removeItem('accessToken');
+  }, []);
 
   return (
     <div className="content">

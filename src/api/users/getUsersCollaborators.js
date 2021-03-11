@@ -1,8 +1,11 @@
 import config from '../../config';
 
 const getUsersCollaborators = async (payload) => {
+  const { search_terms } = payload;
   try {
-    const url = `${config.apiUrl}/users/${payload.user_id}/collaborators/`;
+    const url = `${config.apiUrl}/users/${payload.user_id}/collaborators/${
+      search_terms ? `?search_terms=${search_terms}` : ''
+    }`;
     const method = 'GET';
     const bearer = `Bearer ${localStorage.getItem('accessToken')}`;
     const response = await fetch(url, {
@@ -14,7 +17,9 @@ const getUsersCollaborators = async (payload) => {
     });
     const textResponse = await response.text();
     const parsedResponse = JSON.parse(textResponse);
-    console.log(parsedResponse);
+    if (parsedResponse.statusCode === 404) {
+      return [];
+    }
     return parsedResponse;
   } catch (err) {
     console.log(err);

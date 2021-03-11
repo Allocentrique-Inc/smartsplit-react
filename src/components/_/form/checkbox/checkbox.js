@@ -1,8 +1,8 @@
 export default function Checkbox(props) {
-  const { onChange, checked, disabled, label } = props;
+  const { onChange, checked, disabled, label, className = '' } = props;
   return (
     <div
-      className={`checkbox ${disabled ? 'disabled' : ''}`}
+      className={`checkbox ${disabled ? 'disabled' : ''} ${className}`}
       onClick={() => !disabled && onChange()}
     >
       <div
