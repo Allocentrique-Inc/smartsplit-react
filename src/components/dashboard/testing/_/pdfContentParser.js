@@ -65,7 +65,9 @@ export default function PdfContentParser(reactElements) {
           </Text>
         );
       case 'column':
-        return <View>{PdfContentParser(el.props.children)}</View>;
+        return (
+          <View key={Math.random()}>{PdfContentParser(el.props.children)}</View>
+        );
       case 'a':
         return (
           // eslint-disable-next-line jsx-a11y/anchor-is-valid
