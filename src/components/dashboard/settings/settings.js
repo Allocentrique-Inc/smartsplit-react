@@ -11,10 +11,47 @@ import ProfilePlaceholder from '../../../icons/profilePlaceholder';
 import patchUser from '../../../api/users/patchUser';
 import getUsers from '../../../api/users/getUsers';
 import { loadObjToAnother } from '../../../utils';
-import translations from '../../../translations';
+import useForm from '../../_/form/useForm';
 
 export default function Settings(props) {
   const { user } = props;
+  const form = useForm({
+    avatar: {
+      value: '',
+      errors: [],
+    },
+    firstName: { value: '', errors: [] },
+    lastName: { value: '', errors: [] },
+    artistName: { value: '', errors: [] },
+    projects: { value: [], errors: [] },
+    address: { value: '', errors: [] },
+    locale: { value: '', errors: [] },
+    phoneNumber: { value: '', errors: [] },
+    emails: { value: [], errors: [] },
+    organisations: { value: [], errors: [] },
+    professionalIdentity: {
+      value: {
+        ids: [],
+        public: false,
+      },
+      errors: [],
+    },
+    birthDate: { value: '', errors: [] },
+    isni: { value: '', errors: [] },
+    uri: { value: '', errors: [] },
+    notifications: {
+      value: {
+        generalInteractions: ['email'],
+        administrativeMessages: ['email'],
+        accountLogin: [],
+        smartsplitBlog: [],
+        smartsplitPromotions: [],
+        partnerPromotions: [],
+      },
+      errors: [],
+    },
+  });
+
   const [profile, setProfile] = useState({
     avatar: '',
     firstName: '',
@@ -101,13 +138,8 @@ export default function Settings(props) {
 
   const commonProps = {
     ...props,
-    profile,
-    account,
-    professionalIdentity,
-    notifications,
-    setField,
-    updateUser,
-    translations: translations.settings,
+    form,
+    updateUser: () => {},
   };
   return (
     <div className="settings">
@@ -159,10 +191,10 @@ export default function Settings(props) {
         </div>*/}
         <div className="colRight">
           <Profile {...commonProps} />
-          <Account {...commonProps} />
-          <ProfessionalIdentity {...commonProps} />
-          <Notifications {...commonProps} />
-          <Security {...commonProps} />
+          {/*<Account {...commonProps} />*/}
+          {/*<ProfessionalIdentity {...commonProps} />*/}
+          {/*<Notifications {...commonProps} className="toDo" />*/}
+          {/*<Security {...commonProps} />*/}
         </div>
       </main>
     </div>

@@ -45,7 +45,7 @@ export default (props) => {
       excluded: true,
     },
     termsChecked: {
-      value: false,
+      value: true,
       errors: [],
       validators: ['shouldBeTrue'],
       excluded: true,
@@ -199,7 +199,11 @@ export default (props) => {
           placeholder={t_confirm_password_placeholder}
         />
       </FormInput>
-      <FormInput errors={form.fields.termsChecked.errors} {...commonProps}>
+      <FormInput
+        errors={form.fields.termsChecked.errors}
+        {...commonProps}
+        className="toDo"
+      >
         <Checkbox
           checked={form.fields.termsChecked.value}
           onChange={form.handlers.termsChecked}
@@ -208,14 +212,15 @@ export default (props) => {
       </FormInput>
 
       <div className="buttons">
+        <button onClick={handleSubmit} className="btn-primary">
+          {t_button}
+        </button>
         <Checkbox
+          className="toDo"
           checked={stayConnected}
           onChange={() => setStayConnected(!stayConnected)}
           label={t_stay_logged_checkbox}
         />
-        <button onClick={handleSubmit} className="btn-primary">
-          {t_button}
-        </button>
       </div>
     </div>
   );
