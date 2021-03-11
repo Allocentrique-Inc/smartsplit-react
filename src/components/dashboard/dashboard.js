@@ -15,15 +15,16 @@ const Dashboard = (props) => {
   const [apiErrors, setApiErrors] = useState([]);
   const user_id = localStorage.getItem('user_id');
   const refreshUser = async () => {
+    props.setIsLoaded(false);
     const user = await getUsers({ user_id });
     setUser(user);
+    props.setIsLoaded(true);
   };
   useEffect(() => {
     refreshUser();
   }, []);
   const language = (user && user.locale) || 'fr';
   const toggleLanguage = async () => {
-    console.log('ARE WE HERE');
     const newLanguage = language === 'fr' ? 'en' : 'fr';
     await patchUser({ locale: newLanguage, user_id });
     await refreshUser();
@@ -42,20 +43,22 @@ const Dashboard = (props) => {
     refreshUser,
   };
   return (
-    <Switch>
-      <Route path="/workpiece/:workpiece_id">
-        <Workpiece {...props} {...commonProps} />
-      </Route>
-      <Route path="/settings">
-        <Settings {...props} {...commonProps} />
-      </Route>
-      <Route path="/testing">
-        <Testing {...props} {...commonProps} />
-      </Route>
-      <Route path="/">
-        <Workpieces {...props} {...commonProps} />
-      </Route>
-    </Switch>
+    <>
+      <Switch>
+        <Route path="/workpiece/:workpiece_id">
+          <Workpiece {...props} {...commonProps} />
+        </Route>
+        <Route path="/settings">
+          <Settings {...props} {...commonProps} />
+        </Route>
+        <Route path="/testing">
+          <Testing {...props} {...commonProps} />
+        </Route>
+        <Route path="/">
+          <Workpieces {...props} {...commonProps} />
+        </Route>
+      </Switch>
+    </>
   );
 };
 

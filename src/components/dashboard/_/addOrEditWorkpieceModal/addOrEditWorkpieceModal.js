@@ -35,6 +35,7 @@ export default function WorkpieceModal(props) {
   const isAdding = workpiece_id === null;
   const handleConfirm = async () => {
     if (form.isValid()) {
+      props.setIsLoaded(false);
       const result = isAdding
         ? await postWorkpiece(form.toJS())
         : await patchWorkpiece({ workpiece_id, ...form.toJS() });
