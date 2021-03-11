@@ -1,0 +1,191 @@
+.paymentModal{
+  .modal{
+    width:650px;
+    .topBar {
+      height: 110px;
+      position: relative;
+
+      .btn-icon {
+        align-self: flex-start
+      }
+    }
+    .downBar{
+      position:relative;
+    }
+
+    .topBarContent{
+      width:100%
+    }
+    .content{
+      height:60vh;
+      h3{
+        margin-bottom:1em
+      }
+    }
+
+  }
+  .paymentSteps{
+    margin-top:5px;
+    display:flex;
+    .step{
+      flex-grow: 0;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width:80px;
+      .stepCircle{
+        background:#ccc;
+        color:#999;
+        width:40px;
+        height:40px;
+        border-radius:20px;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+      }
+      .stepCircle.active{
+        background:map-get($colors, 'action');
+        color:map-get($colors,'primary_reversed')
+      }
+      .stepLabel{
+        font-size:11px;
+        text-align:center;
+        color:#ccc
+      }
+      .stepLabel.active{
+        color:#000
+      }
+
+    }
+    .interStep{
+      position:relative;
+      flex-grow:1;
+      transform: translateY(-60%);
+      border-bottom:1px solid #ccc;
+    }
+    .interStep.active{
+      border-color:map-get($colors, 'action');
+    }
+  }
+  .splashModal{
+    position:relative;
+    .btn-icon{
+      position:absolute;
+      right:10px;
+      top:10px
+    }
+
+  }
+  .splashContent{
+    display:flex;
+    flex-direction: column;
+  }
+  .splashImage{
+    max-height:40vh;
+    overflow:hidden;
+  }
+  .splashProductInfo{
+    padding:1em;
+    h5{
+      //styleName: Interface/Small-700-Caps;
+      color:map-get($colors, 'action');
+      font-size: 14px;
+      text-transform: uppercase;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 16px;
+      letter-spacing: 0.5px;
+      text-align: left;
+
+    }
+    h3{
+      //styleName: Heading/3;
+      //font-family: IBM Plex Sans;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 32px;
+      letter-spacing: 0px;
+      text-align: left;
+
+    }
+
+    p{
+      //styleName: Interface/Medium-400;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px;
+      letter-spacing: 0px;
+      text-align: left;
+
+    }
+  }
+  .productImage{
+    width:100%;
+    height:auto;
+  }
+  .downBar.splash{
+    box-shadow: none;
+  }
+  .item-row{
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    margin-bottom:10px;
+  }
+  .item-image{
+    flex-grow:0;
+    flex-basis:30%;
+    img{
+     width:100%
+    }
+  }
+  .item-description{
+    flex-grow:1;
+    flex-basis:60%;
+    padding:0 20px;
+  }
+  .item-price{
+    font-weight:700;
+    text-align:right;
+
+  }
+  .addressBox{
+    border:1px solid #999;
+    padding:1em;
+    position:relative;
+    .btn-icon{
+      position:absolute;
+      right:20px;
+      top:20px;
+    }
+  }
+  .addressForm {
+
+    p{display:flex; margin-bottom:0.3em}
+    label {
+       display:block;
+      width: 150px;
+      text-align:right;
+      padding-right:10px;
+    }
+  }
+  .hline {
+    height:1px;
+    width:100%;
+    border-bottom:1px solid #ccc
+  }
+  .successStep{
+    h3,h2{color:map-get($colors, 'action');}
+  }
+  .loadingStep{
+    height:50vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+}

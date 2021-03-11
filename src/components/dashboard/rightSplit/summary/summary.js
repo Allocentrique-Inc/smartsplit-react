@@ -5,6 +5,7 @@ import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
 import Consult from '../consult/consult';
 import X from '../../../../icons/x';
 import AdjustEmails from './adjustEmails/adjustEmails';
+import PaymentModal from '../../_/payments/PaymentModal';
 
 const Summary = (props) => {
   const history = useHistory();
@@ -202,33 +203,42 @@ const DraftRightSplit = (props) => {
 
 const AcceptedRightSplit = (props) => {
   const versionIndex = props.workpiece.rightSplit.version;
+  const productCode = 'RIGHT_SPLIT_DOWNLOAD';
+  const [showPaymentModal, setShowPaymentModal] = useState();
+  const modalProps = {
+    productCode,
+    ...props,
+    setShowModal: setShowPaymentModal,
+  };
   return (
-    <div
-      className="rightSplit"
-      style={{ marginBottom: '8px' }}
-      onClick={() => props.setConsulting(props.workpiece.rightSplit)}
-    >
-      <div className="title">{`Version ${versionIndex}`}</div>
-      <div className="details">
-        Créé par
-        <span className="artistName">
-          {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-        </span>
-        {/* il y a ------- */}
-      </div>
-      <div className="b1">
-        {/* <div className="collaborators" /> */}
-        <div />
-        <div className="status acceptedStatus">Accepté</div>
-      </div>
-      <div className="border" />
-      <button
-        // onClick={props.handleConsultBtn}
-        disabled
+    <>
+      <div
+        className="rightSplit"
+        style={{ marginBottom: '8px' }}
+        onClick={() => props.setConsulting(props.workpiece.rightSplit)}
       >
-        Téléchargé l'entente
-      </button>
-    </div>
+        <div className="title">{`Version ${versionIndex}`}</div>
+        <div className="details">
+          Créé par
+          <span className="artistName">
+            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
+          </span>
+          {/* il y a ------- */}
+        </div>
+        <div className="b1">
+          {/* <div className="collaborators" /> */}
+          <div />
+          <div className="status acceptedStatus">Accepté</div>
+        </div>
+        <div className="border" />
+        <button
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowPaymentModal(true); }}
+        >
+          Télécharger l'entente
+        </button>
+      </div>
+      {showPaymentModal && <PaymentModal {...modalProps} />}
+    </>
   );
 };
 

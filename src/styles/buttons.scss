@@ -36,8 +36,15 @@
 }
 
 .btn-disabled {
+  @extend .btn;
   color: map-get($colors, 'tertiary');
   background-color: map-get($colors-background, 'hell');
+  border:none;
+}
+.btn-disabled-small {
+  @extend .btn-disabled, .small-700;
+  padding: 4px 8px;
+  height: 24px;
 }
 
 .btn-secondary {
