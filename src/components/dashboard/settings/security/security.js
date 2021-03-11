@@ -30,7 +30,7 @@ export default function Security(props) {
           {translations.security.changePasswordModal._action[language]}
         </button>
       </div>
-      <div className="formInput">
+      <div className="formInput toDo">
         <label htmlFor="deleteAccountBtn">
           {translations.security.deleteAccountModal._label[language]}
         </label>

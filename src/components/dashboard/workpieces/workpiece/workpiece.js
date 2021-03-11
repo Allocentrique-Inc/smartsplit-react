@@ -31,7 +31,7 @@ const Workpiece = (props) => {
 
       <div className="right">
         <Action {...commonProps} />
-        <Ellipsis {...commonProps} />
+        {props.tab === 'owner' && <Ellipsis {...commonProps} />}
       </div>
     </div>
   );

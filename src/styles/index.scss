@@ -44,7 +44,7 @@ body {
 
 .toDo {
   background-color: map-get($colors, 'wip');
-  display: none;
+  display: none !important;
 }
 .profileMenu {
   outline: 0;

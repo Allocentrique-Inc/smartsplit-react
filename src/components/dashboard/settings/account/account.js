@@ -38,7 +38,7 @@ export default function Account(props) {
           </option>
         </select>
       </div>
-      <div className="formInput phoneNumber">
+      <div className="formInput phoneNumber toDo">
         <label htmlFor="phoneNumber">
           {translations.fields.phoneNumber._label[language]}
         </label>

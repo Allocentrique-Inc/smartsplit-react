@@ -31,10 +31,15 @@ const ProfileOptions = (props) => {
       }
     }, 0);
   };
-  const handleCloseProfileOptions = () => {
+  const handleCloseProfileOptions = async () => {
     setTimeout(() => {
       setShowProfileOptions(false);
     }, 200);
+  };
+
+  const handleToggleLanguage = () => {
+    setShowProfileOptions(false);
+    props.toggleLanguage();
   };
 
   const t_settings = translations.general.profileOptions._settings[language];
@@ -48,7 +53,7 @@ const ProfileOptions = (props) => {
           onBlur={handleCloseProfileOptions}
           id="profileMenu1"
         >
-          <div className="menuItem" onClick={props.toggleLanguage}>
+          <div className="menuItem" onClick={handleToggleLanguage}>
             {t_language}
           </div>
           <div className="menuItem" onClick={handleSettingsBtn}>
