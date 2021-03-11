@@ -17,9 +17,9 @@ export default function Settings(props) {
   const { user } = props;
   const form = useForm(
     {
-      firstName: { value: '', errors: [] },
-      lastName: { value: '', errors: [] },
-      artistName: { value: '', errors: [] },
+      firstName: { value: '', errors: [], validators: ['required'] },
+      lastName: { value: '', errors: [], validators: ['required'] },
+      artistName: { value: '', errors: [], validators: ['required'] },
       projects: { value: [], errors: [] },
       address: { value: '', errors: [] },
       locale: { value: '', errors: [] },
@@ -51,35 +51,13 @@ export default function Settings(props) {
     true,
   );
 
-  const [account, setAccount] = useState({
-    address: '',
-    locale: '',
-    phoneNumber: '',
-    emails: [],
-  });
-  const [professionalIdentity, setProfessionalIdentity] = useState({
-    organisations: [],
-    professionalIdentity: {
-      ids: [],
-      public: false,
-    },
-    birthDate: '',
-    isni: '',
-    uri: '',
-  });
-  const [notifications, setNotifications] = useState({
-    generalInteractions: ['email'],
-    administrativeMessages: ['email'],
-    accountLogin: [],
-    smartsplitBlog: [],
-    smartsplitPromotions: [],
-    partnerPromotions: [],
-  });
+  const [triedSubmit, setTriedSubmit] = useState(false);
   const updateUser = async () => {
     if (form.isValid()) {
       await patchUser({ user_id: user.user_id, ...form.toJS() });
       props.refreshUser();
     }
+    setTriedSubmit(true);
   };
 
   useEffect(() => {
@@ -93,6 +71,7 @@ export default function Settings(props) {
     ...props,
     form,
     updateUser,
+    triedSubmit,
   };
   return (
     <div className="settings">
@@ -144,8 +123,8 @@ export default function Settings(props) {
         </div>*/}
         <div className="colRight">
           <Profile {...commonProps} />
-          {/*<Account {...commonProps} />*/}
-          {/*<ProfessionalIdentity {...commonProps} />*/}
+          <Account {...commonProps} />
+          <ProfessionalIdentity {...commonProps} />
           {/*<Notifications {...commonProps} className="toDo" />*/}
           {/*<Security {...commonProps} />*/}
         </div>

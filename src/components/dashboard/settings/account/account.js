@@ -1,70 +1,80 @@
 import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 import PhoneNumber from '../../../_/form/phoneNumber/phoneNumber';
+import FormInput from '../../../_/form/formInput/formInput';
 
 export default function Account(props) {
-  const { account, setField, updateUser, translations, language } = props;
+  const { form, updateUser, translations, language, triedSubmit } = props;
+
+  const commonProps = {
+    language,
+    triedSubmit,
+  };
+
+  const t_h2 = translations.settings.titles._account[language];
+  const t_address_label = translations.settings.fields.address._label[language];
+  const t_locale_label = translations.settings.fields.locale._label[language];
+  const t_locale_french =
+    translations.settings.fields.locale.options._french[language];
+  const t_locale_english =
+    translations.settings.fields.locale.options._english[language];
+  const t_phone_number_label =
+    translations.settings.fields.phoneNumber._label[language];
+  const t_emails_label = translations.settings.fields.emails._label[language];
   return (
     <div className="account" id="account">
-      <h2>{translations.titles._account[language]}</h2>
-      <div className="formInput">
-        <label htmlFor="address">
-          {translations.fields.address._label[language]}
-        </label>
+      <h2>{t_h2}</h2>
+      <FormInput errors={form.fields.address.errors} {...commonProps}>
+        <label htmlFor="address">{t_address_label}</label>
         <input
           id="address"
           type="text"
-          value={account.address}
-          onChange={(e) => setField('account', { address: e.target.value })}
+          value={form.fields.address.value}
+          onChange={form.handlers.address}
           onBlur={updateUser}
         />
-      </div>
-      <div className="formInput locale">
-        <label htmlFor="locale">
-          {translations.fields.locale._label[language]}
-        </label>
+      </FormInput>
+      <FormInput errors={form.fields.locale.errors} {...commonProps}>
+        <label htmlFor="locale">{t_locale_label}</label>
         <select
           id="locale"
-          value={account.locale}
-          onChange={(e) => {
-            setField('account', { locale: e.target.value });
-          }}
+          value={form.fields.locale.value}
+          onChange={form.handlers.locale}
           onBlur={updateUser}
         >
-          <option value="fr">
-            {translations.fields.locale.options._french[language]}
-          </option>
-          <option value="en">
-            {translations.fields.locale.options._english[language]}
-          </option>
+          <option value="fr">{t_locale_french}</option>
+          <option value="en">{t_locale_english}</option>
         </select>
-      </div>
-      <div className="formInput phoneNumber toDo">
-        <label htmlFor="phoneNumber">
-          {translations.fields.phoneNumber._label[language]}
-        </label>
+      </FormInput>
+
+      <FormInput
+        errors={form.fields.phoneNumber.errors}
+        {...commonProps}
+        className="toDo"
+      >
+        {' '}
+        <label htmlFor="phoneNumber">{t_phone_number_label}</label>
         <PhoneNumber
           id="phoneNumber"
           type="text"
-          value={account.phoneNumber}
-          onChange={(value) =>
-            setField('account', {
-              phoneNumber: value,
-            })
-          }
+          value={form.fields.phoneNumber.value}
+          onChange={form.handlers.phoneNumber}
           onBlur={updateUser}
         />
-      </div>
-      <div className="formInput toDo">
-        <label htmlFor="emails">
-          {translations.fields.emails._label[language]}
-        </label>
+      </FormInput>
+
+      <FormInput
+        errors={form.fields.emails.errors}
+        {...commonProps}
+        className="toDo"
+      >
+        <label htmlFor="emails">{t_emails_label}</label>
         <MultiSelect
           id="emails"
-          value={account.emails}
-          onChange={(value) => setField('account', { emails: value })}
+          value={form.fields.emails.value}
+          onChange={form.handlers.emails}
           onBlur={updateUser}
         />
-      </div>
+      </FormInput>
     </div>
   );
 }

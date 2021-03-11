@@ -52,7 +52,8 @@ export default function useForm(iniFields = {}, dirtyMode = false) {
       fieldsToValidate = fields;
     }
     const result = validate(fieldsToValidate);
-    setFields({ ...fieldsToValidate });
+    console.log('RESULT', result, fieldsToValidate);
+    setFields({ ...fields, ...fieldsToValidate });
     return result;
   };
   const reset = () => setFields(iniFields);

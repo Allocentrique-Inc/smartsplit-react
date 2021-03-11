@@ -1,86 +1,95 @@
 import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 import ProIdSelect from './_/proIdSelect/proIdSelect';
+import FormInput from '../../../_/form/formInput/formInput';
 
 export default function ProfessionalIdentity(props) {
-  const {
-    professionalIdentity,
-    setField,
-    updateUser,
-    translations,
+  const { form, updateUser, translations, language, triedSubmit } = props;
+
+  const commonProps = {
     language,
-  } = props;
+    triedSubmit,
+  };
+  const t_h2 = translations.settings.titles._professionalIdentity[language];
+  const t_organisations_label =
+    translations.settings.fields.organisations._label[language];
+  const t_professional_identity_label =
+    translations.settings.fields.professionalIdentity._label[language];
+  const t_birth_date_label =
+    translations.settings.fields.birthDate._label[language];
+  const t_birth_date_placeholder =
+    translations.settings.fields.birthDate._placeholder[language];
+  const t_isni_label = translations.settings.fields.isni._label[language];
+  const t_uri_label = translations.settings.fields.uri._label[language];
+  const t_uri_placeholder =
+    translations.settings.fields.uri._placeholder[language];
   return (
     <div className="professionalIdentity" id="professional-identity">
-      <h2>{translations.titles._professionalIdentity[language]}</h2>
-      <div className="formInput toDo">
-        <label htmlFor="organisations">
-          {translations.fields.organisations._label[language]}
-        </label>
+      <h2>{t_h2}</h2>
+
+      <FormInput
+        errors={form.fields.organisations.errors}
+        {...commonProps}
+        className="toDo"
+      >
+        <label htmlFor="organisations">{t_organisations_label}</label>
         <MultiSelect
           id="organisations"
-          value={professionalIdentity.organisations}
-          onChange={(value) =>
-            setField('professionalIdentity', { organisations: value })
-          }
+          value={form.fields.organisations.value}
+          onChange={form.handlers.organisations}
           onBlur={updateUser}
         />
-      </div>
-      <div className="formInput toDo">
+      </FormInput>
+      <FormInput
+        errors={form.fields.professionalIdentity.errors}
+        {...commonProps}
+        className="toDo"
+      >
         <label htmlFor="professionalIdentity">
-          Mes identifiants professionnels
+          {t_professional_identity_label}
         </label>
         <ProIdSelect
           id="professionalIdentity"
-          value={professionalIdentity.professionalIdentity}
-          onChange={(value) =>
-            setField('professionalIdentity', { professionalIdentity: value })
-          }
+          value={form.fields.professionalIdentity.value}
+          onChange={form.handlers.professionalIdentity}
           onBlur={updateUser}
         />
-      </div>
-      <div className="formInput birthDate">
-        <label htmlFor="birthDate">
-          {translations.fields.birthDate._label[language]}
-        </label>
+      </FormInput>
+      <FormInput errors={form.fields.birthDate.errors} {...commonProps}>
+        <label htmlFor="birthDate">{t_birth_date_label}</label>
         <input
-          id="birthDate"
           type="date"
-          value={professionalIdentity.birthDate}
-          onChange={(e) =>
-            setField('professionalIdentity', { birthDate: e.target.value })
-          }
+          id="birthDate"
+          value={form.fields.birthDate.value}
+          onChange={form.handlers.birthDate}
           onBlur={updateUser}
-          placeholder={translations.fields.birthDate._placeholder[language]}
+          placeholder={t_birth_date_placeholder}
         />
-      </div>
-      <div className="formInput isni">
-        <label htmlFor="isni">
-          {translations.fields.isni._label[language]}
-        </label>{' '}
+      </FormInput>
+      <FormInput
+        errors={form.fields.isni.errors}
+        {...commonProps}
+        className="isni"
+      >
+        <label htmlFor="isni">{t_isni_label}</label>
         <input
           id="isni"
           type="text"
-          value={professionalIdentity.isni}
-          onChange={(e) =>
-            setField('professionalIdentity', { isni: e.target.value })
-          }
+          value={form.fields.isni.value}
+          onChange={form.handlers.isni}
           onBlur={updateUser}
-          placeholder={translations.fields.isni._placeholder[language]}
         />
-      </div>
-      <div className="formInput">
-        <label htmlFor="uri">{translations.fields.uri._label[language]}</label>{' '}
+      </FormInput>
+      <FormInput errors={form.fields.uri.errors} {...commonProps}>
+        <label htmlFor="uri">{t_uri_label}</label>
         <input
           id="uri"
           type="text"
-          value={professionalIdentity.uri}
-          onChange={(e) =>
-            setField('professionalIdentity', { uri: e.target.value })
-          }
+          value={form.fields.uri.value}
+          onChange={form.handlers.uri}
           onBlur={updateUser}
-          placeholder={translations.fields.uri._placeholder[language]}
+          placeholder={t_uri_placeholder}
         />
-      </div>
+      </FormInput>
     </div>
   );
 }

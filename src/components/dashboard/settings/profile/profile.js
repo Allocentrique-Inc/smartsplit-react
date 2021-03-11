@@ -1,8 +1,15 @@
 import ReactHtmlParser from 'react-html-parser';
 import MultiSelect from '../../../_/form/multiSelect/multiSelect';
+import FormInput from '../../../_/form/formInput/formInput';
 
 export default function Profile(props) {
-  const { form, updateUser, translations, language } = props;
+  const { form, updateUser, translations, language, triedSubmit } = props;
+
+  const commonProps = {
+    language,
+    triedSubmit,
+  };
+
   const t_h2 = translations.settings.titles._profile[language];
   const t_first_name_label =
     translations.settings.fields.firstName._label[language];
@@ -33,7 +40,7 @@ export default function Profile(props) {
     <div className="profile" id="profile">
       <h2>{t_h2}</h2>
       <div className="row">
-        <div className="formInput">
+        <FormInput errors={form.fields.firstName.errors} {...commonProps}>
           <label htmlFor="firstName">{t_first_name_label}</label>
           <input
             type="text"
@@ -44,8 +51,8 @@ export default function Profile(props) {
             placeholder={t_first_name_placeholder}
           />
           <div className="hint">{t_first_name_hint}</div>
-        </div>
-        <div className="formInput">
+        </FormInput>
+        <FormInput errors={form.fields.lastName.errors} {...commonProps}>
           <label htmlFor="lastName">{t_last_name_label}</label>
           <input
             type="text"
@@ -56,9 +63,9 @@ export default function Profile(props) {
             placeholder={t_last_name_placeholder}
           />
           <div className="hint">{t_last_name_hint}</div>
-        </div>
+        </FormInput>
       </div>
-      <div className="formInput">
+      <FormInput errors={form.fields.artistName.errors} {...commonProps}>
         <label htmlFor="artistName">{t_artist_name_label}</label>
         <input
           type="text"
@@ -69,8 +76,12 @@ export default function Profile(props) {
           placeholder={t_artist_name_placeholder}
         />
         <div className="hint">{t_artist_name_hint}</div>
-      </div>
-      <div className="formInput toDo">
+      </FormInput>
+      <FormInput
+        errors={form.fields.artistName.errors}
+        {...commonProps}
+        className="toDo"
+      >
         <label htmlFor="projects">{t_projects_label}</label>
         <MultiSelect
           id="projects"
@@ -79,7 +90,7 @@ export default function Profile(props) {
           onBlur={updateUser}
           placeholder={t_projects_placeholder}
         />
-      </div>
+      </FormInput>
     </div>
   );
 }
