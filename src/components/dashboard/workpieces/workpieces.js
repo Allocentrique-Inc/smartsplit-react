@@ -24,14 +24,17 @@ const Workpieces = (props) => {
     if (firstLoad && workpiecesByOwner.length === 0) {
       setTab('rightHolder');
     }
+    props.setIsLoaded(true);
   };
   const resetWorkpiecesByRightHolder = async () => {
     const workpiecesByRightHolder = await getWorkpiecesByRightHolder({
       user_id,
     });
     setWorkpiecesByRightHolder(workpiecesByRightHolder);
+    props.setIsLoaded(true);
   };
   const resetData = async (params) => {
+    props.setIsLoaded(false);
     const firstLoad = params && params.firstLoad;
     resetWorkpiecesByOwner(firstLoad);
     resetWorkpiecesByRightHolder();
@@ -40,6 +43,15 @@ const Workpieces = (props) => {
   useEffect(() => {
     resetData({ firstLoad: true });
   }, []);
+
+  const t_pageTitle = {
+    fr: 'Mes pièces musicales',
+    en: 'My Workpieces',
+  }[props.language];
+  const t_addButton = {
+    fr: 'Ajouter',
+    en: 'Add',
+  }[props.language];
 
   const commonProps = {
     ...props,
@@ -51,7 +63,7 @@ const Workpieces = (props) => {
   return (
     <div className="workpieces">
       {showModal && <AddOrEditWorkpieceModal {...commonProps} />}
-      <LeftMenu />
+      <LeftMenu {...commonProps} />
       <div className="rightContent">
         <div className="topBar">
           {/* <div className="searchBar" /> */}
@@ -61,9 +73,9 @@ const Workpieces = (props) => {
 
         <div className="content">
           <div className="titleRow">
-            <div className="title">Mes pièces musicales</div>
+            <div className="title">{t_pageTitle}</div>
             <button className="btn-primary" onClick={() => setShowModal(true)}>
-              Ajouter
+              {t_addButton}
             </button>
           </div>
           <SelectPerspective {...props} {...commonProps} />

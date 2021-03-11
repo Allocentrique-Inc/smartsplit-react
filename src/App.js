@@ -10,6 +10,7 @@ import Dashboard from './components/dashboard/dashboard';
 import Public from './components/public/public';
 import check from './api/auth/check';
 import './styles/index.scss';
+import Loading from './components/_/loading/loading';
 
 function App() {
   return (
@@ -29,22 +30,28 @@ function App() {
 const LoadingManager = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+  const [isLogChecked, setIsLogChecked] = useState(false);
   const resetLogginCheck = async () => {
     const checkResult = await check();
     const isLogged = checkResult.statusCode !== 401;
     setIsLogged(isLogged);
-    setIsLoaded(true);
+    setIsLogChecked(true);
   };
   useEffect(() => {
     resetLogginCheck();
   });
+  const commonProps = {
+    ...props,
+    setIsLoaded,
+    isLoaded,
+  };
   return (
     <>
-      {!isLoaded && 'LOADING'}
-      {isLoaded && isLogged && (
-        <Dashboard {...props} resetLogginCheck={resetLogginCheck} />
+      {(!isLoaded || !isLogged) && <Loading />}
+      {isLogChecked && isLogged && (
+        <Dashboard {...commonProps} resetLogginCheck={resetLogginCheck} />
       )}
-      {isLoaded && !isLogged && <Redirect to="/login" />}
+      {isLogChecked && !isLogged && <Redirect to="/login" />}
     </>
   );
 };

@@ -27,22 +27,27 @@ const Workpiece = (props) => {
     resetData();
   }, [props.selectedWorkpiece]);
 
-  if (!workpiece) {
-    return null;
-  }
+  useEffect(() => {
+    if (workpiece) {
+      props.setIsLoaded(true);
+    } else {
+      props.setIsLoaded(false);
+    }
+  }, [workpiece]);
+
   return (
     <>
       <Route path="/workpiece/:workpiece_id/right-split/">
-        <RightSplit {...commonProps} />
+        {workpiece && <RightSplit {...commonProps} />}
       </Route>
       <Route path="/workpiece/:workpiece_id/documentation/">
-        <Documentation {...commonProps} />
+        {workpiece && <Documentation {...commonProps} />}
       </Route>
       <Route path="/workpiece/:workpiece_id/" exact>
-        <Orientation {...commonProps} />
+        {workpiece && <Orientation {...commonProps} />}
       </Route>
       <Route path="/workpiece/:workpiece_id/protect/">
-        <div>PROTEXT</div>
+        <div>PROTECT</div>
       </Route>
     </>
   );

@@ -1,12 +1,9 @@
 import { useParams, useHistory } from 'react-router-dom';
-import { useState } from 'react';
 import ChevronRight from '../../../../../icons/chevron-right';
-import ChevronDown from '../../../../../icons/chevronDown';
 import SongPlaceholder from '../../../../../icons/songPlaceholder';
 import ProfileOptions from '../../../_/profileOptions/profileOptions';
 
 const TopBar = (props) => {
-  const [showUserMenu, setShowUserMenu] = useState(false);
   const history = useHistory();
   const { workpiece_id } = useParams();
 
@@ -20,8 +17,9 @@ const TopBar = (props) => {
   const handleSaveAndQuit = async () => {
     props.setTriedSubmit(true);
     if (flowErrors.length === 0) {
-      await props.saveRightSplit();
+      props.setIsLoaded(false);
       history.push(`/workpiece/${workpiece_id}`);
+      await props.saveRightSplit();
     }
   };
 

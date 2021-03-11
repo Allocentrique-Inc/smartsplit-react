@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import Tile from './tile/tile';
 import PenIcon from '../../../icons/pen';
@@ -25,10 +25,18 @@ const Orientation = (props) => {
     props.workpiece.owner.lastName &&
     `${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName}`;
 
+  const t_createdBy_ = {
+    fr: 'créé par',
+    en: 'created by',
+  }[props.language];
+  const t_tasks = {
+    fr: 'Tâches',
+    en: 'Tasks',
+  }[props.language];
+
   const handleEditWorkpiece = () => setIsEditingWorkpiece(true);
   const handleSelectTask = () => setTab('task');
   const taskTabClassName = `tab ${tab === 'task' ? 'selectedTab' : ''}`;
-  if (!props.workpiece) return null;
 
   const commonProps = {
     ...props,
@@ -78,7 +86,7 @@ const Orientation = (props) => {
                   </button>
                 </div>
                 <div className="details">
-                  {t_createdBy && 'créé par'}
+                  {t_createdBy && t_createdBy_}
                   <span className="artistName">{t_createdBy}</span>
                 </div>
               </div>
@@ -88,7 +96,7 @@ const Orientation = (props) => {
           {/** TOP BAR SECTION THREE */}
           <div className="b3">
             <button className={taskTabClassName} onClick={handleSelectTask}>
-              Taches
+              {t_tasks}
             </button>
             <span className="space" />
           </div>

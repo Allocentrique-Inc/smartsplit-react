@@ -6,6 +6,11 @@ import Tool from '../../../../icons/tool';
 const LeftMenu = (props) => {
   const history = useHistory();
   const selected = 'alfa';
+
+  const t_workpieces = {
+    fr: 'Mes pièces musicales',
+    en: 'My workpieces',
+  }[props.user.locale];
   return (
     <div className="leftMenu">
       <div className="logo">
@@ -18,7 +23,7 @@ const LeftMenu = (props) => {
         <span className="buttonLogo">
           <Music />
         </span>
-        Mes pièces musicales
+        {t_workpieces}
       </button>
 
       {/*<button
