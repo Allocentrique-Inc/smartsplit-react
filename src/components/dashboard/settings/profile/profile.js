@@ -32,12 +32,6 @@ export default function Profile(props) {
   return (
     <div className="profile" id="profile">
       <h2>{t_h2}</h2>
-      <input
-        value={form.fields.avatar.value}
-        className="toDo"
-        onChange={form.handlers.avatar}
-        onBlur={updateUser}
-      />
       <div className="row">
         <div className="formInput">
           <label htmlFor="firstName">{t_first_name_label}</label>

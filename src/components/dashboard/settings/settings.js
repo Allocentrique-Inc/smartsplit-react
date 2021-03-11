@@ -16,10 +16,6 @@ import useForm from '../../_/form/useForm';
 export default function Settings(props) {
   const { user } = props;
   const form = useForm({
-    avatar: {
-      value: '',
-      errors: [],
-    },
     firstName: { value: '', errors: [] },
     lastName: { value: '', errors: [] },
     artistName: { value: '', errors: [] },
@@ -120,20 +116,11 @@ export default function Settings(props) {
     }
   };
 
-  const mapData = async () => {
-    loadObjToAnother(user, profile);
-    setProfile({ ...profile });
-    loadObjToAnother(user, account);
-    if (user.mobilePhone) {
-      account.phoneNumber = user.mobilePhone.number;
-    }
-    setAccount({ ...account });
-    loadObjToAnother(user, professionalIdentity);
-    setProfessionalIdentity({ ...professionalIdentity });
-    setNotifications(user.notifications);
-  };
   useEffect(() => {
-    mapData();
+    form.loadFields({
+      ...user,
+      phoneNumber: user.mobilePhone.number,
+    });
   }, []);
 
   const commonProps = {
