@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import X from '../../../../icons/x';
-import getUsers from '../../../../api/users/getUsers';
-import getProducts from '../../../../api/payments/getProducts';
 import PaymentSteps from './PaymentSteps';
-import ProductImage from '../../../../assets/entente.png';
-import getPromoCode from '../../../../api/payments/getPromoCode';
 import PromoCodeStep from './steps/PromoCodeStep';
 import SplashStep from './steps/SplashStep';
 import BillingAddressStep from './steps/BillingAddressStep';
