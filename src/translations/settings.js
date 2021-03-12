@@ -129,7 +129,7 @@ export default {
       },
       _placeholder: {
         fr: 'Nom de famille usuel',
-        en: 'Usual first _label(s)',
+        en: 'Usual first Name(s)',
       },
       _hint: {
         fr: 'Exemple: <i>Ciccone</i>',
@@ -143,7 +143,7 @@ export default {
       },
       _placeholder: {
         fr: "Entre ton nom d'artiste",
-        en: 'Artist _label',
+        en: 'Artist Name',
       },
       _hint: {
         fr:

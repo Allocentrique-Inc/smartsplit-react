@@ -51,12 +51,22 @@ export default function useForm(iniFields = {}, dirtyMode = false) {
     } else {
       fieldsToValidate = fields;
     }
+    if (Object.keys(fieldsToValidate).length === 0) {
+      return false;
+    }
     const result = validate(fieldsToValidate);
-    console.log('RESULT', result, fieldsToValidate);
     setFields({ ...fields, ...fieldsToValidate });
     return result;
   };
   const reset = () => setFields(iniFields);
+  const cleanFields = () => {
+    Object.keys(fields).forEach((fieldName) => {
+      if (fields[fieldName].isDirty) {
+        console.log('coucou');
+        fields[fieldName].isDirty = false;
+      }
+    });
+  };
   const loadFields = (values) => {
     Object.entries(values).forEach(([key, value]) => {
       if (fields[key]) {
@@ -79,5 +89,6 @@ export default function useForm(iniFields = {}, dirtyMode = false) {
     isValid,
     reset,
     loadFields,
+    cleanFields,
   };
 }

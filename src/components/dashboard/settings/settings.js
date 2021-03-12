@@ -55,6 +55,7 @@ export default function Settings(props) {
   const updateUser = async () => {
     if (form.isValid()) {
       await patchUser({ user_id: user.user_id, ...form.toJS() });
+      form.cleanFields();
       props.refreshUser();
     }
     setTriedSubmit(true);
