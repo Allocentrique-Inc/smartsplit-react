@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import postWorkpiece from '../../../../api/workpieces/postWorkpiece';
 import patchWorkpiece from '../../../../api/workpieces/patchWorkpiece';
 import uploadDocFile from '../../../../api/workpieces/uploadFile';
@@ -9,17 +10,19 @@ import FormInput from '../../../_/form/formInput/formInput';
 import EditCoverImage from '../coverImage/EditCoverImage';
 
 export default function WorkpieceModal(props) {
+  console.log(props);
   const {
     setShowModal,
     resetData,
     workpiece_id = null,
     language,
     translations,
+    workpiece,
   } = props;
   const history = useHistory();
   const form = useForm({
     title: {
-      value: '',
+      value: workpiece ? workpiece.title : '',
       errors: [],
       validators: ['required'],
     },
@@ -55,10 +58,10 @@ export default function WorkpieceModal(props) {
           'public',
           (progress) => { console.log(progress); },
         );
-        console.log(response);
+        //console.log(response);
       }
       setShowModal(false);
-      resetData();
+      document.location.reload();
       if (isAdding) {
         if (result && result.workpiece_id) {
           history.push(`/workpiece/${result.workpiece_id}`);
@@ -69,17 +72,6 @@ export default function WorkpieceModal(props) {
   };
   const handleCoverImageSave = async (imageData, blob) => {
     setImgBlob(blob);
-    if (!isAdding) {
-      const file = new File(imgBlob, 'canvas-image.png');
-      const response = await uploadDocFile(
-        workpiece_id,
-        file,
-        'art',
-        'public',
-        (progress) => { console.log(progress); },
-      );
-      console.log(response);
-    }
   };
   const commonProps = {
     language,
@@ -125,7 +117,7 @@ export default function WorkpieceModal(props) {
             </FormInput>
             <div className="formInput">
               <label>Cover Image</label>
-              <EditCoverImage mode={!isAdding || imgBlob ? 'edit' : 'create'} onSave={handleCoverImageSave} />
+              <EditCoverImage mode={!isAdding || imgBlob ? 'edit' : 'create'} onSave={handleCoverImageSave} {...props} />
             </div>
             <div className="formInput toDo">
               <label htmlFor="type">Cette oeuvre est...</label>

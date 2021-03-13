@@ -28,7 +28,7 @@ export async function uploadDocFile(
       xhr.responseType;
       resolve(xhr.response);
     };
-    xhr.addEventListener('readystatechange', () => {
+    xhr.addEventListener('readystatechange', function rsch() {
       if (this.readyState === 4) {
         console.log(xhr.responseText);
       }
@@ -65,8 +65,11 @@ export async function uploadDocFile(
     // prepare a file object
     //const files = document.querySelector("[name=file]").files
     const formData = new FormData();
-    formData.append('file', file.file, file.file.name);
+    console.log(file);
     formData.append('visibility', visibility);
+    formData.append('file',
+      file.file ? file.file : file,
+      file.file ? file.file.name : file.name);
 
     // send request
     xhr.send(formData);

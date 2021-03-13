@@ -22,7 +22,7 @@ const Workpiece = (props) => {
     <div className="workpiece">
       <div className="left">
         <div className="img">
-          <CoverImage className="small" {...props} />
+          <CoverImage className="small" workpiece={props} />
         </div>
         <div className="details">
           <div className="b1">

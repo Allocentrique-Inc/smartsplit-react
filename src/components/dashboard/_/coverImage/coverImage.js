@@ -3,7 +3,9 @@ import SongPlaceholder from '../../../../icons/songPlaceholder';
 import Config from '../../../../config';
 
 const CoverImage = (props) => {
-  const { workpiece, className, imgData } = props;
+  console.log(props);
+  const { workpiece, className, imgData, artFiles } = props;
+  console.log(artFiles);
   const sizes = {
     large: 128,
     medium: 72,
@@ -20,10 +22,10 @@ const CoverImage = (props) => {
         (workpiece
           && workpiece.documentation
           && workpiece.documentation.files
-          && workpiece.files.documentation.art
-          && workpiece.files.documentation.art.length
+          && workpiece.documentation.files.art
+          && workpiece.documentation.files.art.length
           // eslint-disable-next-line jsx-a11y/img-redundant-alt
-          ? <img src={workpiece.documentation.files.art[0].url} alt="cover image" />
+          ? <img data-version={artFiles ? artFiles.length : workpiece.documentation.files.art.length} src={Config.apiUrl + workpiece.documentation.files.art[workpiece.documentation.files.art.length - 1].url} alt="cover image" />
           : <SongPlaceholder size={imageSize} />)
       }
 

@@ -44,6 +44,7 @@ const Orientation = (props) => {
     ...props,
     workpiece_id,
   };
+  console.log(props);
   return (
     <div className="orientation">
       {/** EDIT WORKPIECE MODAL */}
@@ -77,7 +78,7 @@ const Orientation = (props) => {
           {/** TOP BAR SECTION TWO */}
           <div className="b2">
             <div className="left">
-              <CoverImage className="medium" />
+              <CoverImage {...props} className="medium" artFiles={props.workpiece.documentation.files.art} />
               <div className="description">
                 <div className="title">
                   {props.workpiece.title}
