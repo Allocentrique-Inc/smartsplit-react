@@ -5,13 +5,12 @@ import X from '../../../../icons/x';
 import Slider from '../../../_/form/slider/Slider';
 
 const PictureEditModal = (props) => {
-  const { setVisible, shape, size, onSave, onClose } = props;
-  const [saving, setSaving] = useState();
+  const { shape, size, onSave, onClose, hiRes } = props;
   const [zoom, setZoom] = useState(150);
   const [file, setFile] = useState(null);
   const editorRef = useRef();
   const handleSave = () => {
-    const canvas = editorRef.current.getImageScaledToCanvas();
+    const canvas = hiRes ? editorRef.current.getImage() : editorRef.current.getImageScaledToCanvas();
     console.log(canvas.toDataURL());
     onSave(canvas.toDataURL());
     onClose();
@@ -60,7 +59,6 @@ const PictureEditModal = (props) => {
             <h4>Edit Profile Picture</h4>
             <button
               className="btn-icon"
-              disabled={saving}
               onClick={handleClose}
             >
               <X />
@@ -108,6 +106,7 @@ PictureEditModal.propTypes = {
   size: PropTypes.number,
   onSave: PropTypes.func,
   onClose: PropTypes.func.isRequired,
+  hiRes: PropTypes.bool,
 };
 PictureEditModal.defaultProps = {
   shape: 'square',
@@ -115,6 +114,7 @@ PictureEditModal.defaultProps = {
   onSave: (imgUrl) => {
     console.log('PictureEditorModal: no save function provided -- noop');
   },
+  hiRes: false,
 
 };
 export default PictureEditModal;
