@@ -8,7 +8,7 @@ const Avatar = (props) => {
   const hasImage = user.avatarUrl;
   return (
     <div className={`avatar ${className}`} title={user.fullName}>
-      {hasImage && <img src={Config.apiUrl + user.avatarUrl} alt={user.fullName} />}
+      {hasImage && <img src={user.avatar ? user.avatar : Config.apiUrl + user.avatarUrl} alt={user.fullName} />}
       {!hasImage && <div className="avatar-placeholder"><span>{initials}</span></div>}
     </div>
   );
