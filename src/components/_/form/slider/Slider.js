@@ -60,7 +60,7 @@ const Slider = (props) => {
     };
   }, [sliderBar.current, value]);
   return (
-    <div className="slider">
+    <div className="slider" onMouseMove={dragMove} onMouseUp={dragStop}>
       {leftLabel && <div className="slider-left-label">{leftLabel}</div>}
       <div className="slider-bar" ref={sliderBar}>
         <div className="slider-handle" style={{ left }} onMouseDown={dragStart} onMouseMove={dragMove} onMouseUp={dragStop} />
