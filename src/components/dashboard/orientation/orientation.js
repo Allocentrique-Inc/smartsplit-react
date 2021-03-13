@@ -78,7 +78,7 @@ const Orientation = (props) => {
           {/** TOP BAR SECTION TWO */}
           <div className="b2">
             <div className="left">
-              <CoverImage {...props} className="medium" artFiles={props.workpiece.documentation.files.art} />
+              <CoverImage coverImage={props.coverImage} className="medium" />
               <div className="description">
                 <div className="title">
                   {props.workpiece.title}

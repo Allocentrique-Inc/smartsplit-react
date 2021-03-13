@@ -8,12 +8,17 @@ import Documentation from '../documentation/documentation';
 const Workpiece = (props) => {
   const { workpiece_id } = useParams();
   const [workpiece, setWorkpiece] = useState('');
-
+  const [coverImage, setCoverImage] = useState();
   const resetData = async () => {
     const incomingWorkpiece = await getWorkpiece({
       workpiece_id,
     });
     setWorkpiece(incomingWorkpiece);
+    if (incomingWorkpiece.documentation.files.art.length) {
+      setCoverImage(
+        incomingWorkpiece.documentation.files.art[incomingWorkpiece.documentation.files.art.length - 1].url,
+      );
+    }
   };
 
   const commonProps = {
@@ -21,6 +26,8 @@ const Workpiece = (props) => {
     workpiece,
     resetData,
     workpiece_id,
+    coverImage,
+    setCoverImage,
   };
 
   useEffect(() => {

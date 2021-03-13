@@ -18,6 +18,7 @@ export default function WorkpieceModal(props) {
     language,
     translations,
     workpiece,
+    setCoverImage,
   } = props;
   const history = useHistory();
   const form = useForm({
@@ -58,10 +59,13 @@ export default function WorkpieceModal(props) {
           'public',
           (progress) => { console.log(progress); },
         );
+        console.log(response.url);
+        setCoverImage(response.url);
         //console.log(response);
       }
       setShowModal(false);
-      document.location.reload();
+      resetData();
+      //document.location.reload();
       if (isAdding) {
         if (result && result.workpiece_id) {
           history.push(`/workpiece/${result.workpiece_id}`);
