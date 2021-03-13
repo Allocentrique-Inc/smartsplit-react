@@ -5,6 +5,7 @@ import patchWorkpiece from '../../../../api/workpieces/patchWorkpiece';
 import X from '../../../../icons/x';
 import useForm from '../../../_/form/useForm';
 import FormInput from '../../../_/form/formInput/formInput';
+import EditCoverImage from '../coverImage/EditCoverImage';
 
 export default function WorkpieceModal(props) {
   const {
@@ -91,6 +92,10 @@ export default function WorkpieceModal(props) {
               />
               <div className="hint">{t_title_hint}</div>
             </FormInput>
+            <div className="formInput">
+              <label>Cover Image</label>
+              <EditCoverImage mode={isAdding ? 'create' : 'edit'} />
+            </div>
             <div className="formInput toDo">
               <label htmlFor="type">Cette oeuvre est...</label>
               <div className="radioGroup" id="type">

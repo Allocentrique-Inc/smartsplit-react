@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import Action from './action/action';
-import SongPlaceholder from '../../../../icons/songPlaceholder';
 import VertEllipsis from '../../../../icons/vertEllipsis';
-import CoverImage from '../_/coverImage/coverImage';
+import CoverImage from '../../_/coverImage/coverImage';
 
 const Workpiece = (props) => {
   const t_by = {
@@ -78,4 +77,5 @@ const Ellipsis = (props) => {
     </span>
   );
 };
+
 export default Workpiece;

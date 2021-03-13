@@ -7,8 +7,8 @@ import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkp
 import Collaborators from './collaborators/collaborators';
 import SongPlaceholder from '../../../icons/songPlaceholder';
 import ProfileOptions from '../_/profileOptions/profileOptions';
-import EditCoverImage from '../workpieces/_/coverImage/EditCoverImage';
-import CoverImage from '../workpieces/_/coverImage/coverImage';
+import EditCoverImage from '../_/coverImage/EditCoverImage';
+import CoverImage from '../_/coverImage/coverImage';
 
 const Orientation = (props) => {
   const [tab, setTab] = useState('task');
