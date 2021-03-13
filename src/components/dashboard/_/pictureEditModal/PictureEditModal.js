@@ -1,15 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
 import ReactAvatarEditor from 'react-avatar-editor';
-import X from '../../../../../icons/x';
-import Slider from '../../../../_/form/slider/Slider';
+import PropTypes from 'prop-types';
+import X from '../../../../icons/x';
+import Slider from '../../../_/form/slider/Slider';
 
-const AvatarEditModal = (props) => {
-  const { setEditing } = props;
+const PictureEditModal = (props) => {
+  const { setVisible, shape, size, onSave, onClose } = props;
   const [saving, setSaving] = useState();
   const [zoom, setZoom] = useState(150);
   const [file, setFile] = useState(null);
-  const [canvas, setCanvas] = useState();
   const editorRef = useRef();
+  const handleSave = () => {
+    const canvas = editorRef.current.getImageScaledToCanvas();
+    console.log(canvas.toDataURL());
+    onSave(canvas.toDataURL());
+    onClose();
+  };
   const handleFilesSelection = (e) => {
     if (e.target.files.length) setFile(e.target.files[0]);
   };
@@ -35,7 +41,7 @@ const AvatarEditModal = (props) => {
   };
 
   const handleClose = () => {
-    setEditing(false);
+    onClose();
   };
 
   useEffect(() => {
@@ -47,7 +53,7 @@ const AvatarEditModal = (props) => {
     }
   }, [editorRef, file]);
   return (
-    <div className="avatarModal">
+    <div className="picture-edit-modal">
       <div className="modalBackground">
         <div className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="topBar">
@@ -68,9 +74,9 @@ const AvatarEditModal = (props) => {
                   <div className="editor-container">
                     <ReactAvatarEditor
                       image={file}
-                      width={200}
-                      height={200}
-                      borderRadius={100}
+                      width={size}
+                      height={size}
+                      borderRadius={shape.toLowerCase() === 'circle' ? size / 2 : 0}
                       scale={zoom / 100}
                       ref={editorRef}
                     />
@@ -90,11 +96,25 @@ const AvatarEditModal = (props) => {
 
           <div className="downBar">
             <button className="btn-secondary" onClick={handleClose}>cancel</button>
-            <button className={file ? 'btn-primary' : 'btn-disabled'} disabled={!file}>Crop and Save</button>
+            <button className={file ? 'btn-primary' : 'btn-disabled'} disabled={!file} onClick={handleSave}>Crop and Save</button>
           </div>
         </div>
       </div>
     </div>
   );
 };
-export default AvatarEditModal;
+PictureEditModal.propTypes = {
+  shape: PropTypes.oneOf(['square', 'circle']),
+  size: PropTypes.number,
+  onSave: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
+};
+PictureEditModal.defaultProps = {
+  shape: 'square',
+  size: 200,
+  onSave: (imgUrl) => {
+    console.log('PictureEditorModal: no save function provided -- noop');
+  },
+
+};
+export default PictureEditModal;

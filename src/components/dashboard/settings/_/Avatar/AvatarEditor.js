@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import Avatar from '../../../_/avatar/avatar';
 import Pen from '../../../../../icons/pen';
-import AvatarEditModal from './AvatarEditModal';
+import PictureEditModal from '../../../_/pictureEditModal/PictureEditModal';
+import patchUser from '../../../../../api/users/patchUser';
 
 const AvatarEditor = (props) => {
   const { user, setUser } = props;
@@ -12,11 +13,17 @@ const AvatarEditor = (props) => {
   };
   const modalProps = {
     ...props,
-    setEditing,
+    shape: 'circle',
+    onClose: () => { setEditing(false); },
+    onSave: async (imgData) => {
+      const updatedUser = { ...user, avatar: imgData };
+      const userResponse = patchUser(updatedUser);
+      setUser({ ...updatedUser, avatarUrl: userResponse.avatarUrl });
+    },
   };
   return (
     <div className="avatar-editor">
-      {editing && <AvatarEditModal {...modalProps} />}
+      {editing && <PictureEditModal {...modalProps} />}
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
       <Avatar className="medium" user={user} /><button className="btn-icon" onClick={handleEditClick}><Pen /></button>
     </div>
