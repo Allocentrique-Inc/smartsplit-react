@@ -17,7 +17,9 @@ import PlusCircle from '../../../../icons/plusCircleFull';
  * @constructor
  */
 const EditCoverImage = (props) => {
-  const [editing, setEditing, onSave, mode, workpiece] = useState();
+  const { onSave, mode, workpiece } = props;
+  const [editing, setEditing] = useState();
+  const [imageData, setImageData] = useState();
   const handleEdit = () => {
     setEditing(true);
   };
@@ -25,16 +27,17 @@ const EditCoverImage = (props) => {
     setEditing(false);
   };
   const handleSave = (imgData) => {
+    setImageData(imgData);
     onSave(imgData);
   };
-
+  console.log(mode);
   return (
     <>
       {editing &&
         <PictureEditModal onClose={handleClose} onSave={handleSave} shape="square" hiRes />
       }
       <div className="edit-cover-image">
-        <CoverImage {...props} className="medium" />
+        <CoverImage {...props} className="medium" imgData={imageData} />
         {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
         <button className="btn-icon" onClick={handleEdit}>{
           mode === 'create'

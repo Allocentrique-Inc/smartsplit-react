@@ -32,8 +32,10 @@ const CoverImage = (props) => {
 };
 CoverImage.propTypes = {
   className: PropTypes.string,
+  imgData: PropTypes.oneOfType([PropTypes.array, null]),
 };
 CoverImage.defaultProps = {
   className: 'small',
+  imgData: null,
 };
 export default CoverImage;

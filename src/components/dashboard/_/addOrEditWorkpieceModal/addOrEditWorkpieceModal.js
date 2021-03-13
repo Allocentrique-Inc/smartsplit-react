@@ -33,6 +33,7 @@ export default function WorkpieceModal(props) {
     version: '',
   });
   const [composer, setComposer] = useState('');
+  const [imgData, setImgData] = useState(null);
   const isAdding = workpiece_id === null;
   const handleConfirm = async () => {
     if (form.isValid()) {
@@ -40,6 +41,9 @@ export default function WorkpieceModal(props) {
       const result = isAdding
         ? await postWorkpiece(form.toJS())
         : await patchWorkpiece({ workpiece_id, ...form.toJS() });
+      if (imgData) {
+        // save image
+      }
       setShowModal(false);
       resetData();
       if (isAdding) {
@@ -50,7 +54,9 @@ export default function WorkpieceModal(props) {
     }
     setTriedSubmit(true);
   };
-
+  const handleCoverImageSave = (imageData) => {
+    setImgData(imageData);
+  };
   const commonProps = {
     language,
     errorTranslations: translations.publicPages.formErrors,
@@ -71,6 +77,7 @@ export default function WorkpieceModal(props) {
     translations.workpieces.workpieceModal.downBar.submit[
       isAdding ? '_create' : '_edit'
     ][language];
+  console.log(isAdding);
   return (
     <div className="workpieceModal">
       <div className="modalBackground" onClick={() => setShowModal(false)}>
@@ -94,7 +101,7 @@ export default function WorkpieceModal(props) {
             </FormInput>
             <div className="formInput">
               <label>Cover Image</label>
-              <EditCoverImage mode={isAdding ? 'create' : 'edit'} />
+              <EditCoverImage mode={!isAdding || imgData ? 'edit' : 'create'} onSave={handleCoverImageSave} />
             </div>
             <div className="formInput toDo">
               <label htmlFor="type">Cette oeuvre est...</label>
