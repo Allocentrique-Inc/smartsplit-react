@@ -5,16 +5,21 @@ import X from '../../../../icons/x';
 import Slider from '../../../_/form/slider/Slider';
 
 const PictureEditModal = (props) => {
-  const { shape, size, onSave, onClose, hiRes } = props;
+  const { shape, size, onSave, onClose, hiRes, format } = props;
   const [zoom, setZoom] = useState(150);
   const [file, setFile] = useState(null);
+  const [saving, setSaving] = useState(false);
   const editorRef = useRef();
-  const handleSave = () => {
+  const handleSave = async () => {
+    setSaving(true);
     // if hiRes is true, get the cropped image at the original resolution
     const canvas = hiRes ? editorRef.current.getImage() : editorRef.current.getImageScaledToCanvas();
-    console.log(canvas.toDataURL());
-    onSave(canvas.toDataURL());
-    onClose();
+
+    canvas.toBlob((blob) => {
+      onSave(canvas.toDataURL(), blob);
+      setSaving(false);
+      onClose();
+    });
   };
   const handleFilesSelection = (e) => {
     if (e.target.files.length) setFile(e.target.files[0]);
@@ -95,7 +100,7 @@ const PictureEditModal = (props) => {
 
           <div className="downBar">
             <button className="btn-secondary" onClick={handleClose}>cancel</button>
-            <button className={file ? 'btn-primary' : 'btn-disabled'} disabled={!file} onClick={handleSave}>Crop and Save</button>
+            <button className={file && !saving ? 'btn-primary' : 'btn-disabled'} disabled={!file || saving} onClick={handleSave}>{saving ? 'Saving...' : 'Crop and Save'}</button>
           </div>
         </div>
       </div>

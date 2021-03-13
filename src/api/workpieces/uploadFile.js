@@ -28,7 +28,7 @@ export async function uploadDocFile(
       xhr.responseType;
       resolve(xhr.response);
     };
-    xhr.addEventListener('readystatechange', function () {
+    xhr.addEventListener('readystatechange', () => {
       if (this.readyState === 4) {
         console.log(xhr.responseText);
       }
@@ -72,3 +72,4 @@ export async function uploadDocFile(
     xhr.send(formData);
   });
 }
+export default uploadDocFile;

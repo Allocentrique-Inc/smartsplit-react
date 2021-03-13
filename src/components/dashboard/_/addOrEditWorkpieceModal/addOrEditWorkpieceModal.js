@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import postWorkpiece from '../../../../api/workpieces/postWorkpiece';
 import patchWorkpiece from '../../../../api/workpieces/patchWorkpiece';
+import uploadDocFile from '../../../../api/workpieces/uploadFile';
 import X from '../../../../icons/x';
 import useForm from '../../../_/form/useForm';
 import FormInput from '../../../_/form/formInput/formInput';
@@ -33,7 +34,7 @@ export default function WorkpieceModal(props) {
     version: '',
   });
   const [composer, setComposer] = useState('');
-  const [imgData, setImgData] = useState(null);
+  const [imgBlob, setImgBlob] = useState(null);
   const isAdding = workpiece_id === null;
   const handleConfirm = async () => {
     if (form.isValid()) {
@@ -41,8 +42,20 @@ export default function WorkpieceModal(props) {
       const result = isAdding
         ? await postWorkpiece(form.toJS())
         : await patchWorkpiece({ workpiece_id, ...form.toJS() });
-      if (imgData) {
+      if (imgBlob) {
         // save image
+
+        const id = result.workpiece_id;
+        //console.log(imgBlob);
+        const file = new File([imgBlob], 'canvas-image.png');
+        const response = await uploadDocFile(
+          id,
+          file,
+          'art',
+          'public',
+          (progress) => { console.log(progress); },
+        );
+        console.log(response);
       }
       setShowModal(false);
       resetData();
@@ -54,8 +67,19 @@ export default function WorkpieceModal(props) {
     }
     setTriedSubmit(true);
   };
-  const handleCoverImageSave = (imageData) => {
-    setImgData(imageData);
+  const handleCoverImageSave = async (imageData, blob) => {
+    setImgBlob(blob);
+    if (!isAdding) {
+      const file = new File(imgBlob, 'canvas-image.png');
+      const response = await uploadDocFile(
+        workpiece_id,
+        file,
+        'art',
+        'public',
+        (progress) => { console.log(progress); },
+      );
+      console.log(response);
+    }
   };
   const commonProps = {
     language,
@@ -101,7 +125,7 @@ export default function WorkpieceModal(props) {
             </FormInput>
             <div className="formInput">
               <label>Cover Image</label>
-              <EditCoverImage mode={!isAdding || imgData ? 'edit' : 'create'} onSave={handleCoverImageSave} />
+              <EditCoverImage mode={!isAdding || imgBlob ? 'edit' : 'create'} onSave={handleCoverImageSave} />
             </div>
             <div className="formInput toDo">
               <label htmlFor="type">Cette oeuvre est...</label>

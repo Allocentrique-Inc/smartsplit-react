@@ -26,9 +26,9 @@ const EditCoverImage = (props) => {
   const handleClose = () => {
     setEditing(false);
   };
-  const handleSave = (imgData) => {
+  const handleSave = (imgData, blob) => {
     setImageData(imgData);
-    onSave(imgData);
+    onSave(imgData, blob);
   };
   console.log(mode);
   return (
