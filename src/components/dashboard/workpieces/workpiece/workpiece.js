@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Action from './action/action';
 import SongPlaceholder from '../../../../icons/songPlaceholder';
 import VertEllipsis from '../../../../icons/vertEllipsis';
+import CoverImage from '../_/coverImage/coverImage';
 
 const Workpiece = (props) => {
   const t_by = {
@@ -22,7 +23,7 @@ const Workpiece = (props) => {
     <div className="workpiece">
       <div className="left">
         <div className="img">
-          <SongPlaceholder />
+          <CoverImage className="small" {...props} />
         </div>
         <div className="details">
           <div className="b1">
