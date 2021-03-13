@@ -4,7 +4,7 @@ import colors from '../../../dashboard/rightSplit/_/colors';
 
 const Slider = (props) => {
   const handleWidth = 20;
-  const { value, setValue, range, leftLabel, rightLabel, decimalPlaces } = props;
+  const { value, setValue, range, leftLabel, rightLabel, decimalPlaces, className } = props;
   const min = range[0];
   const max = range[1];
   const [factor, setFactor] = useState();
@@ -60,7 +60,7 @@ const Slider = (props) => {
     };
   }, [sliderBar.current, value]);
   return (
-    <div className="slider" onMouseMove={dragMove} onMouseUp={dragStop}>
+    <div className={`slider ${className}`} onMouseMove={dragMove} onMouseUp={dragStop}>
       {leftLabel && <div className="slider-left-label">{leftLabel}</div>}
       <div className="slider-bar" ref={sliderBar}>
         <div className="slider-handle" style={{ left }} onMouseDown={dragStart} onMouseMove={dragMove} onMouseUp={dragStop} />

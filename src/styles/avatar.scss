@@ -47,9 +47,12 @@
 }
 .avatarModal {
   .modal{
-    width:480px
-
+    width:480px;
+    .content{
+    padding:0.5em 1em 1em !important;
   }
+  }
+
   .image-editor{
     min-height:300px;
     display:flex;
@@ -72,4 +75,7 @@
 
     }
   }
+}
+.avatar-slider {
+  margin-top:0.5em;
 }

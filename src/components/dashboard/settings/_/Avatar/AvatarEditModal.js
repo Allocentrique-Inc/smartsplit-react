@@ -13,30 +13,42 @@ const AvatarEditModal = (props) => {
   const handleFilesSelection = (e) => {
     if (e.target.files.length) setFile(e.target.files[0]);
   };
+  /**
+   * use the wheel events to zoom on the canvas ref we derive.
+   * for some reason the event does not scope with our state vars
+   * seems to need globals thus _av_zoom
+   *
+   * it's safe because we only use the modal one instance at a time
+   * so no conflicts
+   *
+   * @param e {MouseWheelEvent}
+   */
   const editorScrollHandler = (e) => {
     e.preventDefault();
     e.stopPropagation();
     console.log(e.deltaY);
-    window._ss_zoom -= e.deltaY;
-    console.log(window._ss_zoom);
-    if (window._ss_zoom < 100) window._ss_zoom = 100;
-    if (window._ss_zoom > 500) window._ss_zoom = 500;
-    setZoom(window._ss_zoom);
+    window._av_zoom -= e.deltaY;
+    console.log(window._av_zoom);
+    if (window._av_zoom < 100) window._av_zoom = 100;
+    if (window._av_zoom > 500) window._av_zoom = 500;
+    setZoom(window._av_zoom);
   };
+
+  const handleClose = () => {
+    setEditing(false);
+  };
+
   useEffect(() => {
     if (editorRef.current && editorRef.current.canvas) {
       console.dir(editorRef.current.canvas);
       //setCanvas(editorRef.current.canvas);
       editorRef.current.canvas.onwheel = editorScrollHandler;
-      window._ss_zoom = zoom;
+      window._av_zoom = zoom;
     }
   }, [editorRef, file]);
-  const handleClose = () => {
-    setEditing(false);
-  };
   return (
     <div className="avatarModal">
-      <div className="modalBackground" onClick={handleClose}>
+      <div className="modalBackground">
         <div className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="topBar">
             <h4>Edit Profile Picture</h4>
@@ -64,6 +76,7 @@ const AvatarEditModal = (props) => {
                     />
                   </div>
                   <Slider
+                    className="avatar-slider"
                     value={zoom}
                     setValue={setZoom}
                     leftLabel="zoom: "
@@ -73,6 +86,11 @@ const AvatarEditModal = (props) => {
               )}
 
             </div>
+          </div>
+
+          <div className="downBar">
+            <button className="btn-secondary" onClick={handleClose}>cancel</button>
+            <button className={file ? 'btn-primary' : 'btn-disabled'} disabled={!file}>Crop and Save</button>
           </div>
         </div>
       </div>
