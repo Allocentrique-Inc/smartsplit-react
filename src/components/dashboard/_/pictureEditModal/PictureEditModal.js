@@ -10,6 +10,7 @@ const PictureEditModal = (props) => {
   const [file, setFile] = useState(null);
   const editorRef = useRef();
   const handleSave = () => {
+    // if hiRes is true, get the cropped image at the original resolution
     const canvas = hiRes ? editorRef.current.getImage() : editorRef.current.getImageScaledToCanvas();
     console.log(canvas.toDataURL());
     onSave(canvas.toDataURL());

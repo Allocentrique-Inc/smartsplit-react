@@ -16,9 +16,10 @@ const AvatarEditor = (props) => {
     shape: 'circle',
     onClose: () => { setEditing(false); },
     onSave: async (imgData) => {
-      const updatedUser = { ...user, avatar: imgData };
-      const userResponse = patchUser(updatedUser);
-      setUser({ ...updatedUser, avatarUrl: userResponse.avatarUrl });
+      const updatedUser = { ...user, avatar: imgData.split(',', 2)[1] };
+      const userResponse = await patchUser(updatedUser);
+      console.log(userResponse);
+      setUser({ ...userResponse, avatar: imgData });
     },
   };
   return (
