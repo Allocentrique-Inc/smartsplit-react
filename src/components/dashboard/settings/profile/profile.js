@@ -1,4 +1,5 @@
 import ReactHtmlParser from 'react-html-parser';
+import AvatarEditor from '../_/Avatar/AvatarEditor';
 import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 import FormInput from '../../../_/form/formInput/formInput';
 
@@ -39,6 +40,7 @@ export default function Profile(props) {
   return (
     <div className="profile" id="profile">
       <h2>{t_h2}</h2>
+      <AvatarEditor {...props} />
       <div className="row">
         <FormInput errors={form.fields.firstName.errors} {...commonProps}>
           <label htmlFor="firstName">{t_first_name_label}</label>

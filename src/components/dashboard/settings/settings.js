@@ -12,6 +12,7 @@ import patchUser from '../../../api/users/patchUser';
 import getUsers from '../../../api/users/getUsers';
 import { loadObjToAnother } from '../../../utils';
 import useForm from '../../_/form/useForm';
+import Avatar from '../_/avatar/avatar';
 
 export default function Settings(props) {
   const { user } = props;
@@ -80,7 +81,7 @@ export default function Settings(props) {
         <Link to="/">
           <ArrowLeft />
         </Link>
-        <ProfilePlaceholder />
+        <Avatar className="small" user={user} />
       </div>
       <main className="row">
         {/*<div className="colLeft">
