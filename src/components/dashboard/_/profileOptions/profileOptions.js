@@ -2,16 +2,12 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ChevronDown from '../../../../icons/chevronDown';
 import disconnect from '../../../../api/auth/disconnect';
+import Avatar from '../avatar/avatar';
 
 const ProfileOptions = (props) => {
-  const { translations, language } = props;
+  const { translations, language, user } = props;
   const [showProfileOptions, setShowProfileOptions] = useState(false);
   const history = useHistory();
-  let t_initials;
-  if (props.user && props.user.firstName && props.user.lastName) {
-    const { firstName, lastName } = props.user;
-    t_initials = firstName[0] + lastName[0];
-  }
   const handleDisconnectBtn = () => {
     disconnect();
     props.resetLogginCheck();
@@ -65,9 +61,9 @@ const ProfileOptions = (props) => {
         </div>
       )}
       <div onClick={handleSetShowProfileOptions} className="profileOptions">
-        <div className="avatar">{t_initials}</div>
+        <Avatar className="tiny" user={user} />
         <div className="chevronDown">
-          <ChevronDown />
+          <ChevronDown style={showProfileOptions ? { transform: 'rotate(180deg)' } : { transform: 'none' }} />
         </div>
       </div>
     </div>

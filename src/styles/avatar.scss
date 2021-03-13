@@ -28,6 +28,11 @@
     height:40px;
     font-size:20px
   }
+  &.tiny{
+    width:24px;
+    height:24px;
+    font-size:12px;
+  }
   img{
     flex-grow:1;
     align-self: stretch;
