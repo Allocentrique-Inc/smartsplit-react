@@ -104,16 +104,13 @@ const PictureEditModal = (props) => {
 PictureEditModal.propTypes = {
   shape: PropTypes.oneOf(['square', 'circle']),
   size: PropTypes.number,
-  onSave: PropTypes.func,
+  onSave: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   hiRes: PropTypes.bool,
 };
 PictureEditModal.defaultProps = {
   shape: 'square',
   size: 200,
-  onSave: (imgUrl) => {
-    console.log('PictureEditorModal: no save function provided -- noop');
-  },
   hiRes: false,
 
 };
