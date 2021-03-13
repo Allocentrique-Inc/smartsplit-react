@@ -5,6 +5,7 @@ import AvatarEditModal from './AvatarEditModal';
 
 const AvatarEditor = (props) => {
   const { user, setUser } = props;
+  const [file, setFile] = useState();
   const [editing, setEditing] = useState();
   const handleEditClick = () => {
     setEditing(true);

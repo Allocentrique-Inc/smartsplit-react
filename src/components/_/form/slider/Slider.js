@@ -42,15 +42,13 @@ const Slider = (props) => {
 
   const sliderBar = createRef();
   useEffect(() => {
-    document.addEventListener('mouseUp', dragStop, { capture: true });
-    document.addEventListener('dragStop', dragStop, { capture: true });
     console.log(sliderBar);
     if (sliderBar.current) {
       if (sliderBar.current.offsetWidth) {
         if (value < min) setValue(min);
         if (value > max) setValue(max);
-        const width = sliderBar.current.offsetWidth;
-        const factor = (max - min - handleWidth) / width;
+        const width = sliderBar.current.offsetWidth - handleWidth;
+        const factor = (max - min) / width;
         const left = (value - min) / factor;
         console.log(`width: ${width} factor:${factor} left: ${left}`);
         setWidth(sliderBar.current.offsetWidth);
@@ -58,7 +56,9 @@ const Slider = (props) => {
         setLeft(left);
       }
     }
-  }, [sliderBar.current]);
+    return () => {
+    };
+  }, [sliderBar.current, value]);
   return (
     <div className="slider">
       {leftLabel && <div className="slider-left-label">{leftLabel}</div>}
@@ -69,6 +69,7 @@ const Slider = (props) => {
     </div>
   );
 };
+
 Slider.propTypes = {
   leftLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   rightLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
