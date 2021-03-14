@@ -21,6 +21,7 @@ const AvatarEditor = (props) => {
       console.log(userResponse);
       setUser({ ...userResponse, avatar: imgData });
     },
+    title: 'Edit Profile Image',
   };
   return (
     <div className="avatar-editor">

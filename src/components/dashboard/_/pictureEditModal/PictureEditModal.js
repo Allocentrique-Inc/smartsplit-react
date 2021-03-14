@@ -5,7 +5,7 @@ import X from '../../../../icons/x';
 import Slider from '../../../_/form/slider/Slider';
 
 const PictureEditModal = (props) => {
-  const { shape, size, onSave, onClose, hiRes, format } = props;
+  const { shape, size, onSave, onClose, hiRes, title } = props;
   const [zoom, setZoom] = useState(150);
   const [file, setFile] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -62,7 +62,7 @@ const PictureEditModal = (props) => {
       <div className="modalBackground">
         <div className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="topBar">
-            <h4>Edit Profile Picture</h4>
+            <h4>{title}</h4>
             <button
               className="btn-icon"
               onClick={handleClose}
@@ -113,11 +113,13 @@ PictureEditModal.propTypes = {
   onSave: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   hiRes: PropTypes.bool,
+  title: PropTypes.string,
 };
 PictureEditModal.defaultProps = {
   shape: 'square',
   size: 200,
   hiRes: false,
+  title: 'Create / Edit Image',
 
 };
 export default PictureEditModal;

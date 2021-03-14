@@ -34,7 +34,7 @@ const EditCoverImage = (props) => {
   return (
     <>
       {editing &&
-        <PictureEditModal onClose={handleClose} onSave={handleSave} shape="square" />
+        <PictureEditModal onClose={handleClose} onSave={handleSave} shape="square" title="Edit Cover Image" />
       }
       <div className="edit-cover-image">
         <CoverImage imgData={imageData} coverImage={coverImage} className="medium" />
