@@ -13,7 +13,7 @@ const Slider = (props) => {
   const [left, setLeft] = useState(0);
   const dragStop = (e) => {
     if (isDragging) {
-      console.log('stopping');
+      //console.log('stopping');
       e.stopPropagation();
       setIsDragging(false);
     }
@@ -42,7 +42,7 @@ const Slider = (props) => {
 
   const sliderBar = createRef();
   useEffect(() => {
-    console.log(sliderBar);
+    //console.log(sliderBar);
     if (sliderBar.current) {
       if (sliderBar.current.offsetWidth) {
         if (value < min) setValue(min);
@@ -50,7 +50,7 @@ const Slider = (props) => {
         const width = sliderBar.current.offsetWidth - handleWidth;
         const factor = (max - min) / width;
         const left = (value - min) / factor;
-        console.log(`width: ${width} factor:${factor} left: ${left}`);
+        //console.log(`width: ${width} factor:${factor} left: ${left}`);
         setWidth(sliderBar.current.offsetWidth);
         setFactor(factor);
         setLeft(left);

@@ -19,7 +19,7 @@ const CoverImage = (props) => {
       {imgData ? <img src={imgData} alt="cover" /> :
         coverImage
         // eslint-disable-next-line jsx-a11y/img-redundant-alt
-          ? <img src={Config.apiUrl + coverImage} alt="cover image" />
+          ? <img src={coverImage} alt="cover image" />
           : <SongPlaceholder size={imageSize} />
       }
 

@@ -14,7 +14,7 @@ const login = async (payload) => {
     });
     const textResponse = await response.text();
     const parsedResponse = JSON.parse(textResponse);
-    console.log(parsedResponse);
+    //console.log(parsedResponse);
     return parsedResponse;
   } catch (err) {
     console.log(err);
