@@ -59,7 +59,7 @@ export default function WorkpieceModal(props) {
           'public',
           (progress) => { console.log(progress); },
         );
-        console.log(response.url);
+        console.log(response);
         setCoverImage(response.url);
         //console.log(response);
       }

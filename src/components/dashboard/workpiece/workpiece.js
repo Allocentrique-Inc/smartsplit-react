@@ -15,9 +15,11 @@ const Workpiece = (props) => {
     });
     setWorkpiece(incomingWorkpiece);
     if (incomingWorkpiece.documentation.files.art.length) {
+      const newUrl = incomingWorkpiece.documentation.files.art[incomingWorkpiece.documentation.files.art.length - 1].url;
       setCoverImage(
-        incomingWorkpiece.documentation.files.art[incomingWorkpiece.documentation.files.art.length - 1].url,
+        newUrl,
       );
+      console.log(newUrl);
     }
   };
 

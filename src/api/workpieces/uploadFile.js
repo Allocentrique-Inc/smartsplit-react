@@ -22,15 +22,16 @@ export async function uploadDocFile(
 
     // listen for `upload.load` event
     xhr.upload.onload = () => {
-      console.log(`The upload is completed: ${xhr.status} ${xhr.response}`);
+      /*console.log(`The upload is completed: ${xhr.status} ${xhr.response}`);
       console.log(xhr.response);
       console.log(xhr.responseText);
       xhr.responseType;
-      resolve(xhr.response);
+      resolve(xhr.response);*/
     };
     xhr.addEventListener('readystatechange', function rsch() {
       if (this.readyState === 4) {
         console.log(xhr.responseText);
+        resolve(JSON.parse(xhr.responseText));
       }
     });
 
