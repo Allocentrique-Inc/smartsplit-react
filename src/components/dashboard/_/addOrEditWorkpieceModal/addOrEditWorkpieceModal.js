@@ -1,23 +1,29 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import postWorkpiece from '../../../../api/workpieces/postWorkpiece';
 import patchWorkpiece from '../../../../api/workpieces/patchWorkpiece';
+import uploadDocFile from '../../../../api/workpieces/uploadFile';
 import X from '../../../../icons/x';
 import useForm from '../../../_/form/useForm';
 import FormInput from '../../../_/form/formInput/formInput';
+import EditCoverImage from '../coverImage/EditCoverImage';
 
 export default function WorkpieceModal(props) {
+  console.log(props);
   const {
     setShowModal,
     resetData,
     workpiece_id = null,
     language,
     translations,
+    workpiece,
+    setCoverImage,
   } = props;
   const history = useHistory();
   const form = useForm({
     title: {
-      value: '',
+      value: workpiece ? workpiece.title : '',
       errors: [],
       validators: ['required'],
     },
@@ -32,6 +38,7 @@ export default function WorkpieceModal(props) {
     version: '',
   });
   const [composer, setComposer] = useState('');
+  const [imgBlob, setImgBlob] = useState(null);
   const isAdding = workpiece_id === null;
   const handleConfirm = async () => {
     if (form.isValid()) {
@@ -39,8 +46,26 @@ export default function WorkpieceModal(props) {
       const result = isAdding
         ? await postWorkpiece(form.toJS())
         : await patchWorkpiece({ workpiece_id, ...form.toJS() });
+      if (imgBlob) {
+        // save image
+
+        const id = result.workpiece_id;
+        //console.log(imgBlob);
+        const file = new File([imgBlob], 'canvas-image.png');
+        const response = await uploadDocFile(
+          id,
+          file,
+          'art',
+          'public',
+          (progress) => { console.log(progress); },
+        );
+        console.log(response);
+        setCoverImage(response.url);
+        //console.log(response);
+      }
       setShowModal(false);
       resetData();
+      //document.location.reload();
       if (isAdding) {
         if (result && result.workpiece_id) {
           history.push(`/workpiece/${result.workpiece_id}`);
@@ -49,7 +74,9 @@ export default function WorkpieceModal(props) {
     }
     setTriedSubmit(true);
   };
-
+  const handleCoverImageSave = async (imageData, blob) => {
+    setImgBlob(blob);
+  };
   const commonProps = {
     language,
     errorTranslations: translations.publicPages.formErrors,
@@ -70,6 +97,7 @@ export default function WorkpieceModal(props) {
     translations.workpieces.workpieceModal.downBar.submit[
       isAdding ? '_create' : '_edit'
     ][language];
+  console.log(isAdding);
   return (
     <div className="workpieceModal">
       <div className="modalBackground" onClick={() => setShowModal(false)}>
@@ -91,6 +119,10 @@ export default function WorkpieceModal(props) {
               />
               <div className="hint">{t_title_hint}</div>
             </FormInput>
+            <div className="formInput">
+              <label>Cover Image</label>
+              <EditCoverImage mode={!isAdding || imgBlob ? 'edit' : 'create'} onSave={handleCoverImageSave} {...props} />
+            </div>
             <div className="formInput toDo">
               <label htmlFor="type">Cette oeuvre est...</label>
               <div className="radioGroup" id="type">

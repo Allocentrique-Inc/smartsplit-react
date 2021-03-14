@@ -7,6 +7,8 @@ import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkp
 import Collaborators from './collaborators/collaborators';
 import SongPlaceholder from '../../../icons/songPlaceholder';
 import ProfileOptions from '../_/profileOptions/profileOptions';
+import EditCoverImage from '../_/coverImage/EditCoverImage';
+import CoverImage from '../_/coverImage/coverImage';
 
 const Orientation = (props) => {
   const [tab, setTab] = useState('task');
@@ -42,6 +44,7 @@ const Orientation = (props) => {
     ...props,
     workpiece_id,
   };
+  console.log(props);
   return (
     <div className="orientation">
       {/** EDIT WORKPIECE MODAL */}
@@ -75,9 +78,7 @@ const Orientation = (props) => {
           {/** TOP BAR SECTION TWO */}
           <div className="b2">
             <div className="left">
-              <div className="image">
-                <SongPlaceholder size={72} />
-              </div>
+              <CoverImage coverImage={props.coverImage} className="medium" />
               <div className="description">
                 <div className="title">
                   {props.workpiece.title}
