@@ -50,5 +50,7 @@ module.exports = {
     'object-curly-newline': 'off',
     'prefer-destructuring': 'off',
     'jsx-a11y/no-noninteractive-tabindex': 'off',
+    'jsx-a11y/control-has-associated-label': 'off',
+
   },
 };

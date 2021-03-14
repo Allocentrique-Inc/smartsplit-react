@@ -3,10 +3,13 @@ import ReactAvatarEditor from 'react-avatar-editor';
 import PropTypes from 'prop-types';
 import X from '../../../../icons/x';
 import Slider from '../../../_/form/slider/Slider';
+import RotateCounterClockwise from '../../../../icons/rotate-counter-clockwise';
+import RotateClockwise from '../../../../icons/rotate-clockwise';
 
 const PictureEditModal = (props) => {
   const { shape, size, onSave, onClose, hiRes, title } = props;
   const [zoom, setZoom] = useState(150);
+  const [rotation, setRotation] = useState(0);
   const [file, setFile] = useState(null);
   const [saving, setSaving] = useState(false);
   const editorRef = useRef();
@@ -82,6 +85,7 @@ const PictureEditModal = (props) => {
                       height={size}
                       borderRadius={shape.toLowerCase() === 'circle' ? size / 2 : 0}
                       scale={zoom / 100}
+                      rotate={rotation}
                       ref={editorRef}
                     />
                   </div>
@@ -92,6 +96,23 @@ const PictureEditModal = (props) => {
                     leftLabel="zoom: "
                     range={[100, 500]}
                   />
+                  <div className="rotate-button-container">
+                    <label>Rotate:</label>
+                    <button
+                      className="btn-primary-small"
+                      style={{ width: '30px', marginLeft: '0.5em' }}
+                      onClick={() => { setRotation((rotation - 90 < -360) ? -90 : rotation - 90); }}
+                    >
+                      <RotateCounterClockwise color="#fff" />
+                    </button>
+                    <button
+                      className="btn-primary-small"
+                      style={{ width: '30px', marginLeft: '0.5em' }}
+                      onClick={() => { setRotation((rotation + 90 > 360) ? 90 : rotation + 90); }}
+                    >
+                      <RotateClockwise color="#fff" />
+                    </button>
+                  </div>
                 </>
               )}
 
@@ -101,6 +122,7 @@ const PictureEditModal = (props) => {
           <div className="downBar">
             <button className="btn-secondary" onClick={handleClose}>cancel</button>
             <button className={file && !saving ? 'btn-primary' : 'btn-disabled'} disabled={!file || saving} onClick={handleSave}>{saving ? 'Saving...' : 'Crop and Save'}</button>
+
           </div>
         </div>
       </div>
