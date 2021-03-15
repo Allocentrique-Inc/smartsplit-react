@@ -1,51 +1,101 @@
 import { useHistory } from 'react-router-dom';
 
-const getTitle = (tileId) => {
-  switch (tileId) {
-    case 'share':
-      return 'Partage tes droits';
-    case 'document':
-      return 'Documente ton oeuvre';
-    case 'protect':
-      return 'Protège ton oeuvre';
+const getTitle = (tileId, language) => {
+  switch (language) {
+    case 'fr': {
+      switch (tileId) {
+        case 'share':
+          return 'Partage tes droits';
+        case 'document':
+          return 'Documente ton oeuvre';
+        case 'protect':
+          return 'Protège ton oeuvre';
+        default:
+          return '---';
+      }
+    }
+    case 'en': {
+      switch (tileId) {
+        case 'share':
+          return '---';
+        case 'document':
+          return '---';
+        case 'protect':
+          return '---';
+        default:
+          return '---';
+      }
+    }
     default:
       return '---';
   }
 };
-const getDescription = (tileId) => {
-  switch (tileId) {
-    case 'share':
-      return "Crée les partages sur les droits à l'aide de notre guide.  Tu vas voir, c'est beaucoup plus simple que tu ne le crois :)";
-    case 'document':
-      return 'Rends totalement découvrable ton oeuvre aux yeux des moteurs de recherche pour augmenter ton auditoire.';
-    case 'protect':
-      return 'Associe dès aujourd’hui ton enregistrement sonore à ses ayant droits et laisse des traces indélébiles de ça sur une blockchain.';
+const getDescription = (tileId, language) => {
+  switch (language) {
+    case 'fr': {
+      switch (tileId) {
+        case 'share':
+          return "Crée les partages sur les droits à l'aide de notre guide.  Tu vas voir, c'est beaucoup plus simple que tu ne le crois :)";
+        case 'document':
+          return 'Rends totalement découvrable ton oeuvre aux yeux des moteurs de recherche pour augmenter ton auditoire.';
+        case 'protect':
+          return 'Associe dès aujourd’hui ton enregistrement sonore à ses ayant droits et laisse des traces indélébiles de ça sur une blockchain.';
+        default:
+          return '---';
+      }
+    }
+    case 'en': {
+      switch (tileId) {
+        case 'share':
+          return '---';
+        case 'document':
+          return '---';
+        case 'protect':
+          return '---';
+        default:
+          return '---';
+      }
+    }
     default:
       return '---';
   }
 };
 const getActionNameAndDestination = (props) => {
+  const t_start = {
+    fr: 'Commencer',
+    en: 'Start',
+  }[props.language];
+  const t_continue = {
+    fr: 'Continuer',
+    en: 'Continue',
+  }[props.language];
+  const t_consult = {
+    fr: 'Consulter',
+    en: 'Consult',
+  }[props.language];
+
   switch (props.tileId) {
     case 'share': {
-      const _state = props.workpiece
-        && props.workpiece.rightSplit
-        && props.workpiece.rightSplit._state;
+      const _state =
+        props.workpiece &&
+        props.workpiece.rightSplit &&
+        props.workpiece.rightSplit._state;
       switch (_state) {
         case undefined:
           return {
-            name: 'Commencer',
+            name: t_start,
             destination: `/workpiece/${props.workpiece_id}/right-split/copyright`,
             className: 'action start',
           };
         case 'draft':
           return {
-            name: 'Continuer',
+            name: t_continue,
             destination: `/workpiece/${props.workpiece_id}/right-split/summary`,
             className: 'action',
           };
         default:
           return {
-            name: 'Consulter',
+            name: t_consult,
             destination: `/workpiece/${props.workpiece_id}/right-split/summary`,
             className: 'action',
           };
@@ -81,15 +131,9 @@ const Tile = (props) => {
     <div className="tile">
       <div className="image" />
       <div>
-        <div className="title">
-          {' '}
-          {getTitle(props.tileId)}
-          {' '}
-        </div>
+        <div className="title"> {getTitle(props.tileId, props.language)} </div>
         <div className="description">
-          {' '}
-          {getDescription(props.tileId)}
-          {' '}
+          {getDescription(props.tileId, props.language)}{' '}
         </div>
       </div>
       <button

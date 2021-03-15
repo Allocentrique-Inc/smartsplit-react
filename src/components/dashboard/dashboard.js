@@ -14,15 +14,16 @@ const Dashboard = (props) => {
   const [apiErrors, setApiErrors] = useState([]);
   const user_id = localStorage.getItem('user_id');
   const refreshUser = async () => {
+    props.setIsLoaded(false);
     const user = await getUsers({ user_id });
     setUser(user);
+    props.setIsLoaded(true);
   };
   useEffect(() => {
     refreshUser();
   }, []);
   const language = (user && user.locale) || 'fr';
   const toggleLanguage = async () => {
-    console.log('ARE WE HERE');
     const newLanguage = language === 'fr' ? 'en' : 'fr';
     await patchUser({ locale: newLanguage, user_id });
     await refreshUser();

@@ -36,7 +36,6 @@ const patchUser = async (payload) => {
     projects,
     uri,
   });
-  console.log('PATCH BODY', body);
   try {
     const url = `${config.apiUrl}/users/${user_id}`;
     const method = 'PATCH';

@@ -4,17 +4,20 @@ import SongPlaceholder from '../../../../icons/songPlaceholder';
 import VertEllipsis from '../../../../icons/vertEllipsis';
 
 const Workpiece = (props) => {
+  const t_by = {
+    fr: 'par',
+    en: 'by',
+  }[props.language];
   const t_songCreator =
     props.owner &&
     props.owner.firstName &&
     props.owner.lastName &&
-    `par ${props.owner.firstName} ${props.owner.lastName}`;
+    `${t_by} ${props.owner.firstName} ${props.owner.lastName}`;
   const t_songTitle = props.title;
 
   const commonProps = {
     ...props,
   };
-
   return (
     <div className="workpiece">
       <div className="left">

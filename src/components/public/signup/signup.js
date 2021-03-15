@@ -96,25 +96,25 @@ export default (props) => {
       language
     ];
 
-  const t_firstName_label =
+  const t_first_name_label =
     translations.publicPages.form.signup.firstName._label[language];
-  const t_firstName_placeholder =
+  const t_first_name_placeholder =
     translations.publicPages.form.signup.firstName._placeholder[language];
-  const t_firstName_hint = ReactHtmlParser(
+  const t_first_name_hint = ReactHtmlParser(
     translations.publicPages.form.signup.firstName._hint[language],
   );
-  const t_lastName_label =
+  const t_last_name_label =
     translations.publicPages.form.signup.lastName._label[language];
-  const t_lastName_placeholder =
+  const t_last_name_placeholder =
     translations.publicPages.form.signup.lastName._placeholder[language];
-  const t_lastName_hint = ReactHtmlParser(
+  const t_last_name_hint = ReactHtmlParser(
     translations.publicPages.form.signup.lastName._hint[language],
   );
-  const t_artistName_label =
+  const t_artist_name_label =
     translations.publicPages.form.signup.artistName._label[language];
-  const t_artistName_placeholder =
+  const t_artist_name_placeholder =
     translations.publicPages.form.signup.artistName._placeholder[language];
-  const t_artistName_hint = ReactHtmlParser(
+  const t_artist_name_hint = ReactHtmlParser(
     translations.publicPages.form.signup.artistName._hint[language],
   );
   const t_terms_checkbox =
@@ -146,38 +146,38 @@ export default (props) => {
       </FormInput>
       <div className="row">
         <FormInput errors={form.fields.firstName.errors} {...commonProps}>
-          <label htmlFor="firstName">{t_firstName_label}</label>
+          <label htmlFor="firstName">{t_first_name_label}</label>
           <input
             type="text"
             id="firstName"
             value={form.fields.firstName.value}
             onChange={form.handlers.firstName}
-            placeholder={t_firstName_placeholder}
+            placeholder={t_first_name_placeholder}
           />
-          <div className="hint">{t_firstName_hint}</div>
+          <div className="hint">{t_first_name_hint}</div>
         </FormInput>
         <FormInput errors={form.fields.lastName.errors} {...commonProps}>
-          <label htmlFor="lastName">{t_lastName_label}</label>
+          <label htmlFor="lastName">{t_last_name_label}</label>
           <input
             type="text"
             id="lastName"
             value={form.fields.lastName.value}
             onChange={form.handlers.lastName}
-            placeholder={t_lastName_placeholder}
+            placeholder={t_last_name_placeholder}
           />
-          <div className="hint">{t_lastName_hint}</div>
+          <div className="hint">{t_last_name_hint}</div>
         </FormInput>
       </div>
       <FormInput errors={form.fields.artistName.errors} {...commonProps}>
-        <label htmlFor="artistName">{t_artistName_label}</label>
+        <label htmlFor="artistName">{t_artist_name_label}</label>
         <input
           type="text"
           id="artistName"
           value={form.fields.artistName.value}
           onChange={form.handlers.artistName}
-          placeholder={t_artistName_placeholder}
+          placeholder={t_artist_name_placeholder}
         />
-        <div className="hint">{t_artistName_hint}</div>
+        <div className="hint">{t_artist_name_hint}</div>
       </FormInput>
       <FormInput errors={form.fields.password.errors} {...commonProps}>
         <label htmlFor="password">{t_password_label}</label>

@@ -8,6 +8,7 @@ export default function FormInput(props) {
     triedSubmit,
     errorTranslations,
     language,
+    className = '',
     ...nextProps
   } = props;
   const [translations] = useState({
@@ -15,7 +16,7 @@ export default function FormInput(props) {
     ...errorTranslations,
   });
   const showErrors = errors.length > 0 && triedSubmit;
-  const classNames = `formInput ${showErrors ? 'error' : ''}`;
+  const classNames = `formInput ${showErrors ? 'error' : ''} ${className}`;
   const displayTranslation = (error) => {
     try {
       const translation = translations[`_${error}`][language];

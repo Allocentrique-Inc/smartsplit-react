@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import validate from './_/validate';
 
-export default function useForm(iniFields = {}) {
+export default function useForm(iniFields = {}, dirtyMode = false) {
   const [fields, setFields] = useState(iniFields);
   const setField = (field, value) => {
     setFields((prevState) => ({
@@ -9,15 +9,7 @@ export default function useForm(iniFields = {}) {
       [field]: {
         ...prevState[field],
         ...value,
-      },
-    }));
-  };
-  const setFieldValue = (field, value) => {
-    setFields((prevState) => ({
-      ...prevState,
-      [field]: {
-        ...prevState[field],
-        value,
+        isDirty: true,
       },
     }));
   };
@@ -25,7 +17,9 @@ export default function useForm(iniFields = {}) {
     const values = {};
     Object.entries(fields).forEach(([fieldName, field]) => {
       if (!field.excluded) {
-        values[fieldName] = field.value;
+        if (!dirtyMode || (dirtyMode && field.isDirty)) {
+          values[fieldName] = field.value;
+        }
       }
     });
     return values;
@@ -47,15 +41,42 @@ export default function useForm(iniFields = {}) {
     }
   });
   const isValid = () => {
-    const result = validate(fields);
-    setFields({ ...fields });
+    let fieldsToValidate = {};
+    if (dirtyMode) {
+      Object.entries(fields)
+        .filter(([key, value]) => value.isDirty)
+        .forEach(([key, value]) => {
+          fieldsToValidate[key] = value;
+        });
+    } else {
+      fieldsToValidate = fields;
+    }
+    if (Object.keys(fieldsToValidate).length === 0) {
+      return false;
+    }
+    const result = validate(fieldsToValidate);
+    setFields({ ...fields, ...fieldsToValidate });
     return result;
   };
   const reset = () => setFields(iniFields);
+  const cleanFields = () => {
+    Object.keys(fields).forEach((fieldName) => {
+      if (fields[fieldName].isDirty) {
+        console.log('coucou');
+        fields[fieldName].isDirty = false;
+      }
+    });
+  };
   const loadFields = (values) => {
     Object.entries(values).forEach(([key, value]) => {
       if (fields[key]) {
-        setFieldValue(key, value);
+        setFields((prevState) => ({
+          ...prevState,
+          [key]: {
+            ...prevState[key],
+            value,
+          },
+        }));
       }
     });
   };
@@ -63,11 +84,11 @@ export default function useForm(iniFields = {}) {
     fields,
     setFields,
     setField,
-    setFieldValue,
     toJS,
     handlers,
     isValid,
     reset,
     loadFields,
+    cleanFields,
   };
 }

@@ -1,6 +1,7 @@
 @import './variables.scss';
 @import './buttons.scss';
 @import './typographies.scss';
+@import "./textLayout.scss";
 @import './reset.scss';
 @import './forms.scss';
 @import './summary.scss';
@@ -15,6 +16,7 @@
 @import './radio.scss';
 @import './consultRightSplit.scss';
 @import './settings.scss';
+@import "./paymentModal.scss";
 
 body {
   font-family: IBM Plex Sans;
