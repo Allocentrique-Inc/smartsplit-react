@@ -90,18 +90,13 @@
             padding: 8px;
           }
           .rightSplit {
+            cursor: pointer;
+            padding: 16px;
             background-color: white;
             // height: 184px;
             background: #ffffff;
             box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
             border-radius: 4px;
-            .clickableContainer {
-              padding: 16px;
-              cursor: pointer;
-            }
-            .clickableContainer.acceptedRightSplit {
-              padding-bottom: 0;
-            }
             .pdfBtnContainer {
               padding: 16px;
               display: flex;

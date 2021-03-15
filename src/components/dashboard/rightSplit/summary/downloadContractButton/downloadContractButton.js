@@ -1,10 +1,4 @@
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  PDFDownloadLink,
-} from '@react-pdf/renderer';
+import { Document, Page, Text, View, BlobProvider } from '@react-pdf/renderer';
 import ReactHtmlParser from 'react-html-parser';
 import styles from './_/styles';
 import List from './_/list/list';
@@ -12,27 +6,38 @@ import PDFContentParser from './_/PDFContentParser';
 import contractData from './contractData';
 
 export default function DownloadContractButton({ language }) {
-  const t_filename = {
-    fr: '(TEST)Entente de partage de droit.pdf',
-    en: '(TEST)Right split agreee.pdf',
-  }[language];
-  const t_loading = {
-    fr: 'Chargement...',
-    en: 'Loading...',
-  }[language];
+  // const t_filename = {
+  //   fr: '(TEST)Entente de partage de droit.pdf',
+  //   en: '(TEST)Right split agreee.pdf',
+  // }[language];
+  // const t_loading = {
+  //   fr: 'Chargement...',
+  //   en: 'Loading...',
+  // }[language];
   const t_download = {
     fr: "Télécharger l'entente",
     en: 'Download the contract',
   }[language];
   return (
-    <div className="pdfBtnContainer">
-      <PDFDownloadLink
-        className="btn-secondary"
-        document={<Contract />}
-        fileName={t_filename}
-      >
-        {({ blob, url, loading, error }) => (loading ? t_loading : t_download)}
-      </PDFDownloadLink>
+    <div>
+      <BlobProvider document={<Contract />}>
+        {({ blob, url, loading, error }) => {
+          console.log(blob);
+          return (
+            !loading &&
+            !error && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(url);
+                }}
+              >
+                {t_download}
+              </button>
+            )
+          );
+        }}
+      </BlobProvider>
     </div>
   );
 }
