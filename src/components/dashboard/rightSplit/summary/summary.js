@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import TopBar from './topBar/topBar';
 import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
 import Consult from '../consult/consult';
 import X from '../../../../icons/x';
 import AdjustEmails from './adjustEmails/adjustEmails';
+import DownloadContractButton from './downloadContractButton/downloadContractButton';
 import PaymentModal from '../../_/payments/PaymentModal';
 
 const Summary = (props) => {
@@ -42,6 +43,9 @@ const Summary = (props) => {
     setConsulting,
     hasToVote,
   };
+  if (!props.isLoaded) {
+    return null;
+  }
   return (
     <>
       {/* CONSULT */}
@@ -172,31 +176,31 @@ const DraftRightSplit = (props) => {
     props.workpiece.rightSplit.owner.user_id === props.user.user_id;
 
   return (
-    <div
-      className="rightSplit"
-      onClick={() => props.setConsulting(props.workpiece.rightSplit)}
-    >
-      <div className="title">{`Version ${versionIndex}`}</div>
-      <div className="details">
-        Créé par
-        <span className="artistName">
-          {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-        </span>
-        {/* il y a ------- */}
-      </div>
-      <div className="b1">
-        {/* <div className="collaborators" /> */}
-        <div />
-      </div>
+    <div className="rightSplit">
+      <div
+        className="clickableContainer"
+        onClick={() => props.setConsulting(props.workpiece.rightSplit)}
+      >
+        <div className="title">{`Version ${versionIndex}`}</div>
+        <div className="details">
+          Créé par
+          <span className="artistName">
+            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
+          </span>
+        </div>
+        <div className="b1">
+          <div />
+        </div>
 
-      {canSendToCollab ? (
-        <>
-          <div className="border" />
-          <button>{t_sendToCollab}</button>
-        </>
-      ) : (
-        <button>Consulter</button>
-      )}
+        {canSendToCollab ? (
+          <>
+            <div className="border" />
+            <button>{t_sendToCollab}</button>
+          </>
+        ) : (
+          <button>Consulter</button>
+        )}
+      </div>
     </div>
   );
 };
@@ -210,6 +214,8 @@ const AcceptedRightSplit = (props) => {
     ...props,
     setShowModal: setShowPaymentModal,
   };
+  const hasBoughtPDF = Object.values(props.workpiece.purchases).length > 0;
+  console.log(props);
   return (
     <>
       <div
@@ -223,19 +229,24 @@ const AcceptedRightSplit = (props) => {
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
-          {/* il y a ------- */}
         </div>
         <div className="b1">
-          {/* <div className="collaborators" /> */}
           <div />
           <div className="status acceptedStatus">Accepté</div>
         </div>
-        <div className="border" />
-        <button
-          onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowPaymentModal(true); }}
-        >
-          Télécharger l'entente
-        </button>
+        {hasBoughtPDF ? (
+          <DownloadContractButton language={props.language} />
+        ) : (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setShowPaymentModal(true);
+            }}
+          >
+            Télécharger l'entente
+          </button>
+        )}
       </div>
       {showPaymentModal && <PaymentModal {...modalProps} />}
     </>
@@ -243,25 +254,22 @@ const AcceptedRightSplit = (props) => {
 };
 
 const InVoteRightSplit = (props) => {
-  console.log(props);
   const versionIndex = props.workpiece.rightSplit.version;
   return (
-    <div
-      className="rightSplit"
-      onClick={() => props.setConsulting(props.workpiece.rightSplit)}
-    >
-      <div className="title">{`Version ${versionIndex}`}</div>
-      <div className="details">
-        Créé par
-        <span className="artistName">
-          {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-        </span>
-        {/* il y a ------- */}
+    <div className="rightSplit">
+      <div
+        className="clickableContainer"
+        onClick={() => props.setConsulting(props.workpiece.rightSplit)}
+      >
+        <div className="title">{`Version ${versionIndex}`}</div>
+        <div className="details">
+          Créé par
+          <span className="artistName">
+            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
+          </span>
+        </div>
+        <button>Consulter</button>
       </div>
-      {/* <div className="b1">
-      <div className="collaborators" />
-    </div> */}
-      <button>Consulter</button>
     </div>
   );
 };
@@ -273,30 +281,29 @@ const RejectedRightSplit = (props) => {
   const handleCreateANewModelBtn = () =>
     history.push(`/workpiece/${workpiece_id}/right-split/copyright`);
   return (
-    <div
-      className="rightSplit"
-      style={{ marginBottom: '8px' }}
-      onClick={() => {
-        props.setConsulting(props.workpiece.rightSplit);
-      }}
-    >
-      <div className="title">{`Version ${versionIndex}`}</div>
-      <div className="details">
-        Créé par
-        <span className="artistName">
-          {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-        </span>
-        {/* il y a ------- */}
+    <div className="rightSplit" style={{ marginBottom: '8px' }}>
+      <div
+        className="clickableContainer"
+        onClick={() => {
+          props.setConsulting(props.workpiece.rightSplit);
+        }}
+      >
+        <div className="title">{`Version ${versionIndex}`}</div>
+        <div className="details">
+          Créé par
+          <span className="artistName">
+            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
+          </span>
+        </div>
+        <div className="b1">
+          <div />
+          <div className="status rejectedStatus">Refusé</div>
+        </div>
+        <button onClick={handleCreateANewModelBtn}>
+          Créer un nouveau modèle
+        </button>
+        <button>Consulter</button>
       </div>
-      <div className="b1">
-        {/* <div className="collaborators" /> */}
-        <div />
-        <div className="status rejectedStatus">Refusé</div>
-      </div>
-      <button onClick={handleCreateANewModelBtn}>
-        Créer un nouveau modèle
-      </button>
-      <button>Consulter</button>
     </div>
   );
 };
@@ -306,10 +313,7 @@ const RejectedRightSplitArchived = (props) => {
   return (
     <div
       className="rightSplit"
-      style={{ marginBottom: '8px' }}
-      onClick={() => {
-        props.setConsulting(props.archivedRightSplit);
-      }}
+      onClick={() => props.setConsulting(props.workpiece.rightSplit)}
     >
       <div className="title">{`Version ${versionIndex}`}</div>
       <div className="details">
@@ -317,10 +321,8 @@ const RejectedRightSplitArchived = (props) => {
         <span className="artistName">
           {` ${props.archivedRightSplit.owner.firstName} ${props.archivedRightSplit.owner.lastName} `}
         </span>
-        {/* il y a ------- */}
       </div>
       <div className="b1">
-        {/* <div className="collaborators" /> */}
         <div />
         <div className="status rejectedStatus">Refusé</div>
       </div>
