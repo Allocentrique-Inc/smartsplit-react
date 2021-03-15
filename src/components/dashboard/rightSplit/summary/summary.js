@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import TopBar from './topBar/topBar';
 import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
@@ -43,6 +43,9 @@ const Summary = (props) => {
     setConsulting,
     hasToVote,
   };
+  if (!props.isLoaded) {
+    return null;
+  }
   return (
     <>
       {/* CONSULT */}
@@ -212,6 +215,7 @@ const AcceptedRightSplit = (props) => {
     setShowModal: setShowPaymentModal,
   };
   const hasBoughtPDF = Object.values(props.workpiece.purchases).length > 0;
+  console.log(props);
   return (
     <>
       <div
@@ -231,7 +235,7 @@ const AcceptedRightSplit = (props) => {
           <div className="status acceptedStatus">Accepté</div>
         </div>
         {hasBoughtPDF ? (
-          <DownloadContractButton {...props} />
+          <DownloadContractButton language={props.language} />
         ) : (
           <button
             onClick={(e) => {
