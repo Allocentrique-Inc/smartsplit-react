@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Action from './action/action';
-import SongPlaceholder from '../../../../icons/songPlaceholder';
 import VertEllipsis from '../../../../icons/vertEllipsis';
+import CoverImage from '../../_/coverImage/coverImage';
 
 const Workpiece = (props) => {
   const t_by = {
@@ -14,7 +14,9 @@ const Workpiece = (props) => {
     props.owner.lastName &&
     `${t_by} ${props.owner.firstName} ${props.owner.lastName}`;
   const t_songTitle = props.title;
-
+  const coverImage = props.documentation.files.art.length
+    ? props.documentation.files.art[props.documentation.files.art.length - 1].url
+    : null;
   const commonProps = {
     ...props,
   };
@@ -22,7 +24,7 @@ const Workpiece = (props) => {
     <div className="workpiece">
       <div className="left">
         <div className="img">
-          <SongPlaceholder />
+          <CoverImage className="small" coverImage={coverImage} />
         </div>
         <div className="details">
           <div className="b1">
@@ -77,4 +79,5 @@ const Ellipsis = (props) => {
     </span>
   );
 };
+
 export default Workpiece;
