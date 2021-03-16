@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import Tile from './tile/tile';
 import PenIcon from '../../../icons/pen';
 import ArrowLeft from '../../../icons/arrowLeft';
 import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkpieceModal';
 import Collaborators from './collaborators/collaborators';
-import SongPlaceholder from '../../../icons/songPlaceholder';
 import ProfileOptions from '../_/profileOptions/profileOptions';
-import EditCoverImage from '../_/coverImage/EditCoverImage';
 import CoverImage from '../_/coverImage/coverImage';
 
 const Orientation = (props) => {
@@ -78,7 +76,7 @@ const Orientation = (props) => {
           {/** TOP BAR SECTION TWO */}
           <div className="b2">
             <div className="left">
-              <CoverImage coverImage={props.coverImage} className="medium" />
+              <CoverImage {...commonProps} className="medium" />
               <div className="description">
                 <div className="title">
                   {props.workpiece.title}

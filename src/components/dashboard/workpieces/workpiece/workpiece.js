@@ -14,9 +14,15 @@ const Workpiece = (props) => {
     props.owner.lastName &&
     `${t_by} ${props.owner.firstName} ${props.owner.lastName}`;
   const t_songTitle = props.title;
-  const coverImage = props.documentation.files.art.length
-    ? props.documentation.files.art[props.documentation.files.art.length - 1].url
-    : null;
+  const coverImage =
+    props &&
+    props.documentation &&
+    props.documentation.files &&
+    props.documentation.files.art &&
+    props.documentation.files.art.length
+      ? props.documentation.files.art[props.documentation.files.art.length - 1]
+        .url
+      : null;
   const commonProps = {
     ...props,
   };

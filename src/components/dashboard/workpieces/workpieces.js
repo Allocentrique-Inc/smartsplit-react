@@ -60,6 +60,7 @@ const Workpieces = (props) => {
     setTab,
     setShowModal,
   };
+
   return (
     <div className="workpieces">
       {showModal && <AddOrEditWorkpieceModal {...commonProps} />}

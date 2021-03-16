@@ -1,7 +1,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import ChevronRight from '../../../../../icons/chevron-right';
-import SongPlaceholder from '../../../../../icons/songPlaceholder';
 import ProfileOptions from '../../../_/profileOptions/profileOptions';
+import CoverImage from '../../../_/coverImage/coverImage';
 
 const TopBar = (props) => {
   const history = useHistory();
@@ -39,7 +39,7 @@ const TopBar = (props) => {
     <div className="topBar">
       <div className="bx">
         <div className="img">
-          <SongPlaceholder />
+          <CoverImage {...props} />
         </div>
         <div className="title">{t_title}</div>
         <div className="breadCrumb">

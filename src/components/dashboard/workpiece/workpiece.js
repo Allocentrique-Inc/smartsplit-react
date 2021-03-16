@@ -8,20 +8,23 @@ import Documentation from '../documentation/documentation';
 const Workpiece = (props) => {
   const { workpiece_id } = useParams();
   const [workpiece, setWorkpiece] = useState('');
-  const [coverImage, setCoverImage] = useState();
   const resetData = async () => {
     const incomingWorkpiece = await getWorkpiece({
       workpiece_id,
     });
     setWorkpiece(incomingWorkpiece);
-    if (incomingWorkpiece.documentation.files.art.length) {
-      const newUrl = incomingWorkpiece.documentation.files.art[incomingWorkpiece.documentation.files.art.length - 1].url;
-      setCoverImage(
-        newUrl,
-      );
-      console.log(newUrl);
-    }
   };
+
+  const coverImage =
+    workpiece &&
+    workpiece.documentation &&
+    workpiece.documentation.files &&
+    workpiece.documentation.files.art &&
+    workpiece.documentation.files.art.length
+      ? workpiece.documentation.files.art[
+        workpiece.documentation.files.art.length - 1
+      ].url
+      : null;
 
   const commonProps = {
     ...props,
@@ -29,7 +32,6 @@ const Workpiece = (props) => {
     resetData,
     workpiece_id,
     coverImage,
-    setCoverImage,
   };
 
   useEffect(() => {

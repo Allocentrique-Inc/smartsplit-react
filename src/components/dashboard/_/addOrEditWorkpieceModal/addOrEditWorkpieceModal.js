@@ -9,8 +9,7 @@ import useForm from '../../../_/form/useForm';
 import FormInput from '../../../_/form/formInput/formInput';
 import EditCoverImage from '../coverImage/EditCoverImage';
 
-export default function WorkpieceModal(props) {
-  console.log(props);
+export default function AddOrEditWorkpieceModal(props) {
   const {
     setShowModal,
     resetData,
@@ -18,7 +17,6 @@ export default function WorkpieceModal(props) {
     language,
     translations,
     workpiece,
-    setCoverImage,
   } = props;
   const history = useHistory();
   const form = useForm({
@@ -57,11 +55,11 @@ export default function WorkpieceModal(props) {
           file,
           'art',
           'public',
-          (progress) => { console.log(progress); },
+          (progress) => {
+            console.log(progress);
+          },
         );
         console.log(response);
-        setCoverImage(response.url);
-        //console.log(response);
       }
       setShowModal(false);
       resetData();
@@ -121,7 +119,11 @@ export default function WorkpieceModal(props) {
             </FormInput>
             <div className="formInput">
               <label>Cover Image</label>
-              <EditCoverImage mode={!isAdding || imgBlob ? 'edit' : 'create'} onSave={handleCoverImageSave} {...props} />
+              <EditCoverImage
+                mode={!isAdding || imgBlob ? 'edit' : 'create'}
+                onSave={handleCoverImageSave}
+                {...props}
+              />
             </div>
             <div className="formInput toDo">
               <label htmlFor="type">Cette oeuvre est...</label>

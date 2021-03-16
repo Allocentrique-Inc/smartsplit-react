@@ -7,14 +7,6 @@ import PDFContentParser from './_/PDFContentParser';
 import contractData from './contractData';
 
 export default memo(({ language }) => {
-  // const t_filename = {
-  //   fr: '(TEST)Entente de partage de droit.pdf',
-  //   en: '(TEST)Right split agreee.pdf',
-  // }[language];
-  // const t_loading = {
-  //   fr: 'Chargement...',
-  //   en: 'Loading...',
-  // }[language];
   const t_download = {
     fr: "Télécharger l'entente",
     en: 'Download the contract',
