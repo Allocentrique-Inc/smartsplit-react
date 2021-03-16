@@ -10,7 +10,6 @@ import ArrowLeft from '../../../icons/arrowLeft';
 import ProfilePlaceholder from '../../../icons/profilePlaceholder';
 import patchUser from '../../../api/users/patchUser';
 import getUsers from '../../../api/users/getUsers';
-import { loadObjToAnother } from '../../../utils';
 import useForm from '../../_/form/useForm';
 import Avatar from '../_/avatar/avatar';
 

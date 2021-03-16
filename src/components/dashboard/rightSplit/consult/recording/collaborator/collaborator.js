@@ -15,8 +15,9 @@ const Collaborator = (props) => {
     user_id === props.collaborator.rightHolder_id && vote === 'undecided';
 
   const isLabel =
+    props.rightSplitInConsultation.label &&
     props.rightSplitInConsultation.label.rightHolder_id ===
-    props.collaborator.rightHolder_id;
+      props.collaborator.rightHolder_id;
   let isAccepted;
   let isRejected;
   let handleAccept;

@@ -57,8 +57,8 @@ const Collaborator = (props) => {
   const t_userName = `${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`;
   const t_removeCollaborator =
     props.translations.rightSplit._removeCollaborator[props.language];
-  const t_autor =
-    props.translations.rightSplit.copyrightRoles._autor[props.language];
+  const t_author =
+    props.translations.rightSplit.copyrightRoles._author[props.language];
   const t_composer =
     props.translations.rightSplit.copyrightRoles._composer[props.language];
   const t_adaptator =
@@ -104,8 +104,8 @@ const Collaborator = (props) => {
           <RoleBox
             {...commonProps}
             arr={props.collaborator.roles}
-            label={t_autor}
-            _role="autor"
+            label={t_author}
+            _role="author"
           />
           <RoleBox
             {...commonProps}

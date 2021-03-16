@@ -11,6 +11,9 @@ import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollabora
 import PageErrors from '../_/pageErrors/pageErrors';
 import setCollaboratorsErrors from './_/setCollaboratorsErrors';
 import setLabelErrors from './_/setLabelErrors';
+import CircledP from '../../../../icons/circledP';
+import SplitChart from '../_/charts/splitChart/splitChart';
+import { rightHoldersToChartData } from '../_/charts/utils';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
@@ -111,8 +114,8 @@ const Recording = (props) => {
             el.shares === 0
               ? 0
               : sharesToSeparate < 0
-                ? 0
-                : ceil(
+              ? 0
+              : ceil(
                   (el.shares / unlockedNotDraggedActorsSum) * sharesToSeparate,
                 );
         }
@@ -157,6 +160,12 @@ const Recording = (props) => {
     setIsCreatingNewLabelCollaborator,
     triedSubmit,
     setTriedSubmit,
+    chartData: rightHoldersToChartData(
+      props.recording,
+      props.activeCollaboratorsIds,
+    ),
+    logo: CircledP,
+    size: 384,
   };
   return (
     <>
@@ -215,9 +224,7 @@ const Recording = (props) => {
             </div>
             <div className="b1b1b2">
               <div className="b1b1b1b2">
-                {isDisplayingCircle && (
-                  <Circle {...commonProps} collaborators={allActors} />
-                )}
+                {isDisplayingCircle && <SplitChart {...commonProps} />}
               </div>
             </div>
           </div>

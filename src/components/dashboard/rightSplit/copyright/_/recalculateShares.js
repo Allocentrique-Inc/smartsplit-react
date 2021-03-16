@@ -11,18 +11,18 @@ const recalculateShares = ({ newDividingMethod, copyright }) => {
   }
 
   if (newDividingMethod === 'role') {
-    const autor = copyright.reduce(
-      (acc, el) => (el.roles.some((el) => el === 'autor') ? acc + 1 : acc + 0),
+    const author = copyright.reduce(
+      (acc, el) => (el.roles.some((el) => el === 'author') ? acc + 1 : acc + 0),
       0,
     );
     const adaptator = copyright.reduce(
       (acc, el) =>
-        (el.roles.some((el) => el === 'adaptator') ? acc + 1 : acc + 0),
+        el.roles.some((el) => el === 'adaptator') ? acc + 1 : acc + 0,
       0,
     );
     const composer = copyright.reduce(
       (acc, el) =>
-        (el.roles.some((el) => el === 'composer') ? acc + 1 : acc + 0),
+        el.roles.some((el) => el === 'composer') ? acc + 1 : acc + 0,
       0,
     );
     const mixer = copyright.reduce(
@@ -30,20 +30,24 @@ const recalculateShares = ({ newDividingMethod, copyright }) => {
       0,
     );
 
-    const autorShares = autor > 0 ? (adaptator + composer + mixer > 0 ? 50 : 100) / autor : 0;
-    const musicShares = adaptator + composer + mixer > 0
-      ? (autor > 0 ? 50 : 100) / (adaptator + composer + mixer)
-      : 0;
+    const authorShares =
+      author > 0 ? (adaptator + composer + mixer > 0 ? 50 : 100) / author : 0;
+    const musicShares =
+      adaptator + composer + mixer > 0
+        ? (author > 0 ? 50 : 100) / (adaptator + composer + mixer)
+        : 0;
     const arr = [
       ...copyright.map((el) => {
         const obj = { ...el };
-        const collAutorShares = el.roles.some((el) => el === 'autor')
-          ? autorShares
+        const collAutorShares = el.roles.some((el) => el === 'author')
+          ? authorShares
           : 0;
-        const collMusicShares = el.roles.filter(
-          (el) => el === 'adaptator' || el === 'composer' || el === 'mixer',
-        ).length * musicShares;
-        obj.shares = Math.floor((collAutorShares + collMusicShares) * 10000) / 10000;
+        const collMusicShares =
+          el.roles.filter(
+            (el) => el === 'adaptator' || el === 'composer' || el === 'mixer',
+          ).length * musicShares;
+        obj.shares =
+          Math.floor((collAutorShares + collMusicShares) * 10000) / 10000;
         return obj;
       }),
     ];
