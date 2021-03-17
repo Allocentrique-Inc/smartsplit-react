@@ -36,19 +36,19 @@ const Collaborator = (props) => {
         <div className="right">
           <div className="shares">{`${shares.toFixed(1)} %`}</div>
           {vote === 'accepted' && (
-            <div className="voteAccepted">{`${vote}`}</div>
+            <div className="voteAccepted">{props.t_accepted}</div>
           )}
           {vote === 'rejected' && (
-            <div className="voteRejected">{`${vote}`}</div>
+            <div className="voteRejected">{props.t_rejected}</div>
           )}
           {vote === 'undecided' && (
-            <div className="voteUndecided">{`${vote}`}</div>
+            <div className="voteUndecided">{props.t_undecided}</div>
           )}
         </div>
       </div>
       {!props.voting && !isUserVoting && comment && (
         <div className="comment">
-          <div>Commentaire</div>
+          <div>${props.t_comments}</div>
           {comment}
         </div>
       )}
@@ -62,7 +62,7 @@ const Collaborator = (props) => {
                 props.copyright.vote === 'rejected' ? 'rejectSelected' : ''
               }`}
             >
-              No
+              {props.t_no}
             </button>
             <button
               onClick={handleAccept}
@@ -70,7 +70,7 @@ const Collaborator = (props) => {
                 props.copyright.vote === 'accepted' ? 'acceptSelected' : ''
               }`}
             >
-              Yes
+              {props.t_yes}
             </button>
           </div>
           {props.copyright.vote === 'rejected' && (

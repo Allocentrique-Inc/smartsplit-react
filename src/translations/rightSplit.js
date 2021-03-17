@@ -261,46 +261,6 @@ export default {
     },
   },
 
-  consultRightSplit: {
-    _copyright: {
-      fr: "Droits d'auteur",
-      en: '',
-    },
-    _performance: {
-      fr: 'Interprétation',
-      en: '',
-    },
-    _recording: {
-      fr: 'Enregistrement sonore',
-      en: '',
-    },
-    _privacy: {
-      fr: 'Confidentialité',
-      en: '',
-    },
-    _privacySubtitle: {
-      fr: 'veut rendre ce partage des droits',
-      en: '',
-    },
-    _privacyDescription: {
-      fr:
-        'encourage la transparence de l’information sur ces partages de droit, afin que toute la communauté puisse bénéficier de bons exemples.',
-      en: '',
-    },
-    _modify: {
-      fr: 'modifier',
-      en: 'modify',
-    },
-    _public: {
-      fr: 'publique',
-      en: 'modify',
-    },
-    _private: {
-      fr: 'privé',
-      en: 'modify',
-    },
-  },
-
   errors: {
     shouldIncludeAtLeastOneRole: {
       fr: 'Vous devez sélectionner au moins un rôle.',

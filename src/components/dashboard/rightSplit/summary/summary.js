@@ -1,7 +1,6 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import TopBar from './topBar/topBar';
-import submitRightSplit from '../../../../api/workpieces/submitRightSplit';
 import Consult from '../consult/consult';
 import X from '../../../../icons/x';
 import AdjustEmails from './adjustEmails/adjustEmails';
@@ -33,15 +32,62 @@ const Summary = (props) => {
 
   const canSendToCollab =
     props.workpiece.rightSplit.owner.user_id === props.user.user_id;
+
+  const t_splitSummary = {
+    fr: 'Résumé du partage',
+    en: 'Split Summary',
+  }[props.language];
+  const t_createdBy = {
+    fr: 'Créé par',
+    en: 'Created by',
+  }[props.language];
+  const t_waitingSubmit = {
+    fr: "En attente d'envoi",
+    en: 'Waiting to be sent',
+  }[props.language];
+  const t_waitingDecision = {
+    fr: 'En attente de décision',
+    en: 'Waiting for a decision',
+  }[props.language];
+  const t_decided = {
+    fr: 'Décidés',
+    en: 'Decided',
+  }[props.language];
   const t_sendToCollab = {
     fr: 'Envoyer aux collaborateurs',
     en: '',
-  }[props.user.locale];
+  }[props.language];
+  const t_consult = {
+    fr: 'Consulté',
+    en: 'Consult',
+  }[props.language];
+  const t_accepted = {
+    fr: 'Accepté',
+    en: 'Accepted',
+  }[props.language];
+  const t_rejected = {
+    fr: 'Rejeté',
+    en: 'Rejected',
+  }[props.language];
+  const t_download = {
+    fr: "Télécharger l'entente",
+    en: 'Download the contract',
+  }[props.language];
+  const t_createANewOne = {
+    fr: 'Créer un nouveau modèle',
+    en: 'Create a new model',
+  }[props.language];
   const commonProps = {
     ...props,
     setIsAdjustingEmails,
     setConsulting,
     hasToVote,
+    t_createdBy,
+    t_consult,
+    t_accepted,
+    t_rejected,
+    t_download,
+    t_createANewOne,
   };
   if (!props.isLoaded) {
     return null;
@@ -56,7 +102,7 @@ const Summary = (props) => {
           <div className="modalBackground" onClick={() => setConsulting(null)}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
               <div className="topBar">
-                <div className="title">Version 1</div>
+                <div className="title">Version {consulting.version}</div>
                 <div
                   className="exit"
                   onClick={() => {
@@ -95,10 +141,10 @@ const Summary = (props) => {
         <TopBar {...props} />
         <div className="b1">
           <div className="b1b1">
-            <div className="pageTitle">Résumé du partage</div>
+            <div className="pageTitle">{t_splitSummary}</div>
 
             <div className="splitDetails">
-              Créé par
+              {t_createdBy}
               <span className="artistName">
                 {`${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName}`}
               </span>
@@ -109,7 +155,7 @@ const Summary = (props) => {
             <div className="b1b1b2">
               {/* DRAFT */}
               <div className="bx">
-                <div className="colTitle">En attente d'envoi</div>
+                <div className="colTitle">{t_waitingSubmit}</div>
                 <div className="content">
                   {props.workpiece.rightSplit._state === 'draft' && (
                     <DraftRightSplit {...commonProps} {...props} isDraft />
@@ -119,7 +165,7 @@ const Summary = (props) => {
 
               {/* INVOTE */}
               <div className="bx">
-                <div className="colTitle">En attente de décision</div>
+                <div className="colTitle">{t_waitingDecision}</div>
                 <div className="content">
                   {props.workpiece.rightSplit._state === 'voting' && (
                     <InVoteRightSplit {...commonProps} {...props} />
@@ -129,7 +175,7 @@ const Summary = (props) => {
 
               {/* DECIDED */}
               <div className="bx">
-                <div className="colTitle">Décidés</div>
+                <div className="colTitle">{t_decided}</div>
                 <div className="content">
                   {/* ACCEPTED */}
                   {props.workpiece.rightSplit._state === 'accepted' && (
@@ -183,7 +229,7 @@ const DraftRightSplit = (props) => {
       >
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
-          Créé par
+          {props.t_createdBy}
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
@@ -198,7 +244,7 @@ const DraftRightSplit = (props) => {
             <button>{t_sendToCollab}</button>
           </>
         ) : (
-          <button>Consulter</button>
+          <button>{props.t_consult}</button>
         )}
       </div>
     </div>
@@ -215,7 +261,6 @@ const AcceptedRightSplit = (props) => {
     setShowModal: setShowPaymentModal,
   };
   const hasBoughtPDF = Object.values(props.workpiece.purchases).length > 0;
-  console.log(props);
   return (
     <>
       <div
@@ -225,14 +270,14 @@ const AcceptedRightSplit = (props) => {
       >
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
-          Créé par
+          {props.t_createdBy}
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
         </div>
         <div className="b1">
           <div />
-          <div className="status acceptedStatus">Accepté</div>
+          <div className="status acceptedStatus">{props.t_accepted}</div>
         </div>
         {hasBoughtPDF ? (
           <DownloadContractButton language={props.language} />
@@ -244,7 +289,7 @@ const AcceptedRightSplit = (props) => {
               setShowPaymentModal(true);
             }}
           >
-            Télécharger l'entente
+            {props.t_download}
           </button>
         )}
       </div>
@@ -263,12 +308,12 @@ const InVoteRightSplit = (props) => {
       >
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
-          Créé par
+          {props.t_createdBy}
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
         </div>
-        <button>Consulter</button>
+        <button>{props.t_consult}</button>
       </div>
     </div>
   );
@@ -290,19 +335,19 @@ const RejectedRightSplit = (props) => {
       >
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
-          Créé par
+          {props.t_createdBy}
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
         </div>
         <div className="b1">
           <div />
-          <div className="status rejectedStatus">Refusé</div>
+          <div className="status rejectedStatus">{props.t_rejected}</div>
         </div>
         <button onClick={handleCreateANewModelBtn}>
-          Créer un nouveau modèle
+          {props.t_createANewOne}
         </button>
-        <button>Consulter</button>
+        <button>{props.t_consult}</button>
       </div>
     </div>
   );
@@ -317,16 +362,16 @@ const RejectedRightSplitArchived = (props) => {
     >
       <div className="title">{`Version ${versionIndex}`}</div>
       <div className="details">
-        Créé par
+        {props.t_createdBy}
         <span className="artistName">
           {` ${props.archivedRightSplit.owner.firstName} ${props.archivedRightSplit.owner.lastName} `}
         </span>
       </div>
       <div className="b1">
         <div />
-        <div className="status rejectedStatus">Refusé</div>
+        <div className="status rejectedStatus">{props.t_rejected}</div>
       </div>
-      <button>Consulter</button>
+      <button>{props.t_consult}</button>
     </div>
   );
 };

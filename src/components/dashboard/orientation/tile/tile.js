@@ -1,4 +1,14 @@
 import { useHistory } from 'react-router-dom';
+import RightSplit from './rightsplit';
+
+const getIcon = (tileId, language) => {
+  switch (tileId) {
+    case 'share':
+      return <RightSplit />;
+    default:
+      return '---';
+  }
+};
 
 const getTitle = (tileId, language) => {
   switch (language) {
@@ -17,7 +27,7 @@ const getTitle = (tileId, language) => {
     case 'en': {
       switch (tileId) {
         case 'share':
-          return '---';
+          return 'Split your rights';
         case 'document':
           return '---';
         case 'protect':
@@ -47,7 +57,7 @@ const getDescription = (tileId, language) => {
     case 'en': {
       switch (tileId) {
         case 'share':
-          return '---';
+          return "Create the splits on your rights with our guide.  You'll see, it's easier than you think :)";
         case 'document':
           return '---';
         case 'protect':
@@ -129,7 +139,7 @@ const Tile = (props) => {
   const action = getActionNameAndDestination(props);
   return (
     <div className="tile">
-      <div className="image" />
+      <div className="image">{getIcon(props.tileId)}</div>
       <div>
         <div className="title"> {getTitle(props.tileId, props.language)} </div>
         <div className="description">

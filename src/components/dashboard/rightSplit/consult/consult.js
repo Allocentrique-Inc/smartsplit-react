@@ -40,17 +40,68 @@ const Consult = (props) => {
     (el) => el.rightHolder_id,
   );
 
-  const translation = props.translations.rightSplit.consultRightSplit;
-  const locale = props.user.locale;
-  const t_copyright = translation._copyright[locale];
-  const t_performance = translation._performance[locale];
-  const t_recording = translation._recording[locale];
-  const t_privacy = translation._privacy[locale];
-  const t_privacySubtitle = translation._privacySubtitle[locale];
-  const t_privacyDescription = translation._privacyDescription[locale];
-  const t_modify = translation._modify[locale];
-  const t_public = translation._public[locale];
-  const t_private = translation._private[locale];
+  const t_copyright = {
+    fr: "Droits d'auteur",
+    en: 'Copyright',
+  }[props.language];
+  const t_performance = {
+    fr: 'Interprétation',
+    en: 'Interpretation',
+  }[props.language];
+  const t_recording = {
+    fr: 'Enregistrement sonore',
+    en: 'Recording',
+  }[props.language];
+  const t_privacy = {
+    fr: 'Confidentialité',
+    en: 'Privacy',
+  }[props.language];
+  const t_privacySubtitle = {
+    fr: 'veut rendre ce partage des droits',
+    en: 'wants to make this split',
+  }[props.language];
+  const t_privacyDescription = {
+    fr:
+      'encourage la transparence de l’information sur ces partages de droit, afin que toute la communauté puisse bénéficier de bons exemples.',
+    en:
+      'promote data transparency on theses rights split so all the community can benifit from good examples.',
+  }[props.language];
+  const t_modify = {
+    fr: 'modifier',
+    en: 'modify',
+  }[props.language];
+  const t_public = {
+    fr: 'publique',
+    en: 'public',
+  }[props.language];
+  const t_private = {
+    fr: 'privé',
+    en: 'private',
+  }[props.language];
+  const t_accepted = {
+    fr: 'Accepté',
+    en: 'Accepted',
+  }[props.language];
+  const t_rejected = {
+    fr: 'Rejeté',
+    en: 'Rejected',
+  }[props.language];
+  const t_undecided = {
+    fr: 'Non décidé',
+    en: 'Undecided',
+  }[props.language];
+  const t_yes = {
+    fr: 'Oui',
+    en: 'Yes',
+  }[props.language];
+  const t_no = {
+    fr: 'No',
+    en: 'Non',
+  }[props.language];
+  const t_comments = {
+    fr: 'Commentaires',
+    en: 'Comments',
+  }[props.language];
 
   const commonProps = {
     ...props,
@@ -64,6 +115,12 @@ const Consult = (props) => {
     t_modify,
     t_public,
     t_private,
+    t_accepted,
+    t_rejected,
+    t_undecided,
+    t_yes,
+    t_no,
+    t_comments,
   };
   return (
     <>

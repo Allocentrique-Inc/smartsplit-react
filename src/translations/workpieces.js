@@ -1,24 +1,24 @@
 export default {
   emptyOwnerSongs: {
     _text1: {
-      fr: 'Tes oeuvres apparaîtrons ici.',
-      en: 'New password',
+      fr: 'Tes oeuvres apparaîtront ici.',
+      en: 'Your workpieces will be displayed here',
     },
     _text2: {
       fr:
         'Documente et partage les droits sur ta première oeuvre musicale en utilisant le bouton «Ajouter».',
-      en: 'New password',
+      en:
+        'Document and share your rights on your first workpiece by using the button "Add"',
     },
   },
   emptyRightholderSongs: {
     _text1: {
-      fr: 'Ta librairie de collaborateurs apparaitra ici.',
-      en: 'New password',
+      fr: 'Les oeuvres de tes collaborateurs apparaîtront ici.',
+      en: 'Your collaborators workpieces will be displayed here.',
     },
     _text2: {
-      fr:
-        'Ajoute des artistes collaborateurs pour partager des droits avec eux et les inclure dans la documentation de tes chansons. Tu peux aussi le faire en ajoutant un nouvelle pièce musicale.',
-      en: 'New password',
+      fr: "Attendez qu'un collaborateur partage une oeuvre avec vous.",
+      en: 'Wait until a collaborator share a workpiece with you.',
     },
   },
   workpieceModal: {

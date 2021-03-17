@@ -9,6 +9,10 @@ const TopBar = (props) => {
   const handleBackBtn = async () => {
     history.push(`/workpiece/${workpiece_id}`);
   };
+  const t_pageTitle = {
+    fr: 'Partage des droits',
+    en: 'Share your rights',
+  }[props.language];
   return (
     <div className="topBar">
       <div className="side">
@@ -21,7 +25,7 @@ const TopBar = (props) => {
           <SongPlaceholder />
         </div>
         <div className="title">{props.workpiece.title}</div>
-        <div className="pageTitle">- Partage des droits</div>
+        <div className="pageTitle">- {t_pageTitle}</div>
       </div>
       <ProfileOptions {...props} />
     </div>

@@ -84,19 +84,19 @@ const Collab = (props) => {
 
         <div className="right">
           {vote === 'accepted' && (
-            <div className="voteAccepted">{`${t_vote}`}</div>
+            <div className="voteAccepted">{props.t_accepted}</div>
           )}
           {vote === 'rejected' && (
-            <div className="voteRejected">{`${t_vote}`}</div>
+            <div className="voteRejected">{props.t_rejected}</div>
           )}
           {vote === 'undecided' && (
-            <div className="voteUndecided">{`${t_vote}`}</div>
+            <div className="voteUndecided">{props.t_undecided}</div>
           )}
         </div>
       </div>
       {!props.voting && !isUserVoting && comment && (
         <div className="comment">
-          <div>Commentaire</div>
+          <div>${props.t_comments}</div>
           {comment}
         </div>
       )}
@@ -109,7 +109,7 @@ const Collab = (props) => {
                 props.privacy.vote === 'rejected' ? 'rejectSelected' : ''
               }`}
             >
-              No
+              {props.t_no}
             </button>
             <button
               onClick={handleAccept}
@@ -117,7 +117,7 @@ const Collab = (props) => {
                 props.privacy.vote === 'accepted' ? 'acceptSelected' : ''
               }`}
             >
-              Yes
+              {props.t_yes}
             </button>
           </div>
           {props.privacy.vote === 'rejected' && (
