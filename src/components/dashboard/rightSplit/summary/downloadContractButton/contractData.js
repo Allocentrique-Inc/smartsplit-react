@@ -62,5 +62,5 @@ export default {
       ],
     },
   },
-  footer: 'Entente de partage de droits - Page',
+  footer: '<b>Entente de partage de droits</b>',
 };

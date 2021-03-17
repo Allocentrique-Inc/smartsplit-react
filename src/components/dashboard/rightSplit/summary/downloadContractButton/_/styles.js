@@ -110,9 +110,10 @@ export default StyleSheet.create({
   footer: {
     position: 'absolute',
     bottom: 10,
-    left: 32,
+    left: 0,
     right: 32,
-    textAlign: 'right',
+    // textAlign: 'right',
     fontSize: 8,
+    flexDirection: 'row-reverse',
   },
 });

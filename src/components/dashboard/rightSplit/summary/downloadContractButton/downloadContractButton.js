@@ -34,7 +34,7 @@ export default memo(({ language }) => {
   );
 });
 
-const Contract = () => {
+export const Contract = () => {
   return (
     <Document>
       <Page size="A4" style={styles.page} key={Math.random()}>
@@ -64,14 +64,16 @@ const Contract = () => {
             </View>
           ))}
         </View>
-        <Text
-          fixed
-          key={Math.random()}
-          style={styles.footer}
-          render={({ pageNumber, totalPages }) =>
-            `${contractData.footer} ${pageNumber} / ${totalPages}`
-          }
-        />
+        <View fixed key={Math.random()} style={styles.footer}>
+          <Text
+            fixed
+            render={({ pageNumber, totalPages }) =>
+              `- Page ${pageNumber} / ${totalPages}`
+            }
+          />
+          <Text> </Text>
+          {PDFContentParser(ReactHtmlParser(contractData.footer))}
+        </View>
       </Page>
       <Page size="A4" style={styles.page} key={Math.random()}>
         <View style={styles.section} key={Math.random()}>
@@ -117,14 +119,16 @@ const Contract = () => {
             )}
           </List>
         </View>
-        <Text
-          fixed
-          key={Math.random()}
-          style={styles.footer}
-          render={({ pageNumber, totalPages }) =>
-            `${contractData.footer} ${pageNumber} / ${totalPages}`
-          }
-        />
+        <View fixed key={Math.random()} style={styles.footer}>
+          <Text
+            fixed
+            render={({ pageNumber, totalPages }) =>
+              `- Page ${pageNumber} / ${totalPages}`
+            }
+          />
+          <Text> </Text>
+          {PDFContentParser(ReactHtmlParser(contractData.footer))}
+        </View>
       </Page>
       <Page size="A4" style={styles.page} key={Math.random()}>
         <View style={styles.section} key="recommendations">
@@ -155,14 +159,16 @@ const Contract = () => {
             })}
           </View>
         </View>
-        <Text
-          fixed
-          key={Math.random()}
-          style={styles.footer}
-          render={({ pageNumber, totalPages }) =>
-            `${contractData.footer} ${pageNumber} / ${totalPages}`
-          }
-        />
+        <View fixed key={Math.random()} style={styles.footer}>
+          <Text
+            fixed
+            render={({ pageNumber, totalPages }) =>
+              `- Page ${pageNumber} / ${totalPages}`
+            }
+          />
+          <Text> </Text>
+          {PDFContentParser(ReactHtmlParser(contractData.footer))}
+        </View>
       </Page>
     </Document>
   );
