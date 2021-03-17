@@ -9,6 +9,9 @@ import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollabora
 import Presentation from '../_/presentation/presentation';
 import PageErrors from '../_/pageErrors/pageErrors';
 import setCollaboratorsErrors from './_/setCollaboratorsErrors';
+import CircledStar from '../../../../icons/circledStar';
+import SplitChart from '../_/charts/splitChart/splitChart';
+import { rightHoldersToChartData } from '../_/charts/utils';
 
 const Performance = (props) => {
   const { workpiece_id } = useParams();
@@ -56,7 +59,8 @@ const Performance = (props) => {
       (el) => el !== role,
     );
     const newPerformance = props.performance.map((el) =>
-      (el.rightHolder_id === rightHolder_id ? modifiedPerformance : el));
+      el.rightHolder_id === rightHolder_id ? modifiedPerformance : el,
+    );
     props.setPerformance(newPerformance);
   };
 
@@ -66,14 +70,15 @@ const Performance = (props) => {
     );
     modifiedPerformance.roles.push(role);
     const newPerformance = props.performance.map((el) =>
-      (el.rightHolder_id === rightHolder_id ? modifiedPerformance : el));
+      el.rightHolder_id === rightHolder_id ? modifiedPerformance : el,
+    );
     props.setPerformance(newPerformance);
   };
 
   // SHARES CALCULATION
   const mainActorsTotal = props.performance.reduce(
     (acc, el) =>
-      (el.status === 'principal' || el.status === 'featured' ? acc + 1 : acc),
+      el.status === 'principal' || el.status === 'featured' ? acc + 1 : acc,
     0,
   );
   const remainingActorsTotal = props.performance.length - mainActorsTotal;
@@ -84,6 +89,10 @@ const Performance = (props) => {
       el.shares = (mainActorsTotal > 0 ? 20 : 100) / remainingActorsTotal;
     }
   });
+
+  const sharesTotal = props.performance.reduce((acc, el) => el.shares + acc, 0);
+  const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
+  const shouldDisplayPieChart = isTotal100;
 
   const t_title =
     props.translations.rightSplit.title._performance[props.language];
@@ -105,6 +114,12 @@ const Performance = (props) => {
     t_description,
     triedSubmit,
     setTriedSubmit,
+    chartData: rightHoldersToChartData(
+      props.performance,
+      props.activeCollaboratorsIds,
+    ),
+    logo: CircledStar,
+    size: 384,
   };
 
   return (
@@ -134,7 +149,7 @@ const Performance = (props) => {
             </div>
             <div className="b1b1b2">
               <div className="b1b1b1b2">
-                <Circle {...commonProps} collaborators={props.performance} />
+                {shouldDisplayPieChart && <SplitChart {...commonProps} />}
               </div>
             </div>
           </div>

@@ -149,7 +149,7 @@ export default {
         fr:
           'Par exemple, <i>Madonna</i> est le nom d’artiste de <i>Madonna Louise Ciccone</i>.',
         en:
-          'For example, <i>Madonna</i> is the artist _label of <i>Madonna Louise Ciccone</i>.',
+          'For example, <i>Madonna</i> is the artist name of <i>Madonna Louise Ciccone</i>.',
       },
     },
     projects: {

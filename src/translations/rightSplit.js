@@ -66,7 +66,7 @@ export default {
   },
 
   copyrightRoles: {
-    _autor: {
+    _author: {
       fr: 'Auteur',
       en: 'COPYRIGHT',
     },

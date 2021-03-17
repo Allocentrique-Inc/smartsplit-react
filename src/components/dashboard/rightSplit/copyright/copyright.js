@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import AddCollaborators from '../_/addCollaborators/addCollaborators';
-import Circle from '../_/circle/circle';
 import TopBar from '../_/topBar/topBar';
 import DividingMethod from './dividingMethod/dividingMethod';
 import recalculateShares from './_/recalculateShares';
@@ -11,6 +10,10 @@ import DownBar from '../_/downBar/downBar';
 import CreateNewCollaborator from '../_/createNewCollaborator/createNewCollaborator';
 import Presentation from '../_/presentation/presentation';
 import PageErrors from '../_/pageErrors/pageErrors';
+import CircledC from '../../../../icons/circledC';
+import SplitChart from '../_/charts/splitChart/splitChart';
+import DualSplitChart from '../_/charts/dualSplitChart/dualSplitChart';
+import { rightHoldersToChartData } from '../_/charts/utils';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
@@ -67,7 +70,8 @@ const Copyright = (props) => {
     );
     modifiedCollaborator.roles.push(role);
     let newCopyright = props.copyright.map((el) =>
-      (el.rightHolder_id === rightHolder_id ? modifiedCollaborator : el));
+      el.rightHolder_id === rightHolder_id ? modifiedCollaborator : el,
+    );
     newCopyright = recalculateShares({
       newDividingMethod: props.copyrightDividingMethod,
       copyright: newCopyright,
@@ -84,7 +88,8 @@ const Copyright = (props) => {
       (el) => el !== role,
     );
     let newCopyright = props.copyright.map((el) =>
-      (el.rightHolder_id === rightHolder_id ? modifiedCollaborator : el));
+      el.rightHolder_id === rightHolder_id ? modifiedCollaborator : el,
+    );
 
     newCopyright = recalculateShares({
       newDividingMethod: props.copyrightDividingMethod,
@@ -132,8 +137,8 @@ const Copyright = (props) => {
               EL.shares === 0
                 ? 0
                 : sharesToSeparate < 0
-                  ? 0
-                  : ceil((EL.shares / unlockedSharesSum) * sharesToSeparate);
+                ? 0
+                : ceil((EL.shares / unlockedSharesSum) * sharesToSeparate);
           }
           return EL;
         });
@@ -145,7 +150,7 @@ const Copyright = (props) => {
 
   const sharesTotal = props.copyright.reduce((acc, el) => el.shares + acc, 0);
   const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
-  const shouldDisplayCircle = isTotal100;
+  const shouldDisplayPieChart = isTotal100;
 
   const t_title =
     props.translations.rightSplit.title._copyright[props.language];
@@ -153,6 +158,14 @@ const Copyright = (props) => {
     props.translations.rightSplit.presentation._copyright[props.language];
   const t_description =
     props.translations.rightSplit.description._copyright[props.language];
+  const t_lyrics = {
+    fr: 'Paroles',
+    en: 'Lyrics',
+  }[props.language];
+  const t_music = {
+    fr: 'Musique',
+    en: 'Music',
+  }[props.language];
 
   const commonProps = {
     ...props,
@@ -170,6 +183,26 @@ const Copyright = (props) => {
     t_description,
     triedSubmit,
     setTriedSubmit,
+    chartData: rightHoldersToChartData(
+      props.copyright,
+      props.activeCollaboratorsIds,
+    ),
+    leftChartData: rightHoldersToChartData(
+      props.copyright.filter(
+        (rh) => rh.roles.includes('author') || rh.roles.includes('adapter'),
+      ),
+      props.activeCollaboratorsIds,
+    ),
+    leftChartTitle: t_lyrics,
+    rightChartTitle: t_music,
+    rightChartData: rightHoldersToChartData(
+      props.copyright.filter(
+        (rh) => rh.roles.includes('composer') || rh.roles.includes('mixer'),
+      ),
+      props.activeCollaboratorsIds,
+    ),
+    logo: CircledC,
+    size: 384,
   };
 
   return (
@@ -200,9 +233,14 @@ const Copyright = (props) => {
             </div>
             <div className="b1b1b2">
               <div className="b1b1b1b2">
-                {shouldDisplayCircle && (
-                  <Circle {...commonProps} collaborators={props.copyright} />
-                )}
+                {shouldDisplayPieChart &&
+                  props.copyrightDividingMethod !== 'role' && (
+                    <SplitChart {...commonProps} />
+                  )}
+                {shouldDisplayPieChart &&
+                  props.copyrightDividingMethod === 'role' && (
+                    <DualSplitChart {...commonProps} />
+                  )}
               </div>
             </div>
           </div>
