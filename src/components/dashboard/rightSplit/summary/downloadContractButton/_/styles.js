@@ -115,4 +115,8 @@ export default StyleSheet.create({
     fontSize: 8,
     flexDirection: 'row-reverse',
   },
+  chart: {
+    height: 192,
+    width: 192,
+  },
 });
