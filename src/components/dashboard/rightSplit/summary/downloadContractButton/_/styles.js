@@ -112,7 +112,6 @@ export default StyleSheet.create({
     bottom: 10,
     left: 0,
     right: 32,
-    // textAlign: 'right',
     fontSize: 8,
     flexDirection: 'row-reverse',
   },
