@@ -15,9 +15,9 @@ const recalculateShares = ({ newDividingMethod, copyright }) => {
       (acc, el) => (el.roles.some((el) => el === 'author') ? acc + 1 : acc + 0),
       0,
     );
-    const adaptator = copyright.reduce(
+    const adapter = copyright.reduce(
       (acc, el) =>
-        el.roles.some((el) => el === 'adaptator') ? acc + 1 : acc + 0,
+        el.roles.some((el) => el === 'adapter') ? acc + 1 : acc + 0,
       0,
     );
     const composer = copyright.reduce(
@@ -31,10 +31,10 @@ const recalculateShares = ({ newDividingMethod, copyright }) => {
     );
 
     const authorShares =
-      author > 0 ? (adaptator + composer + mixer > 0 ? 50 : 100) / author : 0;
+      author > 0 ? (adapter + composer + mixer > 0 ? 50 : 100) / author : 0;
     const musicShares =
-      adaptator + composer + mixer > 0
-        ? (author > 0 ? 50 : 100) / (adaptator + composer + mixer)
+      adapter + composer + mixer > 0
+        ? (author > 0 ? 50 : 100) / (adapter + composer + mixer)
         : 0;
     const arr = [
       ...copyright.map((el) => {
@@ -44,7 +44,7 @@ const recalculateShares = ({ newDividingMethod, copyright }) => {
           : 0;
         const collMusicShares =
           el.roles.filter(
-            (el) => el === 'adaptator' || el === 'composer' || el === 'mixer',
+            (el) => el === 'adapter' || el === 'composer' || el === 'mixer',
           ).length * musicShares;
         obj.shares =
           Math.floor((collAutorShares + collMusicShares) * 10000) / 10000;

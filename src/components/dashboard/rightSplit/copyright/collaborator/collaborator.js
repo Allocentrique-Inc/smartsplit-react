@@ -61,8 +61,8 @@ const Collaborator = (props) => {
     props.translations.rightSplit.copyrightRoles._author[props.language];
   const t_composer =
     props.translations.rightSplit.copyrightRoles._composer[props.language];
-  const t_adaptator =
-    props.translations.rightSplit.copyrightRoles._adaptator[props.language];
+  const t_adapter =
+    props.translations.rightSplit.copyrightRoles._adapter[props.language];
   const t_mixer =
     props.translations.rightSplit.copyrightRoles._mixer[props.language];
 
@@ -118,8 +118,8 @@ const Collaborator = (props) => {
           <RoleBox
             {...commonProps}
             arr={props.collaborator.roles}
-            label={t_adaptator}
-            _role="adaptator"
+            label={t_adapter}
+            _role="adapter"
           />
           <RoleBox
             {...commonProps}

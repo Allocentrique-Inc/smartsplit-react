@@ -74,7 +74,7 @@ export default {
       fr: 'Compositeur',
       en: 'COPYRIGHT',
     },
-    _adaptator: {
+    _adapter: {
       fr: 'Adaptateur',
       en: 'COPYRIGHT',
     },
