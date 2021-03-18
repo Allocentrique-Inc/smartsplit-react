@@ -280,13 +280,7 @@ const AcceptedRightSplit = (props) => {
           <div />
           <div className="status acceptedStatus">{props.t_accepted}</div>
         </div>
-        <DownloadContractButton
-          language={props.language}
-          copyright={props.copyright}
-          performance={props.performance}
-          recording={props.recording}
-          label={props.label}
-        />
+        <DownloadContractButton language={props.language} />
 
         {/*{hasBoughtPDF ? (
           <DownloadContractButton language={props.language} />

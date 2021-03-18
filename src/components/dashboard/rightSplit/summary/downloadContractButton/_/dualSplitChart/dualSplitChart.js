@@ -12,7 +12,7 @@ export default function DualSplitChart({
 }) {
   const centerOffset = (size * 32) / 384;
   const chartSize = size - centerOffset;
-  const textYpos = chartSize + centerOffset * (4 / 32);
+  const textYpos = chartSize + centerOffset * (7 / 32);
   const chartCenter = { x: size / 2, y: chartSize / 2 };
   const leftSlices = usePieChartSlices({
     data: leftChartData,

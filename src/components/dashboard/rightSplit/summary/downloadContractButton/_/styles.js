@@ -2,7 +2,7 @@ import { StyleSheet } from '@react-pdf/renderer';
 
 export default StyleSheet.create({
   page: {
-    padding: '16 32',
+    padding: '16 30',
     fontFamily: 'Helvetica',
     flex: 1,
   },
@@ -114,5 +114,68 @@ export default StyleSheet.create({
     right: 32,
     fontSize: 8,
     flexDirection: 'row-reverse',
+  },
+  rightSplit: {
+    width: '100%',
+    flexDirection: 'row',
+    paddingTop: 12,
+    paddingBottom: 16,
+    justifyContent: 'space-between',
+  },
+  collaboratorColumn: {
+    width: '50%',
+  },
+  collaboratorRow: {
+    flex: 1,
+    padding: '12 0 8 0',
+    marginLeft: 8,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderBottom: '1 solid #e2e2e3',
+  },
+  rightSplitTitle: {
+    flexDirection: 'row',
+  },
+  iconTitle: {
+    marginRight: 8,
+  },
+  collaboratorRoles: {
+    fontSize: 7,
+    color: '#687A8B',
+    marginTop: 2,
+  },
+  collaboratorName: {
+    fontSize: 9,
+    color: '#203548',
+  },
+  collaboratorShares: {
+    fontSize: 9,
+    fontFamily: 'Helvetica-Bold',
+    color: '#516b81',
+  },
+  collaboratorAcceptedVote: {
+    marginTop: 2,
+    fontSize: 7,
+    fontFamily: 'Helvetica-Bold',
+    color: '#2da84f',
+  },
+  collaboratorRefusedVote: {
+    marginTop: 2,
+    fontSize: 7,
+    fontFamily: 'Helvetica-Bold',
+    color: '#AC1616',
+  },
+  userInitials: {
+    marginLeft: 8,
+    justifyContent: 'center',
+    fontSize: 8,
+    fontFamily: 'Courier-Oblique',
+  },
+  noBorder: {
+    border: 0,
+  },
+  splitTitleRow: {
+    flexDirection: 'row',
+    margin: '0 0 16 8',
   },
 });
