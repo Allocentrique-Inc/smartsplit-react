@@ -6,16 +6,21 @@ import PDFContentParser from '../PDFContentParser';
 import contractData from '../assets/contractData';
 import SplitChartSVG from '../../../../_/charts/splitChart/splitChart';
 import SplitChart from '../splitChart/splitChart';
+import DualSplitChart from '../dualSplitChart/dualSplitChart';
 import usePieChartSlices from '../../../../_/charts/usePieChartSlices';
 import { rightHoldersToChartData } from '../../../../_/charts/utils';
 import logoPaths from '../assets/logoPaths';
 
-export default function Contract(props) {
-  const { copyright, performance, recording, label } = props;
+const CHARTSIZE = 128;
+
+export default function Contract() {
+  const {
+    copyright,
+    copyrightDividingMethod,
+    performance,
+    recording,
+  } = contractData.sections.rightSplit;
   let activeCollaborators = [...copyright, ...performance, ...recording];
-  if (label.rightHolder_id) {
-    activeCollaborators.push(label);
-  }
   activeCollaborators = activeCollaborators.reduce((acc, el) => {
     if (acc.find((EL) => EL.rightHolder_id === el.rightHolder_id)) {
       return acc;
@@ -25,37 +30,35 @@ export default function Contract(props) {
   const activeCollaboratorsIds = activeCollaborators.map(
     (el) => el.rightHolder_id,
   );
-  const copyrightSlices = usePieChartSlices({
-    data: rightHoldersToChartData(copyright, activeCollaboratorsIds),
-    size: 384,
-    pdfMode: true,
-  });
+
   const copyrightChartProps = {
-    slices: copyrightSlices,
+    chartData: rightHoldersToChartData(copyright, activeCollaboratorsIds),
+    leftChartData: rightHoldersToChartData(
+      copyright.filter(
+        (rh) => rh.roles.includes('author') || rh.roles.includes('adapter'),
+      ),
+      activeCollaboratorsIds,
+    ),
+    rightChartData: rightHoldersToChartData(
+      copyright.filter(
+        (rh) => rh.roles.includes('composer') || rh.roles.includes('mixer'),
+      ),
+      activeCollaboratorsIds,
+    ),
     logoPath: logoPaths.copyright,
-    size: 384,
+    size: CHARTSIZE,
     key: 'copyrightChart',
   };
-  const performanceSlices = usePieChartSlices({
-    data: rightHoldersToChartData(performance, activeCollaboratorsIds),
-    size: 384,
-    pdfMode: true,
-  });
   const performanceChartProps = {
-    slices: performanceSlices,
+    chartData: rightHoldersToChartData(performance, activeCollaboratorsIds),
     logoPath: logoPaths.performance,
-    size: 384,
+    size: CHARTSIZE,
     key: 'performanceChart',
   };
-  const recordingSlices = usePieChartSlices({
-    data: rightHoldersToChartData(recording, activeCollaboratorsIds),
-    size: 384,
-    pdfMode: true,
-  });
   const recordingChartProps = {
-    slices: recordingSlices,
+    chartData: rightHoldersToChartData(recording, activeCollaboratorsIds),
     logoPath: logoPaths.recording,
-    size: 384,
+    size: CHARTSIZE,
     key: 'recordingChart',
   };
 
@@ -66,7 +69,13 @@ export default function Contract(props) {
           <Image src={SmartSplit} style={{ width: '38%', marginBottom: 8 }} />
           {PDFContentParser(ReactHtmlParser(contractData.header))}
         </View>
-        <SplitChart {...copyrightChartProps} />
+        {copyrightDividingMethod === 'role' && (
+          <DualSplitChart {...copyrightChartProps} />
+        )}
+        {copyrightDividingMethod !== 'role' && (
+          <SplitChart {...copyrightChartProps} />
+        )}
+
         <SplitChart {...performanceChartProps} />
         <SplitChart {...recordingChartProps} />
 

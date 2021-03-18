@@ -3,14 +3,14 @@ import { memo } from 'react';
 import Contract from './_/contract/contract';
 
 export default memo((props) => {
-  const { language, ...contractProps } = props;
+  const { language } = props;
   const t_download = {
     fr: "Télécharger l'entente",
     en: 'Download the contract',
   }[language];
   return (
     <div>
-      <BlobProvider document={<Contract {...contractProps} />}>
+      <BlobProvider document={<Contract />}>
         {({ blob, url, loading, error }) => {
           return (
             !loading &&

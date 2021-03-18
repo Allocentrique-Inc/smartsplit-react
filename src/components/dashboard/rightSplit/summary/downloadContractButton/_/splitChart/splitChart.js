@@ -1,10 +1,27 @@
 import { Canvas } from '@react-pdf/renderer';
 import styles from '../styles';
+import usePieChartSlices from '../../../../_/charts/usePieChartSlices';
+import useChartLogo from '../useChartLogo';
 
-export default function SplitChart({ slices, logoPath, ...nextProps }) {
+export default function SplitChart({
+  chartData,
+  logoPath,
+  size = 384,
+  startAngle,
+  ...nextProps
+}) {
+  const chartCenter = { x: size / 2, y: size / 2 };
+  const slices = usePieChartSlices({
+    data: chartData,
+    clockwise: true,
+    size,
+    startAngle,
+    pdfMode: true,
+  });
+
+  const [logoVector, logoScale] = useChartLogo({ size, center: chartCenter });
   const paint = (painter) => {
     painter.lineWidth(1);
-    painter.scale(0.5);
     slices.forEach((slice) => {
       if (slice.method === 'path') {
         painter.path(slice.data);
@@ -19,11 +36,18 @@ export default function SplitChart({ slices, logoPath, ...nextProps }) {
       }
     });
     painter
-      .circle(192, 192, 96)
+      .circle(chartCenter.x, chartCenter.y, size / 4)
       .fill('white')
       .path(logoPath)
-      .translate(128, 128)
+      .translate(logoVector.x, logoVector.y)
+      .scale(logoScale)
       .fill('#DCDFE1');
   };
-  return <Canvas style={styles.chart} paint={paint} {...nextProps} />;
+  return (
+    <Canvas
+      style={{ height: size, width: size }}
+      paint={paint}
+      {...nextProps}
+    />
+  );
 }
