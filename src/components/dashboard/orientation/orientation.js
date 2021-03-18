@@ -17,6 +17,8 @@ const Orientation = (props) => {
   const handleBackButton = async () => {
     history.push('/');
   };
+  const hasEditPermission =
+    props.user.user_id === props.workpiece.owner.user_id;
 
   const t_createdBy =
     props.workpiece &&
@@ -80,9 +82,11 @@ const Orientation = (props) => {
               <div className="description">
                 <div className="title">
                   {props.workpiece.title}
-                  <button className="btn-icon" onClick={handleEditWorkpiece}>
-                    <PenIcon />
-                  </button>
+                  {hasEditPermission && (
+                    <button className="btn-icon" onClick={handleEditWorkpiece}>
+                      <PenIcon />
+                    </button>
+                  )}
                 </div>
                 <div className="details">
                   {t_createdBy && t_createdBy_}
