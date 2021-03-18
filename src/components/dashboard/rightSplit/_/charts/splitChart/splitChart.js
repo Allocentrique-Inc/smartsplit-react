@@ -5,7 +5,6 @@ import { rightHoldersToChartData } from '../utils';
 
 export default function SplitChart({
   chartData,
-  activeCollaboratorsIds,
   logo,
   size = 4 * 128,
   startAngle,

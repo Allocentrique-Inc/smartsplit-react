@@ -54,6 +54,36 @@ export function rightHoldersToChartData(collaborators, activeCollaboratorsIds) {
         colors[activeCollaboratorsIds.indexOf(collaborator.rightHolder_id)],
     }));
 }
+
+export function genSliceData({
+  start,
+  end,
+  center,
+  radius,
+  angle,
+  rotation = 0,
+  clockwise,
+  color,
+}) {
+  return 2 * Math.PI - Math.abs(angle) < 0.00000001
+    ? {
+        method: 'circle',
+        cx: center.x,
+        cy: center.y,
+        r: radius,
+        color,
+      }
+    : {
+        method: 'path',
+        data: `M${center.x},${center.y} L${start.x},${
+          start.y
+        } A${radius},${radius} ${rotation} ${
+          Math.abs(angle) > Math.PI ? 1 : 0
+        },${clockwise ? 1 : 0} ${end.x},${end.y} z`,
+        color,
+      };
+}
+
 // https://css-tricks.com/snippets/javascript/lighten-darken-color/
 export function lightenDarkenColor(color, amount) {
   let usePound = false;

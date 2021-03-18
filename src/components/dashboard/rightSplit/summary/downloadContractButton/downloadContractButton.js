@@ -2,14 +2,15 @@ import { BlobProvider } from '@react-pdf/renderer';
 import { memo } from 'react';
 import Contract from './_/contract/contract';
 
-export default memo(({ language }) => {
+export default memo((props) => {
+  const { language, ...contractProps } = props;
   const t_download = {
     fr: "Télécharger l'entente",
     en: 'Download the contract',
   }[language];
   return (
     <div>
-      <BlobProvider document={<Contract />}>
+      <BlobProvider document={<Contract {...contractProps} />}>
         {({ blob, url, loading, error }) => {
           return (
             !loading &&
