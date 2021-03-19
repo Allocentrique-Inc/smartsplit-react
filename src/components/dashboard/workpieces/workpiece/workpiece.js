@@ -21,7 +21,7 @@ const Workpiece = (props) => {
     props.documentation.files.art &&
     props.documentation.files.art.length
       ? props.documentation.files.art[props.documentation.files.art.length - 1]
-        .url
+          .url
       : null;
   const commonProps = {
     ...props,
@@ -50,16 +50,23 @@ const Workpiece = (props) => {
 
 const Ellipsis = (props) => {
   const [showWorkpieceOptions, setShowWorkpieceOptions] = useState(false);
+  const isMenuShowned = !(props.rightSplit && props.rightSplit._state);
   const openMenu = () => {
     setTimeout(() => {
-      document.getElementById('workpieceMenu').focus();
+      try {
+        document.getElementById('workpieceMenu').focus();
+      } catch (err) {
+        console.log(err);
+      }
     }, 0);
     setShowWorkpieceOptions(true);
   };
   const closeMenu = () => {
     setShowWorkpieceOptions(false);
   };
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    props.setWorkpieceInDeletion(props.workpiece_id);
+  };
   const t_deleteButton = {
     fr: 'Supprimer cette pièce',
     en: 'Delete this workpiece',
@@ -71,7 +78,7 @@ const Ellipsis = (props) => {
       onClick={showWorkpieceOptions ? closeMenu : openMenu}
     >
       <VertEllipsis />
-      {showWorkpieceOptions && (
+      {showWorkpieceOptions && isMenuShowned && (
         <button
           className="workpieceMenuOption"
           onClick={handleDelete}

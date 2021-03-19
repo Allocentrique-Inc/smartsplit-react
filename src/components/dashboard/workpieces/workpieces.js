@@ -10,6 +10,7 @@ import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkp
 import ProfileOptions from '../_/profileOptions/profileOptions';
 import EmptyOwnerSongs from './emptyOwnerSongs/emptyOwnerSongs';
 import EmptyRightholderSongs from './emptyRightholderSongs/emptyRightholderSongs';
+import DeletingWorkpiece from './deletingWorkpiece/deletingWorkpiece';
 
 const Workpieces = (props) => {
   const user_id = localStorage.getItem('user_id');
@@ -17,6 +18,7 @@ const Workpieces = (props) => {
   const [workpiecesByRightHolder, setWorkpiecesByRightHolder] = useState([]);
   const [tab, setTab] = useState('owner');
   const [showModal, setShowModal] = useState(false);
+  const [workpieceInDeletion, setWorkpieceInDeletion] = useState(null);
 
   const resetWorkpiecesByOwner = async (firstLoad) => {
     const workpiecesByOwner = await getWorkpiecesByOwner({ user_id });
@@ -59,11 +61,15 @@ const Workpieces = (props) => {
     tab,
     setTab,
     setShowModal,
+    setWorkpieceInDeletion,
+    workpieceInDeletion,
+    resetWorkpiecesByOwner,
   };
 
   return (
     <div className="workpieces">
       {showModal && <AddOrEditWorkpieceModal {...commonProps} />}
+      {workpieceInDeletion && <DeletingWorkpiece {...commonProps} />}
       <LeftMenu {...commonProps} />
       <div className="rightContent">
         <div className="topBar">
@@ -87,18 +93,18 @@ const Workpieces = (props) => {
             ).map((el) => (
               <Workpiece
                 key={el.workpiece_id}
-                {...el}
                 {...commonProps}
+                {...el}
                 tab={tab}
               />
             ))}
             {tab === 'owner'
               ? workpiecesByOwner.length === 0 && (
               <EmptyOwnerSongs {...commonProps} />
-              )
+                )
               : workpiecesByRightHolder.length === 0 && (
               <EmptyRightholderSongs {...commonProps} />
-              )}
+                )}
           </div>
         </div>
       </div>
