@@ -252,7 +252,6 @@ const DraftRightSplit = (props) => {
 };
 
 const AcceptedRightSplit = (props) => {
-  console.log('PROPS SUMMARY', props);
   const versionIndex = props.workpiece.rightSplit.version;
   const productCode = 'RIGHT_SPLIT_DOWNLOAD';
   const [showPaymentModal, setShowPaymentModal] = useState();
@@ -280,9 +279,7 @@ const AcceptedRightSplit = (props) => {
           <div />
           <div className="status acceptedStatus">{props.t_accepted}</div>
         </div>
-        <DownloadContractButton language={props.language} />
-
-        {/*{hasBoughtPDF ? (
+        {hasBoughtPDF ? (
           <DownloadContractButton language={props.language} />
         ) : (
           <button
@@ -294,7 +291,7 @@ const AcceptedRightSplit = (props) => {
           >
             {props.t_download}
           </button>
-        )}*/}
+        )}
       </div>
       {showPaymentModal && <PaymentModal {...modalProps} />}
     </>

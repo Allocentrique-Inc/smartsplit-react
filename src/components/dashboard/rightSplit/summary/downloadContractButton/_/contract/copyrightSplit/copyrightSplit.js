@@ -10,6 +10,7 @@ import contractData from '../../assets/contractData';
 import DualSplitChart from '../../dualSplitChart/dualSplitChart';
 import SplitChart from '../../splitChart/splitChart';
 import colors from '../../../../../_/colors';
+import printRoles from '../_/printRoles';
 
 export default function CopyrightSplit(props) {
   const {
@@ -29,6 +30,8 @@ export default function CopyrightSplit(props) {
       ),
       activeCollaboratorsIds,
     ),
+    leftTitle: contractData.sections.rightSplit.copyright.lyrics,
+    rightTitle: contractData.sections.rightSplit.copyright.music,
     rightChartData: rightHoldersToChartData(
       copyright.rightHolders.filter(
         (rh) => rh.roles.includes('composer') || rh.roles.includes('mixer'),
@@ -38,17 +41,6 @@ export default function CopyrightSplit(props) {
     logoPath: logoPaths.copyright,
     size: CHARTSIZE,
     key: 'copyrightChart',
-  };
-
-  const printRoles = (roles) => {
-    let print = '';
-    roles.forEach((role, index) => {
-      print += `${role}`;
-      if (index !== roles.length - 1) {
-        print += ', ';
-      }
-    });
-    return print;
   };
 
   return (
@@ -108,7 +100,7 @@ export default function CopyrightSplit(props) {
                         : styles.collaboratorRefusedVote
                     }
                   >
-                    {rightHolder.vote}
+                    {rightHolder.displayVote}
                   </Text>
                 </View>
               </View>

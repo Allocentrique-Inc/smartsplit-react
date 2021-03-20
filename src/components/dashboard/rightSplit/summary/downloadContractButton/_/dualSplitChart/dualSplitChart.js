@@ -8,6 +8,8 @@ export default function DualSplitChart({
   rightChartData,
   logoPath,
   size = 384,
+  leftTitle,
+  rightTitle,
   ...nextProps
 }) {
   const centerOffset = (size * 32) / 384;
@@ -63,8 +65,8 @@ export default function DualSplitChart({
       .font('Helvetica-Bold')
       .fontSize(8)
       .fillColor('black')
-      .text('Paroles', chartSize / 2 - 28, textYpos)
-      .text('Musique', chartSize / 2 + centerOffset, textYpos);
+      .text(leftTitle, chartSize / 2 - 28, textYpos)
+      .text(rightTitle, chartSize / 2 + centerOffset, textYpos);
   };
   return (
     <Canvas

@@ -19,6 +19,8 @@ export default {
 
       copyright: {
         title: "<h3>DROITS D'AUTEUR</h3>",
+        lyrics: 'PAROLES',
+        music: 'MUSIQUE',
         rightHolders: [
           {
             artistName: "L'artiste",
@@ -40,7 +42,6 @@ export default {
             shares: 41.6666,
             displayVote: 'Approuvé',
             vote: 'accepted',
-            comment: '',
             rightHolder_id: '0d8f03c7-f1d8-4c1c-a984-0af19db04b0f',
           },
           {
@@ -52,7 +53,6 @@ export default {
             shares: 16.6666,
             displayVote: 'Approuvé',
             vote: 'accepted',
-            comment: '',
             rightHolder_id: 'ba68e3ea-b6ad-4aa3-96d5-a7c0143fb6a4',
           },
           {
@@ -63,7 +63,6 @@ export default {
             shares: 16.6666,
             displayVote: 'Refusé',
             vote: 'refused',
-            comment: '',
             rightHolder_id: 'e5e002a5-e7d8-4355-9dda-03d44fede714',
           },
         ],
@@ -72,6 +71,7 @@ export default {
         title: '<h3>INTERPRÉTATION</h3>',
         rightHolders: [
           {
+            avatar: 'unUrlAvatarValide',
             displayRoles: ['Musicien'],
             roles: ['musician'],
             artistName: 'ARTIST 1',
@@ -81,7 +81,6 @@ export default {
             shares: 80,
             displayVote: 'Approuvé',
             vote: 'accepted',
-            comment: '',
             rightHolder_id: '0d8f03c7-f1d8-4c1c-a984-0af19db04b0f',
           },
           {
@@ -94,7 +93,6 @@ export default {
             shares: 20,
             displayVote: 'Approuvé',
             vote: 'accepted',
-            comment: '',
             rightHolder_id: 'ba68e3ea-b6ad-4aa3-96d5-a7c0143fb6a4',
           },
         ],
@@ -106,14 +104,14 @@ export default {
             artistName: "L'artiste",
             firstName: 'FRANCOIS-X',
             lastName: 'DUEYMES',
-            function: 'producer',
+            displayFunction: 'Producteur',
             shares: 72,
             displayVote: 'Refusé',
             vote: 'refused',
             rightHolder_id: 'fd8c3947-5e2b-4200-8f4f-1b738cb6acc6',
           },
           {
-            function: 'producer',
+            displayFunction: 'Producteur',
             artistName: 'ARTIST 3',
             firstName: 'FX3',
             lastName: 'DUDUDUMS',

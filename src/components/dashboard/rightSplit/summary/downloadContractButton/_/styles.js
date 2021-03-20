@@ -1,8 +1,11 @@
 import { StyleSheet } from '@react-pdf/renderer';
 
 export default StyleSheet.create({
+  smartSplitLogo: {
+    width: '50%',
+  },
   page: {
-    padding: '16 30',
+    padding: '18 30',
     fontFamily: 'Helvetica',
     flex: 1,
   },
@@ -127,7 +130,7 @@ export default StyleSheet.create({
   },
   collaboratorRow: {
     flex: 1,
-    padding: '12 0 8 0',
+    padding: '12 0 9 0',
     marginLeft: 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -142,7 +145,7 @@ export default StyleSheet.create({
   collaboratorRoles: {
     fontSize: 7,
     color: '#687A8B',
-    marginTop: 2,
+    marginTop: 3,
   },
   collaboratorName: {
     fontSize: 9,
@@ -154,13 +157,13 @@ export default StyleSheet.create({
     color: '#516b81',
   },
   collaboratorAcceptedVote: {
-    marginTop: 2,
+    marginTop: 3,
     fontSize: 7,
     fontFamily: 'Helvetica-Bold',
     color: '#2da84f',
   },
   collaboratorRefusedVote: {
-    marginTop: 2,
+    marginTop: 3,
     fontSize: 7,
     fontFamily: 'Helvetica-Bold',
     color: '#AC1616',
@@ -176,6 +179,6 @@ export default StyleSheet.create({
   },
   splitTitleRow: {
     flexDirection: 'row',
-    margin: '0 0 16 8',
+    margin: '12 0 12 8',
   },
 });
