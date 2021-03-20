@@ -209,12 +209,14 @@
           .ellipsis {
             margin-left: 16px;
             cursor: pointer;
+            position: relative;
             .workpieceMenuOption {
               background-color: white;
               width: 160px;
               height: 60px;
               position: absolute;
-              margin-left: -170px;
+              z-index: 1;
+              margin-left: -150px;
               margin-top: 30px;
               // top: 52px;
               border: none;
@@ -252,31 +254,31 @@
     }
   }
 }
-.cover-image{
-  width:40px;
-  height:40px;
-  img,svg{
-
+.cover-image {
+  width: 40px;
+  height: 40px;
+  img,
+  svg {
   }
-  &.large{
-    width:250px;
-    height:250px;
+  &.large {
+    width: 250px;
+    height: 250px;
   }
-  &.medium{
-    width:72px;
-    height:72px;
+  &.medium {
+    width: 72px;
+    height: 72px;
   }
-  &.small{
-    width:40px;
-    height:40px;
+  &.small {
+    width: 40px;
+    height: 40px;
   }
-  &.tiny{
-    width:24px;
-    height:24px;
+  &.tiny {
+    width: 24px;
+    height: 24px;
   }
 }
-.edit-cover-image{
-  display:flex;
+.edit-cover-image {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;

@@ -13,9 +13,8 @@ const deleteWorkpiece = async (payload) => {
       },
     });
     const textResponse = await response.text();
-    const parsedResponse = JSON.parse(textResponse);
-    console.log(parsedResponse);
-    return parsedResponse;
+    console.log(textResponse);
+    return textResponse;
   } catch (err) {
     console.log(err);
     const parsedResponse = { errors: ["Can't reach server"] };
