@@ -1,5 +1,10 @@
 import PieChartSlice from './pieChartSlice/pieChartSlice';
-import { degreesToRadians, getShareTotal, rotatePoint } from './utils';
+import {
+  degreesToRadians,
+  genSliceData,
+  getShareTotal,
+  rotatePoint,
+} from './utils';
 
 export default function usePieChartSlices({
   data,
@@ -7,6 +12,7 @@ export default function usePieChartSlices({
   clockwise,
   size,
   startAngle,
+  pdfMode = false,
 }) {
   const shareAngle =
     (clockwise ? 1 : -1) * degreesToRadians(angleRange / getShareTotal(data));
@@ -25,7 +31,18 @@ export default function usePieChartSlices({
   }
   return data.map((dataPoint) => {
     const end = rotatePoint(start, center, dataPoint.shares * shareAngle);
-    const slice = (
+    const slice = pdfMode ? (
+      genSliceData({
+        start,
+        end,
+        center,
+        radius,
+        angle: dataPoint.shares * shareAngle,
+        color: dataPoint.color,
+        clockwise,
+        key: dataPoint.key,
+      })
+    ) : (
       <PieChartSlice
         start={start}
         end={end}
