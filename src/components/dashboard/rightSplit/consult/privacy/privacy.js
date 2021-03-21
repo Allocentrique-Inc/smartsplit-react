@@ -1,6 +1,8 @@
 // import Collaborator from './collaborator/collaborator';
 import { useHistory, useParams } from 'react-router-dom';
 import Eye from './eye';
+import Avatar from '../../../_/avatar/avatar';
+import colors from '../../_/colors';
 
 const Privacy = (props) => {
   const history = useHistory();
@@ -74,11 +76,16 @@ const Collab = (props) => {
   const user_id = localStorage.getItem('user_id');
   const isUserVoting =
     user_id === props.collaborator.rightHolder_id && vote === 'undecided';
+
+  const collaboratorColor =
+    colors[
+      props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
+    ];
   return (
     <div>
       <div className="consultCollaborator privacyCollaborator">
         <div className="left">
-          <div className="avatar">{t_initials}</div>
+          <Avatar user={rightHolder} color={collaboratorColor} />
           <div className="name">{t_name}</div>
         </div>
 

@@ -1,4 +1,5 @@
-// import Vote from '../vote/vote';
+import Avatar from '../../../../_/avatar/avatar';
+import colors from '../../../_/colors';
 
 const Collaborator = (props) => {
   const { shares, vote, roles, rightHolder, comment } = props.collaborator;
@@ -17,11 +18,16 @@ const Collaborator = (props) => {
   const user_id = localStorage.getItem('user_id');
   const isUserVoting =
     user_id === props.collaborator.rightHolder_id && vote === 'undecided';
+
+  const collaboratorColor =
+    colors[
+      props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
+    ];
   return (
     <>
       <div className="consultCollaborator">
         <div className="left">
-          <div className="avatar">{t_initials}</div>
+          <Avatar user={rightHolder} color={collaboratorColor} />
           <div>
             <div className="name">{`${firstName} ${lastName}`}</div>
             <div className="roles">

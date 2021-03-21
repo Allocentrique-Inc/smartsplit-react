@@ -1,4 +1,5 @@
-// import Vote from '../vote/vote';
+import Avatar from '../../../../_/avatar/avatar';
+import colors from '../../../_/colors';
 
 const Collaborator = (props) => {
   const {
@@ -54,11 +55,16 @@ const Collaborator = (props) => {
       }));
     commentValue = props.recording.comment;
   }
+
+  const collaboratorColor =
+    colors[
+      props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
+    ];
   return (
     <>
       <div className="consultCollaborator">
         <div className="left">
-          <div className="avatar">{t_initials}</div>
+          <Avatar user={rightHolder} color={collaboratorColor} />
           <div>
             <div className="name">{`${firstName} ${lastName}`}</div>
             <div className="roles"> {_function}</div>

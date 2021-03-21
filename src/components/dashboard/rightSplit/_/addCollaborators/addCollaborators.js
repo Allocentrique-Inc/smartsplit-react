@@ -3,6 +3,7 @@ import ChevronDown from '../../../../../icons/chevronDown';
 import PlusCircleFull from '../../../../../icons/plusCircleFull';
 import PlusCircle from '../../../../../icons/plusCircle';
 import getUsersCollaborators from '../../../../../api/users/getUsersCollaborators';
+import Avatar from '../../../_/avatar/avatar';
 
 const AddCollaborators = (props) => {
   const [isAdding, setIsAdding] = useState(false);
@@ -99,8 +100,8 @@ const AddCollaborators = (props) => {
               const secondInstance = isYou
                 ? '(toi)'
                 : artistName
-                  ? `(${firstName} ${lastName})`
-                  : '';
+                ? `(${firstName} ${lastName})`
+                : '';
               return (
                 <div
                   className="option"
@@ -112,10 +113,7 @@ const AddCollaborators = (props) => {
                     await setIsAdding(false);
                   }}
                 >
-                  <div className="avatar">
-                    {firstName[0]}
-                    {lastName[0]}
-                  </div>
+                  <Avatar user={el} />
                   <span className="firstInstance">{firstInstance}</span>
                   <span className="secondInstance">{secondInstance}</span>
                 </div>

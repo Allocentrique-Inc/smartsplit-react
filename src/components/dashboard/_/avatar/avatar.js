@@ -3,12 +3,14 @@ import Config from '../../../../config';
 
 const Avatar = (props) => {
   const { className } = props;
-  const { user } = props;
+  const { user, color } = props;
   const initials =
     user && user.firstName && user.lastName
       ? user.firstName.substr(0, 1) + user.lastName.substr(0, 1)
       : '';
   const hasImage = user.avatarUrl;
+  const backgroundColor = color || 'inherit';
+  console.log(color);
   return (
     <div className={`avatar ${className}`} title={user.fullName}>
       {hasImage && (
@@ -18,7 +20,7 @@ const Avatar = (props) => {
         />
       )}
       {!hasImage && (
-        <div className="avatar-placeholder">
+        <div className="avatar-placeholder" style={{ backgroundColor }}>
           <span>{initials}</span>
         </div>
       )}

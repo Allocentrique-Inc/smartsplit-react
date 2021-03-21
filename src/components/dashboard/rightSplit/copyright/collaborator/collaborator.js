@@ -4,17 +4,16 @@ import colors from '../../_/colors';
 import Ellipsis from '../../../../../icons/ellipsis';
 import Dragger from '../../_/dragger/dragger';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
+import Avatar from '../../../_/avatar/avatar';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
 
   // AVATAR
-  const avatarStyle = {
-    backgroundColor:
-      colors[
-        props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
-      ],
-  };
+  const collaboratorColor =
+    colors[
+      props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
+    ];
 
   // ELLIPSIS
   const handleEllipsisClick = () => {
@@ -74,15 +73,17 @@ const Collaborator = (props) => {
     setShares,
     handleToggleRole,
   };
+
   return (
     <>
       <div className={collaboratorClassName}>
         <div className="b1">
           {/* AVATAR */}
           <div className="rowAC">
-            <div className="avatar" style={avatarStyle}>
-              {t_initials}
-            </div>
+            <Avatar
+              user={props.collaborator.rightHolder}
+              color={collaboratorColor}
+            />
             <div className="name">{t_userName}</div>
           </div>
 

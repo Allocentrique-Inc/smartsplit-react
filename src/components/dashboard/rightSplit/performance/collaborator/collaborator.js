@@ -5,17 +5,16 @@ import colors from '../../_/colors';
 import Ellipsis from '../../../../../icons/ellipsis';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import setCollaboratorsErrors from '../_/setCollaboratorsErrors';
+import Avatar from '../../../_/avatar/avatar';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
 
   // AVATAR
-  const avatarStyle = {
-    backgroundColor:
-      colors[
-        props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
-      ],
-  };
+  const collaboratorColor =
+    colors[
+      props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
+    ];
 
   // ELLIPSIS
   const handleEllipsisClick = () => {
@@ -92,9 +91,10 @@ const Collaborator = (props) => {
         <div className="b1">
           <div className="rowAC">
             {/* AVATAR */}
-            <div className="avatar" style={avatarStyle}>
-              {t_initials}
-            </div>
+            <Avatar
+              user={props.collaborator.rightHolder}
+              color={collaboratorColor}
+            />
             <div className="name">{t_userName}</div>
           </div>
           {/* ELLIPSIS OPTIONS */}
