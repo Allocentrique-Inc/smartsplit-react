@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import Config from '../../../../config';
 
 const Avatar = (props) => {
   const { className } = props;
@@ -10,7 +9,6 @@ const Avatar = (props) => {
       : '';
   const hasImage = user.avatarUrl;
   const backgroundColor = color || 'inherit';
-  console.log(color);
   return (
     <div className={`avatar ${className}`} title={user.fullName}>
       {hasImage && (
