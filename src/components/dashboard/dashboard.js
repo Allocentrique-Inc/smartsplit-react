@@ -7,6 +7,7 @@ import getUsers from '../../api/users/getUsers';
 import translations from '../../translations';
 import patchUser from '../../api/users/patchUser';
 import Dev from './dev/dev';
+import Logistic from './logistic/logistic';
 
 const Dashboard = (props) => {
   const [selectedWorkpiece, selectWorkpiece] = useState('');
@@ -52,6 +53,9 @@ const Dashboard = (props) => {
       </Route>
       <Route path="/dev">
         <Dev {...props} {...commonProps} />
+      </Route>
+      <Route path="/logistic">
+        <Logistic {...props} {...commonProps} />
       </Route>
       <Route path="/">
         <Workpieces {...props} {...commonProps} />
