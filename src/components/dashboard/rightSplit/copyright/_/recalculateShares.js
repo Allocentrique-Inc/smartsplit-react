@@ -1,3 +1,6 @@
+import useLyricContributors from './useLyricContributors';
+import useMusicContributors from './useMusicContributors';
+
 const recalculateShares = ({ newDividingMethod, copyright }) => {
   if (newDividingMethod === 'equal') {
     const arr = [
@@ -11,47 +14,37 @@ const recalculateShares = ({ newDividingMethod, copyright }) => {
   }
 
   if (newDividingMethod === 'role') {
-    const author = copyright.reduce(
-      (acc, el) => (el.roles.some((el) => el === 'author') ? acc + 1 : acc + 0),
-      0,
+    const [lyricContributors, lyricContributorNb] = useLyricContributors(
+      copyright,
     );
-    const adapter = copyright.reduce(
-      (acc, el) =>
-        el.roles.some((el) => el === 'adapter') ? acc + 1 : acc + 0,
-      0,
+    const [musicContributors, musicContributorNb] = useMusicContributors(
+      copyright,
     );
-    const composer = copyright.reduce(
-      (acc, el) =>
-        el.roles.some((el) => el === 'composer') ? acc + 1 : acc + 0,
-      0,
-    );
-    const mixer = copyright.reduce(
-      (acc, el) => (el.roles.some((el) => el === 'mixer') ? acc + 1 : acc + 0),
-      0,
-    );
+    let totalFactor = 0.5;
+    if (lyricContributorNb === 0 || musicContributorNb === 0) {
+      totalFactor = 1;
+    }
+    return copyright.map((rh) => {
+      let score = 0;
+      if (
+        lyricContributors.some(
+          (contributor) => contributor.rightHolder_id === rh.rightHolder_id,
+        )
+      ) {
+        score += (totalFactor * copyright.length) / lyricContributorNb;
+      }
+      musicContributors.forEach((contributor) => {
+        if (contributor.rightHolder_id === rh.rightHolder_id) {
+          score +=
+            (totalFactor * contributor.weight * copyright.length) /
+            musicContributorNb;
+        }
+      });
 
-    const authorShares =
-      author > 0 ? (adapter + composer + mixer > 0 ? 50 : 100) / author : 0;
-    const musicShares =
-      adapter + composer + mixer > 0
-        ? (author > 0 ? 50 : 100) / (adapter + composer + mixer)
-        : 0;
-    const arr = [
-      ...copyright.map((el) => {
-        const obj = { ...el };
-        const collAutorShares = el.roles.some((el) => el === 'author')
-          ? authorShares
-          : 0;
-        const collMusicShares =
-          el.roles.filter(
-            (el) => el === 'adapter' || el === 'composer' || el === 'mixer',
-          ).length * musicShares;
-        obj.shares =
-          Math.floor((collAutorShares + collMusicShares) * 10000) / 10000;
-        return obj;
-      }),
-    ];
-    return arr;
+      rh.shares =
+        Math.floor(((score * 100) / copyright.length) * 10000) / 10000;
+      return rh;
+    });
   }
   if (newDividingMethod === 'manual') {
     return [...copyright];
