@@ -55,7 +55,7 @@ export default {
       fr: 'Partager de façon égale',
       en: 'COPYRIGHT',
     },
-    _roles: {
+    _role: {
       fr: 'Partager selon les rôles',
       en: 'COPYRIGHT',
     },

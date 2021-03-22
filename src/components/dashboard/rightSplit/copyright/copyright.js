@@ -14,6 +14,8 @@ import CircledC from '../../../../icons/circledC';
 import SplitChart from '../_/charts/splitChart/splitChart';
 import DualSplitChart from '../_/charts/dualSplitChart/dualSplitChart';
 import { rightHoldersToChartData } from '../_/charts/utils';
+import computeMusicChartData from './_/computeMusicChartData';
+import computeLyricChartData from './_/computeLyricChartData';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
@@ -187,18 +189,14 @@ const Copyright = (props) => {
       props.copyright,
       props.activeCollaboratorsIds,
     ),
-    leftChartData: rightHoldersToChartData(
-      props.copyright.filter(
-        (rh) => rh.roles.includes('author') || rh.roles.includes('adapter'),
-      ),
+    leftChartData: computeLyricChartData(
+      props.copyright,
       props.activeCollaboratorsIds,
     ),
     leftChartTitle: t_lyrics,
     rightChartTitle: t_music,
-    rightChartData: rightHoldersToChartData(
-      props.copyright.filter(
-        (rh) => rh.roles.includes('composer') || rh.roles.includes('mixer'),
-      ),
+    rightChartData: computeMusicChartData(
+      props.copyright,
       props.activeCollaboratorsIds,
     ),
     logo: CircledC,
