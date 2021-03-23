@@ -110,13 +110,13 @@ const Orientation = (props) => {
       <div className="b2">
         <div className="tileSection">
           <Tile tileId="share" {...commonProps} />
-          {/* <div className="space" />
-          <Tile tileId="document" {...commonProps} />
           <div className="space" />
-          <Tile tileId="protect" {...commonProps} />
-          <Tile tileId="" {...commonProps} />
-          <div className="space" />
-          <Tile tileId="" {...commonProps} /> */}
+          {/* <Tile tileId="document" {...commonProps} />
+          <div className="space" /> */}
+          {/* <Tile tileId="protect" {...commonProps} /> */}
+          <Tile tileId="monetize" {...commonProps} />
+          {/* <div className="space" /> */}
+          {/* <Tile tileId="" {...commonProps} /> */}
         </div>
       </div>
     </div>

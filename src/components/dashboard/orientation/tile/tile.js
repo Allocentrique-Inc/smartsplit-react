@@ -1,10 +1,13 @@
 import { useHistory } from 'react-router-dom';
-import RightSplit from './rightsplit';
+import RightSplit from './icons/rightsplit';
+import Monetize from './icons/monetize';
 
 const getIcon = (tileId, language) => {
   switch (tileId) {
     case 'share':
       return <RightSplit />;
+    case 'monetize':
+      return <Monetize />;
     default:
       return '---';
   }
@@ -20,6 +23,8 @@ const getTitle = (tileId, language) => {
           return 'Documente ton oeuvre';
         case 'protect':
           return 'Protège ton oeuvre';
+        case 'monetize':
+          return 'Monétise ton oeuvre';
         default:
           return '---';
       }
@@ -29,9 +34,11 @@ const getTitle = (tileId, language) => {
         case 'share':
           return 'Split your rights';
         case 'document':
-          return '---';
+          return 'Document your workpiece';
         case 'protect':
-          return '---';
+          return 'Protect your workpiece';
+        case 'monetize':
+          return 'Monetize your workpiece';
         default:
           return '---';
       }
@@ -50,6 +57,8 @@ const getDescription = (tileId, language) => {
           return 'Rends totalement découvrable ton oeuvre aux yeux des moteurs de recherche pour augmenter ton auditoire.';
         case 'protect':
           return 'Associe dès aujourd’hui ton enregistrement sonore à ses ayant droits et laisse des traces indélébiles de ça sur une blockchain.';
+        case 'monetize':
+          return 'Déclare en un seul clic tes partages de droits à TOUTES les sociétés de gestions.';
         default:
           return '---';
       }
@@ -61,6 +70,8 @@ const getDescription = (tileId, language) => {
         case 'document':
           return '---';
         case 'protect':
+          return '---';
+        case 'monetize':
           return '---';
         default:
           return '---';
@@ -122,6 +133,13 @@ const getActionNameAndDestination = (props) => {
       return {
         name: 'Commencer',
         destination: '',
+        className: 'action start',
+      };
+    }
+    case 'monetize': {
+      return {
+        name: 'Commencer',
+        destination: `/workpiece/${props.workpiece_id}/monetize`,
         className: 'action start',
       };
     }
