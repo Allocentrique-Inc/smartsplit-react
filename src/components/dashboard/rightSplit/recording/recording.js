@@ -145,7 +145,7 @@ const Recording = (props) => {
     props.translations.rightSplit.presentation._recording[props.language];
   const t_description =
     props.translations.rightSplit.description._recording[props.language];
-
+  console.log('RECORDING', props);
   const commonProps = {
     ...props,
     addCollaborators,
@@ -161,7 +161,7 @@ const Recording = (props) => {
     triedSubmit,
     setTriedSubmit,
     chartData: rightHoldersToChartData(
-      props.recording,
+      [...props.recording, props.label],
       props.activeCollaboratorsIds,
     ),
     logo: CircledP,

@@ -279,7 +279,9 @@ const AcceptedRightSplit = (props) => {
           <div />
           <div className="status acceptedStatus">{props.t_accepted}</div>
         </div>
-        {hasBoughtPDF ? (
+        <DownloadContractButton language={props.language} />
+
+        {/*        {hasBoughtPDF ? (
           <DownloadContractButton language={props.language} />
         ) : (
           <button
@@ -291,7 +293,7 @@ const AcceptedRightSplit = (props) => {
           >
             {props.t_download}
           </button>
-        )}
+        )}*/}
       </div>
       {showPaymentModal && <PaymentModal {...modalProps} />}
     </>
