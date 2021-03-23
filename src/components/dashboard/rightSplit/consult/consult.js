@@ -2,7 +2,14 @@ import Copyright from './copyright/copyright';
 import Performance from './performance/performance';
 import Recording from './recording/recording';
 import Privacy from './privacy/privacy';
+import SplitChart from '../_/charts/splitChart/splitChart';
 import Circle from '../_/circle/circle';
+import CircledC from '../../../../icons/circledC';
+import {
+  computeLyricChartData,
+  computeMusicChartData,
+  rightHoldersToChartData,
+} from '../_/charts/utils';
 
 const Consult = (props) => {
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
@@ -102,6 +109,14 @@ const Consult = (props) => {
     fr: 'Commentaires',
     en: 'Comments',
   }[props.language];
+  const t_lyrics = {
+    fr: 'Paroles',
+    en: 'Lyrics',
+  }[props.language];
+  const t_music = {
+    fr: 'Musique',
+    en: 'Music',
+  }[props.language];
 
   const commonProps = {
     ...props,
@@ -121,6 +136,21 @@ const Consult = (props) => {
     t_yes,
     t_no,
     t_comments,
+    chartData: rightHoldersToChartData(
+      props.copyright,
+      props.activeCollaboratorsIds,
+    ),
+    leftChartData: computeLyricChartData(
+      props.copyright,
+      props.activeCollaboratorsIds,
+    ),
+    leftChartTitle: t_lyrics,
+    rightChartTitle: t_music,
+    rightChartData: computeMusicChartData(
+      props.copyright,
+      props.activeCollaboratorsIds,
+    ),
+    size: 300,
   };
   return (
     <>
@@ -130,13 +160,10 @@ const Consult = (props) => {
             <Copyright {...commonProps} />
           </div>
           <div className="consultRightSplitRight">
-            {props.rightSplitInConsultation.copyright.length > 0 && (
-              <Circle
-                {...commonProps}
-                collaborators={props.rightSplitInConsultation.copyright}
-                consult
-              />
-            )}
+            {props.rightSplitInConsultation.copyright.length > 0 &&
+              props.copyrightDividingMethod !== 'role' && (
+                <SplitChart {...commonProps} logo={CircledC} />
+              )}
           </div>
         </div>
       )}

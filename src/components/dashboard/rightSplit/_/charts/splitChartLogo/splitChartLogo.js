@@ -13,7 +13,9 @@ export default function SplitChartLogo({ size, center, logo }) {
   return (
     <>
       <circle cx={center.x} cy={center.y} r={size / 4} fill="#FFFFFF" />
-      <g scale={scale} transform={`translate(${logoVector.x} ${logoVector.y})`}>
+      <g
+        transform={`translate(${logoVector.x} ${logoVector.y}) scale(${scale})`}
+      >
         {createElement(logo)}
       </g>
     </>

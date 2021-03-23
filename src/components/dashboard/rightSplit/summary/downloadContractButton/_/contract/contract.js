@@ -11,7 +11,6 @@ import contractData from '../assets/contractData';
 import SplitChartSVG from '../../../../_/charts/splitChart/splitChart';
 import SplitChart from '../splitChart/splitChart';
 import DualSplitChart from '../dualSplitChart/dualSplitChart';
-import usePieChartSlices from '../../../../_/charts/usePieChartSlices';
 import { rightHoldersToChartData } from '../../../../_/charts/utils';
 import logoPaths from '../assets/logoPaths';
 import copyrightIcon from '../../../../../../../icons/copyright';

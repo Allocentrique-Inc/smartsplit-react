@@ -1,6 +1,6 @@
-import usePieChartSlices from '../usePieChartSlices';
 import PieChart from '../pieChart/pieChart';
 import SplitChartLogo from '../splitChartLogo/splitChartLogo';
+import { usePieChartSlices } from '../hooks';
 
 export default function DualSplitChart({
   leftChartData,

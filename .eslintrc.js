@@ -27,6 +27,7 @@ module.exports = {
         'no-tabs': 'off',
         'no-plusplus': 'off',
         'no-bitwise': 'off',
+        'import/no-cycle': 'off',
         'spaced-comment': 'off',
         'import/prefer-default-export': 'off',
         'import/no-named-as-default': 'off',
