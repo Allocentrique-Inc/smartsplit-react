@@ -3,8 +3,11 @@ import Performance from './performance/performance';
 import Recording from './recording/recording';
 import Privacy from './privacy/privacy';
 import SplitChart from '../_/charts/splitChart/splitChart';
+import DualSplitChart from '../_/charts/dualSplitChart/dualSplitChart';
 import Circle from '../_/circle/circle';
 import CircledC from '../../../../icons/circledC';
+import CircledStar from '../../../../icons/circledStar';
+import CircledP from '../../../../icons/circledP';
 import {
   computeLyricChartData,
   computeMusicChartData,
@@ -46,6 +49,8 @@ const Consult = (props) => {
   const activeCollaboratorsIds = activeCollaborators.map(
     (el) => el.rightHolder_id,
   );
+
+  console.log('PROPS', props.rightSplitInConsultation);
 
   const t_copyright = {
     fr: "Droits d'auteur",
@@ -120,7 +125,6 @@ const Consult = (props) => {
 
   const commonProps = {
     ...props,
-    activeCollaboratorsIds,
     t_copyright,
     t_performance,
     t_recording,
@@ -136,20 +140,42 @@ const Consult = (props) => {
     t_yes,
     t_no,
     t_comments,
+  };
+  const copyrightChartProps = {
     chartData: rightHoldersToChartData(
-      props.copyright,
+      props.rightSplitInConsultation.copyright,
       props.activeCollaboratorsIds,
     ),
     leftChartData: computeLyricChartData(
-      props.copyright,
+      props.rightSplitInConsultation.copyright,
       props.activeCollaboratorsIds,
     ),
     leftChartTitle: t_lyrics,
     rightChartTitle: t_music,
     rightChartData: computeMusicChartData(
-      props.copyright,
+      props.rightSplitInConsultation.copyright,
       props.activeCollaboratorsIds,
     ),
+    logo: CircledC,
+    size: 300,
+  };
+  const performanceChartProps = {
+    chartData: rightHoldersToChartData(
+      props.rightSplitInConsultation.performance,
+      activeCollaboratorsIds,
+    ),
+    logo: CircledStar,
+    size: 300,
+  };
+  const recordingChartProps = {
+    chartData: rightHoldersToChartData(
+      [
+        ...props.rightSplitInConsultation.recording,
+        props.rightSplitInConsultation.label,
+      ],
+      activeCollaboratorsIds,
+    ),
+    logo: CircledP,
     size: 300,
   };
   return (
@@ -160,10 +186,12 @@ const Consult = (props) => {
             <Copyright {...commonProps} />
           </div>
           <div className="consultRightSplitRight">
-            {props.rightSplitInConsultation.copyright.length > 0 &&
-              props.copyrightDividingMethod !== 'role' && (
-                <SplitChart {...commonProps} logo={CircledC} />
-              )}
+            {props.copyrightDividingMethod !== 'role' && (
+              <SplitChart {...copyrightChartProps} />
+            )}
+            {props.copyrightDividingMethod === 'role' && (
+              <DualSplitChart {...copyrightChartProps} />
+            )}
           </div>
         </div>
       )}
@@ -174,11 +202,7 @@ const Consult = (props) => {
             <Performance {...commonProps} />
           </div>
           <div className="consultRightSplitRight">
-            <Circle
-              {...commonProps}
-              collaborators={props.rightSplitInConsultation.performance}
-              consult
-            />
+            <SplitChart {...performanceChartProps} />
           </div>
         </div>
       )}
@@ -189,7 +213,7 @@ const Consult = (props) => {
             <Recording {...commonProps} />
           </div>
           <div className="consultRightSplitRight">
-            <Circle {...commonProps} collaborators={recording} consult />
+            <SplitChart {...recordingChartProps} />
           </div>
         </div>
       )}
