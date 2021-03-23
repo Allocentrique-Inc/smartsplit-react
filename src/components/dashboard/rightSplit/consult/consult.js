@@ -144,17 +144,17 @@ const Consult = (props) => {
   const copyrightChartProps = {
     chartData: rightHoldersToChartData(
       props.rightSplitInConsultation.copyright,
-      props.activeCollaboratorsIds,
+      activeCollaboratorsIds,
     ),
     leftChartData: computeLyricChartData(
       props.rightSplitInConsultation.copyright,
-      props.activeCollaboratorsIds,
+      activeCollaboratorsIds,
     ),
     leftChartTitle: t_lyrics,
     rightChartTitle: t_music,
     rightChartData: computeMusicChartData(
       props.rightSplitInConsultation.copyright,
-      props.activeCollaboratorsIds,
+      activeCollaboratorsIds,
     ),
     logo: CircledC,
     size: 300,

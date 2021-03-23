@@ -1,4 +1,5 @@
 export default {
+  locale: 'fr',
   header:
     '<h1>ENTENTE DE PARTAGE DE DROITS</h1><p><i>Droit d’auteur sur l’oeuvre & Droits voisins des artistes-interprètes et producteurs</i></p>',
   sections: {

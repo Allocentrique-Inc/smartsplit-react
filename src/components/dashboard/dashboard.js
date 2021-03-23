@@ -6,7 +6,6 @@ import Settings from './settings/settings';
 import getUsers from '../../api/users/getUsers';
 import translations from '../../translations';
 import patchUser from '../../api/users/patchUser';
-import Dev from './dev/dev';
 import Logistic from './logistic/logistic';
 
 const Dashboard = (props) => {
@@ -50,9 +49,6 @@ const Dashboard = (props) => {
       </Route>
       <Route path="/settings">
         <Settings {...props} {...commonProps} />
-      </Route>
-      <Route path="/dev">
-        <Dev {...props} {...commonProps} />
       </Route>
       <Route path="/logistic">
         <Logistic {...props} {...commonProps} />
