@@ -6,6 +6,7 @@ import X from '../../../../icons/x';
 import AdjustEmails from './adjustEmails/adjustEmails';
 import DownloadContractButton from './downloadContractButton/downloadContractButton';
 import PaymentModal from '../../_/payments/PaymentModal';
+import LastModified from '../../_/lastModified/lastModified';
 
 const Summary = (props) => {
   const history = useHistory();
@@ -233,6 +234,7 @@ const DraftRightSplit = (props) => {
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
+          <LastModified {...props.workpiece} />
         </div>
         <div className="b1">
           <div />
@@ -274,6 +276,7 @@ const AcceptedRightSplit = (props) => {
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
+          <LastModified {...props.workpiece} />
         </div>
         <div className="b1">
           <div />
@@ -314,6 +317,7 @@ const InVoteRightSplit = (props) => {
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
+          <LastModified {...props.workpiece} />
         </div>
         <button>{props.t_consult}</button>
       </div>
@@ -341,6 +345,7 @@ const RejectedRightSplit = (props) => {
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
+          <LastModified {...props.workpiece} />
         </div>
         <div className="b1">
           <div />
