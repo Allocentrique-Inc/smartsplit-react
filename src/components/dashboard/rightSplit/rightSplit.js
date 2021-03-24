@@ -76,6 +76,7 @@ const RightSplit = (props) => {
       label,
       isPublic,
     };
+    console.log('PAYLOAD', payload);
     await postRightSplit(payload);
     props.resetData();
   };

@@ -20,6 +20,7 @@ import recalculateShares from './_/recalculateShares';
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
 const Recording = (props) => {
+  console.log('RECORDING PROPS', props);
   const [isCreatingNewCollaborator, setIsCreatingNewCollaborator] = useState(
     false,
   );
@@ -40,22 +41,49 @@ const Recording = (props) => {
       (el) => newCollaborator.user_id === el.rightHolder_id,
     );
     if (!isCollaboratorAlreadyIn) {
-      let newRecording = [
-        ...props.recording,
-        {
-          rightHolder: newCollaborator,
-          rightHolder_id: newCollaborator.user_id,
-          comment: '',
-          function: '',
-          shares: 0,
-        },
-      ];
-      newRecording = setCollaboratorsErrors(newRecording);
+      props.recording.push({
+        rightHolder: newCollaborator,
+        rightHolder_id: newCollaborator.user_id,
+        comment: '',
+        function: '',
+        shares: 0,
+      });
+      recalculateShares({
+        dividingMethod: props.recordingDividingMethod,
+        recording: props.recording,
+        label: props.label,
+      });
+      const newRecording = setCollaboratorsErrors(props.recording);
       props.setRecording(newRecording);
     }
   };
 
-  const addLabelCollaborators = (newCollaborator) => {
+  const setLabelAgreementDuration = (newValue) => {
+    props.label.agreementDuration = newValue;
+    console.log('LABEL', props.label);
+    const label = setLabelErrors(props.label);
+    props.setLabel(label);
+    recalculateShares({
+      dividingMethod: props.recordingDividingMethod,
+      recording: props.recording,
+      label,
+    });
+  };
+
+  const setCollaboratorFunction = (newValue, rightHolder_id) => {
+    props.recording.find(
+      (el) => el.rightHolder_id === rightHolder_id,
+    ).function = newValue;
+    recalculateShares({
+      dividingMethod: props.recordingDividingMethod,
+      recording: props.recording,
+      label: props.label,
+    });
+    const newRecording = setCollaboratorsErrors(props.recording);
+    props.setRecording(newRecording);
+  };
+
+  const addLabel = (newCollaborator) => {
     let newLabelCollaborator = {
       rightHolder: newCollaborator,
       rightHolder_id: newCollaborator.user_id,
@@ -70,6 +98,11 @@ const Recording = (props) => {
 
   const deleteLabel = () => {
     props.setLabel({});
+    // recalculateShares({
+    //   dividingMethod: props.recordingDividingMethod,
+    //   recording: props.recording,
+    // });
+    // props.setRecording(props.recording);
   };
 
   const deleteCollaborator = (rightHolder) => {
@@ -82,7 +115,7 @@ const Recording = (props) => {
     props.setRecording(newRecording);
   };
 
-  const allActors = [...props.recording];
+  const allActors = props.recording.filter((actor) => actor.function !== '');
   if (props.label.rightHolder) {
     allActors.push(props.label);
   }
@@ -138,18 +171,20 @@ const Recording = (props) => {
     }
   };
 
-  const handleSelectDividingMethod = (newDividingMethod) => {
-    let newRecording = recalculateShares({
-      newDividingMethod,
+  const handleSelectDividingMethod = (dividingMethod) => {
+    recalculateShares({
+      dividingMethod,
       recording: props.recording,
+      label: props.label,
     });
-    newRecording = setCollaboratorsErrors(newRecording);
+
+    const newRecording = setCollaboratorsErrors(props.recording);
     props.setRecording(newRecording);
-    props.selectRecordingDividingMethod(newDividingMethod);
+    props.selectRecordingDividingMethod(dividingMethod);
   };
 
   const allActorsSum = allActors.reduce((acc, el) => el.shares + acc, 0);
-  const isDisplayingCircle = allActorsSum === 100;
+  const isDisplayingCircle = allActorsSum > 99.999 && allActorsSum < 100.001;
 
   const t_title =
     props.translations.rightSplit.title._recording[props.language];
@@ -157,7 +192,6 @@ const Recording = (props) => {
     props.translations.rightSplit.presentation._recording[props.language];
   const t_description =
     props.translations.rightSplit.description._recording[props.language];
-  console.log('RECORDING', props);
   const commonProps = {
     ...props,
     addCollaborators,
@@ -167,6 +201,8 @@ const Recording = (props) => {
     t_description,
     handleDrag,
     handleSelectDividingMethod,
+    setCollaboratorFunction,
+    setLabelAgreementDuration,
     isCreatingNewCollaborator,
     setIsCreatingNewCollaborator,
     isCreatingNewLabelCollaborator,
@@ -186,7 +222,7 @@ const Recording = (props) => {
       {isCreatingNewLabelCollaborator && (
         <CreateNewCollaborator
           {...commonProps}
-          addCollaborators={addLabelCollaborators}
+          addCollaborators={addLabel}
           setIsCreatingNewCollaborator={setIsCreatingNewLabelCollaborator}
         />
       )}
@@ -201,7 +237,7 @@ const Recording = (props) => {
               {!props.label.rightHolder && (
                 <AddCollaborators
                   {...commonProps}
-                  addCollaborators={addLabelCollaborators}
+                  addCollaborators={addLabel}
                   preSelectedCollaborators={[...props.recording, props.label]}
                   setIsCreatingNewCollaborator={
                     setIsCreatingNewLabelCollaborator
@@ -213,7 +249,7 @@ const Recording = (props) => {
                 <Label
                   {...commonProps}
                   collaborator={props.label}
-                  deleteCollaborator={deleteLabel}
+                  deleteLabel={deleteLabel}
                 />
               )}
 

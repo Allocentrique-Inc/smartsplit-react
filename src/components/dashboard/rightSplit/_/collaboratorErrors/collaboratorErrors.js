@@ -1,6 +1,6 @@
 const CollaboratorErrors = (props) => {
-  console.log(props.translations.rightSplit.errors);
-  console.log(props.user.locale);
+  // console.log(props.translations.rightSplit.errors);
+  // console.log(props.user.locale);
   return (
     <>
       {props.triedSubmit &&
@@ -18,7 +18,7 @@ const CollaboratorErrors = (props) => {
               );
             })}
           </div>
-      )}
+        )}
     </>
   );
 };

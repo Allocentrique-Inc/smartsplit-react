@@ -23,14 +23,6 @@ const Collaborator = (props) => {
     props.deleteCollaborator(props.collaborator.rightHolder_id);
   };
 
-  // STATUS
-  const setStatus = (e) => {
-    let newRecording = [...props.recording];
-    newRecording[props.id].function = e.target.value;
-    newRecording = setCollaboratorsErrors(newRecording);
-    props.setRecording(newRecording);
-  };
-
   // DRAGGER
   const setShares = (newShares) => {
     props.handleDrag({
@@ -64,8 +56,11 @@ const Collaborator = (props) => {
     ];
   };
 
+  const isDraggable = props.recordingDividingMethod === 'manual';
+
   const commonProps = {
     ...props,
+    isDraggable,
     setLock,
     setShares,
     handleEllipsisClick,
@@ -100,7 +95,12 @@ const Collaborator = (props) => {
         <select
           className="selectStatus"
           value={props.collaborator.function}
-          onChange={setStatus}
+          onChange={(e) =>
+            props.setCollaboratorFunction(
+              e.target.value,
+              props.collaborator.rightHolder_id,
+            )
+          }
         >
           {[
             '',
@@ -111,14 +111,14 @@ const Collaborator = (props) => {
             'studio',
             'illustratorDesigner',
           ].map((el, id) => (
-            <option disabled={id === 0} value={el}>
+            <option disabled={id === 0} value={el} key={el}>
               {get_t_recordingFunctionOptions(el)}
             </option>
           ))}
         </select>
 
         {/* DRAGGER */}
-        <Dragger {...commonProps} isDraggable />
+        <Dragger {...commonProps} />
       </div>
       <CollaboratorErrors {...commonProps} />
     </>

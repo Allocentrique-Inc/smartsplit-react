@@ -33,13 +33,6 @@ const Collaborator = (props) => {
     });
   };
 
-  const handleAgreementDuration = (e) => {
-    let label = { ...props.label };
-    label.agreementDuration = e.target.value;
-    label = setLabelErrors(label);
-    props.setLabel(label);
-  };
-
   const handleNotifyViaEmail = () => {
     props.setLabel({
       ...props.label,
@@ -113,7 +106,7 @@ const Collaborator = (props) => {
           <div className="ellipsis" onClick={handleEllipsisClick}>
             <Ellipsis />
             {isShowingOptions && (
-              <button onClick={props.deleteCollaborator}>
+              <button onClick={props.deleteLabel}>
                 {t_removeCollaborator}
               </button>
             )}
@@ -124,7 +117,7 @@ const Collaborator = (props) => {
         <select
           className="selectStatus"
           value={props.collaborator.agreementDuration}
-          onChange={handleAgreementDuration}
+          onChange={(e) => props.setLabelAgreementDuration(e.target.value)}
         >
           <option disabled value="">
             Durée de l'entente
