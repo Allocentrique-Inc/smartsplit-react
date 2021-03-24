@@ -37,6 +37,9 @@ const RightSplit = (props) => {
   const [copyrightDividingMethod, selectCopyrightDividingMethod] = useState(
     'equal',
   );
+  const [recordingDividingMethod, selectRecordingDividingMethod] = useState(
+    'equal',
+  );
   const [warnings, setWarnings] = useState([]);
   const mapData = async () => {
     if (props.workpiece.rightSplit) {
@@ -212,7 +215,9 @@ const RightSplit = (props) => {
     mapData,
     saveRightSplit,
     copyrightDividingMethod,
+    recordingDividingMethod,
     selectCopyrightDividingMethod,
+    selectRecordingDividingMethod,
     label,
     setLabel,
     translations,

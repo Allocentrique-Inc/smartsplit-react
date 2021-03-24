@@ -14,6 +14,8 @@ import setLabelErrors from './_/setLabelErrors';
 import CircledP from '../../../../icons/circledP';
 import SplitChart from '../_/charts/splitChart/splitChart';
 import { rightHoldersToChartData } from '../_/charts/utils';
+import DividingMethod from './dividingMethod/dividingMethod';
+import recalculateShares from './_/recalculateShares';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
@@ -136,6 +138,16 @@ const Recording = (props) => {
     }
   };
 
+  const handleSelectDividingMethod = (newDividingMethod) => {
+    let newRecording = recalculateShares({
+      newDividingMethod,
+      recording: props.recording,
+    });
+    newRecording = setCollaboratorsErrors(newRecording);
+    props.setRecording(newRecording);
+    props.selectRecordingDividingMethod(newDividingMethod);
+  };
+
   const allActorsSum = allActors.reduce((acc, el) => el.shares + acc, 0);
   const isDisplayingCircle = allActorsSum === 100;
 
@@ -154,6 +166,7 @@ const Recording = (props) => {
     t_presentation,
     t_description,
     handleDrag,
+    handleSelectDividingMethod,
     isCreatingNewCollaborator,
     setIsCreatingNewCollaborator,
     isCreatingNewLabelCollaborator,
@@ -183,6 +196,8 @@ const Recording = (props) => {
           <div className="b1b1">
             <div className="b1b1b1">
               <Presentation {...commonProps} view="recording" />
+              <DividingMethod {...commonProps} />
+
               {!props.label.rightHolder && (
                 <AddCollaborators
                   {...commonProps}
