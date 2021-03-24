@@ -18,28 +18,20 @@ const Consult = (props) => {
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
   }
-
-  const recording = [
-    props.rightSplitInConsultation &&
-    props.rightSplitInConsultation.label &&
-    props.rightSplitInConsultation.label.rightHolder_id
-      ? props.rightSplitInConsultation.label
-      : '',
-    ...props.rightSplitInConsultation.recording,
-  ].filter((e) => e !== '');
-
-  let activeCollaborators = [
-    ...props.rightSplitInConsultation.copyright,
-    ...props.rightSplitInConsultation.performance,
-    ...props.rightSplitInConsultation.recording,
-  ];
+  const recording = [...props.rightSplitInConsultation.recording];
   if (
     props.rightSplitInConsultation &&
     props.rightSplitInConsultation.label &&
     props.rightSplitInConsultation.label.rightHolder_id
   ) {
-    activeCollaborators.push(props.rightSplitInConsultation.label);
+    recording.push(props.rightSplitInConsultation.label);
   }
+  let activeCollaborators = [
+    ...props.rightSplitInConsultation.copyright,
+    ...props.rightSplitInConsultation.performance,
+    ...recording,
+  ];
+
   activeCollaborators = activeCollaborators.reduce((acc, el) => {
     if (acc.find((EL) => EL.rightHolder_id === el.rightHolder_id)) {
       return acc;
@@ -49,8 +41,6 @@ const Consult = (props) => {
   const activeCollaboratorsIds = activeCollaborators.map(
     (el) => el.rightHolder_id,
   );
-
-  console.log('PROPS', props.rightSplitInConsultation);
 
   const t_copyright = {
     fr: "Droits d'auteur",
@@ -168,13 +158,7 @@ const Consult = (props) => {
     size: 300,
   };
   const recordingChartProps = {
-    chartData: rightHoldersToChartData(
-      [
-        ...props.rightSplitInConsultation.recording,
-        props.rightSplitInConsultation.label,
-      ],
-      activeCollaboratorsIds,
-    ),
+    chartData: rightHoldersToChartData(recording, activeCollaboratorsIds),
     logo: CircledP,
     size: 300,
   };

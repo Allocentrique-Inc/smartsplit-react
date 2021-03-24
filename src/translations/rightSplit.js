@@ -18,12 +18,18 @@ export default {
   },
 
   presentation: {
-    _copyright: { fr: 'Qui a inventé cette pièce musicale ?', en: 'COPYRIGHT' },
+    _copyright: {
+      fr: 'Qui a inventé cette pièce musicale?',
+      en: 'Who invented this musical piece?',
+    },
     _performance: {
       fr: 'Qui a joué sur l’enregistrement sonore?',
-      en: 'PERFORMANCE',
+      en: 'Who played on the audio recording?',
     },
-    _recording: { fr: 'Qui possède l’enregistrement sonore?', en: 'RECORDING' },
+    _recording: {
+      fr: 'Qui possède l’enregistrement sonore?',
+      en: 'Who owns the audio recording?',
+    },
     _privacy: { fr: 'Veux-tu rendre ce partage public?', en: 'PRIVACY' },
   },
 
@@ -31,17 +37,20 @@ export default {
     _copyright: {
       fr:
         'Sépare ici les droits d’auteur entre les créateurs, c’est à dire les auteurs des <b>paroles</b>, les compositeurs et les arrangeurs de la <b>musique</b>. Il est d’usage de partager le droit d’auteur équitablement. Mais tu peux faire autrement.',
-      en: 'COPYRIGHT',
+      en:
+        'Seperate here the copyright between creators, i.e. the authors of <b>lyrics</b>, the composers and the mixers of <b>music</b>. It is common to share the copyright fairly. But you can do otherwise.',
     },
     _performance: {
       fr:
         'On sépare ici le <b>droit voisin</b> entre les <b>interprètes</b>, autant les musiciens que les chanteurs. Les membres d’un groupe se partagent ce droit à parts égales; Les artistes principaux et artistes invités se partagent 80%, tandis que le 20% restant est partagé parmi les artistes accompagnateurs, le cas échéant.',
-      en: 'PERFORMANCE',
+      en:
+        'Seperate here the <b>neighbor right</b> between <b>performers</b>,whether musicians or singers. <i>Group</i> members share this right with equal splits. <i>Main artists</i> and <i>guest artists</i> share 80%, while the remaining 20% is split among <i>featured artists</i>, if applicable.',
     },
     _recording: {
       fr:
         'On sépare ici le <b>droit voisin</b> des <b>producteurs</b>, c’est à dire ceux qui ont investi leur temps et/ou leur argent pour enregistrer et finaliser le produit afin d’être commercialisé. Il est d’usage de partager ce droit en parts égales ou au prorata de l’investissement.',
-      en: 'RECORDING',
+      en:
+        'Seperate here the <b>neighbor right</b> of <b>producers</b>, i.e. those who invested their time and/or their money to record and finalize the product to be commercialized. It is common pratice to share this right in equal parts or in pro bono of the investment.',
     },
     _privacy: {
       fr:
@@ -53,138 +62,137 @@ export default {
   copyrightDividingMethod: {
     _equal: {
       fr: 'Partager de façon égale',
-      en: 'COPYRIGHT',
+      en: 'Split evenly',
     },
     _role: {
       fr: 'Partager selon les rôles',
-      en: 'COPYRIGHT',
+      en: 'Split according to roles',
     },
     _manual: {
       fr: 'Gérer manuellement',
-      en: 'COPYRIGHT',
+      en: 'Manage manually',
     },
   },
 
   copyrightRoles: {
     _author: {
       fr: 'Auteur',
-      en: 'COPYRIGHT',
+      en: 'Author',
     },
     _composer: {
       fr: 'Compositeur',
-      en: 'COPYRIGHT',
+      en: 'Composer',
     },
     _adapter: {
       fr: 'Adaptateur',
-      en: 'COPYRIGHT',
+      en: 'Adapter',
     },
     _mixer: {
       fr: 'Arrangeur',
-      en: 'COPYRIGHT',
+      en: 'Mixer',
     },
   },
 
   performanceRoles: {
     _singer: {
       fr: 'Chanteur',
-      en: 'COPYRIGHT',
+      en: 'Singer',
     },
     _musician: {
       fr: 'Musicien',
-      en: 'COPYRIGHT',
+      en: 'Musician',
     },
   },
 
   performanceStatus: {
     _principal: {
       fr: 'Artiste principal',
-      en: 'COPYRIGHT',
+      en: 'Main Artist',
     },
     _featured: {
       fr: 'Artiste invité (featuring)',
-      en: 'COPYRIGHT',
+      en: 'Guest Artist',
     },
     _bandMember: {
       fr: 'Membre du groupe',
-      en: 'COPYRIGHT',
+      en: 'Band Member',
     },
     _session: {
       fr: 'Artiste accompagnateur',
-      en: 'COPYRIGHT',
+      en: 'Backup Artist',
     },
   },
 
   recordingLabelNotification: {
     _notifyPresentation: {
       fr: "Me notifier 1 mois avant l'échéance...",
-      en: 'COPYRIGHT',
+      en: 'Notify me one month before the deadline...',
     },
     _notifViaText: {
       fr: 'Par texto',
-      en: 'COPYRIGHT',
+      en: 'By SMS',
     },
     _notifViaEmail: {
       fr: 'Par courriel',
-      en: 'COPYRIGHT',
+      en: 'By email',
     },
   },
 
   recordingLabelDealTimeLapse: {
     _oneYear: {
       fr: "1 an, puis renouvelable d'année en année",
-      en: 'COPYRIGHT',
+      en: '1 year, renewable year after year',
     },
     _twoYears: {
       fr: "2 ans, puis renouvelable d'année en année",
-      en: 'COPYRIGHT',
+      en: '2 years, renewable year after year',
     },
     _threeYears: {
       fr: "3 ans, puis renouvelable d'année en année",
-      en: 'COPYRIGHT',
+      en: '3 years, renewable year after year',
     },
     _fourYears: {
       fr: "4 ans, puis renouvelable d'année en année",
-      en: 'COPYRIGHT',
+      en: '4 years, renewable year after year',
     },
     _fiveYears: {
       fr: "5 ans, puis renouvelable d'année en année",
-      en: 'COPYRIGHT',
+      en: '5 years, renewable year after year',
     },
     _renew: {
       fr: 'Se renouvelle automatiquement, sauf avis signifié 60 jours avant.',
-      en: 'COPYRIGHT',
+      en: 'Automatically renews, unless notified 60 days prior.',
     },
   },
 
   recordingFunctionOptions: {
     _placeholder: {
       fr: 'Sélectionner une fonction...',
-      en: 'COPYRIGHT',
+      en: 'Select a function...',
     },
     _producer: {
       fr: 'Producteur',
-      en: 'COPYRIGHT',
+      en: 'Producer',
     },
-    _autoProducer: {
+    _selfProducer: {
       fr: 'Auto-producteur',
-      en: 'COPYRIGHT',
+      en: 'Self Producer',
     },
     _directorProducer: {
       fr: 'Réalisateur-producteur',
-      en: 'COPYRIGHT',
+      en: 'Director-Producer',
     },
     _techProducer: {
       fr: 'Technicien-producteur',
-      en: 'COPYRIGHT',
+      en: 'Technician-Producer',
     },
     _studio: {
       fr: "Studio d'enregistrement",
-      en: 'COPYRIGHT',
+      en: 'Recording Studio',
     },
     _illustratorDesigner: {
-      fr:
-        "Personne s'investissant dans la création de matériel visuel lié à la pièce (pochette, vidéo).",
-      en: 'COPYRIGHT',
+      fr: 'Illustrateur / Graphiste',
+      en: 'Illustrator / Graphic Designer',
     },
   },
 
@@ -407,7 +415,7 @@ export default {
   //   ),
   //   functions: {
   //     producer: 'Producteur',
-  //     autoProducer: 'Auto-producteur',
+  //     selfProducer: 'Auto-producteur',
   //     directorProducer: 'Réalisateur-producteur',
   //     techProducer: 'Technicien-producteur',
   //     studio: "Studio d'enregistrement",
@@ -416,7 +424,7 @@ export default {
   //   functionDefs: {
   //     producer:
   //       "Investisseur externe (n'étant pas l'artiste ni membre du groupe).",
-  //     autoProducer:
+  //     selfProducer:
   //       "Artiste ou membre du groupe s'investissant dans l'enregistrement de la pièce.",
   //     directorProducer:
   //       "Artisan s'investissant dans la réalisation et la production de la pièce.",
