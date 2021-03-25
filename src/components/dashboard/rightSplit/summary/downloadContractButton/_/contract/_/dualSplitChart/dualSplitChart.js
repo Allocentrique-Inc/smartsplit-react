@@ -1,7 +1,7 @@
 import { Canvas } from '@react-pdf/renderer';
 import styles from '../styles';
 import useChartLogo from '../useChartLogo';
-import { usePieChartSlices } from '../../../../_/charts/hooks';
+import { usePieChartSlices } from '../../../../../../_/charts/hooks';
 
 export default function DualSplitChart({
   leftChartData,

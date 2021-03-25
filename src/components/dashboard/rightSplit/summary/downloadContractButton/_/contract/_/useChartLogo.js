@@ -1,4 +1,4 @@
-import { vectorOf } from '../../../_/charts/utils';
+import { vectorOf } from '../../../../../_/charts/utils';
 
 export default function useChartLogo({ size, center }) {
   const logoSize = size / 3;

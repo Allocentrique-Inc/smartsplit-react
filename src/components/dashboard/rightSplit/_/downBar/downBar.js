@@ -16,9 +16,14 @@ const DownBar = (props) => {
     <div className="downBar">
       <div className="b1b1">
         <div className="b1b1b1">
-          <button onClick={handleBack} className="btn-secondary">
-            Retour
-          </button>
+          {props.backUrl ? (
+            <button onClick={handleBack} className="btn-secondary">
+              Retour
+            </button>
+          ) : (
+            <div />
+          )}
+
           {!props.save && (
             <button onClick={handleNext} className="btn-primary">
               Continuer

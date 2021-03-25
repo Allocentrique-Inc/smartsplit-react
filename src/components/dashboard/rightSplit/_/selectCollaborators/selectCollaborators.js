@@ -68,22 +68,42 @@ const AddCollaborators = (props) => {
       onClick={isAdding ? handleCloseMenu : handleOpenMenu}
     >
       <div className="addButton">
-        <div className="plusIcon">
-          <PlusCircleFull />
-        </div>
-        <input
-          className="input"
-          placeholder={
-            props.isAddingLabel
-              ? 'Ajouter un label'
-              : 'Ajouter un collaborateur...'
-          }
-          value={query}
-          onChange={handleQueryInput}
-          id="addCollaboratorInput"
-          onBlur={handleDelayCloseMenu}
-          autoComplete="off"
-        />
+        {props.value ? (
+          <input
+            className="input"
+            style={{ marginLeft: '8px' }}
+            placeholder={
+              props.isAddingLabel
+                ? 'Ajouter un label'
+                : 'Ajouter un collaborateur...'
+            }
+            value={`${props.value.firstName} ${props.value.lastName}`}
+            onChange={handleQueryInput}
+            id="addCollaboratorInput"
+            onBlur={handleDelayCloseMenu}
+            autoComplete="off"
+          />
+        ) : (
+          <>
+            <div className="plusIcon">
+              <PlusCircleFull />
+            </div>
+            <input
+              autoComplete="off"
+              className="input"
+              placeholder={
+                props.isAddingLabel
+                  ? 'Ajouter un label'
+                  : 'Ajouter un collaborateur...'
+              }
+              value={query}
+              onChange={handleQueryInput}
+              id="addCollaboratorInput"
+              onBlur={handleDelayCloseMenu}
+            />
+          </>
+        )}
+
         <div className="arrowDown">
           <ChevronDown />
         </div>
