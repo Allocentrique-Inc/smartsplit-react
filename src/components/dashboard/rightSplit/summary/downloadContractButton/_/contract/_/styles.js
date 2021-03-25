@@ -170,9 +170,17 @@ export default StyleSheet.create({
   },
   userInitials: {
     marginLeft: 8,
+    width: 20,
+    height: 20,
+    borderTopRadius: 10,
+    borderRightRadius: 10,
+    borderBottomRadius: 10,
+    borderLeftRadius: 10,
+    textAlign: 'center',
     justifyContent: 'center',
     fontSize: 8,
     fontFamily: 'Courier-Oblique',
+    backgroundColor: '#AC1616',
   },
   noBorder: {
     border: 0,

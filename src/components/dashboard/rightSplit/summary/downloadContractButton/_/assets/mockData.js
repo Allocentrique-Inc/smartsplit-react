@@ -92,17 +92,17 @@ export default {
         title: '<h3>ENREGISTREMENT SONORE</h3>',
         rightHolders: [
           {
+            function: 'label',
             artistName: "L'artiste",
             firstName: 'FRANCOIS-X',
             lastName: 'DUEYMES',
-            displayFunction: 'Producteur',
             shares: 72,
             displayVote: 'Refusé',
             vote: 'refused',
             rightHolder_id: 'fd8c3947-5e2b-4200-8f4f-1b738cb6acc6',
           },
           {
-            displayFunction: 'Producteur',
+            function: 'producer',
             artistName: 'ARTIST 3',
             firstName: 'FX3',
             lastName: 'DUDUDUMS',
