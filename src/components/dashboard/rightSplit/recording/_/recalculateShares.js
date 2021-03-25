@@ -1,24 +1,34 @@
-const recalculateShares = ({ dividingMethod, recording, label }) => {
-  const activeCollaborators = recording.filter(
-    (collaborator) => collaborator.function !== '',
-  );
-  const isLabelActive =
-    label && label.rightHolder_id && label.agreementDuration !== '';
-  isLabelActive && activeCollaborators.push(label);
-
-  if (dividingMethod === 'equal') {
+const recalculateShares = ({
+  recordingDividingMethod,
+  recording,
+  label,
+  setRecording,
+  setLabel,
+  isLabelActive,
+  activeCollaborators,
+}) => {
+  if (recordingDividingMethod === 'equal') {
+    let recordingChanged = false;
     recording.forEach((collaborator) => {
-      activeCollaborators.some(
-        (activeCollaborator) =>
-          collaborator.rightHolder_id === activeCollaborator.rightHolder_id,
-      ) &&
-        (collaborator.shares =
-          Math.floor((100 / activeCollaborators.length) * 10000) / 10000);
+      if (
+        activeCollaborators.some(
+          (activeCollaborator) =>
+            collaborator.rightHolder_id === activeCollaborator.rightHolder_id,
+        )
+      ) {
+        const oldValue = collaborator.shares;
+        collaborator.shares =
+          Math.floor((100 / activeCollaborators.length) * 10000) / 10000;
+        recordingChanged = collaborator.shares !== oldValue;
+      }
     });
-    isLabelActive &&
-      (label.shares =
-        Math.floor((100 / activeCollaborators.length) * 10000) / 10000);
+    recordingChanged && setRecording([...recording]);
+    if (isLabelActive) {
+      const oldValue = label.shares;
+      label.shares =
+        Math.floor((100 / activeCollaborators.length) * 10000) / 10000;
+      label.shares !== oldValue && setLabel({ ...label });
+    }
   }
 };
-
 export default recalculateShares;

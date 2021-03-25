@@ -1,12 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Dragger from '../../_/dragger/dragger';
 import Ellipsis from '../../../../../icons/ellipsis';
 import colors from '../../_/colors';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import setCollaboratorsErrors from '../_/setCollaboratorsErrors';
 import Avatar from '../../../_/avatar/avatar';
+import recalculateShares from '../_/recalculateShares';
 
 const Collaborator = (props) => {
+  const {
+    collaborator,
+    activeCollaborators,
+    isLabelActive,
+    recordingDividingMethod,
+    recording,
+    label,
+    setRecording,
+    setLabel,
+  } = props;
+  useEffect(
+    () =>
+      recalculateShares({
+        activeCollaborators,
+        isLabelActive,
+        recordingDividingMethod,
+        recording,
+        label,
+        setLabel,
+        setRecording,
+      }),
+    [collaborator.function],
+  );
   const [isShowingOptions, setIsShowingOptions] = useState(false);
 
   // AVATAR
