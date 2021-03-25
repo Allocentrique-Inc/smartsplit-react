@@ -10,7 +10,6 @@ import getWorkpieceContract from '../../../../api/workpieces/getWorkpieceContrac
 
 const Summary = (props) => {
   const history = useHistory();
-  console.log('PROPS', props);
   const { workpiece_id } = useParams();
   const [consulting, setConsulting] = useState(null);
   const [isAdjustingEmails, setIsAdjustingEmails] = useState(false);
@@ -432,9 +431,10 @@ const AcceptedRightSplit = (props) => {
   };
   useEffect(async () => {
     const result = await getWorkpieceContract({ workpiece_id });
-    result.statusCode !== 500 && setContractData(contractData);
+    console.log('CONTRACTDATA', result);
+
+    result.statusCode !== 500 && setContractData(result);
     result.statusCode === 500 && setContractData(null);
-    console.log('CONTRACTDATA', contractData);
   }, []);
   const hasBoughtPDF = Object.values(props.workpiece.purchases).length > 0;
   return (

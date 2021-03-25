@@ -20,7 +20,6 @@ import recalculateShares from './_/recalculateShares';
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
 const Recording = (props) => {
-  console.log('RENDERRECORDING');
   const {
     activeCollaboratorsIds,
     recording,
