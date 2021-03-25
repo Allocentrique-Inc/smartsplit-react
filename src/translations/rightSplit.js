@@ -1,6 +1,8 @@
 export default {
   topBar: {
     breadCrumb: {
+      _editorName: { fr: "Nom de l'éditeur", en: "Editor's Name" },
+      _editorShares: { fr: "Part de l'éditeur", en: "Editor's Shares" },
       _rightSplits: { fr: 'Partage des droits', en: 'Right Split' },
       _copyright: { fr: "Droits d'auteur", en: 'Copyright' },
       _performance: { fr: 'Interpretation', en: 'Performance' },

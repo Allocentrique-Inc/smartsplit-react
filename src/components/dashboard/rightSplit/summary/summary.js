@@ -14,6 +14,9 @@ const Summary = (props) => {
   const { workpiece_id } = useParams();
   const [consulting, setConsulting] = useState(null);
   const [isAdjustingEmails, setIsAdjustingEmails] = useState(false);
+  const [tab, setTab] = useState('withCollaborators');
+  const [showQuestionWithEditor, setShowQuestionWithEditor] = useState(false);
+
   if (
     !props.workpiece.rightSplit ||
     !props.workpiece.rightSplit._state ||
@@ -31,6 +34,50 @@ const Summary = (props) => {
   ]
     .filter((el) => el.rightHolder_id === user_id)
     .some((el) => el.vote === 'undecided');
+
+  const handleWithCollaborators = () => {
+    setTab('withCollaborators');
+  };
+
+  const needResponseToHaveEditor = !(
+    props.editor &&
+    props.editor.rightHolder &&
+    props.editor.rightHolder.user_id
+  );
+  const handleWithEditor = () => {
+    if (
+      props.editor &&
+      props.editor.rightHolder &&
+      props.editor.rightHolder.user_id
+    ) {
+      setTab('withEditor');
+    } else {
+      setShowQuestionWithEditor(true);
+    }
+  };
+  const isWithEditorDisabled = !(
+    props.workpiece.rightSplit &&
+    props.workpiece.rightSplit._state === 'accepted'
+  );
+  const handleGoToEditorName = () => {
+    history.push(`/workpiece/${workpiece_id}/right-split/editor-name`);
+  };
+
+  const handleCancelShowQuestionWithEditor = () => {
+    setShowQuestionWithEditor(false);
+  };
+
+  // const handleWithManager = () => {
+  //   setTab('withManager');
+  // };
+  // const isWithManagerDisabled = !(
+  //   props.workpiece.rightSplit &&
+  //   props.workpiece.rightSplit._state === 'accepted'
+  // );
+  // const handleGoToManagerName = () => {
+  //   history.push(`/workpiece/${workpiece_id}/right-split/manager-name`);
+  // };
+  // const needResponseToHaveManager = true;
 
   const canSendToCollab =
     props.workpiece.rightSplit.owner.user_id === props.user.user_id;
@@ -79,6 +126,39 @@ const Summary = (props) => {
     fr: 'Créer un nouveau modèle',
     en: 'Create a new model',
   }[props.language];
+  const t_withCollaborators = {
+    fr: 'Avec mes collaborateurs',
+    en: 'With my collaborators',
+  }[props.language];
+  const t_withEditor = {
+    fr: 'Avec mon éditeur',
+    en: 'With my editor',
+  }[props.language];
+  const t_withManager = {
+    fr: 'Avec mon manager',
+    en: 'With my manager',
+  }[props.language];
+  const t_haveEditor = {
+    fr: 'As-tu un éditeur?',
+    en: 'Do you have an editor?',
+  }[props.language];
+  const t_haveManager = {
+    fr: 'As-tu un manager?',
+    en: 'Do you have a manager?',
+  }[props.language];
+  const t_yes = {
+    fr: 'Oui',
+    en: 'Yes',
+  }[props.language];
+  const t_no = {
+    fr: 'Non',
+    en: 'No',
+  }[props.language];
+  const t_later = {
+    fr: 'Plus tard',
+    en: 'Later',
+  }[props.language];
+
   const commonProps = {
     ...props,
     setIsAdjustingEmails,
@@ -144,7 +224,6 @@ const Summary = (props) => {
         <div className="b1">
           <div className="b1b1">
             <div className="pageTitle">{t_splitSummary}</div>
-
             <div className="splitDetails">
               {t_createdBy}
               <span className="artistName">
@@ -154,14 +233,92 @@ const Summary = (props) => {
               <span className="lastModify">-------</span> */}
             </div>
 
-            <div className="b1b1b2">
+            {/* TABS */}
+            <div className="tabs">
+              <button
+                className={tab === 'withCollaborators' ? 'tab selected' : 'tab'}
+                onClick={handleWithCollaborators}
+              >
+                {t_withCollaborators}
+              </button>
+              <span className="space" />
+              <div>
+                <button
+                  className={tab === 'withEditor' ? 'tab selected' : 'tab'}
+                  onClick={handleWithEditor}
+                  disabled={isWithEditorDisabled}
+                >
+                  {t_withEditor}
+                  {!isWithEditorDisabled && needResponseToHaveEditor && (
+                    <div className="notification" />
+                  )}
+                </button>
+                {showQuestionWithEditor && (
+                  <div className="withEditorOrManager">
+                    <div className="question">{t_haveEditor}</div>
+                    <div className="yesNo">
+                      <button className="btn-secondary option">{t_no}</button>
+                      <button
+                        className="btn-primary option"
+                        onClick={handleGoToEditorName}
+                      >
+                        {t_yes}
+                      </button>
+                    </div>
+                    <div
+                      onClick={handleCancelShowQuestionWithEditor}
+                      className="later"
+                    >
+                      {t_later}
+                    </div>
+                  </div>
+                )}
+              </div>
+              {/*
+              <span className="space" />
+              <div>
+                <button
+                  className={tab === 'withManager' ? 'tab selected' : 'tab'}
+                  onClick={handleWithManager}
+                  disabled={isWithManagerDisabled}
+                >
+                  {t_withManager}
+                  {needResponseToHaveManager && (
+                    <div className="notification" />
+                  )}
+                </button>
+                {tab === 'withManager' && (
+                  <div className="withEditorOrManager">
+                    <div className="question">{t_haveManager}</div>
+                    <div className="yesNo">
+                      <button className="btn-secondary option">{t_no}</button>
+                      <button
+                        className="btn-primary option"
+                        onClick={handleGoToManagerName}
+                      >
+                        {t_yes}
+                      </button>
+                    </div>
+                    <div onClick={handleWithCollaborators} className="later">
+                      {t_later}
+                    </div>
+                  </div>
+                )}
+              </div> */}
+            </div>
+
+            <div
+              className="b1b1b2"
+              //  style={{ display: tab !== 'withCollaborators' && 'none' }}
+            >
               {/* DRAFT */}
               <div className="bx">
                 <div className="colTitle">{t_waitingSubmit}</div>
                 <div className="content">
-                  {props.workpiece.rightSplit._state === 'draft' && (
-                    <DraftRightSplit {...commonProps} {...props} isDraft />
-                  )}
+                  {tab === 'withCollaborators' &&
+                    props.workpiece.rightSplit._state === 'draft' && (
+                      <DraftRightSplit {...commonProps} {...props} isDraft />
+                    )}
                 </div>
               </div>
 
@@ -169,9 +326,10 @@ const Summary = (props) => {
               <div className="bx">
                 <div className="colTitle">{t_waitingDecision}</div>
                 <div className="content">
-                  {props.workpiece.rightSplit._state === 'voting' && (
-                    <InVoteRightSplit {...commonProps} {...props} />
-                  )}
+                  {tab === 'withCollaborators' &&
+                    props.workpiece.rightSplit._state === 'voting' && (
+                      <InVoteRightSplit {...commonProps} {...props} />
+                    )}
                 </div>
               </div>
 
@@ -181,14 +339,22 @@ const Summary = (props) => {
                 <div className="content">
                   {/* ACCEPTED */}
                   {props.workpiece.rightSplit._state === 'accepted' && (
-                    <AcceptedRightSplit {...commonProps} {...props} />
+                    <div
+                      style={{
+                        display: tab !== 'withCollaborators' && 'none',
+                      }}
+                    >
+                      <AcceptedRightSplit {...commonProps} {...props} />
+                    </div>
                   )}
 
                   {/* REJECTED */}
-                  {props.workpiece.rightSplit._state === 'rejected' && (
-                    <RejectedRightSplit {...commonProps} {...props} />
-                  )}
-                  {props.workpiece.archivedSplits &&
+                  {tab === 'withCollaborators' &&
+                    props.workpiece.rightSplit._state === 'rejected' && (
+                      <RejectedRightSplit {...commonProps} {...props} />
+                    )}
+                  {tab === 'withCollaborators' &&
+                    props.workpiece.archivedSplits &&
                     props.workpiece.archivedSplits.map(
                       (archivedRightSplit, id) => {
                         return (

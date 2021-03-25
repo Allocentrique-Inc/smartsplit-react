@@ -415,6 +415,14 @@
             pointer-events: none;
           }
         }
+
+        .halfBar {
+          width: 164px;
+        }
+        .emptyBar {
+          height: 2px;
+          width: 164px;
+        }
       }
       .shares {
         flex-grow: 1;
