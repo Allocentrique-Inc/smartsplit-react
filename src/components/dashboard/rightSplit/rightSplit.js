@@ -10,6 +10,8 @@ import Summary from './summary/summary';
 import Consult from './consult/consult';
 import Vote from './vote/vote';
 import translations from '../../../translations';
+import EditorName from './editorName/editorName';
+import EditorShares from './editorShares/editorShares';
 
 const RightSplit = (props) => {
   const { language } = props;
@@ -29,6 +31,8 @@ const RightSplit = (props) => {
   const user_id = localStorage.getItem('user_id');
   const history = useHistory();
   const [copyright, setCopyright] = useState([]);
+  const [editor, setEditor] = useState({});
+  const [manager, setManager] = useState({});
   const [performance, setPerformance] = useState([]);
   const [recording, setRecording] = useState([]);
   const [isPublic, setIsPublic] = useState(false);
@@ -226,9 +230,25 @@ const RightSplit = (props) => {
     calculateFlowErrors,
     isPublic,
     setIsPublic,
+    editor,
+    setEditor,
+    manager,
+    setManager,
   };
   return (
     <>
+      <Route path="/workpiece/:workpiece_id/right-split/editor-name">
+        <EditorName {...commonProps} />
+      </Route>
+      <Route path="/workpiece/:workpiece_id/right-split/editor-shares">
+        <EditorShares {...commonProps} />
+      </Route>
+      <Route path="/workpiece/:workpiece_id/right-split/manager-name">
+        <div>MANAGER NAME</div>
+      </Route>
+      <Route path="/workpiece/:workpiece_id/right-split/manager-shares">
+        <div>MANAGER SHARES</div>
+      </Route>
       <Route path="/workpiece/:workpiece_id/right-split/consult">
         <Consult {...commonProps} voting />
       </Route>
