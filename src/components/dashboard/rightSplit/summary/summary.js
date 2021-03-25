@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import TopBar from './topBar/topBar';
 import Consult from '../consult/consult';
@@ -6,9 +6,11 @@ import X from '../../../../icons/x';
 import AdjustEmails from './adjustEmails/adjustEmails';
 import DownloadContractButton from './downloadContractButton/downloadContractButton';
 import PaymentModal from '../../_/payments/PaymentModal';
+import getWorkpieceContract from '../../../../api/workpieces/getWorkpieceContract';
 
 const Summary = (props) => {
   const history = useHistory();
+  console.log('PROPS', props);
   const { workpiece_id } = useParams();
   const [consulting, setConsulting] = useState(null);
   const [isAdjustingEmails, setIsAdjustingEmails] = useState(false);
@@ -255,11 +257,19 @@ const AcceptedRightSplit = (props) => {
   const versionIndex = props.workpiece.rightSplit.version;
   const productCode = 'RIGHT_SPLIT_DOWNLOAD';
   const [showPaymentModal, setShowPaymentModal] = useState();
+  const { workpiece_id } = useParams();
+  const [contractData, setContractData] = useState();
   const modalProps = {
     productCode,
     ...props,
     setShowModal: setShowPaymentModal,
   };
+  useEffect(async () => {
+    const result = await getWorkpieceContract({ workpiece_id });
+    result.statusCode !== 500 && setContractData(contractData);
+    result.statusCode === 500 && setContractData(null);
+    console.log('CONTRACTDATA', contractData);
+  }, []);
   const hasBoughtPDF = Object.values(props.workpiece.purchases).length > 0;
   return (
     <>
@@ -279,7 +289,12 @@ const AcceptedRightSplit = (props) => {
           <div />
           <div className="status acceptedStatus">{props.t_accepted}</div>
         </div>
-        <DownloadContractButton language={props.language} />
+        {contractData && (
+          <DownloadContractButton
+            language={props.language}
+            contractData={contractData}
+          />
+        )}
 
         {/*        {hasBoughtPDF ? (
           <DownloadContractButton language={props.language} />
