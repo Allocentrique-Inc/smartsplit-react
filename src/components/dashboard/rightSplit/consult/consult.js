@@ -2,34 +2,36 @@ import Copyright from './copyright/copyright';
 import Performance from './performance/performance';
 import Recording from './recording/recording';
 import Privacy from './privacy/privacy';
+import SplitChart from '../_/charts/splitChart/splitChart';
+import DualSplitChart from '../_/charts/dualSplitChart/dualSplitChart';
 import Circle from '../_/circle/circle';
+import CircledC from '../../../../icons/circledC';
+import CircledStar from '../../../../icons/circledStar';
+import CircledP from '../../../../icons/circledP';
+import {
+  computeLyricChartData,
+  computeMusicChartData,
+  rightHoldersToChartData,
+} from '../_/charts/utils';
 
 const Consult = (props) => {
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
   }
-
-  const recording = [
-    props.rightSplitInConsultation &&
-    props.rightSplitInConsultation.label &&
-    props.rightSplitInConsultation.label.rightHolder_id
-      ? props.rightSplitInConsultation.label
-      : '',
-    ...props.rightSplitInConsultation.recording,
-  ].filter((e) => e !== '');
-
-  let activeCollaborators = [
-    ...props.rightSplitInConsultation.copyright,
-    ...props.rightSplitInConsultation.performance,
-    ...props.rightSplitInConsultation.recording,
-  ];
+  const recording = [...props.rightSplitInConsultation.recording];
   if (
     props.rightSplitInConsultation &&
     props.rightSplitInConsultation.label &&
     props.rightSplitInConsultation.label.rightHolder_id
   ) {
-    activeCollaborators.push(props.rightSplitInConsultation.label);
+    recording.push(props.rightSplitInConsultation.label);
   }
+  let activeCollaborators = [
+    ...props.rightSplitInConsultation.copyright,
+    ...props.rightSplitInConsultation.performance,
+    ...recording,
+  ];
+
   activeCollaborators = activeCollaborators.reduce((acc, el) => {
     if (acc.find((EL) => EL.rightHolder_id === el.rightHolder_id)) {
       return acc;
@@ -102,10 +104,17 @@ const Consult = (props) => {
     fr: 'Commentaires',
     en: 'Comments',
   }[props.language];
+  const t_lyrics = {
+    fr: 'Paroles',
+    en: 'Lyrics',
+  }[props.language];
+  const t_music = {
+    fr: 'Musique',
+    en: 'Music',
+  }[props.language];
 
   const commonProps = {
     ...props,
-    activeCollaboratorsIds,
     t_copyright,
     t_performance,
     t_recording,
@@ -122,6 +131,37 @@ const Consult = (props) => {
     t_no,
     t_comments,
   };
+  const copyrightChartProps = {
+    chartData: rightHoldersToChartData(
+      props.rightSplitInConsultation.copyright,
+      activeCollaboratorsIds,
+    ),
+    leftChartData: computeLyricChartData(
+      props.rightSplitInConsultation.copyright,
+      activeCollaboratorsIds,
+    ),
+    leftChartTitle: t_lyrics,
+    rightChartTitle: t_music,
+    rightChartData: computeMusicChartData(
+      props.rightSplitInConsultation.copyright,
+      activeCollaboratorsIds,
+    ),
+    logo: CircledC,
+    size: 300,
+  };
+  const performanceChartProps = {
+    chartData: rightHoldersToChartData(
+      props.rightSplitInConsultation.performance,
+      activeCollaboratorsIds,
+    ),
+    logo: CircledStar,
+    size: 300,
+  };
+  const recordingChartProps = {
+    chartData: rightHoldersToChartData(recording, activeCollaboratorsIds),
+    logo: CircledP,
+    size: 300,
+  };
   return (
     <>
       {props.rightSplitInConsultation.copyright.length > 0 && (
@@ -130,12 +170,11 @@ const Consult = (props) => {
             <Copyright {...commonProps} />
           </div>
           <div className="consultRightSplitRight">
-            {props.rightSplitInConsultation.copyright.length > 0 && (
-              <Circle
-                {...commonProps}
-                collaborators={props.rightSplitInConsultation.copyright}
-                consult
-              />
+            {props.copyrightDividingMethod !== 'role' && (
+              <SplitChart {...copyrightChartProps} />
+            )}
+            {props.copyrightDividingMethod === 'role' && (
+              <DualSplitChart {...copyrightChartProps} />
             )}
           </div>
         </div>
@@ -147,11 +186,7 @@ const Consult = (props) => {
             <Performance {...commonProps} />
           </div>
           <div className="consultRightSplitRight">
-            <Circle
-              {...commonProps}
-              collaborators={props.rightSplitInConsultation.performance}
-              consult
-            />
+            <SplitChart {...performanceChartProps} />
           </div>
         </div>
       )}
@@ -162,7 +197,7 @@ const Consult = (props) => {
             <Recording {...commonProps} />
           </div>
           <div className="consultRightSplitRight">
-            <Circle {...commonProps} collaborators={recording} consult />
+            <SplitChart {...recordingChartProps} />
           </div>
         </div>
       )}

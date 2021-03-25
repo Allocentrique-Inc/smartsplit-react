@@ -1,7 +1,7 @@
-import usePieChartSlices from '../usePieChartSlices';
 import PieChart from '../pieChart/pieChart';
 import SplitChartLogo from '../splitChartLogo/splitChartLogo';
 import { rightHoldersToChartData } from '../utils';
+import { usePieChartSlices } from '../hooks';
 
 export default function SplitChart({
   chartData,

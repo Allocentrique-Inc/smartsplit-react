@@ -13,9 +13,11 @@ import PageErrors from '../_/pageErrors/pageErrors';
 import CircledC from '../../../../icons/circledC';
 import SplitChart from '../_/charts/splitChart/splitChart';
 import DualSplitChart from '../_/charts/dualSplitChart/dualSplitChart';
-import { rightHoldersToChartData } from '../_/charts/utils';
-import computeMusicChartData from './_/computeMusicChartData';
-import computeLyricChartData from './_/computeLyricChartData';
+import {
+  computeLyricChartData,
+  computeMusicChartData,
+  rightHoldersToChartData,
+} from '../_/charts/utils';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 

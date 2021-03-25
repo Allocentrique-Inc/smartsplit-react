@@ -105,7 +105,7 @@ const Collaborator = (props) => {
           {[
             '',
             'producer',
-            'autoProducer',
+            'selfProducer',
             'directorProducer',
             'techProducer',
             'studio',

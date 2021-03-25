@@ -4,28 +4,27 @@ import CopyrightSplit from './copyrightSplit/copyrightSplit';
 import PerformanceSplit from './performanceSplit/performanceSplit';
 import RecordingSplit from './recordingSplit/recordingSplit';
 
-import styles from '../styles';
+import styles from './_/styles';
 import SmartSplit from '../assets/smartsplit.png';
-import PDFContentParser from '../PDFContentParser';
-import contractData from '../assets/contractData';
-import SplitChartSVG from '../../../../_/charts/splitChart/splitChart';
-import SplitChart from '../splitChart/splitChart';
-import DualSplitChart from '../dualSplitChart/dualSplitChart';
-import usePieChartSlices from '../../../../_/charts/usePieChartSlices';
+import PDFContentParser from './_/PDFContentParser';
+import mockData from '../assets/mockData';
+import SplitChart from './_/splitChart/splitChart';
+import DualSplitChart from './_/dualSplitChart/dualSplitChart';
 import { rightHoldersToChartData } from '../../../../_/charts/utils';
 import logoPaths from '../assets/logoPaths';
 import copyrightIcon from '../../../../../../../icons/copyright';
-import Icon from '../icon/icon';
-import List from '../list/list';
+import Icon from './_/icon/icon';
+import List from './_/list/list';
 
 const CHARTSIZE = 230;
-export default function Contract() {
+export default function Contract({ contractData = mockData }) {
   const {
     copyright,
     copyrightDividingMethod,
     performance,
     recording,
   } = contractData.sections.rightSplit;
+  const { locale } = contractData;
   let activeCollaborators = [
     ...copyright.rightHolders,
     ...performance.rightHolders,
@@ -48,6 +47,7 @@ export default function Contract() {
     copyrightDividingMethod,
     performance,
     recording,
+    language: locale,
   };
   return (
     <Document>

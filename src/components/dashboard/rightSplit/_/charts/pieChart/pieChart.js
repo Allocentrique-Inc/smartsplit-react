@@ -1,4 +1,4 @@
-import usePieChartSlices from '../usePieChartSlices';
+import { usePieChartSlices } from '../hooks';
 
 export default function PieChart({
   data,

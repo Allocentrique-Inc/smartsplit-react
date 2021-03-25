@@ -1,3 +1,4 @@
+import { useLyricContributors, useMusicContributors } from './hooks';
 import colors from '../colors';
 
 export const Origin = {
@@ -35,6 +36,35 @@ export function rotatePoint(from, center, angle) {
     rotateCenteredPoint(translatePoint(from, vectorOf(center, Origin)), angle),
     vectorOf(Origin, center),
   );
+}
+
+// https://css-tricks.com/snippets/javascript/lighten-darken-color/
+export function lightenDarkenColor(color, amount) {
+  let usePound = false;
+
+  if (color[0] === '#') {
+    color = color.slice(1);
+    usePound = true;
+  }
+
+  const num = parseInt(color, 16);
+
+  let r = (num >> 16) + amount;
+
+  if (r > 255) r = 255;
+  else if (r < 0) r = 0;
+
+  let b = ((num >> 8) & 0x00ff) + amount;
+
+  if (b > 255) b = 255;
+  else if (b < 0) b = 0;
+
+  let g = (num & 0x0000ff) + amount;
+
+  if (g > 255) g = 255;
+  else if (g < 0) g = 0;
+
+  return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
 }
 
 export function getShareTotal(shareholders) {
@@ -84,31 +114,31 @@ export function genSliceData({
       };
 }
 
-// https://css-tricks.com/snippets/javascript/lighten-darken-color/
-export function lightenDarkenColor(color, amount) {
-  let usePound = false;
+export function computeLyricChartData(rightHolders, activeCollaboratorsIds) {
+  const [lyricContributors, lyricContributorsNb] = useLyricContributors(
+    rightHolders,
+  );
+  return rightHoldersToChartData(
+    lyricContributors.map((contributor) => ({
+      ...contributor,
+      shares: Math.floor((100 / lyricContributorsNb) * 10000) * 10000,
+    })),
+    activeCollaboratorsIds,
+  );
+}
 
-  if (color[0] === '#') {
-    color = color.slice(1);
-    usePound = true;
-  }
+export function computeMusicChartData(rightHolders, activeCollaboratorsIds) {
+  const [musicContributors, musicContributorNb] = useMusicContributors(
+    rightHolders,
+  );
 
-  const num = parseInt(color, 16);
-
-  let r = (num >> 16) + amount;
-
-  if (r > 255) r = 255;
-  else if (r < 0) r = 0;
-
-  let b = ((num >> 8) & 0x00ff) + amount;
-
-  if (b > 255) b = 255;
-  else if (b < 0) b = 0;
-
-  let g = (num & 0x0000ff) + amount;
-
-  if (g > 255) g = 255;
-  else if (g < 0) g = 0;
-
-  return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16);
+  return rightHoldersToChartData(
+    musicContributors.map((contributor) => ({
+      ...contributor,
+      shares:
+        Math.floor(((contributor.weight * 100) / musicContributorNb) * 10000) *
+        10000,
+    })),
+    activeCollaboratorsIds,
+  );
 }

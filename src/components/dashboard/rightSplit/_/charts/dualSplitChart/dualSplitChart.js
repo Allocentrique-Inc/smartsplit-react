@@ -1,6 +1,6 @@
-import usePieChartSlices from '../usePieChartSlices';
 import PieChart from '../pieChart/pieChart';
 import SplitChartLogo from '../splitChartLogo/splitChartLogo';
+import { usePieChartSlices } from '../hooks';
 
 export default function DualSplitChart({
   leftChartData,
@@ -12,6 +12,7 @@ export default function DualSplitChart({
 }) {
   const centerOffset = (size * 32) / 384;
   const chartSize = size - centerOffset;
+  const fontSize = (size * 16) / 384;
   const textYpos = chartSize + centerOffset * (28 / 32);
   const chartCenter = { x: size / 2, y: chartSize / 2 };
   const rightSlices = usePieChartSlices({
@@ -49,7 +50,7 @@ export default function DualSplitChart({
           y={textYpos}
           fill="#203548"
           stroke="#203548"
-          style={{ font: 'bold 12 sans-serif' }}
+          style={{ font: `normal ${fontSize}px sans-serif` }}
           textAnchor="end"
         >
           {leftChartTitle.toUpperCase()}
@@ -61,7 +62,7 @@ export default function DualSplitChart({
           y={textYpos}
           fill="#203548"
           stroke="#203548"
-          style={{ font: 'bold 12 sans-serif' }}
+          style={{ font: `normal ${fontSize}px sans-serif` }}
         >
           {rightChartTitle.toUpperCase()}
         </text>
