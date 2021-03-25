@@ -82,6 +82,7 @@ const AddCollaborators = (props) => {
           onChange={handleQueryInput}
           id="addCollaboratorInput"
           onBlur={handleDelayCloseMenu}
+          autoComplete="off"
         />
         <div className="arrowDown">
           <ChevronDown />

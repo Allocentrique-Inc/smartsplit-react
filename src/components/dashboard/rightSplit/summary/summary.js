@@ -60,7 +60,10 @@ const Summary = (props) => {
   const handleGoToEditorName = () => {
     history.push(`/workpiece/${workpiece_id}/right-split/editor-name`);
   };
-  console.log(props.editor);
+
+  const handleCancelShowQuestionWithEditor = () => {
+    setShowQuestionWithEditor(false);
+  };
 
   // const handleWithManager = () => {
   //   setTab('withManager');
@@ -244,7 +247,9 @@ const Summary = (props) => {
                   disabled={isWithEditorDisabled}
                 >
                   {t_withEditor}
-                  {needResponseToHaveEditor && <div className="notification" />}
+                  {!isWithEditorDisabled && needResponseToHaveEditor && (
+                    <div className="notification" />
+                  )}
                 </button>
                 {showQuestionWithEditor && (
                   <div className="withEditorOrManager">
@@ -258,7 +263,10 @@ const Summary = (props) => {
                         {t_yes}
                       </button>
                     </div>
-                    <div onClick={handleWithCollaborators} className="later">
+                    <div
+                      onClick={handleCancelShowQuestionWithEditor}
+                      className="later"
+                    >
                       {t_later}
                     </div>
                   </div>
