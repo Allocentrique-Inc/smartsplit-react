@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Route, useHistory, useRouteMatch } from 'react-router-dom';
 import getUsersCollaborators from '../../../api/users/getUsersCollaborators';
 import postRightSplit from '../../../api/workpieces/postRightSplit';
+import patchRightSplit from '../../../api/workpieces/patchRightSplit';
 import Copyright from './copyright/copyright';
 import Performance from './performance/performance';
 import Recording from './recording/recording';
@@ -41,9 +42,14 @@ const RightSplit = (props) => {
   const [copyrightDividingMethod, selectCopyrightDividingMethod] = useState(
     'equal',
   );
+  const [recordingDividingMethod, selectRecordingDividingMethod] = useState(
+    'equal',
+  );
+  const isCreating = typeof props.workpiece.rightSplit === 'undefined';
+
   const [warnings, setWarnings] = useState([]);
   const mapData = async () => {
-    if (props.workpiece.rightSplit) {
+    if (!isCreating) {
       const {
         copyright,
         performance,
@@ -77,7 +83,12 @@ const RightSplit = (props) => {
       label,
       isPublic,
     };
-    await postRightSplit(payload);
+    console.log('PAYLOAD', payload);
+    if (isCreating) {
+      await postRightSplit(payload);
+    } else {
+      await patchRightSplit(payload);
+    }
     props.resetData();
   };
 
@@ -216,7 +227,9 @@ const RightSplit = (props) => {
     mapData,
     saveRightSplit,
     copyrightDividingMethod,
+    recordingDividingMethod,
     selectCopyrightDividingMethod,
+    selectRecordingDividingMethod,
     label,
     setLabel,
     translations,

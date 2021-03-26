@@ -73,7 +73,7 @@
     display: flex;
     justify-content: space-around;
     .b1b1 {
-      width: 944px;
+      max-width: 944px;
       display: flex;
       justify-content: space-between;
     }
@@ -88,13 +88,13 @@
     display: flex;
     justify-content: center;
     .b1b1 {
-      width: 944px;
+      max-width: 944px;
       display: flex;
       justify-content: space-between;
       margin-bottom: 100px;
       min-height: 90vh;
       .b1b1b1 {
-        width: 464px;
+        max-width: 464px;
         .presentation {
           .presentationB1 {
             display: flex;
@@ -136,7 +136,7 @@
         }
       }
       .b1b1b2 {
-        width: 464px;
+        max-width: 464px;
         .b1b1b1b2 {
           position: sticky;
           top: 144px;

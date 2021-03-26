@@ -3,5 +3,4 @@ export default (label) => {
   if (!label.agreementDuration) {
     label.errors.push('shouldSpecifyAgreementDuration');
   }
-  return label;
 };

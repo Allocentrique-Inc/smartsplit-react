@@ -1,20 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NotificationBox from './notificationBox/notificationBox';
 import Dragger from '../../_/dragger/dragger';
 import Ellipsis from '../../../../../icons/ellipsis';
 import colors from '../../_/colors';
 import setLabelErrors from '../_/setLabelErrors';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
+import recalculateShares from '../_/recalculateShares';
 
-const Collaborator = (props) => {
+const Label = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
-
+  const {
+    label,
+    recordingDividingMethod,
+    recording,
+    setRecording,
+    setLabel,
+    activeCollaborators,
+    isLabelActive,
+  } = props;
+  useEffect(
+    () =>
+      recalculateShares({
+        recordingDividingMethod,
+        recording,
+        label,
+        setLabel,
+        setRecording,
+        activeCollaborators,
+        isLabelActive,
+      }),
+    [label.agreementDuration],
+  );
   // AVATAR
   const avatarStyle = {
     backgroundColor:
-      colors[
-        props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
-      ],
+      colors[props.activeCollaboratorsIds.indexOf(label.rightHolder_id)],
   };
 
   // ELLIPSIS
@@ -29,15 +49,8 @@ const Collaborator = (props) => {
   const setShares = (newShares) => {
     props.handleDrag({
       newShares,
-      draggedRightHolder_id: props.collaborator.rightHolder_id,
+      draggedRightHolder_id: label.rightHolder_id,
     });
-  };
-
-  const handleAgreementDuration = (e) => {
-    let label = { ...props.label };
-    label.agreementDuration = e.target.value;
-    label = setLabelErrors(label);
-    props.setLabel(label);
   };
 
   const handleNotifyViaEmail = () => {
@@ -55,16 +68,13 @@ const Collaborator = (props) => {
   };
 
   const collaboratorClassName =
-    props.collaborator &&
-    props.collaborator.errors &&
-    props.collaborator.errors.length > 0 &&
-    props.triedSubmit
+    label && label.errors && label.errors.length > 0 && props.triedSubmit
       ? 'collaborator collaboratorErrors'
       : 'collaborator';
 
   // TEXTS
-  const t_initials = `${props.collaborator.rightHolder.firstName[0]}${props.collaborator.rightHolder.lastName[0]}`;
-  const t_userName = `${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`;
+  const t_initials = `${label.rightHolder.firstName[0]}${label.rightHolder.lastName[0]}`;
+  const t_userName = `${label.rightHolder.firstName} ${label.rightHolder.lastName}`;
   const t_notifViaEmail =
     props.translations.rightSplit.recordingLabelNotification._notifViaEmail[
       props.language
@@ -113,7 +123,7 @@ const Collaborator = (props) => {
           <div className="ellipsis" onClick={handleEllipsisClick}>
             <Ellipsis />
             {isShowingOptions && (
-              <button onClick={props.deleteCollaborator}>
+              <button onClick={props.deleteLabel}>
                 {t_removeCollaborator}
               </button>
             )}
@@ -123,8 +133,8 @@ const Collaborator = (props) => {
 
         <select
           className="selectStatus"
-          value={props.collaborator.agreementDuration}
-          onChange={handleAgreementDuration}
+          value={label.agreementDuration}
+          onChange={(e) => props.setLabelAgreementDuration(e.target.value)}
         >
           <option disabled value="">
             Durée de l'entente
@@ -151,11 +161,11 @@ const Collaborator = (props) => {
           />
         </div>
 
-        <Dragger {...commonProps} isDraggable />
+        <Dragger {...commonProps} collaborator={label} isDraggable />
       </div>
       <CollaboratorErrors {...commonProps} />
     </>
   );
 };
 
-export default Collaborator;
+export default Label;

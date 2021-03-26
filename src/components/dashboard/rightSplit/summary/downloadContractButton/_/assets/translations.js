@@ -25,7 +25,7 @@ export default {
     _singer: { fr: 'Chanteur', en: 'Singer' },
     _musician: { fr: 'Musicien', en: 'Musician' },
     _producer: { fr: 'Producteur', en: 'Producer' },
-    _autoProducer: { fr: 'Auto-producteur', en: 'Self Producer' },
+    _selfProducer: { fr: 'Auto-producteur', en: 'Self Producer' },
     _directorProducer: {
       fr: 'Réalisateur-producteur',
       en: 'Director-Producer',

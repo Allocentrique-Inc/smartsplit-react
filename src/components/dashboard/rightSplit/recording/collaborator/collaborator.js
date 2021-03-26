@@ -1,12 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Dragger from '../../_/dragger/dragger';
 import Ellipsis from '../../../../../icons/ellipsis';
 import colors from '../../_/colors';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import setCollaboratorsErrors from '../_/setCollaboratorsErrors';
 import Avatar from '../../../_/avatar/avatar';
+import recalculateShares from '../_/recalculateShares';
 
 const Collaborator = (props) => {
+  const {
+    collaborator,
+    activeCollaborators,
+    isLabelActive,
+    recordingDividingMethod,
+    recording,
+    label,
+    setRecording,
+    setLabel,
+  } = props;
+  useEffect(
+    () =>
+      recalculateShares({
+        activeCollaborators,
+        isLabelActive,
+        recordingDividingMethod,
+        recording,
+        label,
+        setLabel,
+        setRecording,
+      }),
+    [collaborator.function],
+  );
   const [isShowingOptions, setIsShowingOptions] = useState(false);
 
   // AVATAR
@@ -21,14 +45,6 @@ const Collaborator = (props) => {
   };
   const handleDeleteCollaboratorButton = () => {
     props.deleteCollaborator(props.collaborator.rightHolder_id);
-  };
-
-  // STATUS
-  const setStatus = (e) => {
-    let newRecording = [...props.recording];
-    newRecording[props.id].function = e.target.value;
-    newRecording = setCollaboratorsErrors(newRecording);
-    props.setRecording(newRecording);
   };
 
   // DRAGGER
@@ -64,8 +80,11 @@ const Collaborator = (props) => {
     ];
   };
 
+  const isDraggable = props.recordingDividingMethod === 'manual';
+
   const commonProps = {
     ...props,
+    isDraggable,
     setLock,
     setShares,
     handleEllipsisClick,
@@ -100,7 +119,12 @@ const Collaborator = (props) => {
         <select
           className="selectStatus"
           value={props.collaborator.function}
-          onChange={setStatus}
+          onChange={(e) =>
+            props.setCollaboratorFunction(
+              e.target.value,
+              props.collaborator.rightHolder_id,
+            )
+          }
         >
           {[
             '',
@@ -111,14 +135,14 @@ const Collaborator = (props) => {
             'studio',
             'illustratorDesigner',
           ].map((el, id) => (
-            <option disabled={id === 0} value={el}>
+            <option disabled={id === 0} value={el} key={el}>
               {get_t_recordingFunctionOptions(el)}
             </option>
           ))}
         </select>
 
         {/* DRAGGER */}
-        <Dragger {...commonProps} isDraggable />
+        <Dragger {...commonProps} />
       </div>
       <CollaboratorErrors {...commonProps} />
     </>

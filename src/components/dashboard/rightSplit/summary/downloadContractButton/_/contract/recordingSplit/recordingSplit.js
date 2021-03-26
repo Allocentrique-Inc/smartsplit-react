@@ -4,7 +4,6 @@ import { rightHoldersToChartData } from '../../../../../_/charts/utils';
 import logoPaths from '../../assets/logoPaths';
 import styles from '../_/styles';
 import SplitChart from '../_/splitChart/splitChart';
-import contractData from '../../assets/contractData';
 import Icon from '../_/icon/icon';
 import PDFContentParser from '../_/PDFContentParser';
 import colors from '../../../../../_/colors';
@@ -50,10 +49,7 @@ export default function RecordingSplit(props) {
             <View
               style={[
                 styles.collaboratorRow,
-                index ===
-                  contractData.sections.rightSplit.recording.rightHolders
-                    .length -
-                    1 && styles.noBorder,
+                index === recording.rightHolders.length - 1 && styles.noBorder,
               ]}
             >
               <View>

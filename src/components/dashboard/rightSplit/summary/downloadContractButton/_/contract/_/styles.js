@@ -122,7 +122,6 @@ export default StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     paddingTop: 12,
-    paddingBottom: 16,
     justifyContent: 'space-between',
   },
   collaboratorColumn: {

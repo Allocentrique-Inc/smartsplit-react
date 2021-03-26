@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import TopBar from './topBar/topBar';
 import Consult from '../consult/consult';
@@ -6,6 +6,7 @@ import X from '../../../../icons/x';
 import AdjustEmails from './adjustEmails/adjustEmails';
 import DownloadContractButton from './downloadContractButton/downloadContractButton';
 import PaymentModal from '../../_/payments/PaymentModal';
+import getWorkpieceContract from '../../../../api/workpieces/getWorkpieceContract';
 import LastModified from '../../_/lastModified/lastModified';
 
 const Summary = (props) => {
@@ -423,11 +424,20 @@ const AcceptedRightSplit = (props) => {
   const versionIndex = props.workpiece.rightSplit.version;
   const productCode = 'RIGHT_SPLIT_DOWNLOAD';
   const [showPaymentModal, setShowPaymentModal] = useState();
+  const { workpiece_id } = useParams();
+  const [contractData, setContractData] = useState();
   const modalProps = {
     productCode,
     ...props,
     setShowModal: setShowPaymentModal,
   };
+  useEffect(async () => {
+    const result = await getWorkpieceContract({ workpiece_id });
+    console.log('CONTRACTDATA', result);
+
+    result.statusCode !== 500 && setContractData(result);
+    result.statusCode === 500 && setContractData(null);
+  }, []);
   const hasBoughtPDF = Object.values(props.workpiece.purchases).length > 0;
   return (
     <>
@@ -448,7 +458,12 @@ const AcceptedRightSplit = (props) => {
           <div />
           <div className="status acceptedStatus">{props.t_accepted}</div>
         </div>
-        <DownloadContractButton language={props.language} />
+        {contractData && (
+          <DownloadContractButton
+            language={props.language}
+            contractData={contractData}
+          />
+        )}
 
         {/*        {hasBoughtPDF ? (
           <DownloadContractButton language={props.language} />
