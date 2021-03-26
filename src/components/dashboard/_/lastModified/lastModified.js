@@ -16,9 +16,11 @@ const LastModified = (props) => {
 LastModified.propTypes = {
   date: PropTypes.string,
   language: PropTypes.string,
+  className: PropTypes.string,
 };
 LastModified.defaultProps = {
   date: '',
   language: 'fr',
+  className: '',
 };
 export default LastModified;
