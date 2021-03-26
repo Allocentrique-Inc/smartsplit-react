@@ -1,7 +1,12 @@
 import { Text, View } from '@react-pdf/renderer';
 import ReactHtmlParser from 'react-html-parser';
 import Icon from '../_/icon/icon';
-import { rightHoldersToChartData } from '../../../../../_/charts/utils';
+import Badge from '../_/badge/badge';
+import {
+  computeLyricChartData,
+  computeMusicChartData,
+  rightHoldersToChartData,
+} from '../../../../../_/charts/utils';
 import PDFContentParser from '../_/PDFContentParser';
 
 import logoPaths from '../../assets/logoPaths';
@@ -26,18 +31,14 @@ export default function CopyrightSplit(props) {
       copyright.rightHolders,
       activeCollaboratorsIds,
     ),
-    leftChartData: rightHoldersToChartData(
-      copyright.rightHolders.filter(
-        (rh) => rh.roles.includes('author') || rh.roles.includes('adapter'),
-      ),
+    leftChartData: computeLyricChartData(
+      copyright.rightHolders,
       activeCollaboratorsIds,
     ),
     leftTitle: translations._lyrics[language],
     rightTitle: translations._music[language],
-    rightChartData: rightHoldersToChartData(
-      copyright.rightHolders.filter(
-        (rh) => rh.roles.includes('composer') || rh.roles.includes('mixer'),
-      ),
+    rightChartData: computeMusicChartData(
+      copyright.rightHolders,
       activeCollaboratorsIds,
     ),
     logoPath: logoPaths.copyright,
@@ -56,18 +57,16 @@ export default function CopyrightSplit(props) {
         </View>
         {copyright.rightHolders.map((rightHolder, index) => (
           <View style={styles.row} key={rightHolder.rightHolder_id}>
-            <View
-              style={{
-                backgroundColor:
+            <View style={styles.userInitials}>
+              <Badge
+                color={
                   colors[
                     activeCollaboratorsIds.indexOf(rightHolder.rightHolder_id)
-                  ],
-                width: 4,
-                margin: '1 0',
-              }}
-            />
-            <View style={styles.userInitials} debug>
-              <Text>{`${rightHolder.firstName[0]}${rightHolder.lastName[0]}`}</Text>
+                  ]
+                }
+                initials={`${rightHolder.firstName[0]}${rightHolder.lastName[0]}`}
+                size={22}
+              />
             </View>
             <View
               style={[

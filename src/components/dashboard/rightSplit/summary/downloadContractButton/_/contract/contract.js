@@ -25,17 +25,14 @@ export default function Contract({ contractData = mockData }) {
     recording,
   } = contractData.sections.rightSplit;
   const { locale } = contractData;
-  let activeCollaborators = [
+  const activeCollaborators = [
     ...copyright.rightHolders,
     ...performance.rightHolders,
     ...recording.rightHolders,
   ];
-  activeCollaborators = activeCollaborators.reduce((acc, el) => {
-    if (acc.find((EL) => EL.rightHolder_id === el.rightHolder_id)) {
-      return acc;
-    }
-    return [...acc, el];
-  }, []);
+  if (recording.label && recording.label.rightHolder_id) {
+    activeCollaborators.push(recording.label);
+  }
   const activeCollaboratorsIds = activeCollaborators.map(
     (el) => el.rightHolder_id,
   );
