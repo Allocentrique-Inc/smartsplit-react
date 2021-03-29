@@ -5,6 +5,7 @@ import Ellipsis from '../../../../../icons/ellipsis';
 import Dragger from '../../_/dragger/dragger';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import Avatar from '../../../_/avatar/avatar';
+import ArtistName from '../../../_/artistName/artistName';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -52,9 +53,7 @@ const Collaborator = (props) => {
       : 'collaborator';
 
   // TEXTS
-  const t_initials = `${props.collaborator.rightHolder.firstName[0]}${props.collaborator.rightHolder.lastName[0]}`;
-  const t_userName = `${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`;
-  const t_removeCollaborator =
+ const t_removeCollaborator =
     props.translations.rightSplit._removeCollaborator[props.language];
   const t_author =
     props.translations.rightSplit.copyrightRoles._author[props.language];
@@ -84,7 +83,7 @@ const Collaborator = (props) => {
               user={props.collaborator.rightHolder}
               color={collaboratorColor}
             />
-            <div className="name">{t_userName}</div>
+            <div className="name"><ArtistName user={props.collaborator.rightHolder} /></div>
           </div>
 
           {/* ELLIPSIS OPTIONS */}

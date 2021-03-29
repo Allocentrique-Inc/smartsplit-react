@@ -1,13 +1,14 @@
 import Vote from '../vote/vote';
+import ArtistName from '../../../../_/artistName/artistName';
 
 const Collaborator = (props) => {
-  const { firstName, lastName, shares, vote, roles } = props.collaborator;
+  const { shares, vote, roles } = props.collaborator;
   return (
     <div className="consultCollaborator">
       <div className="left">
         <div className="avatar" />
         <div>
-          <div className="name">{`${firstName} ${lastName}`}</div>
+          <div className="name"><ArtistName user={props.collaborator} /></div>
           <div className="roles">
             {roles.map((el) => (
               <div>{`${el} `}</div>

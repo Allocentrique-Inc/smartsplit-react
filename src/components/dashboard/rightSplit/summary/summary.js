@@ -8,6 +8,7 @@ import DownloadContractButton from './downloadContractButton/downloadContractBut
 import PaymentModal from '../../_/payments/PaymentModal';
 import getWorkpieceContract from '../../../../api/workpieces/getWorkpieceContract';
 import LastModified from '../../_/lastModified/lastModified';
+import ArtistName from '../../_/artistName/artistName';
 
 const Summary = (props) => {
   const history = useHistory();
@@ -191,7 +192,7 @@ const Summary = (props) => {
               <div className="topBar">
                 <div className="title" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>Version {consulting.version}
                   <div className="consult-details">
-                    {t_createdBy} <span className="artistName">{` ${consulting.owner.firstName} ${consulting.owner.lastName}. `}</span><LastModified date={consulting.updatedAt} language={props.language}>{`${t_updated}`}</LastModified>
+                    <ArtistName user={consulting.owner}>{t_createdBy}</ArtistName>
                   </div>
                 </div>
                 <div
@@ -234,10 +235,7 @@ const Summary = (props) => {
           <div className="b1b1">
             <div className="pageTitle">{t_splitSummary}</div>
             <div className="splitDetails">
-              {t_createdBy}
-              <span className="artistName">
-                {`${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName}`}
-              </span>
+              <ArtistName user={consulting.owner}>{t_createdBy}</ArtistName>
               {/* - Mis à jour
               <span className="lastModify">-------</span> */}
             </div>
@@ -406,10 +404,7 @@ const DraftRightSplit = (props) => {
       >
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
-          {props.t_createdBy}
-          <span className="artistName">
-            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-          </span>
+          <ArtistName user={props.workpiece.rightSplit.owner}>{props.t_createdBy}</ArtistName>
           <LastModified date={props.workpiece.rightSplit.createdAt} language={props.language} />
         </div>
         <div className="b1">
@@ -457,10 +452,7 @@ const AcceptedRightSplit = (props) => {
       >
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
-          {props.t_createdBy}
-          <span className="artistName">
-            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-          </span>
+          <ArtistName user={props.workpiece.rightSplit.owner}>{props.t_createdBy}</ArtistName>
         </div>
         <div className="update-details">
           <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
@@ -508,10 +500,7 @@ const InVoteRightSplit = (props) => {
       >
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
-          {props.t_createdBy}
-          <span className="artistName">
-            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-          </span>
+          <ArtistName user={props.workpiece.rightSplit.owner}>{props.t_createdBy}</ArtistName>
         </div>
         <div className="update-details">
           <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
@@ -538,10 +527,7 @@ const RejectedRightSplit = (props) => {
       >
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
-          {props.t_createdBy}
-          <span className="artistName">
-            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-          </span>
+          <ArtistName user={props.workpiece.rightSplit.owner}>{props.t_createdBy}</ArtistName>
         </div>
         <div className="update-details">
           <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
@@ -568,10 +554,7 @@ const RejectedRightSplitArchived = (props) => {
     >
       <div className="title">{`Version ${versionIndex}`}</div>
       <div className="details">
-        {props.t_createdBy}
-        <span className="artistName">
-          {` ${props.archivedRightSplit.owner.firstName} ${props.archivedRightSplit.owner.lastName} `}
-        </span>
+        <ArtistName user={props.workpiece.rightSplit.owner}>{props.t_createdBy}</ArtistName>
       </div>
       <div className="update-details">
         <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>

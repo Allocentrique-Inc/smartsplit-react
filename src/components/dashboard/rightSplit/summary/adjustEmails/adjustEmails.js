@@ -5,6 +5,7 @@ import PageErrors from '../../_/pageErrors/pageErrors';
 import X from '../../../../../icons/x';
 import ProfilePlaceholder from '../../../../../icons/profilePlaceholder';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
+import ArtistName from '../../../_/artistName/artistName';
 
 const AdjustEmails = (props) => {
   const [emails, setEmails] = useState({});
@@ -126,7 +127,7 @@ const AdjustEmails = (props) => {
                     <ProfilePlaceholder small />
                     <div className="formInput">
                       <label>
-                        {`${collaborator.rightHolder.firstName} ${collaborator.rightHolder.lastName}`}
+                        <ArtistName user={collaborator.rightHolder} />
                       </label>
                       <input
                         value={emails[collaborator.rightHolder_id]}

@@ -10,6 +10,7 @@ import PDFContentParser from '../_/PDFContentParser';
 import colors from '../../../../../_/colors';
 import printRoles from '../_/printRoles';
 import translations from '../../assets/translations';
+import ArtistName from '../../../../../../_/artistName/artistName';
 
 export default function RecordingSplit(props) {
   const { language, recording, activeCollaboratorsIds, CHARTSIZE } = props;
@@ -53,9 +54,7 @@ export default function RecordingSplit(props) {
             >
               <View>
                 <Text style={styles.collaboratorName}>
-                  {`${rightHolder.firstName} ${rightHolder.lastName}${
-                    rightHolder.artistName ? ` (${rightHolder.artistName})` : ''
-                  }`}
+                  <ArtistName user={rightHolder} />
                 </Text>
                 <Text style={styles.collaboratorRoles}>
                   {printRoles([rightHolder.function], language)}

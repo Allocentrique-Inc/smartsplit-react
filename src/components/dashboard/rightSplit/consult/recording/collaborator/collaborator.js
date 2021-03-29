@@ -1,5 +1,6 @@
 import Avatar from '../../../../_/avatar/avatar';
 import colors from '../../../_/colors';
+import ArtistName from '../../../../_/artistName/artistName';
 
 const Collaborator = (props) => {
   const {
@@ -9,8 +10,6 @@ const Collaborator = (props) => {
     rightHolder,
     comment,
   } = props.collaborator;
-  const { firstName, lastName } = rightHolder;
-  const t_initials = `${firstName[0]} ${lastName[0]}`;
   const user_id = localStorage.getItem('user_id');
   const isUserVoting =
     user_id === props.collaborator.rightHolder_id && vote === 'undecided';
@@ -66,7 +65,7 @@ const Collaborator = (props) => {
         <div className="left">
           <Avatar user={rightHolder} color={collaboratorColor} />
           <div>
-            <div className="name">{`${firstName} ${lastName}`}</div>
+            <div className="name"><ArtistName user={rightHolder} /></div>
             <div className="roles"> {_function}</div>
           </div>
         </div>

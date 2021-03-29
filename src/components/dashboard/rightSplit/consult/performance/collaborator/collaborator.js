@@ -1,10 +1,10 @@
 import Avatar from '../../../../_/avatar/avatar';
 import colors from '../../../_/colors';
+import ArtistName from '../../../../_/artistName/artistName';
 
 const Collaborator = (props) => {
   const { shares, vote, roles, rightHolder, comment } = props.collaborator;
-  const { firstName, lastName } = rightHolder;
-  const t_initials = `${firstName[0]} ${lastName[0]}`;
+
   const handleAccept = () =>
     props.setPerformance({ vote: 'accepted', comment: '' });
 
@@ -29,7 +29,7 @@ const Collaborator = (props) => {
         <div className="left">
           <Avatar user={rightHolder} color={collaboratorColor} />
           <div>
-            <div className="name">{`${firstName} ${lastName}`}</div>
+            <div className="name"><ArtistName user={rightHolder} /></div>
             <div className="roles">
               {roles.map((role) => (
                 <div className="role" key={role}>

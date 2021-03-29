@@ -16,6 +16,7 @@ import SplitChart from '../_/splitChart/splitChart';
 import colors from '../../../../../_/colors';
 import printRoles from '../_/printRoles';
 import translations from '../../assets/translations';
+import ArtistName from '../../../../../../_/artistName/artistName';
 
 export default function CopyrightSplit(props) {
   const {
@@ -76,9 +77,7 @@ export default function CopyrightSplit(props) {
             >
               <View>
                 <Text style={styles.collaboratorName}>
-                  {`${rightHolder.firstName} ${rightHolder.lastName}${
-                    rightHolder.artistName ? ` (${rightHolder.artistName})` : ''
-                  }`}
+                  <ArtistName user={rightHolder} />
                 </Text>
                 <Text style={styles.collaboratorRoles}>
                   {printRoles(rightHolder.roles, language)}

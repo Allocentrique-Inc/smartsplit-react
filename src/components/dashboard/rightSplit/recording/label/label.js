@@ -6,6 +6,8 @@ import colors from '../../_/colors';
 import setLabelErrors from '../_/setLabelErrors';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import recalculateShares from '../_/recalculateShares';
+import Avatar from '../../../_/avatar/avatar';
+import ArtistName from '../../../_/artistName/artistName';
 
 const Label = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -73,9 +75,7 @@ const Label = (props) => {
       : 'collaborator';
 
   // TEXTS
-  const t_initials = `${label.rightHolder.firstName[0]}${label.rightHolder.lastName[0]}`;
-  const t_userName = `${label.rightHolder.firstName} ${label.rightHolder.lastName}`;
-  const t_notifViaEmail =
+ const t_notifViaEmail =
     props.translations.rightSplit.recordingLabelNotification._notifViaEmail[
       props.language
     ];
@@ -114,10 +114,10 @@ const Label = (props) => {
       <div className={collaboratorClassName}>
         <div className="b1">
           <div className="rowAC">
-            <div className="avatar" style={avatarStyle}>
-              {t_initials}
-            </div>
-            <div className="name">{t_userName}</div>
+            <Avatar
+              user={props.collaborator.rightHolder}
+            />
+            <div className="name"><ArtistName user={props.collaborator.rightHolder} /></div>
           </div>
 
           <div className="ellipsis" onClick={handleEllipsisClick}>

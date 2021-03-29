@@ -6,6 +6,7 @@ import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import setCollaboratorsErrors from '../_/setCollaboratorsErrors';
 import Avatar from '../../../_/avatar/avatar';
 import recalculateShares from '../_/recalculateShares';
+import ArtistName from '../../../_/artistName/artistName';
 
 const Collaborator = (props) => {
   const {
@@ -69,8 +70,6 @@ const Collaborator = (props) => {
       : 'collaborator';
 
   // TEXTS
-  const t_initials = `${props.collaborator.rightHolder.firstName[0]}${props.collaborator.rightHolder.lastName[0]}`;
-  const t_userName = `${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`;
   const t_removeCollaborator =
     props.translations.rightSplit._removeCollaborator[props.language];
   const get_t_recordingFunctionOptions = (value) => {
@@ -100,7 +99,7 @@ const Collaborator = (props) => {
               user={props.collaborator.rightHolder}
               color={collaboratorColor}
             />
-            <div className="name">{t_userName}</div>
+            <div className="name"><ArtistName user={props.collaborator.rightHolder} /></div>
           </div>
 
           {/* ELLIPSIS OPTIONS */}

@@ -1,4 +1,5 @@
 import X from '../../../../icons/x';
+import ArtistName from '../../_/artistName/artistName';
 
 const Collaborators = (props) => {
   return (
@@ -30,9 +31,8 @@ const Collaborators = (props) => {
 };
 
 const RightHolder = (props) => {
-  const { firstName, lastName } = props.rightHolder;
   const permission = 'read';
-  const t_name = `${firstName} ${lastName}`;
+
   return (
     <div
       style={{
@@ -41,7 +41,7 @@ const RightHolder = (props) => {
         width: '200px',
       }}
     >
-      <div>{t_name}</div>
+      <ArtistName user={props.rightHolder} />
       <div>{permission}</div>
     </div>
   );

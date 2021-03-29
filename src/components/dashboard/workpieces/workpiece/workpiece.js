@@ -10,11 +10,6 @@ const Workpiece = (props) => {
     fr: 'par',
     en: 'by',
   }[props.language];
-  const t_songCreator =
-    props.owner &&
-    props.owner.firstName &&
-    props.owner.lastName &&
-    `${t_by} ${props.owner.firstName} ${props.owner.lastName}`;
   const t_songTitle = props.title;
   const t_mod = {
     fr: 'modifié',

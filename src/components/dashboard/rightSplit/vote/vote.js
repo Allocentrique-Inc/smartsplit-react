@@ -4,6 +4,7 @@ import Creation from './creation/creation';
 import SplitOwner from './splitOwner/splitOwner';
 import Consult from '../consult/consult';
 import DownBar from './downBar/downBar';
+import ArtistName from '../../_/artistName/artistName';
 
 const Vote = (props) => {
   const [copyright, setCopyright] = useState({
@@ -85,15 +86,13 @@ const Vote = (props) => {
         <div className="inner">
           <div className="voteTitle">{`${t_title} ${title}`}</div>
           <div className="workpieceDetails">
-            {t_createdBy}
-            <span className="ownerName">{ownerName}</span>
+            <ArtistName className="ownerName" user={owner}>{t_createdBy}</ArtistName>
             {/* - Mis à jour il y a
             ----- */}
           </div>
           <div className="version">{`Version ${version}`}</div>
           <div className="workpieceDetails">
-            {t_createdBy}
-            <span className="ownerName">{splitOwnerName}</span>
+            <ArtistName className="ownerName" user={owner}>{t_createdBy}</ArtistName>
             {/* - il y a ----- */}
           </div>
           <div className="consult">
