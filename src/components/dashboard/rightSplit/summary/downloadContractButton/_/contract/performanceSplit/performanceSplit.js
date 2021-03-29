@@ -5,6 +5,7 @@ import logoPaths from '../../assets/logoPaths';
 import styles from '../_/styles';
 import SplitChart from '../_/splitChart/splitChart';
 import Icon from '../_/icon/icon';
+import Badge from '../_/badge/badge';
 import PDFContentParser from '../_/PDFContentParser';
 import colors from '../../../../../_/colors';
 import printRoles from '../_/printRoles';
@@ -37,18 +38,16 @@ export default function PerformanceSplit(props) {
         </View>
         {performance.rightHolders.map((rightHolder, index) => (
           <View style={styles.row} key={rightHolder.rightHolder_id}>
-            <View
-              style={{
-                backgroundColor:
+            <View style={styles.userInitials}>
+              <Badge
+                color={
                   colors[
                     activeCollaboratorsIds.indexOf(rightHolder.rightHolder_id)
-                  ],
-                width: 4,
-                margin: '1 0',
-              }}
-            />
-            <View style={styles.userInitials}>
-              <Text>{`${rightHolder.firstName[0]}${rightHolder.lastName[0]}`}</Text>
+                  ]
+                }
+                initials={`${rightHolder.firstName[0]}${rightHolder.lastName[0]}`}
+                size={22}
+              />
             </View>
             <View
               style={[

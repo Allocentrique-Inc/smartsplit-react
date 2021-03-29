@@ -440,14 +440,14 @@ const AcceptedRightSplit = (props) => {
     ...props,
     setShowModal: setShowPaymentModal,
   };
-  useEffect(async () => {
-    const result = await getWorkpieceContract({ workpiece_id });
-    console.log('CONTRACTDATA', result);
-
-    result.statusCode !== 500 && setContractData(result);
-    result.statusCode === 500 && setContractData(null);
-  }, []);
   const hasBoughtPDF = Object.values(props.workpiece.purchases).length > 0;
+  useEffect(async () => {
+    if (hasBoughtPDF) {
+      const result = await getWorkpieceContract({ workpiece_id });
+      result.statusCode !== 500 && setContractData(result);
+      result.statusCode === 500 && setContractData(null);
+    }
+  }, [hasBoughtPDF]);
   return (
     <>
       <div
@@ -469,15 +469,18 @@ const AcceptedRightSplit = (props) => {
           <div />
           <div className="status acceptedStatus">{props.t_accepted}</div>
         </div>
-        {contractData && (
+        {/*{contractData && (
           <DownloadContractButton
             language={props.language}
             contractData={contractData}
           />
-        )}
+        )}*/}
 
-        {/*        {hasBoughtPDF ? (
-          <DownloadContractButton language={props.language} />
+        {hasBoughtPDF ? (
+          <DownloadContractButton
+            language={props.language}
+            contractData={contractData}
+          />
         ) : (
           <button
             onClick={(e) => {
@@ -488,7 +491,7 @@ const AcceptedRightSplit = (props) => {
           >
             {props.t_download}
           </button>
-        )}*/}
+        )}
       </div>
       {showPaymentModal && <PaymentModal {...modalProps} />}
     </>
