@@ -7,6 +7,7 @@ import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkp
 import Collaborators from './collaborators/collaborators';
 import ProfileOptions from '../_/profileOptions/profileOptions';
 import CoverImage from '../_/coverImage/coverImage';
+import ArtistName from '../_/artistName/artistName';
 
 const Orientation = (props) => {
   const [tab, setTab] = useState('task');
@@ -89,8 +90,7 @@ const Orientation = (props) => {
                   )}
                 </div>
                 <div className="details">
-                  {t_createdBy && t_createdBy_}
-                  <span className="artistName">{t_createdBy}</span>
+                  <ArtistName user={props.workpiece.owner}>{t_createdBy_}</ArtistName>
                 </div>
               </div>
             </div>

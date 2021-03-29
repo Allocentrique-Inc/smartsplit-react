@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Action from './action/action';
 import VertEllipsis from '../../../../icons/vertEllipsis';
 import CoverImage from '../../_/coverImage/coverImage';
+import ArtistName from '../../_/artistName/artistName';
 
 const Workpiece = (props) => {
   const t_by = {
@@ -35,7 +36,7 @@ const Workpiece = (props) => {
         <div className="details">
           <div className="b1">
             {t_songTitle && <span className="title">{t_songTitle}</span>}
-            {t_songCreator && t_songCreator}
+            <ArtistName user={props.owner}>{t_by}</ArtistName>
           </div>
         </div>
       </div>
