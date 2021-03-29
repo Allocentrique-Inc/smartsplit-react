@@ -235,7 +235,7 @@ const Summary = (props) => {
           <div className="b1b1">
             <div className="pageTitle">{t_splitSummary}</div>
             <div className="splitDetails">
-              <ArtistName user={consulting.owner}>{t_createdBy}</ArtistName>
+              <ArtistName user={props.workpiece.owner}>{t_createdBy}</ArtistName>
               {/* - Mis à jour
               <span className="lastModify">-------</span> */}
             </div>

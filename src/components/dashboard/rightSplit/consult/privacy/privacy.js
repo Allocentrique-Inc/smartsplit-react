@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import Eye from './eye';
 import Avatar from '../../../_/avatar/avatar';
 import colors from '../../_/colors';
+import ArtistName from '../../../_/artistName/artistName';
 
 const Privacy = (props) => {
   const history = useHistory();
@@ -58,8 +59,6 @@ const Privacy = (props) => {
 const Collab = (props) => {
   const { vote, rightHolder, comment } = props.collaborator;
   const { firstName, lastName } = rightHolder;
-  const t_name = `${firstName} ${lastName}`;
-  const t_initials = `${firstName[0]}${lastName[0]}`;
   const t_vote = props.collaborator.vote;
   const handleAccept = () =>
     props.setPrivacy({
@@ -86,7 +85,7 @@ const Collab = (props) => {
       <div className="consultCollaborator privacyCollaborator">
         <div className="left">
           <Avatar user={rightHolder} color={collaboratorColor} />
-          <div className="name">{t_name}</div>
+          <div className="name"><ArtistName user={rightHolder} /></div>
         </div>
 
         <div className="right">
