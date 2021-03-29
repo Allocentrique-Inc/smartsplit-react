@@ -283,6 +283,16 @@
   align-items: center;
   justify-content: flex-start;
 }
+.update-details{
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 11px;
+  color:lighten(#687a8b,20%);
+}
+.last-modified{
+
+  display:inline-block;
+}
 
 .artistName {
   text-transform:capitalize;

@@ -13,7 +13,6 @@ const TopBar = (props) => {
     props.recording,
     props.label,
   );
-
   const handleSaveAndQuit = async () => {
     props.setTriedSubmit(true);
     if (flowErrors.length === 0) {
@@ -35,7 +34,27 @@ const TopBar = (props) => {
     ];
   const t_saveAndQuit =
     props.translations.rightSplit.topBar._saveAndQuit[props.language];
-  return (
+  return props.isMobile ? (
+    <div className="topBar">
+      <div className="bx">
+        <div className="img">
+          <CoverImage {...props} />
+        </div>
+        <div>
+          <div className="title">{t_title}</div>
+          <div className="breadCrumb">
+            <div className="p1">{t_breadCrumb1}</div>
+          </div>
+        </div>
+      </div>
+      <div className="bx">
+        {/* <div className="saveAndQuit" onClick={handleSaveAndQuit}>
+          {t_saveAndQuit}
+        </div> */}
+        <ProfileOptions {...props} />
+      </div>
+    </div>
+  ) : (
     <div className="topBar">
       <div className="bx">
         <div className="img">

@@ -101,34 +101,65 @@ const Collaborator = (props) => {
         <div className="space" />
 
         {/* ROLES */}
-        <div className="roleRow">
-          <RoleBox
-            {...commonProps}
-            arr={props.collaborator.roles}
-            label={t_author}
-            _role="author"
-          />
-          <RoleBox
-            {...commonProps}
-            arr={props.collaborator.roles}
-            label={t_composer}
-            _role="composer"
-          />
-        </div>
-        <div className="roleRow">
-          <RoleBox
-            {...commonProps}
-            arr={props.collaborator.roles}
-            label={t_adapter}
-            _role="adapter"
-          />
-          <RoleBox
-            {...commonProps}
-            arr={props.collaborator.roles}
-            label={t_mixer}
-            _role="mixer"
-          />
-        </div>
+        {props.isMobile ? (
+          <div className="roleRow">
+            <RoleBox
+              {...commonProps}
+              arr={props.collaborator.roles}
+              label={t_author}
+              _role="author"
+            />
+            <RoleBox
+              {...commonProps}
+              arr={props.collaborator.roles}
+              label={t_composer}
+              _role="composer"
+            />
+            <RoleBox
+              {...commonProps}
+              arr={props.collaborator.roles}
+              label={t_adapter}
+              _role="adapter"
+            />
+            <RoleBox
+              {...commonProps}
+              arr={props.collaborator.roles}
+              label={t_mixer}
+              _role="mixer"
+            />
+          </div>
+        ) : (
+          <>
+            <div className="roleRow">
+              <RoleBox
+                {...commonProps}
+                arr={props.collaborator.roles}
+                label={t_author}
+                _role="author"
+              />
+              <RoleBox
+                {...commonProps}
+                arr={props.collaborator.roles}
+                label={t_composer}
+                _role="composer"
+              />
+            </div>
+            <div className="roleRow">
+              <RoleBox
+                {...commonProps}
+                arr={props.collaborator.roles}
+                label={t_adapter}
+                _role="adapter"
+              />
+              <RoleBox
+                {...commonProps}
+                arr={props.collaborator.roles}
+                label={t_mixer}
+                _role="mixer"
+              />
+            </div>
+          </>
+        )}
 
         {/* SHARES */}
         <Dragger {...commonProps} />

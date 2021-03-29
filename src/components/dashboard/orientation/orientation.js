@@ -7,6 +7,7 @@ import AddOrEditWorkpieceModal from '../_/addOrEditWorkpieceModal/addOrEditWorkp
 import Collaborators from './collaborators/collaborators';
 import ProfileOptions from '../_/profileOptions/profileOptions';
 import CoverImage from '../_/coverImage/coverImage';
+import LastModified from '../_/lastModified/lastModified';
 import ArtistName from '../_/artistName/artistName';
 
 const Orientation = (props) => {
@@ -35,6 +36,10 @@ const Orientation = (props) => {
   const t_tasks = {
     fr: 'Tâches',
     en: 'Tasks',
+  }[props.language];
+  const t_modified = {
+    fr: 'mis à jour',
+    en: 'modified',
   }[props.language];
 
   const handleEditWorkpiece = () => setIsEditingWorkpiece(true);
@@ -91,6 +96,9 @@ const Orientation = (props) => {
                 </div>
                 <div className="details">
                   <ArtistName user={props.workpiece.owner}>{t_createdBy_}</ArtistName>
+                  <span className="artistName">{t_createdBy}</span>
+                  {' '}-{' '}
+                  <LastModified {...commonProps}>{t_modified}</LastModified>
                 </div>
               </div>
             </div>

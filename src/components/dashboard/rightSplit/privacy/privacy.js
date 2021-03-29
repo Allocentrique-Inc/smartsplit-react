@@ -75,7 +75,7 @@ const Privacy = (props) => {
             <PrivacySelection {...commonProps} />
             {triedSubmit && <PageErrors {...commonProps} errors={flowErrors} />}
           </div>
-          <div className="b1b1b2" />
+          {!props.isMobile && <div className="b1b1b2" />}
         </div>
       </div>
       <DownBar
