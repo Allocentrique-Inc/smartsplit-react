@@ -7,6 +7,7 @@ import AdjustEmails from './adjustEmails/adjustEmails';
 import DownloadContractButton from './downloadContractButton/downloadContractButton';
 import PaymentModal from '../../_/payments/PaymentModal';
 import getWorkpieceContract from '../../../../api/workpieces/getWorkpieceContract';
+import LastModified from '../../_/lastModified/lastModified';
 
 const Summary = (props) => {
   const history = useHistory();
@@ -157,6 +158,10 @@ const Summary = (props) => {
     fr: 'Plus tard',
     en: 'Later',
   }[props.language];
+  const t_updated = {
+    fr: 'Mis à jour',
+    en: 'Updated',
+  }[props.language];
 
   const commonProps = {
     ...props,
@@ -169,6 +174,7 @@ const Summary = (props) => {
     t_rejected,
     t_download,
     t_createANewOne,
+    t_updated,
   };
   if (!props.isLoaded) {
     return null;
@@ -183,7 +189,11 @@ const Summary = (props) => {
           <div className="modalBackground" onClick={() => setConsulting(null)}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
               <div className="topBar">
-                <div className="title">Version {consulting.version}</div>
+                <div className="title" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>Version {consulting.version}
+                  <div className="consult-details">
+                    {t_createdBy} <span className="artistName">{` ${consulting.owner.firstName} ${consulting.owner.lastName}. `}</span><LastModified date={consulting.updatedAt} language={props.language}>{`${t_updated}`}</LastModified>
+                  </div>
+                </div>
                 <div
                   className="exit"
                   onClick={() => {
@@ -400,6 +410,7 @@ const DraftRightSplit = (props) => {
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
+          <LastModified date={props.workpiece.rightSplit.createdAt} language={props.language} />
         </div>
         <div className="b1">
           <div />
@@ -451,6 +462,9 @@ const AcceptedRightSplit = (props) => {
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
         </div>
+        <div className="update-details">
+          <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
+        </div>
         <div className="b1">
           <div />
           <div className="status acceptedStatus">{props.t_accepted}</div>
@@ -499,6 +513,9 @@ const InVoteRightSplit = (props) => {
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
         </div>
+        <div className="update-details">
+          <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
+        </div>
         <button>{props.t_consult}</button>
       </div>
     </div>
@@ -526,6 +543,9 @@ const RejectedRightSplit = (props) => {
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
         </div>
+        <div className="update-details">
+          <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
+        </div>
         <div className="b1">
           <div />
           <div className="status rejectedStatus">{props.t_rejected}</div>
@@ -552,6 +572,9 @@ const RejectedRightSplitArchived = (props) => {
         <span className="artistName">
           {` ${props.archivedRightSplit.owner.firstName} ${props.archivedRightSplit.owner.lastName} `}
         </span>
+      </div>
+      <div className="update-details">
+        <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
       </div>
       <div className="b1">
         <div />

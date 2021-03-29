@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useWindowWidth } from '@react-hook/window-size';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,14 +14,19 @@ import './styles/index.scss';
 import Loading from './components/_/loading/loading';
 
 function App() {
+  const windowWidth = useWindowWidth();
+  const isMobile = windowWidth < 944;
+  const commonProps = {
+    isMobile,
+  };
   return (
     <Router>
       <Switch>
         <Route path={['/user', '/login', '/signup']}>
-          <Public />
+          <Public {...commonProps} />
         </Route>
         <Route path="/">
-          <LoadingManager />
+          <LoadingManager {...commonProps} />
         </Route>
       </Switch>
     </Router>
@@ -47,7 +53,7 @@ const LoadingManager = (props) => {
   };
   return (
     <>
-      {(!isLoaded || !isLogged) && <Loading />}
+      {(!isLoaded || !isLogged) && <Loading {...commonProps} />}
       {isLogChecked && isLogged && (
         <Dashboard {...commonProps} resetLogginCheck={resetLogginCheck} />
       )}

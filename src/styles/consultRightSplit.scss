@@ -194,3 +194,16 @@
     }
   }
 }
+.consult-details{
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #687a8b;
+  .artistName {
+    font-weight: bold;
+    color: #2da84f;
+    margin: 0px 4px;
+  }
+}

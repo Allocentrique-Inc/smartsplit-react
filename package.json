@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-hook/window-size": "^3.0.7",
     "@react-pdf/renderer": "^1.6.13",
     "@stripe/react-stripe-js": "^1.4.0",
     "@stripe/stripe-js": "^1.13.0",
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^12.1.10",
     "email-validator": "^2.0.4",
     "libphonenumber-js": "^1.9.11",
+    "moment": "^2.29.1",
     "node-sass": "^4.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",

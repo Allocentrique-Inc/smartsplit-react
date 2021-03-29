@@ -231,18 +231,20 @@ const Copyright = (props) => {
                 <PageErrors {...commonProps} errors={pageErrors} />
               )}
             </div>
-            <div className="b1b1b2">
-              <div className="b1b1b1b2">
-                {shouldDisplayPieChart &&
-                  props.copyrightDividingMethod !== 'role' && (
-                    <SplitChart {...commonProps} />
-                  )}
-                {shouldDisplayPieChart &&
-                  props.copyrightDividingMethod === 'role' && (
-                    <DualSplitChart {...commonProps} />
-                  )}
+            {!props.isMobile && (
+              <div className="b1b1b2">
+                <div className="b1b1b1b2">
+                  {shouldDisplayPieChart &&
+                    props.copyrightDividingMethod !== 'role' && (
+                      <SplitChart {...commonProps} />
+                    )}
+                  {shouldDisplayPieChart &&
+                    props.copyrightDividingMethod === 'role' && (
+                      <DualSplitChart {...commonProps} />
+                    )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 

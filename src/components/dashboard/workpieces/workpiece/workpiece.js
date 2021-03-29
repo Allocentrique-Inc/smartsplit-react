@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Action from './action/action';
 import VertEllipsis from '../../../../icons/vertEllipsis';
 import CoverImage from '../../_/coverImage/coverImage';
+import LastModified from '../../_/lastModified/lastModified';
 
 const Workpiece = (props) => {
   const t_by = {
@@ -14,6 +15,10 @@ const Workpiece = (props) => {
     props.owner.lastName &&
     `${t_by} ${props.owner.firstName} ${props.owner.lastName}`;
   const t_songTitle = props.title;
+  const t_mod = {
+    fr: 'modifié',
+    en: 'modified',
+  }[props.language];
   const coverImage =
     props &&
     props.documentation &&
@@ -36,6 +41,9 @@ const Workpiece = (props) => {
           <div className="b1">
             {t_songTitle && <span className="title">{t_songTitle}</span>}
             {t_songCreator && t_songCreator}
+          </div>
+          <div className="b2">
+            <LastModified {...props}>{t_mod}</LastModified>
           </div>
         </div>
       </div>
