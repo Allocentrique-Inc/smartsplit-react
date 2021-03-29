@@ -29,13 +29,16 @@
   font-weight: bold;
 }
 
-
 h1 {
   color: map-get($colors, 'primary');
   font-style: normal;
   font-weight: bold;
   font-size: 40px;
   line-height: 48px;
+  @media screen and (max-width: 944px) {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }
 
 h2 {
@@ -44,6 +47,22 @@ h2 {
   font-weight: bold;
   font-size: 32px;
   line-height: 40px;
+  @media screen and (max-width: 944px) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+h3 {
+  color: map-get($colors, 'primary');
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: bold;
+  @media screen and (max-width: 944px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 h4 {

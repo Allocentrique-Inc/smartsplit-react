@@ -86,9 +86,15 @@ export default {
       fr: 'Réinitialiser',
       en: 'Reset',
     },
-    _signup: {
-      fr: 'Créer mon compte',
-      en: 'Create my account',
+    signup: {
+      _createAccount: {
+        fr: 'Créer mon compte',
+        en: 'Create my account',
+      },
+      _alreadyHasAccount: {
+        fr: "J'ai déjà un compte",
+        en: 'I already have an account',
+      },
     },
     _login: {
       fr: 'Me connecter',
@@ -184,9 +190,15 @@ export default {
         },
       },
       password: {
-        _label: {
-          fr: 'Choisis ton mot de passe',
-          en: 'Choose your password',
+        labels: {
+          _password: {
+            fr: 'Choisis ton mot de passe',
+            en: 'Choose your password',
+          },
+          _confirmPassword: {
+            fr: 'Répète ton mot de passe',
+            en: 'Repeat your password',
+          },
         },
         placeholders: {
           _password: {

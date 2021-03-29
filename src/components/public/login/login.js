@@ -7,7 +7,7 @@ import Checkbox from '../../_/form/checkbox/checkbox';
 import useForm from '../../_/form/useForm';
 import FormInput from '../../_/form/formInput/formInput';
 
-const Login = ({ translations, language }) => {
+const Login = ({ translations, language, isMobile }) => {
   const form = useForm({
     email: {
       value: '',
@@ -59,6 +59,8 @@ const Login = ({ translations, language }) => {
   const t_checkbox =
     translations.publicPages.checkboxes._stayConnected[language];
   const t_button = translations.publicPages.button._login[language];
+  const t_button_2 =
+    translations.publicPages.button.signup._createAccount[language];
 
   useEffect(() => {
     localStorage.removeItem('accessToken');
@@ -90,6 +92,14 @@ const Login = ({ translations, language }) => {
         <Link to="/user/request-password-reset">{t_forgot_password_link}</Link>
       </FormInput>
       <div className="buttons">
+        {isMobile && (
+          <button
+            onClick={() => history.push('/signup')}
+            className="btn-secondary"
+          >
+            {t_button_2}
+          </button>
+        )}
         <button onClick={handleConfirm} className="btn-primary">
           {t_button}
         </button>

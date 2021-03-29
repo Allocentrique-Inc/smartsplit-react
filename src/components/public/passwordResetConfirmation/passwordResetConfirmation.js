@@ -17,14 +17,15 @@ export default function PasswordResetConfirmation({ translations, language }) {
         <h1>{t_h1}</h1>
         <p>{t_p}</p>
       </div>
-
-      <button
-        className="btn-secondary"
-        style={{ marginTop: 32, width: '100%' }}
-        onClick={() => history.push('/')}
-      >
-        {t_button}
-      </button>
+      <div className="buttons">
+        <button
+          className="btn-secondary "
+          style={{ marginTop: 32, width: '100%' }}
+          onClick={() => history.push('/')}
+        >
+          {t_button}
+        </button>
+      </div>
     </div>
   );
 }
