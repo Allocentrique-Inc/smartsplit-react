@@ -9,6 +9,11 @@
     display: flex;
     justify-content: space-between;
     background-color: white;
+    width: 100%;
+    @media screen and (max-width: 944px) {
+      height: 56px;
+    }
+
     .bx {
       display: flex;
       align-items: center;
@@ -25,6 +30,15 @@
         font-size: 16px;
         line-height: 24px;
         color: #203548;
+
+        @media screen and (max-width: 944px) {
+          font-family: IBM Plex Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 16px;
+          color: #203548;
+        }
       }
       .breadCrumb {
         font-weight: normal;
@@ -35,6 +49,13 @@
         .p1 {
           margin-right: 10px;
           margin-left: 10px;
+          @media screen and (max-width: 944px) {
+            margin-left: 0px;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 16px;
+            color: #203548;
+          }
         }
         .arrow {
           background-color: rgba(214, 196, 162, 0.15);
@@ -72,27 +93,46 @@
     align-items: center;
     display: flex;
     justify-content: space-around;
+    @media screen and (max-width: 944px) {
+      padding: 16px;
+      justify-content: space-between;
+    }
     .b1b1 {
       max-width: 944px;
       display: flex;
       justify-content: space-between;
+      @media screen and (max-width: 944px) {
+        width: 100%;
+      }
     }
     .b1b1b1 {
       width: 464px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      @media screen and (max-width: 944px) {
+        width: 100%;
+      }
     }
   }
   .b1 {
     display: flex;
     justify-content: center;
+    @media screen and (max-width: 944px) {
+      justify-content: flex-start;
+      padding: 16px;
+    }
     .b1b1 {
       max-width: 944px;
       display: flex;
       justify-content: space-between;
       margin-bottom: 100px;
       min-height: 90vh;
+      @media screen and (max-width: 944px) {
+        justify-content: flex-start;
+        margin-bottom: 0px;
+        min-height: calc(100vh - 160px);
+      }
       .b1b1b1 {
         max-width: 464px;
         .presentation {
@@ -101,16 +141,30 @@
             align-items: center;
             margin-bottom: 32px;
             margin-top: 72px;
+            @media screen and (max-width: 944px) {
+              margin-top: 16px;
+              margin-bottom: 16px;
+            }
             .logo {
               width: 22px;
               height: 22px;
               margin-right: 17px;
+              @media screen and (max-width: 944px) {
+                width: 14px;
+                height: 14px;
+                margin-right: 11px;
+              }
             }
             .title {
               font-weight: bold;
               font-size: 16px;
               line-height: 24px;
               color: #2da84f;
+              @media screen and (max-width: 944px) {
+                font-size: 12px;
+                line-height: 16px;
+                letter-spacing: 0.5px;
+              }
             }
           }
           .text1 {
@@ -119,6 +173,12 @@
             line-height: 48px;
             color: #203548;
             margin-bottom: 16px;
+            @media screen and (max-width: 944px) {
+              font-weight: bold;
+              font-size: 24px;
+              line-height: 32px;
+              color: #203548;
+            }
           }
           .text2 {
             font-weight: normal;
@@ -126,6 +186,11 @@
             line-height: 24px;
             color: #687a8b;
             margin-bottom: 72px;
+            @media screen and (max-width: 944px) {
+              font-size: 12px;
+              line-height: 16px;
+              margin-bottom: 32px;
+            }
           }
         }
         .separator {
@@ -136,7 +201,7 @@
         }
       }
       .b1b1b2 {
-        max-width: 464px;
+        width: 464px;
         .b1b1b1b2 {
           position: sticky;
           top: 144px;
@@ -252,6 +317,8 @@
     padding: 16px;
     margin-bottom: 16px;
     border-radius: 2px;
+    @media screen and (max-width: 944px) {
+    }
     .b1 {
       display: flex;
       align-items: center;
@@ -298,6 +365,9 @@
       margin-top: 16px;
       margin-bottom: 16px;
       border-bottom: 1px solid #dcdfe1;
+      @media screen and (max-width: 944px) {
+        margin-left: 0px;
+      }
     }
     .selectStatus {
       height: 32px;
@@ -309,6 +379,11 @@
       padding-right: 8px;
       padding-left: 8px;
       outline: 0;
+      @media screen and (max-width: 944px) {
+        margin-left: 0px;
+        width: 100%;
+        margin-bottom: 24px;
+      }
     }
     .notifyPresentation {
       margin-left: 40px;
@@ -322,10 +397,20 @@
       margin-left: 40px;
       display: flex;
       margin-bottom: 10px;
+      @media screen and (max-width: 944px) {
+        // display: none;
+        margin-left: 10px;
+        justify-content: space-around;
+      }
       .checkBoxRow {
         width: 188px;
         display: flex;
         align-items: center;
+        @media screen and (max-width: 944px) {
+          width: auto;
+          margin-right: 20px;
+          display: block;
+        }
         .checkBox {
           background-color: white;
           width: 18px;
@@ -334,6 +419,9 @@
           box-sizing: border-box;
           border-radius: 2px;
           outline: 0;
+          @media screen and (max-width: 944px) {
+            margin: auto;
+          }
           cursor: pointer;
           .isChecked {
             background-color: #2da84f;
@@ -353,6 +441,9 @@
           line-height: 16px;
           color: #203548;
           margin-left: 11px;
+          @media screen and (max-width: 944px) {
+            margin: auto;
+          }
         }
         input {
           height: 18px;
@@ -364,6 +455,9 @@
     .dragger {
       display: flex;
       align-items: center;
+      @media screen and (max-width: 944px) {
+        display: none;
+      }
       .lock {
         width: 40px;
         display: flex;
