@@ -5,6 +5,7 @@ import SplitOwner from './splitOwner/splitOwner';
 import Consult from '../consult/consult';
 import DownBar from './downBar/downBar';
 import ArtistName from '../../_/artistName/artistName';
+import LastModified from '../../_/lastModified/lastModified';
 
 const Vote = (props) => {
   const [copyright, setCopyright] = useState({
@@ -64,7 +65,10 @@ const Vote = (props) => {
   const t_title = translation._title[locale];
   const t_createdBy = translation._createdBy[locale];
   const t_voteCount = translation._voteCount[locale];
-
+  const t_updated = {
+    en: 'Updated',
+    fr: 'Mis à jour',
+  }[locale];
   const commonProps = {
     copyright,
     setCopyright,
@@ -87,13 +91,14 @@ const Vote = (props) => {
           <div className="voteTitle">{`${t_title} ${title}`}</div>
           <div className="workpieceDetails">
             <ArtistName className="ownerName" user={owner}>{t_createdBy}</ArtistName>
-            {/* - Mis à jour il y a
-            ----- */}
+            {' - '}
+            <LastModified date={props.workpiece.updatedAt}>{t_updated}</LastModified>
           </div>
           <div className="version">{`Version ${version}`}</div>
           <div className="workpieceDetails">
             <ArtistName className="ownerName" user={owner}>{t_createdBy}</ArtistName>
-            {/* - il y a ----- */}
+            {' - '}
+            <LastModified date={props.workpiece.updatedAt}>{t_updated}</LastModified>
           </div>
           <div className="consult">
             <Consult

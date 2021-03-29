@@ -236,8 +236,8 @@ const Summary = (props) => {
             <div className="pageTitle">{t_splitSummary}</div>
             <div className="splitDetails">
               <ArtistName user={props.workpiece.owner}>{t_createdBy}</ArtistName>
-              {/* - Mis à jour
-              <span className="lastModify">-------</span> */}
+              {' '}
+              <LastModified date={props.workpiece.updatedAt} language={props.language}>{t_updated}</LastModified>
             </div>
 
             {/* TABS */}
