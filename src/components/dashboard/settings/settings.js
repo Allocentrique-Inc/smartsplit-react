@@ -14,7 +14,7 @@ import useForm from '../../_/form/useForm';
 import Avatar from '../_/avatar/avatar';
 
 export default function Settings(props) {
-  const { user } = props;
+  const { user, isMobile } = props;
   const form = useForm(
     {
       firstName: { value: '', errors: [], validators: ['required'] },
@@ -76,14 +76,23 @@ export default function Settings(props) {
   };
   return (
     <div className="settings">
-      <div className="topBar">
-        <Link to="/">
-          <ArrowLeft />
-        </Link>
-        <Avatar className="small" user={user} />
-      </div>
-      <main className="row">
-        {/*<div className="colLeft">
+      {isMobile && (
+        <main>
+          <Avatar className="small" user={user} />
+          <h1>ArtistName</h1>
+          <p>firstName lastName</p>
+        </main>
+      )}
+      {!isMobile && (
+        <>
+          <div className="topBar">
+            <Link to="/">
+              <ArrowLeft />
+            </Link>
+            <Avatar className="small" user={user} />
+          </div>
+          <main className="row">
+            {/*<div className="colLeft">
           <div className="navigation">
             <NavHashLink
               smooth
@@ -122,14 +131,16 @@ export default function Settings(props) {
             </NavHashLink>
           </div>
         </div>*/}
-        <div className="colRight">
-          <Profile {...commonProps} />
-          <Account {...commonProps} />
-          <ProfessionalIdentity {...commonProps} />
-          {/*<Notifications {...commonProps} className="toDo" />*/}
-          {/*<Security {...commonProps} />*/}
-        </div>
-      </main>
+            <div className="colRight">
+              <Profile {...commonProps} />
+              <Account {...commonProps} />
+              <ProfessionalIdentity {...commonProps} />
+              {/*<Notifications {...commonProps} className="toDo" />*/}
+              {/*<Security {...commonProps} />*/}
+            </div>
+          </main>
+        </>
+      )}
     </div>
   );
 }

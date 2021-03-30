@@ -25,6 +25,7 @@ export default function Contract({ contractData = mockData }) {
     recording,
   } = contractData.sections.rightSplit;
   const { locale } = contractData;
+  console.log('RECORDING ', recording);
   const activeCollaborators = [
     ...copyright.rightHolders,
     ...performance.rightHolders,

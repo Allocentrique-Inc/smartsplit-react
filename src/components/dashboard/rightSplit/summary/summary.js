@@ -189,9 +189,20 @@ const Summary = (props) => {
           <div className="modalBackground" onClick={() => setConsulting(null)}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
               <div className="topBar">
-                <div className="title" style={{ flexDirection: 'column', alignItems: 'flex-start' }}>Version {consulting.version}
+                <div
+                  className="title"
+                  style={{ flexDirection: 'column', alignItems: 'flex-start' }}
+                >
+                  Version {consulting.version}
                   <div className="consult-details">
-                    {t_createdBy} <span className="artistName">{` ${consulting.owner.firstName} ${consulting.owner.lastName}. `}</span><LastModified date={consulting.updatedAt} language={props.language}>{`${t_updated}`}</LastModified>
+                    {t_createdBy}{' '}
+                    <span className="artistName">{` ${consulting.owner.firstName} ${consulting.owner.lastName}. `}</span>
+                    <LastModified
+                      date={consulting.updatedAt}
+                      language={props.language}
+                    >
+                      {`${t_updated}`}
+                    </LastModified>
                   </div>
                 </div>
                 <div
@@ -410,7 +421,10 @@ const DraftRightSplit = (props) => {
           <span className="artistName">
             {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
           </span>
-          <LastModified date={props.workpiece.rightSplit.createdAt} language={props.language} />
+          <LastModified
+            date={props.workpiece.rightSplit.createdAt}
+            language={props.language}
+          />
         </div>
         <div className="b1">
           <div />
@@ -442,7 +456,7 @@ const AcceptedRightSplit = (props) => {
   };
   const hasBoughtPDF = Object.values(props.workpiece.purchases).length > 0;
   useEffect(async () => {
-    if (hasBoughtPDF) {
+    if (!hasBoughtPDF) {
       const result = await getWorkpieceContract({ workpiece_id });
       result.statusCode !== 500 && setContractData(result);
       result.statusCode === 500 && setContractData(null);
@@ -463,19 +477,24 @@ const AcceptedRightSplit = (props) => {
           </span>
         </div>
         <div className="update-details">
-          <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
+          <LastModified
+            date={props.workpiece.rightSplit.updatedAt}
+            language={props.language}
+          >
+            {props.t_updated}
+          </LastModified>
         </div>
         <div className="b1">
           <div />
           <div className="status acceptedStatus">{props.t_accepted}</div>
         </div>
-        {/*{contractData && (
+        {contractData && (
           <DownloadContractButton
             language={props.language}
             contractData={contractData}
           />
-        )}*/}
-
+        )}
+        {/*
         {hasBoughtPDF ? (
           <DownloadContractButton
             language={props.language}
@@ -491,7 +510,7 @@ const AcceptedRightSplit = (props) => {
           >
             {props.t_download}
           </button>
-        )}
+        )}*/}
       </div>
       {showPaymentModal && <PaymentModal {...modalProps} />}
     </>
@@ -514,7 +533,12 @@ const InVoteRightSplit = (props) => {
           </span>
         </div>
         <div className="update-details">
-          <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
+          <LastModified
+            date={props.workpiece.rightSplit.updatedAt}
+            language={props.language}
+          >
+            {props.t_updated}
+          </LastModified>
         </div>
         <button>{props.t_consult}</button>
       </div>
@@ -544,7 +568,12 @@ const RejectedRightSplit = (props) => {
           </span>
         </div>
         <div className="update-details">
-          <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
+          <LastModified
+            date={props.workpiece.rightSplit.updatedAt}
+            language={props.language}
+          >
+            {props.t_updated}
+          </LastModified>
         </div>
         <div className="b1">
           <div />
@@ -574,7 +603,12 @@ const RejectedRightSplitArchived = (props) => {
         </span>
       </div>
       <div className="update-details">
-        <LastModified date={props.workpiece.rightSplit.updatedAt} language={props.language}>{props.t_updated}</LastModified>
+        <LastModified
+          date={props.workpiece.rightSplit.updatedAt}
+          language={props.language}
+        >
+          {props.t_updated}
+        </LastModified>
       </div>
       <div className="b1">
         <div />

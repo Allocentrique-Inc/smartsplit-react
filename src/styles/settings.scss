@@ -15,6 +15,12 @@
   }
   main {
     max-width: 944px;
+    width: 100%;
+    @media screen and (max-width: 944px) {
+      flex: 1;
+      max-width: 375px;
+      padding: 16px 0;
+    }
     .colLeft {
       width: 244px;
       margin-right: 96px;
