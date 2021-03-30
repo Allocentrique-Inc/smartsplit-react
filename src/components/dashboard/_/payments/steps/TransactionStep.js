@@ -42,8 +42,8 @@ const TransactionStep = (props) => {
     let purchase = {
       user_id: user.user_id,
       workpiece_id: workpiece.workpiece_id,
-      product: product.product_id,
-      billingAddress: address.address_id,
+      productCode: props.productCode,
+      billingAddress_id: address.address_id,
     };
     if (promo) {
       purchase = {
@@ -139,7 +139,14 @@ const TransactionStep = (props) => {
 };
 export default TransactionStep;
 const CheckoutForm = (props) => {
-  const { nextStep, purchase, setPurchase, succeeded, setSucceeded, setDoCleanupOnClose } = props;
+  const {
+    nextStep,
+    purchase,
+    setPurchase,
+    succeeded,
+    setSucceeded,
+    setDoCleanupOnClose,
+  } = props;
   const { clientSecret, stepValid, setStepValid, setHandlePayment } = props;
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState('');
@@ -195,6 +202,7 @@ const CheckoutForm = (props) => {
         user_id: purchase.user_id,
         purchase_id: purchase.purchase_id,
         status: 'succeeded',
+        paymentIntent: payload.paymentIntent,
       });
 
       console.log(updatedPurchase);

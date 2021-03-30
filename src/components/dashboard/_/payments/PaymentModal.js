@@ -10,10 +10,17 @@ import SuccessStep from './steps/SuccessStep';
 import deletePurchase from '../../../../api/payments/deletePurchase';
 import getProductByCode from '../../../../api/payments/getProductByCode';
 
-const fPrice = (n) => (`$${(n / 100).toFixed(2)}`);
+const fPrice = (n) => `$${(n / 100).toFixed(2)}`;
 
 const PaymentModal = (props) => {
-  const { setShowModal, workpiece, language, user, setUser, productCode } = props;
+  const {
+    setShowModal,
+    workpiece,
+    language,
+    user,
+    setUser,
+    productCode,
+  } = props;
   const [product, setProduct] = useState(props.product);
   const [currentStep, setCurrentStep] = useState(0);
   const [promoCode, setPromoCode] = useState(false);
@@ -52,7 +59,11 @@ const PaymentModal = (props) => {
   }, [user]);
   const steps = [
     { label: 'Promo Code', component: PromoCodeStep, next: 'Continue' },
-    { label: 'Billing Address', component: BillingAddressStep, next: 'Confirm Billing Address' },
+    {
+      label: 'Billing Address',
+      component: BillingAddressStep,
+      next: 'Confirm Billing Address',
+    },
     { label: 'Payment', component: TransactionStep, next: 'Confirm Amount' },
     { label: 'Download', component: SuccessStep },
   ];
@@ -75,9 +86,9 @@ const PaymentModal = (props) => {
 
   const total = () =>
     fPrice(
-      product.price
-          - (promo ? promo.value : 0)
-          - (useCredits ? credits2Munee(credits) : 0),
+      product.price -
+        (promo ? promo.value : 0) -
+        (useCredits ? credits2Munee(credits) : 0),
     );
 
   const stepProps = {
@@ -112,46 +123,49 @@ const PaymentModal = (props) => {
     setProcessing,
     doCleanupOnClose,
     setDoCleanupOnClose,
+    productCode,
   };
 
   return (
     <div className="paymentModal">
       <div className="modalBackground">
         <div className="modal" onClick={(e) => e.stopPropagation()}>
-          {loading ? <div className="loadingStep">Loading...</div> :
-            currentStep > 0 ? (
-              <>
-                <div className="topBar">
-                  <div className="topBarContent">
-                    <h4>{`${language === 'en' ? 'Buy a' : 'Achetez une'} ${
+          {loading ? (
+            <div className="loadingStep">Loading...</div>
+          ) : currentStep > 0 ? (
+            <>
+              <div className="topBar">
+                <div className="topBarContent">
+                  <h4>
+                    {`${language === 'en' ? 'Buy a' : 'Achetez une'} ${
                       product.name[language]
                     }`}
-                    </h4>
-                    <PaymentSteps steps={steps} current={currentStep} />
-                  </div>
-                  <button
-                    className="btn-icon"
-                    disabled={processing}
-                    onClick={() => closeModal()}
-                  >
-                    <X />
-                  </button>
+                  </h4>
+                  <PaymentSteps steps={steps} current={currentStep} />
                 </div>
-                <div className="content">
-                  {React.createElement(
-                    steps[currentStep - 1].component,
-                    stepProps,
-                  )}
-                </div>
-                <div className="downBar">
-                  <button
-                    className={stepValid ? 'btn-secondary' : 'btn-disabled'}
-                    disabled={processing || !stepValid}
-                    onClick={() => closeModal()}
-                  >
-                    {currentStep === 4 ? 'Close' : 'Cancel'}
-                  </button>
-                  {currentStep < 3 && (
+                <button
+                  className="btn-icon"
+                  disabled={processing}
+                  onClick={() => closeModal()}
+                >
+                  <X />
+                </button>
+              </div>
+              <div className="content">
+                {React.createElement(
+                  steps[currentStep - 1].component,
+                  stepProps,
+                )}
+              </div>
+              <div className="downBar">
+                <button
+                  className={stepValid ? 'btn-secondary' : 'btn-disabled'}
+                  disabled={processing || !stepValid}
+                  onClick={() => closeModal()}
+                >
+                  {currentStep === 4 ? 'Close' : 'Cancel'}
+                </button>
+                {currentStep < 3 && (
                   <button
                     onClick={nextStep}
                     className={stepValid ? 'btn-primary' : 'btn-disabled'}
@@ -160,13 +174,12 @@ const PaymentModal = (props) => {
                   >
                     {steps[currentStep - 1].next}
                   </button>
-                  )
-                }
-                </div>
-              </>
-            ) : (
-              <SplashStep {...stepProps} />
-            )}
+                )}
+              </div>
+            </>
+          ) : (
+            <SplashStep {...stepProps} />
+          )}
         </div>
       </div>
     </div>
