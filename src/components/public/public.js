@@ -11,12 +11,13 @@ import PasswordResetConfirmation from './passwordResetConfirmation/passwordReset
 import ActivateInvitedUser from './activateInvitedUser/activateInvitedUser';
 import Onboarding from './onboarding/onboarding';
 
-export default function Public() {
+export default function Public({ isMobile }) {
   const match = useRouteMatch();
   const isInvited = useRouteMatch('/user/activate-invited-user');
   const [language, setLanguage] = useState('fr');
   const toggleLanguage = () => setLanguage(language === 'fr' ? 'en' : 'fr');
   const commonProps = {
+    isMobile,
     language,
     toggleLanguage,
     translations,
@@ -28,7 +29,7 @@ export default function Public() {
   const t_language = translations.general._languageBtn[language];
   return (
     <div className="publicPages">
-      {!isInvited && (
+      {!isInvited && !isMobile && (
         <div className="topBar">
           <SmartSplit />
           <div className="right">

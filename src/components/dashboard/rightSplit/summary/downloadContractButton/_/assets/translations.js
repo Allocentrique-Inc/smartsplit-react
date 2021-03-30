@@ -41,4 +41,30 @@ export default {
       en: 'Label',
     },
   },
+  agreementDurations: {
+    _oneYear: {
+      fr: "1 an, puis renouvelable d'année en année",
+      en: '1 year, renewable year after year',
+    },
+    _twoYears: {
+      fr: "2 ans, puis renouvelable d'année en année",
+      en: '2 years, renewable year after year',
+    },
+    _threeYears: {
+      fr: "3 ans, puis renouvelable d'année en année",
+      en: '3 years, renewable year after year',
+    },
+    _fourYears: {
+      fr: "4 ans, puis renouvelable d'année en année",
+      en: '4 years, renewable year after year',
+    },
+    _fiveYears: {
+      fr: "5 ans, puis renouvelable d'année en année",
+      en: '5 years, renewable year after year',
+    },
+    _renew: {
+      fr: 'Se renouvelle automatiquement, sauf avis signifié 60 jours avant.',
+      en: 'Automatically renews, unless notified 60 days prior.',
+    },
+  },
 };
