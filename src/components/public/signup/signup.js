@@ -9,7 +9,7 @@ import useForm from '../../_/form/useForm';
 import FormInput from '../../_/form/formInput/formInput';
 
 export default (props) => {
-  const { translations, language } = props;
+  const { translations, language, isMobile } = props;
   const [stayConnected, setStayConnected] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const form = useForm({
@@ -86,9 +86,13 @@ export default (props) => {
     translations.publicPages.form.signup.email._placeholder[language];
 
   const t_password_label =
-    translations.publicPages.form.signup.password._label[language];
+    translations.publicPages.form.signup.password.labels._password[language];
   const t_password_placeholder =
     translations.publicPages.form.signup.password.placeholders._password[
+      language
+    ];
+  const t_confirm_password_label =
+    translations.publicPages.form.signup.password.labels._confirmPassword[
       language
     ];
   const t_confirm_password_placeholder =
@@ -121,7 +125,11 @@ export default (props) => {
     translations.publicPages.checkboxes._termsAndConditions[language];
   const t_stay_logged_checkbox =
     translations.publicPages.checkboxes._stayConnected[language];
-  const t_button = translations.publicPages.button._signup[language];
+  const t_button =
+    translations.publicPages.button.signup._createAccount[language];
+  const t_button_2 =
+    translations.publicPages.button.signup._alreadyHasAccount[language];
+
   useEffect(() => {
     localStorage.removeItem('accessToken');
   }, []);
@@ -186,17 +194,18 @@ export default (props) => {
           id="password"
           value={form.fields.password.value}
           onChange={form.handlers.password}
-          placeholder={t_password_placeholder}
+          placeholder={`${isMobile ? '' : t_password_placeholder}`}
         />
         <div className="toDo">Validation de mot de passe</div>
       </FormInput>
       <FormInput errors={form.fields.confirmPassword.errors} {...commonProps}>
+        <label htmlFor="confirmPassword">{t_confirm_password_label}</label>
         <input
           id="confirmPassword"
           type="password"
           value={form.fields.confirmPassword.value}
           onChange={form.handlers.confirmPassword}
-          placeholder={t_confirm_password_placeholder}
+          placeholder={`${isMobile ? '' : t_confirm_password_placeholder}`}
         />
       </FormInput>
       <FormInput
@@ -212,6 +221,14 @@ export default (props) => {
       </FormInput>
 
       <div className="buttons">
+        {isMobile && (
+          <button
+            onClick={() => history.push('/login')}
+            className="btn-secondary"
+          >
+            {t_button_2}
+          </button>
+        )}
         <button onClick={handleSubmit} className="btn-primary">
           {t_button}
         </button>

@@ -1,7 +1,8 @@
-import { useParams, useHistory } from 'react-router-dom';
-import ArrowLeft from '../../../../../icons/arrowLeft';
-import ProfileOptions from '../../../_/profileOptions/profileOptions';
-import CoverImage from '../../../_/coverImage/coverImage';
+import { Link, useParams, useHistory } from 'react-router-dom';
+import ArrowLeft from '../../../../icons/arrowLeft';
+import SongPlaceholder from '../../../../icons/songPlaceholder';
+import ProfileOptions from '../../_/profileOptions/profileOptions';
+import CoverImage from '../../_/coverImage/coverImage';
 
 const TopBar = (props) => {
   const { workpiece_id } = useParams();
@@ -10,8 +11,8 @@ const TopBar = (props) => {
     history.push(`/workpiece/${workpiece_id}`);
   };
   const t_pageTitle = {
-    fr: 'Partage des droits',
-    en: 'Share your rights',
+    fr: 'Monétise ton oeuvre',
+    en: 'Monetize your workpiece',
   }[props.language];
   return (
     <div className="topBar">

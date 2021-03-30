@@ -4,6 +4,7 @@ import getWorkpiece from '../../../api/workpieces/getWorkpiece';
 import RightSplit from '../rightSplit/rightSplit';
 import Orientation from '../orientation/orientation';
 import Documentation from '../documentation/documentation';
+import Monetize from '../monetize/monetize';
 
 const Workpiece = (props) => {
   const { workpiece_id } = useParams();
@@ -22,8 +23,8 @@ const Workpiece = (props) => {
     workpiece.documentation.files.art &&
     workpiece.documentation.files.art.length
       ? workpiece.documentation.files.art[
-        workpiece.documentation.files.art.length - 1
-      ].url
+          workpiece.documentation.files.art.length - 1
+        ].url
       : null;
 
   const commonProps = {
@@ -56,6 +57,9 @@ const Workpiece = (props) => {
       </Route>
       <Route path="/workpiece/:workpiece_id/" exact>
         {workpiece && <Orientation {...commonProps} />}
+      </Route>
+      <Route path="/workpiece/:workpiece_id/monetize" exact>
+        {workpiece && <Monetize {...commonProps} />}
       </Route>
       <Route path="/workpiece/:workpiece_id/protect/">
         <div>PROTECT</div>

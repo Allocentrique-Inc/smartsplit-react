@@ -14,16 +14,21 @@ import ArtistName from '../../../../../../_/artistName/artistName';
 
 export default function RecordingSplit(props) {
   const { language, recording, activeCollaboratorsIds, CHARTSIZE } = props;
-
+  const { label } = recording;
+  const rightHolders = [...recording.rightHolders];
+  if (label && label.rightHolder_id) {
+    rightHolders.push(label);
+  }
   const chartProps = {
-    chartData: rightHoldersToChartData(
-      recording.rightHolders,
-      activeCollaboratorsIds,
-    ),
+    chartData: rightHoldersToChartData(rightHolders, activeCollaboratorsIds),
     logoPath: logoPaths.recording,
     size: CHARTSIZE,
     key: 'recordingChart',
   };
+  const agreementDuration = {
+    fr: 'Entente',
+    en: 'Agreement',
+  }[language];
   return (
     <View style={styles.rightSplit} key="recording">
       <View style={styles.collaboratorColumn}>
@@ -33,7 +38,7 @@ export default function RecordingSplit(props) {
             {PDFContentParser(ReactHtmlParser(recording.title))}
           </Text>
         </View>
-        {recording.rightHolders.map((rightHolder, index) => (
+        {rightHolders.map((rightHolder, index) => (
           <View style={styles.row} key={rightHolder.rightHolder_id}>
             <View style={styles.userInitials}>
               <Badge
@@ -57,7 +62,14 @@ export default function RecordingSplit(props) {
                   <ArtistName user={rightHolder} />
                 </Text>
                 <Text style={styles.collaboratorRoles}>
-                  {printRoles([rightHolder.function], language)}
+                  {!rightHolder.agreementDuration &&
+                    printRoles([rightHolder.function], language)}
+                  {rightHolder.agreementDuration &&
+                    `Label\n${agreementDuration}: ${
+                      translations.agreementDurations[
+                        `_${rightHolder.agreementDuration}`
+                      ][language]
+                    }`}
                 </Text>
               </View>
               <View>

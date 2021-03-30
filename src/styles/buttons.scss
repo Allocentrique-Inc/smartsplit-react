@@ -39,7 +39,7 @@
   @extend .btn;
   color: map-get($colors, 'tertiary');
   background-color: map-get($colors-background, 'hell');
-  border:none;
+  border: none;
 }
 .btn-disabled-small {
   @extend .btn-disabled, .small-700;
