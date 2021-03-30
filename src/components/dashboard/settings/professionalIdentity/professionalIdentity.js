@@ -3,7 +3,14 @@ import ProIdSelect from './_/proIdSelect/proIdSelect';
 import FormInput from '../../../_/form/formInput/formInput';
 
 export default function ProfessionalIdentity(props) {
-  const { form, updateUser, translations, language, triedSubmit } = props;
+  const {
+    form,
+    handleBlur,
+    translations,
+    language,
+    triedSubmit,
+    isMobile,
+  } = props;
 
   const commonProps = {
     language,
@@ -24,7 +31,7 @@ export default function ProfessionalIdentity(props) {
     translations.settings.fields.uri._placeholder[language];
   return (
     <div className="professionalIdentity" id="professional-identity">
-      <h2>{t_h2}</h2>
+      {!isMobile && <h2>{t_h2}</h2>}
 
       <FormInput
         errors={form.fields.organisations.errors}
@@ -36,7 +43,7 @@ export default function ProfessionalIdentity(props) {
           id="organisations"
           value={form.fields.organisations.value}
           onChange={form.handlers.organisations}
-          onBlur={updateUser}
+          onBlur={handleBlur}
         />
       </FormInput>
       <FormInput
@@ -51,7 +58,7 @@ export default function ProfessionalIdentity(props) {
           id="professionalIdentity"
           value={form.fields.professionalIdentity.value}
           onChange={form.handlers.professionalIdentity}
-          onBlur={updateUser}
+          onBlur={handleBlur}
         />
       </FormInput>
       <FormInput errors={form.fields.birthDate.errors} {...commonProps}>
@@ -61,7 +68,7 @@ export default function ProfessionalIdentity(props) {
           id="birthDate"
           value={form.fields.birthDate.value}
           onChange={form.handlers.birthDate}
-          onBlur={updateUser}
+          onBlur={handleBlur}
           placeholder={t_birth_date_placeholder}
         />
       </FormInput>
@@ -76,7 +83,7 @@ export default function ProfessionalIdentity(props) {
           type="text"
           value={form.fields.isni.value}
           onChange={form.handlers.isni}
-          onBlur={updateUser}
+          onBlur={handleBlur}
         />
       </FormInput>
       <FormInput errors={form.fields.uri.errors} {...commonProps}>
@@ -86,7 +93,7 @@ export default function ProfessionalIdentity(props) {
           type="text"
           value={form.fields.uri.value}
           onChange={form.handlers.uri}
-          onBlur={updateUser}
+          onBlur={handleBlur}
           placeholder={t_uri_placeholder}
         />
       </FormInput>

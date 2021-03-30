@@ -19,6 +19,9 @@
       }
     }
   }
+  .noShadow {
+    box-shadow: none;
+  }
   .topBar {
     width: 100%;
     padding: 16px 24px;
@@ -53,22 +56,44 @@
   a {
     max-height: 24px;
   }
+  .noMaxWidth {
+    max-width: 100%;
+  }
   main {
     max-width: 944px;
     width: 100%;
-    .menuOption {
-      @extend .medium-400;
-      display: flex;
-      padding: 16px;
-      cursor: pointer;
-      :first-child {
-        margin-right: 16px;
+    .formInput {
+      margin-top: 32px;
+    }
+    .mobileMenu {
+      .menuOption {
+        @extend .medium-400;
+        display: flex;
+        padding: 16px;
+        cursor: pointer;
+        :first-child {
+          margin-right: 16px;
+        }
       }
     }
     @media screen and (max-width: 944px) {
       flex: 1;
       max-width: 375px;
-      padding: 16px 0;
+      padding: 0;
+    }
+    .mobileAccount {
+      width: 100vw;
+      .tabs {
+        .tabMenu {
+          padding: 0 16px;
+          box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
+        }
+        .tab {
+          padding: 0 16px;
+          max-width: 375px;
+          margin: 0 auto;
+        }
+      }
     }
     .colLeft {
       width: 244px;
@@ -95,11 +120,8 @@
         }
       }
     }
-    .colRight {
-      .formInput {
-        margin-top: 32px;
-      }
 
+    .colRight {
       > * {
         padding: 64px 0;
         box-shadow: inset 0px -1px 0px map-get($colors, 'stroke');
@@ -110,6 +132,10 @@
     }
 
     .profile {
+      h2 {
+        margin-bottom: 32px;
+      }
+
       > .row {
         > * {
           flex: 1;

@@ -47,6 +47,16 @@ export default {
       en: 'Logout',
     },
   },
+  mobileAccount: {
+    _accountInformations: {
+      fr: 'Informations de compte',
+      en: 'Account Informations',
+    },
+    _professionalIdentity: {
+      fr: 'Identité professionnelle',
+      en: 'Professional Identity',
+    },
+  },
 
   security: {
     changePasswordModal: {

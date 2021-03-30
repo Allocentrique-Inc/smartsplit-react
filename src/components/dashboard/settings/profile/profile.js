@@ -7,6 +7,7 @@ export default function Profile(props) {
   const {
     form,
     updateUser,
+    handleBlur,
     translations,
     language,
     triedSubmit,
@@ -47,7 +48,7 @@ export default function Profile(props) {
   return (
     <div className="profile" id="profile">
       {!isMobile && <h2>{t_h2}</h2>}
-      <AvatarEditor {...props} />
+      <AvatarEditor className="formInput" {...props} />
       <div className="row">
         <FormInput errors={form.fields.firstName.errors} {...commonProps}>
           <label htmlFor="firstName">{t_first_name_label}</label>
@@ -56,7 +57,7 @@ export default function Profile(props) {
             id="firstName"
             value={form.fields.firstName.value}
             onChange={form.handlers.firstName}
-            onBlur={updateUser}
+            onBlur={handleBlur}
             placeholder={t_first_name_placeholder}
           />
           <div className="hint">{t_first_name_hint}</div>
@@ -68,7 +69,7 @@ export default function Profile(props) {
             id="lastName"
             value={form.fields.lastName.value}
             onChange={form.handlers.lastName}
-            onBlur={updateUser}
+            onBlur={handleBlur}
             placeholder={t_last_name_placeholder}
           />
           <div className="hint">{t_last_name_hint}</div>
@@ -81,7 +82,7 @@ export default function Profile(props) {
           id="artistName"
           value={form.fields.artistName.value}
           onChange={form.handlers.artistName}
-          onBlur={updateUser}
+          onBlur={handleBlur}
           placeholder={t_artist_name_placeholder}
         />
         <div className="hint">{t_artist_name_hint}</div>
@@ -96,7 +97,7 @@ export default function Profile(props) {
           id="projects"
           value={form.fields.projects.value}
           onChange={form.handlers.projects}
-          onBlur={updateUser}
+          onBlur={handleBlur}
           placeholder={t_projects_placeholder}
         />
       </FormInput>
