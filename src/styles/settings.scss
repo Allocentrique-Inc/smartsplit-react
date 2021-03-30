@@ -2,13 +2,53 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  .mobileTopBar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 16px;
+    box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
 
+    > :last-child {
+      border: 0;
+    }
+    > .row {
+      align-items: center;
+      > :first-child {
+        margin-right: 16px;
+      }
+    }
+  }
   .topBar {
     width: 100%;
     padding: 16px 24px;
     align-items: center;
     display: flex;
-    align-items: center;
+    .mobileHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      max-width: 375px;
+      flex: 1;
+      padding: 16px;
+    }
+    @media screen and (max-width: 944px) {
+      justify-content: center;
+      padding: 0;
+      box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
+      #avatar {
+        margin-bottom: 16px;
+      }
+    }
+    p {
+      color: map-get($colors, 'secondary');
+      font-style: normal;
+      font-size: 16px;
+      line-height: 24px;
+    }
+    .btn-icon {
+      margin-bottom: 16px;
+    }
   }
   a {
     max-height: 24px;
@@ -16,6 +56,15 @@
   main {
     max-width: 944px;
     width: 100%;
+    .menuOption {
+      @extend .medium-400;
+      display: flex;
+      padding: 16px;
+      cursor: pointer;
+      :first-child {
+        margin-right: 16px;
+      }
+    }
     @media screen and (max-width: 944px) {
       flex: 1;
       max-width: 375px;

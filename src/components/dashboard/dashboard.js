@@ -47,7 +47,7 @@ const Dashboard = (props) => {
       <Route path="/workpiece/:workpiece_id">
         <Workpiece {...props} {...commonProps} />
       </Route>
-      <Route path="/settings">
+      <Route path={['/settings/:section', '/settings']}>
         <Settings {...props} {...commonProps} />
       </Route>
       <Route path="/logistic">

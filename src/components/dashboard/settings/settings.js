@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useParams, Switch, Route } from 'react-router-dom';
 // import { NavHashLink } from 'react-router-hash-link';
+import MobileTopBar from './_/mobileTopBar/mobileTopBar';
 import Profile from './profile/profile';
 import Account from './account/account';
 import ProfessionalIdentity from './professionalIdentity/professionalIdentity';
@@ -12,9 +13,12 @@ import patchUser from '../../../api/users/patchUser';
 import getUsers from '../../../api/users/getUsers';
 import useForm from '../../_/form/useForm';
 import Avatar from '../_/avatar/avatar';
+import MobileMenu from './mobileMenu/mobileMenu';
 
 export default function Settings(props) {
-  const { user, isMobile } = props;
+  const { user, translations, language, isMobile } = props;
+  const history = useHistory();
+  const { section } = useParams();
   const form = useForm(
     {
       firstName: { value: '', errors: [], validators: ['required'] },
@@ -67,21 +71,36 @@ export default function Settings(props) {
       phoneNumber: user.mobilePhone.number,
     });
   }, []);
-
+  const t_title = section
+    ? translations.settings.mobileMenu[`_${section}`][language]
+    : null;
   const commonProps = {
     ...props,
     form,
     updateUser,
     triedSubmit,
   };
+
   return (
     <div className="settings">
       {isMobile && (
-        <main>
-          <Avatar className="small" user={user} />
-          <h1>ArtistName</h1>
-          <p>firstName lastName</p>
-        </main>
+        <>
+          {t_title && <MobileTopBar {...commonProps}>{t_title}</MobileTopBar>}
+          <Switch>
+            <Route path="/settings/public-profile">
+              <Profile {...commonProps} />
+            </Route>
+            <Route path="/settings/account">
+              <Account {...commonProps} />
+            </Route>
+            <Route path="/settings">
+              <MobileMenu {...commonProps} />
+            </Route>
+            {/*<Route path="/settings/preferences">
+            <Notifications {...commonProps} />
+          </Route>*/}
+          </Switch>
+        </>
       )}
       {!isMobile && (
         <>

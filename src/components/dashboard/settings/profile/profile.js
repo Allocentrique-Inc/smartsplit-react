@@ -4,7 +4,14 @@ import MultiSelect from '../../../_/form/multiSelect/multiSelect';
 import FormInput from '../../../_/form/formInput/formInput';
 
 export default function Profile(props) {
-  const { form, updateUser, translations, language, triedSubmit } = props;
+  const {
+    form,
+    updateUser,
+    translations,
+    language,
+    triedSubmit,
+    isMobile,
+  } = props;
 
   const commonProps = {
     language,
@@ -39,7 +46,7 @@ export default function Profile(props) {
     translations.settings.fields.projects._placeholder[language];
   return (
     <div className="profile" id="profile">
-      <h2>{t_h2}</h2>
+      {!isMobile && <h2>{t_h2}</h2>}
       <AvatarEditor {...props} />
       <div className="row">
         <FormInput errors={form.fields.firstName.errors} {...commonProps}>
