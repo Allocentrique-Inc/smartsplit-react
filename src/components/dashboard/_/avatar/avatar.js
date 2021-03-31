@@ -14,6 +14,8 @@ const Avatar = (props) => {
         <img
           src={user.avatar ? user.avatar : user.avatarUrl}
           alt={user.artistName ? user.artistName : user.fullName}
+          style={{ webkitFilter: color === '#ccc' ? 'grayscale(100%)' : 'none',
+            filter: color === '#ccc' ? 'grayscale(100%)' : 'none' }}
         />
       )}
       {!hasImage && (
