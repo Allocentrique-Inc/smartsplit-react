@@ -6,6 +6,7 @@ import {
   computeLyricChartData,
   computeMusicChartData,
   rightHoldersToChartData,
+  displayDualPieChart,
 } from '../../../../../_/charts/utils';
 import PDFContentParser from '../_/PDFContentParser';
 
@@ -45,6 +46,11 @@ export default function CopyrightSplit(props) {
     size: CHARTSIZE,
     key: 'copyrightChart',
   };
+
+  const shouldDisplayDualPieChart = displayDualPieChart(
+    copyright,
+    copyrightDividingMethod,
+  );
 
   return (
     <View style={styles.rightSplit} key="copyright">
@@ -102,8 +108,8 @@ export default function CopyrightSplit(props) {
           </View>
         ))}
       </View>
-      {copyrightDividingMethod === 'role' && <DualSplitChart {...chartProps} />}
-      {copyrightDividingMethod !== 'role' && <SplitChart {...chartProps} />}
+      {shouldDisplayDualPieChart && <DualSplitChart {...chartProps} />}
+      {!shouldDisplayDualPieChart && <SplitChart {...chartProps} />}
     </View>
   );
 }

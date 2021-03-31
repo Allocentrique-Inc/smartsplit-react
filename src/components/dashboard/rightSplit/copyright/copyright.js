@@ -17,6 +17,7 @@ import {
   computeLyricChartData,
   computeMusicChartData,
   rightHoldersToChartData,
+  displayDualPieChart,
 } from '../_/charts/utils';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
@@ -155,6 +156,10 @@ const Copyright = (props) => {
   const sharesTotal = props.copyright.reduce((acc, el) => el.shares + acc, 0);
   const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
   const shouldDisplayPieChart = isTotal100;
+  const shouldDisplayDualPieChart = displayDualPieChart(
+    props.copyright,
+    props.copyrightDividingMethod,
+  );
 
   const t_title =
     props.translations.rightSplit.title._copyright[props.language];
@@ -234,14 +239,12 @@ const Copyright = (props) => {
             {!props.isMobile && (
               <div className="b1b1b2">
                 <div className="b1b1b1b2">
-                  {shouldDisplayPieChart &&
-                    props.copyrightDividingMethod !== 'role' && (
-                      <SplitChart {...commonProps} />
-                    )}
-                  {shouldDisplayPieChart &&
-                    props.copyrightDividingMethod === 'role' && (
-                      <DualSplitChart {...commonProps} />
-                    )}
+                  {shouldDisplayPieChart && !shouldDisplayDualPieChart && (
+                    <SplitChart {...commonProps} />
+                  )}
+                  {shouldDisplayPieChart && shouldDisplayDualPieChart && (
+                    <DualSplitChart {...commonProps} />
+                  )}
                 </div>
               </div>
             )}

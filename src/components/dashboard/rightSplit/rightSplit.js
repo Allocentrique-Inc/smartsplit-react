@@ -46,7 +46,6 @@ const RightSplit = (props) => {
     'equal',
   );
   const isCreating = typeof props.workpiece.rightSplit === 'undefined';
-
   const [warnings, setWarnings] = useState([]);
   const mapData = async () => {
     if (!isCreating) {
@@ -102,9 +101,16 @@ const RightSplit = (props) => {
     }
     return [...acc, el];
   }, []);
-  const activeCollaboratorsIds = activeCollaborators.map(
-    (el) => el.rightHolder_id,
-  );
+  const activeCollaboratorsIds = [];
+  activeCollaborators.forEach((collaborator) => {
+    if (
+      !activeCollaboratorsIds.some(
+        ({ rightHolder_id }) => collaborator.rightHolder_id === rightHolder_id,
+      )
+    ) {
+      activeCollaboratorsIds.push(collaborator.rightHolder_id);
+    }
+  });
 
   const calculateCopyrightErrors = (copyright) => {
     const pageErrors = [];
