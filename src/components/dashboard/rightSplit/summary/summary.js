@@ -445,25 +445,27 @@ const DraftRightSplit = (props) => {
 
 const AcceptedRightSplit = (props) => {
   const versionIndex = props.workpiece.rightSplit.version;
-  const productCode = 'RIGHT_SPLIT_DOWNLOAD';
+  const productCode = 'RIGHT_SPLIT_CONTRACT';
   const [showPaymentModal, setShowPaymentModal] = useState();
   const { workpiece_id } = useParams();
   const [contractData, setContractData] = useState();
   const modalProps = {
-    productCode,
     ...props,
+    productCode,
     setShowModal: setShowPaymentModal,
   };
-  useEffect(async () => {
-    const result = await getWorkpieceContract({ workpiece_id });
-
-    result.statusCode !== 500 && setContractData(result);
-    result.statusCode === 500 && setContractData(null);
-  }, []);
   const hasBoughtPDF =
     props.workpiece &&
     props.workpiece.purchases &&
-    props.workpiece.purchases.length !== 0;
+    props.workpiece.purchases.length !== 0 &&
+    props.workpiece.purchases.includes(productCode);
+  useEffect(async () => {
+    if (hasBoughtPDF) {
+      const result = await getWorkpieceContract({ workpiece_id });
+      result.statusCode !== 500 && setContractData(result);
+      result.statusCode === 500 && setContractData(null);
+    }
+  }, [hasBoughtPDF]);
   return (
     <>
       <div

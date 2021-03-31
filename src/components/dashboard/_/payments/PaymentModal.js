@@ -124,6 +124,7 @@ const PaymentModal = (props) => {
     doCleanupOnClose,
     setDoCleanupOnClose,
     productCode,
+    resetData: props.resetData,
   };
 
   return (

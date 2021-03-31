@@ -135,6 +135,9 @@
       }
       .b1b1b1 {
         max-width: 464px;
+        @media screen and (max-width: 944px) {
+          max-width: 944px;
+        }
         .presentation {
           .presentationB1 {
             display: flex;

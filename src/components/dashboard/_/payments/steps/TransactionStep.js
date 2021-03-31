@@ -198,20 +198,20 @@ const CheckoutForm = (props) => {
       setProcessing(false);
       setDoCleanupOnClose(true);
     } else {
-      const updatedPurchase = await completePurchase({
-        user_id: purchase.user_id,
-        purchase_id: purchase.purchase_id,
-        status: 'succeeded',
-        paymentIntent: payload.paymentIntent,
-      });
-
-      console.log(updatedPurchase);
-      setPurchase(updatedPurchase);
-      setError(null);
-      setStepValid(true);
-      setSucceeded(true);
-      setProcessing(false);
+      props.resetData();
       nextStep();
+      // const updatedPurchase = await completePurchase({
+      //   user_id: purchase.user_id,
+      //   purchase_id: purchase.purchase_id,
+      //   status: 'succeeded',
+      //   paymentIntent: payload.paymentIntent,
+      // });
+      // console.log(updatedPurchase);
+      // setPurchase(updatedPurchase);
+      // setError(null);
+      // setStepValid(true);
+      // setSucceeded(true);
+      // setProcessing(false);
     }
   };
 
