@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  Link,
+  useHistory,
+  useParams,
+  Switch,
+  Route,
+  useRouteMatch,
+} from 'react-router-dom';
 // import { NavHashLink } from 'react-router-hash-link';
+import MobileTopBar from './_/mobileTopBar/mobileTopBar';
 import Profile from './profile/profile';
 import Account from './account/account';
 import ProfessionalIdentity from './professionalIdentity/professionalIdentity';
@@ -12,9 +20,15 @@ import patchUser from '../../../api/users/patchUser';
 import getUsers from '../../../api/users/getUsers';
 import useForm from '../../_/form/useForm';
 import Avatar from '../_/avatar/avatar';
+import MobileMenu from './mobileMenu/mobileMenu';
+import MobileAccount from './mobileAccount/mobileAccount';
+import Pen from '../../../icons/pen';
 
 export default function Settings(props) {
-  const { user, isMobile } = props;
+  const { user, translations, language, isMobile } = props;
+  const history = useHistory();
+  const { section } = useParams();
+  const isMainMenu = useRouteMatch({ path: '/settings', strict: true }).isExact;
   const form = useForm(
     {
       firstName: { value: '', errors: [], validators: ['required'] },
@@ -61,27 +75,67 @@ export default function Settings(props) {
     setTriedSubmit(true);
   };
 
+  const handleBlur = () => {
+    !isMobile && updateUser();
+  };
+
   useEffect(() => {
     form.loadFields({
       ...user,
       phoneNumber: user.mobilePhone.number,
     });
   }, []);
-
+  const t_title = section
+    ? translations.settings.mobileMenu[`_${section}`][language]
+    : null;
   const commonProps = {
     ...props,
     form,
     updateUser,
+    handleBlur,
     triedSubmit,
   };
+
   return (
     <div className="settings">
       {isMobile && (
-        <main>
-          <Avatar className="small" user={user} />
-          <h1>ArtistName</h1>
-          <p>firstName lastName</p>
-        </main>
+        <>
+          {isMainMenu && (
+            <div className="topBar">
+              <div className="mobileHeader">
+                <div>
+                  <Avatar id="avatar" className="small" user={user} />
+                  <h1>ArtistName</h1>
+                  <p className="medium-400">firstName lastName</p>
+                </div>
+                <button className="btn-icon" onClick={() => {}}>
+                  <Pen />
+                </button>
+              </div>
+            </div>
+          )}
+          {!isMainMenu && (
+            <MobileTopBar noShadow={section === 'account'} {...commonProps}>
+              {t_title}
+            </MobileTopBar>
+          )}
+          <main className={section === 'account' ? 'noMaxWidth' : ''}>
+            <Switch>
+              <Route path="/settings/public-profile">
+                <Profile {...commonProps} />
+              </Route>
+              <Route path="/settings/account">
+                <MobileAccount {...commonProps} />
+              </Route>
+              <Route path="/settings">
+                <MobileMenu {...commonProps} />
+              </Route>
+              {/*<Route path="/settings/preferences">
+            <Notifications {...commonProps} />
+          </Route>*/}
+            </Switch>
+          </main>
+        </>
       )}
       {!isMobile && (
         <>

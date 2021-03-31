@@ -5,7 +5,7 @@ import PictureEditModal from '../../../_/pictureEditModal/PictureEditModal';
 import patchUser from '../../../../../api/users/patchUser';
 
 const AvatarEditor = (props) => {
-  const { user, setUser } = props;
+  const { user, setUser, className = '' } = props;
   const [file, setFile] = useState();
   const [editing, setEditing] = useState();
   const handleEditClick = () => {
@@ -14,7 +14,9 @@ const AvatarEditor = (props) => {
   const modalProps = {
     ...props,
     shape: 'circle',
-    onClose: () => { setEditing(false); },
+    onClose: () => {
+      setEditing(false);
+    },
     onSave: async (imgData) => {
       const updatedUser = { ...user, avatar: imgData.split(',', 2)[1] };
       const userResponse = await patchUser(updatedUser);
@@ -24,10 +26,13 @@ const AvatarEditor = (props) => {
     title: 'Edit Profile Image',
   };
   return (
-    <div className="avatar-editor">
+    <div className={`avatar-editor ${className}`}>
       {editing && <PictureEditModal {...modalProps} />}
       {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-      <Avatar className="medium" user={user} /><button className="btn-icon" onClick={handleEditClick}><Pen /></button>
+      <Avatar className="medium" user={user} />
+      <button className="btn-icon" onClick={handleEditClick}>
+        <Pen />
+      </button>
     </div>
   );
 };

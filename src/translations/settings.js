@@ -27,6 +27,37 @@ export default {
     },
   },
 
+  mobileMenu: {
+    '_public-profile': {
+      fr: 'Profil public',
+      en: 'Public Profil',
+    },
+    _account: {
+      fr: 'Mon compte',
+      en: 'Account',
+    },
+
+    _preferences: {
+      fr: 'Préférences',
+      en: 'Preferences',
+    },
+
+    _logout: {
+      fr: 'Se déconnecter',
+      en: 'Logout',
+    },
+  },
+  mobileAccount: {
+    _accountInformations: {
+      fr: 'Informations de compte',
+      en: 'Account Informations',
+    },
+    _professionalIdentity: {
+      fr: 'Identité professionnelle',
+      en: 'Professional Identity',
+    },
+  },
+
   security: {
     changePasswordModal: {
       _label: {

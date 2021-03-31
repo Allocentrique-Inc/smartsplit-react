@@ -1,0 +1,18 @@
+.tabs {
+  .tabMenu {
+    display: flex;
+
+    > .menuItem {
+      @extend .small-700;
+      color: #687a8b;
+      padding: 12px 0;
+      margin-right: 16px;
+      cursor: pointer;
+    }
+
+    .selected {
+      color: #203548;
+      box-shadow: 0px -2px 0px 0px #3db25e inset;
+    }
+  }
+}

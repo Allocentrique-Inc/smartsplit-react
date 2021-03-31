@@ -1,6 +1,4 @@
-import { Colors } from '../theme';
-
-export default function UserCard({ color = Colors.tertiary, size = 24 }) {
+export default function User({ color = '#8DA0B3', size = 24 }) {
   const scale = size / 24;
 
   return (
@@ -11,12 +9,8 @@ export default function UserCard({ color = Colors.tertiary, size = 24 }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect
-        x="1"
-        y="5"
-        width="22"
-        height="14"
-        rx="2"
+      <path
+        d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
@@ -24,7 +18,7 @@ export default function UserCard({ color = Colors.tertiary, size = 24 }) {
         scale={scale}
       />
       <path
-        d="M8 12C9.10457 12 10 11.1046 10 10C10 8.89543 9.10457 8 8 8C6.89543 8 6 8.89543 6 10C6 11.1046 6.89543 12 8 12Z"
+        d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
@@ -32,7 +26,7 @@ export default function UserCard({ color = Colors.tertiary, size = 24 }) {
         scale={scale}
       />
       <path
-        d="M12 18V17C12 15.8954 11.1046 15 10 15H7C5.89543 15 5 15.8954 5 17V18"
+        d="M23 20.9999V18.9999C22.9993 18.1136 22.7044 17.2527 22.1614 16.5522C21.6184 15.8517 20.8581 15.3515 20 15.1299"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
@@ -40,7 +34,7 @@ export default function UserCard({ color = Colors.tertiary, size = 24 }) {
         scale={scale}
       />
       <path
-        d="M14 9H19M14 12H17"
+        d="M16 3.12988C16.8604 3.35018 17.623 3.85058 18.1676 4.55219C18.7122 5.2538 19.0078 6.11671 19.0078 7.00488C19.0078 7.89305 18.7122 8.75596 18.1676 9.45757C17.623 10.1592 16.8604 10.6596 16 10.8799"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
