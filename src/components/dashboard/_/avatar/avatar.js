@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 
 const Avatar = (props) => {
-  const { className } = props;
-  const { user, color } = props;
+  const { className, user, color, ...nextProps } = props;
   const initials =
     user && user.firstName && user.lastName
       ? user.firstName.substr(0, 1) + user.lastName.substr(0, 1)
@@ -10,7 +9,7 @@ const Avatar = (props) => {
   const hasImage = user.avatarUrl;
   const backgroundColor = color || 'inherit';
   return (
-    <div className={`avatar ${className}`} title={user.fullName}>
+    <div className={`avatar ${className}`} title={user.fullName} {...nextProps}>
       {hasImage && (
         <img
           src={user.avatar ? user.avatar : user.avatarUrl}

@@ -3,7 +3,14 @@ import PhoneNumber from '../../../_/form/phoneNumber/phoneNumber';
 import FormInput from '../../../_/form/formInput/formInput';
 
 export default function Account(props) {
-  const { form, updateUser, translations, language, triedSubmit } = props;
+  const {
+    form,
+    handleBlur,
+    translations,
+    language,
+    triedSubmit,
+    isMobile,
+  } = props;
 
   const commonProps = {
     language,
@@ -22,7 +29,7 @@ export default function Account(props) {
   const t_emails_label = translations.settings.fields.emails._label[language];
   return (
     <div className="account" id="account">
-      <h2>{t_h2}</h2>
+      {!isMobile && <h2>{t_h2}</h2>}
       <FormInput errors={form.fields.address.errors} {...commonProps}>
         <label htmlFor="address">{t_address_label}</label>
         <input
@@ -30,7 +37,7 @@ export default function Account(props) {
           type="text"
           value={form.fields.address.value}
           onChange={form.handlers.address}
-          onBlur={updateUser}
+          onBlur={handleBlur}
         />
       </FormInput>
       <FormInput errors={form.fields.locale.errors} {...commonProps}>
@@ -39,7 +46,7 @@ export default function Account(props) {
           id="locale"
           value={form.fields.locale.value}
           onChange={form.handlers.locale}
-          onBlur={updateUser}
+          onBlur={handleBlur}
         >
           <option value="fr">{t_locale_french}</option>
           <option value="en">{t_locale_english}</option>
@@ -58,7 +65,7 @@ export default function Account(props) {
           type="text"
           value={form.fields.phoneNumber.value}
           onChange={form.handlers.phoneNumber}
-          onBlur={updateUser}
+          onBlur={handleBlur}
         />
       </FormInput>
 
@@ -72,7 +79,7 @@ export default function Account(props) {
           id="emails"
           value={form.fields.emails.value}
           onChange={form.handlers.emails}
-          onBlur={updateUser}
+          onBlur={handleBlur}
         />
       </FormInput>
     </div>
