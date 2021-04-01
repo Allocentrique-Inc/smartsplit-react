@@ -99,7 +99,6 @@ export default function Settings(props) {
     handleBlur,
     triedSubmit,
   };
-  console.log('user', user);
 
   return (
     <div className="settings">
