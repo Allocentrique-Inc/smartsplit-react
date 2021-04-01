@@ -8,7 +8,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 // import { NavHashLink } from 'react-router-hash-link';
-import MobileTopBar from './_/mobileTopBar/mobileTopBar';
+import MobileTopBar from '../_/mobileTopBar/mobileTopBar';
 import Profile from './profile/profile';
 import Account from './account/account';
 import ProfessionalIdentity from './professionalIdentity/professionalIdentity';
@@ -88,6 +88,10 @@ export default function Settings(props) {
   const t_title = section
     ? translations.settings.mobileMenu[`_${section}`][language]
     : null;
+  const t_button = {
+    fr: 'Sauvegarder',
+    en: 'Save',
+  }[language];
   const commonProps = {
     ...props,
     form,
@@ -115,7 +119,16 @@ export default function Settings(props) {
             </div>
           )}
           {!isMainMenu && (
-            <MobileTopBar noShadow={section === 'account'} {...commonProps}>
+            <MobileTopBar
+              backLink="/settings"
+              noShadow={section === 'account'}
+              action={
+                <button className="btn-secondary" onClick={updateUser}>
+                  {t_button}
+                </button>
+              }
+              {...commonProps}
+            >
               {t_title}
             </MobileTopBar>
           )}

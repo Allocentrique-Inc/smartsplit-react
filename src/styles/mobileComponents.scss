@@ -1,0 +1,31 @@
+.mobileTopBar {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 16px;
+  box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
+  a {
+    height: 24px;
+  }
+  > :last-child {
+    border: 0;
+  }
+  > .row {
+    align-items: center;
+    > :first-child {
+      margin-right: 16px;
+    }
+  }
+}
+
+.tabs {
+  .tabMenu {
+    padding: 0 16px;
+    box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
+  }
+  .tab {
+    padding: 0 16px;
+    max-width: 375px;
+    margin: 0 auto;
+  }
+}

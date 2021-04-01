@@ -289,3 +289,59 @@
     }
   }
 }
+
+.mobileSummary {
+  .rightSplit {
+    margin-bottom: 0 !important;
+  }
+  .tab {
+    display: flex;
+    flex-direction: column;
+    .rightSplit {
+      flex: 1;
+      margin-top: 16px;
+      box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      cursor: pointer;
+      .title {
+        @extend h2;
+      }
+      .details {
+        @extend .small-400;
+        color: #687a8b;
+        display: inline-block;
+      }
+      .artistName {
+        @extend .small-700;
+        color: #2da84f;
+      }
+      .update-details {
+        margin-left: 4px;
+        display: inline-block;
+      }
+      .status {
+        @extend .small-700;
+        padding: 4px 8px;
+        border-radius: 2px;
+      }
+
+      .b1 {
+        width: fit-content;
+      }
+
+      .acceptedStatus {
+        background-color: #dff8e3;
+        color: #176d25;
+      }
+      .refusedStatus {
+        background-color: #fbd4d4;
+        color: #ac1616;
+      }
+      button {
+        @extend .btn-secondary;
+        width: 100%;
+        margin-top: 8px;
+      }
+    }
+  }
+}
