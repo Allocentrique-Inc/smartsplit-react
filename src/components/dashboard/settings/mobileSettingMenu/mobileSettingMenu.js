@@ -6,7 +6,7 @@ import UserCard from '../../../../icons/userCard';
 import Cog from '../../../../icons/cog';
 import Logout from '../../../../icons/logout';
 
-export default function MobileMenu({ user, translations, language }) {
+export default function MobileSettingMenu({ user, translations, language }) {
   const history = useHistory();
   const t_public_profile =
     translations.settings.mobileMenu['_public-profile'][language];
@@ -14,7 +14,7 @@ export default function MobileMenu({ user, translations, language }) {
   const t_preferences = translations.settings.mobileMenu._preferences[language];
   const t_logout = translations.settings.mobileMenu._logout[language];
   return (
-    <div className="mobileMenu">
+    <div className="mobileSettingMenu">
       <div
         className="menuOption"
         onClick={() => history.push('/settings/public-profile')}

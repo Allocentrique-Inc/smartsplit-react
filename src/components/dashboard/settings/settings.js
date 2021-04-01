@@ -20,7 +20,7 @@ import patchUser from '../../../api/users/patchUser';
 import getUsers from '../../../api/users/getUsers';
 import useForm from '../../_/form/useForm';
 import Avatar from '../_/avatar/avatar';
-import MobileMenu from './mobileMenu/mobileMenu';
+import MobileSettingMenu from './mobileSettingMenu/mobileSettingMenu';
 import MobileAccount from './mobileAccount/mobileAccount';
 import Pen from '../../../icons/pen';
 
@@ -99,6 +99,7 @@ export default function Settings(props) {
     handleBlur,
     triedSubmit,
   };
+  console.log('user', user);
 
   return (
     <div className="settings">
@@ -109,10 +110,17 @@ export default function Settings(props) {
               <div className="mobileHeader">
                 <div>
                   <Avatar id="avatar" className="small" user={user} />
-                  <h1>ArtistName</h1>
-                  <p className="medium-400">firstName lastName</p>
+                  {user.artistName && <h1>{user.artistName}</h1>}
+                  {user.firstName && user.lastName && (
+                    <p className="medium-400">{`${user.firstName} ${user.lastName}`}</p>
+                  )}
                 </div>
-                <button className="btn-icon" onClick={() => {}}>
+                <button
+                  className="btn-icon"
+                  onClick={() => {
+                    history.push('/settings/public-profile');
+                  }}
+                >
                   <Pen />
                 </button>
               </div>
@@ -132,7 +140,11 @@ export default function Settings(props) {
               {t_title}
             </MobileTopBar>
           )}
-          <main className={section === 'account' ? 'noMaxWidth' : ''}>
+          <main
+            className={
+              section === 'account' || section === undefined ? 'noMaxWidth' : ''
+            }
+          >
             <Switch>
               <Route path="/settings/public-profile">
                 <Profile {...commonProps} />
@@ -141,7 +153,7 @@ export default function Settings(props) {
                 <MobileAccount {...commonProps} />
               </Route>
               <Route path="/settings">
-                <MobileMenu {...commonProps} />
+                <MobileSettingMenu {...commonProps} />
               </Route>
               {/*<Route path="/settings/preferences">
             <Notifications {...commonProps} />
