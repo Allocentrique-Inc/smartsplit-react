@@ -3,6 +3,7 @@
     background-color: #faf8f9;
     height: 240px;
     display: flex;
+
     justify-content: center;
     .content {
       width: 944px;
@@ -13,6 +14,9 @@
         justify-content: space-between;
         align-items: center;
         box-shadow: inset 0px -1px 0px #dcdfe1;
+        @media screen and (max-width:944px) {
+          width:auto;
+        }
         .back {
           display: flex;
           align-items: center;
@@ -30,6 +34,7 @@
       }
 
       .b2 {
+
         margin-top: 24px;
         display: flex;
         justify-content: space-between;
@@ -112,13 +117,21 @@
   }
   .b2 {
     width: 944px;
+    @media screen and (max-width:944px) {
+      width:auto;
+      justify-content: flex-start;
+    }
     display: flex;
     justify-content: center;
     margin: auto;
+
     .tileSection {
       margin-top: 43px;
       display: flex;
       flex-wrap: wrap;
+      @media screen and (max-width:944px) {
+        justify-content: center;
+      }
       .space {
         margin-right: 13px;
       }
