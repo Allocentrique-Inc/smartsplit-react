@@ -13,7 +13,7 @@ const Avatar = (props) => {
       {hasImage && (
         <img
           src={user.avatar ? user.avatar : user.avatarUrl}
-          alt={user.fullName}
+          alt={user.artistName ? user.artistName : user.fullName}
         />
       )}
       {!hasImage && (

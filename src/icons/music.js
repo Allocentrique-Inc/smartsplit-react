@@ -1,6 +1,8 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
 function SvgComponent(props) {
+  const { color } = props;
   return (
     <svg
       width={24}
@@ -12,14 +14,14 @@ function SvgComponent(props) {
     >
       <path
         d="M9 17H5a2 2 0 100 4h2a2 2 0 002-2v-2zm12-2h-4a2 2 0 000 4h2a2 2 0 002-2v-2z"
-        stroke="#2DA84F"
+        stroke={color}
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M9 17V5l12-2v12"
-        stroke="#2DA84F"
+        stroke={color}
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -27,5 +29,11 @@ function SvgComponent(props) {
     </svg>
   );
 }
+SvgComponent.propTypes = {
+  color: PropTypes.string,
+};
+SvgComponent.defaultProps = {
+  color: '#2DA84F',
+};
 
 export default SvgComponent;

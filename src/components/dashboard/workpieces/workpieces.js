@@ -11,6 +11,7 @@ import ProfileOptions from '../_/profileOptions/profileOptions';
 import EmptyOwnerSongs from './emptyOwnerSongs/emptyOwnerSongs';
 import EmptyRightholderSongs from './emptyRightholderSongs/emptyRightholderSongs';
 import DeletingWorkpiece from './deletingWorkpiece/deletingWorkpiece';
+import MobileNav from './mobileNav/mobileNav';
 
 const Workpieces = (props) => {
   const user_id = localStorage.getItem('user_id');
@@ -108,6 +109,7 @@ const Workpieces = (props) => {
           </div>
         </div>
       </div>
+      <MobileNav {...commonProps} />
     </div>
   );
 };

@@ -5,6 +5,9 @@
     height: 100vh;
     width: 288px;
     background-color: #322129;
+    @media screen and (max-width: 944px){
+      display:none;
+    }
     .logo {
       background-color: #3f2933;
       height: 72px;
@@ -292,4 +295,19 @@
 .last-modified{
 
   display:inline-block;
+}
+.mobile-nav{
+  position:fixed;
+  width: 100%;
+  height: 56px;
+  bottom:0;
+  left:0;
+  right:0;
+  align-items:center;
+  justify-content: space-evenly;
+  background:#fff;
+  display:none;
+  @media screen AND (max-width:944px) {
+    display:flex;
+  }
 }
