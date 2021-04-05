@@ -14,38 +14,9 @@ import DeletingWorkpiece from './deletingWorkpiece/deletingWorkpiece';
 import MobileNav from './mobileNav/mobileNav';
 
 const Workpieces = (props) => {
-  const user_id = localStorage.getItem('user_id');
-  const [workpiecesByOwner, setWorkpiecesByOwner] = useState([]);
-  const [workpiecesByRightHolder, setWorkpiecesByRightHolder] = useState([]);
   const [tab, setTab] = useState('owner');
   const [showModal, setShowModal] = useState(false);
   const [workpieceInDeletion, setWorkpieceInDeletion] = useState(null);
-
-  const resetWorkpiecesByOwner = async (firstLoad) => {
-    const workpiecesByOwner = await getWorkpiecesByOwner({ user_id });
-    setWorkpiecesByOwner(workpiecesByOwner);
-    if (firstLoad && workpiecesByOwner.length === 0) {
-      setTab('rightHolder');
-    }
-    props.setIsLoaded(true);
-  };
-  const resetWorkpiecesByRightHolder = async () => {
-    const workpiecesByRightHolder = await getWorkpiecesByRightHolder({
-      user_id,
-    });
-    setWorkpiecesByRightHolder(workpiecesByRightHolder);
-    props.setIsLoaded(true);
-  };
-  const resetData = async (params) => {
-    props.setIsLoaded(false);
-    const firstLoad = params && params.firstLoad;
-    resetWorkpiecesByOwner(firstLoad);
-    resetWorkpiecesByRightHolder();
-  };
-
-  useEffect(() => {
-    resetData({ firstLoad: true });
-  }, []);
 
   const t_pageTitle = {
     fr: 'Mes pièces musicales',
@@ -58,13 +29,11 @@ const Workpieces = (props) => {
 
   const commonProps = {
     ...props,
-    resetData,
     tab,
     setTab,
     setShowModal,
     setWorkpieceInDeletion,
     workpieceInDeletion,
-    resetWorkpiecesByOwner,
   };
 
   return (
@@ -89,8 +58,8 @@ const Workpieces = (props) => {
           <SelectPerspective {...props} {...commonProps} />
           <div className="list">
             {(tab === 'owner'
-              ? workpiecesByOwner
-              : workpiecesByRightHolder
+              ? props.workpiecesByOwner
+              : props.workpiecesByRightHolder
             ).map((el) => (
               <Workpiece
                 key={el.workpiece_id}
@@ -100,10 +69,10 @@ const Workpieces = (props) => {
               />
             ))}
             {tab === 'owner'
-              ? workpiecesByOwner.length === 0 && (
+              ? props.workpiecesByOwner.length === 0 && (
               <EmptyOwnerSongs {...commonProps} />
                 )
-              : workpiecesByRightHolder.length === 0 && (
+              : props.workpiecesByRightHolder.length === 0 && (
               <EmptyRightholderSongs {...commonProps} />
                 )}
           </div>
