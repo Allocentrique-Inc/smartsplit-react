@@ -48,7 +48,7 @@ export default function CopyrightSplit(props) {
   };
 
   const shouldDisplayDualPieChart = displayDualPieChart(
-    copyright,
+    copyright.rightHolders,
     copyrightDividingMethod,
   );
 
