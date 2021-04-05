@@ -142,3 +142,13 @@ export function computeMusicChartData(rightHolders, activeCollaboratorsIds) {
     activeCollaboratorsIds,
   );
 }
+
+export function displayDualPieChart(rightHolders, dividingMethod) {
+  const musicContributorNb = useMusicContributors(rightHolders)[1];
+  const lyricContributorNb = useLyricContributors(rightHolders)[1];
+  return (
+    musicContributorNb > 0 &&
+    lyricContributorNb > 0 &&
+    dividingMethod === 'role'
+  );
+}

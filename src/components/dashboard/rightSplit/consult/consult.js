@@ -12,6 +12,7 @@ import {
   computeLyricChartData,
   computeMusicChartData,
   rightHoldersToChartData,
+  displayDualPieChart,
 } from '../_/charts/utils';
 
 const Consult = (props) => {
@@ -162,6 +163,10 @@ const Consult = (props) => {
     logo: CircledP,
     size: 300,
   };
+  const shouldDisplayDualPieChart = displayDualPieChart(
+    props.rightSplitInConsultation.copyright,
+    props.copyrightDividingMethod,
+  );
   return (
     <>
       {props.rightSplitInConsultation.copyright.length > 0 && (
@@ -170,10 +175,10 @@ const Consult = (props) => {
             <Copyright {...commonProps} />
           </div>
           <div className="consultRightSplitRight">
-            {props.copyrightDividingMethod !== 'role' && (
+            {!shouldDisplayDualPieChart && (
               <SplitChart {...copyrightChartProps} />
             )}
-            {props.copyrightDividingMethod === 'role' && (
+            {shouldDisplayDualPieChart && (
               <DualSplitChart {...copyrightChartProps} />
             )}
           </div>

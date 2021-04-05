@@ -8,6 +8,12 @@ import DownloadContractButton from './downloadContractButton/downloadContractBut
 import PaymentModal from '../../_/payments/PaymentModal';
 import getWorkpieceContract from '../../../../api/workpieces/getWorkpieceContract';
 import LastModified from '../../_/lastModified/lastModified';
+import AcceptedRightSplit from './acceptedRightSplit/acceptedRightSplit';
+import DraftRightSplit from './draftRightSplit/draftRightSplit';
+import InVoteRightSplit from './inVoteRightSplit/inVoteRightSplit';
+import RejectedRightSplit from './rejectedRightSplit/rejectedRightSplit';
+import RejectedRightSplitArchived from './rejectedRightSplitArchived/rejectedRightSplitArchived';
+import MobileSummary from './mobileSummary/mobileSummary';
 
 const Summary = (props) => {
   const history = useHistory();
@@ -168,6 +174,11 @@ const Summary = (props) => {
     setIsAdjustingEmails,
     setConsulting,
     hasToVote,
+    t_splitSummary,
+    t_waitingSubmit,
+    t_waitingDecision,
+    t_withCollaborators,
+    t_withEditor,
     t_createdBy,
     t_consult,
     t_accepted,
@@ -182,7 +193,9 @@ const Summary = (props) => {
   return (
     <>
       {/* CONSULT */}
-      {consulting &&
+      {props.isMobile && <MobileSummary {...commonProps} />}
+      {!props.isMobile &&
+        consulting &&
         (isAdjustingEmails ? (
           <AdjustEmails {...commonProps} />
         ) : (
@@ -238,381 +251,167 @@ const Summary = (props) => {
             </div>
           </div>
         ))}
+      {!props.isMobile && (
+        <div className="summary">
+          <TopBar {...props} />
+          <div className="b1">
+            <div className="b1b1">
+              <div className="pageTitle">{t_splitSummary}</div>
+              <div className="splitDetails">
+                {t_createdBy}
+                <span className="artistName">
+                  {`${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName}`}
+                </span>
+                {/* - Mis à jour
+                    <span className="lastModify">-------</span> */}
+              </div>
 
-      <div className="summary">
-        <TopBar {...props} />
-        <div className="b1">
-          <div className="b1b1">
-            <div className="pageTitle">{t_splitSummary}</div>
-            <div className="splitDetails">
-              {t_createdBy}
-              <span className="artistName">
-                {`${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName}`}
-              </span>
-              {/* - Mis à jour
-              <span className="lastModify">-------</span> */}
-            </div>
+              {/* TABS */}
+              <div className="tabs">
+                <button
+                  className={
+                    tab === 'withCollaborators' ? 'tab selected' : 'tab'
+                  }
+                  onClick={handleWithCollaborators}
+                >
+                  {t_withCollaborators}
+                </button>
+                <span className="space" />
+                <div>
+                  <button
+                    className={tab === 'withEditor' ? 'tab selected' : 'tab'}
+                    onClick={handleWithEditor}
+                    disabled={isWithEditorDisabled}
+                  >
+                    {t_withEditor}
+                    {!isWithEditorDisabled && needResponseToHaveEditor && (
+                      <div className="notification" />
+                    )}
+                  </button>
+                  {showQuestionWithEditor && (
+                    <div className="withEditorOrManager">
+                      <div className="question">{t_haveEditor}</div>
+                      <div className="yesNo">
+                        <button className="btn-secondary option">{t_no}</button>
+                        <button
+                          className="btn-primary option"
+                          onClick={handleGoToEditorName}
+                        >
+                          {t_yes}
+                        </button>
+                      </div>
+                      <div
+                        onClick={handleCancelShowQuestionWithEditor}
+                        className="later"
+                      >
+                        {t_later}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {/*
+                    <span className="space" />
+                    <div>
+                      <button
+                        className={tab === 'withManager' ? 'tab selected' : 'tab'}
+                        onClick={handleWithManager}
+                        disabled={isWithManagerDisabled}
+                      >
+                        {t_withManager}
+                        {needResponseToHaveManager && (
+                          <div className="notification" />
+                        )}
+                      </button>
+                      {tab === 'withManager' && (
+                        <div className="withEditorOrManager">
+                          <div className="question">{t_haveManager}</div>
+                          <div className="yesNo">
+                            <button className="btn-secondary option">{t_no}</button>
+                            <button
+                              className="btn-primary option"
+                              onClick={handleGoToManagerName}
+                            >
+                              {t_yes}
+                            </button>
+                          </div>
+                          <div onClick={handleWithCollaborators} className="later">
+                            {t_later}
+                          </div>
+                        </div>
+                      )}
+                    </div> */}
+              </div>
 
-            {/* TABS */}
-            <div className="tabs">
-              <button
-                className={tab === 'withCollaborators' ? 'tab selected' : 'tab'}
-                onClick={handleWithCollaborators}
+              <div
+                className="b1b1b2"
+                //  style={{ display: tab !== 'withCollaborators' && 'none' }}
               >
-                {t_withCollaborators}
-              </button>
-              <span className="space" />
-              <div>
-                <button
-                  className={tab === 'withEditor' ? 'tab selected' : 'tab'}
-                  onClick={handleWithEditor}
-                  disabled={isWithEditorDisabled}
-                >
-                  {t_withEditor}
-                  {!isWithEditorDisabled && needResponseToHaveEditor && (
-                    <div className="notification" />
-                  )}
-                </button>
-                {showQuestionWithEditor && (
-                  <div className="withEditorOrManager">
-                    <div className="question">{t_haveEditor}</div>
-                    <div className="yesNo">
-                      <button className="btn-secondary option">{t_no}</button>
-                      <button
-                        className="btn-primary option"
-                        onClick={handleGoToEditorName}
-                      >
-                        {t_yes}
-                      </button>
-                    </div>
-                    <div
-                      onClick={handleCancelShowQuestionWithEditor}
-                      className="later"
-                    >
-                      {t_later}
-                    </div>
+                {/* DRAFT */}
+                <div className="bx">
+                  <div className="colTitle">{t_waitingSubmit}</div>
+                  <div className="content">
+                    {tab === 'withCollaborators' &&
+                      props.workpiece.rightSplit._state === 'draft' && (
+                        <DraftRightSplit {...commonProps} {...props} />
+                      )}
                   </div>
-                )}
-              </div>
-              {/*
-              <span className="space" />
-              <div>
-                <button
-                  className={tab === 'withManager' ? 'tab selected' : 'tab'}
-                  onClick={handleWithManager}
-                  disabled={isWithManagerDisabled}
-                >
-                  {t_withManager}
-                  {needResponseToHaveManager && (
-                    <div className="notification" />
-                  )}
-                </button>
-                {tab === 'withManager' && (
-                  <div className="withEditorOrManager">
-                    <div className="question">{t_haveManager}</div>
-                    <div className="yesNo">
-                      <button className="btn-secondary option">{t_no}</button>
-                      <button
-                        className="btn-primary option"
-                        onClick={handleGoToManagerName}
-                      >
-                        {t_yes}
-                      </button>
-                    </div>
-                    <div onClick={handleWithCollaborators} className="later">
-                      {t_later}
-                    </div>
+                </div>
+
+                {/* INVOTE */}
+                <div className="bx">
+                  <div className="colTitle">{t_waitingDecision}</div>
+                  <div className="content">
+                    {tab === 'withCollaborators' &&
+                      props.workpiece.rightSplit._state === 'voting' && (
+                        <InVoteRightSplit {...commonProps} {...props} />
+                      )}
                   </div>
-                )}
-              </div> */}
-            </div>
-
-            <div
-              className="b1b1b2"
-              //  style={{ display: tab !== 'withCollaborators' && 'none' }}
-            >
-              {/* DRAFT */}
-              <div className="bx">
-                <div className="colTitle">{t_waitingSubmit}</div>
-                <div className="content">
-                  {tab === 'withCollaborators' &&
-                    props.workpiece.rightSplit._state === 'draft' && (
-                      <DraftRightSplit {...commonProps} {...props} isDraft />
-                    )}
                 </div>
-              </div>
 
-              {/* INVOTE */}
-              <div className="bx">
-                <div className="colTitle">{t_waitingDecision}</div>
-                <div className="content">
-                  {tab === 'withCollaborators' &&
-                    props.workpiece.rightSplit._state === 'voting' && (
-                      <InVoteRightSplit {...commonProps} {...props} />
+                {/* DECIDED */}
+                <div className="bx">
+                  <div className="colTitle">{t_decided}</div>
+                  <div className="content">
+                    {/* ACCEPTED */}
+                    {props.workpiece.rightSplit._state === 'accepted' && (
+                      <div
+                        style={{
+                          display: tab !== 'withCollaborators' && 'none',
+                        }}
+                      >
+                        <AcceptedRightSplit {...commonProps} {...props} />
+                      </div>
                     )}
-                </div>
-              </div>
 
-              {/* DECIDED */}
-              <div className="bx">
-                <div className="colTitle">{t_decided}</div>
-                <div className="content">
-                  {/* ACCEPTED */}
-                  {props.workpiece.rightSplit._state === 'accepted' && (
-                    <div
-                      style={{
-                        display: tab !== 'withCollaborators' && 'none',
-                      }}
-                    >
-                      <AcceptedRightSplit {...commonProps} {...props} />
-                    </div>
-                  )}
-
-                  {/* REJECTED */}
-                  {tab === 'withCollaborators' &&
-                    props.workpiece.rightSplit._state === 'rejected' && (
-                      <RejectedRightSplit {...commonProps} {...props} />
-                    )}
-                  {tab === 'withCollaborators' &&
-                    props.workpiece.archivedSplits &&
-                    props.workpiece.archivedSplits.map(
-                      (archivedRightSplit, id) => {
-                        return (
-                          <RejectedRightSplitArchived
-                            id={id}
-                            {...commonProps}
-                            archivedRightSplit={archivedRightSplit}
-                            key={archivedRightSplit.version}
-                            // workpiece={workpiece}
-                          />
-                        );
-                      },
-                    )}
+                    {/* REJECTED */}
+                    {tab === 'withCollaborators' &&
+                      props.workpiece.rightSplit._state === 'rejected' && (
+                        <RejectedRightSplit {...commonProps} {...props} />
+                      )}
+                    {tab === 'withCollaborators' &&
+                      props.workpiece.archivedSplits &&
+                      props.workpiece.archivedSplits.map(
+                        (archivedRightSplit, id) => {
+                          return (
+                            <RejectedRightSplitArchived
+                              id={id}
+                              {...commonProps}
+                              archivedRightSplit={archivedRightSplit}
+                              key={archivedRightSplit.version}
+                              // workpiece={workpiece}
+                            />
+                          );
+                        },
+                      )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
 
 export default Summary;
-
-const DraftRightSplit = (props) => {
-  const versionIndex = props.workpiece.rightSplit.version;
-  const t_sendToCollab = {
-    fr: 'Envoyer aux collaborateurs',
-    en: '',
-  }[props.user.locale];
-  const canSendToCollab =
-    props.workpiece.rightSplit.owner.user_id === props.user.user_id;
-
-  return (
-    <div className="rightSplit">
-      <div
-        className="clickableContainer"
-        onClick={() => props.setConsulting(props.workpiece.rightSplit)}
-      >
-        <div className="title">{`Version ${versionIndex}`}</div>
-        <div className="details">
-          {props.t_createdBy}
-          <span className="artistName">
-            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-          </span>
-          <LastModified
-            date={props.workpiece.rightSplit.createdAt}
-            language={props.language}
-          />
-        </div>
-        <div className="b1">
-          <div />
-        </div>
-
-        {canSendToCollab ? (
-          <>
-            <div className="border" />
-            <button>{t_sendToCollab}</button>
-          </>
-        ) : (
-          <button>{props.t_consult}</button>
-        )}
-      </div>
-    </div>
-  );
-};
-
-const AcceptedRightSplit = (props) => {
-  const versionIndex = props.workpiece.rightSplit.version;
-  const productCode = 'RIGHT_SPLIT_CONTRACT';
-  const [showPaymentModal, setShowPaymentModal] = useState();
-  const { workpiece_id } = useParams();
-  const [contractData, setContractData] = useState();
-  const modalProps = {
-    ...props,
-    productCode,
-    setShowModal: setShowPaymentModal,
-  };
-  const hasBoughtPDF =
-    props.workpiece &&
-    props.workpiece.purchases &&
-    props.workpiece.purchases.length !== 0 &&
-    props.workpiece.purchases.includes(productCode);
-  useEffect(async () => {
-    if (hasBoughtPDF) {
-      const result = await getWorkpieceContract({ workpiece_id });
-      result.statusCode !== 500 && setContractData(result);
-      result.statusCode === 500 && setContractData(null);
-    }
-  }, [hasBoughtPDF]);
-  return (
-    <>
-      <div
-        className="rightSplit"
-        style={{ marginBottom: '8px' }}
-        onClick={() => props.setConsulting(props.workpiece.rightSplit)}
-      >
-        <div className="title">{`Version ${versionIndex}`}</div>
-        <div className="details">
-          {props.t_createdBy}
-          <span className="artistName">
-            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-          </span>
-        </div>
-        <div className="update-details">
-          <LastModified
-            date={props.workpiece.rightSplit.updatedAt}
-            language={props.language}
-          >
-            {props.t_updated}
-          </LastModified>
-        </div>
-        <div className="b1">
-          <div />
-          <div className="status acceptedStatus">{props.t_accepted}</div>
-        </div>
-
-        {hasBoughtPDF && contractData ? (
-          <DownloadContractButton
-            language={props.language}
-            contractData={contractData}
-          />
-        ) : (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setShowPaymentModal(true);
-            }}
-          >
-            {props.t_download}
-          </button>
-        )}
-      </div>
-      {showPaymentModal && <PaymentModal {...modalProps} />}
-    </>
-  );
-};
-
-const InVoteRightSplit = (props) => {
-  const versionIndex = props.workpiece.rightSplit.version;
-  return (
-    <div className="rightSplit">
-      <div
-        className="clickableContainer"
-        onClick={() => props.setConsulting(props.workpiece.rightSplit)}
-      >
-        <div className="title">{`Version ${versionIndex}`}</div>
-        <div className="details">
-          {props.t_createdBy}
-          <span className="artistName">
-            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-          </span>
-        </div>
-        <div className="update-details">
-          <LastModified
-            date={props.workpiece.rightSplit.updatedAt}
-            language={props.language}
-          >
-            {props.t_updated}
-          </LastModified>
-        </div>
-        <button>{props.t_consult}</button>
-      </div>
-    </div>
-  );
-};
-
-const RejectedRightSplit = (props) => {
-  const history = useHistory();
-  const { workpiece_id } = useParams();
-  const versionIndex = props.workpiece.rightSplit.version;
-  const handleCreateANewModelBtn = () =>
-    history.push(`/workpiece/${workpiece_id}/right-split/copyright`);
-  return (
-    <div className="rightSplit" style={{ marginBottom: '8px' }}>
-      <div
-        className="clickableContainer"
-        onClick={() => {
-          props.setConsulting(props.workpiece.rightSplit);
-        }}
-      >
-        <div className="title">{`Version ${versionIndex}`}</div>
-        <div className="details">
-          {props.t_createdBy}
-          <span className="artistName">
-            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-          </span>
-        </div>
-        <div className="update-details">
-          <LastModified
-            date={props.workpiece.rightSplit.updatedAt}
-            language={props.language}
-          >
-            {props.t_updated}
-          </LastModified>
-        </div>
-        <div className="b1">
-          <div />
-          <div className="status rejectedStatus">{props.t_rejected}</div>
-        </div>
-        <button onClick={handleCreateANewModelBtn}>
-          {props.t_createANewOne}
-        </button>
-        <button>{props.t_consult}</button>
-      </div>
-    </div>
-  );
-};
-
-const RejectedRightSplitArchived = (props) => {
-  const versionIndex = props.archivedRightSplit.version;
-  return (
-    <div
-      className="rightSplit"
-      onClick={() => props.setConsulting(props.workpiece.rightSplit)}
-    >
-      <div className="title">{`Version ${versionIndex}`}</div>
-      <div className="details">
-        {props.t_createdBy}
-        <span className="artistName">
-          {` ${props.archivedRightSplit.owner.firstName} ${props.archivedRightSplit.owner.lastName} `}
-        </span>
-      </div>
-      <div className="update-details">
-        <LastModified
-          date={props.workpiece.rightSplit.updatedAt}
-          language={props.language}
-        >
-          {props.t_updated}
-        </LastModified>
-      </div>
-      <div className="b1">
-        <div />
-        <div className="status rejectedStatus">{props.t_rejected}</div>
-      </div>
-      <button>{props.t_consult}</button>
-    </div>
-  );
-};

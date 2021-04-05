@@ -3,6 +3,7 @@
 @import './buttons.scss';
 @import './textLayout.scss';
 @import './tabs.scss';
+@import './mobileComponents.scss';
 @import './reset.scss';
 @import './forms.scss';
 @import './summary.scss';
@@ -45,6 +46,10 @@ body {
 .rowAC {
   display: flex;
   align-items: center;
+}
+
+.noShadow {
+  box-shadow: none;
 }
 
 .toDo {

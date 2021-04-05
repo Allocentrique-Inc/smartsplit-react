@@ -49,7 +49,6 @@ const Orientation = (props) => {
     ...props,
     workpiece_id,
   };
-  console.log(props);
   return (
     <div className="orientation">
       {/** EDIT WORKPIECE MODAL */}
@@ -95,8 +94,7 @@ const Orientation = (props) => {
                 </div>
                 <div className="details">
                   {t_createdBy && t_createdBy_}
-                  <span className="artistName">{t_createdBy}</span>
-                  {' '}-{' '}
+                  <span className="artistName">{t_createdBy}</span> -{' '}
                   <LastModified {...commonProps}>{t_modified}</LastModified>
                 </div>
               </div>

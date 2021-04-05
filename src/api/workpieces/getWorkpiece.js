@@ -42,7 +42,7 @@ const getWorkpiece = async (payload) => {
         Object.keys(parsedResponse.rightSplit.label).length > 0
       ) {
         parsedResponse.rightSplit.label.rightHolder_id =
-          parsedResponse.rightSplit.label.rightHolder;
+          parsedResponse.rightSplit.label.rightHolder.user_id;
       }
     }
 
