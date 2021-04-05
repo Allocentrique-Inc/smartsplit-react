@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import Eye from './eye';
 import Avatar from '../../../_/avatar/avatar';
 import colors from '../../_/colors';
+import ArtistName from '../../../_/artistName/artistName';
 
 const Privacy = (props) => {
   const history = useHistory();
@@ -14,7 +15,14 @@ const Privacy = (props) => {
   const t_privacyState = props.rightSplitInConsultation.isPublic
     ? props.t_public
     : props.t_private;
-  const fakeName = 'Alfa';
+
+  console.log(props.rightSplitInConsultation.owner);
+  const user = props.rightSplitInConsultation.owner || null;
+  const artistName = user
+    ? user.artistName
+      ? user.artistName
+      : `${user.firstName} ${user.lastName}`
+    : null;
   return (
     <div className="consultRightSplitSection">
       <div
@@ -34,13 +42,15 @@ const Privacy = (props) => {
       </div>
       <div className="privacySubtitle">
         <Eye />
-        {`${fakeName} ${props.t_privacySubtitle}`}
+        <ArtistName user={props.rightSplitInConsultation.owner} />
+        {'\u00A0'}
+        {`${props.t_privacySubtitle}`}
         {'\u00A0'}
         <b> {t_privacyState}</b>
       </div>
       {props.rightSplitInConsultation.isPublic && (
         <div className="privacyDescription">
-          {`${fakeName} ${props.t_privacyDescription}`}
+          {`${artistName} ${props.t_privacyDescription}`}
         </div>
       )}
       <div />
@@ -81,12 +91,18 @@ const Collab = (props) => {
     colors[
       props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
     ];
+
+  const isYou = props.user.user_id === props.collaborator.rightHolder.user_id;
+
+  // TEXTS
+  const t_you = { fr: '(toi)', en: '(you)' }[props.language];
   return (
     <div>
       <div className="consultCollaborator privacyCollaborator">
         <div className="left">
           <Avatar user={rightHolder} color={collaboratorColor} />
-          <div className="name">{t_name}</div>
+          <ArtistName className="name" user={props.collaborator.rightHolder} />
+          {isYou && `\u00A0${t_you}`}
         </div>
 
         <div className="right">

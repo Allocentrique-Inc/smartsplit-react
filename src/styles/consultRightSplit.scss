@@ -114,6 +114,7 @@
         line-height: 16px;
         text-align: right;
         color: #687a8b;
+        min-width: 61px;
       }
       .voteAccepted {
         font-weight: bold;
@@ -194,7 +195,7 @@
     }
   }
 }
-.consult-details{
+.consult-details {
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;

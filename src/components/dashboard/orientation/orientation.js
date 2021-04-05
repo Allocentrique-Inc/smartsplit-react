@@ -8,6 +8,7 @@ import Collaborators from './collaborators/collaborators';
 import ProfileOptions from '../_/profileOptions/profileOptions';
 import CoverImage from '../_/coverImage/coverImage';
 import LastModified from '../_/lastModified/lastModified';
+import ArtistName from '../_/artistName/artistName';
 
 const Orientation = (props) => {
   const [tab, setTab] = useState('task');
@@ -21,14 +22,7 @@ const Orientation = (props) => {
   const hasEditPermission =
     props.user.user_id === props.workpiece.owner.user_id;
 
-  const t_createdBy =
-    props.workpiece &&
-    props.workpiece.owner &&
-    props.workpiece.owner.firstName &&
-    props.workpiece.owner.lastName &&
-    `${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName}`;
-
-  const t_createdBy_ = {
+  const t_createdBy = {
     fr: 'créé par',
     en: 'created by',
   }[props.language];
@@ -93,9 +87,12 @@ const Orientation = (props) => {
                   )}
                 </div>
                 <div className="details">
-                  {t_createdBy && t_createdBy_}
-                  <span className="artistName">{t_createdBy}</span> -{' '}
-                  <LastModified {...commonProps}>{t_modified}</LastModified>
+                  {t_createdBy}
+                  <ArtistName
+                    user={props.workpiece.owner}
+                    className="artistName"
+                  />{' '}
+                  - <LastModified {...commonProps}>{t_modified}</LastModified>
                 </div>
               </div>
             </div>

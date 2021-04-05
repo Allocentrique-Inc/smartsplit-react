@@ -3,21 +3,17 @@ import Action from './action/action';
 import VertEllipsis from '../../../../icons/vertEllipsis';
 import CoverImage from '../../_/coverImage/coverImage';
 import LastModified from '../../_/lastModified/lastModified';
+import ArtistName from '../../_/artistName/artistName';
 
 const Workpiece = (props) => {
   const t_by = {
     fr: 'par',
     en: 'by',
   }[props.language];
-  const t_songCreator =
-    props.owner &&
-    props.owner.firstName &&
-    props.owner.lastName &&
-    `${t_by} ${props.owner.firstName} ${props.owner.lastName}`;
   const t_songTitle = props.title;
   const t_mod = {
-    fr: 'modifié',
-    en: 'modified',
+    fr: 'Modifié',
+    en: 'Modified',
   }[props.language];
   const coverImage =
     props &&
@@ -40,7 +36,7 @@ const Workpiece = (props) => {
         <div className="details">
           <div className="b1">
             {t_songTitle && <span className="title">{t_songTitle}</span>}
-            {t_songCreator && t_songCreator}
+            <ArtistName user={props.owner}>{t_by}</ArtistName>
           </div>
           <div className="b2">
             <LastModified {...props}>{t_mod}</LastModified>

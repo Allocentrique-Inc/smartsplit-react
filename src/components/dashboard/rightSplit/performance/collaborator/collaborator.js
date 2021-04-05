@@ -6,6 +6,7 @@ import Ellipsis from '../../../../../icons/ellipsis';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import setCollaboratorsErrors from '../_/setCollaboratorsErrors';
 import Avatar from '../../../_/avatar/avatar';
+import ArtistName from '../../../_/artistName/artistName';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -59,8 +60,10 @@ const Collaborator = (props) => {
       ? 'collaborator collaboratorErrors'
       : 'collaborator';
 
+  const isYou = props.user.user_id === props.collaborator.rightHolder.user_id;
+
   // TEXTS
-  const t_initials = `${props.collaborator.rightHolder.firstName[0]}${props.collaborator.rightHolder.lastName[0]}`;
+  const t_you = { fr: '(toi)', en: '(you)' }[props.language];
   const t_userName = `${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`;
   const t_removeCollaborator =
     props.translations.rightSplit._removeCollaborator[props.language];
@@ -95,7 +98,11 @@ const Collaborator = (props) => {
               user={props.collaborator.rightHolder}
               color={collaboratorColor}
             />
-            <div className="name">{t_userName}</div>
+            <ArtistName
+              user={props.collaborator.rightHolder}
+              className="name"
+            />
+            {isYou && t_you}
           </div>
           {/* ELLIPSIS OPTIONS */}
           <div className="ellipsis" onClick={handleEllipsisClick}>

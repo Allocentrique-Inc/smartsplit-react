@@ -1,5 +1,6 @@
 import Avatar from '../../../../_/avatar/avatar';
 import colors from '../../../_/colors';
+import ArtistName from '../../../../_/artistName/artistName';
 
 const Collaborator = (props) => {
   const {
@@ -60,13 +61,19 @@ const Collaborator = (props) => {
     colors[
       props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
     ];
+
+  const isYou = props.user.user_id === props.collaborator.rightHolder.user_id;
+
+  // TEXTS
+  const t_you = { fr: '(toi)', en: '(you)' }[props.language];
   return (
     <>
       <div className="consultCollaborator">
         <div className="left">
           <Avatar user={rightHolder} color={collaboratorColor} />
           <div>
-            <div className="name">{`${firstName} ${lastName}`}</div>
+            <ArtistName className="name" user={rightHolder} />
+            {isYou && `\u00A0${t_you}`}
             <div className="roles"> {_function}</div>
           </div>
         </div>

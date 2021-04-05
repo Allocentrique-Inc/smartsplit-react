@@ -1,4 +1,5 @@
 import LastModified from '../../../_/lastModified/lastModified';
+import ArtistName from '../../../_/artistName/artistName';
 
 export default function RejectedRightSplitArchived(props) {
   const versionIndex = props.archivedRightSplit.version;
@@ -10,13 +11,14 @@ export default function RejectedRightSplitArchived(props) {
       <div className="title">{`Version ${versionIndex}`}</div>
       <div className="details">
         {props.t_createdBy}
-        <span className="artistName">
-          {` ${props.archivedRightSplit.owner.firstName} ${props.archivedRightSplit.owner.lastName} `}
-        </span>
+        <ArtistName
+          user={props.archivedRightSplit.owner}
+          className="artistName"
+        />
       </div>
       <div className="update-details">
         <LastModified
-          date={props.workpiece.rightSplit.updatedAt}
+          date={props.archivedRightSplit.updatedAt}
           language={props.language}
         >
           {props.t_updated}

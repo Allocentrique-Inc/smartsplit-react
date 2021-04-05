@@ -4,6 +4,7 @@ import LastModified from '../../../_/lastModified/lastModified';
 import getWorkpieceContract from '../../../../../api/workpieces/getWorkpieceContract';
 import DownloadContractButton from '../downloadContractButton/downloadContractButton';
 import PaymentModal from '../../../_/payments/PaymentModal';
+import ArtistName from '../../../_/artistName/artistName';
 
 export default function AcceptedRightSplit(props) {
   const versionIndex = props.workpiece.rightSplit.version;
@@ -38,9 +39,10 @@ export default function AcceptedRightSplit(props) {
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
           {props.t_createdBy}
-          <span className="artistName">
-            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-          </span>
+          <ArtistName
+            user={props.workpiece.rightSplit.owner}
+            className="artistName"
+          />
         </div>
         <div className="update-details">
           <LastModified

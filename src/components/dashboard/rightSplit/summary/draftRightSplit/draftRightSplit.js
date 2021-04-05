@@ -1,4 +1,5 @@
 import LastModified from '../../../_/lastModified/lastModified';
+import ArtistName from '../../../_/artistName/artistName';
 
 export default function DraftRightSplit(props) {
   const versionIndex = props.workpiece.rightSplit.version;
@@ -18,9 +19,10 @@ export default function DraftRightSplit(props) {
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
           {props.t_createdBy}
-          <span className="artistName">
-            {` ${props.workpiece.rightSplit.owner.firstName} ${props.workpiece.rightSplit.owner.lastName} `}
-          </span>
+          <ArtistName
+            user={props.workpiece.rightSplit.owner}
+            className="artistName"
+          />
           <LastModified
             date={props.workpiece.rightSplit.createdAt}
             language={props.language}

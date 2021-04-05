@@ -6,6 +6,7 @@ import colors from '../../_/colors';
 import setLabelErrors from '../_/setLabelErrors';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import recalculateShares from '../_/recalculateShares';
+import ArtistName from '../../../_/artistName/artistName';
 
 const Label = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -72,7 +73,10 @@ const Label = (props) => {
       ? 'collaborator collaboratorErrors'
       : 'collaborator';
 
+  const isYou = props.user.user_id === props.label.rightHolder.user_id;
+
   // TEXTS
+  const t_you = { fr: '(toi)', en: '(you)' }[props.language];
   const t_initials = `${label.rightHolder.firstName[0]}${label.rightHolder.lastName[0]}`;
   const t_userName = `${label.rightHolder.firstName} ${label.rightHolder.lastName}`;
   const t_notifViaEmail =
@@ -103,7 +107,6 @@ const Label = (props) => {
 
   const t_removeCollaborator =
     props.translations.rightSplit._removeCollaborator[props.language];
-
   const commonProps = {
     ...props,
     setLock,
@@ -117,7 +120,8 @@ const Label = (props) => {
             <div className="avatar" style={avatarStyle}>
               {t_initials}
             </div>
-            <div className="name">{t_userName}</div>
+            <ArtistName user={props.label.rightHolder} className="name" />
+            {isYou && t_you}
           </div>
 
           <div className="ellipsis" onClick={handleEllipsisClick}>

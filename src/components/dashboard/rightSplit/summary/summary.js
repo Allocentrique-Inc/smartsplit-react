@@ -14,6 +14,7 @@ import InVoteRightSplit from './inVoteRightSplit/inVoteRightSplit';
 import RejectedRightSplit from './rejectedRightSplit/rejectedRightSplit';
 import RejectedRightSplitArchived from './rejectedRightSplitArchived/rejectedRightSplitArchived';
 import MobileSummary from './mobileSummary/mobileSummary';
+import ArtistName from '../../_/artistName/artistName';
 
 const Summary = (props) => {
   const history = useHistory();
@@ -113,7 +114,7 @@ const Summary = (props) => {
     en: '',
   }[props.language];
   const t_consult = {
-    fr: 'Consulté',
+    fr: 'Consulter',
     en: 'Consult',
   }[props.language];
   const t_accepted = {
@@ -209,7 +210,11 @@ const Summary = (props) => {
                   Version {consulting.version}
                   <div className="consult-details">
                     {t_createdBy}{' '}
-                    <span className="artistName">{` ${consulting.owner.firstName} ${consulting.owner.lastName}. `}</span>
+                    <ArtistName
+                      user={consulting.owner}
+                      className="artistName"
+                    />
+                    {' - '}
                     <LastModified
                       date={consulting.updatedAt}
                       language={props.language}
@@ -259,11 +264,10 @@ const Summary = (props) => {
               <div className="pageTitle">{t_splitSummary}</div>
               <div className="splitDetails">
                 {t_createdBy}
-                <span className="artistName">
-                  {`${props.workpiece.owner.firstName} ${props.workpiece.owner.lastName}`}
-                </span>
-                {/* - Mis à jour
-                    <span className="lastModify">-------</span> */}
+                <ArtistName
+                  user={props.workpiece.owner}
+                  className="artistName"
+                />
               </div>
 
               {/* TABS */}
