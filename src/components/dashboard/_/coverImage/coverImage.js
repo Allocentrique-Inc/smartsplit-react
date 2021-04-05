@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import SongPlaceholder from '../../../../icons/songPlaceholder';
 import Config from '../../../../config';
 
@@ -26,11 +26,11 @@ const CoverImage = (props) => {
     </div>
   );
 };
-CoverImage.propTypes = {
-  className: PropTypes.string,
-  coverImage: PropTypes.oneOfType([PropTypes.string, null]),
-  imgData: PropTypes.oneOfType([PropTypes.array, null]),
-};
+// CoverImage.propTypes = {
+//   className: PropTypes.string,
+//   coverImage: PropTypes.oneOfType([PropTypes.string, null]),
+//   imgData: PropTypes.oneOfType([PropTypes.array, null]),
+// };
 CoverImage.defaultProps = {
   className: 'small',
   coverImage: null,

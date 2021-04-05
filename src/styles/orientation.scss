@@ -14,8 +14,8 @@
         justify-content: space-between;
         align-items: center;
         box-shadow: inset 0px -1px 0px #dcdfe1;
-        @media screen and (max-width:944px) {
-          width:auto;
+        @media screen and (max-width: 944px) {
+          width: auto;
         }
         .back {
           display: flex;
@@ -34,7 +34,6 @@
       }
 
       .b2 {
-
         margin-top: 24px;
         display: flex;
         justify-content: space-between;
@@ -68,7 +67,6 @@
               .artistName {
                 font-weight: bold;
                 color: #2da84f;
-                margin-left: 4px;
               }
             }
           }
@@ -117,8 +115,8 @@
   }
   .b2 {
     width: 944px;
-    @media screen and (max-width:944px) {
-      width:auto;
+    @media screen and (max-width: 944px) {
+      width: auto;
       justify-content: flex-start;
     }
     display: flex;
@@ -129,7 +127,7 @@
       margin-top: 43px;
       display: flex;
       flex-wrap: wrap;
-      @media screen and (max-width:944px) {
+      @media screen and (max-width: 944px) {
         justify-content: center;
       }
       .space {

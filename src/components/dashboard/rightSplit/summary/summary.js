@@ -268,6 +268,13 @@ const Summary = (props) => {
                   user={props.workpiece.owner}
                   className="artistName"
                 />
+                {'\u00A0'}-{'\u00A0'}
+                <LastModified
+                  date={props.workpiece.updatedAt}
+                  language={props.language}
+                >
+                  {t_updated}
+                </LastModified>
               </div>
 
               {/* TABS */}

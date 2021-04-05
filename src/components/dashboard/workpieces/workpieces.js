@@ -78,7 +78,7 @@ const Workpieces = (props) => {
           </div>
         </div>
       </div>
-      <MobileNav {...commonProps} />
+      {/* <MobileNav {...commonProps} /> */}
     </div>
   );
 };

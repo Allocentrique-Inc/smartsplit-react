@@ -1,10 +1,18 @@
 import { useState, createRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import colors from '../../../dashboard/rightSplit/_/colors';
 
 const Slider = (props) => {
   const handleWidth = 20;
-  const { value, setValue, range, leftLabel, rightLabel, decimalPlaces, className } = props;
+  const {
+    value,
+    setValue,
+    range,
+    leftLabel,
+    rightLabel,
+    decimalPlaces,
+    className,
+  } = props;
   const min = range[0];
   const max = range[1];
   const [factor, setFactor] = useState();
@@ -56,32 +64,42 @@ const Slider = (props) => {
         setLeft(left);
       }
     }
-    return () => {
-    };
+    return () => {};
   }, [sliderBar.current, value]);
   return (
-    <div className={`slider ${className}`} onMouseMove={dragMove} onMouseUp={dragStop}>
+    <div
+      className={`slider ${className}`}
+      onMouseMove={dragMove}
+      onMouseUp={dragStop}
+    >
       {leftLabel && <div className="slider-left-label">{leftLabel}</div>}
       <div className="slider-bar" ref={sliderBar}>
-        <div className="slider-handle" style={{ left }} onMouseDown={dragStart} onMouseMove={dragMove} onMouseUp={dragStop} />
+        <div
+          className="slider-handle"
+          style={{ left }}
+          onMouseDown={dragStart}
+          onMouseMove={dragMove}
+          onMouseUp={dragStop}
+        />
       </div>
       {rightLabel && <div className="slider-right-label">{rightLabel}</div>}
     </div>
   );
 };
 
-Slider.propTypes = {
-  leftLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  rightLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  range: PropTypes.arrayOf(Number),
-  setValue: PropTypes.func.isRequired,
-  value: PropTypes.number.isRequired,
-  decimalPlaces: PropTypes.number,
-};
+// Slider.propTypes = {
+//   leftLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+//   rightLabel: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+//   range: PropTypes.arrayOf(Number),
+//   setValue: PropTypes.func.isRequired,
+//   value: PropTypes.number.isRequired,
+//   decimalPlaces: PropTypes.number,
+// };
 Slider.defaultProps = {
   leftLabel: '',
   rightLabel: '',
   range: [0, 100],
   decimalPlaces: 0,
 };
+
 export default Slider;
