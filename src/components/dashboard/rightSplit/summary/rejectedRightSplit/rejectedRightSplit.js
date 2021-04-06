@@ -23,15 +23,12 @@ export default function RejectedRightSplit(props) {
             user={props.workpiece.rightSplit.owner}
             className="artistName"
           />
-        </div>
-        <div className="update-details">
           <LastModified
-            date={props.workpiece.rightSplit.updatedAt}
+            date={props.workpiece.rightSplit.createdAt}
             language={props.language}
-          >
-            {props.t_updated}
-          </LastModified>
+          />
         </div>
+        <div className="update-details" />
         <div className="b1">
           <div />
           <div className="status rejectedStatus">{props.t_rejected}</div>

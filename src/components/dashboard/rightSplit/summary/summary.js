@@ -214,7 +214,7 @@ const Summary = (props) => {
                       user={consulting.owner}
                       className="artistName"
                     />
-                    {' - '}
+                    {' - \u00A0'}
                     <LastModified
                       date={consulting.updatedAt}
                       language={props.language}

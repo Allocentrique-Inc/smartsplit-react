@@ -42,11 +42,12 @@ const Privacy = (props) => {
       </div>
       <div className="privacySubtitle">
         <Eye />
-        <ArtistName user={props.rightSplitInConsultation.owner} />
-        {'\u00A0'}
-        {`${props.t_privacySubtitle}`}
-        {'\u00A0'}
-        <b> {t_privacyState}</b>
+        <div>
+          <ArtistName user={props.rightSplitInConsultation.owner} />
+          {'\u00A0'}
+          {`${props.t_privacySubtitle}`}
+          <b> {t_privacyState}</b>.
+        </div>
       </div>
       {props.rightSplitInConsultation.isPublic && (
         <div className="privacyDescription">

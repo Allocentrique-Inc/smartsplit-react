@@ -6,7 +6,7 @@ export default function DraftRightSplit(props) {
   const t_sendToCollab = {
     fr: 'Envoyer aux collaborateurs',
     en: '',
-  }[props.user.locale];
+  }[props.language];
   const canSendToCollab =
     props.workpiece.rightSplit.owner.user_id === props.user.user_id;
 

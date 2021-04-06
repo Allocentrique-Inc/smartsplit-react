@@ -64,6 +64,7 @@
       height: 56px;
       outline: 0;
       cursor: pointer;
+      margin: 0;
       &:disabled {
         cursor: auto;
         color: #dcdfe1;
@@ -196,13 +197,12 @@
               font-weight: normal;
               font-size: 12px;
               line-height: 16px;
-              display: flex;
               align-items: center;
               color: #687a8b;
               .artistName {
                 font-weight: bold;
                 color: #2da84f;
-                margin: 0px 4px;
+                margin-right: 4px;
               }
             }
             .b1 {

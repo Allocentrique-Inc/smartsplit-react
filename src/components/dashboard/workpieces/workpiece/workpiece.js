@@ -74,7 +74,7 @@ const Ellipsis = (props) => {
   const t_deleteButton = {
     fr: 'Supprimer cette pièce',
     en: 'Delete this workpiece',
-  }[props.user.locale];
+  }[props.language];
 
   return (
     <span

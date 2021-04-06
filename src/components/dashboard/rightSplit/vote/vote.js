@@ -59,10 +59,9 @@ const Vote = (props) => {
   const { version } = props.workpiece.rightSplit;
 
   const translation = props.translations.rightSplit.vote;
-  const locale = props.user.locale;
-  const t_title = translation._title[locale];
-  const t_createdBy = translation._createdBy[locale];
-  const t_voteCount = translation._voteCount[locale];
+  const t_title = translation._title[props.language];
+  const t_createdBy = translation._createdBy[props.language];
+  const t_voteCount = translation._voteCount[props.language];
 
   const commonProps = {
     copyright,

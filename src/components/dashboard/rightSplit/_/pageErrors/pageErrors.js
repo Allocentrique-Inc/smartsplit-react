@@ -5,7 +5,7 @@ const PageErrors = (props) => {
         <div className="pageErrors">
           {props.errors.map((el) => {
             let t_error = props.translations.rightSplit.errors[el];
-            t_error = t_error && t_error[props.user.locale];
+            t_error = t_error && t_error[props.language];
             return <div key={el}>{t_error}</div>;
           })}
         </div>

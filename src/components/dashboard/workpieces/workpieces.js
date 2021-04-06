@@ -14,7 +14,6 @@ import DeletingWorkpiece from './deletingWorkpiece/deletingWorkpiece';
 import MobileNav from './mobileNav/mobileNav';
 
 const Workpieces = (props) => {
-  const [tab, setTab] = useState('owner');
   const [showModal, setShowModal] = useState(false);
   const [workpieceInDeletion, setWorkpieceInDeletion] = useState(null);
 
@@ -29,8 +28,6 @@ const Workpieces = (props) => {
 
   const commonProps = {
     ...props,
-    tab,
-    setTab,
     setShowModal,
     setWorkpieceInDeletion,
     workpieceInDeletion,
@@ -57,18 +54,13 @@ const Workpieces = (props) => {
           </div>
           <SelectPerspective {...props} {...commonProps} />
           <div className="list">
-            {(tab === 'owner'
+            {(props.tab === 'owner'
               ? props.workpiecesByOwner
               : props.workpiecesByRightHolder
             ).map((el) => (
-              <Workpiece
-                key={el.workpiece_id}
-                {...commonProps}
-                {...el}
-                tab={tab}
-              />
+              <Workpiece key={el.workpiece_id} {...commonProps} {...el} />
             ))}
-            {tab === 'owner'
+            {props.tab === 'owner'
               ? props.workpiecesByOwner.length === 0 && (
               <EmptyOwnerSongs {...commonProps} />
                 )

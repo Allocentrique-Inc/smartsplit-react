@@ -15,14 +15,10 @@ export default function RejectedRightSplitArchived(props) {
           user={props.archivedRightSplit.owner}
           className="artistName"
         />
-      </div>
-      <div className="update-details">
         <LastModified
-          date={props.archivedRightSplit.updatedAt}
+          date={props.archivedRightSplit.createdAt}
           language={props.language}
-        >
-          {props.t_updated}
-        </LastModified>
+        />
       </div>
       <div className="b1">
         <div />

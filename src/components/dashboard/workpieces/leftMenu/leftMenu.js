@@ -10,7 +10,7 @@ const LeftMenu = (props) => {
   const t_workpieces = {
     fr: 'Mes pièces musicales',
     en: 'My workpieces',
-  }[props.user.locale];
+  }[props.language];
   return (
     <div className="leftMenu">
       <div className="logo">

@@ -5,8 +5,8 @@
     height: 100vh;
     width: 288px;
     background-color: #322129;
-    @media screen and (max-width: 944px){
-      display:none;
+    @media screen and (max-width: 944px) {
+      display: none;
     }
     .logo {
       background-color: #3f2933;
@@ -286,28 +286,27 @@
   align-items: center;
   justify-content: flex-start;
 }
-.update-details{
+.update-details {
   font-weight: normal;
   font-size: 12px;
   line-height: 11px;
-  color:lighten(#687a8b,20%);
+  color: #687a8b;
 }
-.last-modified{
-
-  display:inline-block;
+.last-modified {
+  display: inline-block;
 }
-.mobile-nav{
-  position:fixed;
+.mobile-nav {
+  position: fixed;
   width: 100%;
   height: 56px;
-  bottom:0;
-  left:0;
-  right:0;
-  align-items:center;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
   justify-content: space-evenly;
-  background:#fff;
-  display:none;
-  @media screen AND (max-width:944px) {
-    display:flex;
+  background: #fff;
+  display: none;
+  @media screen AND (max-width: 944px) {
+    display: flex;
   }
 }

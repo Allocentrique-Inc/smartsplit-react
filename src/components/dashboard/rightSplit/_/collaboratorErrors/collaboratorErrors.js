@@ -1,6 +1,4 @@
 const CollaboratorErrors = (props) => {
-  // console.log(props.translations.rightSplit.errors);
-  // console.log(props.user.locale);
   return (
     <>
       {props.triedSubmit &&
@@ -10,7 +8,7 @@ const CollaboratorErrors = (props) => {
           <div className="collaboratorTextErrors">
             {props.collaborator.errors.map((el, id) => {
               let t_error = props.translations.rightSplit.errors[el];
-              t_error = t_error && t_error[props.user.locale];
+              t_error = t_error && t_error[props.language];
               return (
                 <div style={{ marginRight: '8px' }} key={el}>
                   {t_error}

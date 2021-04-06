@@ -21,16 +21,19 @@ const Dashboard = (props) => {
   const [apiErrors, setApiErrors] = useState([]);
   const [tab, setTab] = useState('owner'); // workpieces page tabs
 
-  const resetWorkpiecesByOwner = async (firstLoad) => {
-    const workpiecesByOwner = await getWorkpiecesByOwner({ user_id });
-    setWorkpiecesByOwner(workpiecesByOwner);
+  const setConvenientTab = () => {
     if (
-      firstLoad &&
       workpiecesByOwner.length === 0 &&
-      workpiecesByRightHolder.length !== 0
+      workpiecesByRightHolder.length !== 0 &&
+      loadingProcessRemaining === 0
     ) {
       setTab('rightHolder');
     }
+  };
+
+  const resetWorkpiecesByOwner = async () => {
+    const workpiecesByOwner = await getWorkpiecesByOwner({ user_id });
+    setWorkpiecesByOwner(workpiecesByOwner);
     setLoadingProcessRemaining((s) => s - 1);
   };
 
@@ -42,10 +45,9 @@ const Dashboard = (props) => {
     setLoadingProcessRemaining((s) => s - 1);
   };
 
-  const resetData = async (params) => {
+  const resetData = async () => {
     setLoadingProcessRemaining((s) => s + 2);
-    const firstLoad = params && params.firstLoad;
-    resetWorkpiecesByOwner(firstLoad);
+    resetWorkpiecesByOwner();
     resetWorkpiecesByRightHolder();
   };
 
@@ -59,7 +61,7 @@ const Dashboard = (props) => {
   useEffect(() => {
     props.setIsLoaded(false);
     refreshUser();
-    resetData({ firstLoad: true });
+    resetData();
   }, []);
 
   useEffect(() => {
@@ -68,6 +70,7 @@ const Dashboard = (props) => {
     } else {
       props.setIsLoaded(false);
     }
+    setConvenientTab();
   }, [loadingProcessRemaining]);
 
   const language = (user && user.locale) || 'fr';
@@ -77,7 +80,7 @@ const Dashboard = (props) => {
     await refreshUser();
   };
 
-  if (!user) return null;
+  // if (!user) return null;
 
   const commonProps = {
     selectedWorkpiece,

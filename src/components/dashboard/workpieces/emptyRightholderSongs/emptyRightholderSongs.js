@@ -1,11 +1,10 @@
 import EmptyIcon from '../_/emptyIcon';
 
 const EmptyRightholderSongs = (props) => {
-  const language = props.user.locale;
   const t_text1 =
-    props.translations.workpieces.emptyRightholderSongs._text1[language];
+    props.translations.workpieces.emptyRightholderSongs._text1[props.language];
   const t_text2 =
-    props.translations.workpieces.emptyRightholderSongs._text2[language];
+    props.translations.workpieces.emptyRightholderSongs._text2[props.language];
   return (
     <div className="empty">
       <div>

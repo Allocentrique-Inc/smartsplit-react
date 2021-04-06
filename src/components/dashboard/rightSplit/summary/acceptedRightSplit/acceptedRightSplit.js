@@ -43,14 +43,10 @@ export default function AcceptedRightSplit(props) {
             user={props.workpiece.rightSplit.owner}
             className="artistName"
           />
-        </div>
-        <div className="update-details">
           <LastModified
-            date={props.workpiece.rightSplit.updatedAt}
+            date={props.workpiece.rightSplit.createdAt}
             language={props.language}
-          >
-            {props.t_updated}
-          </LastModified>
+          />
         </div>
         <div className="b1">
           <div />

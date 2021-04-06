@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 const Avatar = (props) => {
   const { className, user, color, ...nextProps } = props;
+  if (!user) return null;
   const initials =
     user && user.firstName && user.lastName
       ? user.firstName.substr(0, 1) + user.lastName.substr(0, 1)

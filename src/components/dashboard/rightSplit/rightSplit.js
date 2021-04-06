@@ -45,26 +45,30 @@ const RightSplit = (props) => {
   const [recordingDividingMethod, selectRecordingDividingMethod] = useState(
     'equal',
   );
-  const isCreating = typeof props.workpiece.rightSplit === 'undefined';
+
+  const isCreating =
+    typeof props.workpiece.rightSplit === 'undefined' ||
+    props.workpiece.rightSplit._state === 'rejected';
+
   const [warnings, setWarnings] = useState([]);
   const mapData = async () => {
-    if (!isCreating) {
-      const {
-        copyright,
-        performance,
-        recording,
-        copyrightDividingMethod,
-        privacy,
-        label,
-        isPublic,
-      } = props.workpiece.rightSplit;
-      setCopyright(copyright);
-      setPerformance(performance);
-      setRecording(recording);
-      selectCopyrightDividingMethod(copyrightDividingMethod);
-      setLabel(label || {});
-      setIsPublic(isPublic);
-    }
+    // if (!isCreating) {
+    const {
+      copyright,
+      performance,
+      recording,
+      copyrightDividingMethod,
+      privacy,
+      label,
+      isPublic,
+    } = props.workpiece.rightSplit;
+    setCopyright(copyright);
+    setPerformance(performance);
+    setRecording(recording);
+    selectCopyrightDividingMethod(copyrightDividingMethod);
+    setLabel(label || {});
+    setIsPublic(isPublic);
+    // }
     const collaborators = await getUsersCollaborators({ user_id });
     setCollaborators([props.user, ...collaborators]);
   };
