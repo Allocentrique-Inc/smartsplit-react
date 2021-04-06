@@ -12,10 +12,7 @@ export default function DraftRightSplit(props) {
 
   return (
     <div className="rightSplit">
-      <div
-        className="clickableContainer"
-        onClick={() => props.setConsulting(props.workpiece.rightSplit)}
-      >
+      <div className="clickableContainer" onClick={props.handleClick}>
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">
           {props.t_createdBy}

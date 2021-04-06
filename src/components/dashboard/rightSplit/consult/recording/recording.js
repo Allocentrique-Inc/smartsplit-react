@@ -1,11 +1,9 @@
 import { useHistory, useParams } from 'react-router-dom';
-import Collaborator from './collaborator/collaborator';
+import Collaborator from '../_/collaborator/collaborator';
 
 const Recording = (props) => {
   const history = useHistory();
-  const isLabelSelected =
-    props.rightSplitInConsultation.label &&
-    Object.keys(props.rightSplitInConsultation.label).length > 0;
+  const labelIsSelected = props.label && Object.keys(props.label).length > 0;
   const { workpiece_id } = useParams();
   const handleButton = () =>
     history.push(`/workpiece/${workpiece_id}/right-split/recording`);
@@ -19,18 +17,22 @@ const Recording = (props) => {
           </button>
         )}
       </div>
-      {[
-        isLabelSelected ? props.rightSplitInConsultation.label : '',
-        ...props.rightSplitInConsultation.recording,
-      ]
-        .filter((e) => e !== '')
-        .map((collaborator, id) => (
-          <Collaborator
-            {...props}
-            collaborator={collaborator}
-            key={collaborator.rightHolder_id}
-          />
-        ))}
+      {labelIsSelected && (
+        <Collaborator
+          {...props}
+          collaborator={props.label}
+          key={props.label.rightHolder_id}
+          collaboratorType="label"
+        />
+      )}
+      {props.recording.map((collaborator, id) => (
+        <Collaborator
+          {...props}
+          collaborator={collaborator}
+          key={collaborator.rightHolder_id}
+          collaboratorType="recording"
+        />
+      ))}
     </div>
   );
 };

@@ -19,7 +19,7 @@ import ArtistName from '../../_/artistName/artistName';
 const Summary = (props) => {
   const history = useHistory();
   const { workpiece_id } = useParams();
-  const [consulting, setConsulting] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [isAdjustingEmails, setIsAdjustingEmails] = useState(false);
   const [tab, setTab] = useState('withCollaborators');
   const [showQuestionWithEditor, setShowQuestionWithEditor] = useState(false);
@@ -74,6 +74,14 @@ const Summary = (props) => {
     setShowQuestionWithEditor(false);
   };
 
+  const handleClick = () => {
+    if (props.isMobile) {
+      history.push(`/workpiece/${workpiece_id}/right-split/consult`);
+    } else {
+      setShowModal(true);
+    }
+  };
+
   // const handleWithManager = () => {
   //   setTab('withManager');
   // };
@@ -111,7 +119,7 @@ const Summary = (props) => {
   }[props.language];
   const t_sendToCollab = {
     fr: 'Envoyer aux collaborateurs',
-    en: '',
+    en: 'Send to collaborators',
   }[props.language];
   const t_consult = {
     fr: 'Consulter',
@@ -173,8 +181,9 @@ const Summary = (props) => {
   const commonProps = {
     ...props,
     setIsAdjustingEmails,
-    setConsulting,
     hasToVote,
+    handleClick,
+    t_sendToCollab,
     t_splitSummary,
     t_waitingSubmit,
     t_waitingDecision,
@@ -196,27 +205,27 @@ const Summary = (props) => {
       {/* CONSULT */}
       {props.isMobile && <MobileSummary {...commonProps} />}
       {!props.isMobile &&
-        consulting &&
+        showModal &&
         (isAdjustingEmails ? (
           <AdjustEmails {...commonProps} />
         ) : (
-          <div className="modalBackground" onClick={() => setConsulting(null)}>
+          <div className="modalBackground" onClick={() => setShowModal(false)}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
               <div className="topBar">
                 <div
                   className="title"
                   style={{ flexDirection: 'column', alignItems: 'flex-start' }}
                 >
-                  Version {consulting.version}
+                  Version {props.workpiece.rightSplit.version}
                   <div className="consult-details">
                     {t_createdBy}{' '}
                     <ArtistName
-                      user={consulting.owner}
+                      user={props.workpiece.rightSplit.owner}
                       className="artistName"
                     />
                     {' - \u00A0'}
                     <LastModified
-                      date={consulting.updatedAt}
+                      date={props.workpiece.rightSplit.updatedAt}
                       language={props.language}
                     >
                       {`${t_updated}`}
@@ -226,7 +235,7 @@ const Summary = (props) => {
                 <div
                   className="exit"
                   onClick={() => {
-                    setConsulting(null);
+                    setShowModal(false);
                     setIsAdjustingEmails(false);
                   }}
                 >
@@ -237,21 +246,22 @@ const Summary = (props) => {
                 <Consult
                   {...props}
                   voting={false}
-                  modifiable={consulting._state === 'draft'}
-                  rightSplitInConsultation={consulting}
+                  modifiable={props.workpiece.rightSplit._state === 'draft'}
+                  rightSplitInConsultation={props.workpiece.rightSplit}
                 />
               </div>
               <div className="downBar">
-                {consulting._state === 'draft' && canSendToCollab && (
-                  <button
-                    className="btn-primary"
-                    onClick={() => {
-                      setIsAdjustingEmails(true);
-                    }}
-                  >
-                    {t_sendToCollab}
-                  </button>
-                )}
+                {props.workpiece.rightSplit._state === 'draft' &&
+                  canSendToCollab && (
+                    <button
+                      className="btn-primary"
+                      onClick={() => {
+                        setIsAdjustingEmails(true);
+                      }}
+                    >
+                      {t_sendToCollab}
+                    </button>
+                  )}
               </div>
             </div>
           </div>

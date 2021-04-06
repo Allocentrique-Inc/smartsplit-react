@@ -34,7 +34,7 @@ export default function AcceptedRightSplit(props) {
       <div
         className="rightSplit"
         style={{ marginBottom: '8px' }}
-        onClick={() => props.setConsulting(props.workpiece.rightSplit)}
+        onClick={props.handleClick}
       >
         <div className="title">{`Version ${versionIndex}`}</div>
         <div className="details">

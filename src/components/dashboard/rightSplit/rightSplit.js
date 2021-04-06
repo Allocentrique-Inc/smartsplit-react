@@ -36,6 +36,7 @@ const RightSplit = (props) => {
   const [manager, setManager] = useState({});
   const [performance, setPerformance] = useState([]);
   const [recording, setRecording] = useState([]);
+  const [privacy, setPrivacy] = useState([]);
   const [isPublic, setIsPublic] = useState(false);
   const [collaborators, setCollaborators] = useState([]);
   const [label, setLabel] = useState({});
@@ -45,6 +46,7 @@ const RightSplit = (props) => {
   const [recordingDividingMethod, selectRecordingDividingMethod] = useState(
     'equal',
   );
+  const [version, setVersion] = useState('');
 
   const isCreating =
     typeof props.workpiece.rightSplit === 'undefined' ||
@@ -60,11 +62,14 @@ const RightSplit = (props) => {
       copyrightDividingMethod,
       privacy,
       label,
+      version,
       isPublic,
     } = props.workpiece.rightSplit;
     setCopyright(copyright);
     setPerformance(performance);
     setRecording(recording);
+    setPrivacy(privacy);
+    setVersion(version);
     selectCopyrightDividingMethod(copyrightDividingMethod);
     setLabel(label || {});
     setIsPublic(isPublic);
@@ -86,7 +91,6 @@ const RightSplit = (props) => {
       label,
       isPublic,
     };
-    console.log('PAYLOAD', payload);
     if (isCreating) {
       await postRightSplit(payload);
     } else {
@@ -232,6 +236,8 @@ const RightSplit = (props) => {
     setPerformance,
     recording,
     setRecording,
+    privacy,
+    setPrivacy,
     collaborators,
     setCollaborators,
     mapData,
@@ -242,6 +248,7 @@ const RightSplit = (props) => {
     selectRecordingDividingMethod,
     label,
     setLabel,
+    version,
     translations,
     language,
     activeCollaboratorsIds,
@@ -273,7 +280,18 @@ const RightSplit = (props) => {
         <div>MANAGER SHARES</div>
       </Route>
       <Route path="/workpiece/:workpiece_id/right-split/consult">
-        <Consult {...commonProps} voting />
+        <Consult
+          {...commonProps}
+          rightSplitInConsultation={{
+            copyright,
+            performance,
+            recording,
+            privacy,
+            label,
+            version,
+            isPublic,
+          }}
+        />
       </Route>
       <Route path="/workpiece/:workpiece_id/right-split/copyright">
         <Copyright {...commonProps} />

@@ -1,13 +1,7 @@
 import { Link } from 'react-router-dom';
 import ArrowLeft from '../../../../icons/arrowLeft';
 
-export default function MobileTopBar({
-  backLink,
-  language,
-  noShadow,
-  action,
-  children,
-}) {
+export default function MobileTopBar({ backLink, noShadow, action, children }) {
   return (
     <div className={`mobileTopBar${noShadow ? ' noShadow' : ''}`}>
       <div className="row">

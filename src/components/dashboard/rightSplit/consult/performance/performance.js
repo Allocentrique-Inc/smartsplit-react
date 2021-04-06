@@ -1,5 +1,5 @@
 import { useHistory, useParams } from 'react-router-dom';
-import Collaborator from './collaborator/collaborator';
+import Collaborator from '../_/collaborator/collaborator';
 
 const Performance = (props) => {
   const history = useHistory();
@@ -16,9 +16,10 @@ const Performance = (props) => {
           </button>
         )}
       </div>
-      {props.rightSplitInConsultation.performance.map((collaborator, id) => (
+      {props.performance.map((collaborator, id) => (
         <Collaborator
           {...props}
+          collaboratorType="performance"
           collaborator={collaborator}
           key={collaborator.rightHolder_id}
         />

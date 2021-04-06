@@ -1,5 +1,6 @@
 import { useHistory, useParams } from 'react-router-dom';
-import Collaborator from './collaborator/collaborator';
+import printRoles from '../_/printRoles';
+import Collaborator from '../_/collaborator/collaborator';
 
 const Copyright = (props) => {
   const history = useHistory();
@@ -16,11 +17,12 @@ const Copyright = (props) => {
           </button>
         )}
       </div>
-      {props.rightSplitInConsultation.copyright.map((collaborator) => {
+      {props.copyright.map((collaborator) => {
         const rightSplit = props.rightSplitInConsultation.copyright;
         return (
           <Collaborator
             {...props}
+            collaboratorType="copyright"
             collaborator={collaborator}
             rightSplit={rightSplit}
             key={collaborator.rightHolder_id}
