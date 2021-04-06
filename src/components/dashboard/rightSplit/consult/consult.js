@@ -1,3 +1,5 @@
+import { useParams } from 'react-router-dom';
+import MobileTopBar from '../../_/mobileTopBar/mobileTopBar';
 import Copyright from './copyright/copyright';
 import Performance from './performance/performance';
 import Recording from './recording/recording';
@@ -19,6 +21,7 @@ const Consult = (props) => {
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
   }
+  const { workpiece_id } = useParams();
   const recording = [...props.rightSplitInConsultation.recording];
   if (
     props.rightSplitInConsultation &&
@@ -169,50 +172,74 @@ const Consult = (props) => {
   );
   return (
     <>
-      {props.rightSplitInConsultation.copyright.length > 0 && (
-        <div className="consultRightSplit">
-          <div className="left">
+      {!props.isMobile && (
+        <>
+          {props.rightSplitInConsultation.copyright.length > 0 && (
+            <div className="consultRightSplit">
+              <div className="left">
+                <Copyright {...commonProps} />
+              </div>
+              <div className="consultRightSplitRight">
+                {!shouldDisplayDualPieChart && (
+                  <SplitChart {...copyrightChartProps} />
+                )}
+                {shouldDisplayDualPieChart && (
+                  <DualSplitChart {...copyrightChartProps} />
+                )}
+              </div>
+            </div>
+          )}
+
+          {props.rightSplitInConsultation.performance.length > 0 && (
+            <div className="consultRightSplit">
+              <div className="left">
+                <Performance {...commonProps} />
+              </div>
+              <div className="consultRightSplitRight">
+                <SplitChart {...performanceChartProps} />
+              </div>
+            </div>
+          )}
+
+          {props.rightSplitInConsultation.recording.length > 0 && (
+            <div className="consultRightSplit">
+              <div className="left">
+                <Recording {...commonProps} />
+              </div>
+              <div className="consultRightSplitRight">
+                <SplitChart {...recordingChartProps} />
+              </div>
+            </div>
+          )}
+
+          <div className="consultRightSplit">
+            <div className="left">
+              <Privacy {...commonProps} />
+            </div>
+            <div className="consultRightSplitRight" />
+          </div>
+        </>
+      )}
+      {props.isMobile && (
+        <div className="mobileConsult">
+          <MobileTopBar
+            backLink={`/workpiece/${workpiece_id}/right-split/summary`}
+          >
+            {`Version ${props.rightSplitInConsultation.version}`}
+          </MobileTopBar>
+          {props.rightSplitInConsultation.copyright.length > 0 && (
             <Copyright {...commonProps} />
-          </div>
-          <div className="consultRightSplitRight">
-            {!shouldDisplayDualPieChart && (
-              <SplitChart {...copyrightChartProps} />
-            )}
-            {shouldDisplayDualPieChart && (
-              <DualSplitChart {...copyrightChartProps} />
-            )}
-          </div>
-        </div>
-      )}
+          )}
 
-      {props.rightSplitInConsultation.performance.length > 0 && (
-        <div className="consultRightSplit">
-          <div className="left">
+          {props.rightSplitInConsultation.performance.length > 0 && (
             <Performance {...commonProps} />
-          </div>
-          <div className="consultRightSplitRight">
-            <SplitChart {...performanceChartProps} />
-          </div>
-        </div>
-      )}
+          )}
 
-      {recording.length > 0 && (
-        <div className="consultRightSplit">
-          <div className="left">
+          {props.rightSplitInConsultation.recording.length > 0 && (
             <Recording {...commonProps} />
-          </div>
-          <div className="consultRightSplitRight">
-            <SplitChart {...recordingChartProps} />
-          </div>
+          )}
         </div>
       )}
-
-      <div className="consultRightSplit">
-        <div className="left">
-          <Privacy {...commonProps} />
-        </div>
-        <div className="consultRightSplitRight" />
-      </div>
     </>
   );
 };
