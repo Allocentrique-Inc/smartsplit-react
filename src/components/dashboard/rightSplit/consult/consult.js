@@ -34,7 +34,6 @@ const Consult = (props) => {
   const recording = [...props.recording];
   if (props.label && props.label.rightHolder_id) {
     recording.push(props.label);
-
   }
   let activeCollaborators = [
     ...props.copyright,
@@ -182,7 +181,6 @@ const Consult = (props) => {
       {!props.isMobile && (
         <>
           {props.copyright.length > 0 && (
-
             <div className="consultRightSplit">
               <div className="left">
                 <Copyright {...commonProps} />

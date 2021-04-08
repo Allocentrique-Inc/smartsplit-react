@@ -45,7 +45,7 @@ const Privacy = (props) => {
         <div>
           {`${artistName} ${props.t_privacySubtitle}`}
           <b> {t_privacyState}</b>
-          {!props.isMobile && (
+          {!props.isMobile && props.isPublic && (
             <p className="privacyPublicDesc">
               <b>{artistName}</b> {props.t_privacyDescription}
             </p>
