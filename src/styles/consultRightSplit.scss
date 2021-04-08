@@ -17,18 +17,23 @@
       font-size: 16px;
       line-height: 24px;
       color: #203548;
-      flex: none;
-      order: 0;
-      flex-grow: 0;
       margin: 0px 4px;
       display: flex;
       align-items: center;
       margin-bottom: 16px;
-      svg {
-        margin-right: 6px;
+      > :first-child {
+        align-self: flex-start;
       }
-      div {
-        display: block;
+      svg {
+        margin-right: 16px;
+        height: 24px !important;
+        width: 24px !important;
+      }
+
+      .privacyPublicDesc {
+        @extend .small-400;
+        margin-top: 16px;
+        color: #687a8b;
       }
     }
     .privacyDescription {
@@ -56,89 +61,71 @@
       color: #203548;
     }
   }
+  .titleRow + .consultCollaborator {
+    box-shadow: 0px 1px 0px 0px #dcdfe1 inset;
+    padding-top: 16px;
+  }
   .toDo {
     background-color: rgba(214, 196, 162, 0.15);
   }
   .consultCollaborator {
+    margin-top: 16px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #dcdfe1;
-    height: 72px;
+    .avatar {
+      margin-right: 16px;
+    }
+    .title {
+      @extend h3;
+    }
 
     .left {
       display: flex;
-      align-items: center;
-      .avatar {
-        background-color: rgba(131, 127, 119, 0.25);
-        height: 24px;
-        width: 24px;
-        margin: 16px;
-        border-radius: 24px;
-        color: black;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        letter-spacing: 0px;
-      }
-      .roles {
-        font-weight: normal;
-        font-size: 12px;
-        line-height: 16px;
-        color: #687a8b;
-        display: flex;
-        .role {
-          margin-right: 5px;
-        }
-      }
-      .name {
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        color: #203548;
-      }
     }
-
-    .right {
-      .shares {
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 24px;
-        text-align: right;
-        color: #203548;
-        width: 65px;
-        flex-shrink: 0;
-      }
-      .voteUndecided {
-        font-weight: normal;
-        font-size: 12px;
-        line-height: 16px;
-        text-align: right;
-        color: #687a8b;
-        min-width: 61px;
-      }
-      .voteAccepted {
-        font-weight: bold;
-        font-size: 12px;
-        line-height: 16px;
-        text-align: right;
-        color: #2da84f;
-      }
-      .voteRejected {
-        font-weight: bold;
-        font-size: 12px;
-        line-height: 16px;
-        text-align: right;
-        color: #ac1616;
-      }
+    .roles {
+      display: flex;
+      @extend .small-400;
+      color: #687a8b;
+    }
+    .name {
+      @extend .medium-400;
+    }
+    .infos {
+      display: flex;
+      flex: 1;
+      padding-bottom: 16px;
+      justify-content: space-between;
+      box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
+    }
+    .shares {
+      @extend h5;
+    }
+    .voteAccepted {
+      @extend .small-700;
+      color: #2da84f;
+    }
+    .voteUndecided {
+      @extend .small-400;
+      color: #687a8b;
     }
   }
 
   .privacyCollaborator {
-    height: inherit;
+    // height: inherit;
+    .left {
+      display: flex;
+      align-items: center;
+    }
+    .right {
+      > * {
+        white-space: nowrap;
+      }
+    }
     border: none;
+    display: flex;
+    align-items: center;
+    .name {
+      vertical-align: middle;
+    }
   }
   .comment {
     @extend .medium-400;
@@ -212,4 +199,65 @@
   }
 }
 .mobileConsult {
+
+  padding-bottom: 32px;
+  .rightSplits {
+    padding: 0 16px;
+  }
+  .consultRightSplitSection {
+    margin-top: 32px;
+    .avatar {
+      margin-right: 16px;
+    }
+    .title {
+      @extend h3;
+    }
+    .consultCollaborator {
+      display: flex;
+      margin-top: 16px;
+    }
+
+    .privacySubtitle {
+      @extend .medium-400;
+      display: flex;
+      > :first-child {
+        margin-right: 16px;
+      }
+    }
+    .consultCollaborator.privacyCollaborator {
+      justify-content: space-between;
+      .left {
+        align-items: center;
+      }
+    }
+    .left {
+      display: flex;
+    }
+    .roles {
+      display: flex;
+      @extend .small-400;
+      color: #687a8b;
+    }
+    .name {
+      @extend .medium-400;
+    }
+    .infos {
+      display: flex;
+      flex: 1;
+      padding-bottom: 16px;
+      justify-content: space-between;
+      box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
+    }
+    .shares {
+      @extend h3;
+    }
+    .voteAccepted {
+      @extend .small-700;
+      color: #2da84f;
+    }
+    .voteUndecided {
+      @extend .small-400;
+      color: #687a8b;
+    }
+  }
 }

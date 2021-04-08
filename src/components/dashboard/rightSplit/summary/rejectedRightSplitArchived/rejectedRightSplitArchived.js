@@ -4,10 +4,7 @@ import ArtistName from '../../../_/artistName/artistName';
 export default function RejectedRightSplitArchived(props) {
   const versionIndex = props.archivedRightSplit.version;
   return (
-    <div
-      className="rightSplit"
-      onClick={() => props.setConsulting(props.workpiece.rightSplit)}
-    >
+    <div className="rightSplit" onClick={props.handleClick}>
       <div className="title">{`Version ${versionIndex}`}</div>
       <div className="details">
         {props.t_createdBy}

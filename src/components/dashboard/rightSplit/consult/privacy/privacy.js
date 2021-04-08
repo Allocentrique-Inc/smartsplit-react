@@ -1,5 +1,6 @@
 // import Collaborator from './collaborator/collaborator';
 import { useHistory, useParams } from 'react-router-dom';
+import ReactHtmlParser from 'react-html-parser';
 import Eye from './eye';
 import Avatar from '../../../_/avatar/avatar';
 import colors from '../../_/colors';
@@ -11,18 +12,15 @@ const Privacy = (props) => {
   const handleButton = () =>
     history.push(`/workpiece/${workpiece_id}/right-split/privacy`);
   const t_title = '';
-  console.log(props.rightSplitInConsultation.isPublic);
-  const t_privacyState = props.rightSplitInConsultation.isPublic
-    ? props.t_public
-    : props.t_private;
+  const t_privacyState = props.isPublic ? props.t_public : props.t_private;
 
-  console.log(props.rightSplitInConsultation.owner);
-  const user = props.rightSplitInConsultation.owner || null;
+  const user = props.workpiece.owner;
   const artistName = user
     ? user.artistName
       ? user.artistName
       : `${user.firstName} ${user.lastName}`
     : null;
+
   return (
     <div className="consultRightSplitSection">
       <div
@@ -41,19 +39,20 @@ const Privacy = (props) => {
         )}
       </div>
       <div className="privacySubtitle">
-        <Eye />
         <div>
-          <ArtistName user={props.rightSplitInConsultation.owner} />
-          {'\u00A0'}
-          {`${props.t_privacySubtitle}`}
-          <b> {t_privacyState}</b>.
+          <Eye />
+        </div>
+        <div>
+          {`${artistName} ${props.t_privacySubtitle}`}
+          <b> {t_privacyState}</b>
+          {!props.isMobile && props.isPublic && (
+            <p className="privacyPublicDesc">
+              <b>{artistName}</b> {props.t_privacyDescription}
+            </p>
+          )}
         </div>
       </div>
-      {props.rightSplitInConsultation.isPublic && (
-        <div className="privacyDescription">
-          {`${artistName} ${props.t_privacyDescription}`}
-        </div>
-      )}
+
       <div />
       {props.rightSplitInConsultation.privacy.map((collaborator, id) => (
         <Collab

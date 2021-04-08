@@ -32,8 +32,8 @@ const Collaborator = (props) => {
   return (
     <>
       <div className="consultCollaborator">
-        <div className="left">
-          <Avatar user={rightHolder} color={collaboratorColor} />
+        <Avatar user={rightHolder} color={collaboratorColor} />
+        <div className="infos">
           <div>
             <ArtistName className="name" user={rightHolder} />
             {isYou && `\u00A0${t_you}`}
@@ -45,18 +45,18 @@ const Collaborator = (props) => {
               ))}
             </div>
           </div>
-        </div>
-        <div className="right">
-          <div className="shares">{`${shares.toFixed(1)} %`}</div>
-          {vote === 'accepted' && (
-            <div className="voteAccepted">{props.t_accepted}</div>
-          )}
-          {vote === 'rejected' && (
-            <div className="voteRejected">{props.t_rejected}</div>
-          )}
-          {vote === 'undecided' && (
-            <div className="voteUndecided">{props.t_undecided}</div>
-          )}
+          <div className="right">
+            <div className="shares">{`${shares.toFixed(1)} %`}</div>
+            {vote === 'accepted' && (
+              <div className="voteAccepted">{props.t_accepted}</div>
+            )}
+            {vote === 'rejected' && (
+              <div className="voteRejected">{props.t_rejected}</div>
+            )}
+            {vote === 'undecided' && (
+              <div className="voteUndecided">{props.t_undecided}</div>
+            )}
+          </div>
         </div>
       </div>
       {!props.voting && !isUserVoting && comment && (

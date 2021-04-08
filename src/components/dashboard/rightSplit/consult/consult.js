@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory, useRouteMatch } from 'react-router-dom';
 import MobileTopBar from '../../_/mobileTopBar/mobileTopBar';
 import Copyright from './copyright/copyright';
 import Performance from './performance/performance';
@@ -21,18 +21,23 @@ const Consult = (props) => {
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
   }
+
+  const history = useHistory();
   const { workpiece_id } = useParams();
-  const recording = [...props.rightSplitInConsultation.recording];
-  if (
-    props.rightSplitInConsultation &&
-    props.rightSplitInConsultation.label &&
-    props.rightSplitInConsultation.label.rightHolder_id
-  ) {
-    recording.push(props.rightSplitInConsultation.label);
+  const match = useRouteMatch({
+    path: `/workpiece/${workpiece_id}/right-split/consult`,
+    strict: true,
+  });
+  if (!props.isMobile && match && match.isExact) {
+    history.push(`/workpiece/${workpiece_id}/right-split/summary`);
+  }
+  const recording = [...props.recording];
+  if (props.label && props.label.rightHolder_id) {
+    recording.push(props.label);
   }
   let activeCollaborators = [
-    ...props.rightSplitInConsultation.copyright,
-    ...props.rightSplitInConsultation.performance,
+    ...props.copyright,
+    ...props.performance,
     ...recording,
   ];
 
@@ -65,6 +70,10 @@ const Consult = (props) => {
   const t_privacySubtitle = {
     fr: 'veut rendre ce partage des droits',
     en: 'wants to make this split',
+  }[props.language];
+  const t_sendToCollab = {
+    fr: 'Envoyer aux collaborateurs',
+    en: 'Send to collaborators',
   }[props.language];
   const t_privacyDescription = {
     fr:
@@ -136,18 +145,15 @@ const Consult = (props) => {
     t_comments,
   };
   const copyrightChartProps = {
-    chartData: rightHoldersToChartData(
-      props.rightSplitInConsultation.copyright,
-      activeCollaboratorsIds,
-    ),
+    chartData: rightHoldersToChartData(props.copyright, activeCollaboratorsIds),
     leftChartData: computeLyricChartData(
-      props.rightSplitInConsultation.copyright,
+      props.copyright,
       activeCollaboratorsIds,
     ),
     leftChartTitle: t_lyrics,
     rightChartTitle: t_music,
     rightChartData: computeMusicChartData(
-      props.rightSplitInConsultation.copyright,
+      props.copyright,
       activeCollaboratorsIds,
     ),
     logo: CircledC,
@@ -155,7 +161,7 @@ const Consult = (props) => {
   };
   const performanceChartProps = {
     chartData: rightHoldersToChartData(
-      props.rightSplitInConsultation.performance,
+      props.performance,
       activeCollaboratorsIds,
     ),
     logo: CircledStar,
@@ -167,14 +173,14 @@ const Consult = (props) => {
     size: 300,
   };
   const shouldDisplayDualPieChart = displayDualPieChart(
-    props.rightSplitInConsultation.copyright,
+    props.copyright,
     props.copyrightDividingMethod,
   );
   return (
     <>
       {!props.isMobile && (
         <>
-          {props.rightSplitInConsultation.copyright.length > 0 && (
+          {props.copyright.length > 0 && (
             <div className="consultRightSplit">
               <div className="left">
                 <Copyright {...commonProps} />
@@ -190,7 +196,7 @@ const Consult = (props) => {
             </div>
           )}
 
-          {props.rightSplitInConsultation.performance.length > 0 && (
+          {props.performance.length > 0 && (
             <div className="consultRightSplit">
               <div className="left">
                 <Performance {...commonProps} />
@@ -201,7 +207,7 @@ const Consult = (props) => {
             </div>
           )}
 
-          {props.rightSplitInConsultation.recording.length > 0 && (
+          {props.recording.length > 0 && (
             <div className="consultRightSplit">
               <div className="left">
                 <Recording {...commonProps} />
@@ -224,20 +230,18 @@ const Consult = (props) => {
         <div className="mobileConsult">
           <MobileTopBar
             backLink={`/workpiece/${workpiece_id}/right-split/summary`}
+            action={<button className="btn-secondary">{t_sendToCollab}</button>}
           >
-            {`Version ${props.rightSplitInConsultation.version}`}
+            {`Version ${props.version}`}
           </MobileTopBar>
-          {props.rightSplitInConsultation.copyright.length > 0 && (
-            <Copyright {...commonProps} />
-          )}
+          <div className="rightSplits">
+            {props.copyright.length > 0 && <Copyright {...commonProps} />}
 
-          {props.rightSplitInConsultation.performance.length > 0 && (
-            <Performance {...commonProps} />
-          )}
+            {props.performance.length > 0 && <Performance {...commonProps} />}
 
-          {props.rightSplitInConsultation.recording.length > 0 && (
-            <Recording {...commonProps} />
-          )}
+            {props.recording.length > 0 && <Recording {...commonProps} />}
+            {props.privacy.length > 0 && <Privacy {...commonProps} />}
+          </div>
         </div>
       )}
     </>
