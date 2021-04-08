@@ -21,6 +21,7 @@ const Consult = (props) => {
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
   }
+
   const history = useHistory();
   const { workpiece_id } = useParams();
   const match = useRouteMatch({
@@ -33,6 +34,7 @@ const Consult = (props) => {
   const recording = [...props.recording];
   if (props.label && props.label.rightHolder_id) {
     recording.push(props.label);
+
   }
   let activeCollaborators = [
     ...props.copyright,
@@ -180,6 +182,7 @@ const Consult = (props) => {
       {!props.isMobile && (
         <>
           {props.copyright.length > 0 && (
+
             <div className="consultRightSplit">
               <div className="left">
                 <Copyright {...commonProps} />
