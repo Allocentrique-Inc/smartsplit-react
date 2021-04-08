@@ -1,5 +1,4 @@
 import { useHistory, useParams } from 'react-router-dom';
-import printRoles from '../_/printRoles';
 import Collaborator from '../_/collaborator/collaborator';
 
 const Copyright = (props) => {

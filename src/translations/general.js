@@ -22,5 +22,9 @@ export default {
       fr: "Le format de l'adresse courriel est invalide",
       en: 'Email address is in an invalid format',
     },
+    _badRequest: {
+      fr: 'Requête invalide, veuillez réessayer ultérieurement',
+      en: 'Bad request, please try again later',
+    },
   },
 };

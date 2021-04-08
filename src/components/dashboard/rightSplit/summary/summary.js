@@ -23,7 +23,6 @@ const Summary = (props) => {
   const [isAdjustingEmails, setIsAdjustingEmails] = useState(false);
   const [tab, setTab] = useState('withCollaborators');
   const [showQuestionWithEditor, setShowQuestionWithEditor] = useState(false);
-
   if (
     !props.workpiece.rightSplit ||
     !props.workpiece.rightSplit._state ||
@@ -183,6 +182,7 @@ const Summary = (props) => {
     setIsAdjustingEmails,
     hasToVote,
     handleClick,
+    setShowModal,
     t_sendToCollab,
     t_splitSummary,
     t_waitingSubmit,

@@ -252,6 +252,7 @@ const RightSplit = (props) => {
     translations,
     language,
     activeCollaboratorsIds,
+    activeCollaborators,
     warnings,
     setWarnings,
     calculateCopyrightErrors,

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import MobileTopBar from '../../../_/mobileTopBar/mobileTopBar';
 import Tabs, { Tab } from '../../../_/tabs/tabs';
 import DraftRightSplit from '../draftRightSplit/draftRightSplit';
@@ -23,12 +23,13 @@ export default function MobileSummary(props) {
     t_updated,
     workpiece,
   } = props;
+  const history = useHistory();
   const { workpiece_id } = useParams();
-  const backLink = `/workpiece/${workpiece_id}`;
+  const back = () => history.push(`/workpiece/${workpiece_id}`);
   const tabNames = [t_withCollaborators, t_withEditor];
   return (
     <div className="mobileSummary">
-      <MobileTopBar backLink={backLink} noShadow>
+      <MobileTopBar back={back} noShadow>
         {t_splitSummary}
       </MobileTopBar>
       <Tabs options={tabNames}>

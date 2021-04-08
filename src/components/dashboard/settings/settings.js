@@ -85,6 +85,7 @@ export default function Settings(props) {
       phoneNumber: user.mobilePhone.number,
     });
   }, []);
+  const backAction = () => history.push('/settings');
   const t_title = section
     ? translations.settings.mobileMenu[`_${section}`][language]
     : null;
@@ -127,7 +128,7 @@ export default function Settings(props) {
           )}
           {!isMainMenu && (
             <MobileTopBar
-              backLink="/settings"
+              back={backAction}
               noShadow={section === 'account'}
               action={
                 <button className="btn-secondary" onClick={updateUser}>

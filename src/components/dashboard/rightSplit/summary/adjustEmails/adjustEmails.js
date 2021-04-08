@@ -65,7 +65,7 @@ const AdjustEmails = (props) => {
         emails,
       });
       setEmails({});
-      props.setConsulting(null);
+      props.setShowModal(false);
       props.setIsAdjustingEmails(false);
       props.resetData();
     }
@@ -90,7 +90,7 @@ const AdjustEmails = (props) => {
       <div
         className="modalBackground"
         onClick={() => {
-          props.setConsulting(null);
+          props.setShowModal(false);
           props.setIsAdjustingEmails(false);
         }}
       >
@@ -100,7 +100,7 @@ const AdjustEmails = (props) => {
             <div
               className="exit"
               onClick={() => {
-                props.setConsulting(null);
+                props.setShowModal(false);
                 props.setIsAdjustingEmails(false);
               }}
             >
@@ -152,7 +152,7 @@ const AdjustEmails = (props) => {
               className="btn-secondary"
               style={{ marginRight: '10px' }}
               onClick={() => {
-                props.setConsulting(null);
+                props.setShowModal(false);
                 props.setIsAdjustingEmails(false);
               }}
             >

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams, useHistory, useRouteMatch } from 'react-router-dom';
 import MobileTopBar from '../../_/mobileTopBar/mobileTopBar';
 import Copyright from './copyright/copyright';
@@ -10,6 +11,7 @@ import Circle from '../_/circle/circle';
 import CircledC from '../../../../icons/circledC';
 import CircledStar from '../../../../icons/circledStar';
 import CircledP from '../../../../icons/circledP';
+import SendToCollaborators from './_/sendToCollaborators/sendToCollaborators';
 import {
   computeLyricChartData,
   computeMusicChartData,
@@ -18,6 +20,8 @@ import {
 } from '../_/charts/utils';
 
 const Consult = (props) => {
+  console.log('CONSULT', props);
+  const [showSendToCollab, setShowSendToCollab] = useState(false);
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
   }
@@ -51,6 +55,10 @@ const Consult = (props) => {
     (el) => el.rightHolder_id,
   );
 
+  const handleClick = () => setShowSendToCollab(true);
+  const backAction = () =>
+    history.push(`/workpiece/${workpiece_id}/right-split/summary`);
+
   const t_copyright = {
     fr: "Droits d'auteur",
     en: 'Copyright',
@@ -74,6 +82,10 @@ const Consult = (props) => {
   const t_sendToCollab = {
     fr: 'Envoyer aux collaborateurs',
     en: 'Send to collaborators',
+  }[props.language];
+  const t_send = {
+    fr: 'Envoyer',
+    en: 'Send',
   }[props.language];
   const t_privacyDescription = {
     fr:
@@ -126,24 +138,6 @@ const Consult = (props) => {
     en: 'Music',
   }[props.language];
 
-  const commonProps = {
-    ...props,
-    t_copyright,
-    t_performance,
-    t_recording,
-    t_privacy,
-    t_privacySubtitle,
-    t_privacyDescription,
-    t_modify,
-    t_public,
-    t_private,
-    t_accepted,
-    t_rejected,
-    t_undecided,
-    t_yes,
-    t_no,
-    t_comments,
-  };
   const copyrightChartProps = {
     chartData: rightHoldersToChartData(props.copyright, activeCollaboratorsIds),
     leftChartData: computeLyricChartData(
@@ -176,6 +170,30 @@ const Consult = (props) => {
     props.copyright,
     props.copyrightDividingMethod,
   );
+
+  const isDraft = props.workpiece.rightSplit._state === 'draft';
+
+  const commonProps = {
+    ...props,
+    t_copyright,
+    t_performance,
+    t_recording,
+    t_privacy,
+    t_privacySubtitle,
+    t_privacyDescription,
+    t_modify,
+    t_public,
+    t_private,
+    t_accepted,
+    t_rejected,
+    t_undecided,
+    t_yes,
+    t_no,
+    t_comments,
+    t_sendToCollab,
+    t_send,
+    setShowSendToCollab,
+  };
   return (
     <>
       {!props.isMobile && (
@@ -228,20 +246,33 @@ const Consult = (props) => {
       )}
       {props.isMobile && (
         <div className="mobileConsult">
-          <MobileTopBar
-            backLink={`/workpiece/${workpiece_id}/right-split/summary`}
-            action={<button className="btn-secondary">{t_sendToCollab}</button>}
-          >
-            {`Version ${props.version}`}
-          </MobileTopBar>
-          <div className="rightSplits">
-            {props.copyright.length > 0 && <Copyright {...commonProps} />}
+          {!showSendToCollab && (
+            <>
+              <MobileTopBar
+                back={backAction}
+                action={
+                  isDraft ? (
+                    <button className="btn-secondary" onClick={handleClick}>
+                      {t_sendToCollab}
+                    </button>
+                  ) : null
+                }
+              >
+                {`Version ${props.version}`}
+              </MobileTopBar>
+              <div className="rightSplits">
+                {props.copyright.length > 0 && <Copyright {...commonProps} />}
 
-            {props.performance.length > 0 && <Performance {...commonProps} />}
+                {props.performance.length > 0 && (
+                  <Performance {...commonProps} />
+                )}
 
-            {props.recording.length > 0 && <Recording {...commonProps} />}
-            {props.privacy.length > 0 && <Privacy {...commonProps} />}
-          </div>
+                {props.recording.length > 0 && <Recording {...commonProps} />}
+                {props.privacy.length > 0 && <Privacy {...commonProps} />}
+              </div>
+            </>
+          )}
+          {showSendToCollab && <SendToCollaborators {...commonProps} />}
         </div>
       )}
     </>
