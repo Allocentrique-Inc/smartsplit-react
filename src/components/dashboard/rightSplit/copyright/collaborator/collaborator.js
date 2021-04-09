@@ -169,7 +169,11 @@ const Collaborator = (props) => {
         )}
 
         {/* SHARES */}
-        <Slider {...commonProps} />
+        <Slider
+          {...commonProps}
+          color={collaboratorColor}
+          value={props.collaborator.shares}
+        />
       </div>
       <CollaboratorErrors {...commonProps} />
     </>

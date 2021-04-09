@@ -106,6 +106,7 @@
 
 .slider {
   flex: 1;
+  position: relative;
   .bar {
     height: 8px;
     width: 100%;
@@ -117,6 +118,28 @@
     border: 1px solid #dcdfe1;
     box-sizing: border-box;
     border-radius: 1000px;
+  }
+  .handle {
+    /* Handle */
+    width: 16px;
+    height: 16px;
+
+    /* Background/Ground */
+    background: #ffffff;
+    /* Content/Stroke */
+    border: 1px solid #dcdfe1;
+    box-sizing: border-box;
+    /* Shadow/Moderate */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 1000px;
+    position: absolute;
+    top: -4px;
+    left: -1px;
+  }
+  .colored {
+    height: 6px;
+    box-sizing: border-box;
+    border-radius: inherit;
   }
 }
 
