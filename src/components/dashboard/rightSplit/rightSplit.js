@@ -15,6 +15,7 @@ import EditorName from './editorName/editorName';
 import EditorShares from './editorShares/editorShares';
 
 const RightSplit = (props) => {
+  console.log(props);
   const { language } = props;
   const { workpiece_id } = useParams();
   const matchCopyright = useRouteMatch(
@@ -54,26 +55,26 @@ const RightSplit = (props) => {
 
   const [warnings, setWarnings] = useState([]);
   const mapData = async () => {
-    // if (!isCreating) {
-    const {
-      copyright,
-      performance,
-      recording,
-      copyrightDividingMethod,
-      privacy,
-      label,
-      version,
-      isPublic,
-    } = props.workpiece.rightSplit;
-    setCopyright(copyright);
-    setPerformance(performance);
-    setRecording(recording);
-    setPrivacy(privacy);
-    setVersion(version);
-    selectCopyrightDividingMethod(copyrightDividingMethod);
-    setLabel(label || {});
-    setIsPublic(isPublic);
-    // }
+    if (!isCreating) {
+      const {
+        copyright,
+        performance,
+        recording,
+        copyrightDividingMethod,
+        privacy,
+        label,
+        version,
+        isPublic,
+      } = props.workpiece.rightSplit;
+      setCopyright(copyright);
+      setPerformance(performance);
+      setRecording(recording);
+      setPrivacy(privacy);
+      setVersion(version);
+      selectCopyrightDividingMethod(copyrightDividingMethod);
+      setLabel(label || {});
+      setIsPublic(isPublic);
+    }
     const collaborators = await getUsersCollaborators({ user_id });
     setCollaborators([props.user, ...collaborators]);
   };

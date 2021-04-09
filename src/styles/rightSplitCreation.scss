@@ -115,7 +115,7 @@
       }
     }
   }
-  .b1 {
+  > .b1 {
     display: flex;
     justify-content: center;
     @media screen and (max-width: 944px) {
@@ -216,6 +216,9 @@
   }
   .dividingMethod {
     margin-bottom: 32px;
+    .splitingMethod {
+      @extend .medium-400;
+    }
   }
   .addCollaborators {
     .addButton {
@@ -459,9 +462,6 @@
     .dragger {
       display: flex;
       align-items: center;
-      @media screen and (max-width: 944px) {
-        display: none;
-      }
       .lock {
         width: 40px;
         display: flex;

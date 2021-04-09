@@ -104,6 +104,22 @@
   cursor: auto;
 }
 
+.slider {
+  flex: 1;
+  .bar {
+    height: 8px;
+    width: 100%;
+    /* Rectangle */
+
+    /* Background/Hell */
+    background: #f5f2f3;
+    /* Content/Stroke */
+    border: 1px solid #dcdfe1;
+    box-sizing: border-box;
+    border-radius: 1000px;
+  }
+}
+
 .formInput.error {
   input,
   .checkbox .square {
@@ -119,4 +135,3 @@
     }
   }
 }
-

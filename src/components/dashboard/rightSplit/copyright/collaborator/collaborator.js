@@ -6,6 +6,7 @@ import Dragger from '../../_/dragger/dragger';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import Avatar from '../../../_/avatar/avatar';
 import ArtistName from '../../../_/artistName/artistName';
+import Slider from '../../../../_/form/slider/slider';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -168,7 +169,7 @@ const Collaborator = (props) => {
         )}
 
         {/* SHARES */}
-        <Dragger {...commonProps} />
+        <Slider {...commonProps} />
       </div>
       <CollaboratorErrors {...commonProps} />
     </>
