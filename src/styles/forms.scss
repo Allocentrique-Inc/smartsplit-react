@@ -107,6 +107,7 @@
 .slider {
   flex: 1;
   position: relative;
+  padding: 4px 0;
   .bar {
     height: 8px;
     width: 100%;
@@ -119,7 +120,7 @@
     box-sizing: border-box;
     border-radius: 1000px;
   }
-  .handle {
+  .thumb {
     /* Handle */
     width: 16px;
     height: 16px;
@@ -133,13 +134,14 @@
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 1000px;
     position: absolute;
-    top: -4px;
-    left: -1px;
+    top: 0px;
   }
   .colored {
     height: 6px;
     box-sizing: border-box;
     border-radius: inherit;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 

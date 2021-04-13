@@ -15,7 +15,6 @@ import EditorName from './editorName/editorName';
 import EditorShares from './editorShares/editorShares';
 
 const RightSplit = (props) => {
-  console.log(props);
   const { language } = props;
   const { workpiece_id } = useParams();
   const matchCopyright = useRouteMatch(

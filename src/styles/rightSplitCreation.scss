@@ -323,7 +323,12 @@
     padding: 16px;
     margin-bottom: 16px;
     border-radius: 2px;
-    @media screen and (max-width: 944px) {
+    .shareRow {
+      display: flex;
+      align-items: center;
+      .btn-icon {
+        margin-right: 16px;
+      }
     }
     .b1 {
       display: flex;
