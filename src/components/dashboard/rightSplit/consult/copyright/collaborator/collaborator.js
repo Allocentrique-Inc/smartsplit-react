@@ -6,14 +6,14 @@ const Collaborator = (props) => {
   const { shares, vote, roles, rightHolder, comment } = props.collaborator;
   const { firstName, lastName } = rightHolder;
   const handleAccept = () =>
-    props.setCopyright({
+    props.setCopyrightVote({
       vote: 'accepted',
       comment: '',
     });
   const handleReject = () =>
-    props.setCopyright((prevState) => ({ ...prevState, vote: 'rejected' }));
+    props.setCopyrightVote((prevState) => ({ ...prevState, vote: 'rejected' }));
   const handleCommentChange = (e) =>
-    props.setCopyright((prevState) => ({
+    props.setCopyrightVote((prevState) => ({
       ...prevState,
       comment: e.target.value,
     }));
@@ -72,7 +72,7 @@ const Collaborator = (props) => {
             <button
               onClick={handleReject}
               className={`reject ${
-                props.copyright.vote === 'rejected' ? 'rejectSelected' : ''
+                props.copyrightVote.vote === 'rejected' ? 'rejectSelected' : ''
               }`}
             >
               {props.t_no}
@@ -80,15 +80,15 @@ const Collaborator = (props) => {
             <button
               onClick={handleAccept}
               className={`accept ${
-                props.copyright.vote === 'accepted' ? 'acceptSelected' : ''
+                props.copyrightVote.vote === 'accepted' ? 'acceptSelected' : ''
               }`}
             >
               {props.t_yes}
             </button>
           </div>
-          {props.copyright.vote === 'rejected' && (
+          {props.copyrightVote.vote === 'rejected' && (
             <textarea
-              value={props.copyright.comment}
+              value={props.copyrightVote.comment}
               onChange={handleCommentChange}
             />
           )}

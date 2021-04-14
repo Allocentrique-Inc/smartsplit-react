@@ -6,23 +6,23 @@ import Consult from '../consult/consult';
 import DownBar from './downBar/downBar';
 
 const Vote = (props) => {
-  const [copyright, setCopyright] = useState({
+  const [copyrightVote, setCopyrightVote] = useState({
     vote: '',
     comment: '',
   });
-  const [performance, setPerformance] = useState({
+  const [performanceVote, setPerformanceVote] = useState({
     vote: '',
     comment: '',
   });
-  const [recording, setRecording] = useState({
+  const [recordingVote, setRecordingVote] = useState({
     vote: '',
     comment: '',
   });
-  const [label, setLabel] = useState({
+  const [labelVote, setLabelVote] = useState({
     vote: '',
     comment: '',
   });
-  const [privacy, setPrivacy] = useState({
+  const [privacyVote, setPrivacyVote] = useState({
     vote: '',
     comment: '',
   });
@@ -45,13 +45,14 @@ const Vote = (props) => {
     rightSplit.privacy &&
       rightSplit.privacy.some((el) => el.rightHolder_id === props.user.user_id),
   ].filter((el) => el === true).length;
-  const voteTotal = [copyright, performance, recording, label, privacy].filter(
-    (el) => el.vote !== '',
-  ).length;
+  const voteTotal = [
+    copyrightVote,
+    performanceVote,
+    recordingVote,
+    labelVote,
+    privacyVote,
+  ].filter((el) => el.vote !== '').length;
 
-  useEffect(() => {
-    console.log('SPLITS', copyright, performance, recording, label);
-  }, []);
   const { title, owner } = props.workpiece;
   const ownerName = `${owner.firstName} ${owner.lastName}`;
   const splitOwner = props.workpiece.rightSplit.owner;
@@ -64,16 +65,17 @@ const Vote = (props) => {
   const t_voteCount = translation._voteCount[props.language];
 
   const commonProps = {
-    copyright,
-    setCopyright,
-    performance,
-    setPerformance,
-    recording,
-    setRecording,
-    label,
-    setLabel,
-    privacy,
-    setPrivacy,
+    ...props,
+    copyrightVote,
+    setCopyrightVote,
+    performanceVote,
+    setPerformanceVote,
+    recordingVote,
+    setRecordingVote,
+    labelVote,
+    setLabelVote,
+    privacyVote,
+    setPrivacyVote,
     voteNbrNeeded,
     voteTotal,
     t_voteCount,
