@@ -84,10 +84,11 @@
     border: 1px solid #dcdfe1;
     box-sizing: border-box;
     border-radius: 2px;
+    margin: 3px;
   }
   span {
     @extend .medium-400;
-    margin-left: 19px;
+    margin-left: 8px;
   }
   .checked {
     background: map-get($colors, 'action');
@@ -143,6 +144,13 @@
     display: flex;
     justify-content: flex-end;
   }
+}
+
+.percentageInput {
+  @extend .medium-700;
+  background: transparent;
+  border: none;
+  width: 65px;
 }
 
 .formInput.error {

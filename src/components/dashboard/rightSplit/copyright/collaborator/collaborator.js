@@ -9,6 +9,7 @@ import ArtistName from '../../../_/artistName/artistName';
 import Slider from '../../../../_/form/slider/slider';
 import Lock from '../../../../../icons/lock';
 import Unlock from '../../../../../icons/unlock';
+import Percentage from '../../../../_/form/percentage/percentage';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -111,65 +112,33 @@ const Collaborator = (props) => {
         <div className="space" />
 
         {/* ROLES */}
-        {props.isMobile ? (
-          <div className="roleRow">
-            <RoleBox
-              {...commonProps}
-              arr={props.collaborator.roles}
-              label={t_author}
-              _role="author"
-            />
-            <RoleBox
-              {...commonProps}
-              arr={props.collaborator.roles}
-              label={t_composer}
-              _role="composer"
-            />
-            <RoleBox
-              {...commonProps}
-              arr={props.collaborator.roles}
-              label={t_adapter}
-              _role="adapter"
-            />
-            <RoleBox
-              {...commonProps}
-              arr={props.collaborator.roles}
-              label={t_mixer}
-              _role="mixer"
-            />
-          </div>
-        ) : (
-          <>
-            <div className="roleRow">
-              <RoleBox
-                {...commonProps}
-                arr={props.collaborator.roles}
-                label={t_author}
-                _role="author"
-              />
-              <RoleBox
-                {...commonProps}
-                arr={props.collaborator.roles}
-                label={t_composer}
-                _role="composer"
-              />
-            </div>
-            <div className="roleRow">
-              <RoleBox
-                {...commonProps}
-                arr={props.collaborator.roles}
-                label={t_adapter}
-                _role="adapter"
-              />
-              <RoleBox
-                {...commonProps}
-                arr={props.collaborator.roles}
-                label={t_mixer}
-                _role="mixer"
-              />
-            </div>
-          </>
-        )}
+        <div className="roleRow">
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_author}
+            _role="author"
+          />
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_composer}
+            _role="composer"
+          />
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_adapter}
+            _role="adapter"
+          />
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_mixer}
+            _role="mixer"
+          />
+        </div>
+
         <div className="shareRow">
           {isDraggable && (
             <button
@@ -184,6 +153,11 @@ const Collaborator = (props) => {
           <Slider
             {...commonProps}
             color={collaboratorColor}
+            value={props.collaborator.shares}
+            onChange={setShares}
+            disabled={!isDraggable}
+          />
+          <Percentage
             value={props.collaborator.shares}
             onChange={setShares}
             disabled={!isDraggable}
