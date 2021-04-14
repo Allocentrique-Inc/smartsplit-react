@@ -1,19 +1,14 @@
-import CheckMark from '../../../../../icons/check-mark';
+import Checkbox from '../../../../_/form/checkbox/checkbox';
 
 const RoleBox = (props) => {
   const isPresent = props.arr.some((el) => props._role === el);
   const handleToggleRole = () => props.handleToggleRole(props._role);
   return (
-    <div className="checkBoxRow">
-      <div className="checkBox" onClick={handleToggleRole}>
-        {isPresent && (
-          <div className="isChecked">
-            <CheckMark />
-          </div>
-        )}
-      </div>
-      <label>{props.label}</label>
-    </div>
+    <Checkbox
+      label={props.label}
+      checked={isPresent}
+      onChange={handleToggleRole}
+    />
   );
 };
 

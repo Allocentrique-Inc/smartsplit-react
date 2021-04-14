@@ -5,6 +5,10 @@ const emailFormatValidator = (value) =>
 const minLengthValidator = (value, charLimit) => value.length >= charLimit;
 const requiredValidator = (value) =>
   value !== '' && value !== [] && value !== {};
+export const percentageValidator = (value) =>
+  /^(0*100{1,1}\.?((?<=\.)0*)?%?$)|(^0*\d{0,2}\.?((?<=\.)\d*)?%?)$/g.test(
+    value,
+  );
 
 export default function validate(fields) {
   let isValid = true;

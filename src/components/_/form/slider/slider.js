@@ -11,22 +11,30 @@ export default function Slider({
   vertical,
   ...nextProps
 }) {
-  const [width, setWidth] = useState(0);
-  const barRef = useRef(null);
-  useEffect(() => {
-    setWidth(barRef.current.getBoundingClientRect().width);
-  }, [window.innerWidth]);
-  console.log('WIDTH', nextProps);
+  const ref = useRef();
+  const handleBarClick = (e) => {
+    const domRect = ref.current.getBoundingClientRect();
+    const newValue = (100 * (e.clientX - domRect.x)) / domRect.width;
+    onChange && onChange(newValue);
+  };
+  const handleThumbClick = (e) => e.stopPropagation();
   const percent = max === 100 ? value : ((value - min) / (max - min)) * 100;
 
   return (
-    <div className="slider">
-      <div ref={barRef} className="bar">
+    <div className="slider" onClick={handleBarClick} ref={ref}>
+      <div className="bar">
         <div
           className="colored"
           style={{ background: color, width: `${percent}%` }}
-        />
-        <div className="handle" />
+        >
+          {!disabled && (
+            <div
+              className="thumb"
+              onClick={handleThumbClick}
+              style={{ transform: 'translateX(8px)' }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

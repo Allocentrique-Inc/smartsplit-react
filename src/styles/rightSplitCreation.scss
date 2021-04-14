@@ -323,7 +323,15 @@
     padding: 16px;
     margin-bottom: 16px;
     border-radius: 2px;
-    @media screen and (max-width: 944px) {
+    .shareRow {
+      display: flex;
+      align-items: center;
+      .btn-icon {
+        margin-right: 16px;
+      }
+      .percentageInput {
+        margin-left: 16px;
+      }
     }
     .b1 {
       display: flex;
@@ -404,59 +412,20 @@
       margin-left: 40px;
       display: flex;
       margin-bottom: 10px;
-      @media screen and (max-width: 944px) {
-        // display: none;
-        margin-left: 10px;
-        justify-content: space-around;
+      flex-wrap: wrap;
+      > * {
+        width: 50%;
+        margin-bottom: 8px;
       }
-      .checkBoxRow {
-        width: 188px;
-        display: flex;
-        align-items: center;
-        @media screen and (max-width: 944px) {
+      @media screen and (max-width: 944px) {
+        > * {
           width: auto;
-          margin-right: 20px;
-          display: block;
+          display: flex;
+          flex-direction: column;
         }
-        .checkBox {
-          background-color: white;
-          width: 18px;
-          height: 18px;
-          border: 1px solid #dcdfe1;
-          box-sizing: border-box;
-          border-radius: 2px;
-          outline: 0;
-          @media screen and (max-width: 944px) {
-            margin: auto;
-          }
-          cursor: pointer;
-          .isChecked {
-            background-color: #2da84f;
-            height: 18px;
-            width: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            outline: 0;
-            margin: -1px;
-            border-radius: 2px;
-          }
-        }
-        label {
-          font-weight: normal;
-          font-size: 12px;
-          line-height: 16px;
-          color: #203548;
-          margin-left: 11px;
-          @media screen and (max-width: 944px) {
-            margin: auto;
-          }
-        }
-        input {
-          height: 18px;
-          width: 18px;
-          border: 1px solid #dcdfe1;
-        }
+        flex-wrap: nowrap;
+
+        justify-content: space-around;
       }
     }
     .dragger {

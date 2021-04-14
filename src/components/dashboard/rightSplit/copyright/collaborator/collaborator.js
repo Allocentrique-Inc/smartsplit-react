@@ -7,6 +7,9 @@ import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import Avatar from '../../../_/avatar/avatar';
 import ArtistName from '../../../_/artistName/artistName';
 import Slider from '../../../../_/form/slider/slider';
+import Lock from '../../../../../icons/lock';
+import Unlock from '../../../../../icons/unlock';
+import Percentage from '../../../../_/form/percentage/percentage';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -38,11 +41,7 @@ const Collaborator = (props) => {
   // DRAGGER
   const setShares = (newShares) =>
     props.handleDrag({ newShares, id: props.id });
-  const setLock = (newState) => {
-    const arr = [...props.copyright];
-    arr[props.id].lock = newState;
-    props.setCopyright(arr);
-  };
+  const setLock = (newState) => {};
   const isDraggable = props.copyrightDividingMethod === 'manual';
 
   const collaboratorClassName =
@@ -54,6 +53,11 @@ const Collaborator = (props) => {
       : 'collaborator';
 
   const isYou = props.user.user_id === props.collaborator.rightHolder.user_id;
+  const handleLockBtn = () => {
+    const arr = [...props.copyright];
+    arr[props.id].lock = !props.collaborator.lock;
+    props.setCopyright(arr);
+  };
 
   // TEXTS
   const t_you = { fr: '(toi)', en: '(you)' }[props.language];
@@ -108,72 +112,58 @@ const Collaborator = (props) => {
         <div className="space" />
 
         {/* ROLES */}
-        {props.isMobile ? (
-          <div className="roleRow">
-            <RoleBox
-              {...commonProps}
-              arr={props.collaborator.roles}
-              label={t_author}
-              _role="author"
-            />
-            <RoleBox
-              {...commonProps}
-              arr={props.collaborator.roles}
-              label={t_composer}
-              _role="composer"
-            />
-            <RoleBox
-              {...commonProps}
-              arr={props.collaborator.roles}
-              label={t_adapter}
-              _role="adapter"
-            />
-            <RoleBox
-              {...commonProps}
-              arr={props.collaborator.roles}
-              label={t_mixer}
-              _role="mixer"
-            />
-          </div>
-        ) : (
-          <>
-            <div className="roleRow">
-              <RoleBox
-                {...commonProps}
-                arr={props.collaborator.roles}
-                label={t_author}
-                _role="author"
-              />
-              <RoleBox
-                {...commonProps}
-                arr={props.collaborator.roles}
-                label={t_composer}
-                _role="composer"
-              />
-            </div>
-            <div className="roleRow">
-              <RoleBox
-                {...commonProps}
-                arr={props.collaborator.roles}
-                label={t_adapter}
-                _role="adapter"
-              />
-              <RoleBox
-                {...commonProps}
-                arr={props.collaborator.roles}
-                label={t_mixer}
-                _role="mixer"
-              />
-            </div>
-          </>
-        )}
+        <div className="roleRow">
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_author}
+            _role="author"
+          />
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_composer}
+            _role="composer"
+          />
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_adapter}
+            _role="adapter"
+          />
+          <RoleBox
+            {...commonProps}
+            arr={props.collaborator.roles}
+            label={t_mixer}
+            _role="mixer"
+          />
+        </div>
 
+        <div className="shareRow">
+          {isDraggable && (
+            <button
+              className={`btn-icon ${
+                props.collaborator.lock ? 'locked' : 'unlocked'
+              }`}
+              onClick={handleLockBtn}
+            >
+              {props.collaborator.lock ? <Lock /> : <Unlock />}
+            </button>
+          )}
+          <Slider
+            {...commonProps}
+            color={collaboratorColor}
+            value={props.collaborator.shares}
+            onChange={setShares}
+            disabled={!isDraggable}
+          />
+          <Percentage
+            value={props.collaborator.shares}
+            onChange={setShares}
+            disabled={!isDraggable}
+          />
+        </div>
         {/* SHARES */}
-        <Slider
-          {...commonProps}
-          color={collaboratorColor}
-          value={props.collaborator.shares}
-        />
       </div>
       <CollaboratorErrors {...commonProps} />
     </>
