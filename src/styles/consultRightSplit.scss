@@ -54,6 +54,14 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
+    .btn-secondary-small {
+      display: flex;
+      align-items: center;
+      padding-left: 4px;
+      svg {
+        margin-right: 6px;
+      }
+    }
     .title {
       font-weight: bold;
       font-size: 16px;
@@ -207,6 +215,18 @@
     margin-top: 32px;
     .avatar {
       margin-right: 16px;
+    }
+    .titleRow {
+      display: flex;
+      justify-content: space-between;
+      .btn-secondary-small {
+        display: flex;
+        align-items: center;
+        padding-left: 4px;
+        svg {
+          margin-right: 6px;
+        }
+      }
     }
     .title {
       @extend h3;

@@ -15,7 +15,7 @@ export default function User({ color = '#8DA0B3', size = 24 }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        scale={scale}
+        transform={`scale(${scale})`}
       />
       <path
         d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z"
@@ -23,7 +23,7 @@ export default function User({ color = '#8DA0B3', size = 24 }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        scale={scale}
+        transform={`scale(${scale})`}
       />
       <path
         d="M23 20.9999V18.9999C22.9993 18.1136 22.7044 17.2527 22.1614 16.5522C21.6184 15.8517 20.8581 15.3515 20 15.1299"
@@ -31,7 +31,7 @@ export default function User({ color = '#8DA0B3', size = 24 }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        scale={scale}
+        transform={`scale(${scale})`}
       />
       <path
         d="M16 3.12988C16.8604 3.35018 17.623 3.85058 18.1676 4.55219C18.7122 5.2538 19.0078 6.11671 19.0078 7.00488C19.0078 7.89305 18.7122 8.75596 18.1676 9.45757C17.623 10.1592 16.8604 10.6596 16 10.8799"
@@ -39,7 +39,7 @@ export default function User({ color = '#8DA0B3', size = 24 }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        scale={scale}
+        transform={`scale(${scale})`}
       />
     </svg>
   );

@@ -1,9 +1,7 @@
 import { Colors, Metrics } from '../theme';
 
-export default function Pen({
-  color = Colors.tertiary,
-  size = Metrics.size.small,
-}) {
+export default function Pen({ color = Colors.tertiary, size = 24 }) {
+  const scale = size / 24;
   return (
     <svg
       width={size}
@@ -18,6 +16,7 @@ export default function Pen({
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        transform={`scale(${scale})`}
       />
       <path
         d="M13 6L18 11"
@@ -25,6 +24,7 @@ export default function Pen({
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        transform={`scale(${scale})`}
       />
     </svg>
   );

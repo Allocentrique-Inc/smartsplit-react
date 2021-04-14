@@ -15,7 +15,7 @@ export default function User({ color = '#8DA0B3', size = 24 }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        scale={scale}
+        transform={`scale(${scale})`}
       />
       <path
         d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
@@ -23,7 +23,7 @@ export default function User({ color = '#8DA0B3', size = 24 }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        scale={scale}
+        transform={`scale(${scale})`}
       />
     </svg>
   );

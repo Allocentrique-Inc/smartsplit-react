@@ -5,6 +5,7 @@ import Eye from './eye';
 import Avatar from '../../../_/avatar/avatar';
 import colors from '../../_/colors';
 import ArtistName from '../../../_/artistName/artistName';
+import Pen from '../../../../../icons/pen';
 
 const Privacy = (props) => {
   const history = useHistory();
@@ -33,7 +34,8 @@ const Privacy = (props) => {
       >
         <div className="title">{props.t_privacy}</div>
         {!props.voting && props.modifiable && (
-          <button className="btn-secondary" onClick={handleButton}>
+          <button className="btn-secondary-small" onClick={handleButton}>
+            <Pen color="#2DA84F" size={16} />
             {props.t_modify}
           </button>
         )}

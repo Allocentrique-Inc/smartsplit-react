@@ -11,7 +11,7 @@ export default function RejectedRightSplitArchived(props) {
         <ArtistName
           user={props.archivedRightSplit.owner}
           className="artistName"
-        />
+        />{' '}
         <LastModified
           date={props.archivedRightSplit.createdAt}
           language={props.language}

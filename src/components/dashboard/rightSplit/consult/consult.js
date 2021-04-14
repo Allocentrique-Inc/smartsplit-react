@@ -20,7 +20,6 @@ import {
 } from '../_/charts/utils';
 
 const Consult = (props) => {
-  console.log('CONSULT', props);
   const [showSendToCollab, setShowSendToCollab] = useState(false);
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
@@ -94,8 +93,8 @@ const Consult = (props) => {
       'promote data transparency on theses rights split so all the community can benifit from good examples.',
   }[props.language];
   const t_modify = {
-    fr: 'modifier',
-    en: 'modify',
+    fr: 'Modifier',
+    en: 'Edit',
   }[props.language];
   const t_public = {
     fr: 'publique',
@@ -193,6 +192,7 @@ const Consult = (props) => {
     t_sendToCollab,
     t_send,
     setShowSendToCollab,
+    modifiable: props.workpiece.rightSplit._state === 'draft',
   };
   return (
     <>

@@ -246,7 +246,6 @@ const Summary = (props) => {
                 <Consult
                   {...props}
                   voting={false}
-                  modifiable={props.workpiece.rightSplit._state === 'draft'}
                   rightSplitInConsultation={props.workpiece.rightSplit}
                 />
               </div>

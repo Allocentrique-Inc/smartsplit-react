@@ -12,7 +12,7 @@ export default function InVoteRightSplit(props) {
           <ArtistName
             user={props.workpiece.rightSplit.owner}
             className="artistName"
-          />
+          />{' '}
           <LastModified
             date={props.workpiece.rightSplit.createdAt}
             language={props.language}

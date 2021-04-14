@@ -15,7 +15,7 @@ export default function Cog({ color = '#8DA0B3', size = 24 }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        scale={scale}
+        transform={`scale(${scale})`}
       />
       <path
         d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
@@ -23,7 +23,7 @@ export default function Cog({ color = '#8DA0B3', size = 24 }) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        scale={scale}
+        transform={`scale(${scale})`}
       />
     </svg>
   );
