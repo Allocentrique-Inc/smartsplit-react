@@ -19,13 +19,11 @@ const Copyright = (props) => {
         )}
       </div>
       {props.copyright.map((collaborator) => {
-        const rightSplit = props.rightSplitInConsultation.copyright;
         return (
           <Collaborator
             {...props}
             collaboratorType="copyright"
             collaborator={collaborator}
-            rightSplit={rightSplit}
             key={collaborator.rightHolder_id}
           />
         );

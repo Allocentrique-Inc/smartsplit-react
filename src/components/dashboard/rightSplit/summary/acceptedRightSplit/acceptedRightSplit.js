@@ -23,12 +23,10 @@ export default function AcceptedRightSplit(props) {
     props.workpiece.purchases.length !== 0 &&
     props.workpiece.purchases.includes(productCode);
   useEffect(async () => {
-    if (hasBoughtPDF) {
-      const result = await getWorkpieceContract({ workpiece_id });
-      result.statusCode !== 500 && setContractData(result);
-      result.statusCode === 500 && setContractData(null);
-    }
-  }, [hasBoughtPDF]);
+    const result = await getWorkpieceContract({ workpiece_id });
+    !result.statusCode && setContractData(result);
+    result.statusCode && setContractData(null);
+  }, []);
   return (
     <>
       <div
@@ -52,8 +50,14 @@ export default function AcceptedRightSplit(props) {
           <div />
           <div className="status acceptedStatus">{props.t_accepted}</div>
         </div>
-
-        {hasBoughtPDF && contractData ? (
+        {contractData && (
+          <DownloadContractButton
+            {...props}
+            language={props.language}
+            contractData={contractData}
+          />
+        )}
+        {/* {hasBoughtPDF && contractData ? (
           <DownloadContractButton
             language={props.language}
             contractData={contractData}
@@ -68,7 +72,7 @@ export default function AcceptedRightSplit(props) {
           >
             {props.t_download}
           </button>
-        )}
+        )}*/}
       </div>
       {showPaymentModal && <PaymentModal {...modalProps} />}
     </>

@@ -5,13 +5,9 @@ const DownBar = (props) => {
   const history = useHistory();
   const { workpiece_id } = useParams();
   const handleSubmit = async () => {
-    const { copyright, performance, recording, privacy, label } = props;
+    const { votes } = props;
     await voteRightSplit({
-      copyright,
-      performance,
-      recording,
-      privacy,
-      label,
+      ...votes,
       workpiece_id,
     });
     props.resetData();
@@ -31,7 +27,7 @@ const DownBar = (props) => {
             className="submit"
             disabled={props.voteTotal / props.voteNbrNeeded !== 1}
           >
-            Soumettre mon vote
+            {props.t_submitVote}
           </button>
         </div>
       </div>

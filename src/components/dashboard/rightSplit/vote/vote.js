@@ -6,27 +6,31 @@ import Consult from '../consult/consult';
 import DownBar from './downBar/downBar';
 
 const Vote = (props) => {
-  const [copyrightVote, setCopyrightVote] = useState({
-    vote: '',
-    comment: '',
+  const [votes, setVotes] = useState({
+    copyright: {
+      vote: '',
+      comment: '',
+    },
+    performance: {
+      vote: '',
+      comment: '',
+    },
+    recording: {
+      vote: '',
+      comment: '',
+    },
+    label: {
+      vote: '',
+      comment: '',
+    },
+    privacy: {
+      vote: '',
+      comment: '',
+    },
   });
-  const [performanceVote, setPerformanceVote] = useState({
-    vote: '',
-    comment: '',
-  });
-  const [recordingVote, setRecordingVote] = useState({
-    vote: '',
-    comment: '',
-  });
-  const [labelVote, setLabelVote] = useState({
-    vote: '',
-    comment: '',
-  });
-  const [privacyVote, setPrivacyVote] = useState({
-    vote: '',
-    comment: '',
-  });
-
+  const setVote = (vote, value) => {
+    setVotes((prevState) => ({ ...prevState, [vote]: { ...value } }));
+  };
   const rightSplit = props.workpiece.rightSplit;
   const voteNbrNeeded = [
     rightSplit.copyright &&
@@ -45,14 +49,7 @@ const Vote = (props) => {
     rightSplit.privacy &&
       rightSplit.privacy.some((el) => el.rightHolder_id === props.user.user_id),
   ].filter((el) => el === true).length;
-  const voteTotal = [
-    copyrightVote,
-    performanceVote,
-    recordingVote,
-    labelVote,
-    privacyVote,
-  ].filter((el) => el.vote !== '').length;
-
+  const voteTotal = Object.values(votes).filter((el) => el.vote !== '').length;
   const { title, owner } = props.workpiece;
   const ownerName = `${owner.firstName} ${owner.lastName}`;
   const splitOwner = props.workpiece.rightSplit.owner;
@@ -63,22 +60,18 @@ const Vote = (props) => {
   const t_title = translation._title[props.language];
   const t_createdBy = translation._createdBy[props.language];
   const t_voteCount = translation._voteCount[props.language];
+  const t_submitVote = { fr: 'Soumettre mon vote', en: 'Submit my vote' }[
+    props.language
+  ];
 
   const commonProps = {
     ...props,
-    copyrightVote,
-    setCopyrightVote,
-    performanceVote,
-    setPerformanceVote,
-    recordingVote,
-    setRecordingVote,
-    labelVote,
-    setLabelVote,
-    privacyVote,
-    setPrivacyVote,
+    votes,
+    setVote,
     voteNbrNeeded,
     voteTotal,
     t_voteCount,
+    t_submitVote,
   };
   return (
     <div className="vote">
@@ -98,16 +91,11 @@ const Vote = (props) => {
             {/* - il y a ----- */}
           </div>
           <div className="consult">
-            <Consult
-              {...props}
-              {...commonProps}
-              voting
-              rightSplitInConsultation={props.workpiece.rightSplit}
-            />
+            <Consult {...commonProps} voting />
           </div>
         </div>
       </div>
-      <DownBar {...props} {...commonProps} />
+      <DownBar {...commonProps} />
     </div>
   );
 };

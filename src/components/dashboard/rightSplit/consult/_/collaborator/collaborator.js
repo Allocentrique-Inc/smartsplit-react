@@ -3,23 +3,30 @@ import colors from '../../../_/colors';
 import ArtistName from '../../../../_/artistName/artistName';
 
 const Collaborator = (props) => {
-  const { collaborator, translations, language } = props;
+  const {
+    collaborator,
+    collaboratorType,
+    votes,
+    setVote,
+    translations,
+    language,
+  } = props;
   const { firstName, lastName } = collaborator.rightHolder;
   const handleAccept = () =>
-    props.setCopyright({
+    props.setVote(collaboratorType, {
       vote: 'accepted',
       comment: '',
     });
   const handleReject = () =>
-    props.setCopyright((prevState) => ({ ...prevState, vote: 'rejected' }));
+    props.setVote(collaboratorType, { vote: 'rejected', comment: '' });
   const handleCommentChange = (e) =>
-    props.setCopyright((prevState) => ({
-      ...prevState,
+    props.setVote(collaboratorType, {
+      vote: 'rejected',
       comment: e.target.value,
-    }));
+    });
   const user_id = localStorage.getItem('user_id');
   const isUserVoting =
-    user_id === props.collaborator.rightHolder_id &&
+    user_id === collaborator.rightHolder_id &&
     collaborator.vote === 'undecided';
 
   const collaboratorColor =
@@ -33,7 +40,7 @@ const Collaborator = (props) => {
   }[language];
   const printRoles = () => {
     let print = '';
-    switch (props.collaboratorType) {
+    switch (collaboratorType) {
       case 'copyright':
         collaborator.roles.forEach((role, index) => {
           print += translations.rightSplit.copyrightRoles[`_${role}`][language];
@@ -125,7 +132,9 @@ const Collaborator = (props) => {
             <button
               onClick={handleReject}
               className={`reject ${
-                props.copyright.vote === 'rejected' ? 'rejectSelected' : ''
+                votes[collaboratorType].vote === 'rejected'
+                  ? 'rejectSelected'
+                  : ''
               }`}
             >
               {props.t_no}
@@ -133,15 +142,17 @@ const Collaborator = (props) => {
             <button
               onClick={handleAccept}
               className={`accept ${
-                props.copyright.vote === 'accepted' ? 'acceptSelected' : ''
+                votes[collaboratorType].vote === 'accepted'
+                  ? 'acceptSelected'
+                  : ''
               }`}
             >
               {props.t_yes}
             </button>
           </div>
-          {props.copyright.vote === 'rejected' && (
+          {votes[collaboratorType].vote === 'rejected' && (
             <textarea
-              value={props.copyright.comment}
+              value={votes[collaboratorType].comment}
               onChange={handleCommentChange}
             />
           )}

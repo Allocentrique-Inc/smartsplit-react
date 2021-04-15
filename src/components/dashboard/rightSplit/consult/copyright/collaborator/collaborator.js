@@ -3,20 +3,18 @@ import colors from '../../../_/colors';
 import ArtistName from '../../../../_/artistName/artistName';
 
 const Collaborator = (props) => {
+  console.log('PROPS', props);
   const { shares, vote, roles, rightHolder, comment } = props.collaborator;
   const { firstName, lastName } = rightHolder;
   const handleAccept = () =>
-    props.setCopyrightVote({
+    props.setVote('copyright', {
       vote: 'accepted',
       comment: '',
     });
   const handleReject = () =>
-    props.setCopyrightVote((prevState) => ({ ...prevState, vote: 'rejected' }));
+    props.setVote('copyright', { vote: 'rejected', comment: '' });
   const handleCommentChange = (e) =>
-    props.setCopyrightVote((prevState) => ({
-      ...prevState,
-      comment: e.target.value,
-    }));
+    props.setVote('copyright', { vote: 'rejected', comment: e.target.value });
   const user_id = localStorage.getItem('user_id');
   const isUserVoting =
     user_id === props.collaborator.rightHolder_id && vote === 'undecided';
@@ -72,7 +70,9 @@ const Collaborator = (props) => {
             <button
               onClick={handleReject}
               className={`reject ${
-                props.copyrightVote.vote === 'rejected' ? 'rejectSelected' : ''
+                props.votes.copyright.vote === 'rejected'
+                  ? 'rejectSelected'
+                  : ''
               }`}
             >
               {props.t_no}
@@ -80,15 +80,17 @@ const Collaborator = (props) => {
             <button
               onClick={handleAccept}
               className={`accept ${
-                props.copyrightVote.vote === 'accepted' ? 'acceptSelected' : ''
+                props.votes.copyright.vote === 'accepted'
+                  ? 'acceptSelected'
+                  : ''
               }`}
             >
               {props.t_yes}
             </button>
           </div>
-          {props.copyrightVote.vote === 'rejected' && (
+          {props.votes.copyright.vote === 'rejected' && (
             <textarea
-              value={props.copyrightVote.comment}
+              value={props.votes.copyright.comment}
               onChange={handleCommentChange}
             />
           )}

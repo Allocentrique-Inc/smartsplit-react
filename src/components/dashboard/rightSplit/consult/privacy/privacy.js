@@ -56,7 +56,7 @@ const Privacy = (props) => {
       </div>
 
       <div />
-      {props.rightSplitInConsultation.privacy.map((collaborator, id) => (
+      {props.privacy.map((collaborator, id) => (
         <Collab
           key={collaborator.rightHolder_id}
           {...props}
@@ -74,17 +74,17 @@ const Collab = (props) => {
   const t_initials = `${firstName[0]}${lastName[0]}`;
   const t_vote = props.collaborator.vote;
   const handleAccept = () =>
-    props.setPrivacy({
+    props.setVote('privacy', {
       vote: 'accepted',
       comment: '',
     });
   const handleReject = () =>
-    props.setPrivacy((prevState) => ({ ...prevState, vote: 'rejected' }));
+    props.setVote('privacy', { vote: 'rejected', comment: '' });
   const handleCommentChange = (e) =>
-    props.setPrivacy((prevState) => ({
-      ...prevState,
+    props.setVote('privacy', {
+      vote: 'rejected',
       comment: e.target.value,
-    }));
+    });
   const user_id = localStorage.getItem('user_id');
   const isUserVoting =
     user_id === props.collaborator.rightHolder_id && vote === 'undecided';
@@ -131,7 +131,7 @@ const Collab = (props) => {
             <button
               onClick={handleReject}
               className={`reject ${
-                props.privacy.vote === 'rejected' ? 'rejectSelected' : ''
+                props.votes.privacy.vote === 'rejected' ? 'rejectSelected' : ''
               }`}
             >
               {props.t_no}
@@ -139,15 +139,15 @@ const Collab = (props) => {
             <button
               onClick={handleAccept}
               className={`accept ${
-                props.privacy.vote === 'accepted' ? 'acceptSelected' : ''
+                props.votes.privacy.vote === 'accepted' ? 'acceptSelected' : ''
               }`}
             >
               {props.t_yes}
             </button>
           </div>
-          {props.privacy.vote === 'rejected' && (
+          {props.votes.privacy.vote === 'rejected' && (
             <textarea
-              value={props.privacy.comment}
+              value={props.votes.privacy.comment}
               onChange={handleCommentChange}
             />
           )}
