@@ -12,6 +12,11 @@
     justify-content: space-around;
   }
   .consultRightSplitSection {
+    > :last-child {
+      .infos {
+        box-shadow: none;
+      }
+    }
     margin-bottom: 56px;
     .privacySubtitle {
       font-size: 16px;
@@ -98,11 +103,13 @@
       @extend .medium-400;
     }
     .infos {
-      display: flex;
       flex: 1;
       padding-bottom: 16px;
-      justify-content: space-between;
       box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
+      .row {
+        align-items: flex-end;
+        justify-content: space-between;
+      }
     }
     .shares {
       @extend h5;
@@ -115,14 +122,24 @@
       @extend .small-400;
       color: #687a8b;
     }
+    .voteRejected {
+      /* Interface/Small-700 */
+      font-family: IBM Plex Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 16px;
+      /* identical to box height, or 133% */
+      text-align: right;
+
+      /* Content/Alert-Negative */
+      color: #ac1616;
+    }
   }
 
   .privacyCollaborator {
     // height: inherit;
-    .left {
-      display: flex;
-      align-items: center;
-    }
+    align-items: flex-start !important;
     .right {
       > * {
         white-space: nowrap;
@@ -148,20 +165,18 @@
   .voting {
     display: flex;
     flex-direction: column;
-    margin-left: 56px;
     margin-top: 8px;
 
     .buttons {
       :first-child {
         margin-right: 16px;
       }
-      margin-bottom: 16px;
     }
     textarea {
+      margin-top: 16px;
       border: 1px solid #dcdfe1;
       box-sizing: border-box;
       border-radius: 2px;
-      margin-bottom: 16px;
     }
     button {
       width: 180px;
@@ -213,6 +228,11 @@
   }
   .consultRightSplitSection {
     margin-top: 32px;
+    > :last-child {
+      .infos {
+        box-shadow: none;
+      }
+    }
     .avatar {
       margin-right: 16px;
     }
@@ -234,6 +254,55 @@
     .consultCollaborator {
       display: flex;
       margin-top: 16px;
+    }
+
+    .voting {
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+
+      .buttons {
+        display: flex;
+        > * {
+          flex: 1;
+        }
+        > :first-child {
+          margin-right: 16px;
+        }
+      }
+      textarea {
+        border: 1px solid #dcdfe1;
+        box-sizing: border-box;
+        border-radius: 2px;
+        margin-top: 16px;
+      }
+      button {
+        height: 40px;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        border: 1px solid #dcdfe1;
+        cursor: pointer;
+      }
+      .reject {
+        color: #ac1616;
+        background-color: white;
+      }
+      .accept {
+        color: #2da84f;
+        background-color: white;
+      }
+      .acceptSelected {
+        background: #2da84f;
+        color: white;
+        border: none;
+      }
+      .rejectSelected {
+        background: #ac1616;
+        color: white;
+        border: none;
+      }
     }
 
     .privacySubtitle {
@@ -265,11 +334,13 @@
       @extend .medium-400;
     }
     .infos {
-      display: flex;
       flex: 1;
       padding-bottom: 16px;
-      justify-content: space-between;
       box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
+      .row {
+        align-items: flex-end;
+        justify-content: space-between;
+      }
     }
     .shares {
       @extend h3;
@@ -281,6 +352,19 @@
     .voteUndecided {
       @extend .small-400;
       color: #687a8b;
+    }
+    .voteRejected {
+      /* Interface/Small-700 */
+      font-family: IBM Plex Sans;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 16px;
+      /* identical to box height, or 133% */
+      text-align: right;
+
+      /* Content/Alert-Negative */
+      color: #ac1616;
     }
   }
   .sendToCollaborators {

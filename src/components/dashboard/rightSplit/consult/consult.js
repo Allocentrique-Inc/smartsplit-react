@@ -248,18 +248,20 @@ const Consult = (props) => {
         <div className="mobileConsult">
           {!showSendToCollab && (
             <>
-              <MobileTopBar
-                back={backAction}
-                action={
-                  isDraft ? (
-                    <button className="btn-secondary" onClick={handleClick}>
-                      {t_sendToCollab}
-                    </button>
-                  ) : null
-                }
-              >
-                {`Version ${props.version}`}
-              </MobileTopBar>
+              {!props.voting && (
+                <MobileTopBar
+                  back={backAction}
+                  action={
+                    isDraft ? (
+                      <button className="btn-secondary" onClick={handleClick}>
+                        {t_sendToCollab}
+                      </button>
+                    ) : null
+                  }
+                >
+                  {`Version ${props.version}`}
+                </MobileTopBar>
+              )}
               <div className="rightSplits">
                 {props.copyright.length > 0 && <Copyright {...commonProps} />}
 

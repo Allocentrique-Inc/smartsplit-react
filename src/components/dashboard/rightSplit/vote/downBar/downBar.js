@@ -16,8 +16,6 @@ const DownBar = (props) => {
   return (
     <div className="downBar">
       <div className="b1">
-        <div />
-
         <div className="right">
           <div className="voteCount">
             {`${props.voteTotal} / ${props.voteNbrNeeded} ${props.t_voteCount}`}

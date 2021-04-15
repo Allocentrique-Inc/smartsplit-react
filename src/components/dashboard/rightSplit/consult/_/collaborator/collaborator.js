@@ -98,66 +98,67 @@ const Collaborator = (props) => {
       <div className="consultCollaborator">
         <Avatar user={collaborator.rightHolder} color={collaboratorColor} />
         <div className="infos">
-          <div>
-            <ArtistName className="name" user={collaborator.rightHolder} />
-            {isYou && `\u00A0${t_you}`}
-            <div className="roles">{printRoles()}</div>
-          </div>
-          <div className="right">
-            <div className="shares">
-              {`${collaborator.shares.toFixed(1)} %`}
+          <div className="row">
+            <div>
+              <ArtistName className="name" user={collaborator.rightHolder} />
+              {isYou && `\u00A0${t_you}`}
+              <div className="roles">{printRoles()}</div>
             </div>
-            {collaborator.vote === 'accepted' && (
-              <div className="voteAccepted">{props.t_accepted}</div>
-            )}
-            {collaborator.vote === 'rejected' && (
-              <div className="voteRejected">{props.t_rejected}</div>
-            )}
-            {collaborator.vote === 'undecided' && (
-              <div className="voteUndecided">{props.t_undecided}</div>
-            )}
+            <div className="right">
+              <div className="shares">
+                {`${collaborator.shares.toFixed(1)} %`}
+              </div>
+              {collaborator.vote === 'accepted' && (
+                <div className="voteAccepted">{props.t_accepted}</div>
+              )}
+              {collaborator.vote === 'rejected' && (
+                <div className="voteRejected">{props.t_rejected}</div>
+              )}
+              {collaborator.vote === 'undecided' && (
+                <div className="voteUndecided">{props.t_undecided}</div>
+              )}
+            </div>
           </div>
-        </div>
-      </div>
-      {!props.voting && !isUserVoting && collaborator.comment && (
-        <div className="comment">
-          <div>${props.t_comments}</div>
-          {collaborator.comment}
-        </div>
-      )}
-
-      {props.voting && isUserVoting && (
-        <div className="voting">
-          <div className="buttons">
-            <button
-              onClick={handleReject}
-              className={`reject ${
-                votes[collaboratorType].vote === 'rejected'
-                  ? 'rejectSelected'
-                  : ''
-              }`}
-            >
-              {props.t_no}
-            </button>
-            <button
-              onClick={handleAccept}
-              className={`accept ${
-                votes[collaboratorType].vote === 'accepted'
-                  ? 'acceptSelected'
-                  : ''
-              }`}
-            >
-              {props.t_yes}
-            </button>
-          </div>
-          {votes[collaboratorType].vote === 'rejected' && (
-            <textarea
-              value={votes[collaboratorType].comment}
-              onChange={handleCommentChange}
-            />
+          {!props.voting && !isUserVoting && collaborator.comment && (
+            <div className="comment">
+              <div>{props.t_comments}</div>
+              {collaborator.comment}
+            </div>
+          )}
+          {props.voting && isUserVoting && (
+            <div className="voting">
+              <div className="buttons">
+                <button
+                  onClick={handleReject}
+                  className={`reject ${
+                    votes[collaboratorType].vote === 'rejected'
+                      ? 'rejectSelected'
+                      : ''
+                  }`}
+                >
+                  {props.t_no}
+                </button>
+                <button
+                  onClick={handleAccept}
+                  className={`accept ${
+                    votes[collaboratorType].vote === 'accepted'
+                      ? 'acceptSelected'
+                      : ''
+                  }`}
+                >
+                  {props.t_yes}
+                </button>
+              </div>
+              {votes[collaboratorType].vote === 'rejected' && (
+                <textarea
+                  value={votes[collaboratorType].comment}
+                  onChange={handleCommentChange}
+                />
+              )}
+            </div>
           )}
         </div>
-      )}
+      </div>
     </>
   );
 };

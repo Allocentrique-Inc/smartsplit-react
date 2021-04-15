@@ -4,6 +4,7 @@ import Creation from './creation/creation';
 import SplitOwner from './splitOwner/splitOwner';
 import Consult from '../consult/consult';
 import DownBar from './downBar/downBar';
+import MobileTopBar from '../../_/mobileTopBar/mobileTopBar';
 
 const Vote = (props) => {
   const [votes, setVotes] = useState({
@@ -58,6 +59,7 @@ const Vote = (props) => {
 
   const translation = props.translations.rightSplit.vote;
   const t_title = translation._title[props.language];
+  const t_mobileTitle = translation._mobileTitle[props.language];
   const t_createdBy = translation._createdBy[props.language];
   const t_voteCount = translation._voteCount[props.language];
   const t_submitVote = { fr: 'Soumettre mon vote', en: 'Submit my vote' }[
@@ -75,27 +77,38 @@ const Vote = (props) => {
   };
   return (
     <div className="vote">
-      <div className="b1">
-        <div className="inner">
-          <div className="voteTitle">{`${t_title} ${title}`}</div>
-          <div className="workpieceDetails">
-            {t_createdBy}
-            <span className="ownerName">{ownerName}</span>
-            {/* - Mis à jour il y a
+      {!props.isMobile && (
+        <>
+          <div className="b1">
+            <div className="inner">
+              <div className="voteTitle">{`${t_title} ${title}`}</div>
+              <div className="workpieceDetails">
+                {t_createdBy}
+                <span className="ownerName">{ownerName}</span>
+                {/* - Mis à jour il y a
             ----- */}
+              </div>
+              <div className="version">{`Version ${version}`}</div>
+              <div className="workpieceDetails">
+                {t_createdBy}
+                <span className="ownerName">{splitOwnerName}</span>
+                {/* - il y a ----- */}
+              </div>
+              <div className="consult">
+                <Consult {...commonProps} voting />
+              </div>
+            </div>
           </div>
-          <div className="version">{`Version ${version}`}</div>
-          <div className="workpieceDetails">
-            {t_createdBy}
-            <span className="ownerName">{splitOwnerName}</span>
-            {/* - il y a ----- */}
-          </div>
-          <div className="consult">
-            <Consult {...commonProps} voting />
-          </div>
-        </div>
-      </div>
-      <DownBar {...commonProps} />
+          <DownBar {...commonProps} />
+        </>
+      )}
+      {props.isMobile && (
+        <>
+          <MobileTopBar>{t_mobileTitle}</MobileTopBar>
+          <Consult {...commonProps} voting />
+          <DownBar {...commonProps} />
+        </>
+      )}
     </div>
   );
 };

@@ -51,6 +51,7 @@
     }
   }
   .downBar {
+    padding: 16px;
     position: sticky;
     bottom: 0px;
     background-color: white;
@@ -76,7 +77,7 @@
           margin-right: 32px;
         }
         .submit {
-          border: 1px solid #dcdfe1;
+          border: 0;
           padding: 6px 12px;
           width: fit-content;
           border-radius: 2px;

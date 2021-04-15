@@ -257,6 +257,10 @@ export default {
   },
 
   vote: {
+    _mobileTitle: {
+      fr: 'Valider le split',
+      en: 'Validate the split',
+    },
     _title: {
       fr: 'Valider le split de',
       en: '',
