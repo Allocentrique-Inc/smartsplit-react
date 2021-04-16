@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Action from './action/action';
 import VertEllipsis from '../../../../icons/vertEllipsis';
 import CoverImage from '../../_/coverImage/coverImage';
@@ -6,6 +7,7 @@ import LastModified from '../../_/lastModified/lastModified';
 import ArtistName from '../../_/artistName/artistName';
 
 const Workpiece = (props) => {
+  const history = useHistory();
   const t_by = {
     fr: 'par',
     en: 'by',
@@ -27,8 +29,10 @@ const Workpiece = (props) => {
   const commonProps = {
     ...props,
   };
+  const handleClick = () =>
+    props.isMobile && history.push(`/workpiece/${props.workpiece_id}`);
   return (
-    <div className="workpiece">
+    <div className="workpiece" onClick={handleClick}>
       <div className="left">
         <div className="img">
           <CoverImage className="small" coverImage={coverImage} />
@@ -45,7 +49,7 @@ const Workpiece = (props) => {
       </div>
 
       <div className="right">
-        <Action {...commonProps} />
+        {!props.isMobile && <Action {...commonProps} />}
         {props.tab === 'owner' && <Ellipsis {...commonProps} />}
       </div>
     </div>

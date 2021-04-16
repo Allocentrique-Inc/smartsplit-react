@@ -18,6 +18,16 @@
     }
   }
 }
+.mobileDownBar {
+  display: flex;
+  justify-content: space-around;
+  padding: 16px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background: #ffffff;
+  box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.1);
+}
 
 .tabs {
   .tabMenu {
