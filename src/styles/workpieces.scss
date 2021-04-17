@@ -110,9 +110,6 @@
       display: flex;
       box-shadow: inset 0px -1px 0px #dcdfe1;
       margin-top: 32px;
-      @media screen and (max-width: 944px) {
-        margin-top: 16px;
-      }
 
       .tab {
         font-family: IBM Plex Sans;
@@ -130,6 +127,19 @@
         cursor: pointer;
         padding: 0;
         margin-right: 16px;
+      }
+      @media screen and (max-width: 944px) {
+        margin-top: 16px;
+        .tab {
+          //styleName: Interface/Small-700;
+          font-family: IBM Plex Sans;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 16px;
+          letter-spacing: 0px;
+          text-align: left;
+        }
       }
       .selectedTab {
         box-shadow: inset 0px -2px 0px #3db25e;
@@ -349,13 +359,14 @@
         }
         > .content {
           overflow-y: visible;
+          flex: 1;
         }
         > .downBar {
           box-shadow: 0px -2px 8px 0px rgba(0, 0, 0, 0.1);
-
+          height: fit-content;
           max-width: none;
-          flex: 1;
           width: 100%;
+          align-self: flex-end;
           position: sticky;
           bottom: 0;
           background: #ffffff;

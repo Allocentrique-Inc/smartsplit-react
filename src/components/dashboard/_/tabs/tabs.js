@@ -17,7 +17,8 @@ export default function Tabs({ options, children }) {
           </div>
         ))}
       </div>
-      {children[currentIndex]}
+      {Array.isArray(children) && children[currentIndex]}
+      {!Array.isArray(children) && children}
     </div>
   );
 }

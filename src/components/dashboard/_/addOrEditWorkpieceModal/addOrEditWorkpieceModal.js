@@ -95,7 +95,6 @@ export default function AddOrEditWorkpieceModal(props) {
     translations.workpieces.workpieceModal.downBar.submit[
       isAdding ? '_create' : '_edit'
     ][language];
-  console.log(isAdding);
   return (
     <div className="workpieceModal">
       <div className="modalBackground" onClick={() => setShowModal(false)}>

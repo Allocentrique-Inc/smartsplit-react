@@ -13,14 +13,14 @@ import EmptyRightholderSongs from './emptyRightholderSongs/emptyRightholderSongs
 import DeletingWorkpiece from './deletingWorkpiece/deletingWorkpiece';
 import MobileDownBar from '../_/mobileDownBar/mobileDownBar';
 import Plus from '../../../icons/plus';
-import AddWorkpieceMobile from './addWorkpieceMobile/addWorkpieceMobile';
+import AddOrEditWorkpieceMobile from '../_/addOrEditWorkpieceMobile/addOrEditWorkpieceMobile';
 
 const Workpieces = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [workpieceInDeletion, setWorkpieceInDeletion] = useState(null);
-  const [showAddWorkpiece, setShowAddWorkpiece] = useState(false);
+  const [showWorkpieceForm, setShowWorkpieceForm] = useState(false);
   useEffect(() => {
-    if (!props.isMobile && showAddWorkpiece) setShowAddWorkpiece(false);
+    if (!props.isMobile && showWorkpieceForm) setShowWorkpieceForm(false);
   }, [props.isMobile]);
 
   const t_pageTitle = {
@@ -37,12 +37,12 @@ const Workpieces = (props) => {
     setShowModal,
     setWorkpieceInDeletion,
     workpieceInDeletion,
-    setShowAddWorkpiece,
+    setShowWorkpieceForm,
   };
 
   return (
     <>
-      {!showAddWorkpiece && (
+      {!showWorkpieceForm && (
         <div className="workpieces">
           {showModal && <AddOrEditWorkpieceModal {...commonProps} />}
           {workpieceInDeletion && <DeletingWorkpiece {...commonProps} />}
@@ -90,7 +90,7 @@ const Workpieces = (props) => {
             <>
               <button
                 className="btn-icon mobile"
-                onClick={() => setShowAddWorkpiece(true)}
+                onClick={() => setShowWorkpieceForm(true)}
               >
                 <Plus />
               </button>
@@ -99,7 +99,7 @@ const Workpieces = (props) => {
           )}
         </div>
       )}
-      {showAddWorkpiece && <AddWorkpieceMobile {...commonProps} />}
+      {showWorkpieceForm && <AddOrEditWorkpieceMobile {...commonProps} />}
     </>
   );
 };

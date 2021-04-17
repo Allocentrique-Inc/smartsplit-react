@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 // import { NavHashLink } from 'react-router-hash-link';
 import MobileTopBar from '../_/mobileTopBar/mobileTopBar';
+import MobileDownBar from '../_/mobileDownBar/mobileDownBar';
 import Profile from './profile/profile';
 import Account from './account/account';
 import ProfessionalIdentity from './professionalIdentity/professionalIdentity';
@@ -160,6 +161,7 @@ export default function Settings(props) {
           </Route>*/}
             </Switch>
           </main>
+          {isMainMenu && <MobileDownBar current="settings" />}
         </>
       )}
       {!isMobile && (

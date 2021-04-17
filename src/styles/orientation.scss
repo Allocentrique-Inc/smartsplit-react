@@ -187,3 +187,50 @@
     }
   }
 }
+
+.mobileOrientation {
+  background: rgba(250, 248, 249, 1);
+
+  main {
+    .row {
+      justify-content: space-between;
+      padding: 0 16px;
+      .details {
+        @extend .small-400;
+        color: rgba(104, 122, 139, 1);
+        .artistName {
+          @extend .small-700;
+          color: rgba(45, 168, 79, 1);
+        }
+      }
+    }
+    .tabMenu {
+      box-shadow: none;
+    }
+    .tab {
+      max-width: none;
+      padding-top: 16px;
+      background: rgba(255, 255, 255, 1);
+      .tile {
+        margin-bottom: 16px;
+        padding: 32px 16px 16px 16px;
+        border: 1px solid rgba(220, 223, 225, 1);
+        box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        .title {
+          @extend h2;
+          margin-top: 32px;
+        }
+        .description {
+          @extend .small-400;
+          color: rgba(104, 122, 139, 1);
+          margin-top: 8px;
+          margin-bottom: 16px;
+        }
+        .action {
+          @extend .btn-secondary;
+        }
+      }
+    }
+  }
+}
