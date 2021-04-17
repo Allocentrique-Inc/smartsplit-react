@@ -1,9 +1,5 @@
-import { Colors, Metrics } from '../theme';
-
-export default function X(props) {
-  const color = props.color || Colors.tertiary;
-  const size = Metrics.size[props.size] || Metrics.size.small;
-
+export default function X({ color = '#8DA0B3', size = 24 }) {
+  const scale = size / 24;
   return (
     <svg
       width={size}
@@ -18,14 +14,15 @@ export default function X(props) {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        transform={`scale(${scale})`}
       />
-
       <path
         d="M6 6L18 18"
         stroke={color}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        transform={`scale(${scale})`}
       />
     </svg>
   );
