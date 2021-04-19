@@ -13,6 +13,7 @@ import CircledStar from '../../../../icons/circledStar';
 import SplitChart from '../_/charts/splitChart/splitChart';
 import { rightHoldersToChartData } from '../_/charts/utils';
 import { computeDividingMethod } from './_/utils';
+import recalculateShares from './_/recalculateShares';
 
 const Performance = (props) => {
   const { workpiece_id } = useParams();
@@ -22,7 +23,6 @@ const Performance = (props) => {
   const [triedSubmit, setTriedSubmit] = useState(false);
   const pageErrors = props.calculatePerformanceErrors(props.performance);
   const [dividingMethod, setDividingMethod] = useState();
-  console.log('dividingMethod', dividingMethod);
   useEffect(() => {
     const newMethod = computeDividingMethod(props.performance);
     if (newMethod !== dividingMethod) {
@@ -44,7 +44,7 @@ const Performance = (props) => {
           roles: [],
           comment: '',
           status: '',
-          shares: 10,
+          shares: 0,
         },
       ];
       newPerformance = setCollaboratorsErrors(newPerformance);
@@ -53,11 +53,14 @@ const Performance = (props) => {
   };
 
   const deleteCollaborator = (rightHolder_id) => {
-    let newPerformance = [...props.performance].filter(
+    const newPerformance = [...props.performance].filter(
       (el) => el.rightHolder_id !== rightHolder_id,
     );
-    newPerformance = setCollaboratorsErrors(newPerformance);
-    props.setPerformance(newPerformance);
+    recalculateShares({
+      performance: newPerformance,
+      setPerformance: props.setPerformance,
+      dividingMethod,
+    });
   };
 
   const deleteRole = (role, rightHolder_id) => {

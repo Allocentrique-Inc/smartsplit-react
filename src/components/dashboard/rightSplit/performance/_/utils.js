@@ -1,7 +1,4 @@
-import {
-  useMajorContributors,
-  useMinorContributors,
-} from '../../recording/_/hooks';
+import { useMajorContributors, useMinorContributors } from './hooks';
 
 export function computeDividingMethod(rightHolders) {
   const majorShares = useMajorContributors(rightHolders);
