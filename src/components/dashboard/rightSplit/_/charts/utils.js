@@ -1,4 +1,3 @@
-import { useLyricContributors, useMusicContributors } from './hooks';
 import colors from '../colors';
 
 export const Origin = {
@@ -112,43 +111,4 @@ export function genSliceData({
         },${clockwise ? 1 : 0} ${end.x},${end.y} z`,
         color,
       };
-}
-
-export function computeLyricChartData(rightHolders, activeCollaboratorsIds) {
-  const [lyricContributors, lyricContributorsNb] = useLyricContributors(
-    rightHolders,
-  );
-  return rightHoldersToChartData(
-    lyricContributors.map((contributor) => ({
-      ...contributor,
-      shares: Math.floor((100 / lyricContributorsNb) * 10000) * 10000,
-    })),
-    activeCollaboratorsIds,
-  );
-}
-
-export function computeMusicChartData(rightHolders, activeCollaboratorsIds) {
-  const [musicContributors, musicContributorNb] = useMusicContributors(
-    rightHolders,
-  );
-
-  return rightHoldersToChartData(
-    musicContributors.map((contributor) => ({
-      ...contributor,
-      shares:
-        Math.floor(((contributor.weight * 100) / musicContributorNb) * 10000) *
-        10000,
-    })),
-    activeCollaboratorsIds,
-  );
-}
-
-export function displayDualPieChart(rightHolders, dividingMethod) {
-  const musicContributorNb = useMusicContributors(rightHolders)[1];
-  const lyricContributorNb = useLyricContributors(rightHolders)[1];
-  return (
-    musicContributorNb > 0 &&
-    lyricContributorNb > 0 &&
-    dividingMethod === 'role'
-  );
 }

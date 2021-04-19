@@ -13,12 +13,13 @@ import PageErrors from '../_/pageErrors/pageErrors';
 import CircledC from '../../../../icons/circledC';
 import SplitChart from '../_/charts/splitChart/splitChart';
 import DualSplitChart from '../_/charts/dualSplitChart/dualSplitChart';
+import { useLyricContributors, useMusicContributors } from './_/hooks';
 import {
   computeLyricChartData,
   computeMusicChartData,
-  rightHoldersToChartData,
-  displayDualPieChart,
-} from '../_/charts/utils';
+  showDualPieChart,
+} from './_/utils';
+import { rightHoldersToChartData } from '../_/charts/utils';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
@@ -156,7 +157,7 @@ const Copyright = (props) => {
   const sharesTotal = props.copyright.reduce((acc, el) => el.shares + acc, 0);
   const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
   const shouldDisplayPieChart = isTotal100;
-  const shouldDisplayDualPieChart = displayDualPieChart(
+  const shouldDisplayDualPieChart = showDualPieChart(
     props.copyright,
     props.copyrightDividingMethod,
   );

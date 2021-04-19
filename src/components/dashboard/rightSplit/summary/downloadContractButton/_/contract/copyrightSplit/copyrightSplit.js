@@ -2,12 +2,7 @@ import { Text, View } from '@react-pdf/renderer';
 import ReactHtmlParser from 'react-html-parser';
 import Icon from '../_/icon/icon';
 import Badge from '../_/badge/badge';
-import {
-  computeLyricChartData,
-  computeMusicChartData,
-  rightHoldersToChartData,
-  displayDualPieChart,
-} from '../../../../../_/charts/utils';
+import { rightHoldersToChartData } from '../../../../../_/charts/utils';
 import PDFContentParser from '../_/PDFContentParser';
 
 import logoPaths from '../../assets/logoPaths';
@@ -17,6 +12,11 @@ import SplitChart from '../_/splitChart/splitChart';
 import colors from '../../../../../_/colors';
 import printRoles from '../_/printRoles';
 import translations from '../../assets/translations';
+import {
+  computeLyricChartData,
+  computeMusicChartData,
+  showDualPieChart,
+} from '../../../../../copyright/_/utils';
 
 export default function CopyrightSplit(props) {
   const {
@@ -47,7 +47,7 @@ export default function CopyrightSplit(props) {
     key: 'copyrightChart',
   };
 
-  const shouldDisplayDualPieChart = displayDualPieChart(
+  const shouldDisplayDualPieChart = showDualPieChart(
     copyright.rightHolders,
     copyrightDividingMethod,
   );
