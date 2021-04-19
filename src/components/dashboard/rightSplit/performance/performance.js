@@ -1,5 +1,5 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
 import AddCollaborators from '../_/addCollaborators/addCollaborators';
 import TopBar from '../_/topBar/topBar';
 import DownBar from '../_/downBar/downBar';
@@ -12,6 +12,7 @@ import setCollaboratorsErrors from './_/setCollaboratorsErrors';
 import CircledStar from '../../../../icons/circledStar';
 import SplitChart from '../_/charts/splitChart/splitChart';
 import { rightHoldersToChartData } from '../_/charts/utils';
+import { computeDividingMethod } from './_/utils';
 
 const Performance = (props) => {
   const { workpiece_id } = useParams();
@@ -20,6 +21,14 @@ const Performance = (props) => {
   );
   const [triedSubmit, setTriedSubmit] = useState(false);
   const pageErrors = props.calculatePerformanceErrors(props.performance);
+  const [dividingMethod, setDividingMethod] = useState();
+  console.log('dividingMethod', dividingMethod);
+  useEffect(() => {
+    const newMethod = computeDividingMethod(props.performance);
+    if (newMethod !== dividingMethod) {
+      setDividingMethod(newMethod);
+    }
+  });
 
   const addCollaborators = (newCollaborator) => {
     if (
@@ -119,6 +128,7 @@ const Performance = (props) => {
       props.activeCollaboratorsIds,
     ),
     logo: CircledStar,
+    startAngle: dividingMethod === 'equal' ? 0 : 216,
     size: 384,
   };
 
