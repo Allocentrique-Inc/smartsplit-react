@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RoleBox from '../../_/roleBox/roleBox';
 import Dragger from '../../_/dragger/dragger';
 import colors from '../../_/colors';
@@ -7,10 +7,18 @@ import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import setCollaboratorsErrors from '../_/setCollaboratorsErrors';
 import Avatar from '../../../_/avatar/avatar';
 import ArtistName from '../../../_/artistName/artistName';
+import recalculateShares from '../_/recalculateShares';
 
 const Collaborator = (props) => {
+  const { collaborator, performance, setPerformance, dividingMethod } = props;
   const [isShowingOptions, setIsShowingOptions] = useState(false);
-
+  useEffect(() => {
+    recalculateShares({
+      performance,
+      setPerformance,
+      dividingMethod,
+    });
+  }, [collaborator.status]);
   // AVATAR
   const collaboratorColor =
     colors[
@@ -30,19 +38,8 @@ const Collaborator = (props) => {
     let arr = [...props.performance];
     arr[props.id].status = e.target.value;
     arr = setCollaboratorsErrors(arr);
-    props.setPerformance(arr);
+    setPerformance(arr);
   };
-
-  // DRAGGER
-  const setShares = () => {
-    /* Shares automatically setted on performance according to status */
-  };
-  const setLock = (newState) => {
-    const arr = [...props.performance];
-    arr[props.id].lock = newState;
-    props.setPerformance(arr);
-  };
-
   // ROLE BOX
   const handleToggleRole = (role) => {
     const isPresent = props.collaborator.roles.some((el) => role === el);
@@ -83,8 +80,6 @@ const Collaborator = (props) => {
   // COMMON PROPS
   const commonProps = {
     ...props,
-    setLock,
-    setShares,
     handleToggleRole,
   };
 

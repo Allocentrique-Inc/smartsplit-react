@@ -1,6 +1,6 @@
 import { useMajorContributors, useMinorContributors } from './hooks';
 
-export function computeDividingMethod(rightHolders) {
+export default function computeDividingMethod(rightHolders) {
   const majorShares = useMajorContributors(rightHolders);
   const minorShares = useMinorContributors(rightHolders);
   if (

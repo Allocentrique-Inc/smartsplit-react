@@ -12,32 +12,35 @@ import setCollaboratorsErrors from './_/setCollaboratorsErrors';
 import CircledStar from '../../../../icons/circledStar';
 import SplitChart from '../_/charts/splitChart/splitChart';
 import { rightHoldersToChartData } from '../_/charts/utils';
-import { computeDividingMethod } from './_/utils';
+import computeDividingMethod from './_/computeDividingMethod';
 import recalculateShares from './_/recalculateShares';
 
 const Performance = (props) => {
+  const { performance, setPerformance } = props;
   const { workpiece_id } = useParams();
   const [isCreatingNewCollaborator, setIsCreatingNewCollaborator] = useState(
     false,
   );
   const [triedSubmit, setTriedSubmit] = useState(false);
-  const pageErrors = props.calculatePerformanceErrors(props.performance);
-  const [dividingMethod, setDividingMethod] = useState();
+  const pageErrors = props.calculatePerformanceErrors(performance);
+  // const [dividingMethod, setDividingMethod] = useState();
+  const dividingMethod = computeDividingMethod(performance);
+
+  // const dividingMethod = computeDividingMethod(props.perf)
   useEffect(() => {
-    const newMethod = computeDividingMethod(props.performance);
-    if (newMethod !== dividingMethod) {
-      setDividingMethod(newMethod);
-    }
-  });
+    recalculateShares({
+      performance,
+      setPerformance,
+      dividingMethod,
+    });
+  }, [performance.length]);
 
   const addCollaborators = (newCollaborator) => {
     if (
-      !props.performance.find(
-        (el) => newCollaborator.user_id === el.rightHolder_id,
-      )
+      !performance.find((el) => newCollaborator.user_id === el.rightHolder_id)
     ) {
       let newPerformance = [
-        ...props.performance,
+        ...performance,
         {
           rightHolder: newCollaborator,
           rightHolder_id: newCollaborator.user_id,
@@ -48,61 +51,49 @@ const Performance = (props) => {
         },
       ];
       newPerformance = setCollaboratorsErrors(newPerformance);
-      props.setPerformance(newPerformance);
+      setPerformance(newPerformance);
     }
   };
 
   const deleteCollaborator = (rightHolder_id) => {
-    const newPerformance = [...props.performance].filter(
+    const newPerformance = [...performance].filter(
       (el) => el.rightHolder_id !== rightHolder_id,
     );
-    recalculateShares({
-      performance: newPerformance,
-      setPerformance: props.setPerformance,
-      dividingMethod,
-    });
+    setPerformance(newPerformance);
   };
-
-  const deleteRole = (role, rightHolder_id) => {
-    const modifiedPerformance = props.performance.find(
-      (el) => el.rightHolder_id === rightHolder_id,
+  const addRole = (role, id) => {
+    const index = performance.findIndex(
+      (collaborator) => collaborator.rightHolder_id === id,
     );
-    modifiedPerformance.roles = modifiedPerformance.roles.filter(
-      (el) => el !== role,
-    );
-    const newPerformance = props.performance.map((el) =>
-      el.rightHolder_id === rightHolder_id ? modifiedPerformance : el,
-    );
-    props.setPerformance(newPerformance);
+    if (index === -1) return;
+    performance[index].roles.push(role);
+    setPerformance([...performance]);
   };
-
-  const addRole = (role, rightHolder_id) => {
-    const modifiedPerformance = props.performance.find(
-      (el) => el.rightHolder_id === rightHolder_id,
+  const deleteRole = (role, id) => {
+    const index = performance.findIndex(
+      (collaborator) => collaborator.rightHolder_id === id,
     );
-    modifiedPerformance.roles.push(role);
-    const newPerformance = props.performance.map((el) =>
-      el.rightHolder_id === rightHolder_id ? modifiedPerformance : el,
-    );
-    props.setPerformance(newPerformance);
+    if (index === -1) return;
+    const roleIndex = performance[index].roles.findIndex((el) => el === role);
+    performance[index].roles.splice(index, 1);
+    setPerformance([...performance]);
   };
-
   // SHARES CALCULATION
-  const mainActorsTotal = props.performance.reduce(
-    (acc, el) =>
-      el.status === 'principal' || el.status === 'featured' ? acc + 1 : acc,
-    0,
-  );
-  const remainingActorsTotal = props.performance.length - mainActorsTotal;
-  props.performance.forEach((el, id, arr) => {
-    if (el.status === 'principal' || el.status === 'featured') {
-      el.shares = (remainingActorsTotal > 0 ? 80 : 100) / mainActorsTotal;
-    } else {
-      el.shares = (mainActorsTotal > 0 ? 20 : 100) / remainingActorsTotal;
-    }
-  });
+  // const mainActorsTotal = performance.reduce(
+  //   (acc, el) =>
+  //     el.status === 'principal' || el.status === 'featured' ? acc + 1 : acc,
+  //   0,
+  // );
+  // const remainingActorsTotal = performance.length - mainActorsTotal;
+  // performance.forEach((el, id, arr) => {
+  //   if (el.status === 'principal' || el.status === 'featured') {
+  //     el.shares = (remainingActorsTotal > 0 ? 80 : 100) / mainActorsTotal;
+  //   } else {
+  //     el.shares = (mainActorsTotal > 0 ? 20 : 100) / remainingActorsTotal;
+  //   }
+  // });
 
-  const sharesTotal = props.performance.reduce((acc, el) => el.shares + acc, 0);
+  const sharesTotal = performance.reduce((acc, el) => el.shares + acc, 0);
   const isTotal100 = sharesTotal > 99.999 && sharesTotal < 100.001;
   const shouldDisplayPieChart = isTotal100;
 
@@ -116,8 +107,6 @@ const Performance = (props) => {
   const commonProps = {
     ...props,
     deleteCollaborator,
-    deleteRole,
-    addRole,
     addCollaborators,
     isCreatingNewCollaborator,
     setIsCreatingNewCollaborator,
@@ -127,12 +116,15 @@ const Performance = (props) => {
     triedSubmit,
     setTriedSubmit,
     chartData: rightHoldersToChartData(
-      props.performance,
+      performance,
       props.activeCollaboratorsIds,
     ),
     logo: CircledStar,
     startAngle: dividingMethod === 'equal' ? 0 : 216,
     size: 384,
+    dividingMethod,
+    addRole,
+    deleteRole,
   };
 
   return (
@@ -144,7 +136,7 @@ const Performance = (props) => {
           <div className="b1b1">
             <div className="b1b1b1">
               <Presentation {...commonProps} view="performance" />
-              {props.performance.map((collaborator, id) => (
+              {performance.map((collaborator, id) => (
                 <Collaborator
                   key={collaborator.rightHolder_id}
                   {...commonProps}
@@ -154,7 +146,7 @@ const Performance = (props) => {
               ))}
               <AddCollaborators
                 {...commonProps}
-                preSelectedCollaborators={props.performance}
+                preSelectedCollaborators={performance}
               />
               {triedSubmit && (
                 <PageErrors {...commonProps} errors={pageErrors} />

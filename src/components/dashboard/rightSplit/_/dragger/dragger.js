@@ -7,7 +7,7 @@ const Dragger = (props) => {
     const newValue = Math.round(
       (e.clientX - e.target.getBoundingClientRect().x) / 3.28,
     );
-    props.setShares(newValue);
+    props.setShares && props.setShares(newValue);
   };
   const handleLockBtn = () => props.setLock(!props.collaborator.lock);
   return (

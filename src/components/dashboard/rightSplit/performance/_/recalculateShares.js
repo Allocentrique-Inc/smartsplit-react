@@ -8,7 +8,7 @@ const recalculateShares = ({ performance, setPerformance, dividingMethod }) => {
   const isActive = (collaborator) =>
     activeCollaborators.some(
       (activeCollaborator) =>
-        activeCollaborators.rightHolder_id === collaborator.rightHolder_id,
+        activeCollaborator.rightHolder_id === collaborator.rightHolder_id,
     );
   const isMajor = (collaborator) =>
     majorShares.some(
@@ -32,25 +32,15 @@ const recalculateShares = ({ performance, setPerformance, dividingMethod }) => {
       }
       const oldValue = collaborator.shares;
       collaborator.shares = isMajor(collaborator)
-        ? Math.floor(
-            ((0.8 * activeCollaborators.length) / majorShares.length) * 10000,
-          ) / 10000
-        : Math.floor(
-            ((0.2 * activeCollaborators.length) / minorShares.length) * 10000,
-          ) / 10000;
+        ? Math.floor((80 / majorShares.length) * 10000) / 10000
+        : Math.floor((20 / minorShares.length) * 10000) / 10000;
       if (!splitChanged) {
         splitChanged = collaborator.shares !== oldValue;
       }
     });
   }
-  console.log(
-    'END OF RECALCULTATION',
-    performance,
-    splitChanged,
-    majorShares,
-    minorShares,
-  );
-  splitChanged && setPerformance([...performance]);
+
+  setPerformance([...performance]);
 };
 
 export default recalculateShares;
