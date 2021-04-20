@@ -9,7 +9,6 @@ export default function SplitChart({
   size = 4 * 128,
   startAngle,
 }) {
-  console.log('startAngle', startAngle);
   const chartCenter = { x: size / 2, y: size / 2 };
   const slices = usePieChartSlices({
     data: chartData,
