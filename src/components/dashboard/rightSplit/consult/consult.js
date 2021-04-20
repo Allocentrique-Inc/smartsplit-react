@@ -12,12 +12,12 @@ import CircledC from '../../../../icons/circledC';
 import CircledStar from '../../../../icons/circledStar';
 import CircledP from '../../../../icons/circledP';
 import SendToCollaborators from './_/sendToCollaborators/sendToCollaborators';
+import { rightHoldersToChartData } from '../_/charts/utils';
 import {
   computeLyricChartData,
   computeMusicChartData,
-  rightHoldersToChartData,
-  displayDualPieChart,
-} from '../_/charts/utils';
+  showDualPieChart,
+} from '../copyright/_/utils';
 
 const Consult = (props) => {
   const [showSendToCollab, setShowSendToCollab] = useState(false);
@@ -165,7 +165,7 @@ const Consult = (props) => {
     logo: CircledP,
     size: 300,
   };
-  const shouldDisplayDualPieChart = displayDualPieChart(
+  const shouldDisplayDualPieChart = showDualPieChart(
     props.copyright,
     props.copyrightDividingMethod,
   );

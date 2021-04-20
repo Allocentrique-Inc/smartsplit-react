@@ -1,7 +1,4 @@
-import {
-  useLyricContributors,
-  useMusicContributors,
-} from '../../_/charts/hooks';
+import { useLyricContributors, useMusicContributors } from './hooks';
 
 const recalculateShares = ({ newDividingMethod, copyright }) => {
   if (newDividingMethod === 'equal') {

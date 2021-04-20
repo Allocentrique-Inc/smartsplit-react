@@ -149,12 +149,10 @@
               margin-bottom: 16px;
             }
             .logo {
-              width: 22px;
-              height: 22px;
               margin-right: 17px;
+              display: flex;
+              align-items: center;
               @media screen and (max-width: 944px) {
-                width: 14px;
-                height: 14px;
                 margin-right: 11px;
               }
             }
@@ -385,6 +383,7 @@
       }
     }
     .selectStatus {
+      @extend .medium-400;
       height: 32px;
       width: calc(100% - 40px);
       margin-left: 40px;

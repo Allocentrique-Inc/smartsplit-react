@@ -8,7 +8,7 @@ const recalculateShares = ({
   activeCollaborators,
 }) => {
   if (recordingDividingMethod === 'equal') {
-    let recordingChanged = false;
+    let splitChanged = false;
     recording.forEach((collaborator) => {
       if (
         activeCollaborators.some(
@@ -19,10 +19,12 @@ const recalculateShares = ({
         const oldValue = collaborator.shares;
         collaborator.shares =
           Math.floor((100 / activeCollaborators.length) * 10000) / 10000;
-        recordingChanged = collaborator.shares !== oldValue;
+        if (!splitChanged) {
+          splitChanged = collaborator.shares !== oldValue;
+        }
       }
     });
-    recordingChanged && setRecording([...recording]);
+    splitChanged && setRecording([...recording]);
     if (isLabelActive) {
       const oldValue = label.shares;
       label.shares =
