@@ -7,73 +7,81 @@ import setCollaboratorsErrors from '../_/setCollaboratorsErrors';
 import Avatar from '../../../_/avatar/avatar';
 import recalculateShares from '../_/recalculateShares';
 import ArtistName from '../../../_/artistName/artistName';
+import checkLockedShareState from '../_/checkLockedShareState';
+import Lock from '../../../../../icons/lock';
+import Unlock from '../../../../../icons/unlock';
+import Slider from '../../../../_/form/slider/slider';
+import Percentage from '../../../../_/form/percentage/percentage';
 
 const Collaborator = (props) => {
   const {
     collaborator,
     activeCollaborators,
-    isLabelActive,
+    labelIsActive,
     recordingDividingMethod,
     recording,
     label,
     setRecording,
     setLabel,
   } = props;
-  useEffect(
-    () =>
-      recalculateShares({
-        activeCollaborators,
-        isLabelActive,
-        recordingDividingMethod,
-        recording,
-        label,
-        setLabel,
-        setRecording,
-      }),
-    [collaborator.function],
-  );
+  useEffect(() => {
+    recalculateShares({
+      activeCollaborators,
+      labelIsActive,
+      recordingDividingMethod,
+      recording,
+      label,
+      setLabel,
+      setRecording,
+    });
+  }, [collaborator.function]);
+
   const [isShowingOptions, setIsShowingOptions] = useState(false);
 
   // AVATAR
   const collaboratorColor =
-    colors[
-      props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
-    ];
+    colors[props.activeCollaboratorIds.indexOf(collaborator.rightHolder_id)];
 
   // ELLIPSIS
   const handleEllipsisClick = () => {
     setIsShowingOptions((e) => !e);
   };
   const handleDeleteCollaboratorButton = () => {
-    props.deleteCollaborator(props.collaborator.rightHolder_id);
+    props.deleteCollaborator(collaborator.rightHolder_id);
   };
 
   // DRAGGER
   const setShares = (newShares) => {
     props.handleDrag({
       newShares,
-      draggedRightHolder_id: props.collaborator.rightHolder_id,
+      draggedRightHolder_id: collaborator.rightHolder_id,
     });
   };
+  const isLocked = collaborator.lock;
   const setLock = (newState) => {
-    const arr = [...props.recording];
-    arr[props.id].lock = newState;
-    props.setRecording(arr);
+    collaborator.lock = !isLocked;
+    checkLockedShareState({
+      recording,
+      setRecording,
+      label,
+      setLabel,
+      lockAll: !isLocked,
+    });
   };
 
   const collaboratorClassName =
-    props.collaborator &&
-    props.collaborator.errors &&
-    props.collaborator.errors.length > 0 &&
+    collaborator &&
+    collaborator.errors &&
+    collaborator.errors.length > 0 &&
     props.triedSubmit
       ? 'collaborator collaboratorErrors'
       : 'collaborator';
 
-  const isYou = props.user.user_id === props.collaborator.rightHolder.user_id;
+  const isYou = props.user.user_id === collaborator.rightHolder.user_id;
 
   // TEXTS
   const t_you = { fr: '(toi)', en: '(you)' }[props.language];
-  const t_userName = `${props.collaborator.rightHolder.firstName} ${props.collaborator.rightHolder.lastName}`;
+  const t_userName = `${collaborator.rightHolder.firstName} ${collaborator.rightHolder.lastName}`;
   const t_removeCollaborator =
     props.translations.rightSplit._removeCollaborator[props.language];
   const get_t_recordingFunctionOptions = (value) => {
@@ -83,7 +91,11 @@ const Collaborator = (props) => {
     ];
   };
 
-  const isDraggable = props.recordingDividingMethod === 'manual';
+  const isActive = collaborator.function !== '';
+  const isDraggable =
+    props.recordingDividingMethod === 'manual' &&
+    !props.recording[props.id].lock &&
+    isActive;
 
   const commonProps = {
     ...props,
@@ -99,14 +111,8 @@ const Collaborator = (props) => {
         <div className="b1">
           <div className="rowAC">
             {/* AVATAR */}
-            <Avatar
-              user={props.collaborator.rightHolder}
-              color={collaboratorColor}
-            />
-            <ArtistName
-              user={props.collaborator.rightHolder}
-              className="name"
-            />
+            <Avatar user={collaborator.rightHolder} color={collaboratorColor} />
+            <ArtistName user={collaborator.rightHolder} className="name" />
             {isYou && t_you}
           </div>
 
@@ -125,11 +131,11 @@ const Collaborator = (props) => {
         {/* STATUS */}
         <select
           className="selectStatus"
-          value={props.collaborator.function}
+          value={collaborator.function}
           onChange={(e) =>
             props.setCollaboratorFunction(
               e.target.value,
-              props.collaborator.rightHolder_id,
+              collaborator.rightHolder_id,
             )
           }
         >
@@ -148,8 +154,30 @@ const Collaborator = (props) => {
           ))}
         </select>
 
-        {/* DRAGGER */}
-        <Dragger {...commonProps} />
+        <div className="shareRow">
+          {props.recordingDividingMethod === 'manual' && isActive && (
+            <button
+              className={`btn-icon ${
+                collaborator.lock ? 'locked' : 'unlocked'
+              }`}
+              onClick={setLock}
+            >
+              {collaborator.lock ? <Lock /> : <Unlock />}
+            </button>
+          )}
+          <Slider
+            {...commonProps}
+            color={collaboratorColor}
+            value={collaborator.shares}
+            onChange={setShares}
+            disabled={!isDraggable}
+          />
+          <Percentage
+            value={collaborator.shares}
+            onChange={setShares}
+            disabled={!isDraggable}
+          />
+        </div>
       </div>
       <CollaboratorErrors {...commonProps} />
     </>

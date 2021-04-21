@@ -72,15 +72,14 @@ export function getShareTotal(shareholders) {
     .reduce((a, n) => a + n, 0);
 }
 
-export function rightHoldersToChartData(collaborators, activeCollaboratorsIds) {
+export function rightHoldersToChartData(collaborators, activeCollaboratorIds) {
   return collaborators
     .filter((collaborator) => collaborator.shares)
     .map((collaborator, index) => ({
       key: collaborator.rightHolder_id,
       name: collaborator.rightHolder_id,
       shares: collaborator.shares,
-      color:
-        colors[activeCollaboratorsIds.indexOf(collaborator.rightHolder_id)],
+      color: colors[activeCollaboratorIds.indexOf(collaborator.rightHolder_id)],
     }));
 }
 

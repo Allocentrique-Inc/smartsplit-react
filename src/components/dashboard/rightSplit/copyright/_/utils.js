@@ -1,7 +1,7 @@
 import { rightHoldersToChartData } from '../../_/charts/utils';
 import { useLyricContributors, useMusicContributors } from './hooks';
 
-export function computeLyricChartData(rightHolders, activeCollaboratorsIds) {
+export function computeLyricChartData(rightHolders, activeCollaboratorIds) {
   const [lyricContributors, lyricContributorsNb] = useLyricContributors(
     rightHolders,
   );
@@ -10,11 +10,11 @@ export function computeLyricChartData(rightHolders, activeCollaboratorsIds) {
       ...contributor,
       shares: Math.floor((100 / lyricContributorsNb) * 10000) * 10000,
     })),
-    activeCollaboratorsIds,
+    activeCollaboratorIds,
   );
 }
 
-export function computeMusicChartData(rightHolders, activeCollaboratorsIds) {
+export function computeMusicChartData(rightHolders, activeCollaboratorIds) {
   const [musicContributors, musicContributorNb] = useMusicContributors(
     rightHolders,
   );
@@ -26,7 +26,7 @@ export function computeMusicChartData(rightHolders, activeCollaboratorsIds) {
         Math.floor(((contributor.weight * 100) / musicContributorNb) * 10000) *
         10000,
     })),
-    activeCollaboratorsIds,
+    activeCollaboratorIds,
   );
 }
 

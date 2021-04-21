@@ -44,7 +44,7 @@ const Canvas = (props) => {
         .reduce((acc, el) => el.shares + acc, 0);
       const end = start + el.shares;
       const color =
-        colors[props.activeCollaboratorsIds.indexOf(el.rightHolder_id)];
+        colors[props.activeCollaboratorIds.indexOf(el.rightHolder_id)];
       drawPie(context, start, end, color, props.consult);
     });
     if (props.collaborators.length !== 0) {

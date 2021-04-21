@@ -33,12 +33,12 @@ export default function Contract({ contractData = mockData }) {
   if (recording.label && recording.label.rightHolder_id) {
     activeCollaborators.push(recording.label);
   }
-  const activeCollaboratorsIds = activeCollaborators.map(
+  const activeCollaboratorIds = activeCollaborators.map(
     (el) => el.rightHolder_id,
   );
 
   const commonProps = {
-    activeCollaboratorsIds,
+    activeCollaboratorIds,
     CHARTSIZE,
     copyright,
     copyrightDividingMethod,

@@ -10,6 +10,7 @@ import Slider from '../../../../_/form/slider/slider';
 import Lock from '../../../../../icons/lock';
 import Unlock from '../../../../../icons/unlock';
 import Percentage from '../../../../_/form/percentage/percentage';
+import checkLockedShareState from '../_/checkLockedShareState';
 
 const Collaborator = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -17,7 +18,7 @@ const Collaborator = (props) => {
   // AVATAR
   const collaboratorColor =
     colors[
-      props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
+      props.activeCollaboratorIds.indexOf(props.collaborator.rightHolder_id)
     ];
 
   // ELLIPSIS
@@ -41,8 +42,9 @@ const Collaborator = (props) => {
   // DRAGGER
   const setShares = (newShares) =>
     props.handleDrag({ newShares, id: props.id });
-  const setLock = (newState) => {};
-  const isDraggable = props.copyrightDividingMethod === 'manual';
+  const isDraggable =
+    props.copyrightDividingMethod === 'manual' &&
+    !props.copyright[props.id].lock;
 
   const collaboratorClassName =
     props.collaborator &&
@@ -53,12 +55,11 @@ const Collaborator = (props) => {
       : 'collaborator';
 
   const isYou = props.user.user_id === props.collaborator.rightHolder.user_id;
+  const isLocked = props.copyright[props.id].lock;
   const handleLockBtn = () => {
-    const arr = [...props.copyright];
-    arr[props.id].lock = !props.collaborator.lock;
-    props.setCopyright(arr);
+    props.copyright[props.id].lock = !isLocked;
+    checkLockedShareState(props.copyright, props.setCopyright, !isLocked);
   };
-
   // TEXTS
   const t_you = { fr: '(toi)', en: '(you)' }[props.language];
   const t_removeCollaborator =
@@ -76,7 +77,6 @@ const Collaborator = (props) => {
   const commonProps = {
     ...props,
     isDraggable,
-    setLock,
     setShares,
     handleToggleRole,
   };
@@ -140,7 +140,7 @@ const Collaborator = (props) => {
         </div>
 
         <div className="shareRow">
-          {isDraggable && (
+          {props.copyrightDividingMethod === 'manual' && (
             <button
               className={`btn-icon ${
                 props.collaborator.lock ? 'locked' : 'unlocked'

@@ -59,7 +59,7 @@ const Collaborator = (props) => {
 
   const collaboratorColor =
     colors[
-      props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
+      props.activeCollaboratorIds.indexOf(props.collaborator.rightHolder_id)
     ];
 
   const isYou = props.user.user_id === props.collaborator.rightHolder.user_id;

@@ -117,7 +117,7 @@ const Performance = (props) => {
     setTriedSubmit,
     chartData: rightHoldersToChartData(
       performance,
-      props.activeCollaboratorsIds,
+      props.activeCollaboratorIds,
     ),
     logo: CircledStar,
     startAngle: dividingMethod === 'equal' ? 0 : 216,

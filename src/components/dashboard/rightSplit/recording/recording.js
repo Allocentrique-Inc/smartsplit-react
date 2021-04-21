@@ -16,12 +16,13 @@ import SplitChart from '../_/charts/splitChart/splitChart';
 import { rightHoldersToChartData } from '../_/charts/utils';
 import DividingMethod from './dividingMethod/dividingMethod';
 import recalculateShares from './_/recalculateShares';
+import checkLockedShareState from './_/checkLockedShareState';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
 const Recording = (props) => {
   const {
-    activeCollaboratorsIds,
+    activeCollaboratorIds,
     recording,
     setRecording,
     recordingDividingMethod,
@@ -36,23 +37,20 @@ const Recording = (props) => {
   const activeCollaborators = recording.filter(
     (collaborator) => collaborator.function !== '',
   );
-  const isLabelActive =
+  const labelIsActive =
     label && label.rightHolder_id && label.agreementDuration !== '';
-  isLabelActive && activeCollaborators.push(label);
+  labelIsActive && activeCollaborators.push(label);
 
-  useEffect(
-    () =>
-      recalculateShares({
-        recordingDividingMethod,
-        recording,
-        label,
-        setLabel,
-        setRecording,
-        activeCollaborators,
-        isLabelActive,
-      }),
-    [activeCollaborators.length, recordingDividingMethod],
-  );
+  useEffect(() => {
+    checkLockedShareState({
+      recording,
+      setRecording,
+      label,
+      setLabel,
+      lockAll: false,
+    });
+  }, [activeCollaborators.length, recordingDividingMethod]);
+
   const [isCreatingNewCollaborator, setIsCreatingNewCollaborator] = useState(
     false,
   );
@@ -110,17 +108,28 @@ const Recording = (props) => {
   };
 
   const deleteLabel = () => {
-    setLabel({});
+    recalculateShares({
+      recording,
+      setRecording,
+      label: {},
+      setLabel,
+      recordingDividingMethod,
+    });
   };
 
   const deleteCollaborator = (rightHolder) => {
-    const newRecording = [...recording];
-    newRecording.splice(
+    recording.splice(
       recording.find((el1) => el1.user_id === rightHolder),
       1,
     );
-    setCollaboratorsErrors(newRecording);
-    setRecording(newRecording);
+    setCollaboratorsErrors(recording);
+    recalculateShares({
+      recording,
+      setRecording,
+      label,
+      setLabel,
+      recordingDividingMethod,
+    });
   };
 
   const allActors = recording.filter((actor) => actor.function !== '');
@@ -195,9 +204,9 @@ const Recording = (props) => {
     translations.rightSplit.description._recording[language];
   const commonProps = {
     ...props,
-    activeCollaboratorsIds,
+    activeCollaboratorIds,
     activeCollaborators,
-    isLabelActive,
+    labelIsActive,
     recording,
     setRecording,
     recordingDividingMethod,
@@ -224,7 +233,7 @@ const Recording = (props) => {
     setTriedSubmit,
     chartData: rightHoldersToChartData(
       [...recording, label],
-      activeCollaboratorsIds,
+      activeCollaboratorIds,
     ),
     logo: CircledP,
     size: 384,

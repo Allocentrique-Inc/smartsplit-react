@@ -12,14 +12,14 @@ import printRoles from '../_/printRoles';
 import translations from '../../assets/translations';
 
 export default function RecordingSplit(props) {
-  const { language, recording, activeCollaboratorsIds, CHARTSIZE } = props;
+  const { language, recording, activeCollaboratorIds, CHARTSIZE } = props;
   const { label } = recording;
   const rightHolders = [...recording.rightHolders];
   if (label && label.rightHolder_id) {
     rightHolders.push(label);
   }
   const chartProps = {
-    chartData: rightHoldersToChartData(rightHolders, activeCollaboratorsIds),
+    chartData: rightHoldersToChartData(rightHolders, activeCollaboratorIds),
     logoPath: logoPaths.recording,
     size: CHARTSIZE,
     key: 'recordingChart',
@@ -43,7 +43,7 @@ export default function RecordingSplit(props) {
               <Badge
                 color={
                   colors[
-                    activeCollaboratorsIds.indexOf(rightHolder.rightHolder_id)
+                    activeCollaboratorIds.indexOf(rightHolder.rightHolder_id)
                   ]
                 }
                 initials={`${rightHolder.firstName[0]}${rightHolder.lastName[0]}`}

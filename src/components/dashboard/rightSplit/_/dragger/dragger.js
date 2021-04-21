@@ -32,7 +32,7 @@ const Dragger = (props) => {
                 : '0px',
               backgroundColor:
                 colors[
-                  props.activeCollaboratorsIds.indexOf(
+                  props.activeCollaboratorIds.indexOf(
                     props.collaborator.rightHolder_id,
                   )
                 ],

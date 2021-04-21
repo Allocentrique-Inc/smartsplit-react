@@ -7,6 +7,11 @@ import setLabelErrors from '../_/setLabelErrors';
 import CollaboratorErrors from '../../_/collaboratorErrors/collaboratorErrors';
 import recalculateShares from '../_/recalculateShares';
 import ArtistName from '../../../_/artistName/artistName';
+import Slider from '../../../../_/form/slider/slider';
+import Percentage from '../../../../_/form/percentage/percentage';
+import Lock from '../../../../../icons/lock';
+import Unlock from '../../../../../icons/unlock';
+import checkLockedShareState from '../_/checkLockedShareState';
 
 const Label = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -17,34 +22,39 @@ const Label = (props) => {
     setRecording,
     setLabel,
     activeCollaborators,
-    isLabelActive,
+    labelIsActive,
   } = props;
-  useEffect(
-    () =>
-      recalculateShares({
-        recordingDividingMethod,
-        recording,
-        label,
-        setLabel,
-        setRecording,
-        activeCollaborators,
-        isLabelActive,
-      }),
-    [label.agreementDuration],
-  );
+  useEffect(() => {
+    recalculateShares({
+      recordingDividingMethod,
+      recording,
+      label,
+      setLabel,
+      setRecording,
+      activeCollaborators,
+      labelIsActive,
+    });
+  }, [label.agreementDuration]);
   // AVATAR
   const avatarStyle = {
     backgroundColor:
-      colors[props.activeCollaboratorsIds.indexOf(label.rightHolder_id)],
+      colors[props.activeCollaboratorIds.indexOf(label.rightHolder_id)],
   };
 
   // ELLIPSIS
   const handleEllipsisClick = () => {
     setIsShowingOptions((e) => !e);
   };
-
-  const setLock = (newState) => {
-    props.setLabel({ ...props.label, lock: newState });
+  const isLocked = label.lock;
+  const setLock = () => {
+    label.lock = !isLocked;
+    checkLockedShareState({
+      recording,
+      setRecording,
+      label,
+      setLabel,
+      lockAll: !isLocked,
+    });
   };
 
   const setShares = (newShares) => {
@@ -72,6 +82,13 @@ const Label = (props) => {
     label && label.errors && label.errors.length > 0 && props.triedSubmit
       ? 'collaborator collaboratorErrors'
       : 'collaborator';
+
+  const collaboratorColor =
+    colors[props.activeCollaboratorIds.indexOf(label.rightHolder_id)];
+  const isDraggable =
+    props.recordingDividingMethod === 'manual' &&
+    !label.lock &&
+    props.labelIsActive;
 
   const isYou = props.user.user_id === props.label.rightHolder.user_id;
 
@@ -165,7 +182,28 @@ const Label = (props) => {
           />
         </div>
 
-        <Dragger {...commonProps} collaborator={label} isDraggable />
+        <div className="shareRow">
+          {props.recordingDividingMethod === 'manual' && props.labelIsActive && (
+            <button
+              className={`btn-icon ${label.lock ? 'locked' : 'unlocked'}`}
+              onClick={setLock}
+            >
+              {label.lock ? <Lock /> : <Unlock />}
+            </button>
+          )}
+          <Slider
+            {...commonProps}
+            color={collaboratorColor}
+            value={label.shares}
+            onChange={setShares}
+            disabled={!isDraggable}
+          />
+          <Percentage
+            value={label.shares}
+            onChange={setShares}
+            disabled={!isDraggable}
+          />
+        </div>
       </div>
       <CollaboratorErrors {...commonProps} />
     </>

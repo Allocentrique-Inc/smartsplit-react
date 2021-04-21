@@ -50,7 +50,7 @@ const Consult = (props) => {
     }
     return [...acc, el];
   }, []);
-  const activeCollaboratorsIds = activeCollaborators.map(
+  const activeCollaboratorIds = activeCollaborators.map(
     (el) => el.rightHolder_id,
   );
 
@@ -138,16 +138,16 @@ const Consult = (props) => {
   }[props.language];
 
   const copyrightChartProps = {
-    chartData: rightHoldersToChartData(props.copyright, activeCollaboratorsIds),
+    chartData: rightHoldersToChartData(props.copyright, activeCollaboratorIds),
     leftChartData: computeLyricChartData(
       props.copyright,
-      activeCollaboratorsIds,
+      activeCollaboratorIds,
     ),
     leftChartTitle: t_lyrics,
     rightChartTitle: t_music,
     rightChartData: computeMusicChartData(
       props.copyright,
-      activeCollaboratorsIds,
+      activeCollaboratorIds,
     ),
     logo: CircledC,
     size: 300,
@@ -155,13 +155,13 @@ const Consult = (props) => {
   const performanceChartProps = {
     chartData: rightHoldersToChartData(
       props.performance,
-      activeCollaboratorsIds,
+      activeCollaboratorIds,
     ),
     logo: CircledStar,
     size: 300,
   };
   const recordingChartProps = {
-    chartData: rightHoldersToChartData(recording, activeCollaboratorsIds),
+    chartData: rightHoldersToChartData(recording, activeCollaboratorIds),
     logo: CircledP,
     size: 300,
   };

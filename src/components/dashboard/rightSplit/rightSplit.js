@@ -109,14 +109,14 @@ const RightSplit = (props) => {
     }
     return [...acc, el];
   }, []);
-  const activeCollaboratorsIds = [];
+  const activeCollaboratorIds = [];
   activeCollaborators.forEach((collaborator) => {
     if (
-      !activeCollaboratorsIds.some(
+      !activeCollaboratorIds.some(
         ({ rightHolder_id }) => collaborator.rightHolder_id === rightHolder_id,
       )
     ) {
-      activeCollaboratorsIds.push(collaborator.rightHolder_id);
+      activeCollaboratorIds.push(collaborator.rightHolder_id);
     }
   });
 
@@ -251,7 +251,7 @@ const RightSplit = (props) => {
     version,
     translations,
     language,
-    activeCollaboratorsIds,
+    activeCollaboratorIds,
     activeCollaborators,
     warnings,
     setWarnings,

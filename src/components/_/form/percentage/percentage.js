@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { percentageValidator } from '../_/validate';
 
-export default function Percentage({ value, onChange, digits, disabled }) {
+const Percentage = ({ value, onChange, digits, disabled }) => {
   const [displayValue, setDisplayValue] = useState('');
   //Update displayed value on prop value change
   const formatPercentage = (percent) => {
@@ -32,4 +32,6 @@ export default function Percentage({ value, onChange, digits, disabled }) {
       disabled={disabled}
     />
   );
-}
+};
+
+export default Percentage;

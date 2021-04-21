@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import AddCollaborators from '../_/addCollaborators/addCollaborators';
 import TopBar from '../_/topBar/topBar';
@@ -20,6 +20,7 @@ import {
   showDualPieChart,
 } from './_/utils';
 import { rightHoldersToChartData } from '../_/charts/utils';
+import checkLockedShareState from './_/checkLockedShareState';
 
 const ceil = (el) => Math.floor(el * 10000) / 10000;
 
@@ -57,6 +58,10 @@ const Copyright = (props) => {
       props.setCopyright(newCopyright);
     }
   };
+
+  useEffect(() => {
+    checkLockedShareState(props.copyright, props.setCopyright, false);
+  }, [props.copyright.length, props.copyrightDividingMethod]);
 
   const deleteCollaborator = (rightHolder_id) => {
     let newCopyright = props.copyright.filter(
@@ -195,17 +200,17 @@ const Copyright = (props) => {
     setTriedSubmit,
     chartData: rightHoldersToChartData(
       props.copyright,
-      props.activeCollaboratorsIds,
+      props.activeCollaboratorIds,
     ),
     leftChartData: computeLyricChartData(
       props.copyright,
-      props.activeCollaboratorsIds,
+      props.activeCollaboratorIds,
     ),
     leftChartTitle: t_lyrics,
     rightChartTitle: t_music,
     rightChartData: computeMusicChartData(
       props.copyright,
-      props.activeCollaboratorsIds,
+      props.activeCollaboratorIds,
     ),
     logo: CircledC,
     size: 384,

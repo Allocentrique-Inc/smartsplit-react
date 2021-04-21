@@ -46,7 +46,10 @@ const recalculateShares = ({ newDividingMethod, copyright }) => {
     });
   }
   if (newDividingMethod === 'manual') {
-    return [...copyright];
+    if (copyright.length === 1) {
+      copyright[0].shares = 100;
+    }
+    return copyright;
   }
 };
 

@@ -22,7 +22,7 @@ const Collaborator = (props) => {
   // AVATAR
   const collaboratorColor =
     colors[
-      props.activeCollaboratorsIds.indexOf(props.collaborator.rightHolder_id)
+      props.activeCollaboratorIds.indexOf(props.collaborator.rightHolder_id)
     ];
 
   // ELLIPSIS

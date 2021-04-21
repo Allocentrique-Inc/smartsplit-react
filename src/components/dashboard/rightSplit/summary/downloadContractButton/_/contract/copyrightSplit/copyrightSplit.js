@@ -22,7 +22,7 @@ export default function CopyrightSplit(props) {
   const {
     copyright,
     copyrightDividingMethod,
-    activeCollaboratorsIds,
+    activeCollaboratorIds,
     CHARTSIZE,
     language,
   } = props;
@@ -30,17 +30,17 @@ export default function CopyrightSplit(props) {
   const chartProps = {
     chartData: rightHoldersToChartData(
       copyright.rightHolders,
-      activeCollaboratorsIds,
+      activeCollaboratorIds,
     ),
     leftChartData: computeLyricChartData(
       copyright.rightHolders,
-      activeCollaboratorsIds,
+      activeCollaboratorIds,
     ),
     leftTitle: translations._lyrics[language],
     rightTitle: translations._music[language],
     rightChartData: computeMusicChartData(
       copyright.rightHolders,
-      activeCollaboratorsIds,
+      activeCollaboratorIds,
     ),
     logoPath: logoPaths.copyright,
     size: CHARTSIZE,
@@ -67,7 +67,7 @@ export default function CopyrightSplit(props) {
               <Badge
                 color={
                   colors[
-                    activeCollaboratorsIds.indexOf(rightHolder.rightHolder_id)
+                    activeCollaboratorIds.indexOf(rightHolder.rightHolder_id)
                   ]
                 }
                 initials={`${rightHolder.firstName[0]}${rightHolder.lastName[0]}`}

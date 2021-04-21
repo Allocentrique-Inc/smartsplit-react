@@ -12,11 +12,11 @@ import printRoles from '../_/printRoles';
 import translations from '../../assets/translations';
 
 export default function PerformanceSplit(props) {
-  const { language, performance, activeCollaboratorsIds, CHARTSIZE } = props;
+  const { language, performance, activeCollaboratorIds, CHARTSIZE } = props;
   const chartProps = {
     chartData: rightHoldersToChartData(
       performance.rightHolders,
-      activeCollaboratorsIds,
+      activeCollaboratorIds,
     ),
     logoPath: logoPaths.performance,
     size: CHARTSIZE,
@@ -42,7 +42,7 @@ export default function PerformanceSplit(props) {
               <Badge
                 color={
                   colors[
-                    activeCollaboratorsIds.indexOf(rightHolder.rightHolder_id)
+                    activeCollaboratorIds.indexOf(rightHolder.rightHolder_id)
                   ]
                 }
                 initials={`${rightHolder.firstName[0]}${rightHolder.lastName[0]}`}
