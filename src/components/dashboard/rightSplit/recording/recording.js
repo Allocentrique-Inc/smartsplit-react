@@ -49,7 +49,17 @@ const Recording = (props) => {
       setLabel,
       lockAll: false,
     });
-  }, [activeCollaborators.length, recordingDividingMethod]);
+  }, [activeCollaborators.length]);
+
+  useEffect(() => {
+    recalculateShares({
+      recording,
+      setRecording,
+      label,
+      setLabel,
+      recordingDividingMethod,
+    });
+  }, [recordingDividingMethod]);
 
   const [isCreatingNewCollaborator, setIsCreatingNewCollaborator] = useState(
     false,

@@ -19,7 +19,6 @@ const recalculateShares = ({
             collaborator.rightHolder_id === activeCollaborator.rightHolder_id,
         )
       ) {
-        const oldValue = collaborator.shares;
         collaborator.shares =
           Math.floor((100 / activeCollaborators.length) * 10000) / 10000;
       }
