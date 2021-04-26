@@ -12,6 +12,7 @@ export default function SendToCollaborators(props) {
     activeCollaborators,
     language,
     translations,
+    resetData,
   } = props;
   const { workpiece_id } = useParams();
   const initForm = {};
@@ -32,7 +33,8 @@ export default function SendToCollaborators(props) {
         workpiece_id,
         emails: form.toJS(),
       });
-      if (!result.statusCode) {
+      if (result === '') {
+        await resetData();
         setShowSendToCollab(false);
       } else {
         Object.keys(form.fields).forEach((key) => {
