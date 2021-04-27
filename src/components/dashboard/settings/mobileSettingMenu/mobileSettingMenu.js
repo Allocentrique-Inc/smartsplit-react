@@ -29,13 +29,13 @@ export default function MobileSettingMenu({ user, translations, language }) {
         <UserCard />
         {t_account}
       </div>
-      <div
+      {/* <div
         className="menuOption"
         onClick={() => history.push('/settings/preferences')}
       >
         <Cog />
         {t_preferences}
-      </div>
+      </div>*/}
       <div className="menuOption">
         <Logout />
         {t_logout}

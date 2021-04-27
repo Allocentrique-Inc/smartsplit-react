@@ -128,10 +128,16 @@ const Recording = (props) => {
   };
 
   const deleteCollaborator = (rightHolder) => {
-    recording.splice(
-      recording.find((el1) => el1.user_id === rightHolder),
-      1,
+    const index = recording.findIndex(
+      (el) => el.rightHolder_id === rightHolder,
     );
+    const removedCollab = recording.splice(index, 1)[0];
+    if (recordingDividingMethod === 'manual') {
+      recording.forEach((el) => {
+        el.shares +=
+          Math.floor((removedCollab.shares / recording.length) * 10000) / 10000;
+      });
+    }
     setCollaboratorsErrors(recording);
     recalculateShares({
       recording,

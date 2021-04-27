@@ -12,6 +12,7 @@ import Percentage from '../../../../_/form/percentage/percentage';
 import Lock from '../../../../../icons/lock';
 import Unlock from '../../../../../icons/unlock';
 import checkLockedShareState from '../_/checkLockedShareState';
+import Checkbox from '../../../../_/form/checkbox/checkbox';
 
 const Label = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);
@@ -168,17 +169,15 @@ const Label = (props) => {
         </select>
         <div className="notifyPresentation">{t_notifyPresentation}</div>
         <div className="roleRow">
-          <NotificationBox
-            label={props.label}
-            tag={t_notifViaEmail}
-            value={props.label.notifViaEmail}
-            toggle={handleNotifyViaEmail}
+          <Checkbox
+            label={t_notifViaEmail}
+            onChange={handleNotifyViaEmail}
+            checked={label.notifViaEmail}
           />
-          <NotificationBox
-            label={props.label}
-            tag={t_notifViaText}
-            value={props.label.notifViaText}
-            toggle={handleNotifViaText}
+          <Checkbox
+            label={t_notifViaText}
+            onChange={handleNotifViaText}
+            checked={label.notifViaText}
           />
         </div>
 

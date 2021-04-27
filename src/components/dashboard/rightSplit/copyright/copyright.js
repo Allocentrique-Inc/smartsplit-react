@@ -64,9 +64,19 @@ const Copyright = (props) => {
   }, [props.copyright.length, props.copyrightDividingMethod]);
 
   const deleteCollaborator = (rightHolder_id) => {
-    let newCopyright = props.copyright.filter(
-      (el) => el.rightHolder_id !== rightHolder_id,
+    const index = props.copyright.findIndex(
+      (el) => el.rightHolder_id === rightHolder_id,
     );
+    const removedCollab = props.copyright.splice(index, 1)[0];
+    let newCopyright = props.copyright;
+    if (props.copyrightDividingMethod === 'manual') {
+      newCopyright = props.copyright.map((el) => {
+        el.shares +=
+          Math.floor((removedCollab.shares / props.copyright.length) * 10000) /
+          10000;
+        return el;
+      });
+    }
     newCopyright = recalculateShares({
       newDividingMethod: props.copyrightDividingMethod,
       copyright: newCopyright,
