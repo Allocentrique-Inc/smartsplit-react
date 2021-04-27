@@ -121,39 +121,40 @@ const Copyright = (props) => {
   };
 
   const handleDrag = ({ newShares, id }) => {
-    let newCopyright = props.copyright;
     if (props.copyrightDividingMethod === 'manual') {
-      if (newCopyright[id].lock !== true) {
-        const draggedDifferential = newCopyright[id].shares - newShares;
-        const notFocussedCollaborators = newCopyright.filter(
+      if (!props.copyright[id].lock) {
+        const draggedDifferential = props.copyright[id].shares - newShares;
+        const notFocussedCollaborators = props.copyright.filter(
           (el, ID) => ID !== id,
         );
         const unLocksCollaborators = notFocussedCollaborators.filter(
-          (el) => el.lock !== true,
+          (el) => !el.lock,
         );
         const unlockedSharesSum = unLocksCollaborators.reduce(
           (acc, el) => el.shares + acc,
           0,
         );
-        const totalSum = newCopyright.reduce((acc, el) => el.shares + acc, 0);
+        const totalSum = props.copyright.reduce(
+          (acc, el) => el.shares + acc,
+          0,
+        );
         const sharesToSeparate =
           unlockedSharesSum + draggedDifferential + 100 - totalSum;
-        newCopyright = [...newCopyright].map((EL, ID) => {
+        props.copyright.forEach((EL, ID) => {
           if (id === ID) {
-            EL.shares = ceil(
-              sharesToSeparate < 0 ? newShares + sharesToSeparate : newShares,
-            );
-          } else if (EL.lock !== true) {
+            EL.shares = ceil(newShares);
+          } else if (!EL.lock) {
             EL.shares =
-              EL.shares === 0
-                ? 0
-                : sharesToSeparate < 0
-                ? 0
+              draggedDifferential > 0
+                ? ceil(
+                    EL.shares +
+                      draggedDifferential / unLocksCollaborators.length,
+                  )
                 : ceil((EL.shares / unlockedSharesSum) * sharesToSeparate);
           }
           return EL;
         });
-        newCopyright = setCollaboratorsErrors(newCopyright);
+        const newCopyright = setCollaboratorsErrors(props.copyright);
         props.setCopyright(newCopyright);
       }
     }

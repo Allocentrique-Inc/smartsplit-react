@@ -151,13 +151,13 @@ const Recording = (props) => {
     const draggedActor = allActors.find(
       (el) => el.rightHolder_id === draggedRightHolder_id,
     );
-    if (draggedActor.lock !== true) {
+    if (!draggedActor.lock) {
       const draggedDifferential = draggedActor.shares - newShares;
       const notDraggedActors = allActors.filter(
         (el) => el.rightHolder_id !== draggedRightHolder_id,
       );
       const unlockedNotDraggedActors = notDraggedActors.filter(
-        (el) => el.lock !== true,
+        (el) => !el.lock,
       );
       const unlockedNotDraggedActorsSum = unlockedNotDraggedActors.reduce(
         (acc, el) => el.shares + acc,
@@ -168,15 +168,14 @@ const Recording = (props) => {
         unlockedNotDraggedActorsSum + draggedDifferential + 100 - totalSum;
       const redefinedActors = allActors.map((el) => {
         if (el.rightHolder_id === draggedRightHolder_id) {
-          el.shares = ceil(
-            sharesToSeparate < 0 ? newShares + sharesToSeparate : newShares,
-          );
+          el.shares = ceil(newShares);
         } else if (el.lock !== true) {
           el.shares =
-            el.shares === 0
-              ? 0
-              : sharesToSeparate < 0
-              ? 0
+            draggedDifferential > 0
+              ? ceil(
+                  el.shares +
+                    draggedDifferential / unlockedNotDraggedActors.length,
+                )
               : ceil(
                   (el.shares / unlockedNotDraggedActorsSum) * sharesToSeparate,
                 );
