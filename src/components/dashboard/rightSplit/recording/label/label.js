@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import NotificationBox from './notificationBox/notificationBox';
 import Dragger from '../../_/dragger/dragger';
 import Ellipsis from '../../../../../icons/ellipsis';
 import colors from '../../_/colors';
@@ -11,6 +10,7 @@ import Slider from '../../../../_/form/slider/slider';
 import Percentage from '../../../../_/form/percentage/percentage';
 import Lock from '../../../../../icons/lock';
 import Unlock from '../../../../../icons/unlock';
+import Checkbox from '../../../../_/form/checkbox/checkbox';
 import checkLockedShareState from '../_/checkLockedShareState';
 import Checkbox from '../../../../_/form/checkbox/checkbox';
 
@@ -171,13 +171,13 @@ const Label = (props) => {
         <div className="roleRow">
           <Checkbox
             label={t_notifViaEmail}
-            onChange={handleNotifyViaEmail}
             checked={label.notifViaEmail}
+            onChange={handleNotifyViaEmail}
           />
           <Checkbox
             label={t_notifViaText}
-            onChange={handleNotifViaText}
             checked={label.notifViaText}
+            onChange={handleNotifyViaEmail}
           />
         </div>
 

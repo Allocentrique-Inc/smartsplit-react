@@ -16,7 +16,11 @@ export default (props) => {
   const handleFirstName = (e) => setFirstName(e.target.value);
   const handleLastName = (e) => setLastName(e.target.value);
   const handleArtistName = (e) => setArtistName(e.target.value);
+  const isPasswordValid = password === confirmPassword && password !== '';
   const handleSubmit = async () => {
+    if (!isPasswordValid) {
+      return null;
+    }
     const result = await activateInvited({
       token,
       password,
@@ -37,7 +41,6 @@ export default (props) => {
     localStorage.removeItem('accessToken');
   }, []);
 
-  const isPasswordValid = () => password === confirmPassword && password !== '';
   return (
     <div className="content">
       <div className="header">
