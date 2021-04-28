@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import NotificationBox from './notificationBox/notificationBox';
 import Dragger from '../../_/dragger/dragger';
 import Ellipsis from '../../../../../icons/ellipsis';
 import colors from '../../_/colors';
@@ -11,6 +10,7 @@ import Slider from '../../../../_/form/slider/slider';
 import Percentage from '../../../../_/form/percentage/percentage';
 import Lock from '../../../../../icons/lock';
 import Unlock from '../../../../../icons/unlock';
+import Checkbox from '../../../../_/form/checkbox/checkbox';
 import checkLockedShareState from '../_/checkLockedShareState';
 
 const Label = (props) => {
@@ -168,17 +168,15 @@ const Label = (props) => {
         </select>
         <div className="notifyPresentation">{t_notifyPresentation}</div>
         <div className="roleRow">
-          <NotificationBox
-            label={props.label}
-            tag={t_notifViaEmail}
-            value={props.label.notifViaEmail}
-            toggle={handleNotifyViaEmail}
+          <Checkbox
+            label={t_notifViaEmail}
+            checked={label.notifViaEmail}
+            onChange={handleNotifyViaEmail}
           />
-          <NotificationBox
-            label={props.label}
-            tag={t_notifViaText}
-            value={props.label.notifViaText}
-            toggle={handleNotifViaText}
+          <Checkbox
+            label={t_notifViaText}
+            checked={label.notifViaText}
+            onChange={handleNotifyViaEmail}
           />
         </div>
 

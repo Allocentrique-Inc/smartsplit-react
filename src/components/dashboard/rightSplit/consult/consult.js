@@ -121,8 +121,8 @@ const Consult = (props) => {
     en: 'Yes',
   }[props.language];
   const t_no = {
-    fr: 'No',
-    en: 'Non',
+    fr: 'Non',
+    en: 'No',
   }[props.language];
   const t_comments = {
     fr: 'Commentaires',
@@ -225,16 +225,17 @@ const Consult = (props) => {
             </div>
           )}
 
-          {props.recording.length > 0 && (
-            <div className="consultRightSplit">
-              <div className="left">
-                <Recording {...commonProps} />
+          {props.recording.length > 0 ||
+            (props.label.rightHolder_id && (
+              <div className="consultRightSplit">
+                <div className="left">
+                  <Recording {...commonProps} />
+                </div>
+                <div className="consultRightSplitRight">
+                  <SplitChart {...recordingChartProps} />
+                </div>
               </div>
-              <div className="consultRightSplitRight">
-                <SplitChart {...recordingChartProps} />
-              </div>
-            </div>
-          )}
+            ))}
 
           <div className="consultRightSplit">
             <div className="left">
