@@ -59,7 +59,8 @@ const Workpiece = (props) => {
 const Ellipsis = (props) => {
   const [showWorkpieceOptions, setShowWorkpieceOptions] = useState(false);
   const isMenuShowned = !(props.rightSplit && props.rightSplit._state);
-  const openMenu = () => {
+  const openMenu = (e) => {
+    e.stopPropagation();
     setTimeout(() => {
       try {
         document.getElementById('workpieceMenu').focus();
@@ -69,7 +70,9 @@ const Ellipsis = (props) => {
     }, 0);
     setShowWorkpieceOptions(true);
   };
-  const closeMenu = () => {
+  const closeMenu = (e) => {
+    e.stopPropagation();
+
     setShowWorkpieceOptions(false);
   };
   const handleDelete = () => {
@@ -86,7 +89,7 @@ const Ellipsis = (props) => {
       onClick={showWorkpieceOptions ? closeMenu : openMenu}
     >
       <VertEllipsis />
-      {showWorkpieceOptions && isMenuShowned && (
+      {showWorkpieceOptions && (
         <button
           className="workpieceMenuOption"
           onClick={handleDelete}

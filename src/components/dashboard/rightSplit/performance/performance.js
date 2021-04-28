@@ -75,7 +75,7 @@ const Performance = (props) => {
     );
     if (index === -1) return;
     const roleIndex = performance[index].roles.findIndex((el) => el === role);
-    performance[index].roles.splice(index, 1);
+    performance[index].roles.splice(roleIndex, 1);
     setPerformance([...performance]);
   };
   // SHARES CALCULATION

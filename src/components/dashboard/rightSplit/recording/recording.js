@@ -40,6 +40,10 @@ const Recording = (props) => {
   const labelIsActive =
     label && label.rightHolder_id && label.agreementDuration !== '';
   labelIsActive && activeCollaborators.push(label);
+  const isCollabActive = (collabId) =>
+    activeCollaborators.some(
+      (activeCollab) => collabId === activeCollab.rightHolder_id,
+    );
 
   useEffect(() => {
     checkLockedShareState({
@@ -134,8 +138,12 @@ const Recording = (props) => {
     const removedCollab = recording.splice(index, 1)[0];
     if (recordingDividingMethod === 'manual') {
       recording.forEach((el) => {
-        el.shares +=
-          Math.floor((removedCollab.shares / recording.length) * 10000) / 10000;
+        if (isCollabActive(el.rightHolder_id)) {
+          el.shares +=
+            Math.floor(
+              (removedCollab.shares / activeCollaborators.length) * 10000,
+            ) / 10000;
+        }
       });
     }
     setCollaboratorsErrors(recording);
@@ -148,18 +156,13 @@ const Recording = (props) => {
     });
   };
 
-  const allActors = recording.filter((actor) => actor.function !== '');
-  if (label.rightHolder) {
-    allActors.push(label);
-  }
-
   const handleDrag = ({ newShares, draggedRightHolder_id }) => {
-    const draggedActor = allActors.find(
+    const draggedActor = activeCollaborators.find(
       (el) => el.rightHolder_id === draggedRightHolder_id,
     );
     if (!draggedActor.lock) {
       const draggedDifferential = draggedActor.shares - newShares;
-      const notDraggedActors = allActors.filter(
+      const notDraggedActors = activeCollaborators.filter(
         (el) => el.rightHolder_id !== draggedRightHolder_id,
       );
       const unlockedNotDraggedActors = notDraggedActors.filter(
@@ -169,37 +172,41 @@ const Recording = (props) => {
         (acc, el) => el.shares + acc,
         0,
       );
-      const totalSum = allActors.reduce((acc, el) => el.shares + acc, 0);
+      const totalSum = activeCollaborators.reduce(
+        (acc, el) => el.shares + acc,
+        0,
+      );
       const sharesToSeparate =
         unlockedNotDraggedActorsSum + draggedDifferential + 100 - totalSum;
-      const redefinedActors = allActors.map((el) => {
-        if (el.rightHolder_id === draggedRightHolder_id) {
-          el.shares = ceil(newShares);
-        } else if (el.lock !== true) {
-          el.shares =
-            draggedDifferential > 0
-              ? ceil(
-                  el.shares +
-                    draggedDifferential / unlockedNotDraggedActors.length,
-                )
-              : ceil(
-                  (el.shares / unlockedNotDraggedActorsSum) * sharesToSeparate,
-                );
-        }
-        return el;
-      });
-      const newRecording = redefinedActors.filter(
-        (el) => el.rightHolder_id !== label.rightHolder_id,
-      );
-      const newLabel = redefinedActors.filter(
-        (el) => el.rightHolder_id === label.rightHolder_id,
-      );
-      setCollaboratorsErrors(newRecording);
-      setLabelErrors(newLabel);
-      setRecording(newRecording);
-      if (newLabel.length > 0) {
-        setLabel(newLabel[0]);
+
+      if (labelIsActive) {
+        recording.push(label);
       }
+      recording.forEach((el) => {
+        if (isCollabActive(el.rightHolder_id)) {
+          if (el.rightHolder_id === draggedRightHolder_id) {
+            el.shares = ceil(newShares);
+          } else if (el.lock !== true) {
+            el.shares =
+              draggedDifferential > 0
+                ? ceil(
+                    el.shares +
+                      draggedDifferential / unlockedNotDraggedActors.length,
+                  )
+                : ceil(
+                    (el.shares / unlockedNotDraggedActorsSum) *
+                      sharesToSeparate,
+                  );
+          }
+        }
+      });
+      if (labelIsActive) {
+        const newLabel = recording.pop();
+        setLabelErrors([newLabel]);
+        setLabel(newLabel);
+      }
+      setCollaboratorsErrors(recording);
+      setRecording([...recording]);
     }
   };
 
@@ -209,7 +216,10 @@ const Recording = (props) => {
     selectRecordingDividingMethod(dividingMethod);
   };
 
-  const allActorsSum = allActors.reduce((acc, el) => el.shares + acc, 0);
+  const allActorsSum = activeCollaborators.reduce(
+    (acc, el) => el.shares + acc,
+    0,
+  );
   const isDisplayingCircle = allActorsSum > 99.999 && allActorsSum < 100.001;
 
   const t_title = translations.rightSplit.title._recording[language];
@@ -299,7 +309,7 @@ const Recording = (props) => {
 
               <AddCollaborators
                 {...commonProps}
-                preSelectedCollaborators={allActors}
+                preSelectedCollaborators={[...recording, label]}
               />
 
               {triedSubmit && (

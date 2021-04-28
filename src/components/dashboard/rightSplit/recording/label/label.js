@@ -12,7 +12,6 @@ import Lock from '../../../../../icons/lock';
 import Unlock from '../../../../../icons/unlock';
 import Checkbox from '../../../../_/form/checkbox/checkbox';
 import checkLockedShareState from '../_/checkLockedShareState';
-import Checkbox from '../../../../_/form/checkbox/checkbox';
 
 const Label = (props) => {
   const [isShowingOptions, setIsShowingOptions] = useState(false);

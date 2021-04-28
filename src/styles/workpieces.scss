@@ -149,6 +149,7 @@
     .content {
       overflow-y: auto;
       padding: 32px;
+      height: 100%;
       @media screen and (max-width: 944px) {
         padding: 16px 16px 72px;
       }
