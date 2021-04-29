@@ -1,0 +1,15 @@
+.tag {
+  @extend .small-400;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 2px;
+  width: fit-content;
+}
+
+.tag.inVote {
+  @extend .small-700;
+  background: rgba(255, 229, 161, 1);
+  color: rgba(165, 81, 8, 1);
+}

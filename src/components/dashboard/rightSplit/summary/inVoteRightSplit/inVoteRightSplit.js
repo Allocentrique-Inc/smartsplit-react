@@ -1,8 +1,10 @@
 import LastModified from '../../../_/lastModified/lastModified';
 import ArtistName from '../../../_/artistName/artistName';
+import Tag from '../_/tag';
 
 export default function InVoteRightSplit(props) {
   const versionIndex = props.workpiece.rightSplit.version;
+  console.log('props', props);
   return (
     <div className="rightSplit">
       <div className="clickableContainer" onClick={props.handleClick}>
@@ -18,6 +20,7 @@ export default function InVoteRightSplit(props) {
             language={props.language}
           />
         </div>
+        <Tag type="inVote" />
         <button>{props.t_consult}</button>
       </div>
     </div>
