@@ -310,6 +310,9 @@
         color: #687a8b;
         display: inline-block;
       }
+      .tag {
+        margin-top: 8px;
+      }
       .artistName {
         @extend .small-700;
         color: #2da84f;
