@@ -19,8 +19,11 @@ export default function InVoteRightSplit(props) {
             language={props.language}
           />
         </div>
-        {props.isMobile && <Tag type="inVote" language={props.language} />}
-        <button>{props.t_consult}</button>
+        {props.isMobile ? (
+          <Tag type="inVote" language={props.language} />
+        ) : (
+          <button>{props.t_consult}</button>
+        )}
       </div>
     </div>
   );

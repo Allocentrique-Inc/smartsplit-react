@@ -296,6 +296,9 @@
   .tab {
     display: flex;
     flex-direction: column;
+    > :first-child {
+      margin-top: 16px;
+    }
     .rightSplit {
       flex: 1;
       margin-top: 16px;

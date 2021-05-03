@@ -12,21 +12,31 @@ export default function MobileSummary(props) {
     t_splitSummary,
     t_waitingSubmit,
     t_waitingDecision,
-    t_createdBy,
-    t_consult,
-    t_accepted,
-    t_rejected,
-    t_download,
     t_createANewOne,
     t_withCollaborators,
     t_withEditor,
     t_updated,
     workpiece,
+    hasToVote,
   } = props;
   const history = useHistory();
   const { workpiece_id } = useParams();
   const back = () => history.push(`/workpiece/${workpiece_id}`);
   const tabNames = [t_withCollaborators, t_withEditor];
+  const handleClick = () => {
+    if (!hasToVote) {
+      history.push(`/workpiece/${workpiece_id}/right-split/consult`);
+    } else {
+      history.push(`/workpiece/${workpiece_id}/right-split/vote`);
+    }
+  };
+  const handleCreateNewVersion = () =>
+    history.push(`/workpiece/${workpiece_id}/right-split/copyright`);
+
+  const commonProps = {
+    ...props,
+    handleClick,
+  };
   return (
     <div className="mobileSummary">
       <MobileTopBar back={back} noShadow>
@@ -34,24 +44,27 @@ export default function MobileSummary(props) {
       </MobileTopBar>
       <Tabs options={tabNames}>
         <Tab key={tabNames[0]}>
+          <button className="btn-secondary" onClick={handleCreateNewVersion}>
+            {t_createANewOne}
+          </button>
           {workpiece.rightSplit._state === 'draft' && (
-            <DraftRightSplit {...props} />
+            <DraftRightSplit {...commonProps} />
           )}
           {workpiece.rightSplit._state === 'voting' && (
-            <InVoteRightSplit {...props} />
+            <InVoteRightSplit {...commonProps} />
           )}
           {workpiece.rightSplit._state === 'accepted' && (
-            <AcceptedRightSplit {...props} />
+            <AcceptedRightSplit {...commonProps} />
           )}
-          {workpiece.rightSplit._state === 'refused' && (
-            <RejectedRightSplit {...props} />
+          {workpiece.rightSplit._state === 'rejected' && (
+            <RejectedRightSplit {...commonProps} />
           )}
           {workpiece.archivedSplits &&
             workpiece.archivedSplits.map((archivedRightSplit, id) => {
               return (
                 <RejectedRightSplitArchived
                   id={id}
-                  {...props}
+                  {...commonProps}
                   archivedRightSplit={archivedRightSplit}
                   key={archivedRightSplit.version}
                   // workpiece={workpiece}

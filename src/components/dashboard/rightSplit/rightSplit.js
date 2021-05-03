@@ -29,6 +29,13 @@ const RightSplit = (props) => {
   const matchPrivacy = useRouteMatch(
     '/workpiece/:workpiece_id/right-split/privacy',
   );
+  const matchConsultArchivedSplit = useRouteMatch(
+    '/workpiece/:workpiece_id/right-split/:version/consult',
+  );
+  let versionToConsult;
+  if (matchConsultArchivedSplit) {
+    versionToConsult = matchConsultArchivedSplit.params.version;
+  }
   const user_id = localStorage.getItem('user_id');
   const history = useHistory();
   const [copyright, setCopyright] = useState([]);
@@ -292,6 +299,14 @@ const RightSplit = (props) => {
             version,
             isPublic,
           }}
+        />
+      </Route>
+      <Route path="/workpiece/:workpiece_id/right-split/:version/consult">
+        <Consult
+          {...commonProps}
+          rightSplitInConsultation={
+            props.workpiece.archivedSplits[versionToConsult - 1]
+          }
         />
       </Route>
       <Route path="/workpiece/:workpiece_id/right-split/copyright">

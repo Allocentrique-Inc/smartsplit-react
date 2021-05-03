@@ -20,6 +20,14 @@ import {
 } from '../copyright/_/utils';
 
 const Consult = (props) => {
+  const {
+    copyright,
+    performance,
+    recording,
+    label,
+    privacy,
+    version,
+  } = props.rightSplitInConsultation;
   const [showSendToCollab, setShowSendToCollab] = useState(false);
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
@@ -34,15 +42,10 @@ const Consult = (props) => {
   if (!props.isMobile && match && match.isExact) {
     history.push(`/workpiece/${workpiece_id}/right-split/summary`);
   }
-  const recording = [...props.recording];
-  if (props.label && props.label.rightHolder_id) {
-    recording.push(props.label);
-  }
-  let activeCollaborators = [
-    ...props.copyright,
-    ...props.performance,
-    ...recording,
-  ];
+  let activeCollaborators = [...copyright, ...performance, ...recording];
+  const labelIsActive =
+    label && label.rightHolder_id && label.agreementDuration !== '';
+  labelIsActive && activeCollaborators.push(label);
 
   activeCollaborators = activeCollaborators.reduce((acc, el) => {
     if (acc.find((EL) => EL.rightHolder_id === el.rightHolder_id)) {
@@ -138,35 +141,29 @@ const Consult = (props) => {
   }[props.language];
 
   const copyrightChartProps = {
-    chartData: rightHoldersToChartData(props.copyright, activeCollaboratorIds),
-    leftChartData: computeLyricChartData(
-      props.copyright,
-      activeCollaboratorIds,
-    ),
+    chartData: rightHoldersToChartData(copyright, activeCollaboratorIds),
+    leftChartData: computeLyricChartData(copyright, activeCollaboratorIds),
     leftChartTitle: t_lyrics,
     rightChartTitle: t_music,
-    rightChartData: computeMusicChartData(
-      props.copyright,
-      activeCollaboratorIds,
-    ),
+    rightChartData: computeMusicChartData(copyright, activeCollaboratorIds),
     logo: CircledC,
     size: 300,
   };
   const performanceChartProps = {
-    chartData: rightHoldersToChartData(
-      props.performance,
-      activeCollaboratorIds,
-    ),
+    chartData: rightHoldersToChartData(performance, activeCollaboratorIds),
     logo: CircledStar,
     size: 300,
   };
   const recordingChartProps = {
-    chartData: rightHoldersToChartData(recording, activeCollaboratorIds),
+    chartData: rightHoldersToChartData(
+      [...recording, label],
+      activeCollaboratorIds,
+    ),
     logo: CircledP,
     size: 300,
   };
   const shouldDisplayDualPieChart = showDualPieChart(
-    props.copyright,
+    copyright,
     props.copyrightDividingMethod,
   );
 
@@ -193,12 +190,16 @@ const Consult = (props) => {
     t_send,
     setShowSendToCollab,
     modifiable: props.workpiece.rightSplit._state === 'draft',
+    copyright,
+    performance,
+    recording,
+    label,
   };
   return (
     <>
       {!props.isMobile && (
         <>
-          {props.copyright.length > 0 && (
+          {copyright.length > 0 && (
             <div className="consultRightSplit">
               <div className="left">
                 <Copyright {...commonProps} />
@@ -214,7 +215,7 @@ const Consult = (props) => {
             </div>
           )}
 
-          {props.performance.length > 0 && (
+          {performance.length > 0 && (
             <div className="consultRightSplit">
               <div className="left">
                 <Performance {...commonProps} />
@@ -225,17 +226,16 @@ const Consult = (props) => {
             </div>
           )}
 
-          {props.recording.length > 0 ||
-            (props.label.rightHolder_id && (
-              <div className="consultRightSplit">
-                <div className="left">
-                  <Recording {...commonProps} />
-                </div>
-                <div className="consultRightSplitRight">
-                  <SplitChart {...recordingChartProps} />
-                </div>
+          {(recording.length > 0 || labelIsActive) && (
+            <div className="consultRightSplit">
+              <div className="left">
+                <Recording {...commonProps} />
               </div>
-            ))}
+              <div className="consultRightSplitRight">
+                <SplitChart {...recordingChartProps} />
+              </div>
+            </div>
+          )}
 
           <div className="consultRightSplit">
             <div className="left">
@@ -260,18 +260,18 @@ const Consult = (props) => {
                     ) : null
                   }
                 >
-                  {`Version ${props.version}`}
+                  {`Version ${version}`}
                 </MobileTopBar>
               )}
               <div className="rightSplits">
-                {props.copyright.length > 0 && <Copyright {...commonProps} />}
+                {copyright.length > 0 && <Copyright {...commonProps} />}
 
-                {props.performance.length > 0 && (
-                  <Performance {...commonProps} />
+                {performance.length > 0 && <Performance {...commonProps} />}
+
+                {(recording.length || labelIsActive) > 0 && (
+                  <Recording {...commonProps} />
                 )}
-
-                {props.recording.length > 0 && <Recording {...commonProps} />}
-                {props.privacy.length > 0 && <Privacy {...commonProps} />}
+                {privacy.length > 0 && <Privacy {...commonProps} />}
               </div>
             </>
           )}

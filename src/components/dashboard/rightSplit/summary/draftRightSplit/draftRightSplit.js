@@ -1,5 +1,6 @@
 import LastModified from '../../../_/lastModified/lastModified';
 import ArtistName from '../../../_/artistName/artistName';
+import Tag from '../_/tag';
 
 export default function DraftRightSplit(props) {
   const versionIndex = props.workpiece.rightSplit.version;
@@ -25,18 +26,16 @@ export default function DraftRightSplit(props) {
             language={props.language}
           />
         </div>
-        <div className="b1">
-          <div />
-        </div>
-
-        {canSendToCollab ? (
-          <>
-            <div className="border" />
-            <button>{t_sendToCollab}</button>
-          </>
-        ) : (
-          <button>{props.t_consult}</button>
-        )}
+        {props.isMobile && <Tag type="draft" language={props.language} />}
+        {!props.isMobile &&
+          (canSendToCollab ? (
+            <>
+              <div className="border" />
+              <button>{t_sendToCollab}</button>
+            </>
+          ) : (
+            <button>{props.t_consult}</button>
+          ))}
       </div>
     </div>
   );

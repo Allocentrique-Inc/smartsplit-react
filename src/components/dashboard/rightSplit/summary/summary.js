@@ -74,10 +74,10 @@ const Summary = (props) => {
   };
 
   const handleClick = () => {
-    if (props.isMobile) {
-      history.push(`/workpiece/${workpiece_id}/right-split/consult`);
-    } else {
+    if (!hasToVote) {
       setShowModal(true);
+    } else {
+      history.push(`/workpiece/${workpiece_id}/right-split/vote`);
     }
   };
 
@@ -137,8 +137,8 @@ const Summary = (props) => {
     en: 'Download the contract',
   }[props.language];
   const t_createANewOne = {
-    fr: 'Créer un nouveau modèle',
-    en: 'Create a new model',
+    fr: 'Créer une nouvelle version',
+    en: 'Create a new version',
   }[props.language];
   const t_withCollaborators = {
     fr: 'Avec mes collaborateurs',

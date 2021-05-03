@@ -51,6 +51,7 @@ const Vote = (props) => {
       rightSplit.privacy.some((el) => el.rightHolder_id === props.user.user_id),
   ].filter((el) => el === true).length;
   const voteTotal = Object.values(votes).filter((el) => el.vote !== '').length;
+  console.log('vautetotol', voteTotal, voteNbrNeeded);
   const { title, owner } = props.workpiece;
   const ownerName = `${owner.firstName} ${owner.lastName}`;
   const splitOwner = props.workpiece.rightSplit.owner;
