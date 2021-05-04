@@ -325,7 +325,18 @@ const RightSplit = (props) => {
         <Summary {...commonProps} />
       </Route>
       <Route path="/workpiece/:workpiece_id/right-split/vote">
-        <Vote {...commonProps} />
+        <Vote
+          {...commonProps}
+          rightSplitInConsultation={{
+            copyright,
+            performance,
+            recording,
+            privacy,
+            label,
+            version,
+            isPublic,
+          }}
+        />
       </Route>
     </>
   );

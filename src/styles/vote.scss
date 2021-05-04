@@ -1,4 +1,10 @@
 .vote {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  > .mobileConsult {
+    flex: 1;
+  }
   .b1 {
     display: flex;
     justify-content: space-around;

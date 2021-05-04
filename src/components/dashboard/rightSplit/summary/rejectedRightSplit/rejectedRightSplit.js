@@ -24,7 +24,7 @@ export default function RejectedRightSplit(props) {
             language={props.language}
           />
         </div>
-        <Tag type="refused" language={props.language} />
+        <Tag type="rejected" language={props.language} />
         {!props.isMobile && (
           <>
             <button onClick={handleCreateANewModelBtn}>

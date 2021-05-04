@@ -5,14 +5,25 @@ import User from '../../../../icons/user';
 import UserCard from '../../../../icons/userCard';
 import Cog from '../../../../icons/cog';
 import Logout from '../../../../icons/logout';
+import disconnect from '../../../../api/auth/disconnect';
 
-export default function MobileSettingMenu({ user, translations, language }) {
+export default function MobileSettingMenu({
+  user,
+  translations,
+  language,
+  resetLogginCheck,
+}) {
   const history = useHistory();
   const t_public_profile =
     translations.settings.mobileMenu['_public-profile'][language];
   const t_account = translations.settings.mobileMenu._account[language];
   const t_preferences = translations.settings.mobileMenu._preferences[language];
   const t_logout = translations.settings.mobileMenu._logout[language];
+
+  const handleLogout = () => {
+    disconnect();
+    resetLogginCheck();
+  };
   return (
     <div className="mobileSettingMenu">
       <div
@@ -36,7 +47,7 @@ export default function MobileSettingMenu({ user, translations, language }) {
         <Cog />
         {t_preferences}
       </div>*/}
-      <div className="menuOption">
+      <div className="menuOption" onClick={handleLogout}>
         <Logout />
         {t_logout}
       </div>

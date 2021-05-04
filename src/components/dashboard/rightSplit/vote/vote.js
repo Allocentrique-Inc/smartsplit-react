@@ -1,3 +1,4 @@
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Title from './title/title';
 import Creation from './creation/creation';
@@ -7,6 +8,8 @@ import DownBar from './downBar/downBar';
 import MobileTopBar from '../../_/mobileTopBar/mobileTopBar';
 
 const Vote = (props) => {
+  const history = useHistory();
+  const { workpiece_id } = useParams();
   const [votes, setVotes] = useState({
     copyright: {
       vote: '',
@@ -51,7 +54,6 @@ const Vote = (props) => {
       rightSplit.privacy.some((el) => el.rightHolder_id === props.user.user_id),
   ].filter((el) => el === true).length;
   const voteTotal = Object.values(votes).filter((el) => el.vote !== '').length;
-  console.log('vautetotol', voteTotal, voteNbrNeeded);
   const { title, owner } = props.workpiece;
   const ownerName = `${owner.firstName} ${owner.lastName}`;
   const splitOwner = props.workpiece.rightSplit.owner;
@@ -105,7 +107,13 @@ const Vote = (props) => {
       )}
       {props.isMobile && (
         <>
-          <MobileTopBar>{t_mobileTitle}</MobileTopBar>
+          <MobileTopBar
+            back={() =>
+              history.push(`/workpiece/${workpiece_id}/right-split/summary`)
+            }
+          >
+            {t_mobileTitle}
+          </MobileTopBar>
           <Consult {...commonProps} voting />
           <DownBar {...commonProps} />
         </>
