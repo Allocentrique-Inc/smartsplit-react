@@ -1,15 +1,19 @@
 import { useHistory } from 'react-router-dom';
 import LastModified from '../../../_/lastModified/lastModified';
 import ArtistName from '../../../_/artistName/artistName';
-import Tag from '../_/tag';
+import Tag from '../_/tag/tag';
 
 export default function RejectedRightSplitArchived(props) {
   const history = useHistory();
   const versionIndex = props.archivedRightSplit.version;
   const handleClick = () => {
-    history.push(
-      `/workpiece/${props.workpiece_id}/right-split/${versionIndex}/consult`,
-    );
+    if (props.isMobile) {
+      history.push(
+        `/workpiece/${props.workpiece_id}/right-split/${versionIndex}/consult`,
+      );
+    } else {
+      props.handleClick();
+    }
   };
   return (
     <div className="rightSplit" onClick={handleClick}>

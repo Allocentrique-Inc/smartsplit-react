@@ -16,6 +16,7 @@ import EditorShares from './editorShares/editorShares';
 
 const RightSplit = (props) => {
   const { language } = props;
+  console.log({ props });
   const { workpiece_id } = useParams();
   const matchCopyright = useRouteMatch(
     '/workpiece/:workpiece_id/right-split/copyright',
@@ -54,6 +55,7 @@ const RightSplit = (props) => {
     'equal',
   );
   const [version, setVersion] = useState('');
+  const [_state, set_state] = useState('draft');
 
   const isCreating =
     typeof props.workpiece.rightSplit === 'undefined' ||
@@ -71,6 +73,7 @@ const RightSplit = (props) => {
         label,
         version,
         isPublic,
+        _state,
       } = props.workpiece.rightSplit;
       setCopyright(copyright);
       setPerformance(performance);
@@ -80,6 +83,7 @@ const RightSplit = (props) => {
       selectCopyrightDividingMethod(copyrightDividingMethod);
       setLabel(label || {});
       setIsPublic(isPublic);
+      set_state(_state);
     }
     const collaborators = await getUsersCollaborators({ user_id });
     setCollaborators([props.user, ...collaborators]);
@@ -298,6 +302,7 @@ const RightSplit = (props) => {
             label,
             version,
             isPublic,
+            _state,
           }}
         />
       </Route>
@@ -335,6 +340,7 @@ const RightSplit = (props) => {
             label,
             version,
             isPublic,
+            _state,
           }}
         />
       </Route>

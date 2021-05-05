@@ -19,6 +19,7 @@ export default function MobileSummary(props) {
     workpiece,
     hasToVote,
   } = props;
+  console.log({ workpiece });
   const history = useHistory();
   const { workpiece_id } = useParams();
   const back = () => history.push(`/workpiece/${workpiece_id}`);

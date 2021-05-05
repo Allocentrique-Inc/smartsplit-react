@@ -1,7 +1,7 @@
 import { useHistory, useParams } from 'react-router-dom';
 import LastModified from '../../../_/lastModified/lastModified';
 import ArtistName from '../../../_/artistName/artistName';
-import Tag from '../_/tag';
+import Tag from '../_/tag/tag';
 
 export default function RejectedRightSplit(props) {
   const history = useHistory();

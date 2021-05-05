@@ -27,7 +27,9 @@ const Consult = (props) => {
     label,
     privacy,
     version,
+    _state,
   } = props.rightSplitInConsultation;
+  console.log({ props });
   const [showSendToCollab, setShowSendToCollab] = useState(false);
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
@@ -167,7 +169,7 @@ const Consult = (props) => {
     props.copyrightDividingMethod,
   );
 
-  const isDraft = props.workpiece.rightSplit._state === 'draft';
+  const isEditable = _state === 'draft';
 
   const commonProps = {
     ...props,
@@ -189,7 +191,7 @@ const Consult = (props) => {
     t_sendToCollab,
     t_send,
     setShowSendToCollab,
-    modifiable: props.workpiece.rightSplit._state === 'draft',
+    isEditable,
     copyright,
     performance,
     recording,
@@ -253,7 +255,7 @@ const Consult = (props) => {
                 <MobileTopBar
                   back={backAction}
                   action={
-                    isDraft ? (
+                    isEditable ? (
                       <button className="btn-secondary" onClick={handleClick}>
                         {t_sendToCollab}
                       </button>
