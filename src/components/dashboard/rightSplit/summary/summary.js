@@ -33,6 +33,7 @@ const Summary = (props) => {
     return null;
   }
   const user_id = localStorage.getItem('user_id');
+  const [rightSplitInConsultation, setRightSplitInConsultation] = useState();
 
   const hasToVote = [
     ...props.workpiece.rightSplit.copyright,
@@ -76,6 +77,7 @@ const Summary = (props) => {
 
   const handleClick = () => {
     if (!hasToVote) {
+      setRightSplitInConsultation(props.workpiece.rightSplit);
       setShowModal(true);
     } else {
       history.push(`/workpiece/${workpiece_id}/right-split/vote`);
@@ -184,6 +186,8 @@ const Summary = (props) => {
     hasToVote,
     handleClick,
     setShowModal,
+    rightSplitInConsultation,
+    setRightSplitInConsultation,
     t_sendToCollab,
     t_splitSummary,
     t_waitingSubmit,
@@ -198,6 +202,7 @@ const Summary = (props) => {
     t_createANewOne,
     t_updated,
   };
+
   if (!props.isLoaded) {
     return null;
   }

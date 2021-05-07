@@ -1,6 +1,7 @@
 import ArtistName from '../../../../_/artistName/artistName';
 import LastModified from '../../../../_/lastModified/lastModified';
 import Consult from '../../../consult/consult';
+import X from '../../../../../../icons/x';
 
 const ConsultModal = (props) => {
   const {
@@ -9,9 +10,11 @@ const ConsultModal = (props) => {
     t_createdBy,
     t_updated,
     t_sendToCollab,
+    rightSplitInConsultation,
   } = props;
+  console.log({ rightSplitInConsultation });
   const canSendToCollab =
-    props.workpiece.rightSplit.owner.user_id === props.user.user_id;
+    rightSplitInConsultation.owner.user_id === props.user.user_id;
   return (
     <div className="modalBackground" onClick={() => setShowModal(false)}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -20,16 +23,16 @@ const ConsultModal = (props) => {
             className="title"
             style={{ flexDirection: 'column', alignItems: 'flex-start' }}
           >
-            Version {props.workpiece.rightSplit.version}
+            Version {rightSplitInConsultation.version}
             <div className="consult-details">
               {t_createdBy}{' '}
               <ArtistName
-                user={props.workpiece.rightSplit.owner}
+                user={rightSplitInConsultation.owner}
                 className="artistName"
               />
               {' - \u00A0'}
               <LastModified
-                date={props.workpiece.rightSplit.updatedAt}
+                date={rightSplitInConsultation.updatedAt}
                 language={props.language}
               >
                 {`${t_updated}`}
@@ -47,14 +50,10 @@ const ConsultModal = (props) => {
           </div>
         </div>
         <div className="content postSaveConsult">
-          <Consult
-            {...props}
-            voting={false}
-            rightSplitInConsultation={props.workpiece.rightSplit}
-          />
+          <Consult {...props} voting={false} />
         </div>
         <div className="downBar">
-          {props.workpiece.rightSplit._state === 'draft' && canSendToCollab && (
+          {rightSplitInConsultation._state === 'draft' && canSendToCollab && (
             <button
               className="btn-primary"
               onClick={() => {

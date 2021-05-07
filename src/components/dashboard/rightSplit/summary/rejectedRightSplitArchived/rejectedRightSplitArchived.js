@@ -12,7 +12,8 @@ export default function RejectedRightSplitArchived(props) {
         `/workpiece/${props.workpiece_id}/right-split/${versionIndex}/consult`,
       );
     } else {
-      props.handleClick();
+      props.setRightSplitInConsultation(props.archivedRightSplit);
+      props.setShowModal(true);
     }
   };
   return (
