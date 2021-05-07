@@ -33,7 +33,7 @@ const Privacy = (props) => {
         }}
       >
         <div className="title">{props.t_privacy}</div>
-        {!props.voting && props.modifiable && (
+        {!props.voting && props.isEditable && (
           <button className="btn-secondary-small" onClick={handleButton}>
             <Pen color="#2DA84F" size={16} />
             {props.t_modify}
@@ -126,7 +126,7 @@ const Collab = (props) => {
 
           {!props.voting && !isUserVoting && comment && (
             <div className="comment">
-              <div>${props.t_comments}</div>
+              <div>{props.t_comments}</div>
               {comment}
             </div>
           )}

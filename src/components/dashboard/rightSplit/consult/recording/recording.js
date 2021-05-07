@@ -12,7 +12,7 @@ const Recording = (props) => {
     <div className="consultRightSplitSection">
       <div className="titleRow">
         <div className="title">{props.t_recording}</div>
-        {!props.voting && props.modifiable && (
+        {!props.voting && props.isEditable && (
           <button className="btn-secondary-small" onClick={handleButton}>
             <Pen color="#2DA84F" size={16} />
             {props.t_modify}

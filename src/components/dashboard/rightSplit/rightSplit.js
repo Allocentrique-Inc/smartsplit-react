@@ -16,7 +16,6 @@ import EditorShares from './editorShares/editorShares';
 
 const RightSplit = (props) => {
   const { language } = props;
-  console.log({ props });
   const { workpiece_id } = useParams();
   const matchCopyright = useRouteMatch(
     '/workpiece/:workpiece_id/right-split/copyright',
@@ -57,9 +56,7 @@ const RightSplit = (props) => {
   const [version, setVersion] = useState('');
   const [_state, set_state] = useState('draft');
 
-  const isCreating =
-    typeof props.workpiece.rightSplit === 'undefined' ||
-    props.workpiece.rightSplit._state === 'rejected';
+  const isCreating = typeof props.workpiece.rightSplit === 'undefined';
 
   const [warnings, setWarnings] = useState([]);
   const mapData = async () => {
@@ -90,7 +87,7 @@ const RightSplit = (props) => {
   };
   useEffect(() => {
     mapData();
-  }, [props.workpiece]);
+  }, [props.workpiece.rightSplit]);
 
   const saveRightSplit = async () => {
     const payload = {
@@ -294,16 +291,7 @@ const RightSplit = (props) => {
       <Route path="/workpiece/:workpiece_id/right-split/consult">
         <Consult
           {...commonProps}
-          rightSplitInConsultation={{
-            copyright,
-            performance,
-            recording,
-            privacy,
-            label,
-            version,
-            isPublic,
-            _state,
-          }}
+          rightSplitInConsultation={props.workpiece.rightSplit}
         />
       </Route>
       <Route path="/workpiece/:workpiece_id/right-split/:version/consult">
@@ -330,19 +318,7 @@ const RightSplit = (props) => {
         <Summary {...commonProps} />
       </Route>
       <Route path="/workpiece/:workpiece_id/right-split/vote">
-        <Vote
-          {...commonProps}
-          rightSplitInConsultation={{
-            copyright,
-            performance,
-            recording,
-            privacy,
-            label,
-            version,
-            isPublic,
-            _state,
-          }}
-        />
+        <Vote {...commonProps} />
       </Route>
     </>
   );

@@ -24,6 +24,7 @@ const Label = (props) => {
     activeCollaborators,
     labelIsActive,
   } = props;
+  console.log({ labelIsActive });
   useEffect(() => {
     recalculateShares({
       recordingDividingMethod,

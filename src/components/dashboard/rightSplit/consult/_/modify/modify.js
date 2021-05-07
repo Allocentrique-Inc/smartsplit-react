@@ -5,7 +5,7 @@ const Modify = (props) => {
   const { workpiece_id } = useParams();
   return (
     <div>
-      {props.modifiable && (
+      {props.isEditable && (
         <button
           onClick={() => {
             history.push(

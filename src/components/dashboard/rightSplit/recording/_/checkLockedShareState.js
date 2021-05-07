@@ -5,6 +5,7 @@ const checkLockedShareState = ({
   setLabel,
   lockAll = true,
 }) => {
+  console.log({ recording, label });
   const activeCollaborators = recording.filter(
     (collaborator) => collaborator.function !== '',
   );

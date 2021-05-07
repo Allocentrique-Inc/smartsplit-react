@@ -154,10 +154,11 @@
   }
   .comment {
     @extend .medium-400;
-    padding: 8px 16px;
-    margin: 0 8px 16px 8px;
+    padding: 8px;
+    margin: 8px 8px 16px 0px;
     color: map-get($colors, 'secondary');
     background-color: map-get($colors-background, 'underground');
+    width: fit-content;
     div {
       margin-bottom: 8px;
     }
@@ -340,6 +341,17 @@
       .row {
         align-items: flex-end;
         justify-content: space-between;
+      }
+    }
+    .comment {
+      @extend .medium-400;
+      padding: 8px 8px;
+      margin: 8px 8px 16px 0px;
+      color: map-get($colors, 'secondary');
+      background-color: map-get($colors-background, 'underground');
+      width: fit-content;
+      div {
+        margin-bottom: 8px;
       }
     }
     .shares {

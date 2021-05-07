@@ -98,7 +98,11 @@ const Vote = (props) => {
                 {/* - il y a ----- */}
               </div>
               <div className="consult">
-                <Consult {...commonProps} voting />
+                <Consult
+                  {...commonProps}
+                  rightSplitInConsultation={rightSplit}
+                  voting
+                />
               </div>
             </div>
           </div>

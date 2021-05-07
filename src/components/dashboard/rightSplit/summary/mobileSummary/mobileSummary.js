@@ -45,9 +45,6 @@ export default function MobileSummary(props) {
       </MobileTopBar>
       <Tabs options={tabNames}>
         <Tab key={tabNames[0]}>
-          <button className="btn-secondary" onClick={handleCreateNewVersion}>
-            {t_createANewOne}
-          </button>
           {workpiece.rightSplit._state === 'draft' && (
             <DraftRightSplit {...commonProps} />
           )}
@@ -58,7 +55,15 @@ export default function MobileSummary(props) {
             <AcceptedRightSplit {...commonProps} />
           )}
           {workpiece.rightSplit._state === 'rejected' && (
-            <RejectedRightSplit {...commonProps} />
+            <>
+              <button
+                className="btn-secondary"
+                onClick={handleCreateNewVersion}
+              >
+                {t_createANewOne}
+              </button>
+              <RejectedRightSplit {...commonProps} />
+            </>
           )}
           {workpiece.archivedSplits &&
             workpiece.archivedSplits.map((archivedRightSplit, id) => {

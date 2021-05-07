@@ -32,12 +32,11 @@ const Recording = (props) => {
     setLabel,
     translations,
     language,
-    labelIsActive,
   } = props;
-
   const activeCollaborators = recording.filter(
     (collaborator) => collaborator.function !== '',
   );
+  const labelIsActive = label && label.agreementDuration !== '';
   labelIsActive && activeCollaborators.push(label);
 
   const isCollabActive = (collabId) =>
