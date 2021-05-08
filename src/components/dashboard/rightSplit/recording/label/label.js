@@ -24,7 +24,6 @@ const Label = (props) => {
     activeCollaborators,
     labelIsActive,
   } = props;
-  console.log({ labelIsActive });
   useEffect(() => {
     recalculateShares({
       recordingDividingMethod,
@@ -177,7 +176,7 @@ const Label = (props) => {
           <Checkbox
             label={t_notifViaText}
             checked={label.notifViaText}
-            onChange={handleNotifyViaEmail}
+            onChange={handleNotifViaText}
           />
         </div>
 

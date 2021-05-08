@@ -148,8 +148,14 @@ const Copyright = (props) => {
           (acc, el) => el.shares + acc,
           0,
         );
-        const sharesToSeparate =
+        let sharesToSeparate =
           unlockedSharesSum + draggedDifferential + 100 - totalSum;
+        if (sharesToSeparate < 0 && unlockedSharesSum > 0) {
+          newShares += sharesToSeparate;
+          sharesToSeparate = 0;
+        } else if (sharesToSeparate < 0 && unlockedSharesSum <= 0) {
+          return;
+        }
         props.copyright.forEach((EL, ID) => {
           if (id === ID) {
             EL.shares = ceil(newShares);

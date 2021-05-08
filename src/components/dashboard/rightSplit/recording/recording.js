@@ -37,8 +37,11 @@ const Recording = (props) => {
     (collaborator) => collaborator.function !== '',
   );
   const labelIsActive = label && label.agreementDuration !== '';
-  labelIsActive && activeCollaborators.push(label);
+  if (labelIsActive) {
+    activeCollaborators.push(label);
+  }
 
+  console.log('active collaborator count', activeCollaborators.length);
   const isCollabActive = (collabId) =>
     activeCollaborators.some(
       (activeCollab) => collabId === activeCollab.rightHolder_id,
@@ -121,6 +124,27 @@ const Recording = (props) => {
   };
 
   const deleteLabel = () => {
+    if (
+      recordingDividingMethod === 'manual' &&
+      isCollabActive(label.rightHolder_id)
+    ) {
+      const label = activeCollaborators.pop();
+      const split =
+        Math.floor((label.shares / activeCollaborators.length) * 1000000) /
+        1000000;
+      recording.forEach((el) => {
+        if (isCollabActive(el.rightHolder_id)) {
+          el.shares += split;
+        }
+      });
+      checkLockedShareState({
+        recording,
+        setRecording,
+        label: {},
+        setLabel,
+        lockAll: false,
+      });
+    }
     recalculateShares({
       recording,
       setRecording,
@@ -136,14 +160,22 @@ const Recording = (props) => {
     );
     const removedCollab = recording.splice(index, 1)[0];
     if (recordingDividingMethod === 'manual') {
+      let activeCollaboratorCount = activeCollaborators.length;
+      if (isCollabActive(removedCollab.rightHolder_id)) {
+        activeCollaboratorCount--;
+      }
+      const split =
+        Math.floor((removedCollab.shares / activeCollaboratorCount) * 10000) /
+        10000;
+
       recording.forEach((el) => {
         if (isCollabActive(el.rightHolder_id)) {
-          el.shares +=
-            Math.floor(
-              (removedCollab.shares / activeCollaborators.length) * 10000,
-            ) / 10000;
+          el.shares += split;
         }
       });
+      if (isCollabActive(label.rightHolder_id)) {
+        label.shares += split;
+      }
     }
     setCollaboratorsErrors(recording);
     recalculateShares({
@@ -175,8 +207,14 @@ const Recording = (props) => {
         (acc, el) => el.shares + acc,
         0,
       );
-      const sharesToSeparate =
+      let sharesToSeparate =
         unlockedNotDraggedActorsSum + draggedDifferential + 100 - totalSum;
+      if (sharesToSeparate < 0 && unlockedNotDraggedActorsSum > 0) {
+        newShares += sharesToSeparate;
+        sharesToSeparate = 0;
+      } else if (sharesToSeparate < 0 && unlockedNotDraggedActorsSum <= 0) {
+        return;
+      }
 
       if (labelIsActive) {
         recording.push(label);

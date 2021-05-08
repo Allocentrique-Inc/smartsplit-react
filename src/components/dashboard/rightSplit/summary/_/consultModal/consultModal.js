@@ -52,8 +52,8 @@ const ConsultModal = (props) => {
         <div className="content postSaveConsult">
           <Consult {...props} voting={false} />
         </div>
-        <div className="downBar">
-          {rightSplitInConsultation._state === 'draft' && canSendToCollab && (
+        {rightSplitInConsultation._state === 'draft' && canSendToCollab && (
+          <div className="downBar">
             <button
               className="btn-primary"
               onClick={() => {
@@ -62,8 +62,8 @@ const ConsultModal = (props) => {
             >
               {t_sendToCollab}
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
