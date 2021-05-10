@@ -11,7 +11,8 @@ const EditorShares = (props) => {
   const [triedSubmit, setTriedSubmit] = useState(false);
   const t_title = { fr: 'Droit d’auteur', en: 'Copyrights' }[props.language];
   console.log(props.workpiece);
-  const personalShares = props.copyright.find(
+  const { workpiece } = props;
+  const personalShares = workpiece.rightSplit.copyright.find(
     (el) => el.rightHolder_id === props.user.user_id,
   ).shares;
   const songTitle = props.workpiece.title;
@@ -20,7 +21,9 @@ const EditorShares = (props) => {
     en: '',
   }[props.language];
   const t_description = {
-    fr: `C’est officiel, <b>tu possèdes ${personalShares}% du droit d’auteur de l’oeuvre ${songTitle}</b>. Tu dois maintenant indiquer combien, de cette part, sera partagé avec ton éditeur.`,
+    fr: `C’est officiel, <b>tu possèdes ${personalShares.toFixed(
+      2,
+    )}% du droit d’auteur de l’oeuvre ${songTitle}</b>. Tu dois maintenant indiquer combien, de cette part, sera partagé avec ton éditeur.`,
     en: '',
   }[props.language];
 

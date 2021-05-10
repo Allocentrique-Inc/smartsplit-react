@@ -29,35 +29,32 @@ export default function AcceptedRightSplit(props) {
   }, []);
   return (
     <>
-      <div
-        className="rightSplit"
-        style={{ marginBottom: '8px' }}
-        onClick={props.handleClick}
-      >
-        <div className="title">{`Version ${versionIndex}`}</div>
-        <div className="details">
-          {props.t_createdBy}
-          <ArtistName
-            user={props.workpiece.rightSplit.owner}
-            className="artistName"
-          />{' '}
-          <LastModified
-            date={props.workpiece.rightSplit.createdAt}
-            language={props.language}
-          />
-        </div>
-        <div className="b1">
-          <div />
-          <div className="status acceptedStatus">{props.t_accepted}</div>
-        </div>
-        {contractData && (
-          <DownloadContractButton
-            {...props}
-            language={props.language}
-            contractData={contractData}
-          />
-        )}
-        {/* {hasBoughtPDF && contractData ? (
+      <div className="rightSplit" style={{ marginBottom: '8px' }}>
+        <div className="clickableContainer" onClick={props.handleClick}>
+          <div className="title">{`Version ${versionIndex}`}</div>
+          <div className="details">
+            {props.t_createdBy}
+            <ArtistName
+              user={props.workpiece.rightSplit.owner}
+              className="artistName"
+            />{' '}
+            <LastModified
+              date={props.workpiece.rightSplit.createdAt}
+              language={props.language}
+            />
+          </div>
+          <div className="b1">
+            <div />
+            <div className="status acceptedStatus">{props.t_accepted}</div>
+          </div>
+          {contractData && (
+            <DownloadContractButton
+              {...props}
+              language={props.language}
+              contractData={contractData}
+            />
+          )}
+          {/* {hasBoughtPDF && contractData ? (
           <DownloadContractButton
             language={props.language}
             contractData={contractData}
@@ -73,6 +70,7 @@ export default function AcceptedRightSplit(props) {
             {props.t_download}
           </button>
         )}*/}
+        </div>
       </div>
       {showPaymentModal && <PaymentModal {...modalProps} />}
     </>

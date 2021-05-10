@@ -16,8 +16,10 @@ import RejectedRightSplitArchived from './rejectedRightSplitArchived/rejectedRig
 import MobileSummary from './mobileSummary/mobileSummary';
 import ArtistName from '../../_/artistName/artistName';
 import ConsultModal from './_/consultModal/consultModal';
+import disableEditorNotif from '../../../../api/workpieces/disableEditorNotif';
 
 const Summary = (props) => {
+  console.log({ props });
   const history = useHistory();
   const { workpiece_id } = useParams();
   const [showModal, setShowModal] = useState(false);
@@ -32,9 +34,15 @@ const Summary = (props) => {
     history.push(`/workpiece/${workpiece_id}/`);
     return null;
   }
+  const handleDisableEditorNotif = async () => {
+    await disableEditorNotif({ workpiece_id });
+    props.resetData();
+  };
   const user_id = localStorage.getItem('user_id');
   const [rightSplitInConsultation, setRightSplitInConsultation] = useState();
-
+  const isCopyrightRightHolder = props.workpiece.rightSplit.copyright.some(
+    (el) => el.rightHolder_id === props.user.user_id,
+  );
   const hasToVote = [
     ...props.workpiece.rightSplit.copyright,
     ...props.workpiece.rightSplit.performance,
@@ -50,7 +58,8 @@ const Summary = (props) => {
   const needResponseToHaveEditor = !(
     props.editor &&
     props.editor.rightHolder &&
-    props.editor.rightHolder.user_id
+    props.editor.rightHolder.user_id &&
+    isCopyrightRightHolder
   );
   const handleWithEditor = () => {
     if (
@@ -65,7 +74,8 @@ const Summary = (props) => {
   };
   const isWithEditorDisabled = !(
     props.workpiece.rightSplit &&
-    props.workpiece.rightSplit._state === 'accepted'
+    props.workpiece.rightSplit._state === 'accepted' &&
+    isCopyrightRightHolder
   );
   const handleGoToEditorName = () => {
     history.push(`/workpiece/${workpiece_id}/right-split/editor-name`);
@@ -179,7 +189,6 @@ const Summary = (props) => {
     fr: 'Mis à jour',
     en: 'Updated',
   }[props.language];
-
   const commonProps = {
     ...props,
     setIsAdjustingEmails,
@@ -201,6 +210,10 @@ const Summary = (props) => {
     t_download,
     t_createANewOne,
     t_updated,
+    handleWithEditor,
+    handleGoToEditorName,
+    needResponseToHaveEditor,
+    isWithEditorDisabled,
   };
 
   if (!props.isLoaded) {
@@ -267,7 +280,7 @@ const Summary = (props) => {
                         <button className="btn-secondary option">{t_no}</button>
                         <button
                           className="btn-primary option"
-                          onClick={handleGoToEditorName}
+                          onClick={handleDisableEditorNotif}
                         >
                           {t_yes}
                         </button>

@@ -18,12 +18,22 @@ export default function MobileSummary(props) {
     t_updated,
     workpiece,
     hasToVote,
+    isWithEditorDisabled,
+    needResponseToHaveEditor,
   } = props;
-  console.log({ workpiece });
+  console.log({ isWithEditorDisabled, needResponseToHaveEditor });
   const history = useHistory();
   const { workpiece_id } = useParams();
   const back = () => history.push(`/workpiece/${workpiece_id}`);
-  const tabNames = [t_withCollaborators, t_withEditor];
+  const tabOptions = [
+    t_withCollaborators,
+    <>
+      {t_withEditor}
+      {!isWithEditorDisabled && needResponseToHaveEditor && (
+        <div className="notification" />
+      )}
+    </>,
+  ];
   const handleClick = () => {
     if (!hasToVote) {
       history.push(`/workpiece/${workpiece_id}/right-split/consult`);
@@ -43,8 +53,8 @@ export default function MobileSummary(props) {
       <MobileTopBar back={back} noShadow>
         {t_splitSummary}
       </MobileTopBar>
-      <Tabs options={tabNames}>
-        <Tab key={tabNames[0]}>
+      <Tabs options={tabOptions}>
+        <Tab key={tabOptions[0]}>
           {workpiece.rightSplit._state === 'draft' && (
             <DraftRightSplit {...commonProps} />
           )}
@@ -78,7 +88,7 @@ export default function MobileSummary(props) {
               );
             })}
         </Tab>
-        <Tab key={tabNames[1]}>TODO</Tab>
+        <Tab key={tabOptions[1]}>TODO</Tab>
       </Tabs>
     </div>
   );

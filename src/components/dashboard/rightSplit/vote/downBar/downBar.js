@@ -4,13 +4,14 @@ import voteRightSplit from '../../../../../api/workpieces/voteRightSplit';
 const DownBar = (props) => {
   const history = useHistory();
   const { workpiece_id } = useParams();
+  console.log({ props });
   const handleSubmit = async () => {
     const { votes } = props;
     await voteRightSplit({
       ...votes,
       workpiece_id,
     });
-    props.resetData();
+    await props.resetData();
     history.push(`/workpiece/${workpiece_id}/right-split/summary`);
   };
   return (
