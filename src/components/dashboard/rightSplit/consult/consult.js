@@ -24,12 +24,11 @@ const Consult = (props) => {
     copyright,
     performance,
     recording,
-    label,
+    label = {},
     privacy,
     version,
     _state,
   } = props.rightSplitInConsultation;
-  console.log({ props });
   const [showSendToCollab, setShowSendToCollab] = useState(false);
   if (!props.workpiece || !props.workpiece.rightSplit || !props.collaborators) {
     return null;
@@ -270,7 +269,7 @@ const Consult = (props) => {
 
                 {performance.length > 0 && <Performance {...commonProps} />}
 
-                {(recording.length || labelIsActive) > 0 && (
+                {(recording.length > 0 || labelIsActive) && (
                   <Recording {...commonProps} />
                 )}
                 {privacy.length > 0 && <Privacy {...commonProps} />}
