@@ -17,6 +17,8 @@ import MobileSummary from './mobileSummary/mobileSummary';
 import ArtistName from '../../_/artistName/artistName';
 import ConsultModal from './_/consultModal/consultModal';
 import disableEditorNotif from '../../../../api/workpieces/disableEditorNotif';
+import Tabs, { Tab } from '../../_/tabs/tabs';
+import Kanban from './_/kanban/kanban';
 
 const Summary = (props) => {
   console.log({ props });
@@ -63,15 +65,9 @@ const Summary = (props) => {
   };
 
   const handleWithEditor = () => {
-    if (
-      props.editor &&
-      props.editor.rightHolder &&
-      props.editor.rightHolder.user_id
-    ) {
-      setTab('withEditor');
-    } else {
-      setShowQuestionWithEditor(true);
-    }
+    currentCollaborator.displayEditorNotif
+      ? setShowQuestionWithEditor(true)
+      : setTab('withEditor');
   };
   const isWithEditorDisabled =
     !props.workpiece.rightSplit ||
@@ -190,6 +186,15 @@ const Summary = (props) => {
     fr: 'Mis à jour',
     en: 'Updated',
   }[props.language];
+  const tabOptions = [
+    t_withCollaborators,
+    <>
+      {t_withEditor}
+      {!isWithEditorDisabled && currentCollaborator.displayEditorNotif && (
+        <div className="notification" />
+      )}
+    </>,
+  ];
   const commonProps = {
     ...props,
     setIsAdjustingEmails,
@@ -215,6 +220,7 @@ const Summary = (props) => {
     handleGoToEditorName,
     currentCollaborator,
     isWithEditorDisabled,
+    tabOptions,
   };
 
   if (!props.isLoaded) {
@@ -251,8 +257,16 @@ const Summary = (props) => {
                   {t_updated}
                 </LastModified>
               </div>
-
               {/* TABS */}
+              <Tabs options={tabOptions}>
+                <Tab key={tabOptions[0]}>
+                  <Kanban
+                    {...commonProps}
+                    currentSplit={props.workpiece.rightSplit}
+                    archivedSplits={props.workpiece.archivedSplits}
+                  />
+                </Tab>
+              </Tabs>
               <div className="tabs">
                 <button
                   className={
@@ -327,71 +341,6 @@ const Summary = (props) => {
                         </div>
                       )}
                     </div> */}
-              </div>
-
-              <div
-                className="b1b1b2"
-                //  style={{ display: tab !== 'withCollaborators' && 'none' }}
-              >
-                {/* DRAFT */}
-                <div className="bx">
-                  <div className="colTitle">{t_waitingSubmit}</div>
-                  <div className="content">
-                    {tab === 'withCollaborators' &&
-                      props.workpiece.rightSplit._state === 'draft' && (
-                        <DraftRightSplit {...commonProps} {...props} />
-                      )}
-                  </div>
-                </div>
-
-                {/* INVOTE */}
-                <div className="bx">
-                  <div className="colTitle">{t_waitingDecision}</div>
-                  <div className="content">
-                    {tab === 'withCollaborators' &&
-                      props.workpiece.rightSplit._state === 'voting' && (
-                        <InVoteRightSplit {...commonProps} {...props} />
-                      )}
-                  </div>
-                </div>
-
-                {/* DECIDED */}
-                <div className="bx">
-                  <div className="colTitle">{t_decided}</div>
-                  <div className="content">
-                    {/* ACCEPTED */}
-                    {props.workpiece.rightSplit._state === 'accepted' && (
-                      <div
-                        style={{
-                          display: tab !== 'withCollaborators' && 'none',
-                        }}
-                      >
-                        <AcceptedRightSplit {...commonProps} {...props} />
-                      </div>
-                    )}
-
-                    {/* REJECTED */}
-                    {tab === 'withCollaborators' &&
-                      props.workpiece.rightSplit._state === 'rejected' && (
-                        <RejectedRightSplit {...commonProps} {...props} />
-                      )}
-                    {tab === 'withCollaborators' &&
-                      props.workpiece.archivedSplits &&
-                      props.workpiece.archivedSplits.map(
-                        (archivedRightSplit, id) => {
-                          return (
-                            <RejectedRightSplitArchived
-                              id={id}
-                              {...commonProps}
-                              archivedRightSplit={archivedRightSplit}
-                              key={archivedRightSplit.version}
-                              // workpiece={workpiece}
-                            />
-                          );
-                        },
-                      )}
-                  </div>
-                </div>
               </div>
             </div>
           </div>

@@ -20,19 +20,11 @@ export default function MobileSummary(props) {
     hasToVote,
     isWithEditorDisabled,
     currentCollaborator,
+    tabOptions,
   } = props;
   const history = useHistory();
   const { workpiece_id } = useParams();
   const back = () => history.push(`/workpiece/${workpiece_id}`);
-  const tabOptions = [
-    t_withCollaborators,
-    <>
-      {t_withEditor}
-      {!isWithEditorDisabled && currentCollaborator.displayEditorNotif && (
-        <div className="notification" />
-      )}
-    </>,
-  ];
   const handleClick = () => {
     if (!hasToVote) {
       history.push(`/workpiece/${workpiece_id}/right-split/consult`);

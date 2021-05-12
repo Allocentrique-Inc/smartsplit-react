@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Tabs({ options, children }) {
+const Tabs = ({ options, children }) => {
   const [currentTab, setCurrentTab] = useState(options[0]);
   const currentIndex = options.indexOf(currentTab);
   const isSelected = (option) => option === currentTab;
@@ -21,7 +21,9 @@ export default function Tabs({ options, children }) {
       {!Array.isArray(children) && children}
     </div>
   );
-}
+};
+
+export default Tabs;
 
 export function Tab({ children, ...nextProps }) {
   return (
