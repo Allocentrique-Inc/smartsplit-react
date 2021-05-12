@@ -39,10 +39,17 @@ const Summary = (props) => {
     props.resetData();
   };
   const user_id = localStorage.getItem('user_id');
+  const currentCollaborator = props.workpiece.collaborators.find(
+    (x) => x.user.user_id === user_id,
+  );
+  console.log({ currentCollaborator });
+
   const [rightSplitInConsultation, setRightSplitInConsultation] = useState();
+
   const isCopyrightRightHolder = props.workpiece.rightSplit.copyright.some(
     (el) => el.rightHolder_id === props.user.user_id,
   );
+
   const hasToVote = [
     ...props.workpiece.rightSplit.copyright,
     ...props.workpiece.rightSplit.performance,
@@ -55,12 +62,6 @@ const Summary = (props) => {
     setTab('withCollaborators');
   };
 
-  const needResponseToHaveEditor = !(
-    props.editor &&
-    props.editor.rightHolder &&
-    props.editor.rightHolder.user_id &&
-    isCopyrightRightHolder
-  );
   const handleWithEditor = () => {
     if (
       props.editor &&
@@ -72,11 +73,11 @@ const Summary = (props) => {
       setShowQuestionWithEditor(true);
     }
   };
-  const isWithEditorDisabled = !(
-    props.workpiece.rightSplit &&
-    props.workpiece.rightSplit._state === 'accepted' &&
-    isCopyrightRightHolder
-  );
+  const isWithEditorDisabled =
+    !props.workpiece.rightSplit ||
+    props.workpiece.rightSplit._state !== 'accepted' ||
+    !isCopyrightRightHolder;
+
   const handleGoToEditorName = () => {
     history.push(`/workpiece/${workpiece_id}/right-split/editor-name`);
   };
@@ -212,7 +213,7 @@ const Summary = (props) => {
     t_updated,
     handleWithEditor,
     handleGoToEditorName,
-    needResponseToHaveEditor,
+    currentCollaborator,
     isWithEditorDisabled,
   };
 
@@ -269,9 +270,10 @@ const Summary = (props) => {
                     disabled={isWithEditorDisabled}
                   >
                     {t_withEditor}
-                    {!isWithEditorDisabled && needResponseToHaveEditor && (
-                      <div className="notification" />
-                    )}
+                    {!isWithEditorDisabled &&
+                      currentCollaborator.displayEditorNotif && (
+                        <div className="notification" />
+                      )}
                   </button>
                   {showQuestionWithEditor && (
                     <div className="withEditorOrManager">

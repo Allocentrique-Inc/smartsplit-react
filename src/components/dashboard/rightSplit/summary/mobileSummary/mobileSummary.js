@@ -19,9 +19,8 @@ export default function MobileSummary(props) {
     workpiece,
     hasToVote,
     isWithEditorDisabled,
-    needResponseToHaveEditor,
+    currentCollaborator,
   } = props;
-  console.log({ isWithEditorDisabled, needResponseToHaveEditor });
   const history = useHistory();
   const { workpiece_id } = useParams();
   const back = () => history.push(`/workpiece/${workpiece_id}`);
@@ -29,7 +28,7 @@ export default function MobileSummary(props) {
     t_withCollaborators,
     <>
       {t_withEditor}
-      {!isWithEditorDisabled && needResponseToHaveEditor && (
+      {!isWithEditorDisabled && currentCollaborator.displayEditorNotif && (
         <div className="notification" />
       )}
     </>,
