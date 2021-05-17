@@ -1,4 +1,8 @@
 .summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
   .topBar {
     position: sticky;
     top: 0px;
@@ -9,6 +13,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
+    width: 100%;
     .side {
       width: 0px;
       .back {
@@ -40,231 +45,27 @@
       }
     }
   }
-  .tabs {
+  main {
     margin-top: 32px;
-    height: 56px;
-    display: flex;
-    align-items: center;
     width: 100%;
-    box-shadow: inset 0px -1px 0px #dcdfe1;
-    .space {
-      margin-left: 32px;
-    }
-    .tab {
-      font-family: IBM Plex Sans;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 24px;
-      display: flex;
-      align-items: center;
-      border: none;
-      background-color: inherit;
-      color: #687a8b;
-      height: 56px;
-      outline: 0;
-      cursor: pointer;
-      margin: 0;
-      &:disabled {
-        cursor: auto;
-        color: #dcdfe1;
-      }
-    }
-    .selected {
-      box-shadow: inset 0px -2px 0px #3db25e;
-      color: #203548;
-    }
-    .notification {
-      background-color: #ac1616;
-      width: 8px;
-      height: 8px;
-      border-radius: 8px;
-      margin-left: 8px;
-    }
-    .withEditorOrManager {
-      background-color: red;
-      position: absolute;
+    max-width: 944px;
+    flex: 1;
+    > p {
       margin-top: 8px;
-      margin-left: -57px;
-      width: 256px;
-      height: 147px;
-      background: #ffffff;
-      border: 1px solid #dcdfe1;
-      box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.25);
-      padding: 16px;
-      .question {
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 24px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #203548;
-        justify-content: center;
-        width: 100%;
-        margin-bottom: 16px;
-      }
-      .yesNo {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 16px;
-        .option {
-          width: 108px;
-        }
-      }
-      .later {
-        font-weight: bold;
-        font-size: 12px;
-        line-height: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      @extend .small-400;
+      color: #687a8b;
+      .artistName {
+        @extend .small-700;
         color: #2da84f;
-        cursor: pointer;
       }
     }
-  }
-
-  .b1 {
-    display: flex;
-    justify-content: center;
-    .b1b1 {
-      width: 944px;
-      .pageTitle {
-        font-weight: bold;
-        font-size: 32px;
-        line-height: 40px;
+    .tabs {
+      margin-top: 32px;
+      .tabMenu {
+        box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
+      }
+      .tab {
         margin-top: 32px;
-      }
-      .splitDetails {
-        font-weight: normal;
-        font-size: 12px;
-        line-height: 16px;
-        color: #687a8b;
-        margin-top: 8px;
-        .artistName {
-          font-weight: bold;
-          font-size: 12px;
-          line-height: 16px;
-          color: #2da84f;
-        }
-      }
-      .b1b1b2 {
-        margin-top: 48px;
-        width: 944px;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 100px;
-        min-height: 50vh;
-        .bx {
-          width: 304px;
-          .colTitle {
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 24px;
-            color: #203548;
-          }
-          .content {
-            background-color: #faf8f9;
-            height: 100%;
-            margin-top: 16px;
-            padding: 8px;
-          }
-          .rightSplit {
-            cursor: pointer;
-            .clickableContainer {
-              padding: 16px;
-              .tag {
-                margin: 8px 0 0 auto;
-              }
-            }
-            background-color: white;
-            // height: 184px;
-            background: #ffffff;
-            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-            .pdfBtnContainer {
-              padding: 16px;
-              display: flex;
-              justify-content: center;
-              .btn-secondary {
-                flex: 1;
-                text-align: center;
-              }
-            }
-            .title {
-              font-weight: bold;
-              font-size: 16px;
-              line-height: 24px;
-              color: #203548;
-            }
-            .details {
-              font-weight: normal;
-              font-size: 12px;
-              line-height: 16px;
-              align-items: center;
-              color: #687a8b;
-              .artistName {
-                font-weight: bold;
-                color: #2da84f;
-                margin-right: 4px;
-              }
-            }
-            .b1 {
-              display: flex;
-              width: 100%;
-              justify-content: space-between;
-              margin-top: 16px;
-              .collaborators {
-                height: 24px;
-                width: 100px;
-                background-color: rgba(214, 196, 162, 0.15);
-              }
-              .status {
-                display: flex;
-                align-items: center;
-                height: 24px;
-                background: #dff8e3;
-                border-radius: 2px;
-                padding: 4px 8px;
-                font-weight: bold;
-                font-size: 12px;
-                line-height: 16px;
-                align-items: center;
-                text-align: center;
-              }
-              .acceptedStatus {
-                background-color: #dff8e3;
-                color: #176d25;
-              }
-              .rejectedStatus {
-                background-color: #fbd4d4;
-                color: #ac1616;
-              }
-            }
-            .border {
-              height: 16px;
-              box-shadow: inset 0px -1px 0px #dcdfe1;
-              width: 100%;
-            }
-            button {
-              background-color: red;
-              width: 100%;
-              margin-top: 16px;
-              height: 40px;
-              background: rgba(255, 255, 255, 0.01);
-              border: 1px solid #dcdfe1;
-              box-sizing: border-box;
-              border-radius: 2px;
-              font-weight: bold;
-              font-size: 16px;
-              line-height: 24px;
-              color: #2da84f;
-              cursor: pointer;
-              outline: 0;
-            }
-          }
-        }
       }
     }
   }

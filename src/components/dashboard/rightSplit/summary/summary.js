@@ -213,6 +213,7 @@ const Summary = (props) => {
     t_consult,
     t_accepted,
     t_rejected,
+    t_decided,
     t_download,
     t_createANewOne,
     t_updated,
@@ -240,34 +241,30 @@ const Summary = (props) => {
       {!props.isMobile && (
         <div className="summary">
           <TopBar {...props} />
-          <div className="b1">
-            <div className="b1b1">
-              <div className="pageTitle">{t_splitSummary}</div>
-              <div className="splitDetails">
-                {t_createdBy}
-                <ArtistName
-                  user={props.workpiece.owner}
-                  className="artistName"
+          <main>
+            <h2>{t_splitSummary}</h2>
+            <p>
+              {t_createdBy}
+              <ArtistName user={props.workpiece.owner} className="artistName" />
+              {'\u00A0'}-{'\u00A0'}
+              <LastModified
+                date={props.workpiece.updatedAt}
+                language={props.language}
+              >
+                {t_updated}
+              </LastModified>
+            </p>
+            {/* TABS */}
+            <Tabs options={tabOptions}>
+              <Tab key={tabOptions[0]}>
+                <Kanban
+                  {...commonProps}
+                  currentSplit={props.workpiece.rightSplit}
+                  archivedSplits={props.workpiece.archivedSplits}
                 />
-                {'\u00A0'}-{'\u00A0'}
-                <LastModified
-                  date={props.workpiece.updatedAt}
-                  language={props.language}
-                >
-                  {t_updated}
-                </LastModified>
-              </div>
-              {/* TABS */}
-              <Tabs options={tabOptions}>
-                <Tab key={tabOptions[0]}>
-                  <Kanban
-                    {...commonProps}
-                    currentSplit={props.workpiece.rightSplit}
-                    archivedSplits={props.workpiece.archivedSplits}
-                  />
-                </Tab>
-              </Tabs>
-              <div className="tabs">
+              </Tab>
+            </Tabs>
+            {/* <div className="tabs">
                 <button
                   className={
                     tab === 'withCollaborators' ? 'tab selected' : 'tab'
@@ -309,8 +306,8 @@ const Summary = (props) => {
                       </div>
                     </div>
                   )}
-                </div>
-                {/*
+                </div>*/}
+            {/*
                     <span className="space" />
                     <div>
                       <button
@@ -340,10 +337,9 @@ const Summary = (props) => {
                           </div>
                         </div>
                       )}
-                    </div> */}
-              </div>
-            </div>
-          </div>
+                    </div>
+              </div>*/}
+          </main>
         </div>
       )}
     </>

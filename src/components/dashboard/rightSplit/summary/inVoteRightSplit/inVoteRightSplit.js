@@ -2,7 +2,7 @@ import LastModified from '../../../_/lastModified/lastModified';
 import ArtistName from '../../../_/artistName/artistName';
 import Tag from '../_/tag/tag';
 
-export default function InVoteRightSplit(props) {
+const InVoteRightSplit = (props) => {
   const versionIndex = props.workpiece.rightSplit.version;
   return (
     <div className="rightSplit">
@@ -27,4 +27,6 @@ export default function InVoteRightSplit(props) {
       </div>
     </div>
   );
-}
+};
+
+export default InVoteRightSplit;

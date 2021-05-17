@@ -6,7 +6,7 @@ import DownloadContractButton from '../downloadContractButton/downloadContractBu
 import PaymentModal from '../../../_/payments/PaymentModal';
 import ArtistName from '../../../_/artistName/artistName';
 
-export default function AcceptedRightSplit(props) {
+const AcceptedRightSplit = (props) => {
   const versionIndex = props.workpiece.rightSplit.version;
   const productCode = 'RIGHT_SPLIT_CONTRACT';
   const [showPaymentModal, setShowPaymentModal] = useState();
@@ -75,4 +75,6 @@ export default function AcceptedRightSplit(props) {
       {showPaymentModal && <PaymentModal {...modalProps} />}
     </>
   );
-}
+};
+
+export default AcceptedRightSplit;
