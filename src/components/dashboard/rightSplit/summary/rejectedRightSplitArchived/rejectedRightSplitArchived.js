@@ -3,7 +3,7 @@ import LastModified from '../../../_/lastModified/lastModified';
 import ArtistName from '../../../_/artistName/artistName';
 import Tag from '../_/tag/tag';
 
-export default function RejectedRightSplitArchived(props) {
+const RejectedRightSplitArchived = (props) => {
   const history = useHistory();
   const versionIndex = props.archivedRightSplit.version;
   const handleClick = () => {
@@ -34,4 +34,6 @@ export default function RejectedRightSplitArchived(props) {
       {!props.isMobile && <button>{props.t_consult}</button>}
     </div>
   );
-}
+};
+
+export default RejectedRightSplitArchived;

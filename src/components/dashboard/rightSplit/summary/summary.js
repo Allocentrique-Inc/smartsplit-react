@@ -19,9 +19,9 @@ import ConsultModal from './_/consultModal/consultModal';
 import disableEditorNotif from '../../../../api/workpieces/disableEditorNotif';
 import Tabs, { Tab } from '../../_/tabs/tabs';
 import Kanban from './_/kanban/kanban';
+import Dot from '../../../../icons/dot';
 
 const Summary = (props) => {
-  console.log({ props });
   const history = useHistory();
   const { workpiece_id } = useParams();
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +44,6 @@ const Summary = (props) => {
   const currentCollaborator = props.workpiece.collaborators.find(
     (x) => x.user.user_id === user_id,
   );
-  console.log({ currentCollaborator });
 
   const [rightSplitInConsultation, setRightSplitInConsultation] = useState();
 
@@ -73,6 +72,7 @@ const Summary = (props) => {
     !props.workpiece.rightSplit ||
     props.workpiece.rightSplit._state !== 'accepted' ||
     !isCopyrightRightHolder;
+  console.log({ currentCollaborator, isWithEditorDisabled });
 
   const handleGoToEditorName = () => {
     history.push(`/workpiece/${workpiece_id}/right-split/editor-name`);
@@ -191,7 +191,7 @@ const Summary = (props) => {
     <>
       {t_withEditor}
       {!isWithEditorDisabled && currentCollaborator.displayEditorNotif && (
-        <div className="notification" />
+        <Dot />
       )}
     </>,
   ];
@@ -213,6 +213,7 @@ const Summary = (props) => {
     t_consult,
     t_accepted,
     t_rejected,
+    t_decided,
     t_download,
     t_createANewOne,
     t_updated,
@@ -240,34 +241,33 @@ const Summary = (props) => {
       {!props.isMobile && (
         <div className="summary">
           <TopBar {...props} />
-          <div className="b1">
-            <div className="b1b1">
-              <div className="pageTitle">{t_splitSummary}</div>
-              <div className="splitDetails">
-                {t_createdBy}
-                <ArtistName
-                  user={props.workpiece.owner}
-                  className="artistName"
+          <main>
+            <h2>{t_splitSummary}</h2>
+            <p>
+              {t_createdBy}
+              <ArtistName user={props.workpiece.owner} className="artistName" />
+              {'\u00A0'}-{'\u00A0'}
+              <LastModified
+                date={props.workpiece.updatedAt}
+                language={props.language}
+              >
+                {t_updated}
+              </LastModified>
+            </p>
+            {/* TABS */}
+            <Tabs options={tabOptions}>
+              <Tab key={tabOptions[0]}>
+                <Kanban
+                  {...commonProps}
+                  currentSplit={props.workpiece.rightSplit}
+                  archivedSplits={props.workpiece.archivedSplits}
                 />
-                {'\u00A0'}-{'\u00A0'}
-                <LastModified
-                  date={props.workpiece.updatedAt}
-                  language={props.language}
-                >
-                  {t_updated}
-                </LastModified>
-              </div>
-              {/* TABS */}
-              <Tabs options={tabOptions}>
-                <Tab key={tabOptions[0]}>
-                  <Kanban
-                    {...commonProps}
-                    currentSplit={props.workpiece.rightSplit}
-                    archivedSplits={props.workpiece.archivedSplits}
-                  />
-                </Tab>
-              </Tabs>
-              <div className="tabs">
+              </Tab>
+              <Tab key={tabOptions[1]}>
+                <Kanban {...commonProps} />
+              </Tab>
+            </Tabs>
+            {/* <div className="tabs">
                 <button
                   className={
                     tab === 'withCollaborators' ? 'tab selected' : 'tab'
@@ -309,8 +309,8 @@ const Summary = (props) => {
                       </div>
                     </div>
                   )}
-                </div>
-                {/*
+                </div>*/}
+            {/*
                     <span className="space" />
                     <div>
                       <button
@@ -340,10 +340,9 @@ const Summary = (props) => {
                           </div>
                         </div>
                       )}
-                    </div> */}
-              </div>
-            </div>
-          </div>
+                    </div>
+              </div>*/}
+          </main>
         </div>
       )}
     </>

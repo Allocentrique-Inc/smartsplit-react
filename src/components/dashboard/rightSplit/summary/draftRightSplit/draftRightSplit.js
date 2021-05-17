@@ -2,7 +2,7 @@ import LastModified from '../../../_/lastModified/lastModified';
 import ArtistName from '../../../_/artistName/artistName';
 import Tag from '../_/tag/tag';
 
-export default function DraftRightSplit(props) {
+const DraftRightSplit = (props) => {
   const versionIndex = props.workpiece.rightSplit.version;
   const t_sendToCollab = {
     fr: 'Envoyer aux collaborateurs',
@@ -30,7 +30,7 @@ export default function DraftRightSplit(props) {
         {!props.isMobile &&
           (canSendToCollab ? (
             <>
-              <div className="border" />
+              <div className="separator" />
               <button>{t_sendToCollab}</button>
             </>
           ) : (
@@ -39,4 +39,5 @@ export default function DraftRightSplit(props) {
       </div>
     </div>
   );
-}
+};
+export default DraftRightSplit;

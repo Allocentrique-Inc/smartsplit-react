@@ -23,12 +23,12 @@
 @import './avatar.scss';
 @import './monetize.scss';
 @import './tag.scss';
+@import './kanban.scss';
 
 body {
   font-family: IBM Plex Sans;
   padding: 0;
 }
-
 .row {
   display: flex;
 }
