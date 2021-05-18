@@ -10,7 +10,7 @@ import Info from './info/info';
 import Lyrics from './lyrics/lyrics';
 import Streaming from './streaming/streaming';
 import patchDocumentation from '../../../api/workpieces/patchDocumentation';
-import TopBar from '../_/topBar/topBar';
+import TopBar from './_/topBar/topBar';
 
 const Documentation = (props) => {
   // console.log(props);
