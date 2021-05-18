@@ -21,7 +21,6 @@ import Tabs, { Tab } from '../../_/tabs/tabs';
 import Kanban from './_/kanban/kanban';
 
 const Summary = (props) => {
-  console.log({ props });
   const history = useHistory();
   const { workpiece_id } = useParams();
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +43,6 @@ const Summary = (props) => {
   const currentCollaborator = props.workpiece.collaborators.find(
     (x) => x.user.user_id === user_id,
   );
-  console.log({ currentCollaborator });
 
   const [rightSplitInConsultation, setRightSplitInConsultation] = useState();
 
@@ -262,6 +260,9 @@ const Summary = (props) => {
                   currentSplit={props.workpiece.rightSplit}
                   archivedSplits={props.workpiece.archivedSplits}
                 />
+              </Tab>
+              <Tab key={tabOptions[1]}>
+                <Kanban {...commonProps} />
               </Tab>
             </Tabs>
             {/* <div className="tabs">

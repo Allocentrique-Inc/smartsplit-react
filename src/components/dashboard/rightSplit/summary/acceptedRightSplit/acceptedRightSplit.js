@@ -5,6 +5,7 @@ import getWorkpieceContract from '../../../../../api/workpieces/getWorkpieceCont
 import DownloadContractButton from '../downloadContractButton/downloadContractButton';
 import PaymentModal from '../../../_/payments/PaymentModal';
 import ArtistName from '../../../_/artistName/artistName';
+import Tag from '../_/tag/tag';
 
 const AcceptedRightSplit = (props) => {
   const versionIndex = props.workpiece.rightSplit.version;
@@ -43,16 +44,17 @@ const AcceptedRightSplit = (props) => {
               language={props.language}
             />
           </div>
-          <div className="b1">
-            <div />
-            <div className="status acceptedStatus">{props.t_accepted}</div>
-          </div>
+          <Tag type="accepted" language={props.language} />
+
           {contractData && (
-            <DownloadContractButton
-              {...props}
-              language={props.language}
-              contractData={contractData}
-            />
+            <>
+              <div className="separator" />
+              <DownloadContractButton
+                {...props}
+                language={props.language}
+                contractData={contractData}
+              />
+            </>
           )}
           {/* {hasBoughtPDF && contractData ? (
           <DownloadContractButton

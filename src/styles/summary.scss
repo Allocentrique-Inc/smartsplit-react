@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  padding-bottom: 64px;
   .topBar {
     position: sticky;
     top: 0px;
@@ -50,6 +51,8 @@
     width: 100%;
     max-width: 944px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
     > p {
       margin-top: 8px;
       @extend .small-400;
@@ -61,11 +64,19 @@
     }
     .tabs {
       margin-top: 32px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       .tabMenu {
         box-shadow: 0px -1px 0px 0px #dcdfe1 inset;
       }
       .tab {
         margin-top: 32px;
+        flex: 1;
+        display: flex;
+        .kanban {
+          flex: 1;
+        }
       }
     }
   }

@@ -30,7 +30,7 @@ const DraftRightSplit = (props) => {
         {!props.isMobile &&
           (canSendToCollab ? (
             <>
-              <div className="border" />
+              <div className="separator" />
               <button>{t_sendToCollab}</button>
             </>
           ) : (

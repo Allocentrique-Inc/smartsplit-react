@@ -6,18 +6,14 @@ import RejectedRightSplitArchived from '../../rejectedRightSplitArchived/rejecte
 
 const Kanban = (props) => {
   const {
-    currentSplit,
-    archivedSplits,
+    currentSplit = {},
+    archivedSplits = {},
     t_waitingSubmit,
     t_waitingDecision,
     t_decided,
   } = props;
-  console.log({ props });
   return (
-    <div
-      className="kanban"
-      //  style={{ display: tab !== 'withCollaborators' && 'none' }}
-    >
+    <div className="kanban">
       {/* DRAFT */}
       <div className="column">
         <h4>{t_waitingSubmit}</h4>

@@ -12,8 +12,9 @@ const Tag = ({ language, type = 'draft' }) => {
       };
       break;
     case 'accepted': {
-      t_label = { fr: 'Acceptée', en: 'Acceptée' }[language];
+      t_label = { fr: 'Acceptée', en: 'Accepted' }[language];
       style = {
+        fontWeight: 'bold',
         background: '#DFF8E3',
         color: '#176D25',
       };
