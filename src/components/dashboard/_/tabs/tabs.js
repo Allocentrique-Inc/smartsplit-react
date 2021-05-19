@@ -1,17 +1,23 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-const Tabs = ({ options, children }) => {
-  const [currentTab, setCurrentTab] = useState(options[0]);
-  const currentIndex = options.indexOf(currentTab);
-  const isSelected = (option) => option === currentTab;
+const Tabs = ({ options, children, optionActions = {} }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const isSelected = (index) => index === currentIndex;
   return (
     <div className="tabs">
       <div className="tabMenu">
-        {options.map((option) => (
+        {options.map((option, index) => (
           <div
-            className={`menuItem${isSelected(option) ? ' selected' : ''}`}
+            className={`menuItem${isSelected(index) ? ' selected' : ''}`}
             key={option}
-            onClick={() => setCurrentTab(option)}
+            onClick={() => {
+              let updateComponent = true;
+              if (optionActions[index]) {
+                updateComponent = optionActions[index]();
+              }
+              updateComponent && setCurrentIndex(index);
+            }}
           >
             {option}
           </div>

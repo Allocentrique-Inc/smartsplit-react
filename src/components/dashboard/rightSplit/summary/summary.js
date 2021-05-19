@@ -26,6 +26,7 @@ const Summary = (props) => {
   const { workpiece_id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [isAdjustingEmails, setIsAdjustingEmails] = useState(false);
+  const [showTabQuestionModal, setShowTabQuestionModal] = useState(false);
   const [tab, setTab] = useState('withCollaborators');
   const [showQuestionWithEditor, setShowQuestionWithEditor] = useState(false);
   if (
@@ -72,10 +73,17 @@ const Summary = (props) => {
     !props.workpiece.rightSplit ||
     props.workpiece.rightSplit._state !== 'accepted' ||
     !isCopyrightRightHolder;
-  console.log({ currentCollaborator, isWithEditorDisabled });
 
   const handleGoToEditorName = () => {
     history.push(`/workpiece/${workpiece_id}/right-split/editor-name`);
+  };
+
+  const handleEditorTabClick = () => {
+    if (!isWithEditorDisabled && currentCollaborator.displayEditorNotif) {
+      setShowTabQuestionModal(true);
+      return false;
+    }
+    return true;
   };
 
   const handleCancelShowQuestionWithEditor = () => {
@@ -88,6 +96,12 @@ const Summary = (props) => {
       setShowModal(true);
     } else {
       history.push(`/workpiece/${workpiece_id}/right-split/vote`);
+    }
+  };
+
+  const handleSummaryClick = () => {
+    if (showTabQuestionModal) {
+      setShowTabQuestionModal(false);
     }
   };
 
@@ -239,7 +253,7 @@ const Summary = (props) => {
           <ConsultModal {...commonProps} />
         ))}
       {!props.isMobile && (
-        <div className="summary">
+        <div className="summary" onClick={handleSummaryClick}>
           <TopBar {...props} />
           <main>
             <h2>{t_splitSummary}</h2>
@@ -254,16 +268,29 @@ const Summary = (props) => {
                 {t_updated}
               </LastModified>
             </p>
+            {showTabQuestionModal && (
+              <div className="tabQuestionModal">
+                <p>{t_haveEditor}</p>
+                <div className="row">
+                  <button className="btn-secondary">{t_no}</button>
+                  <button className="btn-primary">{t_yes}</button>
+                </div>
+                <button className="btn-secondary-small">{t_later}</button>
+              </div>
+            )}
             {/* TABS */}
-            <Tabs options={tabOptions}>
-              <Tab key={tabOptions[0]}>
+            <Tabs
+              options={tabOptions}
+              optionActions={[null, handleEditorTabClick]}
+            >
+              <Tab key={t_withCollaborators}>
                 <Kanban
                   {...commonProps}
                   currentSplit={props.workpiece.rightSplit}
                   archivedSplits={props.workpiece.archivedSplits}
                 />
               </Tab>
-              <Tab key={tabOptions[1]}>
+              <Tab key={t_withEditor}>
                 <Kanban {...commonProps} />
               </Tab>
             </Tabs>
