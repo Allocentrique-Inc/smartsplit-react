@@ -64,7 +64,7 @@
   }
   .tabQuestionModal {
     position: absolute;
-    left: 208.375px;
+    left: 150px;
     top: 155px;
   }
 }
@@ -120,6 +120,9 @@
     }
     margin-top: 16px;
     margin-bottom: 8px;
+    > * {
+      width: 108px;
+    }
   }
   > :last-child {
     border: none;
