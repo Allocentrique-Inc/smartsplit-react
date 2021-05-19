@@ -5,45 +5,26 @@
   min-height: 100vh;
   padding-bottom: 64px;
   .topBar {
-    position: sticky;
-    top: 0px;
-    background-color: white;
-    height: 72px;
-    border-bottom: 2px solid #dcdfe1;
-    box-shadow: 0px -2px 4px 4px #dcdfe1;
-    align-items: center;
+    padding: 16px;
+    padding-left: 0;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    .side {
-      width: 0px;
-      .back {
-        cursor: pointer;
-        margin-left: 16px;
-      }
+
+    align-items: center;
+    box-shadow: 0px -1px 0px 0px rgba(220, 223, 225, 1) inset;
+    > :first-child {
+      padding: 0 16px;
+      height: 40px;
     }
-    .b1 {
-      align-self: center;
-      width: 944px;
+    .center {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      .img {
+      > :first-child {
         margin-right: 16px;
       }
-      .title {
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 24px;
-        color: #203548;
-      }
-      .pageTitle {
-        font-weight: normal;
-        font-size: 16px;
-        line-height: 24px;
-        color: #203548;
-        margin-left: 6px;
-      }
+      flex: 1;
+      max-width: 944px;
     }
   }
   main {
