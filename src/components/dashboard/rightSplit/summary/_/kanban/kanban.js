@@ -1,65 +1,58 @@
+import DraftRightSplit from '../../draftRightSplit/draftRightSplit';
+import InVoteRightSplit from '../../inVoteRightSplit/inVoteRightSplit';
+import AcceptedRightSplit from '../../acceptedRightSplit/acceptedRightSplit';
+import RejectedRightSplit from '../../rejectedRightSplit/rejectedRightSplit';
+import RejectedRightSplitArchived from '../../rejectedRightSplitArchived/rejectedRightSplitArchived';
+
 const Kanban = (props) => {
   const {
-    currentSplit,
-    archivedSplits,
+    currentSplit = {},
+    archivedSplits = {},
     t_waitingSubmit,
     t_waitingDecision,
     t_decided,
   } = props;
-  console.log({ props });
   return (
-    <div
-      className="b1b1b2"
-      //  style={{ display: tab !== 'withCollaborators' && 'none' }}
-    >
+    <div className="kanban">
       {/* DRAFT */}
-      <div className="bx">
-        <div className="colTitle">{t_waitingSubmit}</div>
+      <div className="column">
+        <h4>{t_waitingSubmit}</h4>
         <div className="content">
           {currentSplit._state === 'draft' && (
-            <DraftRightSplit {...commonProps} {...props} />
+            <DraftRightSplit {...props} {...props} />
           )}
         </div>
       </div>
 
       {/* INVOTE */}
-      <div className="bx">
-        <div className="colTitle">{t_waitingDecision}</div>
+      <div className="column">
+        <h4>{t_waitingDecision}</h4>
         <div className="content">
-          {tab === 'withCollaborators' &&
-            props.workpiece.rightSplit._state === 'voting' && (
-              <InVoteRightSplit {...commonProps} {...props} />
-            )}
+          {currentSplit._state === 'voting' && (
+            <InVoteRightSplit {...props} {...props} />
+          )}
         </div>
       </div>
 
       {/* DECIDED */}
-      <div className="bx">
-        <div className="colTitle">{t_decided}</div>
+      <div className="column">
+        <h4>{t_decided}</h4>
         <div className="content">
           {/* ACCEPTED */}
-          {props.workpiece.rightSplit._state === 'accepted' && (
-            <div
-              style={{
-                display: tab !== 'withCollaborators' && 'none',
-              }}
-            >
-              <AcceptedRightSplit {...commonProps} {...props} />
-            </div>
+          {currentSplit._state === 'accepted' && (
+            <AcceptedRightSplit {...props} {...props} />
           )}
 
           {/* REJECTED */}
-          {tab === 'withCollaborators' &&
-            props.workpiece.rightSplit._state === 'rejected' && (
-              <RejectedRightSplit {...commonProps} {...props} />
-            )}
-          {tab === 'withCollaborators' &&
-            props.workpiece.archivedSplits &&
+          {currentSplit._state === 'rejected' && (
+            <RejectedRightSplit {...props} {...props} />
+          )}
+          {props.workpiece.archivedSplits &&
             props.workpiece.archivedSplits.map((archivedRightSplit, id) => {
               return (
                 <RejectedRightSplitArchived
                   id={id}
-                  {...commonProps}
+                  {...props}
                   archivedRightSplit={archivedRightSplit}
                   key={archivedRightSplit.version}
                   // workpiece={workpiece}

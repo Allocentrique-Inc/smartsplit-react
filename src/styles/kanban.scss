@@ -1,0 +1,51 @@
+.kanban {
+  width: 100%;
+  display: flex;
+  .column {
+    flex: 33%;
+    margin-right: 16px;
+    display: flex;
+    flex-direction: column;
+    .content {
+      margin-top: 16px;
+      background: #faf8f9;
+      padding: 8px;
+      flex: 1;
+      .rightSplit {
+        background: #ffffff;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        .clickableContainer {
+          padding: 16px;
+          cursor: pointer;
+        }
+        .title {
+          @extend h5;
+        }
+        .details {
+          @extend .small-400;
+          color: #687a8b;
+          .artistName {
+            @extend .small-700;
+            color: #2da84f;
+          }
+        }
+        .separator {
+          height: 16px;
+          box-shadow: inset 0px -1px 0px #dcdfe1;
+          margin-bottom: 16px;
+        }
+        .tag {
+          margin-top: 16px;
+        }
+        button {
+          @extend .btn-primary;
+          width: 100%;
+        }
+      }
+    }
+  }
+  > :last-child {
+    margin-right: 0;
+  }
+}

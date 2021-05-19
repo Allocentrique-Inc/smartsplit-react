@@ -3,7 +3,7 @@ import LastModified from '../../../_/lastModified/lastModified';
 import ArtistName from '../../../_/artistName/artistName';
 import Tag from '../_/tag/tag';
 
-export default function RejectedRightSplit(props) {
+const RejectedRightSplit = (props) => {
   const history = useHistory();
   const { workpiece_id } = useParams();
   const versionIndex = props.workpiece.rightSplit.version;
@@ -36,4 +36,6 @@ export default function RejectedRightSplit(props) {
       </div>
     </div>
   );
-}
+};
+
+export default RejectedRightSplit;
