@@ -37,9 +37,10 @@ const Summary = (props) => {
     history.push(`/workpiece/${workpiece_id}/`);
     return null;
   }
-  const handleDisableEditorNotif = async () => {
+  const handleHasEditorAnswer = async (answer) => {
     await disableEditorNotif({ workpiece_id });
     props.resetData();
+    setShowTabQuestionModal(false);
   };
   const user_id = localStorage.getItem('user_id');
   const currentCollaborator = props.workpiece.collaborators.find(
@@ -84,10 +85,6 @@ const Summary = (props) => {
       return false;
     }
     return true;
-  };
-
-  const handleCancelShowQuestionWithEditor = () => {
-    setShowQuestionWithEditor(false);
   };
 
   const handleClick = () => {
@@ -269,13 +266,31 @@ const Summary = (props) => {
               </LastModified>
             </p>
             {showTabQuestionModal && (
-              <div className="tabQuestionModal">
+              <div
+                className="tabQuestionModal"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <p>{t_haveEditor}</p>
                 <div className="row">
-                  <button className="btn-secondary">{t_no}</button>
-                  <button className="btn-primary">{t_yes}</button>
+                  <button
+                    className="btn-secondary"
+                    onClick={() => handleHasEditorAnswer(false)}
+                  >
+                    {t_no}
+                  </button>
+                  <button
+                    className="btn-primary"
+                    onClick={() => handleHasEditorAnswer(true)}
+                  >
+                    {t_yes}
+                  </button>
                 </div>
-                <button className="btn-secondary-small">{t_later}</button>
+                <button
+                  className="btn-secondary-small"
+                  onClick={() => setShowTabQuestionModal(false)}
+                >
+                  {t_later}
+                </button>
               </div>
             )}
             {/* TABS */}
