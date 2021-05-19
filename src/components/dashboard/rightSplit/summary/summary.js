@@ -19,6 +19,7 @@ import ConsultModal from './_/consultModal/consultModal';
 import disableEditorNotif from '../../../../api/workpieces/disableEditorNotif';
 import Tabs, { Tab } from '../../_/tabs/tabs';
 import Kanban from './_/kanban/kanban';
+import Dot from '../../../../icons/dot';
 
 const Summary = (props) => {
   const history = useHistory();
@@ -71,6 +72,7 @@ const Summary = (props) => {
     !props.workpiece.rightSplit ||
     props.workpiece.rightSplit._state !== 'accepted' ||
     !isCopyrightRightHolder;
+  console.log({ currentCollaborator, isWithEditorDisabled });
 
   const handleGoToEditorName = () => {
     history.push(`/workpiece/${workpiece_id}/right-split/editor-name`);
@@ -189,7 +191,7 @@ const Summary = (props) => {
     <>
       {t_withEditor}
       {!isWithEditorDisabled && currentCollaborator.displayEditorNotif && (
-        <div className="notification" />
+        <Dot />
       )}
     </>,
   ];
