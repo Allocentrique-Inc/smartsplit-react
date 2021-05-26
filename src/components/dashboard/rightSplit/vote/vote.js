@@ -118,7 +118,11 @@ const Vote = (props) => {
           >
             {t_mobileTitle}
           </MobileTopBar>
-          <Consult {...commonProps} voting />
+          <Consult
+            {...commonProps}
+            rightSplitInConsultation={rightSplit}
+            voting
+          />
           <DownBar {...commonProps} />
         </>
       )}

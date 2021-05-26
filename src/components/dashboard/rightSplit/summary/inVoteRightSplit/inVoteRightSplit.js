@@ -22,7 +22,10 @@ const InVoteRightSplit = (props) => {
         {props.isMobile ? (
           <Tag type="inVote" language={props.language} />
         ) : (
-          <button>{props.t_consult}</button>
+          <>
+            <div className="separator" />
+            <button>{props.t_consult}</button>
+          </>
         )}
       </div>
     </div>
