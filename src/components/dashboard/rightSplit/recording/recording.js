@@ -41,7 +41,6 @@ const Recording = (props) => {
     activeCollaborators.push(label);
   }
 
-  console.log('active collaborator count', activeCollaborators.length);
   const isCollabActive = (collabId) =>
     activeCollaborators.some(
       (activeCollab) => collabId === activeCollab.rightHolder_id,

@@ -18,20 +18,27 @@ const RejectedRightSplitArchived = (props) => {
   };
   return (
     <div className="rightSplit" onClick={handleClick}>
-      <div className="title">{`Version ${versionIndex}`}</div>
-      <div className="details">
-        {props.t_createdBy}
-        <ArtistName
-          user={props.archivedRightSplit.owner}
-          className="artistName"
-        />{' '}
-        <LastModified
-          date={props.archivedRightSplit.createdAt}
-          language={props.language}
-        />
+      <div className="clickableContainer" onClick={props.handleClick}>
+        <div className="title">{`Version ${versionIndex}`}</div>
+        <div className="details">
+          {props.t_createdBy}
+          <ArtistName
+            user={props.archivedRightSplit.owner}
+            className="artistName"
+          />{' '}
+          <LastModified
+            date={props.archivedRightSplit.createdAt}
+            language={props.language}
+          />
+        </div>
+        <Tag type="rejected" language={props.language} />
+        {!props.isMobile && (
+          <>
+            <div className="separator" />
+            <button>{props.t_consult}</button>
+          </>
+        )}
       </div>
-      <Tag type="rejected" language={props.language} />
-      {!props.isMobile && <button>{props.t_consult}</button>}
     </div>
   );
 };

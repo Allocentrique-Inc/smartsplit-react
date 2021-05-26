@@ -12,7 +12,6 @@ const ConsultModal = (props) => {
     t_sendToCollab,
     rightSplitInConsultation,
   } = props;
-  console.log({ rightSplitInConsultation });
   const canSendToCollab =
     rightSplitInConsultation.owner.user_id === props.user.user_id;
   return (

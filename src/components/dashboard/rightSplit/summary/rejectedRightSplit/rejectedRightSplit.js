@@ -27,10 +27,10 @@ const RejectedRightSplit = (props) => {
         <Tag type="rejected" language={props.language} />
         {!props.isMobile && (
           <>
+            <div className="separator" />
             <button onClick={handleCreateANewModelBtn}>
               {props.t_createANewOne}
             </button>
-            <button>{props.t_consult}</button>
           </>
         )}
       </div>

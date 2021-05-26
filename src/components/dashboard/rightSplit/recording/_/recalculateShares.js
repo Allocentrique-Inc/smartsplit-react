@@ -5,7 +5,6 @@ const recalculateShares = ({
   setRecording,
   setLabel,
 }) => {
-  console.log('coucou');
   const activeCollaborators = recording.filter(
     (collaborator) => collaborator.function !== '',
   );

@@ -56,7 +56,10 @@ const RightSplit = (props) => {
   const [version, setVersion] = useState('');
   const [_state, set_state] = useState('draft');
 
-  const isCreating = typeof props.workpiece.rightSplit === 'undefined';
+  const isCreating =
+    typeof props.workpiece.rightSplit === 'undefined' ||
+    props.workpiece.rightSplit._state === 'rejected';
+  console.log({ isCreating });
 
   const [warnings, setWarnings] = useState([]);
   const mapData = async () => {
