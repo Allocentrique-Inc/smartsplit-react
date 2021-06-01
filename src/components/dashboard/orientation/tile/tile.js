@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import RightSplit from './icons/rightsplit';
 import Monetize from './icons/monetize';
+import Protection from './icons/protection';
 
 const getIcon = (tileId, language) => {
   switch (tileId) {
@@ -8,6 +9,8 @@ const getIcon = (tileId, language) => {
       return <RightSplit />;
     case 'monetize':
       return <Monetize />;
+    case 'protect':
+      return <Protection />;
     default:
       return '---';
   }
@@ -132,7 +135,7 @@ const getActionNameAndDestination = (props) => {
     case 'protect': {
       return {
         name: 'Commencer',
-        destination: '',
+        destination: `/workpiece/${props.workpiece_id}/protect`,
         className: 'action start',
       };
     }

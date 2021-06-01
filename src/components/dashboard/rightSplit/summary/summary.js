@@ -102,18 +102,6 @@ const Summary = (props) => {
     }
   };
 
-  // const handleWithManager = () => {
-  //   setTab('withManager');
-  // };
-  // const isWithManagerDisabled = !(
-  //   props.workpiece.rightSplit &&
-  //   props.workpiece.rightSplit._state === 'accepted'
-  // );
-  // const handleGoToManagerName = () => {
-  //   history.push(`/workpiece/${workpiece_id}/right-split/manager-name`);
-  // };
-  // const needResponseToHaveManager = true;
-
   const canSendToCollab =
     props.workpiece.rightSplit.owner.user_id === props.user.user_id;
 
@@ -309,81 +297,6 @@ const Summary = (props) => {
                 <Kanban {...commonProps} />
               </Tab>
             </Tabs>
-            {/* <div className="tabs">
-                <button
-                  className={
-                    tab === 'withCollaborators' ? 'tab selected' : 'tab'
-                  }
-                  onClick={handleWithCollaborators}
-                >
-                  {t_withCollaborators}
-                </button>
-                <span className="space" />
-                <div>
-                  <button
-                    className={tab === 'withEditor' ? 'tab selected' : 'tab'}
-                    onClick={handleWithEditor}
-                    disabled={isWithEditorDisabled}
-                  >
-                    {t_withEditor}
-                    {!isWithEditorDisabled &&
-                      currentCollaborator.displayEditorNotif && (
-                        <div className="notification" />
-                      )}
-                  </button>
-                  {showQuestionWithEditor && (
-                    <div className="withEditorOrManager">
-                      <div className="question">{t_haveEditor}</div>
-                      <div className="yesNo">
-                        <button className="btn-secondary option">{t_no}</button>
-                        <button
-                          className="btn-primary option"
-                          onClick={handleDisableEditorNotif}
-                        >
-                          {t_yes}
-                        </button>
-                      </div>
-                      <div
-                        onClick={handleCancelShowQuestionWithEditor}
-                        className="later"
-                      >
-                        {t_later}
-                      </div>
-                    </div>
-                  )}
-                </div>*/}
-            {/*
-                    <span className="space" />
-                    <div>
-                      <button
-                        className={tab === 'withManager' ? 'tab selected' : 'tab'}
-                        onClick={handleWithManager}
-                        disabled={isWithManagerDisabled}
-                      >
-                        {t_withManager}
-                        {needResponseToHaveManager && (
-                          <div className="notification" />
-                        )}
-                      </button>
-                      {tab === 'withManager' && (
-                        <div className="withEditorOrManager">
-                          <div className="question">{t_haveManager}</div>
-                          <div className="yesNo">
-                            <button className="btn-secondary option">{t_no}</button>
-                            <button
-                              className="btn-primary option"
-                              onClick={handleGoToManagerName}
-                            >
-                              {t_yes}
-                            </button>
-                          </div>
-                          <div onClick={handleWithCollaborators} className="later">
-                            {t_later}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-              </div>*/}
           </main>
         </div>
       )}

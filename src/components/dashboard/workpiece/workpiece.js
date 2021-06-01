@@ -5,6 +5,7 @@ import RightSplit from '../rightSplit/rightSplit';
 import Orientation from '../orientation/orientation';
 import Documentation from '../documentation/documentation';
 import Monetize from '../monetize/monetize';
+import Protect from '../protect/protect';
 
 const Workpiece = (props) => {
   const { workpiece_id } = useParams();
@@ -62,7 +63,7 @@ const Workpiece = (props) => {
         {workpiece && <Monetize {...commonProps} />}
       </Route>
       <Route path="/workpiece/:workpiece_id/protect/">
-        <div>PROTECT</div>
+        {workpiece && <Protect {...commonProps} />}
       </Route>
     </>
   );
