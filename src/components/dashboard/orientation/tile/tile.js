@@ -133,11 +133,15 @@ const getActionNameAndDestination = (props) => {
       };
     }
     case 'protect': {
-      return {
-        name: 'Commencer',
-        destination: `/workpiece/${props.workpiece_id}/protect`,
-        className: 'action start',
-      };
+      const _state = undefined;
+      if (_state === undefined) {
+        return {
+          name: 'Commencer',
+          destination: `/workpiece/${props.workpiece_id}/protect/file`,
+          className: 'action start',
+        };
+      }
+      break;
     }
     case 'monetize': {
       return {

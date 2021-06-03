@@ -1,0 +1,40 @@
+.protect {
+  .topBar {
+    padding: 16px;
+    padding-left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    align-items: center;
+    box-shadow: 0px -1px 0px 0px rgba(220, 223, 225, 1) inset;
+    > :first-child {
+      padding: 0 16px;
+      height: 40px;
+    }
+    .left {
+      display: flex;
+      align-items: center;
+      .cover-image {
+        margin-right: 16px;
+      }
+      > p {
+        margin-right: 32px;
+      }
+      .breadCrumbs {
+        display: flex;
+        align-items: center;
+        svg {
+          margin: 0 16px;
+        }
+      }
+    }
+    .right {
+      display: flex;
+      align-items: center;
+      button {
+        border: none;
+      }
+    }
+  }
+}

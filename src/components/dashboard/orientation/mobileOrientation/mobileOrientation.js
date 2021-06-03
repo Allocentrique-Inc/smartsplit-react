@@ -56,6 +56,7 @@ export default function MobileOrientation(props) {
             <Tabs options={tabNames}>
               <Tab key={tabNames[0]}>
                 <Tile tileId="share" {...props} />
+                <Tile tileId="protect" {...props} />
                 <Tile tileId="monetize" {...props} />
               </Tab>
             </Tabs>

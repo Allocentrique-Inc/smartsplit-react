@@ -1,6 +1,6 @@
 import { Colors } from '../theme';
 
-export default function ChevronRight({ color = Colors.tertiary }) {
+const ChevronRight = ({ color = Colors.tertiary }) => {
   return (
     <svg
       width="24"
@@ -18,4 +18,6 @@ export default function ChevronRight({ color = Colors.tertiary }) {
       />
     </svg>
   );
-}
+};
+
+export default ChevronRight;
