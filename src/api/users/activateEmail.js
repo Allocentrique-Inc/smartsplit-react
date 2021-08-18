@@ -1,5 +1,5 @@
-import refresh from '../auth/refresh';
 import config from '../../config';
+import refresh from '../auth/refresh';
 
 const activateEmail = async (payload) => {
   const { token } = payload;
