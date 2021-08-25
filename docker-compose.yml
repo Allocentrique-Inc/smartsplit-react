@@ -1,0 +1,47 @@
+version: '3.5'
+
+services:
+  db:
+    container_name: smartsplit-db
+    image: 'mongo:latest'
+    networks:
+      smartsplit-net:
+
+  frontend:
+    container_name: smartsplit-app
+    build:
+      context: smartsplit-react
+      dockerfile: Dockerfile
+    ports:
+      - 3000:80
+    networks:
+      smartsplit-net:
+
+  backend:
+    container_name: smartsplit-api
+    depends_on:
+      - db
+    build:
+      context: smartsplit
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+    networks:
+      smartsplit-net:
+
+  admin-db:
+    container_name: smartsplit-db-ui
+    image: mongo-express:latest
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=smartsplit-db
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+    depends_on:
+      - db
+    networks:
+      smartsplit-net:
+    ports:
+      - 3002:8081
+
+networks:
+  smartsplit-net:
