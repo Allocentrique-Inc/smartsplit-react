@@ -11,7 +11,7 @@ services:
     container_name: smartsplit-app
     build:
       context: smartsplit-react
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_local_testing
     ports:
       - 3000:80
     networks:
