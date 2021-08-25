@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import ReactAvatarEditor from 'react-avatar-editor';
 import PropTypes from 'prop-types';
 import X from '../../../../icons/x';
-import Slider from '../../../_/form/slider/Slider';
+import Slider from '../../../_/form/imageSlider/imageSlider';
 import RotateCounterClockwise from '../../../../icons/rotate-counter-clockwise';
 import RotateClockwise from '../../../../icons/rotate-clockwise';
 
@@ -16,7 +16,9 @@ const PictureEditModal = (props) => {
   const handleSave = async () => {
     setSaving(true);
     // if hiRes is true, get the cropped image at the original resolution
-    const canvas = hiRes ? editorRef.current.getImage() : editorRef.current.getImageScaledToCanvas();
+    const canvas = hiRes
+      ? editorRef.current.getImage()
+      : editorRef.current.getImageScaledToCanvas();
 
     canvas.toBlob((blob) => {
       onSave(canvas.toDataURL(), blob);
@@ -66,16 +68,15 @@ const PictureEditModal = (props) => {
         <div className="modal" onClick={(e) => e.stopPropagation()}>
           <div className="topBar">
             <h4>{title}</h4>
-            <button
-              className="btn-icon"
-              onClick={handleClose}
-            >
+            <button className="btn-icon" onClick={handleClose}>
               <X />
             </button>
           </div>
           <div className="content">
             <div className="image-editor">
-              <div className="image-selector"><input type="file" onChange={handleFilesSelection} /></div>
+              <div className="image-selector">
+                <input type="file" onChange={handleFilesSelection} />
+              </div>
               {file && (
                 <>
                   <div className="editor-container">
@@ -83,7 +84,9 @@ const PictureEditModal = (props) => {
                       image={file}
                       width={size}
                       height={size}
-                      borderRadius={shape.toLowerCase() === 'circle' ? size / 2 : 0}
+                      borderRadius={
+                        shape.toLowerCase() === 'circle' ? size / 2 : 0
+                      }
                       scale={zoom / 100}
                       rotate={rotation}
                       ref={editorRef}
@@ -101,28 +104,38 @@ const PictureEditModal = (props) => {
                     <button
                       className="btn-primary-small"
                       style={{ width: '30px', marginLeft: '0.5em' }}
-                      onClick={() => { setRotation((rotation - 90 < -360) ? -90 : rotation - 90); }}
+                      onClick={() => {
+                        setRotation(rotation - 90 < -360 ? -90 : rotation - 90);
+                      }}
                     >
                       <RotateCounterClockwise color="#fff" />
                     </button>
                     <button
                       className="btn-primary-small"
                       style={{ width: '30px', marginLeft: '0.5em' }}
-                      onClick={() => { setRotation((rotation + 90 > 360) ? 90 : rotation + 90); }}
+                      onClick={() => {
+                        setRotation(rotation + 90 > 360 ? 90 : rotation + 90);
+                      }}
                     >
                       <RotateClockwise color="#fff" />
                     </button>
                   </div>
                 </>
               )}
-
             </div>
           </div>
 
           <div className="downBar">
-            <button className="btn-secondary" onClick={handleClose}>cancel</button>
-            <button className={file && !saving ? 'btn-primary' : 'btn-disabled'} disabled={!file || saving} onClick={handleSave}>{saving ? 'Saving...' : 'Crop and Save'}</button>
-
+            <button className="btn-secondary" onClick={handleClose}>
+              cancel
+            </button>
+            <button
+              className={file && !saving ? 'btn-primary' : 'btn-disabled'}
+              disabled={!file || saving}
+              onClick={handleSave}
+            >
+              {saving ? 'Saving...' : 'Crop and Save'}
+            </button>
           </div>
         </div>
       </div>
@@ -142,6 +155,5 @@ PictureEditModal.defaultProps = {
   size: 200,
   hiRes: false,
   title: 'Create / Edit Image',
-
 };
 export default PictureEditModal;
